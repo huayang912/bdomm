@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://ws.textanywhere.net/ta_sms.asmx?wsdl" docRef="https://ws.textanywhere.net/ta_sms.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://ws.textanywhere.net/ta_sms.asmx" xmlns:q1="http://ws.textanywhere.net/TA_WS" binding="q1:TextAnywhere_SMSSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>
