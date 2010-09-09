@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="OMM">
+  <DataContextMoniker Name="/OMMDataContext" />
+  <nestedChildShapes>
+    <classShape Id="50b3c158-3625-4ecf-9aff-587a2f1ba26a" absoluteBounds="0.5, 2, 2, 1.26050048828125">
+      <DataClassMoniker Name="/OMMDataContext/Message" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d69c60b3-a4fd-4079-abce-e3c8a7559c73" absoluteBounds="0.51500000000000012, 2.46, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ff61884f-376d-4ae0-bdb6-767b8d650dec" absoluteBounds="3.25, 2, 2, 2.73962646484375">
+      <DataClassMoniker Name="/OMMDataContext/Message_Recipient" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5d1de126-53ca-4684-a946-349b400028bb" absoluteBounds="3.265, 2.46, 1.9700000000000002, 2.17962646484375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.5 : 2.63025024414063); (3.25 : 2.63025024414063)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OMMDataContext/Message/Message_Message_Recipient" />
+      <nodes>
+        <classShapeMoniker Id="50b3c158-3625-4ecf-9aff-587a2f1ba26a" />
+        <classShapeMoniker Id="ff61884f-376d-4ae0-bdb6-767b8d650dec" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="d8f366c7-061b-42ff-9d4d-bd014c843b51" absoluteBounds="3.5, 0.5, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/OMMDataContext/Message_Statuse" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2923b154-2beb-483b-b8c9-10af273c321a" absoluteBounds="3.5149999999999997, 0.96, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.375 : 1.59615315755208); (4.375 : 2)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OMMDataContext/Message_Statuse/Message_Statuse_Message_Recipient" />
+      <nodes>
+        <classShapeMoniker Id="d8f366c7-061b-42ff-9d4d-bd014c843b51" />
+        <classShapeMoniker Id="ff61884f-376d-4ae0-bdb6-767b8d650dec" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
