@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Enquiries" conflictDetection="overwriteChanges" label="Enquiries" actionHandlerType="CustomClass"  plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <command id="command1" type="Text">
+      <text><![CDATA[select
+	"Enquiries"."ID" "ID"
+	,"Enquiries"."Number" "Number"
+	,"Enquiries"."ContactID" "ContactID"
+	,"Contact"."JobTitle" "ContactJobTitle"
+	,"Contact"."Email" "ContactEmail"
+                     ,"Contact"."Name" "ContactName"
+	,"ContactCompany"."Name" "ContactCompanyName"
+	,"ContactCompanyCountry"."Name" "ContactCompanyCountryName"
+	,"ContactCompanyChangedByUser"."UserName" "ContactCompanyChangedByUserUserName"
+	,"ContactCountry"."Name" "ContactCountryName"
+	,"ContactChangedByUser"."UserName" "ContactChangedByUserUserName"
+	,"Enquiries"."TypeID" "TypeID"
+	,"Type"."Name" "TypeName"
+	,"Enquiries"."StatusID" "StatusID"
+	,"Status"."Name" "StatusName"
+	,"Enquiries"."CreatedByUserID" "CreatedByUserID"
+	,"CreatedByUser"."UserName" "CreatedByUserUserName"
+	,"Enquiries"."CreatedOn" "CreatedOn"
+	,"Enquiries"."ChangedByUserID" "ChangedByUserID"
+	,"ChangedByUser"."UserName" "ChangedByUsername"
+	,"ChangedByUser"."UserName" "ChangedByUserUserName"
+	,"Enquiries"."ChangedOn" "ChangedOn"
+	,"Enquiries"."Version" "Version"
+,"Enquiries"."EnguirySubject" "EnguirySubject"
+	,"Enquiries"."CreatedByUsername" "CreatedByUsername"
+	,"EnquiryLines"."Details" "Details"
+from "dbo"."Enquiries" "Enquiries"
+	left join "dbo"."ClientContacts" "Contact" on "Enquiries"."ContactID" = "Contact"."ID"
+	left join "dbo"."Clients" "ContactCompany" on "Contact"."CompanyID" = "ContactCompany"."ID"
+	left join "dbo"."Countries" "ContactCompanyCountry" on "ContactCompany"."CountryID" = "ContactCompanyCountry"."ID"
+	left join "dbo"."Users" "ContactCompanyChangedByUser" on "ContactCompany"."ChangedByUserID" = "ContactCompanyChangedByUser"."ID"
+	left join "dbo"."Countries" "ContactCountry" on "Contact"."CountryID" = "ContactCountry"."ID"
+	left join "dbo"."Users" "ContactChangedByUser" on "Contact"."ChangedByUserID" = "ContactChangedByUser"."ID"
+	left join "dbo"."EnquiryTypes" "Type" on "Enquiries"."TypeID" = "Type"."ID"
+	left join "dbo"."EnquiryStatuses" "Status" on "Enquiries"."StatusID" = "Status"."ID"
+	left join "dbo"."Users" "CreatedByUser" on "Enquiries"."CreatedByUserID" = "CreatedByUser"."ID"
+	left join "dbo"."Users" "ChangedByUser" on "Enquiries"."ChangedByUserID" = "ChangedByUser"."ID"
+	left join "dbo"."EnquiryLines" "EnquiryLines" on "Enquiries"."ID" = "enquiryLines"."EnquiryID"]]></text>
+    </command>
+    <command id="IDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ID" />
+      </output>
+    </command>
+  </commands>
+  <fields xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" readOnly="true" label="Id" />
+    <field name="Number" type="String" label="Number" showInSummary="true" />
+    <field name="ContactID" type="Int32" allowNulls="false" label="Contact#" showInSummary="true">
+      <items style="Lookup" dataController="ClientContacts" newDataView="createForm1" />
+    </field>
+    <field name="ContactName" type="String" readOnly="true" label="Contact Name" />
+    <field name="ContactCompanyName" type="String" readOnly="true" label="Company" />
+    <field name="ContactCompanyCountryName" type="String" readOnly="true" label="Country" />
+    <field name="ContactCompanyChangedByUserUserName" type="String" readOnly="true" label="Contact Company Changed By User Name" />
+    <field name="ContactCountryName" type="String" readOnly="true" label="Contact Country Name" />
+    <field name="ContactChangedByUserUserName" type="String" readOnly="true" label="Contact Changed By User Name" />
+    <field name="TypeID" type="Int32" allowNulls="false" label="Type#" showInSummary="true">
+      <items style="Lookup" dataController="EnquiryTypes" newDataView="createForm1" />
+    </field>
+    <field name="TypeName" type="String" readOnly="true" label="Type Name" />
+    <field name="StatusID" type="Int32" allowNulls="false" label="Status#" showInSummary="true">
+      <items style="Lookup" dataController="EnquiryStatuses" newDataView="createForm1" />
+    </field>
+    <field name="StatusName" type="String" readOnly="true" label="Status Name" />
+    <field name="CreatedByUserID" type="Int32" label="Created By User#" showInSummary="true">
+      <items style="Lookup" dataController="Users" newDataView="createForm1" />
+    </field>
+    <field name="CreatedByUserUserName" type="String" readOnly="true" label="Created By User Name" />
+    <field name="CreatedOn" type="DateTime" default="(getdate())" label="Created On" />
+    <field name="ChangedByUserID" type="Int32" label="Changed By User#">
+      <items style="Lookup" dataController="Users" newDataView="createForm1" />
+    </field>
+    <field name="ChangedByUserUserName" type="String" readOnly="true" label="Changed By User Name" />
+    <field name="ChangedOn" type="DateTime" default="(getdate())" label="Changed On" />
+    <field name="CreatedByUsername" type="String" label="Created By Username" />
+    <field name="ChangedByUsername" type="String" label="Changed By Username" />
+    <field name="EnguirySubject" type="String" label="Enguiry Subject" showInSummary="true" />
+    <field name="Details" type="String" readOnly="true" label="Details" showInSummary="true" formatOnClient="true" allowQBE="false" allowSorting="false" />
+    <field name="ContactJobTitle" type="String" allowNulls="false" readOnly="true" label="Contact Job Title" showInSummary="true" formatOnClient="true" allowQBE="false" allowSorting="false" />
+    <field name="ContactEmail" type="String" allowNulls="false" readOnly="true" label="Contact Email" showInSummary="true" formatOnClient="true" allowQBE="false" allowSorting="false" />
+    <field name="Version" type="String" label="Version" formatOnClient="true" />
+  </fields>
+  <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <view id="grid1" type="Grid" commandId="command1" label="Enquiries" sortExpression="statusid asc,id desc">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Number" columns="50" />
+        <dataField fieldName="EnguirySubject" />
+        <dataField fieldName="CreatedOn" columns="10" />
+        <dataField fieldName="TypeID" aliasFieldName="TypeName" />
+        <dataField fieldName="StatusID" aliasFieldName="StatusName" />
+        <dataField fieldName="ContactID" aliasFieldName="ContactName" />
+        <dataField fieldName="ContactCompanyName" />
+        <dataField fieldName="ContactCompanyCountryName" />
+        <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
+        <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
+        <dataField fieldName="ChangedOn" columns="10" />
+        <dataField fieldName="CreatedByUsername" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Enquiries">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category headerText="Enquiries" newColumn="true">
+          <description>$DefaultEditDescription</description>
+          <dataFields>
+            <dataField fieldName="Number" readOnly="true" columns="50" />
+            <dataField fieldName="TypeID" aliasFieldName="TypeName" />
+            <dataField fieldName="EnguirySubject" />
+            <dataField fieldName="StatusID" aliasFieldName="StatusName" />
+            <dataField fieldName="CreatedOn" readOnly="true" columns="10" />
+            <dataField fieldName="ContactID" aliasFieldName="ContactName" />
+            <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn" readOnly="true" columns="10" />
+            <dataField fieldName="ContactJobTitle" />
+            <dataField fieldName="CreatedByUsername" readOnly="true" columns="50" hidden="false" />
+            <dataField fieldName="ContactEmail" hyperlinkFormatString="mailto:{ContactEmail}" />
+            <dataField fieldName="Version" hidden="true" columns="15" />
+            <dataField fieldName="ChangedByUsername" columns="50" />
+            <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
+          </dataFields>
+        </category>
+        <category headerText="Reference Information" newColumn="true">
+          <description>$DefaultReferenceDescription</description>
+          <dataFields>
+            <dataField fieldName="ContactCompanyName" />
+            <dataField fieldName="ContactCompanyCountryName" />
+            <dataField fieldName="ContactCompanyChangedByUserUserName" hidden="true" />
+            <dataField fieldName="ContactCountryName" hidden="true" />
+            <dataField fieldName="ContactChangedByUserUserName" hidden="true" />
+            <dataField fieldName="Details" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Enquiries">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category headerText="New Enquiries" newColumn="true">
+          <description>$DefaultNewDescription</description>
+          <dataFields>
+            <dataField fieldName="Number" hidden="true" columns="50" />
+            <dataField fieldName="EnguirySubject" />
+            <dataField fieldName="ContactID" aliasFieldName="ContactName" />
+            <dataField fieldName="TypeID" aliasFieldName="TypeName" />
+            <dataField fieldName="StatusID" aliasFieldName="StatusName" />
+            <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
+            <dataField fieldName="CreatedOn" hidden="true" columns="10" />
+            <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn" hidden="true" columns="10" />
+            <dataField fieldName="CreatedByUsername" hidden="true" columns="50" />
+            <dataField fieldName="ChangedByUsername" columns="50" readOnly="" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a8" commandName="New" commandArgument="grid1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

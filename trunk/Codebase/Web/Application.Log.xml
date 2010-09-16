@@ -1,0 +1,2484 @@
+<log xmlns="urn:schemas-codeontime-com:xml-builder" xmlns:aquarium="urn:schemas-codeontime-com:data-aquarium" xmlns:app="urn:schemas-codeontime-com:data-aquarium-application" xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+  <c y="Update" t="2010-06-19T01:26:36">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Clients" />
+    </s>
+    <d>
+      <f p="@path" v="Clients" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:26:48">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ClientContacts" />
+    </s>
+    <d>
+      <f p="@path" v="Clients | Client Contacts" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:27:42">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Enquiries" />
+    </s>
+    <d>
+      <f p="@path" v=" Enquiries" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:28:30">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Quotations" />
+    </s>
+    <d>
+      <f p="@path" v="Quotations" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:29:17">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Enquiries" />
+    </s>
+    <d>
+      <f p="@index" v="1091" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:29:32">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Quotations" />
+    </s>
+    <d>
+      <f p="@index" v="1099" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:29:49">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ClientContactsNotes" />
+    </s>
+    <d>
+      <f p="@path" v="Clients | Client Contacts | Client Contacts Notes" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:30:03">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ClientProjectContacts" />
+    </s>
+    <d>
+      <f p="@path" v="Clients | Client Contacts | Client Project Contacts" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:30:13">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ClientPurchaseOrders" />
+    </s>
+    <d>
+      <f p="@path" v="Clients | Client Purchase Orders" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:30:31">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ClientsFinancial" />
+    </s>
+    <d>
+      <f p="@path" v="Clients | Clients Financial" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:42:25">
+    <s p="//app:page[@name=$v0 and not(parent::*/*[@name=$v1])]">
+      <v n="v0" v="Contacts" />
+      <v n="v1" v="Personnel" />
+    </s>
+    <d>
+      <f p="@name" v="Personnel" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:43:22">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Personnel" />
+    </s>
+    <d>
+      <f p="@title" v="Personnel" />
+      <f p="@path" v="Personnel" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:43:40">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="BankDetails" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel | Bank Details" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:43:49">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Certificates" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel | Certificates" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:43:59">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactRoles" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel | Contact Roles" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:44:10">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsNextOfKin" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel | Contacts Next Of Kin" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:44:22">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsNotes" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel | Contacts Notes" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:44:36">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel | Contacts Travel" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:44:52">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EmailAddresses" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel | Email Addresses" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:45:02">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Passports" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel | Passports" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:45:15">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="TelephoneNumbers" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel | Telephone Numbers" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:45:25">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="NextOfKin" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel | Next Of Kin" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:45:36">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Visas" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel | Visas" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:46:25">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="CertificateTypes" />
+    </s>
+    <d>
+      <f p="@index" v="1245" />
+      <f p="@path" v="Personnel | Certificate Types" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:47:20">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EnquiryLines" />
+    </s>
+    <d>
+      <f p="@index" v="1095" />
+      <f p="@path" v=" Enquiries | Enquiry Lines" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:48:39">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EmploymentHistory" />
+    </s>
+    <d>
+      <f p="@index" v="1135" />
+      <f p="@path" v="Personnel | Employment History" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:57:20">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Countries" />
+    </s>
+    <d>
+      <f p="@index" v="1280" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:58:17">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ClientsFinancial" />
+    </s>
+    <d>
+      <f p="@index" v="1085" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T01:59:39">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ClientsNotes" />
+    </s>
+    <d>
+      <f p="@index" v="1087" />
+      <f p="@path" v="Clients | Clients Notes" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:00:47">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Projects" />
+    </s>
+    <d>
+      <f p="@index" v="1120" />
+      <f p="@path" v="Projects" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-06-19T02:02:56">
+    <s p="/app:application/app:pages" e="//app:page[@name=$v0]">
+      <v n="v0" v="ListBox" />
+    </s>
+    <d>
+      <f p="@name" v="ListBox" />
+      <f p="@index" v="1125" />
+      <f p="@title" v="List Box" />
+      <f p="@roles" v="*" />
+    </d>
+    <t>
+      <page xmlns="urn:schemas-codeontime-com:data-aquarium-application">
+        <containers />
+        <controls />
+      </page>
+    </t>
+  </c>
+  <c y="Update" t="2010-06-19T02:03:47">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ListBox" />
+    </s>
+    <d>
+      <f p="@index" v="1275" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:04:12">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ListBox" />
+    </s>
+    <d>
+      <f p="@path" v="List Box" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:04:36">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Countries" />
+    </s>
+    <d>
+      <f p="@path" v="List Box | Countries" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:04:46">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Currency" />
+    </s>
+    <d>
+      <f p="@path" v="List Box | Currency" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:04:53">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EnquiryStatuses" />
+    </s>
+    <d>
+      <f p="@path" v="List Box | Enquiry Statuses" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:05:01">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EnquiryTypes" />
+    </s>
+    <d>
+      <f p="@path" v="List Box | Enquiry Types" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:05:11">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="MaritalStatuses" />
+    </s>
+    <d>
+      <f p="@path" v="List Box | Marital Statuses" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:05:39">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="QuotationPricingTypes" />
+    </s>
+    <d>
+      <f p="@path" v="List Box | Quotation Pricing Types" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:05:50">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="QuotationStatuses" />
+    </s>
+    <d>
+      <f p="@path" v="List Box | Quotation Statuses" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:05:58">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="TelephoneNumberTypes" />
+    </s>
+    <d>
+      <f p="@path" v="List Box | Telephone Number Types" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:06:24">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Photos" />
+    </s>
+    <d>
+      <f p="@index" v="1250" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:06:46">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Photos" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel | Photos" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:14:44">
+    <s p="//app:page[@name=$v0 and not(parent::*/*[@name=$v1])]">
+      <v n="v0" v="Personnel" />
+      <v n="v1" v="contacts" />
+    </s>
+    <d>
+      <f p="@name" v="contacts" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-19T02:14:54">
+    <s p="//app:page[@name=$v0 and not(parent::*/*[@name=$v1])]">
+      <v n="v0" v="contacts" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@name" v="Contacts" />
+    </d>
+  </c>
+  <c y="Delete" t="2010-06-21T09:16:27">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="dbo_Home" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-21T09:16:58">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="SMS_Home" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-21T09:17:03">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="SMS_Messages" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-21T09:17:08">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="SMS_Statuses" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-21T09:41:56">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Messages" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-21T09:42:02">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Message_Home" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-21T09:42:09">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Message_Statuses" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-21T09:42:14">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Message_Recipients" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-21T09:42:46">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Users" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-21T09:42:51">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Roles" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-21T09:43:20">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ClientPurchaseOrders" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-21T09:43:25">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ClientsFinancial" />
+    </s>
+  </c>
+  <c y="Update" t="2010-06-21T09:56:20">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsNotes" />
+    </s>
+    <d>
+      <f p="@index" v="1135" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T09:56:39">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsNotes" />
+    </s>
+    <d>
+      <f p="@index" v="1133" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T09:57:26">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsNotes" />
+    </s>
+    <d>
+      <f p="@title" v="Notes" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T09:57:42">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactRoles" />
+    </s>
+    <d>
+      <f p="@title" v="Roles" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T09:57:55">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsNextOfKin" />
+    </s>
+    <d>
+      <f p="@title" v="Next Of Kin" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T09:58:09">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@title" v="Travel" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T09:58:47">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsNextOfKin" />
+    </s>
+    <d>
+      <f p="@index" v="1180" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T09:58:56">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactRoles" />
+    </s>
+    <d>
+      <f p="@index" v="1170" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T09:59:06">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Certificates" />
+    </s>
+    <d>
+      <f p="@index" v="1160" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T09:59:16">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="BankDetails" />
+    </s>
+    <d>
+      <f p="@index" v="1150" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T09:59:25">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EmploymentHistory" />
+    </s>
+    <d>
+      <f p="@index" v="1140" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T09:59:41">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsNotes" />
+    </s>
+    <d>
+      <f p="@index" v="1135" />
+    </d>
+  </c>
+  <c y="MakeLast" t="2010-06-21T10:20:08">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view2" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@id" v="view2" />
+      <f p="ancestor::app:page[1]/@name" v="Contacts" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T10:20:47">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view6" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@text" v="Notes" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T10:20:56">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view7" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@text" v="Travel" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T10:21:07">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view5" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@text" v="Next Of Kin" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T10:21:15">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view4" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@text" v="Roles" />
+    </d>
+  </c>
+  <c y="MakeLast" t="2010-06-21T10:21:34">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view5" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@id" v="view5" />
+      <f p="ancestor::app:page[1]/@name" v="Contacts" />
+    </d>
+  </c>
+  <c y="MakeFirst" t="2010-06-21T10:21:47">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view12" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@id" v="view12" />
+      <f p="ancestor::app:page[1]/@name" v="Contacts" />
+    </d>
+  </c>
+  <c y="MakeFirst" t="2010-06-21T10:21:53">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view1" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@id" v="view1" />
+      <f p="ancestor::app:page[1]/@name" v="Contacts" />
+    </d>
+  </c>
+  <c y="MakeFirst" t="2010-06-21T10:21:59">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view6" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@id" v="view6" />
+      <f p="ancestor::app:page[1]/@name" v="Contacts" />
+    </d>
+  </c>
+  <c y="MakeFirst" t="2010-06-21T10:22:04">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view1" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@id" v="view1" />
+      <f p="ancestor::app:page[1]/@name" v="Contacts" />
+    </d>
+  </c>
+  <c y="MakeLast" t="2010-06-21T10:22:14">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view7" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@id" v="view7" />
+      <f p="ancestor::app:page[1]/@name" v="Contacts" />
+    </d>
+  </c>
+  <c y="Update" t="2010-06-21T10:58:37">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsNotes" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel | Notes" />
+    </d>
+  </c>
+  <c y="Delete" t="2010-06-21T12:18:41">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view3" />
+      <v n="v1" v="Clients" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-21T12:18:46">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view4" />
+      <v n="v1" v="Clients" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-21T12:21:33">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view6" />
+      <v n="v1" v="Clients" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-28T11:40:56">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="vwAvailablePersonnel" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-28T11:41:04">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="vwContacts" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-28T11:41:10">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="vwProjectsWithEmploymentHistory" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-28T11:41:20">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="vwQuotations" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-28T11:41:25">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="vwAvailablePersonnel" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-28T11:41:37">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="vwContacts" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-28T11:41:43">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="vwProjectsWithEmploymentHistory" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-28T11:41:49">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="vwQuotations" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-06-28T11:41:56">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="AllReports" />
+    </s>
+  </c>
+  <c y="Update" t="2010-07-01T00:42:45">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="Clients" />
+      <v n="v1" v="view5" />
+    </s>
+    <d>
+      <f p="@container" v="container1" />
+      <f p="@activator" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T00:47:54">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view5" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@container" v="container2" />
+      <f p="@activator" v="Tab" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T12:43:03">
+    <s p="//app:container[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="container2" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@flow" v="NewColumn" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T13:30:21">
+    <s p="//app:container[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="container2" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@flow" v="NewRow" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T13:35:34">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view5" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@container" v="container1" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T14:04:35">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="Clients" />
+      <v n="v1" v="view1" />
+    </s>
+    <d>
+      <f p="@activator" v="Tab" />
+    </d>
+  </c>
+  <c y="MoveUp" t="2010-07-01T14:04:43">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view5" />
+      <v n="v1" v="Clients" />
+    </s>
+  </c>
+  <c y="Update" t="2010-07-01T14:04:51">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="Clients" />
+      <v n="v1" v="view2" />
+    </s>
+    <d>
+      <f p="@activator" v="" />
+    </d>
+  </c>
+  <c y="MoveDown" t="2010-07-01T14:07:55">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view5" />
+      <v n="v1" v="Clients" />
+    </s>
+  </c>
+  <c y="Update" t="2010-07-01T14:08:02">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view1" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@activator" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T14:08:09">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view2" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@activator" v="Tab" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T14:09:12">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view5" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@container" v="container2" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T14:18:32">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view2" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@container" v="container1" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T14:18:42">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view2" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@activator" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T14:28:52">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view5" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@activator" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T14:31:38">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="Clients" />
+      <v n="v1" v="view2" />
+    </s>
+    <d>
+      <f p="@container" v="container2" />
+      <f p="@activator" v="Tab" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T14:31:49">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="Clients" />
+      <v n="v1" v="view5" />
+    </s>
+    <d>
+      <f p="@activator" v="Tab" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T14:53:01">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view1" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@container" v="container2" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T14:53:14">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view1" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@activator" v="Tab" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T14:56:05">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view1" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@container" v="container1" />
+      <f p="@activator" v="" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-07-01T15:29:44">
+    <s p="//app:page[@name=$Page]/app:dataViews" e="//app:dataView[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="Clients" />
+      <v n="v1" v="Clients" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="container2" />
+      <f p="@controller" v="ClientPurchaseOrders" />
+      <f p="@view" v="grid1" />
+      <f p="@activator" v="Tab" />
+      <f p="@showInSummary" v="false" />
+      <f p="@showActionBar" v="true" />
+      <f p="@showDescription" v="true" />
+      <f p="@showViewSelector" v="true" />
+      <f p="@filterSource" v="view1" />
+      <f p="@filterFields" v="ClientID" />
+    </d>
+    <t>
+      <dataView id="dv100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Update" t="2010-07-01T15:30:02">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1 and not(parent::*/*[@id=$v2 and ancestor::app:page[1]/@name=$v3])]">
+      <v n="v0" v="dv100" />
+      <v n="v1" v="Clients" />
+      <v n="v2" v="view7" />
+      <v n="v3" v="Clients" />
+    </s>
+    <d>
+      <f p="@id" v="view7" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T15:30:23">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view7" />
+      <v n="v1" v="Clients" />
+    </s>
+    <d>
+      <f p="@text" v="Purchase Orders" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-07-01T15:31:26">
+    <s p="//app:page[@name=$Page]/app:dataViews" e="//app:dataView[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="Clients" />
+      <v n="v1" v="Clients" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="container2" />
+      <f p="@controller" v="ClientsFinancial" />
+      <f p="@view" v="grid1" />
+      <f p="@activator" v="Tab" />
+      <f p="@text" v="Financial Details" />
+      <f p="@showInSummary" v="false" />
+      <f p="@showActionBar" v="true" />
+      <f p="@showDescription" v="true" />
+      <f p="@showViewSelector" v="true" />
+      <f p="@filterSource" v="view1" />
+      <f p="@filterFields" v="ClientID" />
+    </d>
+    <t>
+      <dataView id="dv100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Update" t="2010-07-01T15:31:34">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1 and not(parent::*/*[@id=$v2 and ancestor::app:page[1]/@name=$v3])]">
+      <v n="v0" v="dv100" />
+      <v n="v1" v="Clients" />
+      <v n="v2" v="view 9" />
+      <v n="v3" v="Clients" />
+    </s>
+    <d>
+      <f p="@id" v="view 9" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-01T15:34:57">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1 and not(parent::*/*[@id=$v2 and ancestor::app:page[1]/@name=$v3])]">
+      <v n="v0" v="view 9" />
+      <v n="v1" v="Clients" />
+      <v n="v2" v="view9" />
+      <v n="v3" v="Clients" />
+    </s>
+    <d>
+      <f p="@id" v="view9" />
+    </d>
+  </c>
+  <c y="MoveUp" t="2010-07-04T20:26:25">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view3" />
+      <v n="v1" v="Quotations" />
+    </s>
+  </c>
+  <c y="MoveUp" t="2010-07-05T00:43:26">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view3" />
+      <v n="v1" v="Enquiries" />
+    </s>
+  </c>
+  <c y="MoveUp" t="2010-07-12T11:45:40">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view5" />
+      <v n="v1" v="Contacts" />
+    </s>
+  </c>
+  <c y="MoveUp" t="2010-07-12T11:45:45">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view5" />
+      <v n="v1" v="Contacts" />
+    </s>
+  </c>
+  <c y="MoveUp" t="2010-07-12T11:45:53">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view5" />
+      <v n="v1" v="Contacts" />
+    </s>
+  </c>
+  <c y="MoveDown" t="2010-07-12T12:10:35">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view10" />
+      <v n="v1" v="Contacts" />
+    </s>
+  </c>
+  <c y="Update" t="2010-07-12T12:10:48">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view5" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@text" v="Family" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-12T15:04:50">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="NextOfKin" />
+    </s>
+    <d>
+      <f p="@index" v="1185" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-12T15:05:14">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsNextOfKin" />
+    </s>
+    <d>
+      <f p="@title" v="Family" />
+      <f p="@path" v="Personnel | Contacts Family" />
+    </d>
+  </c>
+  <c y="Delete" t="2010-07-12T15:05:33">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Photos" />
+    </s>
+  </c>
+  <c y="Update" t="2010-07-12T15:06:15">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="CertificateTypes" />
+    </s>
+    <d>
+      <f p="@index" v="1375" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-12T15:06:43">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="CertificateTypes" />
+    </s>
+    <d>
+      <f p="@path" v="List Box | Certificate Types" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-14T16:51:28">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view12" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@container" v="container1" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-14T17:06:39">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view12" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@container" v="container2" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-07-15T09:22:37">
+    <s p="//app:page[@name=$Page]/app:dataViews" e="//app:dataView[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="ContactsTravel" />
+      <v n="v1" v="ContactsTravel" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="container1" />
+      <f p="@controller" v="Passports" />
+      <f p="@view" v="grid1" />
+      <f p="@tag" v="Passport" />
+      <f p="@activator" v="Tab" />
+      <f p="@text" v="Passport" />
+      <f p="@showInSummary" v="false" />
+      <f p="@multiSelect" v="false" />
+      <f p="@showActionBar" v="true" />
+      <f p="@showDescription" v="true" />
+      <f p="@showViewSelector" v="true" />
+      <f p="@filterSource" v="view1" />
+      <f p="@filterFields" v="ContactID" />
+    </d>
+    <t>
+      <dataView id="dv100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Update" t="2010-07-15T09:22:50">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1 and not(parent::*/*[@id=$v2 and ancestor::app:page[1]/@name=$v3])]">
+      <v n="v0" v="dv100" />
+      <v n="v1" v="ContactsTravel" />
+      <v n="v2" v="view2" />
+      <v n="v3" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@id" v="view2" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-15T09:40:15">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="ContactsTravel" />
+      <v n="v1" v="view2" />
+    </s>
+    <d>
+      <f p="@tag" v="" />
+      <f p="@pageSize" v="5" />
+      <f p="@autoHide" v="Container" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-15T09:45:07">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="ContactsTravel" />
+      <v n="v1" v="view2" />
+    </s>
+    <d>
+      <f p="@autoHide" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-15T09:49:59">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="ContactsTravel" />
+      <v n="v1" v="view2" />
+    </s>
+    <d>
+      <f p="@container" v="container2" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-15T09:59:48">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view2" />
+      <v n="v1" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@container" v="container1" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-15T10:00:46">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view2" />
+      <v n="v1" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@activator" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-15T10:18:22">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="ContactsTravel" />
+      <v n="v1" v="view2" />
+    </s>
+    <d>
+      <f p="@activator" v="SideBarTask" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-07-15T11:10:23">
+    <s p="/app:application/app:pages" e="//app:page[@name=$v0]">
+      <v n="v0" v="Personnel_new" />
+    </s>
+    <d>
+      <f p="@name" v="Personnel_new" />
+      <f p="@index" v="500" />
+      <f p="@title" v="Personnel" />
+      <f p="@description" v="PErsonnel" />
+      <f p="app:about" v="PErsonnel" />
+      <f p="@roles" v="*" />
+    </d>
+    <t>
+      <page xmlns="urn:schemas-codeontime-com:data-aquarium-application">
+        <containers />
+        <controls />
+      </page>
+    </t>
+  </c>
+  <c y="Update" t="2010-07-15T11:10:51">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Personnel_new" />
+    </s>
+    <d>
+      <f p="@index" v="5000" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-07-15T11:11:26">
+    <s p="//app:page[@name=$Page]/app:containers" e="//app:container[@id=$v1 and ancestor::app:page[1]/@name=$v2]">
+      <v n="Page" v="Personnel_new" />
+      <v n="v1" v="" />
+      <v n="v2" v="Personnel_new" />
+    </s>
+    <d>
+      <f p="@flow" v="NewColumn" />
+    </d>
+    <t>
+      <container id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-07-15T11:12:03">
+    <s p="//app:page[@name=$Page]/app:dataViews" e="//app:dataView[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="Personnel_new" />
+      <v n="v1" v="Personnel_new" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="c100" />
+      <f p="@controller" v="ContactsTravel" />
+      <f p="@showInSummary" v="false" />
+      <f p="@showActionBar" v="true" />
+      <f p="@showDescription" v="true" />
+      <f p="@showViewSelector" v="true" />
+    </d>
+    <t>
+      <dataView id="dv100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-07-15T11:13:17">
+    <s p="//app:page[@name=$Page]/app:dataViews" e="//app:dataView[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="Personnel_new" />
+      <v n="v1" v="Personnel_new" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="c100" />
+      <f p="@controller" v="Passports" />
+      <f p="@view" v="grid1" />
+      <f p="@showInSummary" v="false" />
+      <f p="@showActionBar" v="true" />
+      <f p="@showDescription" v="true" />
+      <f p="@showViewSelector" v="true" />
+      <f p="@filterSource" v="dv100" />
+      <f p="@filterFields" v="ContactID" />
+    </d>
+    <t>
+      <dataView id="dv101" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Update" t="2010-07-15T11:24:59">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Personnel_new" />
+    </s>
+    <d>
+      <f p="@title" v="Personnel New" />
+      <f p="@description" v="Personnel" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-15T11:25:29">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Personnel_new" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel New" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-07-15T12:00:44">
+    <s p="//app:page[@name=$Page]/app:dataViews" e="//app:dataView[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="Personnel_new" />
+      <v n="v1" v="Personnel_new" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="c100" />
+      <f p="@controller" v="Visas" />
+      <f p="@view" v="grid1" />
+      <f p="@showInSummary" v="false" />
+      <f p="@showActionBar" v="true" />
+      <f p="@showDescription" v="true" />
+      <f p="@showViewSelector" v="true" />
+      <f p="@filterSource" v="dv100" />
+      <f p="@filterFields" v="ContactID" />
+    </d>
+    <t>
+      <dataView id="dv102" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Update" t="2010-07-15T12:06:59">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="Personnel_new" />
+      <v n="v1" v="dv102" />
+    </s>
+    <d>
+      <f p="@showActionBar" v="false" />
+      <f p="@showDescription" v="false" />
+      <f p="@showViewSelector" v="false" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-15T12:07:13">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="Personnel_new" />
+      <v n="v1" v="dv101" />
+    </s>
+    <d>
+      <f p="@showActionBar" v="false" />
+      <f p="@showDescription" v="false" />
+      <f p="@showViewSelector" v="false" />
+    </d>
+  </c>
+  <c y="Delete" t="2010-07-20T13:19:50">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Visas" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-20T13:19:54">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="TelephoneNumbers" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-20T13:19:58">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Passports" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-20T13:20:06">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EmailAddresses" />
+    </s>
+  </c>
+  <c y="Insert" t="2010-07-20T14:12:44">
+    <s p="/app:application/app:pages" e="//app:page[@name=$v0]">
+      <v n="v0" v="Personnel_one" />
+    </s>
+    <d>
+      <f p="@name" v="Personnel_one" />
+      <f p="@index" v="9000" />
+      <f p="@title" v="Personnel One" />
+      <f p="@roles" v="*" />
+    </d>
+    <t>
+      <page xmlns="urn:schemas-codeontime-com:data-aquarium-application">
+        <containers />
+        <controls />
+      </page>
+    </t>
+  </c>
+  <c y="Update" t="2010-07-21T12:56:47">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view6" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@container" v="container1" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-21T13:06:25">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view1" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@activator" v="Tab" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-21T13:14:03">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view6" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@container" v="container2" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-21T13:14:10">
+    <s p="//app:dataView[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="view1" />
+      <v n="v1" v="Contacts" />
+    </s>
+    <d>
+      <f p="@activator" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-21T15:30:43">
+    <s p="//app:container[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="container1" />
+      <v n="v1" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@width" v="120px" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-21T15:31:06">
+    <s p="//app:container[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="container2" />
+      <v n="v1" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@flow" v="NewColumn" />
+      <f p="@width" v="120px" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-21T15:42:11">
+    <s p="//app:container[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="container1" />
+      <v n="v1" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@width" v="320px" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-21T15:42:22">
+    <s p="//app:container[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="container2" />
+      <v n="v1" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@width" v="420px" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-21T15:48:14">
+    <s p="//app:container[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="container1" />
+      <v n="v1" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@width" v="520px" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-21T15:48:23">
+    <s p="//app:container[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="container2" />
+      <v n="v1" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@width" v="920px" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-21T15:48:31">
+    <s p="//app:container[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="container1" />
+      <v n="v1" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@width" v="920px" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-21T15:48:40">
+    <s p="//app:container[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="container2" />
+      <v n="v1" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@width" v="620px" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-21T22:59:02">
+    <s p="//app:container[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="container2" />
+      <v n="v1" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@flow" v="NewRow" />
+      <f p="@width" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-21T22:59:12">
+    <s p="//app:container[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="container1" />
+      <v n="v1" v="ContactsTravel" />
+    </s>
+    <d>
+      <f p="@width" v="" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-07-21T23:59:32">
+    <s p="/app:application/app:pages" e="//app:page[@name=$v0]">
+      <v n="v0" v="QuoteSrch" />
+    </s>
+    <d>
+      <f p="@name" v="QuoteSrch" />
+      <f p="@index" v="1010" />
+      <f p="@title" v="Quotation" />
+      <f p="@path" v="QuoteSrch" />
+      <f p="@description" v="Quotation" />
+      <f p="@roles" v="*" />
+    </d>
+    <t>
+      <page xmlns="urn:schemas-codeontime-com:data-aquarium-application">
+        <containers />
+        <controls />
+      </page>
+    </t>
+  </c>
+  <c y="Insert" t="2010-07-21T23:59:56">
+    <s p="//app:page[@name=$Page]/app:containers" e="//app:container[@id=$v1 and ancestor::app:page[1]/@name=$v2]">
+      <v n="Page" v="QuoteSrch" />
+      <v n="v1" v="" />
+      <v n="v2" v="QuoteSrch" />
+    </s>
+    <d>
+      <f p="@flow" v="NewRow" />
+    </d>
+    <t>
+      <container id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-07-22T00:00:27">
+    <s p="/app:application/app:userControls" e="//app:userControl[@name=$v0]">
+      <v n="v0" v="QuoteSrchControl" />
+    </s>
+    <d>
+      <f p="@name" v="QuoteSrchControl" />
+      <f p="@prefix" v="uc" />
+      <f p="@generate" v="FirstTimeOnly" />
+    </d>
+    <t>
+      <userControl xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-07-22T00:00:44">
+    <s p="//app:page[@name=$Page]/app:controls" e="//app:control[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="QuoteSrch" />
+      <v n="v1" v="QuoteSrch" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="c100" />
+      <f p="@name" v="QuoteSrchControl" />
+    </d>
+    <t>
+      <control id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-07-22T01:20:05">
+    <s p="/app:application/app:pages" e="//app:page[@name=$v0]">
+      <v n="v0" v="EnquirySch" />
+    </s>
+    <d>
+      <f p="@name" v="EnquirySch" />
+      <f p="@index" v="1015" />
+      <f p="@title" v="Enquiry" />
+      <f p="@path" v="EnquirySch" />
+      <f p="@description" v="Enquiry" />
+      <f p="app:about" v="Enquiry" />
+      <f p="@roles" v="*" />
+    </d>
+    <t>
+      <page xmlns="urn:schemas-codeontime-com:data-aquarium-application">
+        <containers />
+        <controls />
+      </page>
+    </t>
+  </c>
+  <c y="Update" t="2010-07-22T01:20:27">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EnquirySch" />
+    </s>
+    <d>
+      <f p="@index" v="1010" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T01:20:35">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="QuoteSrch" />
+    </s>
+    <d>
+      <f p="@index" v="1015" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-07-22T01:20:56">
+    <s p="//app:page[@name=$Page]/app:containers" e="//app:container[@id=$v1 and ancestor::app:page[1]/@name=$v2]">
+      <v n="Page" v="EnquirySch" />
+      <v n="v1" v="" />
+      <v n="v2" v="EnquirySch" />
+    </s>
+    <d>
+      <f p="@flow" v="NewRow" />
+    </d>
+    <t>
+      <container id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-07-22T01:21:21">
+    <s p="/app:application/app:userControls" e="//app:userControl[@name=$v0]">
+      <v n="v0" v="EnquirySrch" />
+    </s>
+    <d>
+      <f p="@name" v="EnquirySrch" />
+      <f p="@prefix" v="uc" />
+      <f p="@generate" v="FirstTimeOnly" />
+    </d>
+    <t>
+      <userControl xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-07-22T01:21:29">
+    <s p="//app:page[@name=$Page]/app:controls" e="//app:control[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="EnquirySch" />
+      <v n="v1" v="EnquirySch" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="c100" />
+      <f p="@name" v="EnquirySrch" />
+    </d>
+    <t>
+      <control id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Delete" t="2010-07-22T13:58:35">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsTravel" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-22T13:58:43">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="NextOfKin" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-22T13:58:50">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsNextOfKin" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-22T13:59:00">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactRoles" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-22T13:59:06">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Certificates" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-22T13:59:11">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="BankDetails" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-22T13:59:16">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EmploymentHistory" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-22T13:59:20">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactsNotes" />
+    </s>
+  </c>
+  <c y="Update" t="2010-07-22T13:59:49">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EnquiryLines" />
+    </s>
+    <d>
+      <f p="@path" v="" />
+    </d>
+  </c>
+  <c y="Delete" t="2010-07-22T14:01:51">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Personnel_one" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-22T14:01:55">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Personnel_new" />
+    </s>
+  </c>
+  <c y="Update" t="2010-07-22T14:02:30">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ListBox" />
+    </s>
+    <d>
+      <f p="@path" v="Configuration" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:02:39">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Countries" />
+    </s>
+    <d>
+      <f p="@path" v="Configuration | Countries" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:02:45">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Currency" />
+    </s>
+    <d>
+      <f p="@path" v="Configuration | Currency" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:02:53">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EnquiryStatuses" />
+    </s>
+    <d>
+      <f p="@path" v="Configuration | Enquiry Statuses" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:03:00">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EnquiryTypes" />
+    </s>
+    <d>
+      <f p="@path" v="Configuration | Enquiry Types" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:03:07">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="MaritalStatuses" />
+    </s>
+    <d>
+      <f p="@path" v="Configuration | Marital Statuses" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:03:19">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="QuotationPricingTypes" />
+    </s>
+    <d>
+      <f p="@path" v="Configuration | Quotation Pricing Types" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:03:28">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="QuotationStatuses" />
+    </s>
+    <d>
+      <f p="@path" v="Configuration | Quotation Statuses" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:03:35">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="TelephoneNumberTypes" />
+    </s>
+    <d>
+      <f p="@path" v="Configuration | Telephone Number Types" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:03:42">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="CertificateTypes" />
+    </s>
+    <d>
+      <f p="@path" v="Configuration | Certificate Types" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:04:33">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EnquirySch" />
+    </s>
+    <d>
+      <f p="@index" v="1089" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:04:57">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="QuoteSrch" />
+    </s>
+    <d>
+      <f p="@index" v="1098" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:05:12">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Enquiries" />
+    </s>
+    <d>
+      <f p="@path" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:05:22">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EnquirySch" />
+    </s>
+    <d>
+      <f p="@path" v="Enquiry" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:05:42">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EnquirySch" />
+    </s>
+    <d>
+      <f p="@path" v="Enquiries" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:06:04">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Quotations" />
+    </s>
+    <d>
+      <f p="@path" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:06:12">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="QuoteSrch" />
+    </s>
+    <d>
+      <f p="@path" v="Quotations" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-07-22T14:09:05">
+    <s p="/app:application/app:pages" e="//app:page[@name=$v0]">
+      <v n="v0" v="PersonnelNew" />
+    </s>
+    <d>
+      <f p="@name" v="PersonnelNew" />
+      <f p="@index" v="1095" />
+      <f p="@title" v="Personnel" />
+      <f p="@path" v="PersonnelNew" />
+      <f p="@description" v="Personnel" />
+      <f p="@roles" v="*" />
+    </d>
+    <t>
+      <page xmlns="urn:schemas-codeontime-com:data-aquarium-application">
+        <containers />
+        <controls />
+      </page>
+    </t>
+  </c>
+  <c y="Update" t="2010-07-22T14:09:34">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="PersonnelNew" />
+    </s>
+    <d>
+      <f p="@index" v="1125" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:10:00">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="PersonnelNew" />
+    </s>
+    <d>
+      <f p="@title" v="PersonnelNew" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-07-22T14:16:20">
+    <s p="//app:page[@name=$Page]/app:containers" e="//app:container[@id=$v1 and ancestor::app:page[1]/@name=$v2]">
+      <v n="Page" v="PersonnelNew" />
+      <v n="v1" v="" />
+      <v n="v2" v="PersonnelNew" />
+    </s>
+    <d>
+      <f p="@flow" v="NewRow" />
+    </d>
+    <t>
+      <container id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-07-22T14:16:53">
+    <s p="/app:application/app:userControls" e="//app:userControl[@name=$v0]">
+      <v n="v0" v="PersonnelAdvPageControl" />
+    </s>
+    <d>
+      <f p="@name" v="PersonnelAdvPageControl" />
+      <f p="@prefix" v="uc" />
+      <f p="@generate" v="FirstTimeOnly" />
+    </d>
+    <t>
+      <userControl xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-07-22T14:16:57">
+    <s p="//app:page[@name=$Page]/app:controls" e="//app:control[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="PersonnelNew" />
+      <v n="v1" v="PersonnelNew" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="c100" />
+      <f p="@name" v="PersonnelAdvPageControl" />
+    </d>
+    <t>
+      <control id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Update" t="2010-07-22T14:26:38">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Contacts" />
+    </s>
+    <d>
+      <f p="@path" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T14:26:44">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="PersonnelNew" />
+    </s>
+    <d>
+      <f p="@path" v="Personnel" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T15:17:51">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="PersonnelNew" />
+    </s>
+    <d>
+      <f p="@title" v="Personnel" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T16:04:58">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ClientContacts" />
+    </s>
+    <d>
+      <f p="@path" v="Contacts" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T16:05:10">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ClientContactsNotes" />
+    </s>
+    <d>
+      <f p="@path" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T16:05:18">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ClientProjectContacts" />
+    </s>
+    <d>
+      <f p="@path" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T16:05:26">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ClientsNotes" />
+    </s>
+    <d>
+      <f p="@path" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T16:11:35">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="ClientContacts" />
+      <v n="v1" v="view4" />
+    </s>
+    <d>
+      <f p="@autoHide" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T16:12:30">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="ClientContacts" />
+      <v n="v1" v="view1" />
+    </s>
+    <d>
+      <f p="@activator" v="Tab" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-22T16:13:15">
+    <s p="//app:dataView[ancestor::app:page[1]/@name=$v0 and @id=$v1]">
+      <v n="v0" v="ClientContacts" />
+      <v n="v1" v="view4" />
+    </s>
+    <d>
+      <f p="@container" v="container1" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-25T13:38:25">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="VewPersonnelRoles" />
+    </s>
+    <d>
+      <f p="@path" v="" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-25T13:38:37">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="VewQuotationExpDate" />
+    </s>
+    <d>
+      <f p="@path" v="" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-25T13:39:09">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ProjectStatuses" />
+    </s>
+    <d>
+      <f p="@path" v="Configuration | Project Statuses" />
+      <f p="@style" v="" />
+    </d>
+  </c>
+  <c y="Delete" t="2010-07-25T14:19:22">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="VewPersonnelRoles" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-25T14:19:28">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="VewPersonnelRoles" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-25T14:19:33">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="VewQuotationExpDate" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-07-25T14:19:40">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="VewQuotationExpDate" />
+    </s>
+  </c>
+  <c y="Insert" t="2010-07-29T21:29:48">
+    <s p="/app:application/app:pages" e="//app:page[@name=$v0]">
+      <v n="v0" v="ProjectSrch" />
+    </s>
+    <d>
+      <f p="@name" v="ProjectSrch" />
+      <f p="@title" v="Project" />
+      <f p="@path" v="Project " />
+      <f p="@description" v="Projrct" />
+      <f p="@roles" v="*" />
+    </d>
+    <t>
+      <page xmlns="urn:schemas-codeontime-com:data-aquarium-application">
+        <containers />
+        <controls />
+      </page>
+    </t>
+  </c>
+  <c y="Insert" t="2010-07-30T00:07:53">
+    <s p="//app:page[@name=$Page]/app:containers" e="//app:container[@id=$v1 and ancestor::app:page[1]/@name=$v2]">
+      <v n="Page" v="ProjectSrch" />
+      <v n="v1" v="" />
+      <v n="v2" v="ProjectSrch" />
+    </s>
+    <d>
+      <f p="@flow" v="NewRow" />
+    </d>
+    <t>
+      <container id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-07-30T00:08:38">
+    <s p="/app:application/app:userControls" e="//app:userControl[@name=$v0]">
+      <v n="v0" v="ProjectControl" />
+    </s>
+    <d>
+      <f p="@name" v="ProjectControl" />
+      <f p="@prefix" v="uc" />
+      <f p="@generate" v="FirstTimeOnly" />
+    </d>
+    <t>
+      <userControl xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-07-30T00:08:44">
+    <s p="//app:page[@name=$Page]/app:controls" e="//app:control[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="ProjectSrch" />
+      <v n="v1" v="ProjectSrch" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="c100" />
+      <f p="@name" v="ProjectControl" />
+    </d>
+    <t>
+      <control id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Update" t="2010-07-30T00:10:05">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ProjectSrch" />
+    </s>
+    <d>
+      <f p="@index" v="1125" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-30T00:10:31">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ProjectSrch" />
+    </s>
+    <d>
+      <f p="@index" v="1122" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-30T00:10:49">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ProjectSrch" />
+    </s>
+    <d>
+      <f p="@path" v="Projects New" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-07-30T00:50:31">
+    <s p="//app:page[@name=$Page]/app:containers" e="//app:container[@id=$v1 and ancestor::app:page[1]/@name=$v2]">
+      <v n="Page" v="ProjectSrch" />
+      <v n="v1" v="" />
+      <v n="v2" v="ProjectSrch" />
+    </s>
+    <d>
+      <f p="@flow" v="NewRow" />
+    </d>
+    <t>
+      <container id="c101" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Delete" t="2010-07-30T00:58:34">
+    <s p="//app:container[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="c101" />
+      <v n="v1" v="ProjectSrch" />
+    </s>
+  </c>
+  <c y="Update" t="2010-07-30T01:16:38">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="Projects" />
+    </s>
+    <d>
+      <f p="@path" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-30T01:16:46">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ProjectSrch" />
+    </s>
+    <d>
+      <f p="@path" v="Projects" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-30T01:17:20">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EnquirySch" />
+    </s>
+    <d>
+      <f p="@title" v="Enquies" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-30T01:17:37">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="EnquirySch" />
+    </s>
+    <d>
+      <f p="@title" v="Enquiries" />
+    </d>
+  </c>
+  <c y="Update" t="2010-07-30T01:17:54">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ProjectSrch" />
+    </s>
+    <d>
+      <f p="@title" v="Projects" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-08-19T01:54:43">
+    <s p="/app:application/app:pages" e="//app:page[@name=$v0]">
+      <v n="v0" v="CV" />
+    </s>
+    <d>
+      <f p="@name" v="CV" />
+      <f p="@index" v="8000" />
+      <f p="@title" v="cv" />
+      <f p="@roles" v="*" />
+    </d>
+    <t>
+      <page xmlns="urn:schemas-codeontime-com:data-aquarium-application">
+        <containers />
+        <controls />
+      </page>
+    </t>
+  </c>
+  <c y="Update" t="2010-08-19T01:55:40">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="CV" />
+    </s>
+    <d>
+      <f p="@description" v="cv" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-08-19T01:56:10">
+    <s p="//app:page[@name=$Page]/app:containers" e="//app:container[@id=$v1 and ancestor::app:page[1]/@name=$v2]">
+      <v n="Page" v="CV" />
+      <v n="v1" v="" />
+      <v n="v2" v="CV" />
+    </s>
+    <d>
+      <f p="@flow" v="NewRow" />
+    </d>
+    <t>
+      <container id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-08-19T01:56:50">
+    <s p="//app:page[@name=$Page]/app:dataViews" e="//app:dataView[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="CV" />
+      <v n="v1" v="CV" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="c100" />
+      <f p="@controller" v="CVs" />
+      <f p="@view" v="grid1" />
+      <f p="@showInSummary" v="false" />
+      <f p="@showActionBar" v="true" />
+      <f p="@showDescription" v="true" />
+      <f p="@showViewSelector" v="true" />
+    </d>
+    <t>
+      <dataView id="dv100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Delete" t="2010-08-19T11:31:40">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="ContactCVs" />
+    </s>
+  </c>
+  <c y="Insert" t="2010-08-19T12:19:26">
+    <s p="/app:application/app:userControls" e="//app:userControl[@name=$v0]">
+      <v n="v0" v="cv_usr_control" />
+    </s>
+    <d>
+      <f p="@name" v="cv_usr_control" />
+      <f p="@prefix" v="uc" />
+      <f p="@generate" v="FirstTimeOnly" />
+    </d>
+    <t>
+      <userControl xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-08-19T12:19:36">
+    <s p="//app:page[@name=$Page]/app:controls" e="//app:control[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="CV" />
+      <v n="v1" v="CV" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="c100" />
+      <f p="@name" v="cv_usr_control" />
+    </d>
+    <t>
+      <control id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Delete" t="2010-08-19T12:24:29">
+    <s p="//app:control[@id=$v0 and ancestor::app:page[1]/@name=$v1]">
+      <v n="v0" v="c100" />
+      <v n="v1" v="CV" />
+    </s>
+  </c>
+  <c y="Insert" t="2010-08-19T12:28:10">
+    <s p="//app:page[@name=$Page]/app:controls" e="//app:control[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="CV" />
+      <v n="v1" v="CV" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="c100" />
+      <f p="@name" v="cv_usr_control" />
+    </d>
+    <t>
+      <control id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-08-19T12:58:57">
+    <s p="/app:application/app:pages" e="//app:page[@name=$v0]">
+      <v n="v0" v="CVNew" />
+    </s>
+    <d>
+      <f p="@name" v="CVNew" />
+      <f p="@index" v="8000" />
+      <f p="@title" v="Personnel CV" />
+      <f p="@path" v="CV" />
+      <f p="@description" v="Personnel CV" />
+      <f p="@roles" v="*" />
+    </d>
+    <t>
+      <page xmlns="urn:schemas-codeontime-com:data-aquarium-application">
+        <containers />
+        <controls />
+      </page>
+    </t>
+  </c>
+  <c y="Insert" t="2010-08-19T12:59:30">
+    <s p="//app:page[@name=$Page]/app:containers" e="//app:container[@id=$v1 and ancestor::app:page[1]/@name=$v2]">
+      <v n="Page" v="CVNew" />
+      <v n="v1" v="" />
+      <v n="v2" v="CVNew" />
+    </s>
+    <d>
+      <f p="@flow" v="NewRow" />
+    </d>
+    <t>
+      <container id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-08-19T12:59:45">
+    <s p="//app:page[@name=$Page]/app:controls" e="//app:control[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="CVNew" />
+      <v n="v1" v="CVNew" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="c100" />
+      <f p="@name" v="cv_usr_control" />
+    </d>
+    <t>
+      <control id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Delete" t="2010-08-19T13:00:02">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="CV" />
+    </s>
+  </c>
+  <c y="Update" t="2010-08-19T13:03:13">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="CVNew" />
+    </s>
+    <d>
+      <f p="@index" v="1127" />
+      <f p="@path" v="Personnel | CV" />
+    </d>
+  </c>
+  <c y="Insert" t="2010-08-26T02:36:55">
+    <s p="/app:application/app:pages" e="//app:page[@name=$v0]">
+      <v n="v0" v="PersonnelAdd" />
+    </s>
+    <d>
+      <f p="@name" v="PersonnelAdd" />
+      <f p="@index" v="30000" />
+      <f p="@title" v="Add New Personnel" />
+      <f p="@roles" v="*" />
+    </d>
+    <t>
+      <page xmlns="urn:schemas-codeontime-com:data-aquarium-application">
+        <containers />
+        <controls />
+      </page>
+    </t>
+  </c>
+  <c y="Insert" t="2010-08-26T02:37:16">
+    <s p="//app:page[@name=$Page]/app:containers" e="//app:container[@id=$v1 and ancestor::app:page[1]/@name=$v2]">
+      <v n="Page" v="PersonnelAdd" />
+      <v n="v1" v="" />
+      <v n="v2" v="PersonnelAdd" />
+    </s>
+    <d>
+      <f p="@flow" v="NewRow" />
+    </d>
+    <t>
+      <container id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-08-26T02:37:55">
+    <s p="/app:application/app:userControls" e="//app:userControl[@name=$v0]">
+      <v n="v0" v="PersonnelAdvPageAddControl" />
+    </s>
+    <d>
+      <f p="@name" v="PersonnelAdvPageAddControl" />
+      <f p="@prefix" v="uc" />
+      <f p="@generate" v="FirstTimeOnly" />
+    </d>
+    <t>
+      <userControl xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-08-26T02:38:09">
+    <s p="//app:page[@name=$Page]/app:controls" e="//app:control[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="PersonnelAdd" />
+      <v n="v1" v="PersonnelAdd" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="c100" />
+      <f p="@name" v="PersonnelAdvPageAddControl" />
+    </d>
+    <t>
+      <control id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Delete" t="2010-08-26T02:44:50">
+    <s p="//app:userControl[@name=$v0]">
+      <v n="v0" v="PersonnelAdvPageAddControl" />
+    </s>
+  </c>
+  <c y="Delete" t="2010-08-26T02:46:07">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="PersonnelAdd" />
+    </s>
+  </c>
+  <c y="Insert" t="2010-08-26T02:46:50">
+    <s p="/app:application/app:pages" e="//app:page[@name=$v0]">
+      <v n="v0" v="PersonnelAdd" />
+    </s>
+    <d>
+      <f p="@name" v="PersonnelAdd" />
+      <f p="@title" v="Add New Personnel" />
+      <f p="@roles" v="*" />
+    </d>
+    <t>
+      <page xmlns="urn:schemas-codeontime-com:data-aquarium-application">
+        <containers />
+        <controls />
+      </page>
+    </t>
+  </c>
+  <c y="Insert" t="2010-08-26T02:47:26">
+    <s p="//app:page[@name=$Page]/app:containers" e="//app:container[@id=$v1 and ancestor::app:page[1]/@name=$v2]">
+      <v n="Page" v="PersonnelAdd" />
+      <v n="v1" v="" />
+      <v n="v2" v="PersonnelAdd" />
+    </s>
+    <d>
+      <f p="@flow" v="NewRow" />
+    </d>
+    <t>
+      <container id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-08-26T02:50:45">
+    <s p="/app:application/app:userControls" e="//app:userControl[@name=$v0]">
+      <v n="v0" v="AddNewPersonnelControl" />
+    </s>
+    <d>
+      <f p="@name" v="AddNewPersonnelControl" />
+      <f p="@prefix" v="uc" />
+      <f p="@generate" v="FirstTimeOnly" />
+    </d>
+    <t>
+      <userControl xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Insert" t="2010-08-26T02:50:48">
+    <s p="//app:page[@name=$Page]/app:controls" e="//app:control[ancestor::app:page[1]/@name=$v1 and @id=$v2]">
+      <v n="Page" v="PersonnelAdd" />
+      <v n="v1" v="PersonnelAdd" />
+      <v n="v2" v="" />
+    </s>
+    <d>
+      <f p="@container" v="c100" />
+      <f p="@name" v="AddNewPersonnelControl" />
+    </d>
+    <t>
+      <control id="c100" xmlns="urn:schemas-codeontime-com:data-aquarium-application" />
+    </t>
+  </c>
+  <c y="Update" t="2010-08-26T02:51:16">
+    <s p="//app:page[@name=$v0]">
+      <v n="v0" v="PersonnelAdd" />
+    </s>
+    <d>
+      <f p="@index" v="30000" />
+    </d>
+  </c>
+</log>

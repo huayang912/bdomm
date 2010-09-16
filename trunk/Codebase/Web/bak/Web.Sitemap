@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" xmlns:app="urn:schemas-codeontime-com:data-aquarium-application">
+  <siteMapNode url="~/Default.aspx" title="Home" description="">
+    <siteMapNode title="Home" description="Application home page" url="~/Pages/Home.aspx" />
+    <siteMapNode title="Dbo" description="Home of Dbo" url="~/Pages/dbo_Home.aspx">
+      <siteMapNode title="Clients" description="View Clients" url="~/Pages/Clients.aspx">
+        <siteMapNode title="Client Contacts" description="View Client Contacts" url="~/Pages/ClientContacts.aspx">
+          <siteMapNode title="Enquiries" description="View Enquiries" url="~/Pages/Enquiries.aspx" />
+          <siteMapNode title="Quotations" description="View Quotations" url="~/Pages/Quotations.aspx" />
+          <siteMapNode title="Client Contacts Notes" description="View Client Contacts Notes" url="~/Pages/ClientContactsNotes.aspx" />
+          <siteMapNode title="Client Project Contacts" description="View Client Project Contacts" url="~/Pages/ClientProjectContacts.aspx" />
+        </siteMapNode>
+        <siteMapNode title="Client Purchase Orders" description="View Client Purchase Orders" url="~/Pages/ClientPurchaseOrders.aspx" />
+        <siteMapNode title="Clients Financial" description="View Clients Financial" url="~/Pages/ClientsFinancial.aspx" />
+        <siteMapNode title="Clients Notes" description="View Clients Notes" url="~/Pages/ClientsNotes.aspx" />
+        <siteMapNode title="Employment History" description="View Employment History" url="~/Pages/EmploymentHistory.aspx" />
+      </siteMapNode>
+      <siteMapNode title="Countries" description="View Countries" url="~/Pages/Countries.aspx">
+        <siteMapNode title="Contacts" description="View Contacts" url="~/Pages/Contacts.aspx">
+          <siteMapNode title="Bank Details" description="View Bank Details" url="~/Pages/BankDetails.aspx" />
+          <siteMapNode title="Certificates" description="View Certificates" url="~/Pages/Certificates.aspx" />
+          <siteMapNode title="Contact Roles" description="View Contact Roles" url="~/Pages/ContactRoles.aspx" />
+          <siteMapNode title="Contacts Next Of Kin" description="View Contacts Next Of Kin" url="~/Pages/ContactsNextOfKin.aspx" />
+          <siteMapNode title="Contacts Notes" description="View Contacts Notes" url="~/Pages/ContactsNotes.aspx" />
+          <siteMapNode title="Contacts Travel" description="View Contacts Travel" url="~/Pages/ContactsTravel.aspx" />
+          <siteMapNode title="Email Addresses" description="View Email Addresses" url="~/Pages/EmailAddresses.aspx" />
+          <siteMapNode title="Passports" description="View Passports" url="~/Pages/Passports.aspx" />
+          <siteMapNode title="Telephone Numbers" description="View Telephone Numbers" url="~/Pages/TelephoneNumbers.aspx" />
+        </siteMapNode>
+        <siteMapNode title="Next Of Kin" description="View Next Of Kin" url="~/Pages/NextOfKin.aspx" />
+        <siteMapNode title="Visas" description="View Visas" url="~/Pages/Visas.aspx" />
+      </siteMapNode>
+      <siteMapNode title="Projects" description="View Projects" url="~/Pages/Projects.aspx" />
+      <siteMapNode title="Users" description="View Users" url="~/Pages/Users.aspx">
+        <siteMapNode title="Roles" description="View Roles" url="~/Pages/Roles.aspx" />
+        <siteMapNode title="Enquiry Lines" description="View Enquiry Lines" url="~/Pages/EnquiryLines.aspx" />
+      </siteMapNode>
+      <siteMapNode title="Certificate Types" description="View Certificate Types" url="~/Pages/CertificateTypes.aspx" />
+      <siteMapNode title="Currency" description="View Currency" url="~/Pages/Currency.aspx" />
+      <siteMapNode title="Enquiry Statuses" description="View Enquiry Statuses" url="~/Pages/EnquiryStatuses.aspx" />
+      <siteMapNode title="Enquiry Types" description="View Enquiry Types" url="~/Pages/EnquiryTypes.aspx" />
+      <siteMapNode title="Marital Statuses" description="View Marital Statuses" url="~/Pages/MaritalStatuses.aspx" />
+      <siteMapNode title="Photos" description="View Photos" url="~/Pages/Photos.aspx" />
+      <siteMapNode title="Quotation Pricing Types" description="View Quotation Pricing Types" url="~/Pages/QuotationPricingTypes.aspx" />
+      <siteMapNode title="Quotation Statuses" description="View Quotation Statuses" url="~/Pages/QuotationStatuses.aspx" />
+      <siteMapNode title="Telephone Number Types" description="View Telephone Number Types" url="~/Pages/TelephoneNumberTypes.aspx" />
+      <siteMapNode title="Messages" description="View Messages" url="~/Pages/Messages.aspx" />
+    </siteMapNode>
+    <siteMapNode title="Message" description="Home of Message" url="~/Pages/Message_Home.aspx">
+      <siteMapNode title="Message Statuses" description="View Message Statuses" url="~/Pages/Message_Statuses.aspx">
+        <siteMapNode title="Message Recipients" description="View Message Recipients" url="~/Pages/Message_Recipients.aspx" />
+      </siteMapNode>
+    </siteMapNode>
+    <siteMapNode title="Sms" description="Home of Sms" url="~/Pages/SMS_Home.aspx">
+      <siteMapNode title="SMS Messages" description="View SMS Messages" url="~/Pages/SMS_Messages.aspx" />
+      <siteMapNode title="SMS Statuses" description="View SMS Statuses" url="~/Pages/SMS_Statuses.aspx" />
+    </siteMapNode>
+    <siteMapNode title="Membership" description="User and role manager" url="~/Pages/Membership.aspx" roles="Administrators" />
+  </siteMapNode>
+</siteMap>

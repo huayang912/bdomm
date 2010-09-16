@@ -1,0 +1,15 @@
+﻿A call to Result.ShowAlert(...) simply adds a java script snippet to 
+the 
+buffered script that will be send to the client when your server code 
+stops the execution. 
+For example, 
+Result.ShowAlert("Hello"); 
+Result.ShowAlert("Hello Again"); 
+Result.ExecuteOnClient("window.open(' URL goes here ') "); 
+will result in: 
+1) Message "hello" displayed on the client. 
+2) Message "Hello Again" displayed on the client. 
+3) browser will navigate to http://microsoft.com. 
+All three actions will take place only after your server code has 
+finished 
+the execution. 

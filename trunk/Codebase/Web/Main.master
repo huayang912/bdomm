@@ -1,0 +1,68 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Main.master.cs" Inherits="Main" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head runat="server">
+    <title>Main</title>
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+  </head>
+  <body xmlns:factory="urn:codeontime:app-factory">
+    <form id="form1" runat="server">
+      <div>
+        <act:ToolkitScriptManager ID="sm" runat="server" ScriptMode="Release" EnableScriptGlobalization="True" />
+        <aquarium:MembershipBar ID="mb" runat="server" DisplayMyAccount="False" DisplayLogin="False" />
+        <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" ShowStartingNode="False" />
+        <div id="PageHeader">
+          <div id="PageHeaderBar">BUDI</div>
+          <div id="PageMenuBar" runat="server" class="PageMenuBar" />
+        </div>
+        <aquarium:MenuExtender ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1" TargetControlID="PageMenuBar" HoverStyle="Auto" PopupPosition="Left" ShowSiteActions="true" />
+        <table id="PageBody" cellpadding="0" cellspacing="0">
+          <tr>
+            <td id="PageHeaderSideBar">
+              <asp:Image ID="Image5" runat="server" SkinID="PageLogo" CssClass="PageLogo" />
+            </td>
+            <td id="PageHeaderLeftSide">
+              <asp:Image ID="Image1" runat="server" SkinID="Placeholder" />
+            </td>
+            <td id="PageHeaderContent">
+              <div class="Header">
+                <asp:SiteMapPath ID="SiteMapPath1" runat="server" SkinID="SiteMapPath" />
+                <div class="Title">
+                  <asp:ContentPlaceHolder ID="PageHeaderContentPlaceHolder" runat="server">Page Title</asp:ContentPlaceHolder>
+                </div>
+              </div>
+            </td>
+            <td id="PageHeaderRightSide">
+              <asp:Image ID="Image2" runat="server" SkinID="Placeholder" />
+            </td>
+          </tr>
+          <tr>
+            <td id="PageContentSideBar" valign="top">
+              <div class="SideBarBody">
+                <asp:ContentPlaceHolder ID="SideBarPlaceHolder" runat="server" />
+                <asp:Image runat="server" SkinID="Placeholder" />
+              </div>
+            </td>
+            <td id="PageContentLeftSide">
+              <asp:Image ID="Image3" runat="server" SkinID="Placeholder" />
+            </td>
+            <td id="PageContent" valign="top">
+              <asp:ContentPlaceHolder ID="PageContentPlaceHolder" runat="server" />
+            </td>
+            <td id="PageContentRightSide">
+              <asp:Image ID="Image4" runat="server" SkinID="Placeholder" />
+            </td>
+          </tr>
+          <tr>
+            <td id="PageFooterSideBar" />
+            <td id="PageFooterLeftSide" />
+            <td id="PageFooterContent" />
+            <td id="PageFooterRightSide" />
+          </tr>
+        </table>
+        <div id="PageFooterBar">&copy;  OMM</div>
+      </div>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="OMM" Class="OMMDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=MIMI-PC;Initial Catalog=OMM;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BUDI2_NS" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Message_Recipients" Member="Message_Recipients">
+    <Type Name="Message_Recipient">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Message_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Recipient_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Recipient_Name" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Destination" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="Try_Order" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SMS_Credits" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
+      <Column Name="Is_Phone_Number" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SMS_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SMS_Status_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Updated_On" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Message_Statuse_Message_Recipient" Member="Message_Statuse" ThisKey="Status_ID" OtherKey="ID" Type="Message_Statuse" IsForeignKey="true" />
+      <Association Name="Message_Message_Recipient" Member="Message" ThisKey="Message_ID" OtherKey="ID" Type="Message" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Message_Statuses" Member="Message_Statuses">
+    <Type Name="Message_Statuse">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Message_Statuse_Message_Recipient" Member="Message_Recipients" ThisKey="ID" OtherKey="Status_ID" Type="Message_Recipient" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Messages" Member="Messages">
+    <Type Name="Message">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Text" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Delivered" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Message_Message_Recipient" Member="Message_Recipients" ThisKey="ID" OtherKey="Message_ID" Type="Message_Recipient" />
+    </Type>
+  </Table>
+</Database>

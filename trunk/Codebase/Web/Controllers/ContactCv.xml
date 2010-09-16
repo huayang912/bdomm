@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ContactCv" conflictDetection="overwriteChanges" plugIn="BUDI2_NS.Data.AnnotationPlugIn" handler="BUDI2_NS.Rules.ContactCV" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium" />
+  <fields xmlns:a="urn:schemas-codeontime-com:data-aquarium" />
+  <views xmlns:a="urn:schemas-codeontime-com:data-aquarium" />
+  <actions xmlns:a="urn:schemas-codeontime-com:data-aquarium" />
+</dataController>

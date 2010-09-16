@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Visas" conflictDetection="overwriteChanges" label="Visas" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Visas"."ID" "ID"
+	,"Visas"."ContactID" "ContactID"
+	,"Contact"."FirstNames" "ContactFirstNames"
+	,"ContactCountry"."Name" "ContactCountryName"
+	,"ContactCountryOfBirth"."Name" "ContactCountryOfBirthName"
+	,"ContactMaritalStatus"."Name" "ContactMaritalStatusName"
+	,"ContactCreatedByUser"."UserName" "ContactCreatedByUserUserName"
+	,"ContactChangedByUser"."UserName" "ContactChangedByUserUserName"
+	,"Visas"."CountryID" "CountryID"
+	,"Country"."Name" "CountryName"
+	,"Visas"."VisaType" "VisaType"
+	,"Visas"."ExpiryDate" "ExpiryDate"
+	,"Visas"."TimeStamp" "TimeStamp"
+	,"Visas"."ChangedByUserID" "ChangedByUserID"
+	,"ChangedByUser"."UserName" "ChangedByUserUserName"
+	,"Visas"."ChangedOn" "ChangedOn"
+from "dbo"."Visas" "Visas"
+	left join "dbo"."Contacts" "Contact" on "Visas"."ContactID" = "Contact"."ID"
+	left join "dbo"."Countries" "ContactCountry" on "Contact"."CountryID" = "ContactCountry"."ID"
+	left join "dbo"."Countries" "ContactCountryOfBirth" on "Contact"."CountryOfBirthID" = "ContactCountryOfBirth"."ID"
+	left join "dbo"."MaritalStatuses" "ContactMaritalStatus" on "Contact"."MaritalStatusID" = "ContactMaritalStatus"."ID"
+	left join "dbo"."Users" "ContactCreatedByUser" on "Contact"."CreatedByUserID" = "ContactCreatedByUser"."ID"
+	left join "dbo"."Users" "ContactChangedByUser" on "Contact"."ChangedByUserID" = "ContactChangedByUser"."ID"
+	left join "dbo"."Countries" "Country" on "Visas"."CountryID" = "Country"."ID"
+	left join "dbo"."Users" "ChangedByUser" on "Visas"."ChangedByUserID" = "ChangedByUser"."ID"
+]]></text>
+    </command>
+    <command id="IDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ID" />
+      </output>
+    </command>
+  </commands>
+  <fields xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" readOnly="true" label="Id" />
+    <field name="ContactID" type="Int32" allowNulls="false" label="Contact#" showInSummary="true">
+      <items style="Lookup" dataController="Contacts" newDataView="createForm1" />
+    </field>
+    <field name="ContactFirstNames" type="String" readOnly="true" label="Contact First Names" />
+    <field name="CountryID" type="Int32" allowNulls="false" label="Country#" showInSummary="true">
+      <items style="Lookup" dataController="Countries" newDataView="createForm1" />
+    </field>
+    <field name="CountryName" type="String" readOnly="true" label="Country Name" />
+    <field name="VisaType" type="String" label="Visa Type" showInSummary="true" />
+    <field name="ExpiryDate" type="DateTime" label="Expiry Date" showInSummary="true" />
+    <field name="TimeStamp" type="Byte[]" allowNulls="false" readOnly="true" label="Time Stamp" showInSummary="true" />
+    <field name="ChangedByUserID" type="Int32" label="Changed By User#">
+      <items style="Lookup" dataController="Users" newDataView="createForm1" />
+    </field>
+    <field name="ChangedByUserUserName" type="String" readOnly="true" label="Changed By User Name" />
+    <field name="ChangedOn" type="DateTime" allowNulls="false" default="(getdate())" label="Changed On" />
+  </fields>
+  <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <view id="grid1" type="Grid" commandId="command1" label="Visas">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
+        <dataField fieldName="CountryID" aliasFieldName="CountryName" />
+        <dataField fieldName="VisaType" columns="50" />
+        <dataField fieldName="ExpiryDate" columns="10" />
+        <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
+        <dataField fieldName="ChangedOn" columns="10" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Visas">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category headerText="Visas" newColumn="true">
+          <description>$DefaultEditDescription</description>
+          <dataFields>
+            <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
+            <dataField fieldName="CountryID" aliasFieldName="CountryName" />
+            <dataField fieldName="VisaType" columns="50" />
+            <dataField fieldName="ExpiryDate" columns="10" />
+            <dataField fieldName="TimeStamp" hidden="true" columns="15" />
+            <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn" columns="10" />
+          </dataFields>
+        </category>
+        <category headerText="Reference Information">
+          <description>$DefaultReferenceDescription</description>
+          <dataFields>
+            <dataField fieldName="ContactCreatedByUserUserName" />
+            <dataField fieldName="ContactChangedByUserUserName" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Visas">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category headerText="New Visas" newColumn="true">
+          <description>$DefaultNewDescription</description>
+          <dataFields>
+            <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
+            <dataField fieldName="CountryID" aliasFieldName="CountryName" />
+            <dataField fieldName="VisaType" columns="50" />
+            <dataField fieldName="ExpiryDate" columns="10" />
+            <dataField fieldName="ChangedByUserID" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a8" commandName="New" commandArgument="grid1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

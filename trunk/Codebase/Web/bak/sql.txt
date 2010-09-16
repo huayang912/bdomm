@@ -1,0 +1,17 @@
+Alter TABLE [dbo].[Quotations]
+add [CreatedByUsername] [nvarchar](50) NULL
+
+Alter TABLE [dbo].[Quotations]
+add [ChangedByUsername] [nvarchar](50) NULL
+
+Alter TABLE [dbo].[Enquiries]
+add [CreatedByUsername] [nvarchar](50) NULL
+
+Alter TABLE [dbo].[Enquiries]
+add [ChangedByUsername] [nvarchar](50) NULL
+
+Alter TABLE [dbo].[Projects]
+add [CreatedByUsername] [nvarchar](50) NULL
+
+Alter TABLE [dbo].[Projects]
+add [ChangedByUsername] [nvarchar](50) NULL

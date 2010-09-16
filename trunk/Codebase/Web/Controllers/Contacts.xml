@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Contacts" conflictDetection="overwriteChanges" label="Contacts" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <command id="command1" type="Text">
+      <text><![CDATA[select
+	"Contacts"."ID" "ID"
+	,"Contacts"."FirstNames" "FirstNames"
+	,"Contacts"."LastName" "LastName"
+	,"Contacts"."Address" "Address"
+	,"Contacts"."Postcode" "Postcode"
+	,"Contacts"."CountryID" "CountryID"
+	,"PersonnelRoles"."PrimaryRole" "PrimaryRole"
+	,"PersonnelRoles"."SecondaryRole" "SecondaryRole"
+	,"PersonnelRoles"."TertiaryRole" "TertiaryRole"
+	,"Country"."Name" "CountryName"
+	,"Contacts"."DateOfBirth" "DateOfBirth"
+	,"Contacts"."DateOfLastMeeting" "DateOfLastMeeting"
+	,"Contacts"."MaritalStatusID" "MaritalStatusID"
+	,"MaritalStatus"."Name" "MaritalStatusName"
+	,"Contacts"."PlaceOfBirth" "PlaceOfBirth"
+	,"Contacts"."CountryOfBirthID" "CountryOfBirthID"
+	,"CountryOfBirth"."Name" "CountryOfBirthName"
+	,"Contacts"."PhotoID" "PhotoID"
+	,"Contacts"."PreferredDayRate" "PreferredDayRate"
+	,"Contacts"."Inactive" "Inactive"
+	,"Contacts"."NoSMSorEmail" "NoSMSorEmail"
+	,"Contacts"."CreatedByUserID" "CreatedByUserID"
+	,"CreatedByUser"."UserName" "CreatedByUserUserName"
+	,"Contacts"."CreatedOn" "CreatedOn"
+	,"Contacts"."ChangedByUserID" "ChangedByUserID"
+	,"ChangedByUser"."UserName" "ChangedByUserUserName"
+	,"Contacts"."ChangedOn" "ChangedOn"
+	,"Contacts"."Version" "Version"
+	,"Contacts"."DayRateCurrencyID" "DayRateCurrencyID"
+from "dbo"."Contacts" "Contacts"
+	left join "dbo"."VewPersonnelRoles" "PersonnelRoles" on "Contacts"."ID" = "PersonnelRoles"."ID"
+	left join "dbo"."Countries" "Country" on "Contacts"."CountryID" = "Country"."ID"
+	left join "dbo"."MaritalStatuses" "MaritalStatus" on "Contacts"."MaritalStatusID" = "MaritalStatus"."ID"
+	left join "dbo"."Countries" "CountryOfBirth" on "Contacts"."CountryOfBirthID" = "CountryOfBirth"."ID"
+	left join "dbo"."Users" "CreatedByUser" on "Contacts"."CreatedByUserID" = "CreatedByUser"."ID"
+	left join "dbo"."Users" "ChangedByUser" on "Contacts"."ChangedByUserID" = "ChangedByUser"."ID"]]></text>
+    </command>
+    <command id="IDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ID" />
+      </output>
+    </command>
+  </commands>
+  <fields xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" readOnly="true" label="Id" />
+    <field name="FirstNames" type="String" allowNulls="false" label="First Names" showInSummary="true" />
+    <field name="LastName" type="String" allowNulls="false" label="Last Name" showInSummary="true" />
+    <field name="Address" type="String" label="Address" showInSummary="true" />
+    <field name="Postcode" type="String" label="Postcode" showInSummary="true" />
+    <field name="CountryID" type="Int32" label="Country#" showInSummary="true">
+      <items style="Lookup" dataController="Countries" newDataView="createForm1" />
+    </field>
+    <field name="CountryName" type="String" readOnly="true" label="Country Name" />
+    <field name="DateOfBirth" type="DateTime" label="Date Of Birth" />
+    <field name="DateOfLastMeeting" type="DateTime" label="Date Of Last Meeting" />
+    <field name="MaritalStatusID" type="Int32" allowNulls="false" label="Marital Status#">
+      <items style="Lookup" dataController="MaritalStatuses" newDataView="createForm1" />
+    </field>
+    <field name="MaritalStatusName" type="String" readOnly="true" label="Marital Status Name" />
+    <field name="PlaceOfBirth" type="String" label="Place Of Birth" />
+    <field name="CountryOfBirthID" type="Int32" label="Country Of Birth#">
+      <items style="Lookup" dataController="Countries" newDataView="createForm1" />
+    </field>
+    <field name="CountryOfBirthName" type="String" readOnly="true" label="Country Of Birth Name" />
+    <field name="PhotoID" type="Int32" label="Photo#">
+      <items style="Lookup" dataController="Photos" newDataView="createForm1" />
+    </field>
+    <field name="PreferredDayRate" type="Decimal" label="Preferred Day Rate" />
+    <field name="Inactive" type="Boolean" allowNulls="false" default="((0))" label="Inactive" />
+    <field name="NoSMSorEmail" type="Boolean" allowNulls="false" default="((0))" label="No SM Sor Email" />
+    <field name="CreatedByUserID" type="Int32" label="Created By User#">
+      <items style="Lookup" dataController="Users" newDataView="createForm1" />
+    </field>
+    <field name="CreatedByUserUserName" type="String" readOnly="true" label="Created By User Name" />
+    <field name="CreatedOn" type="DateTime" allowNulls="false" default="(getdate())" readOnly="true" label="Created On" />
+    <field name="ChangedByUserID" type="Int32" label="Changed By User#">
+      <items style="Lookup" dataController="Users" newDataView="createForm1" />
+    </field>
+    <field name="ChangedByUserUserName" type="String" readOnly="true" label="Changed By User Name" />
+    <field name="ChangedOn" type="DateTime" allowNulls="false" default="(getdate())" readOnly="true" label="Changed On" />
+    <field name="Version" type="Byte[]" allowNulls="false" readOnly="true" label="Version" />
+    <field name="DayRateCurrencyID" type="Int32" label="Day Rate Currency#" />
+    <field name="PrimaryRole" type="String" readOnly="true" label="Primary Role" showInSummary="true" formatOnClient="true" />
+    <field name="SecondaryRole" type="String" readOnly="true" label="Secondary Role" showInSummary="true" formatOnClient="true" />
+    <field name="TertiaryRole" type="String" readOnly="true" label="Tertiary Role" showInSummary="true" formatOnClient="true" />
+  </fields>
+  <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <view id="grid1" type="Grid" commandId="command1" label="Contacts" sortExpression="LastName,FirstNames">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="LastName" columns="50" />
+        <dataField fieldName="FirstNames" columns="50" />
+        <dataField fieldName="PrimaryRole" />
+        <dataField fieldName="SecondaryRole" />
+        <dataField fieldName="TertiaryRole" />
+        <dataField fieldName="Postcode" hidden="true" columns="20" />
+        <dataField fieldName="CountryID" hidden="true" aliasFieldName="CountryName" />
+        <dataField fieldName="DateOfBirth" hidden="true" columns="10" />
+        <dataField fieldName="DateOfLastMeeting" hidden="true" columns="10" />
+        <dataField fieldName="MaritalStatusID" hidden="true" aliasFieldName="MaritalStatusName" />
+        <dataField fieldName="PlaceOfBirth" hidden="true" />
+        <dataField fieldName="CountryOfBirthID" hidden="true" aliasFieldName="CountryOfBirthName" />
+        <dataField fieldName="Address" hidden="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Contacts">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category headerText="Contacts" newColumn="true">
+          <description>$DefaultEditDescription</description>
+          <dataFields>
+            <dataField fieldName="FirstNames" columns="50" />
+            <dataField fieldName="LastName" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="Postcode" columns="20" />
+            <dataField fieldName="CountryID" aliasFieldName="CountryName" />
+            <dataField fieldName="DateOfBirth" columns="10" />
+            <dataField fieldName="MaritalStatusID" aliasFieldName="MaritalStatusName" />
+            <dataField fieldName="PhotoID" hidden="true" aliasFieldName="PreferredDayRate" />
+            <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
+            <dataField fieldName="CreatedOn" columns="10" />
+            <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="Version" hidden="true" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Other" tab="Other Details">
+          <description>Other Details</description>
+          <dataFields>
+            <dataField fieldName="PlaceOfBirth" />
+            <dataField fieldName="CountryOfBirthID" />
+            <dataField fieldName="CountryOfBirthName" />
+          </dataFields>
+        </category>
+        <category headerText="Business Details" tab="Business Details">
+          <description>Business Details</description>
+          <dataFields>
+            <dataField fieldName="DateOfLastMeeting" />
+            <dataField fieldName="PreferredDayRate" />
+            <dataField fieldName="DayRateCurrencyID" />
+            <dataField fieldName="NoSMSorEmail" />
+            <dataField fieldName="Inactive" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Contacts">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category headerText="New Contacts" newColumn="true">
+          <description>$DefaultNewDescription</description>
+          <dataFields>
+            <dataField fieldName="FirstNames" columns="50" />
+            <dataField fieldName="LastName" columns="50" />
+            <dataField fieldName="Address" />
+            <dataField fieldName="Postcode" columns="20" />
+            <dataField fieldName="CountryID" aliasFieldName="CountryName" />
+            <dataField fieldName="DateOfBirth" columns="10" />
+            <dataField fieldName="DateOfLastMeeting" columns="10" />
+            <dataField fieldName="MaritalStatusID" aliasFieldName="MaritalStatusName" />
+            <dataField fieldName="PlaceOfBirth" />
+            <dataField fieldName="CountryOfBirthID" aliasFieldName="CountryOfBirthName" />
+            <dataField fieldName="PhotoID" aliasFieldName="PreferredDayRate" />
+            <dataField fieldName="PreferredDayRate" columns="15" />
+            <dataField fieldName="Inactive" />
+            <dataField fieldName="NoSMSorEmail" />
+            <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
+            <dataField fieldName="CreatedOn" columns="10" />
+            <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="DayRateCurrencyID" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a8" commandName="New" commandArgument="grid1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a100" commandName="Update" commandArgument="~/pages/Contacts_bak.aspx?ID={ID}" headerText="Update" causesValidation="true" whenLastCommandName="Edit" whenHRef="Contacts_bak" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a100" commandName="Navigate" commandArgument="~/pages/Certificates.aspx?ContactID={ID}" headerText="Certificates" causesValidation="true" whenHRef="Contacts_bak" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>
