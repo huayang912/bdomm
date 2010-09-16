@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Projects" conflictDetection="overwriteChanges" label="Projects" actionHandlerType="CustomPrjClass" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <command id="command1" type="Text">
+      <text><![CDATA[select
+	"Projects"."ID" "ID"
+	,"Projects"."Number" "Number"
+	,"Projects"."Name" "Name"
+	,"Projects"."Description" "Description"
+	,"Projects"."StartDate" "StartDate"
+	,"Projects"."EndDate" "EndDate"
+	,"Projects"."QuotationID" "QuotationID"
+	,"Quotation"."Number" "QuotationNumber"
+	,"QuotationSubmittedToClientContact"."Name" "QuotationSubmittedToClientContactName"
+	,"QuotationSubmittedToClientContactCompany"."Name" "QuotationSubmittedToClientContactCompanyName"
+	,"QuotationSubmittedToClientContactCountry"."Name" "QuotationSubmittedToClientContactCountryName"
+	,"QuotationSubmittedToClientContactChangedByUser"."UserName" "QuotationSubmittedToClientContactChangedByUserUserName"
+	,"QuotationCurrency"."Description" "QuotationCurrencyDescription"
+	,"QuotationEnquiry"."Number" "QuotationEnquiryNumber"
+	,"QuotationEnquiryContact"."Name" "QuotationEnquiryContactName"
+	,"QuotationEnquiryStatus"."Name" "QuotationEnquiryStatusName"
+	,"QuotationEnquiryType"."Name" "QuotationEnquiryTypeName"
+	,"QuotationEnquiryCreatedByUser"."UserName" "QuotationEnquiryCreatedByUserUserName"
+	,"QuotationEnquiryChangedByUser"."UserName" "QuotationEnquiryChangedByUserUserName"
+	,"QuotationStatus"."Name" "QuotationStatusName"
+	,"QuotationChangedByUser"."UserName" "QuotationChangedByUserUserName"
+	,"QuotationCreatedByUser"."UserName" "QuotationCreatedByUserUserName"
+	,"Projects"."CreatedByUserID" "CreatedByUserID"
+	,"CreatedByUser"."UserName" "CreatedByUserUserName"
+	,"Projects"."CreatedOn" "CreatedOn"
+	,"Projects"."ChangedByUserID" "ChangedByUserID"
+	,"ChangedByUser"."UserName" "ChangedByUserUserName"
+	,"Projects"."ChangedOn" "ChangedOn"
+	,"Projects"."Version" "Version"
+	,"Projects"."CreatedByUsername" "CreatedByUsername"
+	,"Projects"."ChangedByUsername" "ChangedByUsername"
+	,"Projects"."StatusID" "StatusID"
+	,"Status"."Name" "StatusName"
+from "dbo"."Projects" "Projects"
+	left join "dbo"."Quotations" "Quotation" on "Projects"."QuotationID" = "Quotation"."ID"
+	left join "dbo"."ClientContacts" "QuotationSubmittedToClientContact" on "Quotation"."SubmittedToClientContactID" = "QuotationSubmittedToClientContact"."ID"
+	left join "dbo"."Clients" "QuotationSubmittedToClientContactCompany" on "QuotationSubmittedToClientContact"."CompanyID" = "QuotationSubmittedToClientContactCompany"."ID"
+	left join "dbo"."Countries" "QuotationSubmittedToClientContactCountry" on "QuotationSubmittedToClientContact"."CountryID" = "QuotationSubmittedToClientContactCountry"."ID"
+	left join "dbo"."Users" "QuotationSubmittedToClientContactChangedByUser" on "QuotationSubmittedToClientContact"."ChangedByUserID" = "QuotationSubmittedToClientContactChangedByUser"."ID"
+	left join "dbo"."Currency" "QuotationCurrency" on "Quotation"."CurrencyID" = "QuotationCurrency"."ID"
+	left join "dbo"."Enquiries" "QuotationEnquiry" on "Quotation"."EnquiryID" = "QuotationEnquiry"."ID"
+	left join "dbo"."ClientContacts" "QuotationEnquiryContact" on "QuotationEnquiry"."ContactID" = "QuotationEnquiryContact"."ID"
+	left join "dbo"."EnquiryStatuses" "QuotationEnquiryStatus" on "QuotationEnquiry"."StatusID" = "QuotationEnquiryStatus"."ID"
+	left join "dbo"."EnquiryTypes" "QuotationEnquiryType" on "QuotationEnquiry"."TypeID" = "QuotationEnquiryType"."ID"
+	left join "dbo"."Users" "QuotationEnquiryCreatedByUser" on "QuotationEnquiry"."CreatedByUserID" = "QuotationEnquiryCreatedByUser"."ID"
+	left join "dbo"."Users" "QuotationEnquiryChangedByUser" on "QuotationEnquiry"."ChangedByUserID" = "QuotationEnquiryChangedByUser"."ID"
+	left join "dbo"."QuotationStatuses" "QuotationStatus" on "Quotation"."StatusID" = "QuotationStatus"."ID"
+	left join "dbo"."Users" "QuotationChangedByUser" on "Quotation"."ChangedByUserID" = "QuotationChangedByUser"."ID"
+	left join "dbo"."Users" "QuotationCreatedByUser" on "Quotation"."CreatedByUserID" = "QuotationCreatedByUser"."ID"
+	left join "dbo"."Users" "CreatedByUser" on "Projects"."CreatedByUserID" = "CreatedByUser"."ID"
+	left join "dbo"."Users" "ChangedByUser" on "Projects"."ChangedByUserID" = "ChangedByUser"."ID"
+	left join "dbo"."ProjectStatuses" "Status" on "Projects"."StatusID" = "Status"."ID"
+]]></text>
+    </command>
+    <command id="IDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ID" />
+      </output>
+    </command>
+  </commands>
+  <fields xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" readOnly="true" label="Id" />
+    <field name="Number" type="String" label="Number" showInSummary="true" />
+    <field name="Name" type="String" allowNulls="false" label="Name" showInSummary="true" />
+    <field name="Description" type="String" label="Description" showInSummary="true" />
+    <field name="StartDate" type="DateTime" label="Start Date" showInSummary="true" />
+    <field name="EndDate" type="DateTime" label="End Date" showInSummary="true" />
+    <field name="QuotationID" type="Int32" label="Quotation#">
+      <items style="Lookup" dataController="Quotations" newDataView="createForm1" />
+    </field>
+    <field name="QuotationNumber" type="String" readOnly="true" label="Quotation Number" />
+    <field name="QuotationSubmittedToClientContactName" type="String" readOnly="true" label="Contact Name" />
+    <field name="QuotationSubmittedToClientContactCompanyName" type="String" readOnly="true" label=" Company Name" />
+    <field name="QuotationSubmittedToClientContactCountryName" type="String" readOnly="true" label="Country" />
+    <field name="QuotationSubmittedToClientContactChangedByUserUserName" type="String" readOnly="true" label="Changed By" />
+    <field name="QuotationCurrencyDescription" type="String" readOnly="true" label="Currency Description" />
+    <field name="QuotationEnquiryNumber" type="String" readOnly="true" label="Quotation Enquiry Number" />
+    <field name="QuotationEnquiryContactName" type="String" readOnly="true" label="Quotation Enquiry Contact Name" />
+    <field name="QuotationEnquiryStatusName" type="String" readOnly="true" label="Quotation Enquiry Status Name" />
+    <field name="QuotationEnquiryTypeName" type="String" readOnly="true" label="Quotation Enquiry Type Name" />
+    <field name="QuotationEnquiryCreatedByUserUserName" type="String" readOnly="true" label="Quotation Enquiry Created By User Name" />
+    <field name="QuotationEnquiryChangedByUserUserName" type="String" readOnly="true" label="Quotation Enquiry Changed By User Name" />
+    <field name="QuotationStatusName" type="String" readOnly="true" label="Quotation Status Name" />
+    <field name="QuotationChangedByUserUserName" type="String" readOnly="true" label="Quotation Changed By User Name" />
+    <field name="QuotationCreatedByUserUserName" type="String" readOnly="true" label="Quotation Created By User Name" />
+    <field name="CreatedByUserID" type="Int32" label="Created By User#">
+      <items style="Lookup" dataController="Users" newDataView="createForm1" />
+    </field>
+    <field name="CreatedByUserUserName" type="String" readOnly="true" label="Created By User Name" />
+    <field name="CreatedOn" type="DateTime" default="(getdate())" label="Created On" />
+    <field name="ChangedByUserID" type="Int32" label="Changed By User#">
+      <items style="Lookup" dataController="Users" newDataView="createForm1" />
+    </field>
+    <field name="ChangedByUserUserName" type="String" readOnly="true" label="Changed By User Name" />
+    <field name="ChangedOn" type="DateTime" default="(getdate())" label="Changed On" />
+    <field name="Version" type="Byte[]" allowNulls="false" readOnly="true" label="Version" />
+    <field name="CreatedByUsername" type="String" label="Created By Username" />
+    <field name="ChangedByUsername" type="String" label="Changed By Username" />
+    <field name="StatusID" type="Int32" label="Status#">
+      <items style="Lookup" dataController="ProjectStatuses" dataValueField="ID,ID" newDataView="createForm1" />
+    </field>
+    <field name="StatusName" type="String" readOnly="true" label="Status Name" />
+  </fields>
+  <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <view id="grid1" type="Grid" commandId="command1" label="Projects" sortExpression="id desc">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Name" />
+        <dataField fieldName="Number" columns="50" />
+        <dataField fieldName="StatusID" aliasFieldName="StatusName" />
+        <dataField fieldName="Description" />
+        <dataField fieldName="StartDate" columns="10" />
+        <dataField fieldName="EndDate" columns="10" />
+        <dataField fieldName="QuotationID" aliasFieldName="QuotationNumber" hyperlinkFormatString="~/Pages/Quotations.aspx?Number={QuotationID}" />
+        <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
+        <dataField fieldName="CreatedOn" columns="10" />
+        <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
+        <dataField fieldName="ChangedOn" columns="10" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Projects">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category headerText="Projects" newColumn="true">
+          <description>$DefaultEditDescription</description>
+          <dataFields>
+            <dataField fieldName="Number" readOnly="true" columns="50" />
+            <dataField fieldName="StatusID" aliasFieldName="StatusName" />
+            <dataField fieldName="Name" />
+            <dataField fieldName="Description" rows="4" />
+            <dataField fieldName="StartDate" columns="10" />
+            <dataField fieldName="EndDate" columns="10" />
+            <dataField fieldName="QuotationID" aliasFieldName="QuotationNumber" hyperlinkFormatString="~/Pages/Quotations.aspx?Number={QuotationID}" />
+            <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
+            <dataField fieldName="CreatedOn" hidden="true" columns="10" />
+            <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn" hidden="true" columns="10" />
+            <dataField fieldName="Version" hidden="true" columns="15" />
+            <dataField fieldName="CreatedByUsername" hidden="true" readOnly="true" columns="50" />
+            <dataField fieldName="ChangedByUsername" hidden="true" readOnly="true" columns="50" />
+          </dataFields>
+        </category>
+        <category headerText="Reference Information" newColumn="true">
+          <description>$DefaultReferenceDescription</description>
+          <dataFields>
+            <dataField fieldName="StatusName" columns="50" />
+            <dataField fieldName="QuotationSubmittedToClientContactName" />
+            <dataField fieldName="QuotationSubmittedToClientContactCompanyName" />
+            <dataField fieldName="QuotationSubmittedToClientContactCountryName" />
+            <dataField fieldName="QuotationSubmittedToClientContactChangedByUserUserName" hidden="true" />
+            <dataField fieldName="QuotationCurrencyDescription" columns="50" />
+            <dataField fieldName="QuotationEnquiryNumber" columns="50" hyperlinkFormatString="~/Pages/Enquiries.aspx?id={QuotationEnquiryNumber}" />
+            <dataField fieldName="QuotationEnquiryContactName" />
+            <dataField fieldName="QuotationEnquiryStatusName" columns="50" />
+            <dataField fieldName="QuotationEnquiryTypeName" columns="50" />
+            <dataField fieldName="QuotationEnquiryCreatedByUserUserName" hidden="true" />
+            <dataField fieldName="QuotationEnquiryChangedByUserUserName" hidden="true" />
+            <dataField fieldName="QuotationStatusName" columns="50" />
+            <dataField fieldName="QuotationChangedByUserUserName" hidden="true" />
+            <dataField fieldName="QuotationCreatedByUserUserName" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Projects">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category headerText="New Projects" newColumn="true">
+          <description>$DefaultNewDescription</description>
+          <dataFields>
+            <dataField fieldName="Number" hidden="true" columns="50" />
+            <dataField fieldName="StatusID" aliasFieldName="StatusName" />
+            <dataField fieldName="Name" />
+            <dataField fieldName="Description" />
+            <dataField fieldName="StartDate" columns="10" />
+            <dataField fieldName="EndDate" columns="10" />
+            <dataField fieldName="QuotationID" aliasFieldName="QuotationNumber" hyperlinkFormatString="~/Pages/Quotations.aspx?Number={QuotationNumber}" />
+            <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
+            <dataField fieldName="CreatedOn" hidden="true" columns="10" />
+            <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn" hidden="true" columns="10" />
+            <dataField fieldName="CreatedByUsername" hidden="true" columns="50" />
+            <dataField fieldName="ChangedByUsername" hidden="true" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a8" commandName="New" commandArgument="grid1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

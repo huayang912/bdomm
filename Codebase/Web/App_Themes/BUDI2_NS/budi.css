@@ -1,0 +1,9 @@
+/* Momin Arrow off */
+span.ObjectRef
+{
+    display:none;
+}
+tr.QuoteExpired td
+{
+	background-color: #FFCCFF!important;
+}

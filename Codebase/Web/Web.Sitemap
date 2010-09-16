@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" xmlns:app="urn:schemas-codeontime-com:data-aquarium-application">
+  <siteMapNode url="~/Default.aspx" title="Home" description="">
+    <siteMapNode title="Home" description="Application home page" url="~/Pages/Home.aspx" />
+    <siteMapNode title="Clients" description="View Clients" url="~/Pages/Clients.aspx" />
+    <siteMapNode title="Contacts" description="View Client Contacts" url="~/Pages/ClientContacts.aspx" />
+    <siteMapNode title="Enquiries" description="Enquiry" url="~/Pages/EnquirySch.aspx" roles="*" />
+    <siteMapNode title="Quotations" description="Quotation" url="~/Pages/QuoteSrch.aspx" roles="*" />
+    <siteMapNode title="Projects" description="Projrct" url="~/Pages/ProjectSrch.aspx" roles="*" />
+    <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelNew.aspx" roles="*">
+      <siteMapNode title="CV" description="Personnel CV" url="~/Pages/CVNew.aspx" roles="*" />
+      <siteMapNode title="Send SMS" description="Sends SMS to the Corresponding Client" url="~/Pages/SendSMS.aspx" roles="*" />
+    </siteMapNode>
+    <siteMapNode title="Configuration" description="" url="~/Pages/ListBox.aspx" roles="*">
+      <siteMapNode title="Countries" description="View Countries" url="~/Pages/Countries.aspx" />
+      <siteMapNode title="Currency" description="View Currency" url="~/Pages/Currency.aspx" />
+      <siteMapNode title="Enquiry Statuses" description="View Enquiry Statuses" url="~/Pages/EnquiryStatuses.aspx" />
+      <siteMapNode title="Enquiry Types" description="View Enquiry Types" url="~/Pages/EnquiryTypes.aspx" />
+      <siteMapNode title="Marital Statuses" description="View Marital Statuses" url="~/Pages/MaritalStatuses.aspx" />
+      <siteMapNode title="Project Statuses" description="View Project Statuses" url="~/Pages/ProjectStatuses.aspx" />
+      <siteMapNode title="Quotation Pricing Types" description="View Quotation Pricing Types" url="~/Pages/QuotationPricingTypes.aspx" />
+      <siteMapNode title="Quotation Statuses" description="View Quotation Statuses" url="~/Pages/QuotationStatuses.aspx" />
+      <siteMapNode title="Certificate Types" description="View Certificate Types" url="~/Pages/CertificateTypes.aspx" />
+      <siteMapNode title="Telephone Number Types" description="View Telephone Number Types" url="~/Pages/TelephoneNumberTypes.aspx" />
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>
