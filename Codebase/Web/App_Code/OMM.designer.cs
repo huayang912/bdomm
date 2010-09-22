@@ -38,6 +38,24 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   partial void InsertMessage(Message instance);
   partial void UpdateMessage(Message instance);
   partial void DeleteMessage(Message instance);
+  partial void InsertClientContact(ClientContact instance);
+  partial void UpdateClientContact(ClientContact instance);
+  partial void DeleteClientContact(ClientContact instance);
+  partial void InsertClient(Client instance);
+  partial void UpdateClient(Client instance);
+  partial void DeleteClient(Client instance);
+  partial void InsertCountry(Country instance);
+  partial void UpdateCountry(Country instance);
+  partial void DeleteCountry(Country instance);
+  partial void InsertEnquiry(Enquiry instance);
+  partial void UpdateEnquiry(Enquiry instance);
+  partial void DeleteEnquiry(Enquiry instance);
+  partial void InsertEnquiryType(EnquiryType instance);
+  partial void UpdateEnquiryType(EnquiryType instance);
+  partial void DeleteEnquiryType(EnquiryType instance);
+  partial void InsertEnquiryLine(EnquiryLine instance);
+  partial void UpdateEnquiryLine(EnquiryLine instance);
+  partial void DeleteEnquiryLine(EnquiryLine instance);
   #endregion
 	
 	public OMMDataContext() : 
@@ -91,6 +109,54 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<Message>();
+		}
+	}
+	
+	public System.Data.Linq.Table<ClientContact> ClientContacts
+	{
+		get
+		{
+			return this.GetTable<ClientContact>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Client> Clients
+	{
+		get
+		{
+			return this.GetTable<Client>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Country> Countries
+	{
+		get
+		{
+			return this.GetTable<Country>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Enquiry> Enquiries
+	{
+		get
+		{
+			return this.GetTable<Enquiry>();
+		}
+	}
+	
+	public System.Data.Linq.Table<EnquiryType> EnquiryTypes
+	{
+		get
+		{
+			return this.GetTable<EnquiryType>();
+		}
+	}
+	
+	public System.Data.Linq.Table<EnquiryLine> EnquiryLines
+	{
+		get
+		{
+			return this.GetTable<EnquiryLine>();
 		}
 	}
 }
@@ -752,6 +818,2040 @@ public partial class Message : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this.SendPropertyChanging();
 		entity.Message = null;
+	}
+}
+
+[Table(Name="dbo.ClientContacts")]
+public partial class ClientContact : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private string _Name;
+	
+	private string _JobTitle;
+	
+	private string _Address;
+	
+	private string _Postcode;
+	
+	private System.Nullable<int> _CountryID;
+	
+	private string _Telephone;
+	
+	private string _Fax;
+	
+	private string _Email;
+	
+	private int _CompanyID;
+	
+	private System.Nullable<System.DateTime> _DateOfBirth;
+	
+	private System.Nullable<int> _ChangedByUserID;
+	
+	private System.DateTime _ChangedOn;
+	
+	private System.Data.Linq.Binary _Version;
+	
+	private string _Mobile;
+	
+	private string _Department;
+	
+	private System.Nullable<System.DateTime> _Imported;
+	
+	private EntitySet<Enquiry> _Enquiries;
+	
+	private EntityRef<Client> _Client;
+	
+	private EntityRef<Country> _Country;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnJobTitleChanging(string value);
+    partial void OnJobTitleChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnPostcodeChanging(string value);
+    partial void OnPostcodeChanged();
+    partial void OnCountryIDChanging(System.Nullable<int> value);
+    partial void OnCountryIDChanged();
+    partial void OnTelephoneChanging(string value);
+    partial void OnTelephoneChanged();
+    partial void OnFaxChanging(string value);
+    partial void OnFaxChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnCompanyIDChanging(int value);
+    partial void OnCompanyIDChanged();
+    partial void OnDateOfBirthChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateOfBirthChanged();
+    partial void OnChangedByUserIDChanging(System.Nullable<int> value);
+    partial void OnChangedByUserIDChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    partial void OnVersionChanging(System.Data.Linq.Binary value);
+    partial void OnVersionChanged();
+    partial void OnMobileChanging(string value);
+    partial void OnMobileChanged();
+    partial void OnDepartmentChanging(string value);
+    partial void OnDepartmentChanged();
+    partial void OnImportedChanging(System.Nullable<System.DateTime> value);
+    partial void OnImportedChanged();
+    #endregion
+	
+	public ClientContact()
+	{
+		this._Enquiries = new EntitySet<Enquiry>(new Action<Enquiry>(this.attach_Enquiries), new Action<Enquiry>(this.detach_Enquiries));
+		this._Client = default(EntityRef<Client>);
+		this._Country = default(EntityRef<Country>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Name", DbType="NVarChar(100) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Name
+	{
+		get
+		{
+			return this._Name;
+		}
+		set
+		{
+			if ((this._Name != value))
+			{
+				this.OnNameChanging(value);
+				this.SendPropertyChanging();
+				this._Name = value;
+				this.SendPropertyChanged("Name");
+				this.OnNameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_JobTitle", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+	public string JobTitle
+	{
+		get
+		{
+			return this._JobTitle;
+		}
+		set
+		{
+			if ((this._JobTitle != value))
+			{
+				this.OnJobTitleChanging(value);
+				this.SendPropertyChanging();
+				this._JobTitle = value;
+				this.SendPropertyChanged("JobTitle");
+				this.OnJobTitleChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Address", DbType="NVarChar(250)", UpdateCheck=UpdateCheck.Never)]
+	public string Address
+	{
+		get
+		{
+			return this._Address;
+		}
+		set
+		{
+			if ((this._Address != value))
+			{
+				this.OnAddressChanging(value);
+				this.SendPropertyChanging();
+				this._Address = value;
+				this.SendPropertyChanged("Address");
+				this.OnAddressChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Postcode", DbType="NVarChar(20)", UpdateCheck=UpdateCheck.Never)]
+	public string Postcode
+	{
+		get
+		{
+			return this._Postcode;
+		}
+		set
+		{
+			if ((this._Postcode != value))
+			{
+				this.OnPostcodeChanging(value);
+				this.SendPropertyChanging();
+				this._Postcode = value;
+				this.SendPropertyChanged("Postcode");
+				this.OnPostcodeChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_CountryID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> CountryID
+	{
+		get
+		{
+			return this._CountryID;
+		}
+		set
+		{
+			if ((this._CountryID != value))
+			{
+				if (this._Country.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnCountryIDChanging(value);
+				this.SendPropertyChanging();
+				this._CountryID = value;
+				this.SendPropertyChanged("CountryID");
+				this.OnCountryIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Telephone", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string Telephone
+	{
+		get
+		{
+			return this._Telephone;
+		}
+		set
+		{
+			if ((this._Telephone != value))
+			{
+				this.OnTelephoneChanging(value);
+				this.SendPropertyChanging();
+				this._Telephone = value;
+				this.SendPropertyChanged("Telephone");
+				this.OnTelephoneChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Fax", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string Fax
+	{
+		get
+		{
+			return this._Fax;
+		}
+		set
+		{
+			if ((this._Fax != value))
+			{
+				this.OnFaxChanging(value);
+				this.SendPropertyChanging();
+				this._Fax = value;
+				this.SendPropertyChanged("Fax");
+				this.OnFaxChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Email", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+	public string Email
+	{
+		get
+		{
+			return this._Email;
+		}
+		set
+		{
+			if ((this._Email != value))
+			{
+				this.OnEmailChanging(value);
+				this.SendPropertyChanging();
+				this._Email = value;
+				this.SendPropertyChanged("Email");
+				this.OnEmailChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_CompanyID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int CompanyID
+	{
+		get
+		{
+			return this._CompanyID;
+		}
+		set
+		{
+			if ((this._CompanyID != value))
+			{
+				if (this._Client.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnCompanyIDChanging(value);
+				this.SendPropertyChanging();
+				this._CompanyID = value;
+				this.SendPropertyChanged("CompanyID");
+				this.OnCompanyIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_DateOfBirth", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<System.DateTime> DateOfBirth
+	{
+		get
+		{
+			return this._DateOfBirth;
+		}
+		set
+		{
+			if ((this._DateOfBirth != value))
+			{
+				this.OnDateOfBirthChanging(value);
+				this.SendPropertyChanging();
+				this._DateOfBirth = value;
+				this.SendPropertyChanged("DateOfBirth");
+				this.OnDateOfBirthChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> ChangedByUserID
+	{
+		get
+		{
+			return this._ChangedByUserID;
+		}
+		set
+		{
+			if ((this._ChangedByUserID != value))
+			{
+				this.OnChangedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUserID = value;
+				this.SendPropertyChanged("ChangedByUserID");
+				this.OnChangedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Version", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary Version
+	{
+		get
+		{
+			return this._Version;
+		}
+		set
+		{
+			if ((this._Version != value))
+			{
+				this.OnVersionChanging(value);
+				this.SendPropertyChanging();
+				this._Version = value;
+				this.SendPropertyChanged("Version");
+				this.OnVersionChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Mobile", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string Mobile
+	{
+		get
+		{
+			return this._Mobile;
+		}
+		set
+		{
+			if ((this._Mobile != value))
+			{
+				this.OnMobileChanging(value);
+				this.SendPropertyChanging();
+				this._Mobile = value;
+				this.SendPropertyChanged("Mobile");
+				this.OnMobileChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Department", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+	public string Department
+	{
+		get
+		{
+			return this._Department;
+		}
+		set
+		{
+			if ((this._Department != value))
+			{
+				this.OnDepartmentChanging(value);
+				this.SendPropertyChanging();
+				this._Department = value;
+				this.SendPropertyChanged("Department");
+				this.OnDepartmentChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Imported", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<System.DateTime> Imported
+	{
+		get
+		{
+			return this._Imported;
+		}
+		set
+		{
+			if ((this._Imported != value))
+			{
+				this.OnImportedChanging(value);
+				this.SendPropertyChanging();
+				this._Imported = value;
+				this.SendPropertyChanged("Imported");
+				this.OnImportedChanged();
+			}
+		}
+	}
+	
+	[Association(Name="ClientContact_Enquiry", Storage="_Enquiries", ThisKey="ID", OtherKey="ContactID")]
+	public EntitySet<Enquiry> Enquiries
+	{
+		get
+		{
+			return this._Enquiries;
+		}
+		set
+		{
+			this._Enquiries.Assign(value);
+		}
+	}
+	
+	[Association(Name="Client_ClientContact", Storage="_Client", ThisKey="CompanyID", OtherKey="ID", IsForeignKey=true)]
+	public Client Client
+	{
+		get
+		{
+			return this._Client.Entity;
+		}
+		set
+		{
+			Client previousValue = this._Client.Entity;
+			if (((previousValue != value) 
+						|| (this._Client.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Client.Entity = null;
+					previousValue.ClientContacts.Remove(this);
+				}
+				this._Client.Entity = value;
+				if ((value != null))
+				{
+					value.ClientContacts.Add(this);
+					this._CompanyID = value.ID;
+				}
+				else
+				{
+					this._CompanyID = default(int);
+				}
+				this.SendPropertyChanged("Client");
+			}
+		}
+	}
+	
+	[Association(Name="Country_ClientContact", Storage="_Country", ThisKey="CountryID", OtherKey="ID", IsForeignKey=true)]
+	public Country Country
+	{
+		get
+		{
+			return this._Country.Entity;
+		}
+		set
+		{
+			Country previousValue = this._Country.Entity;
+			if (((previousValue != value) 
+						|| (this._Country.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Country.Entity = null;
+					previousValue.ClientContacts.Remove(this);
+				}
+				this._Country.Entity = value;
+				if ((value != null))
+				{
+					value.ClientContacts.Add(this);
+					this._CountryID = value.ID;
+				}
+				else
+				{
+					this._CountryID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("Country");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_Enquiries(Enquiry entity)
+	{
+		this.SendPropertyChanging();
+		entity.ClientContact = this;
+	}
+	
+	private void detach_Enquiries(Enquiry entity)
+	{
+		this.SendPropertyChanging();
+		entity.ClientContact = null;
+	}
+}
+
+[Table(Name="dbo.Clients")]
+public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private string _Number;
+	
+	private string _Name;
+	
+	private string _Address;
+	
+	private string _Postcode;
+	
+	private int _CountryID;
+	
+	private string _Telephone;
+	
+	private string _Fax;
+	
+	private string _Email;
+	
+	private string _Web;
+	
+	private System.Nullable<int> _ChangedByUserID;
+	
+	private System.DateTime _ChangedOn;
+	
+	private System.Data.Linq.Binary _Version;
+	
+	private string _Mobile;
+	
+	private EntitySet<ClientContact> _ClientContacts;
+	
+	private EntityRef<Country> _Country;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNumberChanging(string value);
+    partial void OnNumberChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnPostcodeChanging(string value);
+    partial void OnPostcodeChanged();
+    partial void OnCountryIDChanging(int value);
+    partial void OnCountryIDChanged();
+    partial void OnTelephoneChanging(string value);
+    partial void OnTelephoneChanged();
+    partial void OnFaxChanging(string value);
+    partial void OnFaxChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnWebChanging(string value);
+    partial void OnWebChanged();
+    partial void OnChangedByUserIDChanging(System.Nullable<int> value);
+    partial void OnChangedByUserIDChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    partial void OnVersionChanging(System.Data.Linq.Binary value);
+    partial void OnVersionChanged();
+    partial void OnMobileChanging(string value);
+    partial void OnMobileChanged();
+    #endregion
+	
+	public Client()
+	{
+		this._ClientContacts = new EntitySet<ClientContact>(new Action<ClientContact>(this.attach_ClientContacts), new Action<ClientContact>(this.detach_ClientContacts));
+		this._Country = default(EntityRef<Country>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Number", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string Number
+	{
+		get
+		{
+			return this._Number;
+		}
+		set
+		{
+			if ((this._Number != value))
+			{
+				this.OnNumberChanging(value);
+				this.SendPropertyChanging();
+				this._Number = value;
+				this.SendPropertyChanged("Number");
+				this.OnNumberChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Name", DbType="NVarChar(100) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Name
+	{
+		get
+		{
+			return this._Name;
+		}
+		set
+		{
+			if ((this._Name != value))
+			{
+				this.OnNameChanging(value);
+				this.SendPropertyChanging();
+				this._Name = value;
+				this.SendPropertyChanged("Name");
+				this.OnNameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Address", DbType="NVarChar(250) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Address
+	{
+		get
+		{
+			return this._Address;
+		}
+		set
+		{
+			if ((this._Address != value))
+			{
+				this.OnAddressChanging(value);
+				this.SendPropertyChanging();
+				this._Address = value;
+				this.SendPropertyChanged("Address");
+				this.OnAddressChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Postcode", DbType="NVarChar(20) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Postcode
+	{
+		get
+		{
+			return this._Postcode;
+		}
+		set
+		{
+			if ((this._Postcode != value))
+			{
+				this.OnPostcodeChanging(value);
+				this.SendPropertyChanging();
+				this._Postcode = value;
+				this.SendPropertyChanged("Postcode");
+				this.OnPostcodeChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_CountryID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int CountryID
+	{
+		get
+		{
+			return this._CountryID;
+		}
+		set
+		{
+			if ((this._CountryID != value))
+			{
+				if (this._Country.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnCountryIDChanging(value);
+				this.SendPropertyChanging();
+				this._CountryID = value;
+				this.SendPropertyChanged("CountryID");
+				this.OnCountryIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Telephone", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string Telephone
+	{
+		get
+		{
+			return this._Telephone;
+		}
+		set
+		{
+			if ((this._Telephone != value))
+			{
+				this.OnTelephoneChanging(value);
+				this.SendPropertyChanging();
+				this._Telephone = value;
+				this.SendPropertyChanged("Telephone");
+				this.OnTelephoneChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Fax", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string Fax
+	{
+		get
+		{
+			return this._Fax;
+		}
+		set
+		{
+			if ((this._Fax != value))
+			{
+				this.OnFaxChanging(value);
+				this.SendPropertyChanging();
+				this._Fax = value;
+				this.SendPropertyChanged("Fax");
+				this.OnFaxChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Email", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+	public string Email
+	{
+		get
+		{
+			return this._Email;
+		}
+		set
+		{
+			if ((this._Email != value))
+			{
+				this.OnEmailChanging(value);
+				this.SendPropertyChanging();
+				this._Email = value;
+				this.SendPropertyChanged("Email");
+				this.OnEmailChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Web", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+	public string Web
+	{
+		get
+		{
+			return this._Web;
+		}
+		set
+		{
+			if ((this._Web != value))
+			{
+				this.OnWebChanging(value);
+				this.SendPropertyChanging();
+				this._Web = value;
+				this.SendPropertyChanged("Web");
+				this.OnWebChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> ChangedByUserID
+	{
+		get
+		{
+			return this._ChangedByUserID;
+		}
+		set
+		{
+			if ((this._ChangedByUserID != value))
+			{
+				this.OnChangedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUserID = value;
+				this.SendPropertyChanged("ChangedByUserID");
+				this.OnChangedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Version", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary Version
+	{
+		get
+		{
+			return this._Version;
+		}
+		set
+		{
+			if ((this._Version != value))
+			{
+				this.OnVersionChanging(value);
+				this.SendPropertyChanging();
+				this._Version = value;
+				this.SendPropertyChanged("Version");
+				this.OnVersionChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Mobile", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string Mobile
+	{
+		get
+		{
+			return this._Mobile;
+		}
+		set
+		{
+			if ((this._Mobile != value))
+			{
+				this.OnMobileChanging(value);
+				this.SendPropertyChanging();
+				this._Mobile = value;
+				this.SendPropertyChanged("Mobile");
+				this.OnMobileChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Client_ClientContact", Storage="_ClientContacts", ThisKey="ID", OtherKey="CompanyID")]
+	public EntitySet<ClientContact> ClientContacts
+	{
+		get
+		{
+			return this._ClientContacts;
+		}
+		set
+		{
+			this._ClientContacts.Assign(value);
+		}
+	}
+	
+	[Association(Name="Country_Client", Storage="_Country", ThisKey="CountryID", OtherKey="ID", IsForeignKey=true)]
+	public Country Country
+	{
+		get
+		{
+			return this._Country.Entity;
+		}
+		set
+		{
+			Country previousValue = this._Country.Entity;
+			if (((previousValue != value) 
+						|| (this._Country.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Country.Entity = null;
+					previousValue.Clients.Remove(this);
+				}
+				this._Country.Entity = value;
+				if ((value != null))
+				{
+					value.Clients.Add(this);
+					this._CountryID = value.ID;
+				}
+				else
+				{
+					this._CountryID = default(int);
+				}
+				this.SendPropertyChanged("Country");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_ClientContacts(ClientContact entity)
+	{
+		this.SendPropertyChanging();
+		entity.Client = this;
+	}
+	
+	private void detach_ClientContacts(ClientContact entity)
+	{
+		this.SendPropertyChanging();
+		entity.Client = null;
+	}
+}
+
+[Table(Name="dbo.Countries")]
+public partial class Country : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private string _Name;
+	
+	private bool _IsUK;
+	
+	private bool _IsEurope;
+	
+	private string _Code;
+	
+	private EntitySet<ClientContact> _ClientContacts;
+	
+	private EntitySet<Client> _Clients;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnIsUKChanging(bool value);
+    partial void OnIsUKChanged();
+    partial void OnIsEuropeChanging(bool value);
+    partial void OnIsEuropeChanged();
+    partial void OnCodeChanging(string value);
+    partial void OnCodeChanged();
+    #endregion
+	
+	public Country()
+	{
+		this._ClientContacts = new EntitySet<ClientContact>(new Action<ClientContact>(this.attach_ClientContacts), new Action<ClientContact>(this.detach_ClientContacts));
+		this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+	public string Name
+	{
+		get
+		{
+			return this._Name;
+		}
+		set
+		{
+			if ((this._Name != value))
+			{
+				this.OnNameChanging(value);
+				this.SendPropertyChanging();
+				this._Name = value;
+				this.SendPropertyChanged("Name");
+				this.OnNameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_IsUK", DbType="Bit NOT NULL")]
+	public bool IsUK
+	{
+		get
+		{
+			return this._IsUK;
+		}
+		set
+		{
+			if ((this._IsUK != value))
+			{
+				this.OnIsUKChanging(value);
+				this.SendPropertyChanging();
+				this._IsUK = value;
+				this.SendPropertyChanged("IsUK");
+				this.OnIsUKChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_IsEurope", DbType="Bit NOT NULL")]
+	public bool IsEurope
+	{
+		get
+		{
+			return this._IsEurope;
+		}
+		set
+		{
+			if ((this._IsEurope != value))
+			{
+				this.OnIsEuropeChanging(value);
+				this.SendPropertyChanging();
+				this._IsEurope = value;
+				this.SendPropertyChanged("IsEurope");
+				this.OnIsEuropeChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Code", DbType="NVarChar(5) NOT NULL", CanBeNull=false)]
+	public string Code
+	{
+		get
+		{
+			return this._Code;
+		}
+		set
+		{
+			if ((this._Code != value))
+			{
+				this.OnCodeChanging(value);
+				this.SendPropertyChanging();
+				this._Code = value;
+				this.SendPropertyChanged("Code");
+				this.OnCodeChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Country_ClientContact", Storage="_ClientContacts", ThisKey="ID", OtherKey="CountryID")]
+	public EntitySet<ClientContact> ClientContacts
+	{
+		get
+		{
+			return this._ClientContacts;
+		}
+		set
+		{
+			this._ClientContacts.Assign(value);
+		}
+	}
+	
+	[Association(Name="Country_Client", Storage="_Clients", ThisKey="ID", OtherKey="CountryID")]
+	public EntitySet<Client> Clients
+	{
+		get
+		{
+			return this._Clients;
+		}
+		set
+		{
+			this._Clients.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_ClientContacts(ClientContact entity)
+	{
+		this.SendPropertyChanging();
+		entity.Country = this;
+	}
+	
+	private void detach_ClientContacts(ClientContact entity)
+	{
+		this.SendPropertyChanging();
+		entity.Country = null;
+	}
+	
+	private void attach_Clients(Client entity)
+	{
+		this.SendPropertyChanging();
+		entity.Country = this;
+	}
+	
+	private void detach_Clients(Client entity)
+	{
+		this.SendPropertyChanging();
+		entity.Country = null;
+	}
+}
+
+[Table(Name="dbo.Enquiries")]
+public partial class Enquiry : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private string _Number;
+	
+	private int _ContactID;
+	
+	private int _TypeID;
+	
+	private int _StatusID;
+	
+	private System.Nullable<int> _CreatedByUserID;
+	
+	private System.DateTime _CreatedOn;
+	
+	private System.Nullable<int> _ChangedByUserID;
+	
+	private System.DateTime _ChangedOn;
+	
+	private System.Data.Linq.Binary _Version;
+	
+	private string _CreatedByUsername;
+	
+	private string _ChangedByUsername;
+	
+	private string _EnguirySubject;
+	
+	private EntitySet<EnquiryLine> _EnquiryLines;
+	
+	private EntityRef<ClientContact> _ClientContact;
+	
+	private EntityRef<EnquiryType> _EnquiryType;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNumberChanging(string value);
+    partial void OnNumberChanged();
+    partial void OnContactIDChanging(int value);
+    partial void OnContactIDChanged();
+    partial void OnTypeIDChanging(int value);
+    partial void OnTypeIDChanged();
+    partial void OnStatusIDChanging(int value);
+    partial void OnStatusIDChanged();
+    partial void OnCreatedByUserIDChanging(System.Nullable<int> value);
+    partial void OnCreatedByUserIDChanged();
+    partial void OnCreatedOnChanging(System.DateTime value);
+    partial void OnCreatedOnChanged();
+    partial void OnChangedByUserIDChanging(System.Nullable<int> value);
+    partial void OnChangedByUserIDChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    partial void OnVersionChanging(System.Data.Linq.Binary value);
+    partial void OnVersionChanged();
+    partial void OnCreatedByUsernameChanging(string value);
+    partial void OnCreatedByUsernameChanged();
+    partial void OnChangedByUsernameChanging(string value);
+    partial void OnChangedByUsernameChanged();
+    partial void OnEnguirySubjectChanging(string value);
+    partial void OnEnguirySubjectChanged();
+    #endregion
+	
+	public Enquiry()
+	{
+		this._EnquiryLines = new EntitySet<EnquiryLine>(new Action<EnquiryLine>(this.attach_EnquiryLines), new Action<EnquiryLine>(this.detach_EnquiryLines));
+		this._ClientContact = default(EntityRef<ClientContact>);
+		this._EnquiryType = default(EntityRef<EnquiryType>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Number", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Number
+	{
+		get
+		{
+			return this._Number;
+		}
+		set
+		{
+			if ((this._Number != value))
+			{
+				this.OnNumberChanging(value);
+				this.SendPropertyChanging();
+				this._Number = value;
+				this.SendPropertyChanged("Number");
+				this.OnNumberChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ContactID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int ContactID
+	{
+		get
+		{
+			return this._ContactID;
+		}
+		set
+		{
+			if ((this._ContactID != value))
+			{
+				if (this._ClientContact.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnContactIDChanging(value);
+				this.SendPropertyChanging();
+				this._ContactID = value;
+				this.SendPropertyChanged("ContactID");
+				this.OnContactIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_TypeID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int TypeID
+	{
+		get
+		{
+			return this._TypeID;
+		}
+		set
+		{
+			if ((this._TypeID != value))
+			{
+				if (this._EnquiryType.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnTypeIDChanging(value);
+				this.SendPropertyChanging();
+				this._TypeID = value;
+				this.SendPropertyChanged("TypeID");
+				this.OnTypeIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_StatusID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int StatusID
+	{
+		get
+		{
+			return this._StatusID;
+		}
+		set
+		{
+			if ((this._StatusID != value))
+			{
+				this.OnStatusIDChanging(value);
+				this.SendPropertyChanging();
+				this._StatusID = value;
+				this.SendPropertyChanged("StatusID");
+				this.OnStatusIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_CreatedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> CreatedByUserID
+	{
+		get
+		{
+			return this._CreatedByUserID;
+		}
+		set
+		{
+			if ((this._CreatedByUserID != value))
+			{
+				this.OnCreatedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._CreatedByUserID = value;
+				this.SendPropertyChanged("CreatedByUserID");
+				this.OnCreatedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_CreatedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime CreatedOn
+	{
+		get
+		{
+			return this._CreatedOn;
+		}
+		set
+		{
+			if ((this._CreatedOn != value))
+			{
+				this.OnCreatedOnChanging(value);
+				this.SendPropertyChanging();
+				this._CreatedOn = value;
+				this.SendPropertyChanged("CreatedOn");
+				this.OnCreatedOnChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> ChangedByUserID
+	{
+		get
+		{
+			return this._ChangedByUserID;
+		}
+		set
+		{
+			if ((this._ChangedByUserID != value))
+			{
+				this.OnChangedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUserID = value;
+				this.SendPropertyChanged("ChangedByUserID");
+				this.OnChangedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Version", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary Version
+	{
+		get
+		{
+			return this._Version;
+		}
+		set
+		{
+			if ((this._Version != value))
+			{
+				this.OnVersionChanging(value);
+				this.SendPropertyChanging();
+				this._Version = value;
+				this.SendPropertyChanged("Version");
+				this.OnVersionChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_CreatedByUsername", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string CreatedByUsername
+	{
+		get
+		{
+			return this._CreatedByUsername;
+		}
+		set
+		{
+			if ((this._CreatedByUsername != value))
+			{
+				this.OnCreatedByUsernameChanging(value);
+				this.SendPropertyChanging();
+				this._CreatedByUsername = value;
+				this.SendPropertyChanged("CreatedByUsername");
+				this.OnCreatedByUsernameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUsername", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string ChangedByUsername
+	{
+		get
+		{
+			return this._ChangedByUsername;
+		}
+		set
+		{
+			if ((this._ChangedByUsername != value))
+			{
+				this.OnChangedByUsernameChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUsername = value;
+				this.SendPropertyChanged("ChangedByUsername");
+				this.OnChangedByUsernameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_EnguirySubject", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+	public string EnguirySubject
+	{
+		get
+		{
+			return this._EnguirySubject;
+		}
+		set
+		{
+			if ((this._EnguirySubject != value))
+			{
+				this.OnEnguirySubjectChanging(value);
+				this.SendPropertyChanging();
+				this._EnguirySubject = value;
+				this.SendPropertyChanged("EnguirySubject");
+				this.OnEnguirySubjectChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Enquiry_EnquiryLine", Storage="_EnquiryLines", ThisKey="ID", OtherKey="EnquiryID")]
+	public EntitySet<EnquiryLine> EnquiryLines
+	{
+		get
+		{
+			return this._EnquiryLines;
+		}
+		set
+		{
+			this._EnquiryLines.Assign(value);
+		}
+	}
+	
+	[Association(Name="ClientContact_Enquiry", Storage="_ClientContact", ThisKey="ContactID", OtherKey="ID", IsForeignKey=true)]
+	public ClientContact ClientContact
+	{
+		get
+		{
+			return this._ClientContact.Entity;
+		}
+		set
+		{
+			ClientContact previousValue = this._ClientContact.Entity;
+			if (((previousValue != value) 
+						|| (this._ClientContact.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._ClientContact.Entity = null;
+					previousValue.Enquiries.Remove(this);
+				}
+				this._ClientContact.Entity = value;
+				if ((value != null))
+				{
+					value.Enquiries.Add(this);
+					this._ContactID = value.ID;
+				}
+				else
+				{
+					this._ContactID = default(int);
+				}
+				this.SendPropertyChanged("ClientContact");
+			}
+		}
+	}
+	
+	[Association(Name="EnquiryType_Enquiry", Storage="_EnquiryType", ThisKey="TypeID", OtherKey="ID", IsForeignKey=true)]
+	public EnquiryType EnquiryType
+	{
+		get
+		{
+			return this._EnquiryType.Entity;
+		}
+		set
+		{
+			EnquiryType previousValue = this._EnquiryType.Entity;
+			if (((previousValue != value) 
+						|| (this._EnquiryType.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._EnquiryType.Entity = null;
+					previousValue.Enquiries.Remove(this);
+				}
+				this._EnquiryType.Entity = value;
+				if ((value != null))
+				{
+					value.Enquiries.Add(this);
+					this._TypeID = value.ID;
+				}
+				else
+				{
+					this._TypeID = default(int);
+				}
+				this.SendPropertyChanged("EnquiryType");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_EnquiryLines(EnquiryLine entity)
+	{
+		this.SendPropertyChanging();
+		entity.Enquiry = this;
+	}
+	
+	private void detach_EnquiryLines(EnquiryLine entity)
+	{
+		this.SendPropertyChanging();
+		entity.Enquiry = null;
+	}
+}
+
+[Table(Name="dbo.EnquiryTypes")]
+public partial class EnquiryType : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private string _Name;
+	
+	private string _NumberSuffix;
+	
+	private EntitySet<Enquiry> _Enquiries;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnNumberSuffixChanging(string value);
+    partial void OnNumberSuffixChanged();
+    #endregion
+	
+	public EnquiryType()
+	{
+		this._Enquiries = new EntitySet<Enquiry>(new Action<Enquiry>(this.attach_Enquiries), new Action<Enquiry>(this.detach_Enquiries));
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string Name
+	{
+		get
+		{
+			return this._Name;
+		}
+		set
+		{
+			if ((this._Name != value))
+			{
+				this.OnNameChanging(value);
+				this.SendPropertyChanging();
+				this._Name = value;
+				this.SendPropertyChanged("Name");
+				this.OnNameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_NumberSuffix", DbType="NVarChar(5) NOT NULL", CanBeNull=false)]
+	public string NumberSuffix
+	{
+		get
+		{
+			return this._NumberSuffix;
+		}
+		set
+		{
+			if ((this._NumberSuffix != value))
+			{
+				this.OnNumberSuffixChanging(value);
+				this.SendPropertyChanging();
+				this._NumberSuffix = value;
+				this.SendPropertyChanged("NumberSuffix");
+				this.OnNumberSuffixChanged();
+			}
+		}
+	}
+	
+	[Association(Name="EnquiryType_Enquiry", Storage="_Enquiries", ThisKey="ID", OtherKey="TypeID")]
+	public EntitySet<Enquiry> Enquiries
+	{
+		get
+		{
+			return this._Enquiries;
+		}
+		set
+		{
+			this._Enquiries.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_Enquiries(Enquiry entity)
+	{
+		this.SendPropertyChanging();
+		entity.EnquiryType = this;
+	}
+	
+	private void detach_Enquiries(Enquiry entity)
+	{
+		this.SendPropertyChanging();
+		entity.EnquiryType = null;
+	}
+}
+
+[Table(Name="dbo.EnquiryLines")]
+public partial class EnquiryLine : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private int _EnquiryID;
+	
+	private string _Details;
+	
+	private System.Nullable<int> _ChangedByUserID;
+	
+	private System.DateTime _ChangedOn;
+	
+	private System.Data.Linq.Binary _Version;
+	
+	private EntityRef<Enquiry> _Enquiry;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnEnquiryIDChanging(int value);
+    partial void OnEnquiryIDChanged();
+    partial void OnDetailsChanging(string value);
+    partial void OnDetailsChanged();
+    partial void OnChangedByUserIDChanging(System.Nullable<int> value);
+    partial void OnChangedByUserIDChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    partial void OnVersionChanging(System.Data.Linq.Binary value);
+    partial void OnVersionChanged();
+    #endregion
+	
+	public EnquiryLine()
+	{
+		this._Enquiry = default(EntityRef<Enquiry>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_EnquiryID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int EnquiryID
+	{
+		get
+		{
+			return this._EnquiryID;
+		}
+		set
+		{
+			if ((this._EnquiryID != value))
+			{
+				if (this._Enquiry.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnEnquiryIDChanging(value);
+				this.SendPropertyChanging();
+				this._EnquiryID = value;
+				this.SendPropertyChanged("EnquiryID");
+				this.OnEnquiryIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Details", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Details
+	{
+		get
+		{
+			return this._Details;
+		}
+		set
+		{
+			if ((this._Details != value))
+			{
+				this.OnDetailsChanging(value);
+				this.SendPropertyChanging();
+				this._Details = value;
+				this.SendPropertyChanged("Details");
+				this.OnDetailsChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> ChangedByUserID
+	{
+		get
+		{
+			return this._ChangedByUserID;
+		}
+		set
+		{
+			if ((this._ChangedByUserID != value))
+			{
+				this.OnChangedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUserID = value;
+				this.SendPropertyChanged("ChangedByUserID");
+				this.OnChangedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Version", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary Version
+	{
+		get
+		{
+			return this._Version;
+		}
+		set
+		{
+			if ((this._Version != value))
+			{
+				this.OnVersionChanging(value);
+				this.SendPropertyChanging();
+				this._Version = value;
+				this.SendPropertyChanged("Version");
+				this.OnVersionChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Enquiry_EnquiryLine", Storage="_Enquiry", ThisKey="EnquiryID", OtherKey="ID", IsForeignKey=true)]
+	public Enquiry Enquiry
+	{
+		get
+		{
+			return this._Enquiry.Entity;
+		}
+		set
+		{
+			Enquiry previousValue = this._Enquiry.Entity;
+			if (((previousValue != value) 
+						|| (this._Enquiry.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Enquiry.Entity = null;
+					previousValue.EnquiryLines.Remove(this);
+				}
+				this._Enquiry.Entity = value;
+				if ((value != null))
+				{
+					value.EnquiryLines.Add(this);
+					this._EnquiryID = value.ID;
+				}
+				else
+				{
+					this._EnquiryID = default(int);
+				}
+				this.SendPropertyChanged("Enquiry");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
 	}
 }
 #pragma warning restore 1591
