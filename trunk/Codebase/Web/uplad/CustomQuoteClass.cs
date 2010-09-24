@@ -57,7 +57,10 @@ public class CustomQuoteClass:ActionHandlerBase
 
         {
             MembershipUser User = Membership.GetUser();
-            args["CreatedByUsername"].NewValue = User.UserName;
+            //args["CreatedByUsername"].NewValue = User.UserName;
+            args["ChangedByUserID"].NewValue = SessionCache.CurrentUser.ID;
+            args["CreatedByUsername"].NewValue = SessionCache.CurrentUser.UserName;
+            
             args["CreatedByUsername"].Modified = true;
 
             //     args["CreatedByUserID"].NewValue = WindowsIdentity.GetCurrent().Name; 
