@@ -56,6 +56,15 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   partial void InsertEnquiryLine(EnquiryLine instance);
   partial void UpdateEnquiryLine(EnquiryLine instance);
   partial void DeleteEnquiryLine(EnquiryLine instance);
+  partial void InsertUser(User instance);
+  partial void UpdateUser(User instance);
+  partial void DeleteUser(User instance);
+  partial void InsertUserInRole(UserInRole instance);
+  partial void UpdateUserInRole(UserInRole instance);
+  partial void DeleteUserInRole(UserInRole instance);
+  partial void InsertRole(Role instance);
+  partial void UpdateRole(Role instance);
+  partial void DeleteRole(Role instance);
   #endregion
 	
 	public OMMDataContext() : 
@@ -158,6 +167,48 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		{
 			return this.GetTable<EnquiryLine>();
 		}
+	}
+	
+	public System.Data.Linq.Table<User> Users
+	{
+		get
+		{
+			return this.GetTable<User>();
+		}
+	}
+	
+	public System.Data.Linq.Table<UserInRole> UserInRoles
+	{
+		get
+		{
+			return this.GetTable<UserInRole>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Role> Roles
+	{
+		get
+		{
+			return this.GetTable<Role>();
+		}
+	}
+	
+	[Function(Name="dbo.GenerateNewQuotationNumber", IsComposable=true)]
+	public string GenerateNewQuotationNumber([Parameter(Name="EnquiryID", DbType="Int")] System.Nullable<int> enquiryID, [Parameter(Name="WithVersion", DbType="Bit")] System.Nullable<bool> withVersion)
+	{
+		return ((string)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), enquiryID, withVersion).ReturnValue));
+	}
+	
+	[Function(Name="dbo.GenerateNewProjectNumber", IsComposable=true)]
+	public string GenerateNewProjectNumber()
+	{
+		return ((string)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod()))).ReturnValue));
+	}
+	
+	[Function(Name="dbo.GenerateNewEnquiryNumber", IsComposable=true)]
+	public string GenerateNewEnquiryNumber([Parameter(Name="EnquiryTypeID", DbType="Int")] System.Nullable<int> enquiryTypeID)
+	{
+		return ((string)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), enquiryTypeID).ReturnValue));
 	}
 }
 
@@ -867,6 +918,8 @@ public partial class ClientContact : INotifyPropertyChanging, INotifyPropertyCha
 	
 	private EntityRef<Country> _Country;
 	
+	private EntityRef<User> _User;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -912,6 +965,7 @@ public partial class ClientContact : INotifyPropertyChanging, INotifyPropertyCha
 		this._Enquiries = new EntitySet<Enquiry>(new Action<Enquiry>(this.attach_Enquiries), new Action<Enquiry>(this.detach_Enquiries));
 		this._Client = default(EntityRef<Client>);
 		this._Country = default(EntityRef<Country>);
+		this._User = default(EntityRef<User>);
 		OnCreated();
 	}
 	
@@ -1154,6 +1208,10 @@ public partial class ClientContact : INotifyPropertyChanging, INotifyPropertyCha
 		{
 			if ((this._ChangedByUserID != value))
 			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
 				this.OnChangedByUserIDChanging(value);
 				this.SendPropertyChanging();
 				this._ChangedByUserID = value;
@@ -1344,6 +1402,40 @@ public partial class ClientContact : INotifyPropertyChanging, INotifyPropertyCha
 		}
 	}
 	
+	[Association(Name="User_ClientContact", Storage="_User", ThisKey="ChangedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.ClientContacts.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.ClientContacts.Add(this);
+					this._ChangedByUserID = value.ID;
+				}
+				else
+				{
+					this._ChangedByUserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -1415,6 +1507,8 @@ public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntityRef<Country> _Country;
 	
+	private EntityRef<User> _User;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1453,6 +1547,7 @@ public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this._ClientContacts = new EntitySet<ClientContact>(new Action<ClientContact>(this.attach_ClientContacts), new Action<ClientContact>(this.detach_ClientContacts));
 		this._Country = default(EntityRef<Country>);
+		this._User = default(EntityRef<User>);
 		OnCreated();
 	}
 	
@@ -1671,6 +1766,10 @@ public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
 		{
 			if ((this._ChangedByUserID != value))
 			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
 				this.OnChangedByUserIDChanging(value);
 				this.SendPropertyChanging();
 				this._ChangedByUserID = value;
@@ -1783,6 +1882,40 @@ public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
 					this._CountryID = default(int);
 				}
 				this.SendPropertyChanged("Country");
+			}
+		}
+	}
+	
+	[Association(Name="User_Client", Storage="_User", ThisKey="ChangedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.Clients.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.Clients.Add(this);
+					this._ChangedByUserID = value.ID;
+				}
+				else
+				{
+					this._ChangedByUserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
 			}
 		}
 	}
@@ -2072,6 +2205,10 @@ public partial class Enquiry : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntityRef<EnquiryType> _EnquiryType;
 	
+	private EntityRef<User> _User;
+	
+	private EntityRef<User> _User1;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2109,6 +2246,8 @@ public partial class Enquiry : INotifyPropertyChanging, INotifyPropertyChanged
 		this._EnquiryLines = new EntitySet<EnquiryLine>(new Action<EnquiryLine>(this.attach_EnquiryLines), new Action<EnquiryLine>(this.detach_EnquiryLines));
 		this._ClientContact = default(EntityRef<ClientContact>);
 		this._EnquiryType = default(EntityRef<EnquiryType>);
+		this._User = default(EntityRef<User>);
+		this._User1 = default(EntityRef<User>);
 		OnCreated();
 	}
 	
@@ -2231,6 +2370,10 @@ public partial class Enquiry : INotifyPropertyChanging, INotifyPropertyChanged
 		{
 			if ((this._CreatedByUserID != value))
 			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
 				this.OnCreatedByUserIDChanging(value);
 				this.SendPropertyChanging();
 				this._CreatedByUserID = value;
@@ -2271,6 +2414,10 @@ public partial class Enquiry : INotifyPropertyChanging, INotifyPropertyChanged
 		{
 			if ((this._ChangedByUserID != value))
 			{
+				if (this._User1.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
 				this.OnChangedByUserIDChanging(value);
 				this.SendPropertyChanging();
 				this._ChangedByUserID = value;
@@ -2457,6 +2604,74 @@ public partial class Enquiry : INotifyPropertyChanging, INotifyPropertyChanged
 					this._TypeID = default(int);
 				}
 				this.SendPropertyChanged("EnquiryType");
+			}
+		}
+	}
+	
+	[Association(Name="User_Enquiry", Storage="_User", ThisKey="CreatedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.Enquiries.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.Enquiries.Add(this);
+					this._CreatedByUserID = value.ID;
+				}
+				else
+				{
+					this._CreatedByUserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	[Association(Name="User_Enquiry1", Storage="_User1", ThisKey="ChangedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User1
+	{
+		get
+		{
+			return this._User1.Entity;
+		}
+		set
+		{
+			User previousValue = this._User1.Entity;
+			if (((previousValue != value) 
+						|| (this._User1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User1.Entity = null;
+					previousValue.Enquiries1.Remove(this);
+				}
+				this._User1.Entity = value;
+				if ((value != null))
+				{
+					value.Enquiries1.Add(this);
+					this._ChangedByUserID = value.ID;
+				}
+				else
+				{
+					this._ChangedByUserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User1");
 			}
 		}
 	}
@@ -2652,6 +2867,8 @@ public partial class EnquiryLine : INotifyPropertyChanging, INotifyPropertyChang
 	
 	private EntityRef<Enquiry> _Enquiry;
 	
+	private EntityRef<User> _User;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2673,6 +2890,7 @@ public partial class EnquiryLine : INotifyPropertyChanging, INotifyPropertyChang
 	public EnquiryLine()
 	{
 		this._Enquiry = default(EntityRef<Enquiry>);
+		this._User = default(EntityRef<User>);
 		OnCreated();
 	}
 	
@@ -2751,6 +2969,10 @@ public partial class EnquiryLine : INotifyPropertyChanging, INotifyPropertyChang
 		{
 			if ((this._ChangedByUserID != value))
 			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
 				this.OnChangedByUserIDChanging(value);
 				this.SendPropertyChanging();
 				this._ChangedByUserID = value;
@@ -2834,6 +3056,40 @@ public partial class EnquiryLine : INotifyPropertyChanging, INotifyPropertyChang
 		}
 	}
 	
+	[Association(Name="User_EnquiryLine", Storage="_User", ThisKey="ChangedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.EnquiryLines.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.EnquiryLines.Add(this);
+					this._ChangedByUserID = value.ID;
+				}
+				else
+				{
+					this._ChangedByUserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -2852,6 +3108,968 @@ public partial class EnquiryLine : INotifyPropertyChanging, INotifyPropertyChang
 		{
 			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
+	}
+}
+
+[Table(Name="dbo.Users")]
+public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private string _UserName;
+	
+	private string _DisplayName;
+	
+	private string _Email;
+	
+	private string _Password;
+	
+	private System.Nullable<int> _ModifiedBy;
+	
+	private System.Nullable<System.DateTime> _Modified;
+	
+	private EntitySet<ClientContact> _ClientContacts;
+	
+	private EntitySet<Client> _Clients;
+	
+	private EntitySet<Enquiry> _Enquiries;
+	
+	private EntitySet<Enquiry> _Enquiries1;
+	
+	private EntitySet<EnquiryLine> _EnquiryLines;
+	
+	private EntitySet<UserInRole> _UserInRoles;
+	
+	private EntitySet<UserInRole> _UserInRoles1;
+	
+	private EntitySet<Role> _Roles;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnDisplayNameChanging(string value);
+    partial void OnDisplayNameChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnModifiedByChanging(System.Nullable<int> value);
+    partial void OnModifiedByChanged();
+    partial void OnModifiedChanging(System.Nullable<System.DateTime> value);
+    partial void OnModifiedChanged();
+    #endregion
+	
+	public User()
+	{
+		this._ClientContacts = new EntitySet<ClientContact>(new Action<ClientContact>(this.attach_ClientContacts), new Action<ClientContact>(this.detach_ClientContacts));
+		this._Clients = new EntitySet<Client>(new Action<Client>(this.attach_Clients), new Action<Client>(this.detach_Clients));
+		this._Enquiries = new EntitySet<Enquiry>(new Action<Enquiry>(this.attach_Enquiries), new Action<Enquiry>(this.detach_Enquiries));
+		this._Enquiries1 = new EntitySet<Enquiry>(new Action<Enquiry>(this.attach_Enquiries1), new Action<Enquiry>(this.detach_Enquiries1));
+		this._EnquiryLines = new EntitySet<EnquiryLine>(new Action<EnquiryLine>(this.attach_EnquiryLines), new Action<EnquiryLine>(this.detach_EnquiryLines));
+		this._UserInRoles = new EntitySet<UserInRole>(new Action<UserInRole>(this.attach_UserInRoles), new Action<UserInRole>(this.detach_UserInRoles));
+		this._UserInRoles1 = new EntitySet<UserInRole>(new Action<UserInRole>(this.attach_UserInRoles1), new Action<UserInRole>(this.detach_UserInRoles1));
+		this._Roles = new EntitySet<Role>(new Action<Role>(this.attach_Roles), new Action<Role>(this.detach_Roles));
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_UserName", DbType="NVarChar(300) NOT NULL", CanBeNull=false)]
+	public string UserName
+	{
+		get
+		{
+			return this._UserName;
+		}
+		set
+		{
+			if ((this._UserName != value))
+			{
+				this.OnUserNameChanging(value);
+				this.SendPropertyChanging();
+				this._UserName = value;
+				this.SendPropertyChanged("UserName");
+				this.OnUserNameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_DisplayName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+	public string DisplayName
+	{
+		get
+		{
+			return this._DisplayName;
+		}
+		set
+		{
+			if ((this._DisplayName != value))
+			{
+				this.OnDisplayNameChanging(value);
+				this.SendPropertyChanging();
+				this._DisplayName = value;
+				this.SendPropertyChanged("DisplayName");
+				this.OnDisplayNameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Email", DbType="NVarChar(100)")]
+	public string Email
+	{
+		get
+		{
+			return this._Email;
+		}
+		set
+		{
+			if ((this._Email != value))
+			{
+				this.OnEmailChanging(value);
+				this.SendPropertyChanging();
+				this._Email = value;
+				this.SendPropertyChanged("Email");
+				this.OnEmailChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Password", DbType="NVarChar(50)")]
+	public string Password
+	{
+		get
+		{
+			return this._Password;
+		}
+		set
+		{
+			if ((this._Password != value))
+			{
+				this.OnPasswordChanging(value);
+				this.SendPropertyChanging();
+				this._Password = value;
+				this.SendPropertyChanged("Password");
+				this.OnPasswordChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ModifiedBy", DbType="Int")]
+	public System.Nullable<int> ModifiedBy
+	{
+		get
+		{
+			return this._ModifiedBy;
+		}
+		set
+		{
+			if ((this._ModifiedBy != value))
+			{
+				this.OnModifiedByChanging(value);
+				this.SendPropertyChanging();
+				this._ModifiedBy = value;
+				this.SendPropertyChanged("ModifiedBy");
+				this.OnModifiedByChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Modified", DbType="DateTime")]
+	public System.Nullable<System.DateTime> Modified
+	{
+		get
+		{
+			return this._Modified;
+		}
+		set
+		{
+			if ((this._Modified != value))
+			{
+				this.OnModifiedChanging(value);
+				this.SendPropertyChanging();
+				this._Modified = value;
+				this.SendPropertyChanged("Modified");
+				this.OnModifiedChanged();
+			}
+		}
+	}
+	
+	[Association(Name="User_ClientContact", Storage="_ClientContacts", ThisKey="ID", OtherKey="ChangedByUserID")]
+	public EntitySet<ClientContact> ClientContacts
+	{
+		get
+		{
+			return this._ClientContacts;
+		}
+		set
+		{
+			this._ClientContacts.Assign(value);
+		}
+	}
+	
+	[Association(Name="User_Client", Storage="_Clients", ThisKey="ID", OtherKey="ChangedByUserID")]
+	public EntitySet<Client> Clients
+	{
+		get
+		{
+			return this._Clients;
+		}
+		set
+		{
+			this._Clients.Assign(value);
+		}
+	}
+	
+	[Association(Name="User_Enquiry", Storage="_Enquiries", ThisKey="ID", OtherKey="CreatedByUserID")]
+	public EntitySet<Enquiry> Enquiries
+	{
+		get
+		{
+			return this._Enquiries;
+		}
+		set
+		{
+			this._Enquiries.Assign(value);
+		}
+	}
+	
+	[Association(Name="User_Enquiry1", Storage="_Enquiries1", ThisKey="ID", OtherKey="ChangedByUserID")]
+	public EntitySet<Enquiry> Enquiries1
+	{
+		get
+		{
+			return this._Enquiries1;
+		}
+		set
+		{
+			this._Enquiries1.Assign(value);
+		}
+	}
+	
+	[Association(Name="User_EnquiryLine", Storage="_EnquiryLines", ThisKey="ID", OtherKey="ChangedByUserID")]
+	public EntitySet<EnquiryLine> EnquiryLines
+	{
+		get
+		{
+			return this._EnquiryLines;
+		}
+		set
+		{
+			this._EnquiryLines.Assign(value);
+		}
+	}
+	
+	[Association(Name="User_UserInRole", Storage="_UserInRoles", ThisKey="ID", OtherKey="UserID")]
+	public EntitySet<UserInRole> UserInRoles
+	{
+		get
+		{
+			return this._UserInRoles;
+		}
+		set
+		{
+			this._UserInRoles.Assign(value);
+		}
+	}
+	
+	[Association(Name="User_UserInRole1", Storage="_UserInRoles1", ThisKey="ID", OtherKey="ModifiedBy")]
+	public EntitySet<UserInRole> UserInRoles1
+	{
+		get
+		{
+			return this._UserInRoles1;
+		}
+		set
+		{
+			this._UserInRoles1.Assign(value);
+		}
+	}
+	
+	[Association(Name="User_Role", Storage="_Roles", ThisKey="ID", OtherKey="ChangedByUserID")]
+	public EntitySet<Role> Roles
+	{
+		get
+		{
+			return this._Roles;
+		}
+		set
+		{
+			this._Roles.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_ClientContacts(ClientContact entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_ClientContacts(ClientContact entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_Clients(Client entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_Clients(Client entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_Enquiries(Enquiry entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_Enquiries(Enquiry entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_Enquiries1(Enquiry entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = this;
+	}
+	
+	private void detach_Enquiries1(Enquiry entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = null;
+	}
+	
+	private void attach_EnquiryLines(EnquiryLine entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_EnquiryLines(EnquiryLine entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_UserInRoles(UserInRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_UserInRoles(UserInRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_UserInRoles1(UserInRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = this;
+	}
+	
+	private void detach_UserInRoles1(UserInRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = null;
+	}
+	
+	private void attach_Roles(Role entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_Roles(Role entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+}
+
+[Table(Name="dbo.UserInRole")]
+public partial class UserInRole : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private System.Nullable<int> _UserID;
+	
+	private System.Nullable<int> _RoleID;
+	
+	private System.Nullable<int> _ModifiedBy;
+	
+	private System.Nullable<System.DateTime> _Modified;
+	
+	private EntityRef<User> _User;
+	
+	private EntityRef<User> _User1;
+	
+	private EntityRef<Role> _Role;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnUserIDChanging(System.Nullable<int> value);
+    partial void OnUserIDChanged();
+    partial void OnRoleIDChanging(System.Nullable<int> value);
+    partial void OnRoleIDChanged();
+    partial void OnModifiedByChanging(System.Nullable<int> value);
+    partial void OnModifiedByChanged();
+    partial void OnModifiedChanging(System.Nullable<System.DateTime> value);
+    partial void OnModifiedChanged();
+    #endregion
+	
+	public UserInRole()
+	{
+		this._User = default(EntityRef<User>);
+		this._User1 = default(EntityRef<User>);
+		this._Role = default(EntityRef<Role>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_UserID", DbType="Int")]
+	public System.Nullable<int> UserID
+	{
+		get
+		{
+			return this._UserID;
+		}
+		set
+		{
+			if ((this._UserID != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._UserID = value;
+				this.SendPropertyChanged("UserID");
+				this.OnUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_RoleID", DbType="Int")]
+	public System.Nullable<int> RoleID
+	{
+		get
+		{
+			return this._RoleID;
+		}
+		set
+		{
+			if ((this._RoleID != value))
+			{
+				if (this._Role.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnRoleIDChanging(value);
+				this.SendPropertyChanging();
+				this._RoleID = value;
+				this.SendPropertyChanged("RoleID");
+				this.OnRoleIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ModifiedBy", DbType="Int")]
+	public System.Nullable<int> ModifiedBy
+	{
+		get
+		{
+			return this._ModifiedBy;
+		}
+		set
+		{
+			if ((this._ModifiedBy != value))
+			{
+				if (this._User1.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnModifiedByChanging(value);
+				this.SendPropertyChanging();
+				this._ModifiedBy = value;
+				this.SendPropertyChanged("ModifiedBy");
+				this.OnModifiedByChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Modified", DbType="DateTime")]
+	public System.Nullable<System.DateTime> Modified
+	{
+		get
+		{
+			return this._Modified;
+		}
+		set
+		{
+			if ((this._Modified != value))
+			{
+				this.OnModifiedChanging(value);
+				this.SendPropertyChanging();
+				this._Modified = value;
+				this.SendPropertyChanged("Modified");
+				this.OnModifiedChanged();
+			}
+		}
+	}
+	
+	[Association(Name="User_UserInRole", Storage="_User", ThisKey="UserID", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.UserInRoles.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.UserInRoles.Add(this);
+					this._UserID = value.ID;
+				}
+				else
+				{
+					this._UserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	[Association(Name="User_UserInRole1", Storage="_User1", ThisKey="ModifiedBy", OtherKey="ID", IsForeignKey=true)]
+	public User User1
+	{
+		get
+		{
+			return this._User1.Entity;
+		}
+		set
+		{
+			User previousValue = this._User1.Entity;
+			if (((previousValue != value) 
+						|| (this._User1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User1.Entity = null;
+					previousValue.UserInRoles1.Remove(this);
+				}
+				this._User1.Entity = value;
+				if ((value != null))
+				{
+					value.UserInRoles1.Add(this);
+					this._ModifiedBy = value.ID;
+				}
+				else
+				{
+					this._ModifiedBy = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User1");
+			}
+		}
+	}
+	
+	[Association(Name="Role_UserInRole", Storage="_Role", ThisKey="RoleID", OtherKey="ID", IsForeignKey=true)]
+	public Role Role
+	{
+		get
+		{
+			return this._Role.Entity;
+		}
+		set
+		{
+			Role previousValue = this._Role.Entity;
+			if (((previousValue != value) 
+						|| (this._Role.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Role.Entity = null;
+					previousValue.UserInRoles.Remove(this);
+				}
+				this._Role.Entity = value;
+				if ((value != null))
+				{
+					value.UserInRoles.Add(this);
+					this._RoleID = value.ID;
+				}
+				else
+				{
+					this._RoleID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("Role");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[Table(Name="dbo.Roles")]
+public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private string _Name;
+	
+	private string _Description;
+	
+	private System.Nullable<int> _ChangedByUserID;
+	
+	private System.DateTime _ChangedOn;
+	
+	private System.Data.Linq.Binary _Version;
+	
+	private EntitySet<UserInRole> _UserInRoles;
+	
+	private EntityRef<User> _User;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnChangedByUserIDChanging(System.Nullable<int> value);
+    partial void OnChangedByUserIDChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    partial void OnVersionChanging(System.Data.Linq.Binary value);
+    partial void OnVersionChanged();
+    #endregion
+	
+	public Role()
+	{
+		this._UserInRoles = new EntitySet<UserInRole>(new Action<UserInRole>(this.attach_UserInRoles), new Action<UserInRole>(this.detach_UserInRoles));
+		this._User = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Name
+	{
+		get
+		{
+			return this._Name;
+		}
+		set
+		{
+			if ((this._Name != value))
+			{
+				this.OnNameChanging(value);
+				this.SendPropertyChanging();
+				this._Name = value;
+				this.SendPropertyChanged("Name");
+				this.OnNameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Description", DbType="NVarChar(250)", UpdateCheck=UpdateCheck.Never)]
+	public string Description
+	{
+		get
+		{
+			return this._Description;
+		}
+		set
+		{
+			if ((this._Description != value))
+			{
+				this.OnDescriptionChanging(value);
+				this.SendPropertyChanging();
+				this._Description = value;
+				this.SendPropertyChanged("Description");
+				this.OnDescriptionChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> ChangedByUserID
+	{
+		get
+		{
+			return this._ChangedByUserID;
+		}
+		set
+		{
+			if ((this._ChangedByUserID != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnChangedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUserID = value;
+				this.SendPropertyChanged("ChangedByUserID");
+				this.OnChangedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Version", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary Version
+	{
+		get
+		{
+			return this._Version;
+		}
+		set
+		{
+			if ((this._Version != value))
+			{
+				this.OnVersionChanging(value);
+				this.SendPropertyChanging();
+				this._Version = value;
+				this.SendPropertyChanged("Version");
+				this.OnVersionChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Role_UserInRole", Storage="_UserInRoles", ThisKey="ID", OtherKey="RoleID")]
+	public EntitySet<UserInRole> UserInRoles
+	{
+		get
+		{
+			return this._UserInRoles;
+		}
+		set
+		{
+			this._UserInRoles.Assign(value);
+		}
+	}
+	
+	[Association(Name="User_Role", Storage="_User", ThisKey="ChangedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.Roles.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.Roles.Add(this);
+					this._ChangedByUserID = value.ID;
+				}
+				else
+				{
+					this._ChangedByUserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_UserInRoles(UserInRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Role = this;
+	}
+	
+	private void detach_UserInRoles(UserInRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Role = null;
 	}
 }
 #pragma warning restore 1591

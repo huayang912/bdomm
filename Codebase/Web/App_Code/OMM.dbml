@@ -56,6 +56,7 @@
       <Association Name="ClientContact_Enquiry" Member="Enquiries" ThisKey="ID" OtherKey="ContactID" Type="Enquiry" />
       <Association Name="Client_ClientContact" Member="Client" ThisKey="CompanyID" OtherKey="ID" Type="Client" IsForeignKey="true" />
       <Association Name="Country_ClientContact" Member="Country" ThisKey="CountryID" OtherKey="ID" Type="Country" IsForeignKey="true" />
+      <Association Name="User_ClientContact" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Clients" Member="Clients">
@@ -76,6 +77,7 @@
       <Column Name="Mobile" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Client_ClientContact" Member="ClientContacts" ThisKey="ID" OtherKey="CompanyID" Type="ClientContact" />
       <Association Name="Country_Client" Member="Country" ThisKey="CountryID" OtherKey="ID" Type="Country" IsForeignKey="true" />
+      <Association Name="User_Client" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Countries" Member="Countries">
@@ -107,6 +109,8 @@
       <Association Name="Enquiry_EnquiryLine" Member="EnquiryLines" ThisKey="ID" OtherKey="EnquiryID" Type="EnquiryLine" />
       <Association Name="ClientContact_Enquiry" Member="ClientContact" ThisKey="ContactID" OtherKey="ID" Type="ClientContact" IsForeignKey="true" />
       <Association Name="EnquiryType_Enquiry" Member="EnquiryType" ThisKey="TypeID" OtherKey="ID" Type="EnquiryType" IsForeignKey="true" />
+      <Association Name="User_Enquiry" Member="User" ThisKey="CreatedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+      <Association Name="User_Enquiry1" Member="User1" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.EnquiryTypes" Member="EnquiryTypes">
@@ -126,6 +130,62 @@
       <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Association Name="Enquiry_EnquiryLine" Member="Enquiry" ThisKey="EnquiryID" OtherKey="ID" Type="Enquiry" IsForeignKey="true" />
+      <Association Name="User_EnquiryLine" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="User_ClientContact" Member="ClientContacts" ThisKey="ID" OtherKey="ChangedByUserID" Type="ClientContact" />
+      <Association Name="User_Client" Member="Clients" ThisKey="ID" OtherKey="ChangedByUserID" Type="Client" />
+      <Association Name="User_Enquiry" Member="Enquiries" ThisKey="ID" OtherKey="CreatedByUserID" Type="Enquiry" />
+      <Association Name="User_Enquiry1" Member="Enquiries1" ThisKey="ID" OtherKey="ChangedByUserID" Type="Enquiry" />
+      <Association Name="User_EnquiryLine" Member="EnquiryLines" ThisKey="ID" OtherKey="ChangedByUserID" Type="EnquiryLine" />
+      <Association Name="User_UserInRole" Member="UserInRoles" ThisKey="ID" OtherKey="UserID" Type="UserInRole" />
+      <Association Name="User_UserInRole1" Member="UserInRoles1" ThisKey="ID" OtherKey="ModifiedBy" Type="UserInRole" />
+      <Association Name="User_Role" Member="Roles" ThisKey="ID" OtherKey="ChangedByUserID" Type="Role" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserInRole" Member="UserInRoles">
+    <Type Name="UserInRole">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RoleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="User_UserInRole" Member="User" ThisKey="UserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+      <Association Name="User_UserInRole1" Member="User1" ThisKey="ModifiedBy" OtherKey="ID" Type="User" IsForeignKey="true" />
+      <Association Name="Role_UserInRole" Member="Role" ThisKey="RoleID" OtherKey="ID" Type="Role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Roles" Member="Roles">
+    <Type Name="Role">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ChangedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Association Name="Role_UserInRole" Member="UserInRoles" ThisKey="ID" OtherKey="RoleID" Type="UserInRole" />
+      <Association Name="User_Role" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.GenerateNewQuotationNumber" Method="GenerateNewQuotationNumber" IsComposable="true">
+    <Parameter Name="EnquiryID" Parameter="enquiryID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="WithVersion" Parameter="withVersion" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.GenerateNewProjectNumber" Method="GenerateNewProjectNumber" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.GenerateNewEnquiryNumber" Method="GenerateNewEnquiryNumber" IsComposable="true">
+    <Parameter Name="EnquiryTypeID" Parameter="enquiryTypeID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
 </Database>

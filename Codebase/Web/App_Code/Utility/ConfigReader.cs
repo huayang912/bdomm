@@ -34,5 +34,12 @@ public class ConfigReader
             return GetAppSettings("TextAnywhereClientPassword");
         }
     }
+    public static String CSharpCalendarDateFormat
+    {
+        get
+        {
+            return GetAppSettings("CSharpCalendarDateFormat");
+        }
+    }
          
 }
