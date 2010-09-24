@@ -6,10 +6,12 @@
     <title>Main</title>
     <asp:ContentPlaceHolder ID="head" runat="server" />
   </head>
+  
   <body xmlns:factory="urn:codeontime:app-factory">
+  
     <form id="form1" runat="server">
       <div>
-        <act:ToolkitScriptManager ID="sm" runat="server" ScriptMode="Release" EnableScriptGlobalization="True" />
+        <act:ToolkitScriptManager ID="sm" runat="server" ScriptMode="Release" EnableScriptGlobalization="True" EnablePageMethods="true" />
         <aquarium:MembershipBar ID="mb" runat="server" DisplayMyAccount="False" DisplayLogin="False" />
         <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" ShowStartingNode="False" />
         <div id="PageHeader">
@@ -63,6 +65,9 @@
         </table>
         <div id="PageFooterBar">&copy;  OMM</div>
       </div>
+      
+      <%--Progress Animation--%>
+        <div id="divProgressAnimationContainer" class="progressanimationcontainer"><img src="/Images/Loading.gif" alt="Loading" title="Loading" /></div>
     </form>
   </body>
 </html>

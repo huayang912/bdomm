@@ -4,7 +4,10 @@
     <siteMapNode title="Home" description="Application home page" url="~/Pages/Home.aspx" />
     <siteMapNode title="Clients" description="View Clients" url="~/Pages/Clients.aspx" />
     <siteMapNode title="Contacts" description="View Client Contacts" url="~/Pages/ClientContacts.aspx" />
-    <siteMapNode title="Enquiries" description="Enquiry" url="~/Pages/EnquirySch.aspx" roles="*" />
+    <siteMapNode title="Enquiries" description="Enquiry" url="~/Pages/EnquirySch.aspx" roles="*">
+      <siteMapNode title="Create New Enquiry" description="Create a New Enquiry" url="~/Pages/EnquiryChange.aspx" roles="*" />
+    </siteMapNode>
+    
     <siteMapNode title="Quotations" description="Quotation" url="~/Pages/QuoteSrch.aspx" roles="*" />
     <siteMapNode title="Projects" description="Projrct" url="~/Pages/ProjectSrch.aspx" roles="*" />
     <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelNew.aspx" roles="*">

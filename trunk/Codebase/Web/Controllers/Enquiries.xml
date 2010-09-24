@@ -95,7 +95,7 @@ from "dbo"."Enquiries" "Enquiries"
         <dataField fieldName="EnguirySubject" />
         <dataField fieldName="CreatedOn" columns="10" />
         <dataField fieldName="TypeID" aliasFieldName="TypeName" />
-        <dataField fieldName="StatusID" aliasFieldName="StatusName" />
+        <dataField fieldName="StatusID" aliasFieldName="StatusName"  />
         <dataField fieldName="ContactID" aliasFieldName="ContactName" />
         <dataField fieldName="ContactCompanyName" />
         <dataField fieldName="ContactCompanyCountryName" />
