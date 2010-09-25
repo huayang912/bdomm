@@ -34,9 +34,9 @@ public partial class Pages_EnquiryChange : BasePage
         if (_EnquiryID > 0)
         {
             _IsEditMode = true;
-            h1Heading.InnerHtml = "Edit Enquiry";            
+            ltrHeading.Text = "Edit Enquiry";            
         }
-        Page.Title = WebUtil.GetPageTitle(h1Heading.InnerHtml);
+        Page.Title = WebUtil.GetPageTitle(ltrHeading.Text);
     }
     /// <summary>
     /// Binds Dropdown Lists for this page

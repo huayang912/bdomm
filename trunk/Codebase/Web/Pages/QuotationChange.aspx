@@ -6,6 +6,7 @@
     
     <script language="javascript" type="text/javascript">
         var _PricingList = new Array();
+        var _CustomQuotation = null;
         
         function MoveNext(stepIndex) {
             for (i = 1; i < 5; i++) {
@@ -13,30 +14,79 @@
             }
             document.getElementById('divStep' + stepIndex).style.display = 'block';
         }
+        ///Quotations 
         function ValidateAndMoveNext(validationGroup, stepID)
         {
+            //alert(Page_ClientValidate(validationGroup));
             if (Page_ClientValidate(validationGroup))
+            {                
+                //SaveQuotationInformation();
                 MoveNext(stepID);
+            }
         }
+        function PrepareQuotationObject() {
+            _CustomQuotation = new App.CustomModels.CustomQuotation();
+            _CustomQuotation.ID = <%=_EnquiryID.ToString() %>;
+            _CustomQuotation.EnquiryID = <%=_EnquiryID.ToString() %>;
+            _CustomQuotation.Subcontractor = $('#<%=txtSubcontractor.ClientID %>').val();
+            _CustomQuotation.ScopeOfWork = $('#<%=txtScopeOfWork.ClientID %>').val();
+            _CustomQuotation.MainEquipment = $('#<%=txtMainEquipment.ClientID %>').val();
+            _CustomQuotation.Scheduel = $('#<%=txtSchedule.ClientID %>').val();
+            _CustomQuotation.ValidityDays = $('#<%=txtValidityDays.ClientID %>').val();
+            _CustomQuotation.SubmissionDate = $('#<%=txtSubmissionDate.ClientID %>').val();
+            _CustomQuotation.DecisionDate = $('#<%=txtDecisionDate.ClientID %>').val();        
+        }
+        function SaveQuotationInformation() {
+            ShowProgress();
+            PrepareQuotationObject();
+            PageMethods.SaveQuotation(_CustomQuotation, OnSaveEnquirySuccess, OnAjax_Error, OnAjax_TimeOut);
+        }
+        function OnSaveEnquirySuccess(result)
+        {
+            var id = eval(result);
+            alert(id);
+        }
+        
+        ///Pricing Section
         function ValidateAndBindPricingList() {
             if (Page_ClientValidate('SaveInfo2')) {
+                alert('I am here');
                 //var         
                 //MoveNext(3);
             }
         }
-        function ShowPricingForm() {
+        function ShowPricingForm(showPricing) {
+            if(showPricing)
+            {
+                $('#divPricingForm').show();
+                $('#divPricingList').hide();
+                $('#divMasterControl').hide();
+            }
+            else
+            {
+                $('#divPricingForm').show();
+                $('#divMasterControl').show();
+                $('#divPricingList').hide();                
+            }
+        }
+        function ChangeCurrency(currencyValue)
+        {
+            alert('CurrencyChange NOt Implemented ' + currencyValue);   
         }
     </script>
     
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="PageHeaderContentPlaceHolder" Runat="Server">
+    <asp:Literal id="ltrHeading" runat="server">Create New Quotation Wizard</asp:Literal>
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="SideBarPlaceHolder" Runat="Server">
+    
 </asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="PageContentPlaceHolder" Runat="Server">
-    <h1 id="h1Heading" runat="server">Create New Quotation Wizard</h1>
-    
-    
+
     <div id="divMessage" runat="server" enableviewstate="false" visible="false"></div>
     
     <asp:Panel ID="pnlDetails" runat="server">
@@ -149,8 +199,16 @@
                 <b>Enter Contract Pricing - Step 2 of 2</b><br />
                 <asp:Label ID="lblStep2Title" Text="Enter the Estimated Breakdown." runat="server"></asp:Label>
             </div>
-            <div>
-                 <input type="button" value="Add Pricing" onclick="ShowPricingForm();" />
+            <div>                 
+                <div id="divMasterControl" style="padding-left:3px; margin-bottom:10px;">
+                    <div class="floatleft">
+                        Currency <asp:DropDownList ID="ddlCurrency" runat="server" onchange="ChangeCurrency(this.value);"></asp:DropDownList>
+                    </div>
+                    <div class="floatright">
+                        <input type="button" value="Add Pricing" onclick="ShowPricingForm();" /> 
+                    </div>						        
+                    <div class="clearboth"></div>
+                </div>
                  <div id="divPricingForm" style="display:block;">
                     <table cellpadding="3" cellspacing="0" class="FormTable">
                         <colgroup>

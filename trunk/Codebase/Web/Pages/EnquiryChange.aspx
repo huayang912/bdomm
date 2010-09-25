@@ -53,7 +53,7 @@
             if(_Enquiry.ID > 0)
                 $('#aNewQuation').attr('href', '/Pages/QuotationList.aspx?ENQ=' + enquiryID).html('View the quotations related to this enquiry');
             else
-                $('#aNewQuation').attr('href', '/Pages/QuotationChange.aspx?ENQ=' + enquiryID);
+                $('#aNewQuation').attr('href', '/Pages/QuotationChange.aspx?<%=AppConstants.QueryString.ENQUIRY_ID %>=' + enquiryID);
             
         }
         //View the quotations related to this enquiry
@@ -61,13 +61,14 @@
         
     </script>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="PageHeaderContentPlaceHolder" Runat="Server">
+    <asp:Literal id="ltrHeading" runat="server">Create New Enquiry Wizard</asp:Literal>
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="SideBarPlaceHolder" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="PageContentPlaceHolder" Runat="Server">    
-    
-    <h1 id="h1Heading" runat="server">Create New Enquiry Wizard</h1>
+<asp:Content ID="Content4" ContentPlaceHolderID="PageContentPlaceHolder" Runat="Server">
     
     <div id="divMessage" runat="server" enableviewstate="false" visible="false"></div>
     
