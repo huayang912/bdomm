@@ -41,5 +41,11 @@ public class ConfigReader
             return GetAppSettings("CSharpCalendarDateFormat");
         }
     }
-         
+    public static String JSCalendarDateFormat
+    {
+        get
+        {
+            return GetAppSettings("JSCalendarDateFormat");
+        }
+    }          
 }

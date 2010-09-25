@@ -1,0 +1,194 @@
+﻿table td
+{
+	vertical-align:top;
+}
+div.pageheading, h1
+{
+	color:#555555;
+	font-size:18px;
+	font-weight:bold;
+	margin-top:0px;	
+	margin-bottom:10px;
+}
+.MessageBox
+{
+    clear:both;    
+	height:auto;
+    text-align:left;    
+    font-weight:bold;
+    color:#0F7D0A; 	
+}
+.ErrorMessageBox
+{
+    clear:both; 
+	height:auto;	
+    text-align:left;    
+    font-weight:bold;	
+    color:#FF0000;
+    margin-bottom:5px;
+}
+.floatleft
+{
+	float:left;
+}
+.floatright
+{
+	float:right;
+}
+.clearboth
+{
+	clear:both;
+}
+.TextBoxCommon{	
+	width:99%;	
+	color:#333333;
+	font-size:11px;
+	padding:0px; 
+	margin:0px;
+}
+.ButtonCommon {
+	/*background-color:#2aa1cc;*/
+	background-color:#FF3333;
+	border-style:outset;
+	border-width:1px;
+	color:#FFFFFF;
+	font-size:11px;
+	font-weight:bold;
+	height: 22px;
+	cursor:pointer;	
+}
+.DropDownListCommon
+{
+	min-width:100px;
+	width:auto;		
+	color:#333333;
+	font-size:11px;
+	padding:0px;
+	margin:0px;
+	width:100%;
+}    
+div.GroupBox
+{
+	border:#B9B9B9 1px solid;
+	padding:10px;    
+	margin-bottom:15px;    
+	-moz-border-radius: 6px;
+	border-radius: 6px;	
+}
+div.GroupHeader
+{
+	font-weight:bold;	
+	margin-left:10px;
+}
+.GridView
+{
+	width:100%;	
+	border-collapse:collapse;
+}
+.GridView th
+{
+	background-color:#CECDCD;
+	border:#F2F2F2 1px solid;
+}
+.GridView td
+{
+	border:#F2F2F2 1px solid;
+}
+textarea
+{
+	width:100%;
+	font-family:Verdana;
+	font-size:12px;
+}
+
+
+/**Modal Popup With Progress ANimation***/
+.blockingContainer 
+{         
+    background-color:#999999;	        
+    filter:alpha(opacity=30);
+    opacity:0.5;      
+}   
+.modalpopupshadow
+{
+	position:absolute;
+	z-index:19;
+	background-color:#3C3C3C;	
+    filter:alpha(opacity=50);
+    opacity:0.5;      
+} 
+
+.PopupContainer {
+	background-color:#FFFFFF;
+	width:355px;	
+	position: absolute;        
+    color: #333;
+    z-index:20; 
+}
+.PopupHeaderMiddle {	
+	background-color:#FFFFFF;	
+	min-width: 325px;	
+	height: 22px;
+	padding: 6px 15px 0px 15px;	
+	color:#000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;	
+}
+.PopupBody {	
+	background-color:#FFFFFF;	
+	min-width: 305px;	
+	padding: 5px 25px 5px 25px;	
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	/*line-height: 20px;*/
+	border-top:#FF0000 solid 1px;
+}
+.PopupButtonContainer 
+{	
+	text-align: right;
+	padding:10px 15px 20px 0px;	
+}
+/*Progress Animation Start */
+.progressanimation
+{
+	background-color:#999999;	        
+    filter:alpha(opacity=30);
+    opacity:0.5;      
+	position:absolute;	
+	z-index:30;
+}
+.progressanimationcontainer
+{	
+	width:220px;	
+	position: absolute;        
+    color: #333;
+    z-index:31; 
+    display:none;
+    left:50%;
+    top:50%;
+    margin-left:-110px;
+    margin-top:-5px;
+}
+/*** Modal Popup With Progress Animation End **/
+
+
+.FormHeader
+{
+	height:40px;
+	padding:10px 10px 0px 3px;
+	background-color:#FFFFFF;
+	border-bottom:#B9B9B9 1px solid;
+	margin-bottom:10px;
+}
+.CalendarTextBox
+{
+	width:110px;
+	color:#333333;
+	font-size:11px;
+	padding:0px; 
+	margin:0px;
+	margin-right:2px;
+}
+.FormTable
+{
+	width:650px;
+}
