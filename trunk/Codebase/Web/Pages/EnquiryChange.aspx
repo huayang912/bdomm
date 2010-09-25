@@ -36,9 +36,12 @@
             _Enquiry.Details = $('#<%= txtDetails.ClientID%>').val();            
         }
         function SaveEnquiry() {
-            ShowProgress();
-            PrepareObject();
-            PageMethods.SaveEnquiry(_Enquiry, OnSaveEnquirySuccess, OnAjaxFailure)
+            if(Page_ClientValidate('SaveInfo3'))
+            {
+                ShowProgress();
+                PrepareObject();
+                PageMethods.SaveEnquiry(_Enquiry, OnSaveEnquirySuccess, OnAjaxFailure)
+            }
         }
         
         function OnSaveEnquirySuccess(result) {
@@ -139,6 +142,11 @@
             </div>
             <div>
                 <asp:TextBox ID="txtDetails" MaxLength="1000" TextMode="MultiLine" runat="server" style="height:200px;"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvDetails" runat="server"
+                    SetFocusOnError="true" Display="Dynamic"
+                    ControlToValidate="txtDetails" ValidationGroup="SaveInfo3"
+                    ErrorMessage="Please Enter Details.">                    
+                </asp:RequiredFieldValidator>
             </div>
             <%--<div style="height:100px;">&nbsp;</div>--%>
             <div style="margin-top:10px;">
