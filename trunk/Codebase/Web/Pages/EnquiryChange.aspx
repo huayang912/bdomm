@@ -1,32 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="EnquiryChange.aspx.cs" Inherits="Pages_EnquiryChange" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    <link href="/Scripts/Main.css" rel="Stylesheet" type="text/css" />
-    <link href="/Scripts/ModalPopupStyles.css" rel="Stylesheet" type="text/css" />
-    <script language="javascript" src="/Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
-    <style type="text/css">
-        .FormHeader
-        {
-        	height:40px;
-        	padding:10px 10px 0px 10px;
-        	background-color:#FFFFFF;
-        	border-bottom:#B9B9B9 1px solid;
-        	margin-bottom:10px;
-        }
-        textarea
-        {
-        	width:100%;
-        	font-family:Verdana;
-        	font-size:12px;
-        }
-    </style>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">    
+    
     <script language="javascript" type="text/javascript">
         function GetDetails(clientID) {
-            //alert(clientID);            
+            ShowProgress();
             PageMethods.GetClientContact(clientID, OnGetClientSuccess, OnAjaxFailure);
         }
         function OnGetClientSuccess(result) {
-            //alert(result);
+            HideProgress();
             var contact = eval(result);
             document.getElementById('<%= txtClientName.ClientID%>').value = contact.ClientName;
             document.getElementById('<%= txtContactName.ClientID%>').value = contact.ContactName;
@@ -69,7 +51,7 @@
         {
             //alert(enquiryID);
             if(_Enquiry.ID > 0)
-                $('#aNewQuation').attr('href', '/').html('View the quotations related to this enquiry');
+                $('#aNewQuation').attr('href', '/Pages/QuotationList.aspx?ENQ=' + enquiryID).html('View the quotations related to this enquiry');
             else
                 $('#aNewQuation').attr('href', '/Pages/QuotationChange.aspx?ENQ=' + enquiryID);
             
@@ -91,15 +73,15 @@
     
     <asp:Panel ID="pnlDetails" runat="server">
     
-        <div id="divStep1" class="GroupBox" style="height:350px; display:block;">
+        <div id="divStep1" class="GroupBox" style="display:block;">
             <div class="FormHeader">
                 <b>Assign Contact</b><br />
                 <asp:Label ID="lblStep1Title" Text="Select a Contact to Make this Enquiry" runat="server"></asp:Label>
             </div>
-            <table cellpadding="3" cellspacing="0" style="width:60%;">
+            <table cellpadding="3" cellspacing="0" class="FormTable">
                 <colgroup>
-                    <col style="width:35%;" />
-                    <col style="width:65%;" />
+                    <col style="width:15%;" />
+                    <col style="width:85%;" />
                 </colgroup>
                 <tr>
                     <td>Select Contact</td>
@@ -133,7 +115,7 @@
         </div>
         
         <%--Step 2--%>
-        <div id="divStep2" class="GroupBox" style="height:350px; display:none;">
+        <div id="divStep2" class="GroupBox" style="display:none;">
             <div class="FormHeader">
                 <b>Select Enquiry Type</b><br />
                 <asp:Label ID="lblStep2Title" Text="Select the type of enquiry being made. Note that this cannot be modified once set." runat="server"></asp:Label>
@@ -149,7 +131,7 @@
         </div>
         
         <%--Step 3--%>
-        <div id="divStep3" class="GroupBox" style="height:350px; display:none;">
+        <div id="divStep3" class="GroupBox" style="display:none;">
             <div class="FormHeader">
                 <b>Enter Enquiry Details</b><br />
                 <asp:Label ID="lblStep3Title" Text="Enter specific details for this enquiry. Note that text can be pasted from another application into the text box below." runat="server"></asp:Label>
@@ -165,7 +147,7 @@
         </div>
         
         <%--Step 4--%>
-        <div id="divStep4" class="GroupBox" style="height:350px; display:none;">
+        <div id="divStep4" class="GroupBox" style="display:none;">
             <div class="FormHeader">
                 <b>Summary</b><br />
                 <asp:Label ID="lblStep4" Text="The enquiry has been successfully created." runat="server"></asp:Label>
