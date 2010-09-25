@@ -77,6 +77,9 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   partial void InsertQuotationStatuse(QuotationStatuse instance);
   partial void UpdateQuotationStatuse(QuotationStatuse instance);
   partial void DeleteQuotationStatuse(QuotationStatuse instance);
+  partial void InsertCurrency(Currency instance);
+  partial void UpdateCurrency(Currency instance);
+  partial void DeleteCurrency(Currency instance);
   #endregion
 	
 	public OMMDataContext() : 
@@ -234,6 +237,14 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<QuotationStatuse>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Currency> Currencies
+	{
+		get
+		{
+			return this.GetTable<Currency>();
 		}
 	}
 	
@@ -4295,6 +4306,8 @@ public partial class Quotation : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntityRef<QuotationStatuse> _QuotationStatuse;
 	
+	private EntityRef<Currency> _Currency;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -4357,6 +4370,7 @@ public partial class Quotation : INotifyPropertyChanging, INotifyPropertyChanged
 		this._User = default(EntityRef<User>);
 		this._User1 = default(EntityRef<User>);
 		this._QuotationStatuse = default(EntityRef<QuotationStatuse>);
+		this._Currency = default(EntityRef<Currency>);
 		OnCreated();
 	}
 	
@@ -4751,6 +4765,10 @@ public partial class Quotation : INotifyPropertyChanging, INotifyPropertyChanged
 		{
 			if ((this._CurrencyID != value))
 			{
+				if (this._Currency.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
 				this.OnCurrencyIDChanging(value);
 				this.SendPropertyChanging();
 				this._CurrencyID = value;
@@ -5039,6 +5057,40 @@ public partial class Quotation : INotifyPropertyChanging, INotifyPropertyChanged
 					this._StatusID = default(int);
 				}
 				this.SendPropertyChanged("QuotationStatuse");
+			}
+		}
+	}
+	
+	[Association(Name="Currency_Quotation", Storage="_Currency", ThisKey="CurrencyID", OtherKey="ID", IsForeignKey=true)]
+	public Currency Currency
+	{
+		get
+		{
+			return this._Currency.Entity;
+		}
+		set
+		{
+			Currency previousValue = this._Currency.Entity;
+			if (((previousValue != value) 
+						|| (this._Currency.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Currency.Entity = null;
+					previousValue.Quotations.Remove(this);
+				}
+				this._Currency.Entity = value;
+				if ((value != null))
+				{
+					value.Quotations.Add(this);
+					this._CurrencyID = value.ID;
+				}
+				else
+				{
+					this._CurrencyID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("Currency");
 			}
 		}
 	}
@@ -5613,6 +5665,144 @@ public partial class QuotationStatuse : INotifyPropertyChanging, INotifyProperty
 	{
 		this.SendPropertyChanging();
 		entity.QuotationStatuse = null;
+	}
+}
+
+[Table(Name="dbo.Currency")]
+public partial class Currency : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private string _Description;
+	
+	private string _ShortCode;
+	
+	private EntitySet<Quotation> _Quotations;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnShortCodeChanging(string value);
+    partial void OnShortCodeChanged();
+    #endregion
+	
+	public Currency()
+	{
+		this._Quotations = new EntitySet<Quotation>(new Action<Quotation>(this.attach_Quotations), new Action<Quotation>(this.detach_Quotations));
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Description", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string Description
+	{
+		get
+		{
+			return this._Description;
+		}
+		set
+		{
+			if ((this._Description != value))
+			{
+				this.OnDescriptionChanging(value);
+				this.SendPropertyChanging();
+				this._Description = value;
+				this.SendPropertyChanged("Description");
+				this.OnDescriptionChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ShortCode", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+	public string ShortCode
+	{
+		get
+		{
+			return this._ShortCode;
+		}
+		set
+		{
+			if ((this._ShortCode != value))
+			{
+				this.OnShortCodeChanging(value);
+				this.SendPropertyChanging();
+				this._ShortCode = value;
+				this.SendPropertyChanged("ShortCode");
+				this.OnShortCodeChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Currency_Quotation", Storage="_Quotations", ThisKey="ID", OtherKey="CurrencyID")]
+	public EntitySet<Quotation> Quotations
+	{
+		get
+		{
+			return this._Quotations;
+		}
+		set
+		{
+			this._Quotations.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_Quotations(Quotation entity)
+	{
+		this.SendPropertyChanging();
+		entity.Currency = this;
+	}
+	
+	private void detach_Quotations(Quotation entity)
+	{
+		this.SendPropertyChanging();
+		entity.Currency = null;
 	}
 }
 #pragma warning restore 1591

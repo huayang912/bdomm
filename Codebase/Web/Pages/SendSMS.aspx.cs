@@ -6,10 +6,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
-using System.Collections.Generic;
 
 public partial class Pages_SendSMS : System.Web.UI.Page
 {
+    //net.textanywhere.ws.TextAnywhere_SMS ta_sms = new net.textanywhere.ws.TextAnywhere_SMS();
+    private SMSService.TextAnywhere_SMS _SmsService = new SMSService.TextAnywhere_SMS();
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -643,7 +645,7 @@ public partial class Pages_SendSMS : System.Web.UI.Page
         }
         finally
         {
-            ta_sms.Dispose();
+            _SmsService.Dispose();
 
 
             //?????????
@@ -651,9 +653,6 @@ public partial class Pages_SendSMS : System.Web.UI.Page
             //?????????
         }
     }
-
-    net.textanywhere.ws.TextAnywhere_SMS ta_sms = new net.textanywhere.ws.TextAnywhere_SMS();
-
 
     // Check the SMS service is running
     private bool CheckSMSServiceRunning()
@@ -677,7 +676,7 @@ public partial class Pages_SendSMS : System.Web.UI.Page
         
 
 
-        serviceTestReply = ta_sms.ServiceTest(username, password);
+        serviceTestReply = _SmsService.ServiceTest(username, password);
 
 
         //??????
