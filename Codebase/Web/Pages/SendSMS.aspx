@@ -1,57 +1,183 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="SendSMS.aspx.cs" Inherits="Pages_SendSMS" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" 
+AutoEventWireup="true" CodeFile="SendSMS.aspx.cs" 
+Inherits="Pages_SendSMS" enableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+
+    <script language="javascript" type="text/javascript">
+        function GetDetails(clientID) {
+            ShowProgress();
+            PageMethods.GetClientContact(clientID, OnGetClientSuccess, OnAjaxFailure);
+        }
+
+        function OnAjaxFailure(error) {
+            HideProgress();
+            alert(error.get_message());
+        }
+        function MoveNext(stepIndex) {
+            for(i = 1; i < 5; i++)
+            {
+                document.getElementById('divStep' + i).style.display = 'none';
+            }
+            document.getElementById('divStep' + stepIndex).style.display = 'block';
+
+            if (stepIndex < 3) {
+                document.getElementById('divStep3').style.display = 'block';
+            }
+
+//            if (stepIndex = 1) {
+//                document.getElementById('btnPrev').enabled = false;
+//                document.getElementById('btnNext').enabled = true;
+//            }
+
+//            if (stepIndex = 2) {
+//                document.getElementById('btnPrev').disabled = false;
+//                document.getElementById('btnNext').disabled = true;
+//            }
+        }
+        
+        
+        function CreateStausLinks(enquiryID)
+        {
+            //alert(enquiryID);
+            if(_Enquiry.ID > 0)
+                $('#aNewQuation').attr('href', '/Pages/QuotationList.aspx?ENQ=' + enquiryID).html('View the quotations related to this enquiry');
+            else
+                $('#aNewQuation').attr('href', '/Pages/QuotationChange.aspx?ENQ=' + enquiryID);
+            
+        }
+    </script>
+
+    <script language="JavaScript">
+        function setMouseOverColor(element) {
+            try {
+                element.style.cursor = 'hand';
+                oldgridSelectedColor = element.style.backgroundColor;
+                element.style.backgroundColor = 'Thistle';
+                //element.style.cursor='wait';
+                //element.style.textDecoration='underline';
+            }
+            catch (e) {
+
+            }
+        }
+
+        function setMouseOutColor(element) {
+            try {
+                element.style.backgroundColor = oldgridSelectedColor;
+                element.style.textDecoration = 'none';
+            }
+            catch (e) {
+
+            }
+        }
+
+        function textboxMultilineMaxNumber(txt, maxLen) {
+            try {
+                if (txt.value.length > (maxLen - 1)) return false;
+            } catch (e) {
+            }
+        }
+
+    </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageHeaderContentPlaceHolder" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="SideBarPlaceHolder" Runat="Server">
 </asp:Content>
+
+
 <asp:Content ID="Content4" ContentPlaceHolderID="PageContentPlaceHolder" Runat="Server">
-    <table cellpadding="5" cellspacing="0" border="0" width="100%">
+    <table cellpadding="5" cellspacing="0" border="0" width="100%" style="background-color:WhiteSmoke">
         <tr>
             <td>
-                Please Insert The Message To Be Sent<br />
-                <asp:TextBox ID="tbxMessage" runat="server" Height="43px" Width="520px"></asp:TextBox>
+               <asp:Label ID="lblMessage" runat="server" Font-Bold="True" Font-Size="Medium"></asp:Label>
+                
+                <div id="divStep1" style="display:block;">
+                    Please Insert The Message To Be Sent<br />
+                    <asp:TextBox ID="tbxMessage" runat="server" Height="300px" Width="99%"></asp:TextBox>
+                </div>
+                <div id="divStep2" style="display:none;">
+                    <asp:GridView ID="GridView1" runat="server" 
+                        
+                        Width="100%" 
+                        AllowPaging="True" AutoGenerateColumns="False" Height="280px" 
+                        onselectedindexchanging="GridView1_SelectedIndexChanging" 
+                        onrowdatabound="GridView1_RowDataBound">
+                        <%--
+                        DataSourceID="LinqDataSource1" --%>
+                        <Columns>
+                            <asp:BoundField DataField="Recipient_Name" HeaderText="Recipient_Name" 
+                                ReadOnly="True" SortExpression="Recipient_Name" />
+                            <asp:BoundField DataField="Destination" HeaderText="Destination" 
+                                ReadOnly="True" SortExpression="Destination" />
+                            <asp:BoundField DataField="SMS_Credits" HeaderText="SMS_Credits" 
+                                ReadOnly="True" SortExpression="SMS_Credits" />
+                            <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" 
+                                SortExpression="ID" />
+                        </Columns>
+                    </asp:GridView> <br />
+                    
+                    
+                    
+                    <asp:Button ID="btnVerifyPhoneNumbers" runat="server" 
+                        Text="Verify Phone Numbers" onclick="btnVerifyPhoneNumbers_Click"/>
+                    <asp:Button ID="btnDelete" runat="server" Text="Delete Recipient" 
+                        onclick="btnDelete_Click"/>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                 <div id="divStep3" style="display:block;">
+                    <input type="button" id="btnPrev" value="< Previous" onclick="MoveNext(1);" />&nbsp;
+                    <input type="button" id="btnNext" value="Next >" onclick="MoveNext(2);" />
+                    
+                    <%--<asp:Button ID="btnPrevious" runat="server" Text="< Previous" 
+                         Enabled="false" onclick="javascript:MoveNext(1);"/>
+                    <asp:Button ID="btnNext" runat="server" Text="Next >" 
+                        onclick="MoveNext(2);" />--%>
+                    <asp:Button ID="btnFinish" runat="server" Text="Finish" onclick="btnFinish_Click" Enabled="false"/>
+                    <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+                </div>
             </td>
         </tr>
         <tr>
             <td>
-                <asp:Button ID="btnNext" runat="server" Text="Next >>" 
-                    onclick="btnNext_Click" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <asp:GridView ID="GridView1" runat="server" 
-                    DataSourceID="LinqDataSource1" Width="100%" 
-                    AllowPaging="True" AutoGenerateColumns="False">
-                    <Columns>
-                        <asp:BoundField DataField="Recipient_Name" HeaderText="Recipient_Name" 
-                            ReadOnly="True" SortExpression="Recipient_Name" />
-                        <asp:BoundField DataField="Destination" HeaderText="Destination" 
-                            ReadOnly="True" SortExpression="Destination" />
-                        <asp:BoundField DataField="SMS_Credits" HeaderText="SMS_Credits" 
-                            ReadOnly="True" SortExpression="SMS_Credits" />
-                        <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" 
-                            SortExpression="ID" />
-                    </Columns>
-                </asp:GridView>
-            </td>
-        </tr>
-        
-        <tr>
-            <td>
-                <asp:Button ID="btnVerifyPhoneNumbers" runat="server" 
-                    Text="Verify Phone Numbers" onclick="btnVerifyPhoneNumbers_Click"/>
-                <asp:Button ID="btnDelete" runat="server" Text="Delete Recipient" 
-                    onclick="btnDelete_Click"/>
-            </td>
-        </tr>
-        
-        <tr>
-            <td>
-                <asp:Button ID="btnFinish" runat="server" Text="Finish" onclick="btnFinish_Click" 
-                    />
+            
+                <div id="divStep4" style="display:none;">
+                    <table cellpadding="5" cellspacing="5" border="0" width="100%">
+                        <tr>
+                            <td>
+                                <asp:Button ID="btnBackToAll" runat="server" Text="< Back To All" 
+                                    Enabled="True" onclick="btnBackToAll_Click" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:TextBox ID="tbxMobileNumber" runat="server" Width="99%"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Please Insert The Message To Be Sent
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:TextBox ID="tbxSingleSms" runat="server" Height="200px" Width="99%"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                <asp:Button ID="btnSendSingleSMS" runat="server" Text="Send SMS" 
+                                    Enabled="True" />
+                            </td>
+                        </tr>
+                    </table>
+              </div>
+                
             </td>
         </tr>
     </table>
