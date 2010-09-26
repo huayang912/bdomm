@@ -47,7 +47,9 @@ namespace App.CustomModels
         public String Item { get; set; }
         public String Description { get; set; }
         public int PricingTypeID { get; set; }
-        public int UnitPrice { get; set; }
-        public int Quantity { get; set; }        
-    }
+        public String PricingType { get; set; }
+        public decimal UnitPrice { get; set; }
+        public int Quantity { get; set; }
+        public decimal Price { get; set; }
+    }    
 }

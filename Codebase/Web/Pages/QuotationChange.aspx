@@ -3,21 +3,29 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <UC:jQueryCalendar id="ucjQueryCalendar" runat="server"></UC:jQueryCalendar>
+    <style type="text/css">
+        table th
+        {
+        	text-align:left;
+        }
+    </style>
     
     <script language="javascript" type="text/javascript">
         var _PricingList = new Array();
         var _CustomQuotation = null;
+        var _QuotationID = <%=_ID.ToString() %>;
+        var _EnquiryID = <%=_EnquiryID.ToString() %>;
+        var _EditIndex = -1;
         
         function MoveNext(stepIndex) {
-            for (i = 1; i < 5; i++) {
+            for (i = 1; i < 4; i++) {
                 document.getElementById('divStep' + i).style.display = 'none';
             }
             document.getElementById('divStep' + stepIndex).style.display = 'block';
         }
         ///Quotations 
         function ValidateAndMoveNext(validationGroup, stepID)
-        {
-            //alert(Page_ClientValidate(validationGroup));
+        {            
             if (Page_ClientValidate(validationGroup))
             {                
                 //SaveQuotationInformation();
@@ -26,8 +34,8 @@
         }
         function PrepareQuotationObject() {
             _CustomQuotation = new App.CustomModels.CustomQuotation();
-            _CustomQuotation.ID = <%=_EnquiryID.ToString() %>;
-            _CustomQuotation.EnquiryID = <%=_EnquiryID.ToString() %>;
+            _CustomQuotation.ID = _QuotationID;
+            _CustomQuotation.EnquiryID = _EnquiryID;
             _CustomQuotation.Subcontractor = $('#<%=txtSubcontractor.ClientID %>').val();
             _CustomQuotation.ScopeOfWork = $('#<%=txtScopeOfWork.ClientID %>').val();
             _CustomQuotation.MainEquipment = $('#<%=txtMainEquipment.ClientID %>').val();
@@ -39,40 +47,127 @@
         function SaveQuotationInformation() {
             ShowProgress();
             PrepareQuotationObject();
-            PageMethods.SaveQuotation(_CustomQuotation, OnSaveEnquirySuccess, OnAjax_Error, OnAjax_TimeOut);
+            PageMethods.SaveQuotation(_CustomQuotation, _PricingList, OnSaveEnquirySuccess, OnAjax_Error, OnAjax_TimeOut);
         }
         function OnSaveEnquirySuccess(result)
         {
+            HideProgress();
             var id = eval(result);
-            alert(id);
+            //alert(id);            
         }
         
         ///Pricing Section
         function ValidateAndBindPricingList() {
             if (Page_ClientValidate('SaveInfo2')) {
-                alert('I am here');
-                //var         
-                //MoveNext(3);
+                PrepareQuotationPricingObject();
+                BindPricingList();                
             }
+        }        
+        function PrepareQuotationPricingObject()
+        {
+            var pricingLine = new App.CustomModels.CustomQuotationPricingLine(); 
+    
+            pricingLine.ID = 0;
+            pricingLine.QuotationID = _QuotationID;
+            pricingLine.Item = $('#<%= txtItem.ClientID %>').val();
+            pricingLine.Description = $('#<%= txtDescription.ClientID %>').val();
+            pricingLine.PricingTypeID =  $('#<%= ddlPricingTypeID.ClientID %>').val();
+            pricingLine.PricingType =  $("#<%= ddlPricingTypeID.ClientID %> option[value='" + pricingLine.PricingTypeID + "']").text();
+            pricingLine.UnitPrice = $('#<%= txtUnitPrice.ClientID %>').val();
+            pricingLine.Quantity = $('#<%= txtQuantity.ClientID %>').val();
+            pricingLine.Price = pricingLine.UnitPrice * pricingLine.Quantity;
+            if(_EditIndex > -1)
+                _PricingList[_EditIndex] = pricingLine;
+            else        
+                _PricingList.push(pricingLine);    
         }
         function ShowPricingForm(showPricing) {
             if(showPricing)
             {
                 $('#divPricingForm').show();
                 $('#divPricingList').hide();
-                $('#divMasterControl').hide();
+                $('#divMasterControl').hide()
+                $('#divStep2ButtonContainer').hide();
             }
             else
             {
-                $('#divPricingForm').show();
+                $('#divPricingForm').hide();                
+                $('#divPricingList').show();
                 $('#divMasterControl').show();
-                $('#divPricingList').hide();                
+                $('#divStep2ButtonContainer').show();
             }
+            _EditIndex = -1;
         }
         function ChangeCurrency(currencyValue)
         {
-            alert('CurrencyChange NOt Implemented ' + currencyValue);   
+            //alert('CurrencyChange NOt Implemented ' + currencyValue);   
+            BindPricingList();
         }
+        function BindPricingList()
+        {
+            if(_PricingList.length > 0)
+            {            
+                var html = '<table cellpadding="3" cellspacing="0" style="width:100%;">';
+                html += '<colgroup>';
+                html += '   <col style="width:12%;" />';
+                html += '   <col style="width:35%;" />';
+                html += '   <col style="width:15%;" />';
+                html += '   <col style="width:10%;" />';
+                html += '   <col style="width:10%;" />';
+                html += '   <col style="width:10%;" />';
+                html += '   <col style="width:8%;" />';
+                html += '   <col />';
+                html += '</colgroup>';
+                
+                html += '<tr>';
+                html += '   <th>Item</th><th>Description</th><th>Pricing Type</th><th>Unit Price</th><th>Quantity</th><th>Price</th><th>Edit</th>';
+                html += '</tr>';
+                var currency = $('#<%= ddlCurrency.ClientID %>').val();
+                var totalPrice = 0;
+                for(i = 0; i < _PricingList.length; i++)
+                {
+                    var pricingLine = _PricingList[i];                    
+                    html += '<tr>';
+                    html += '   <td>' + pricingLine.Item + '</td>';
+                    html += '   <td>' + FormatText(pricingLine.Description) + '</td>';
+                    html += '   <td>' + pricingLine.PricingType + '</td>';
+                    html += '   <td>' + pricingLine.UnitPrice + '</td>';
+                    html += '   <td>' + pricingLine.Quantity + '</td>';
+                    html += '   <td>' + currency + pricingLine.Price + '</td>';
+                    html += '   <td><a href="javascript:void(0);" onclick="LoadPricingForEdit(' + i + ')">Edit</a></td>';
+                    html += '</tr>';                    
+                    totalPrice += pricingLine.Price;
+                }
+                html += '</table>';
+                html += '<div style="margin: 10px 0px 0px 3px; width:100%; text-align:right;">Total Price: &nbsp;<input type="text" readonly="readonly" value="' + totalPrice + '" style="text-align:right;" /></div>'
+                $('#divPricingList').html(html);
+                ShowPricingForm(false);
+            }
+        }
+        function LoadPricingForEdit(index)
+        {
+            ShowPricingForm(true);
+            _EditIndex = index;
+            var pricingLine =  _PricingList[index];
+            $('#<%= txtItem.ClientID %>').val(pricingLine.Item);
+            $('#<%= txtDescription.ClientID %>').val(pricingLine.Description);
+            $('#<%= ddlPricingTypeID.ClientID %>').val(pricingLine.PricingTypeID);               
+            $('#<%= txtUnitPrice.ClientID %>').val(pricingLine.UnitPrice);
+            $('#<%= txtQuantity.ClientID %>').val(pricingLine.Quantity);
+        }
+        function ClearFormData()
+        {
+            $('#<%= txtItem.ClientID %>').val('');
+            $('#<%= txtDescription.ClientID %>').val('');
+            //$('#<%= ddlPricingTypeID.ClientID %>').val('');                           
+            $('#<%= txtUnitPrice.ClientID %>').val('0');
+            $('#<%= txtQuantity.ClientID %>').val('0');
+        }
+        ///Page Load
+        $(document).ready(function(){
+            ShowPricingForm(true);
+            ClearFormData();
+        });
     </script>
     
 </asp:Content>
@@ -202,10 +297,10 @@
             <div>                 
                 <div id="divMasterControl" style="padding-left:3px; margin-bottom:10px;">
                     <div class="floatleft">
-                        Currency <asp:DropDownList ID="ddlCurrency" runat="server" onchange="ChangeCurrency(this.value);"></asp:DropDownList>
+                        Currency &nbsp;<asp:DropDownList ID="ddlCurrency" runat="server" onchange="ChangeCurrency(this.value);"></asp:DropDownList>
                     </div>
                     <div class="floatright">
-                        <input type="button" value="Add Pricing" onclick="ShowPricingForm();" /> 
+                        <input type="button" value="Add Pricing" onclick="ShowPricingForm(true); ClearFormData();" /> 
                     </div>						        
                     <div class="clearboth"></div>
                 </div>
@@ -214,18 +309,7 @@
                         <colgroup>
                             <col style="width:15%;" />
                             <col style="width:85%;" />
-                        </colgroup>
-				        <tr>
-					        <td>Quotation</td>
-					        <td>
-						        <asp:DropDownList ID="ddlQuotationID" runat="server"></asp:DropDownList>
-						        <asp:RequiredFieldValidator ID="rfvQuotationID" runat="server"
-							        ControlToValidate="ddlQuotationID" SetFocusOnError="true"
-							        ErrorMessage="<br/>Please Select Quotation." Display="Dynamic"
-							        ValidationGroup="SaveInfo2">
-						        </asp:RequiredFieldValidator>
-					        </td>
-				        </tr>
+                        </colgroup>				        
 				        <tr>
 					        <td>Item</td>
 					        <td>
@@ -240,7 +324,7 @@
 				        <tr>
 					        <td>Description</td>
 					        <td>
-						        <asp:TextBox ID="txtDescription" TextMode="MultiLine" MaxLength="2000" runat="server"></asp:TextBox>						        
+						        <asp:TextBox ID="txtDescription" TextMode="MultiLine" MaxLength="2000" runat="server" style="height:90px;"></asp:TextBox>						        
 					            <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"
 							        ControlToValidate="txtDescription" SetFocusOnError="true"
 							        ErrorMessage="Please Enter a Description." Display="Dynamic"
@@ -270,7 +354,7 @@
 						        </asp:RequiredFieldValidator>
                                 <asp:CompareValidator ID="CompareValidator2" runat="server" 
                                     ControlToValidate="txtUnitPrice" Display="Dynamic"
-                                    Operator="DataTypeCheck" Type="Integer"
+                                    Operator="DataTypeCheck" Type="Double"
                                     SetFocusOnError="true" ValidationGroup="SaveInfo2"
                                     ErrorMessage="<br/>Please Enter a Valid Unit Price in digits.">
                                 </asp:CompareValidator>
@@ -298,14 +382,14 @@
 			            <input type="button" value="Save Pricing" onclick="ValidateAndBindPricingList();" />&nbsp;
 			        </div>
                 </div>
-                <div id="divPricingList" style="display:none;">
+                <div id="divPricingList" style="display:none; min-height:200px;">
                     
-                </div>
+                </div>                
             </div>
             <%--<div style="height:100px;">&nbsp;</div>--%>
-            <div id="divStep2ButtonContainer" style="margin-top:10px; display:none;">
+            <div id="divStep2ButtonContainer" style="margin-top:10px; display:block;">
                 <input type="button" value="< Back" onclick="MoveNext(1);" />&nbsp;
-                <input type="button" value="Next >" onclick="MoveNext(3);" />
+                <input type="button" value="Finish" onclick="SaveQuotationInformation();" />
             </div>
         </div>
         
