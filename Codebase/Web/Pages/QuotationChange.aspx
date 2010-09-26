@@ -120,7 +120,7 @@
                 html += '</colgroup>';
                 
                 html += '<tr>';
-                html += '   <th>Item</th><th>Description</th><th>Pricing Type</th><th>Unit Price</th><th>Quantity</th><th>Price</th><th>Edit</th>';
+                html += '   <th>Item</th><th>Description</th><th>Pricing Type</th><th>Unit Price</th><th>Quantity</th><th style="text-align:right;">Price</th><th style="text-align:center;">Edit</th>';
                 html += '</tr>';
                 var currency = $('#<%= ddlCurrency.ClientID %>').val();
                 var totalPrice = 0;
@@ -133,13 +133,17 @@
                     html += '   <td>' + pricingLine.PricingType + '</td>';
                     html += '   <td>' + pricingLine.UnitPrice + '</td>';
                     html += '   <td>' + pricingLine.Quantity + '</td>';
-                    html += '   <td>' + currency + pricingLine.Price + '</td>';
-                    html += '   <td><a href="javascript:void(0);" onclick="LoadPricingForEdit(' + i + ')">Edit</a></td>';
+                    html += '   <td style="text-align:right;">' + jQuery.trim(currency) + pricingLine.Price + '</td>';
+                    html += '   <td style="text-align:center;"><a href="javascript:void(0);" onclick="LoadPricingForEdit(' + i + ')">Edit</a></td>';
                     html += '</tr>';                    
                     totalPrice += pricingLine.Price;
                 }
+                html += '<tr>';
+                html += '   <td colspan="6" style="text-align:right;"><b>Total Price:</b> &nbsp;<input type="text" readonly="readonly" value="' + jQuery.trim(currency) + totalPrice + '" style="text-align:right;" /></td>'; 
+                html += '   <td></td>';
+                html += '</tr>';
                 html += '</table>';
-                html += '<div style="margin: 10px 0px 0px 3px; width:100%; text-align:right;">Total Price: &nbsp;<input type="text" readonly="readonly" value="' + totalPrice + '" style="text-align:right;" /></div>'
+                //html += '<div style="margin: 10px 0px 0px 3px; width:100%; text-align:right;"></div>'
                 $('#divPricingList').html(html);
                 ShowPricingForm(false);
             }
