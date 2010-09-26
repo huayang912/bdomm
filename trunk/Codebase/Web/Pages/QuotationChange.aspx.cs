@@ -44,6 +44,7 @@ public partial class Pages_QuotationChange : BasePage
     {
         OMMDataContext dataContext = new OMMDataContext();
 
+        ///TODO: Where In example in LINQ
         //int[] ids = {1,2,3};        
         //IList<Message_Recipient> recipients = (from R in dataContext.Message_Recipients
         //                                       where (from I in ids select I).Contains(R.ID)
@@ -55,65 +56,50 @@ public partial class Pages_QuotationChange : BasePage
         ddlCurrency.DataTextField = "Description";
         ddlCurrency.DataBind();
 
-        //IList<Currency> currencies = currencyDAO.GetAll();
-        /////TODO: Following Structure Should be Used instead of the Above Code.
-        ////BindDropdownList.Enquirieses(ddlEnquiryID);QuotationStatusesDAO quotationstatusesDAO = new QuotationStatusesDAO();
-        //IList<QuotationStatuses> quotationStatuseses = quotationstatusesDAO.GetAll();
-        //WebUtil.BindDropDownList(ddlStatusID, quotationStatuseses, "Name", "ID");
-        /////TODO: Following Structure Should be Used instead of the Above Code.
-        ////BindDropdownList.QuotationStatuseses(ddlStatusID);UsersDAO usersDAO = new UsersDAO();
-        //IList<Users> userses = usersDAO.GetAll();
-        //WebUtil.BindDropDownList(ddlChangedByUserID, userses, "UserName", "ID");
-        /////TODO: Following Structure Should be Used instead of the Above Code.
-        ////BindDropdownList.Userses(ddlChangedByUserID);UsersDAO usersDAO = new UsersDAO();
-        //IList<Users> userses = usersDAO.GetAll();
-        //WebUtil.BindDropDownList(ddlCreatedByUserID, userses, "UserName", "ID");
-        /////TODO: Following Structure Should be Used instead of the Above Code.
-        ////BindDropdownList.Userses(ddlCreatedByUserID);
+        IList<QuotationPricingType> pricingTypes = (from C in dataContext.QuotationPricingTypes select C).ToList();
+        ddlPricingTypeID.DataSource = pricingTypes;
+        ddlPricingTypeID.DataValueField = "ID";
+        ddlPricingTypeID.DataTextField = "Name";
+        ddlPricingTypeID.DataBind();
     }
     /// <summary>
     /// Binds Quotations Info Requested through Query Strings
     /// </summary>
     protected void BindQuotationsInfo()
     {
-        //if (_IsEditMode)
-        //{            
-        //    if (_ID > 0)
-        //    {
-        //        QuotationsDAO dao = new QuotationsDAO();
-        //        Quotations entity = dao.GetByID(_ID);
-        //        if (entity == null)
-        //            ShowErroMessag();
-        //        else
-        //        { 
-        //            txtNumber.Text = entity.Number;
-        //            ddlEnquiryID.SetSelectedItem(entity.EnquiryID);
-        //            ddlStatusID.SetSelectedItem(entity.StatusID);
-        //            txtSubcontractor.Text = entity.Subcontractor;
-        //            txtScopeOfWork.Text = entity.ScopeOfWork;
-        //            txtMainEquipment.Text = entity.MainEquipment;
-        //            txtValidityDays.Text = entity.ValidityDays;
-        //            txtSchedule.Text = entity.Schedule;
-        //        txtSubmissionDate.Text = entity.SubmissionDate.ToString(ConfigReader.CSharpCalendarDateFormat));
-        //            chkDecisionSuccessful.Checked = entity.DecisionSuccessful;
-        //        txtDecisionDate.Text = entity.DecisionDate.ToString(ConfigReader.CSharpCalendarDateFormat));
-        //        txtCreatedOn.Text = entity.CreatedOn.ToString(ConfigReader.CSharpCalendarDateFormat));
-        //            ddlCreatedByUserID.SetSelectedItem(entity.CreatedByUserID);
-        //        txtChangedOn.Text = entity.ChangedOn.ToString(ConfigReader.CSharpCalendarDateFormat));
-        //            ddlChangedByUserID.SetSelectedItem(entity.ChangedByUserID);
-        //            txtVersion.Text = entity.Version;
-        //            ddlSubmittedToClientContactID.SetSelectedItem(entity.SubmittedToClientContactID);
-        //            ddlCurrencyID.SetSelectedItem(entity.CurrencyID);
-        //            txtCreatedByUsername.Text = entity.CreatedByUsername;
-        //            txtChangedByUsername.Text = entity.ChangedByUsername;
-        //            txtContractawardedto.Text = entity.Contractawardedto;
-        //            txtContractawardedValue.Text = entity.ContractawardedValue;
-        //            txtNewStatusID.Text = entity.NewStatusID;                      
-        //        }
-        //    }
-        //    else
-        //        ShowErroMessag();
-        //}
+        if (_IsEditMode)
+        {            
+            //QuotationsDAO dao = new QuotationsDAO();
+            //Quotations entity = dao.GetByID(_ID);
+            //if (entity == null)
+            //    ShowErroMessag();
+            //else
+            //{ 
+            //    txtNumber.Text = entity.Number;
+            //    ddlEnquiryID.SetSelectedItem(entity.EnquiryID);
+            //    ddlStatusID.SetSelectedItem(entity.StatusID);
+            //    txtSubcontractor.Text = entity.Subcontractor;
+            //    txtScopeOfWork.Text = entity.ScopeOfWork;
+            //    txtMainEquipment.Text = entity.MainEquipment;
+            //    txtValidityDays.Text = entity.ValidityDays;
+            //    txtSchedule.Text = entity.Schedule;
+            //    txtSubmissionDate.Text = entity.SubmissionDate.ToString(ConfigReader.CSharpCalendarDateFormat));
+            //    chkDecisionSuccessful.Checked = entity.DecisionSuccessful;
+            //    txtDecisionDate.Text = entity.DecisionDate.ToString(ConfigReader.CSharpCalendarDateFormat));
+            //    txtCreatedOn.Text = entity.CreatedOn.ToString(ConfigReader.CSharpCalendarDateFormat));
+            //    ddlCreatedByUserID.SetSelectedItem(entity.CreatedByUserID);
+            //    txtChangedOn.Text = entity.ChangedOn.ToString(ConfigReader.CSharpCalendarDateFormat));
+            //    ddlChangedByUserID.SetSelectedItem(entity.ChangedByUserID);
+            //    txtVersion.Text = entity.Version;
+            //    ddlSubmittedToClientContactID.SetSelectedItem(entity.SubmittedToClientContactID);
+            //    ddlCurrencyID.SetSelectedItem(entity.CurrencyID);
+            //    txtCreatedByUsername.Text = entity.CreatedByUsername;
+            //    txtChangedByUsername.Text = entity.ChangedByUsername;
+            //    txtContractawardedto.Text = entity.Contractawardedto;
+            //    txtContractawardedValue.Text = entity.ContractawardedValue;
+            //    txtNewStatusID.Text = entity.NewStatusID;                      
+            //}            
+        }
     }
     /// <summary>
     /// Shows a Message in the UI and Hides the Data Editing Controls
@@ -174,7 +160,7 @@ public partial class Pages_QuotationChange : BasePage
     }
 
     [WebMethod]
-    public static int SaveQuotation(App.CustomModels.CustomQuotation customQuotation)
+    public static int SaveQuotation(App.CustomModels.CustomQuotation customQuotation, IList<App.CustomModels.CustomQuotationPricingLine> pricingLineItems)
     {
         OMMDataContext dataContext = new OMMDataContext();
         Quotation quotation = new Quotation();
