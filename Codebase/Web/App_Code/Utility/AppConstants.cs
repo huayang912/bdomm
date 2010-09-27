@@ -24,44 +24,44 @@ public class AppConstants
     public class Pages
     {
         #region Private Pages
-        public const String PERFORMENCE_TABLE = "/Pages/Private/PerformenceTable.aspx";
-        public const String STAFF_LIST = "/Pages/Private/StaffList.aspx";
-        public const String STAFF_CHANGE = "/Pages/Private/StaffChange.aspx";
-        public const String USER_CHANGE = "/Pages/Private/UserChange.aspx";
-        public const String USER_LIST = "/Pages/Private/UserList.aspx";
-        public const String FDP_CHANGE = "/Pages/Private/FDPChange.aspx";
-        public const String FDP_LIST = "/Pages/Private/FDPList.aspx";
-        public const String CHANGE_PASSWORD = "/Pages/Private/ChangePassword.aspx";
-        public const String CATCHMENT = "/Pages/Private/Catchment.aspx";
-        public const String CATCHMENT_FRAME_DISTRICT = "/Pages/Private/IframePages/Catchment_Frame_District.aspx";
-        public const String CATCHMENT_FRAME_FDP = "/Pages/Private/IframePages/Catchment_Frame_FDP.aspx";
-        public const String CATCHMENT_FRAME_PROGRAM = "/Pages/Private/IframePages/Catchment_Frame_Program.aspx";
-        public const String CATCHMENT_FRAME_SERVICESITE = "/Pages/Private/IframePages/Catchment_Frame_ServiceSite.aspx";
-        public const String CATCHMENT_FRAME_STAFF = "/Pages/Private/IframePages/Catchment_Frame_Staff.aspx";
-        public const String CATCHMENT_FRAME_UNION = "/Pages/Private/IframePages/Catchment_Frame_Union.aspx";
-        public const String CATCHMENT_FRAME_UPAZILLA = "/Pages/Private/IframePages/Catchment_Frame_Upazilla.aspx";
-        public const String CATCHMENT_FRAME_VILLAGE = "/Pages/Private/IframePages/Catchment_Frame_Village.aspx";
+        //public const String PERFORMENCE_TABLE = "/Pages/Private/PerformenceTable.aspx";
+        //public const String STAFF_LIST = "/Pages/Private/StaffList.aspx";
+        //public const String STAFF_CHANGE = "/Pages/Private/StaffChange.aspx";
+        //public const String USER_CHANGE = "/Pages/Private/UserChange.aspx";
+        //public const String USER_LIST = "/Pages/Private/UserList.aspx";
+        //public const String FDP_CHANGE = "/Pages/Private/FDPChange.aspx";
+        //public const String FDP_LIST = "/Pages/Private/FDPList.aspx";
+        //public const String CHANGE_PASSWORD = "/Pages/Private/ChangePassword.aspx";
+        //public const String CATCHMENT = "/Pages/Private/Catchment.aspx";
+        //public const String CATCHMENT_FRAME_DISTRICT = "/Pages/Private/IframePages/Catchment_Frame_District.aspx";
+        //public const String CATCHMENT_FRAME_FDP = "/Pages/Private/IframePages/Catchment_Frame_FDP.aspx";
+        //public const String CATCHMENT_FRAME_PROGRAM = "/Pages/Private/IframePages/Catchment_Frame_Program.aspx";
+        //public const String CATCHMENT_FRAME_SERVICESITE = "/Pages/Private/IframePages/Catchment_Frame_ServiceSite.aspx";
+        //public const String CATCHMENT_FRAME_STAFF = "/Pages/Private/IframePages/Catchment_Frame_Staff.aspx";
+        //public const String CATCHMENT_FRAME_UNION = "/Pages/Private/IframePages/Catchment_Frame_Union.aspx";
+        //public const String CATCHMENT_FRAME_UPAZILLA = "/Pages/Private/IframePages/Catchment_Frame_Upazilla.aspx";
+        //public const String CATCHMENT_FRAME_VILLAGE = "/Pages/Private/IframePages/Catchment_Frame_Village.aspx";
 
-        public const String DAM_CHANGE_STEP1 = "/Pages/Private/DAMChange_Step1.aspx";
-        public const String DAM_CHANGE_STEP2 = "/Pages/Private/DAMChange_Step2.aspx";
-        public const String DAM_CHANGE_STEP3 = "/Pages/Private/DAMChange_Step3.aspx";
-        public const String DAM_LIST = "/Pages/Private/DAMList.aspx";
-        public const String VOLUNTEER_LIST = "/Pages/Private/VolunteerList.aspx";
-        public const String VOLUNTEER_CHANGE = "/Pages/Private/VolunteerChange.aspx";
-        public const String WAYBILL_CHANGE = "/Pages/Private/WayBillChange.aspx";
-        public const String WAYBILL_LIST = "/Pages/Private/WayBillList.aspx";
+        //public const String DAM_CHANGE_STEP1 = "/Pages/Private/DAMChange_Step1.aspx";
+        //public const String DAM_CHANGE_STEP2 = "/Pages/Private/DAMChange_Step2.aspx";
+        //public const String DAM_CHANGE_STEP3 = "/Pages/Private/DAMChange_Step3.aspx";
+        //public const String DAM_LIST = "/Pages/Private/DAMList.aspx";
+        //public const String VOLUNTEER_LIST = "/Pages/Private/VolunteerList.aspx";
+        //public const String VOLUNTEER_CHANGE = "/Pages/Private/VolunteerChange.aspx";
+        //public const String WAYBILL_CHANGE = "/Pages/Private/WayBillChange.aspx";
+        //public const String WAYBILL_LIST = "/Pages/Private/WayBillList.aspx";
 
-        public const String WAYBILL_CHANGE_STEP1 = "/Pages/Private/WayBillChangeStep1.aspx";
-        public const String WAYBILL_CHANGE_STEP2 = "/Pages/Private/WayBillChangeStep2.aspx";
-        public const String WAYBILL_CHANGE_STEP3 = "/Pages/Private/WayBillChangeStep3.aspx";
+        //public const String WAYBILL_CHANGE_STEP1 = "/Pages/Private/WayBillChangeStep1.aspx";
+        //public const String WAYBILL_CHANGE_STEP2 = "/Pages/Private/WayBillChangeStep2.aspx";
+        //public const String WAYBILL_CHANGE_STEP3 = "/Pages/Private/WayBillChangeStep3.aspx";
 
-        public const String STACKING_CHANGE_STEP1 = "/Pages/Private/StackingChangeStep1.aspx";
-        public const String STACKING_CHANGE_STEP2 = "/Pages/Private/StackingChangeStep2.aspx";
-        public const String STACKING_CHANGE_STEP3 = "/Pages/Private/StackingChangeStep3.aspx";
+        //public const String STACKING_CHANGE_STEP1 = "/Pages/Private/StackingChangeStep1.aspx";
+        //public const String STACKING_CHANGE_STEP2 = "/Pages/Private/StackingChangeStep2.aspx";
+        //public const String STACKING_CHANGE_STEP3 = "/Pages/Private/StackingChangeStep3.aspx";
 
-        public const String RECONSTITUTION_CHANGE_STEP1 = "/Pages/Private/ReconstitutionStep1.aspx";
-        public const String RECONSTITUTION_CHANGE_STEP2 = "/Pages/Private/ReconstitutionStep2.aspx";
-        public const String RECONSTITUTION_CHANGE_STEP3 = "/Pages/Private/ReconstitutionStep3.aspx";
+        //public const String RECONSTITUTION_CHANGE_STEP1 = "/Pages/Private/ReconstitutionStep1.aspx";
+        //public const String RECONSTITUTION_CHANGE_STEP2 = "/Pages/Private/ReconstitutionStep2.aspx";
+        //public const String RECONSTITUTION_CHANGE_STEP3 = "/Pages/Private/ReconstitutionStep3.aspx";
                 
         #endregion        
 

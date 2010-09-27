@@ -54,9 +54,9 @@
         {
             //alert(enquiryID);
             if(_Enquiry.ID > 0)
-                $('#aNewQuation').attr('href', '/Pages/QuotationList.aspx?ENQ=' + enquiryID).html('View the quotations related to this enquiry');
+                $('#aNewQuation').attr('href', 'QuotationList.aspx?ENQ=' + enquiryID).html('View the quotations related to this enquiry');
             else
-                $('#aNewQuation').attr('href', '/Pages/QuotationChange.aspx?<%=AppConstants.QueryString.ENQUIRY_ID %>=' + enquiryID);
+                $('#aNewQuation').attr('href', 'QuotationChange.aspx?<%=AppConstants.QueryString.ENQUIRY_ID %>=' + enquiryID);
             
         }
         //View the quotations related to this enquiry
@@ -106,10 +106,7 @@
                 <tr>
                     <td>Country</td>
                     <td><asp:TextBox ID="txtCountry" ReadOnly="true" runat="server"></asp:TextBox></td>
-                </tr>
-                <%--<tr>
-                    <td colspan="2" style="height:100px;">&nbsp;</td>
-                </tr>--%>
+                </tr>                
                 <tr>
                     <td colspan="2" style="padding-top:10px;">
                         <input type="button" value="Next >" onclick="MoveNext(2);" />
@@ -161,7 +158,7 @@
                 <b>Summary</b><br />
                 <asp:Label ID="lblStep4" Text="The enquiry has been successfully created." runat="server"></asp:Label>
             </div>
-            <div>
+            <div style="min-height:100px;">
                 <a id="aNewQuation" href="javascript:void(0);">Create a new quation now</a>.
             </div>        
         </div>
