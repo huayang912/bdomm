@@ -52,8 +52,10 @@
         function OnSaveEnquirySuccess(result)
         {
             HideProgress();
-            var id = eval(result);
-            //alert(id);            
+            var id = result.split(':')[0];
+            var number = result.split(':')[1];                     
+            $('#<%=lblQuotationMessage.ClientID %>').html('Quotation <b>' + number + '</b> has been successfully created.');
+            MoveNext(3);            
         }
         
         ///Pricing Section
@@ -167,9 +169,26 @@
             $('#<%= txtUnitPrice.ClientID %>').val('0');
             $('#<%= txtQuantity.ClientID %>').val('0');
         }
+        function PreparePricingList()
+        {
+            if($('#<%= hdnQuotationPricings.ClientID %>').val().length > 0)
+                _PricingList = eval($('#<%= hdnQuotationPricings.ClientID %>').val());            
+            
+            var showEditForm = false;
+            if(_PricingList == null || 'undefined' == _PricingList || _PricingList.length == 0)
+                showEditForm = true;
+            else
+                BindPricingList();
+            
+            ShowPricingForm(showEditForm);
+        }
+        function SubmitQuotation()
+        {
+            ///There Is No Operation Specified in the Windows Application for this
+        }
         ///Page Load
         $(document).ready(function(){
-            ShowPricingForm(true);
+            PreparePricingList();            
             ClearFormData();
         });
     </script>
@@ -184,9 +203,11 @@
     
 </asp:Content>
 
-<asp:Content ID="Content4" ContentPlaceHolderID="PageContentPlaceHolder" Runat="Server">
-
+<asp:Content ID="Content4" ContentPlaceHolderID="PageContentPlaceHolder" Runat="Server">    
+    
     <div id="divMessage" runat="server" enableviewstate="false" visible="false"></div>
+    
+    <asp:HiddenField ID="hdnQuotationPricings" runat="server" />
     
     <asp:Panel ID="pnlDetails" runat="server">
     
@@ -301,11 +322,11 @@
             <div>                 
                 <div id="divMasterControl" style="padding-left:3px; margin-bottom:10px;">
                     <div class="floatleft">
-                        Currency &nbsp;<asp:DropDownList ID="ddlCurrency" runat="server" onchange="ChangeCurrency(this.value);"></asp:DropDownList>
-                    </div>
-                    <div class="floatright">
                         <input type="button" value="Add Pricing" onclick="ShowPricingForm(true); ClearFormData();" /> 
-                    </div>						        
+                    </div>
+                    <div class="floatleft" style="margin-left:20px;">
+                        Currency &nbsp;<asp:DropDownList ID="ddlCurrency" runat="server" onchange="ChangeCurrency(this.value);"></asp:DropDownList>
+                    </div>                    						        
                     <div class="clearboth"></div>
                 </div>
                  <div id="divPricingForm" style="display:block;">
@@ -398,18 +419,21 @@
         </div>
         
         <%--Step 3--%>
-        <div id="divStep3" class="GroupBox" style="display:none;">
+        <div id="divStep3" class="GroupBox" style="display:none; min-height:120px;">
             <div class="FormHeader">
-                <b>Enter Enquiry Details</b><br />
-                <asp:Label ID="lblStep3Title" Text="Enter specific details for this enquiry. Note that text can be pasted from another application into the text box below." runat="server"></asp:Label>
+                <b>Summary</b><br />
+                <asp:Label ID="lblStep3Title" Text="Tick the box below to submit this quotation now." runat="server"></asp:Label>
             </div>
-            <div>               
-                <asp:TextBox ID="txtDetails" MaxLength="1000" TextMode="MultiLine" runat="server" style="height:200px;"></asp:TextBox>
+            <div>
+                <asp:Label ID="lblQuotationMessage" runat="server" Text=""></asp:Label>               
+                <div style="margin-top:15px;">
+                    <asp:CheckBox ID="chkSubmitQuotation" Enabled="false" runat="server" Text="Submit this quotation now." />
+                </div>                
             </div>
             <%-- Next Previous Buttons --%>
-            <div style="margin-top:10px;">
-                <input type="button" value="< Back" onclick="MoveNext(2);" />&nbsp;
-                <input type="button" value="Finish" onclick="SaveEnquiry();" />
+            <div style="margin-top:20px;">
+                <%--<input type="button" value="< Back" onclick="MoveNext(2);" />&nbsp;--%>
+                <input type="button" value="Close" disabled="disabled" onclick="SubmitQuotation();" />
             </div>
         </div>
         

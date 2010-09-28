@@ -109,7 +109,7 @@ public partial class Pages_EnquiryChange : BasePage
     /// <param name="customEnquiry"></param>
     /// <returns></returns>
     [WebMethod]
-    public static int SaveEnquiry(App.CustomModels.CustomEnquiry customEnquiry)
+    public static String SaveEnquiry(App.CustomModels.CustomEnquiry customEnquiry)
     {        
         OMMDataContext context = new OMMDataContext();
         Enquiry enquiry = null;
@@ -125,7 +125,7 @@ public partial class Pages_EnquiryChange : BasePage
         
         context.SubmitChanges();
         SaveEnquiryLineItems(customEnquiry, enquiry, context);
-        return enquiry.ID;
+        return String.Format("{0}:{1}", enquiry.ID, enquiry.Number);
     }
     /// <summary>
     /// Saves Enquiry Line Items

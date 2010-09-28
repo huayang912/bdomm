@@ -22,10 +22,6 @@ namespace App.CustomModels
         public String Details { get; set; }
         public int StatusID { get; set; }
     }
-    public static class EnquiryStatus
-    {
-        public const int New = 1;
-    }
     public class CustomQuotation
     {
         public int ID { get; set; }
@@ -51,5 +47,30 @@ namespace App.CustomModels
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
-    }    
+    }
+
+
+    #region Enum Like Classes
+    public static class EnquiryStatus
+    {
+        public const int New = 1;  ///Outstanding in the Database
+        public const int Quoted = 2;
+        public const int Closed = 3;
+    }
+    public static class QuotationStatus
+    {
+        public const int NotSubmitted = 1;
+        public const int Submitted = 2;
+        public const int Unsuccessful = 3;
+        public const int Successful = 4;
+        public const int ReQquoteRequested = 5;
+        public const int Revised = 6;
+        public const int Closed = 7;
+    }
+    public static class ProjectStatus
+    {
+        public const int InProgress = 1;
+        public const int Completed = 2;
+    }
+    #endregion
 }
