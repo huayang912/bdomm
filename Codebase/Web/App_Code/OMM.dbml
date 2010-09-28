@@ -154,6 +154,8 @@
       <Association Name="User_Role" Member="Roles" ThisKey="ID" OtherKey="ChangedByUserID" Type="Role" />
       <Association Name="User_Quotation" Member="Quotations" ThisKey="ID" OtherKey="ChangedByUserID" Type="Quotation" />
       <Association Name="User_Quotation1" Member="Quotations1" ThisKey="ID" OtherKey="CreatedByUserID" Type="Quotation" />
+      <Association Name="User_Project" Member="Projects" ThisKey="ID" OtherKey="CreatedByUserID" Type="Project" />
+      <Association Name="User_Project1" Member="Projects1" ThisKey="ID" OtherKey="ChangedByUserID" Type="Project" />
     </Type>
   </Table>
   <Table Name="dbo.UserInRole" Member="UserInRoles">
@@ -207,6 +209,7 @@
       <Column Name="Contract_awarded_Value" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="NewStatusID" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Association Name="Quotation_QuotationPricingLine" Member="QuotationPricingLines" ThisKey="ID" OtherKey="QuotationID" Type="QuotationPricingLine" />
+      <Association Name="Quotation_Project" Member="Projects" ThisKey="ID" OtherKey="QuotationID" Type="Project" />
       <Association Name="ClientContact_Quotation" Member="ClientContact" ThisKey="SubmittedToClientContactID" OtherKey="ID" Type="ClientContact" IsForeignKey="true" />
       <Association Name="Enquiry_Quotation" Member="Enquiry" ThisKey="EnquiryID" OtherKey="ID" Type="Enquiry" IsForeignKey="true" />
       <Association Name="User_Quotation" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
@@ -249,6 +252,28 @@
       <Column Name="Description" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ShortCode" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
       <Association Name="Currency_Quotation" Member="Quotations" ThisKey="ID" OtherKey="CurrencyID" Type="Quotation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Projects" Member="Projects">
+    <Type Name="Project">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Number" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="QuotationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ChangedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="CreatedByUsername" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ChangedByUsername" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Quotation_Project" Member="Quotation" ThisKey="QuotationID" OtherKey="ID" Type="Quotation" IsForeignKey="true" />
+      <Association Name="User_Project" Member="User" ThisKey="CreatedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+      <Association Name="User_Project1" Member="User1" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.GenerateNewQuotationNumber" Method="GenerateNewQuotationNumber" IsComposable="true">

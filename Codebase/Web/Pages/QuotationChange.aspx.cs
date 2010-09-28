@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Services;
+using App.Core.Extensions;
 
 public partial class Pages_QuotationChange : BasePage
 {    
@@ -29,7 +30,7 @@ public partial class Pages_QuotationChange : BasePage
         _ID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);
         _EnquiryID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ENQUIRY_ID);
 
-        if (_ID > 0)
+        if (_EnquiryID > 0 && _ID > 0)
         {
             _IsEditMode = true;
             ltrHeading.Text = "Edit Quotations Wizard";
@@ -66,40 +67,62 @@ public partial class Pages_QuotationChange : BasePage
     /// Binds Quotations Info Requested through Query Strings
     /// </summary>
     protected void BindQuotationsInfo()
-    {
+    {        
+        OMMDataContext dataContext = new OMMDataContext();
+        Enquiry enquiry = dataContext.Enquiries.SingleOrDefault(E => E.ID == _EnquiryID);
+        if (enquiry != null)
+            ltrHeading.Text = String.Format("Create New Quotation Wizard - Enquiry {0}", enquiry.Number);
+
+        Page.Title = ltrHeading.Text;
+
         if (_IsEditMode)
         {            
-            //QuotationsDAO dao = new QuotationsDAO();
-            //Quotations entity = dao.GetByID(_ID);
-            //if (entity == null)
-            //    ShowErroMessag();
-            //else
-            //{ 
-            //    txtNumber.Text = entity.Number;
-            //    ddlEnquiryID.SetSelectedItem(entity.EnquiryID);
-            //    ddlStatusID.SetSelectedItem(entity.StatusID);
-            //    txtSubcontractor.Text = entity.Subcontractor;
-            //    txtScopeOfWork.Text = entity.ScopeOfWork;
-            //    txtMainEquipment.Text = entity.MainEquipment;
-            //    txtValidityDays.Text = entity.ValidityDays;
-            //    txtSchedule.Text = entity.Schedule;
-            //    txtSubmissionDate.Text = entity.SubmissionDate.ToString(ConfigReader.CSharpCalendarDateFormat));
-            //    chkDecisionSuccessful.Checked = entity.DecisionSuccessful;
-            //    txtDecisionDate.Text = entity.DecisionDate.ToString(ConfigReader.CSharpCalendarDateFormat));
-            //    txtCreatedOn.Text = entity.CreatedOn.ToString(ConfigReader.CSharpCalendarDateFormat));
-            //    ddlCreatedByUserID.SetSelectedItem(entity.CreatedByUserID);
-            //    txtChangedOn.Text = entity.ChangedOn.ToString(ConfigReader.CSharpCalendarDateFormat));
-            //    ddlChangedByUserID.SetSelectedItem(entity.ChangedByUserID);
-            //    txtVersion.Text = entity.Version;
-            //    ddlSubmittedToClientContactID.SetSelectedItem(entity.SubmittedToClientContactID);
-            //    ddlCurrencyID.SetSelectedItem(entity.CurrencyID);
-            //    txtCreatedByUsername.Text = entity.CreatedByUsername;
-            //    txtChangedByUsername.Text = entity.ChangedByUsername;
-            //    txtContractawardedto.Text = entity.Contractawardedto;
-            //    txtContractawardedValue.Text = entity.ContractawardedValue;
-            //    txtNewStatusID.Text = entity.NewStatusID;                      
-            //}            
+            Quotation quotation = dataContext.Quotations.SingleOrDefault(Q => Q.EnquiryID == _EnquiryID && Q.ID == _ID);
+            if (enquiry == null || quotation == null)
+                ShowErroMessag();            
+            else
+            {                
+                //txtNumber.Text = entity.Number;
+                //ddlEnquiryID.SetSelectedItem(entity.EnquiryID);
+                //ddlStatusID.SetSelectedItem(entity.StatusID);
+                txtSubcontractor.Text = quotation.Subcontractor;
+                txtScopeOfWork.Text = quotation.ScopeOfWork;
+                txtMainEquipment.Text = quotation.MainEquipment;
+                txtValidityDays.Text = quotation.ValidityDays.ToString();
+                txtSchedule.Text = quotation.Schedule;
+                txtSubmissionDate.Text = quotation.SubmissionDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat);
+                //chkDecisionSuccessful.Checked = entity.DecisionSuccessful;
+                txtDecisionDate.Text = quotation.DecisionDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat);
+                //txtCreatedOn.Text = entity.CreatedOn.ToString(ConfigReader.CSharpCalendarDateFormat));
+                //ddlCreatedByUserID.SetSelectedItem(entity.CreatedByUserID);
+                //txtChangedOn.Text = entity.ChangedOn.ToString(ConfigReader.CSharpCalendarDateFormat));
+                //ddlChangedByUserID.SetSelectedItem(entity.ChangedByUserID);
+                //txtVersion.Text = entity.Version;
+                //ddlSubmittedToClientContactID.SetSelectedItem(entity.SubmittedToClientContactID);
+                //ddlCurrencyID.SetSelectedItem(entity.CurrencyID);
+                //txtCreatedByUsername.Text = entity.CreatedByUsername;
+                //txtChangedByUsername.Text = entity.ChangedByUsername;
+                //txtContractawardedto.Text = entity.Contractawardedto;
+                //txtContractawardedValue.Text = entity.ContractawardedValue;
+                //txtNewStatusID.Text = entity.NewStatusID; 
+                BindQuotationPricingList(dataContext);     
+            }            
         }
+    }
+    /// <summary>
+    /// This Prepares a JSON String from the Pricing Collection
+    /// Which will be used in JavaScript Generate the List from JavaScript
+    /// </summary>
+    /// <param name="dataContext"></param>
+    protected void BindQuotationPricingList(OMMDataContext dataContext)
+    {
+        IList<QuotationPricingLine> pricings = (from Q in dataContext.QuotationPricingLines
+                                                where Q.QuotationID == _ID
+                                                select Q).ToList();
+        
+        if(pricings != null && pricings.Count > 0)
+            hdnQuotationPricings.Value = pricings.ToJSON();
+
     }
     /// <summary>
     /// Shows a Message in the UI and Hides the Data Editing Controls
@@ -113,7 +136,7 @@ public partial class Pages_QuotationChange : BasePage
     {
         if (Page.IsValid)
         {
-            SaveQuotations();
+            //SaveQuotations();
             //Response.Redirect(AppConstants.Pages.QUOTATIONS_LIST);
             return;
         }
@@ -123,68 +146,18 @@ public partial class Pages_QuotationChange : BasePage
         //Response.Redirect(AppConstants.Pages.QUOTATIONS_LIST);
         return;
     }
-    protected void SaveQuotations()
-    {
-        //QuotationsDAO dao = new QuotationsDAO();
-        //Quotations entity = new Quotations();
 
-        //if (_IsEditMode)
-        //{
-        //    entity = dao.GetByID(_ID);
-        //}
-        //entity.ID = txtID.Text;
-        //entity.Number = txtNumber.Text;
-        //entity.EnquiryID = ddlEnquiryID.SelectedValue;
-        //entity.StatusID = ddlStatusID.SelectedValue;
-        //entity.Subcontractor = txtSubcontractor.Text;
-        //entity.ScopeOfWork = txtScopeOfWork.Text;
-        //entity.MainEquipment = txtMainEquipment.Text;
-        //entity.ValidityDays = txtValidityDays.Text;
-        //entity.Schedule = txtSchedule.Text;
-        //entity.SubmissionDate = WebUtil.GetDate(txtSubmissionDate.Text);
-        //entity.DecisionSuccessful = chkDecisionSuccessful.Checked;
-        //entity.DecisionDate = WebUtil.GetDate(txtDecisionDate.Text);
-        //entity.CreatedOn = WebUtil.GetDate(txtCreatedOn.Text);
-        //entity.CreatedByUserID = ddlCreatedByUserID.SelectedValue;
-        //entity.ChangedOn = WebUtil.GetDate(txtChangedOn.Text);
-        //entity.ChangedByUserID = ddlChangedByUserID.SelectedValue;
-        //entity.Version = txtVersion.Text;
-        //entity.SubmittedToClientContactID = ddlSubmittedToClientContactID.SelectedValue;
-        //entity.CurrencyID = ddlCurrencyID.SelectedValue;
-        //entity.CreatedByUsername = txtCreatedByUsername.Text;
-        //entity.ChangedByUsername = txtChangedByUsername.Text;
-        //entity.Contractawardedto = txtContractawardedto.Text;
-        //entity.ContractawardedValue = txtContractawardedValue.Text;
-        //entity.NewStatusID = txtNewStatusID.Text;
-        //dao.Save(entity);
-    }
-
-    [WebMethod]
-    public static int SaveQuotation(App.CustomModels.CustomQuotation customQuotation, IList<App.CustomModels.CustomQuotationPricingLine> pricingLineItems)
-    {
-        OMMDataContext dataContext = new OMMDataContext();
-        Quotation quotation = new Quotation();
-        if (customQuotation.ID == 0)
-        {
-            dataContext.Quotations.InsertOnSubmit(quotation);
-        }
-        else
-        {
-            quotation = dataContext.Quotations.SingleOrDefault(P => P.ID == customQuotation.ID);
-        }
-        MapObject(quotation, customQuotation, dataContext);
-
-        //dataContext.SubmitChanges();
-        return 0;
-    }
+    #region Page Methods
 
     private static void MapObject(Quotation quotation, App.CustomModels.CustomQuotation customQuotation, OMMDataContext dataContext)
-    {        
+    {
         if (customQuotation.ID == 0)
         {
             quotation.CreatedByUserID = SessionCache.CurrentUser.ID;
             quotation.CreatedByUsername = SessionCache.CurrentUser.UserName;
             quotation.CreatedOn = DateTime.Now;
+            quotation.Number = dataContext.GenerateNewQuotationNumber(quotation.EnquiryID, false);
+            quotation.StatusID = App.CustomModels.QuotationStatus.NotSubmitted;
         }
         quotation.ChangedByUserID = SessionCache.CurrentUser.ID;
         quotation.ChangedByUsername = SessionCache.CurrentUser.UserName;
@@ -198,5 +171,86 @@ public partial class Pages_QuotationChange : BasePage
         quotation.ValidityDays = customQuotation.ValidityDays;
         quotation.SubmissionDate = WebUtil.GetDate(customQuotation.SubmissionDate);
         quotation.DecisionDate = WebUtil.GetDate(customQuotation.DecisionDate);
+
     }
+    private static void ProcessAndSaveQuotation(Quotation quotation, IList < App.CustomModels.CustomQuotationPricingLine > pricingLineItems, OMMDataContext dataContext)
+    {
+        Enquiry enquiry = dataContext.Enquiries.SingleOrDefault(E => E.ID == quotation.EnquiryID);
+        ///Enquiry Section
+        if (quotation.ID == 0)
+        {
+            enquiry.StatusID = App.CustomModels.EnquiryStatus.Quoted;
+            dataContext.Quotations.InsertOnSubmit(quotation);            
+        }
+        else if (quotation.StatusID == 3)
+            enquiry.StatusID = App.CustomModels.EnquiryStatus.Closed;
+        else if (quotation.StatusID == App.CustomModels.QuotationStatus.Successful)
+            enquiry.StatusID = App.CustomModels.EnquiryStatus.Closed;
+        else if (quotation.StatusID == App.CustomModels.QuotationStatus.ReQquoteRequested)
+        {
+            //TODO: Add Copy Function. Will be found in the Win App at
+            ///QuotationDataset.cs. Line 591
+        }
+        ///QuotationPricingLine Section
+        foreach (App.CustomModels.CustomQuotationPricingLine pricing in pricingLineItems)
+        {
+            quotation.QuotationPricingLines.Add(PreparePricingLineItem(pricing));
+        }        
+
+        ///Project Section
+        ///TODO: Could not found the code that how it is bind to the UI while creating quotation
+        //Project project = new Project();
+        //if (project.ID == 0)
+        //{
+        //    project.CreatedByUserID = SessionCache.CurrentUser.ID;
+        //    project.CreatedByUsername = SessionCache.CurrentUser.UserName;
+        //    project.CreatedOn = DateTime.Now;
+        //    project.StatusID = App.CustomModels.ProjectStatus.InProgress;
+        //    project.Number = dataContext.GenerateNewProjectNumber();
+        //}
+        //project.ChangedByUserID = SessionCache.CurrentUser.ID;
+        //project.ChangedByUsername = SessionCache.CurrentUser.UserName;
+        //project.ChangedOn = DateTime.Now;
+        //project.StartDate = DateTime.Now;
+        
+        //project.Description = quotation.ScopeOfWork;
+        //project.Name = enquiry.EnguirySubject;
+        //quotation.Projects.Add(project);
+
+        //enquiry.Quotations.Add(quotation);
+
+        dataContext.SubmitChanges();        
+    }
+
+    private static QuotationPricingLine PreparePricingLineItem(App.CustomModels.CustomQuotationPricingLine pricing)
+    {
+        QuotationPricingLine lineItem = new QuotationPricingLine();
+        lineItem.Description = pricing.Description;
+        lineItem.Item = pricing.Item;
+        lineItem.PricingTypeID = pricing.PricingTypeID;
+        lineItem.Quantity = pricing.Quantity;
+        //lineItem.QuotationID = pricing.QuotationID;
+        lineItem.UnitPrice = pricing.UnitPrice;
+        return lineItem;
+    }
+
+    [WebMethod]
+    public static String SaveQuotation(App.CustomModels.CustomQuotation customQuotation, IList<App.CustomModels.CustomQuotationPricingLine> pricingLineItems)
+    {
+        OMMDataContext dataContext = new OMMDataContext();
+        Quotation quotation = new Quotation();
+        if (customQuotation.ID == 0)
+        {
+            dataContext.Quotations.InsertOnSubmit(quotation);
+        }
+        else
+        {
+            quotation = dataContext.Quotations.SingleOrDefault(P => P.ID == customQuotation.ID);
+        }
+        MapObject(quotation, customQuotation, dataContext);
+        ProcessAndSaveQuotation(quotation, pricingLineItems, dataContext);
+        //dataContext.SubmitChanges();
+        return String.Format("{0}:{1}", quotation.ID, quotation.Number);
+    }
+    #endregion
 }

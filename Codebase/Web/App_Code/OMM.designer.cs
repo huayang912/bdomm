@@ -80,6 +80,9 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   partial void InsertCurrency(Currency instance);
   partial void UpdateCurrency(Currency instance);
   partial void DeleteCurrency(Currency instance);
+  partial void InsertProject(Project instance);
+  partial void UpdateProject(Project instance);
+  partial void DeleteProject(Project instance);
   #endregion
 	
 	public OMMDataContext() : 
@@ -245,6 +248,14 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<Currency>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Project> Projects
+	{
+		get
+		{
+			return this.GetTable<Project>();
 		}
 	}
 	
@@ -3262,6 +3273,10 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<Quotation> _Quotations1;
 	
+	private EntitySet<Project> _Projects;
+	
+	private EntitySet<Project> _Projects1;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3294,6 +3309,8 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		this._Roles = new EntitySet<Role>(new Action<Role>(this.attach_Roles), new Action<Role>(this.detach_Roles));
 		this._Quotations = new EntitySet<Quotation>(new Action<Quotation>(this.attach_Quotations), new Action<Quotation>(this.detach_Quotations));
 		this._Quotations1 = new EntitySet<Quotation>(new Action<Quotation>(this.attach_Quotations1), new Action<Quotation>(this.detach_Quotations1));
+		this._Projects = new EntitySet<Project>(new Action<Project>(this.attach_Projects), new Action<Project>(this.detach_Projects));
+		this._Projects1 = new EntitySet<Project>(new Action<Project>(this.attach_Projects1), new Action<Project>(this.detach_Projects1));
 		OnCreated();
 	}
 	
@@ -3567,6 +3584,32 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="User_Project", Storage="_Projects", ThisKey="ID", OtherKey="CreatedByUserID")]
+	public EntitySet<Project> Projects
+	{
+		get
+		{
+			return this._Projects;
+		}
+		set
+		{
+			this._Projects.Assign(value);
+		}
+	}
+	
+	[Association(Name="User_Project1", Storage="_Projects1", ThisKey="ID", OtherKey="ChangedByUserID")]
+	public EntitySet<Project> Projects1
+	{
+		get
+		{
+			return this._Projects1;
+		}
+		set
+		{
+			this._Projects1.Assign(value);
+		}
+	}
+	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -3702,6 +3745,30 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_Quotations1(Quotation entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = null;
+	}
+	
+	private void attach_Projects(Project entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_Projects(Project entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_Projects1(Project entity)
+	{
+		this.SendPropertyChanging();
+		entity.User1 = this;
+	}
+	
+	private void detach_Projects1(Project entity)
 	{
 		this.SendPropertyChanging();
 		entity.User1 = null;
@@ -4296,6 +4363,8 @@ public partial class Quotation : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<QuotationPricingLine> _QuotationPricingLines;
 	
+	private EntitySet<Project> _Projects;
+	
 	private EntityRef<ClientContact> _ClientContact;
 	
 	private EntityRef<Enquiry> _Enquiry;
@@ -4365,6 +4434,7 @@ public partial class Quotation : INotifyPropertyChanging, INotifyPropertyChanged
 	public Quotation()
 	{
 		this._QuotationPricingLines = new EntitySet<QuotationPricingLine>(new Action<QuotationPricingLine>(this.attach_QuotationPricingLines), new Action<QuotationPricingLine>(this.detach_QuotationPricingLines));
+		this._Projects = new EntitySet<Project>(new Action<Project>(this.attach_Projects), new Action<Project>(this.detach_Projects));
 		this._ClientContact = default(EntityRef<ClientContact>);
 		this._Enquiry = default(EntityRef<Enquiry>);
 		this._User = default(EntityRef<User>);
@@ -4891,6 +4961,19 @@ public partial class Quotation : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="Quotation_Project", Storage="_Projects", ThisKey="ID", OtherKey="QuotationID")]
+	public EntitySet<Project> Projects
+	{
+		get
+		{
+			return this._Projects;
+		}
+		set
+		{
+			this._Projects.Assign(value);
+		}
+	}
+	
 	[Association(Name="ClientContact_Quotation", Storage="_ClientContact", ThisKey="SubmittedToClientContactID", OtherKey="ID", IsForeignKey=true)]
 	public ClientContact ClientContact
 	{
@@ -5122,6 +5205,18 @@ public partial class Quotation : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_QuotationPricingLines(QuotationPricingLine entity)
+	{
+		this.SendPropertyChanging();
+		entity.Quotation = null;
+	}
+	
+	private void attach_Projects(Project entity)
+	{
+		this.SendPropertyChanging();
+		entity.Quotation = this;
+	}
+	
+	private void detach_Projects(Project entity)
 	{
 		this.SendPropertyChanging();
 		entity.Quotation = null;
@@ -5803,6 +5898,527 @@ public partial class Currency : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this.SendPropertyChanging();
 		entity.Currency = null;
+	}
+}
+
+[Table(Name="dbo.Projects")]
+public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private string _Number;
+	
+	private string _Name;
+	
+	private string _Description;
+	
+	private System.Nullable<System.DateTime> _StartDate;
+	
+	private System.Nullable<System.DateTime> _EndDate;
+	
+	private System.Nullable<int> _QuotationID;
+	
+	private System.Nullable<int> _CreatedByUserID;
+	
+	private System.DateTime _CreatedOn;
+	
+	private System.Nullable<int> _ChangedByUserID;
+	
+	private System.DateTime _ChangedOn;
+	
+	private System.Data.Linq.Binary _Version;
+	
+	private string _CreatedByUsername;
+	
+	private string _ChangedByUsername;
+	
+	private System.Nullable<int> _StatusID;
+	
+	private EntityRef<Quotation> _Quotation;
+	
+	private EntityRef<User> _User;
+	
+	private EntityRef<User> _User1;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNumberChanging(string value);
+    partial void OnNumberChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnStartDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnStartDateChanged();
+    partial void OnEndDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnEndDateChanged();
+    partial void OnQuotationIDChanging(System.Nullable<int> value);
+    partial void OnQuotationIDChanged();
+    partial void OnCreatedByUserIDChanging(System.Nullable<int> value);
+    partial void OnCreatedByUserIDChanged();
+    partial void OnCreatedOnChanging(System.DateTime value);
+    partial void OnCreatedOnChanged();
+    partial void OnChangedByUserIDChanging(System.Nullable<int> value);
+    partial void OnChangedByUserIDChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    partial void OnVersionChanging(System.Data.Linq.Binary value);
+    partial void OnVersionChanged();
+    partial void OnCreatedByUsernameChanging(string value);
+    partial void OnCreatedByUsernameChanged();
+    partial void OnChangedByUsernameChanging(string value);
+    partial void OnChangedByUsernameChanged();
+    partial void OnStatusIDChanging(System.Nullable<int> value);
+    partial void OnStatusIDChanged();
+    #endregion
+	
+	public Project()
+	{
+		this._Quotation = default(EntityRef<Quotation>);
+		this._User = default(EntityRef<User>);
+		this._User1 = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Number", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string Number
+	{
+		get
+		{
+			return this._Number;
+		}
+		set
+		{
+			if ((this._Number != value))
+			{
+				this.OnNumberChanging(value);
+				this.SendPropertyChanging();
+				this._Number = value;
+				this.SendPropertyChanged("Number");
+				this.OnNumberChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Name", DbType="NVarChar(200) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Name
+	{
+		get
+		{
+			return this._Name;
+		}
+		set
+		{
+			if ((this._Name != value))
+			{
+				this.OnNameChanging(value);
+				this.SendPropertyChanging();
+				this._Name = value;
+				this.SendPropertyChanged("Name");
+				this.OnNameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Description", DbType="NVarChar(500)", UpdateCheck=UpdateCheck.Never)]
+	public string Description
+	{
+		get
+		{
+			return this._Description;
+		}
+		set
+		{
+			if ((this._Description != value))
+			{
+				this.OnDescriptionChanging(value);
+				this.SendPropertyChanging();
+				this._Description = value;
+				this.SendPropertyChanged("Description");
+				this.OnDescriptionChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_StartDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<System.DateTime> StartDate
+	{
+		get
+		{
+			return this._StartDate;
+		}
+		set
+		{
+			if ((this._StartDate != value))
+			{
+				this.OnStartDateChanging(value);
+				this.SendPropertyChanging();
+				this._StartDate = value;
+				this.SendPropertyChanged("StartDate");
+				this.OnStartDateChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_EndDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<System.DateTime> EndDate
+	{
+		get
+		{
+			return this._EndDate;
+		}
+		set
+		{
+			if ((this._EndDate != value))
+			{
+				this.OnEndDateChanging(value);
+				this.SendPropertyChanging();
+				this._EndDate = value;
+				this.SendPropertyChanged("EndDate");
+				this.OnEndDateChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_QuotationID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> QuotationID
+	{
+		get
+		{
+			return this._QuotationID;
+		}
+		set
+		{
+			if ((this._QuotationID != value))
+			{
+				if (this._Quotation.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnQuotationIDChanging(value);
+				this.SendPropertyChanging();
+				this._QuotationID = value;
+				this.SendPropertyChanged("QuotationID");
+				this.OnQuotationIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_CreatedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> CreatedByUserID
+	{
+		get
+		{
+			return this._CreatedByUserID;
+		}
+		set
+		{
+			if ((this._CreatedByUserID != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnCreatedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._CreatedByUserID = value;
+				this.SendPropertyChanged("CreatedByUserID");
+				this.OnCreatedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_CreatedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime CreatedOn
+	{
+		get
+		{
+			return this._CreatedOn;
+		}
+		set
+		{
+			if ((this._CreatedOn != value))
+			{
+				this.OnCreatedOnChanging(value);
+				this.SendPropertyChanging();
+				this._CreatedOn = value;
+				this.SendPropertyChanged("CreatedOn");
+				this.OnCreatedOnChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> ChangedByUserID
+	{
+		get
+		{
+			return this._ChangedByUserID;
+		}
+		set
+		{
+			if ((this._ChangedByUserID != value))
+			{
+				if (this._User1.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnChangedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUserID = value;
+				this.SendPropertyChanged("ChangedByUserID");
+				this.OnChangedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Version", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary Version
+	{
+		get
+		{
+			return this._Version;
+		}
+		set
+		{
+			if ((this._Version != value))
+			{
+				this.OnVersionChanging(value);
+				this.SendPropertyChanging();
+				this._Version = value;
+				this.SendPropertyChanged("Version");
+				this.OnVersionChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_CreatedByUsername", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string CreatedByUsername
+	{
+		get
+		{
+			return this._CreatedByUsername;
+		}
+		set
+		{
+			if ((this._CreatedByUsername != value))
+			{
+				this.OnCreatedByUsernameChanging(value);
+				this.SendPropertyChanging();
+				this._CreatedByUsername = value;
+				this.SendPropertyChanged("CreatedByUsername");
+				this.OnCreatedByUsernameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUsername", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string ChangedByUsername
+	{
+		get
+		{
+			return this._ChangedByUsername;
+		}
+		set
+		{
+			if ((this._ChangedByUsername != value))
+			{
+				this.OnChangedByUsernameChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUsername = value;
+				this.SendPropertyChanged("ChangedByUsername");
+				this.OnChangedByUsernameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_StatusID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> StatusID
+	{
+		get
+		{
+			return this._StatusID;
+		}
+		set
+		{
+			if ((this._StatusID != value))
+			{
+				this.OnStatusIDChanging(value);
+				this.SendPropertyChanging();
+				this._StatusID = value;
+				this.SendPropertyChanged("StatusID");
+				this.OnStatusIDChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Quotation_Project", Storage="_Quotation", ThisKey="QuotationID", OtherKey="ID", IsForeignKey=true)]
+	public Quotation Quotation
+	{
+		get
+		{
+			return this._Quotation.Entity;
+		}
+		set
+		{
+			Quotation previousValue = this._Quotation.Entity;
+			if (((previousValue != value) 
+						|| (this._Quotation.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Quotation.Entity = null;
+					previousValue.Projects.Remove(this);
+				}
+				this._Quotation.Entity = value;
+				if ((value != null))
+				{
+					value.Projects.Add(this);
+					this._QuotationID = value.ID;
+				}
+				else
+				{
+					this._QuotationID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("Quotation");
+			}
+		}
+	}
+	
+	[Association(Name="User_Project", Storage="_User", ThisKey="CreatedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.Projects.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.Projects.Add(this);
+					this._CreatedByUserID = value.ID;
+				}
+				else
+				{
+					this._CreatedByUserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	[Association(Name="User_Project1", Storage="_User1", ThisKey="ChangedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User1
+	{
+		get
+		{
+			return this._User1.Entity;
+		}
+		set
+		{
+			User previousValue = this._User1.Entity;
+			if (((previousValue != value) 
+						|| (this._User1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User1.Entity = null;
+					previousValue.Projects1.Remove(this);
+				}
+				this._User1.Entity = value;
+				if ((value != null))
+				{
+					value.Projects1.Add(this);
+					this._ChangedByUserID = value.ID;
+				}
+				else
+				{
+					this._ChangedByUserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User1");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
 	}
 }
 #pragma warning restore 1591

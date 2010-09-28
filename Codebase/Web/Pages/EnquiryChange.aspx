@@ -47,17 +47,24 @@
         function OnSaveEnquirySuccess(result) {
             HideProgress();
             MoveNext(4);
-            //var enquiryNumber = result;
-            CreateStausLinks(result);
+            //alert(result);
+            //var enquiry = eval(result);
+            var enquiryID = result.split(':')[0];
+            var enquiryNo = result.split(':')[1];
+            CreateStausLinks(enquiryID, enquiryNo);
         }
-        function CreateStausLinks(enquiryID)
+        function CreateStausLinks(enquiryID, enquiryNo)
         {
-            //alert(enquiryID);
+            //alert(_Enquiry.ID + 'ID: ' + enquiryID + 'No: ' + enquiryNo);
             if(_Enquiry.ID > 0)
+            {                
                 $('#aNewQuation').attr('href', 'QuotationList.aspx?ENQ=' + enquiryID).html('View the quotations related to this enquiry');
+            }
             else
+            {
+                $('#<%=lblStep4Message.ClientID %>').html('Enquiry <b>' + enquiryNo + '</b> has been successfully created.');
                 $('#aNewQuation').attr('href', 'QuotationChange.aspx?<%=AppConstants.QueryString.ENQUIRY_ID %>=' + enquiryID);
-            
+            }            
         }
         //View the quotations related to this enquiry
         //document.getElementById('aNewQuation').href = '/Pages/QuationChange.aspx?ID=' + 777777;
@@ -156,7 +163,7 @@
         <div id="divStep4" class="GroupBox" style="display:none;">
             <div class="FormHeader">
                 <b>Summary</b><br />
-                <asp:Label ID="lblStep4" Text="The enquiry has been successfully created." runat="server"></asp:Label>
+                <asp:Label ID="lblStep4Message" Text="Enquiry information Saved." runat="server"></asp:Label>
             </div>
             <div style="min-height:100px;">
                 <a id="aNewQuation" href="javascript:void(0);">Create a new quation now</a>.
