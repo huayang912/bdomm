@@ -69,9 +69,22 @@ public partial class Pages_QuotationChange : BasePage
     protected void BindQuotationsInfo()
     {        
         OMMDataContext dataContext = new OMMDataContext();
+        ///Bind Quotation First
         Enquiry enquiry = dataContext.Enquiries.SingleOrDefault(E => E.ID == _EnquiryID);
-        if (enquiry != null)
+        if (enquiry == null)
+        {
+            ShowErroMessag("E", String.Empty);
+            return;
+        }
+        else
+        {
             ltrHeading.Text = String.Format("Create New Quotation Wizard - Enquiry {0}", enquiry.Number);
+            if (enquiry.StatusID == App.CustomModels.EnquiryStatus.Quoted)
+            {
+                ShowErroMessag("V", enquiry.Number);
+                return;
+            }
+        }
 
         Page.Title = ltrHeading.Text;
 
@@ -79,7 +92,7 @@ public partial class Pages_QuotationChange : BasePage
         {            
             Quotation quotation = dataContext.Quotations.SingleOrDefault(Q => Q.EnquiryID == _EnquiryID && Q.ID == _ID);
             if (enquiry == null || quotation == null)
-                ShowErroMessag();            
+                ShowErroMessag("Q", String.Empty);            
             else
             {                
                 //txtNumber.Text = entity.Number;
@@ -127,10 +140,15 @@ public partial class Pages_QuotationChange : BasePage
     /// <summary>
     /// Shows a Message in the UI and Hides the Data Editing Controls
     /// </summary>
-    protected void ShowErroMessag()
+    protected void ShowErroMessag(String msgType,  String enquiryNumber)
     {
         pnlDetails.Visible = false;
-        WebUtil.ShowMessageBox(divMessage, "Sorry! requested Quotation was not found.", true);
+        if(msgType == "E")
+            WebUtil.ShowMessageBox(divMessage, "Sorry! requested Enquiry was not found.", true);
+        else if(msgType == "Q")
+            WebUtil.ShowMessageBox(divMessage, "Sorry! requested Quotation was not found.", true);
+        else if (msgType == "V")
+            WebUtil.ShowMessageBox(divMessage, String.Format("Sorry! Enquiry {0} has already been Quotated .", enquiryNumber), true);
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
