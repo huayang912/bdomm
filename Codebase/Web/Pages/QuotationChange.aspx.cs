@@ -53,9 +53,13 @@ public partial class Pages_QuotationChange : BasePage
 
         IList<Currency> currencies = (from C in dataContext.Currencies select C).ToList();
         ddlCurrency.DataSource = currencies;
-        ddlCurrency.DataValueField = "ShortCode";
-        ddlCurrency.DataTextField = "Description";
-        ddlCurrency.DataBind();
+        foreach (Currency c in currencies)
+        {
+            ddlCurrency.Items.Add(new ListItem(c.Description, String.Format("{0}:{1}", c.ID, c.ShortCode)));
+        }
+        //ddlCurrency.DataValueField = "ShortCode";
+        //ddlCurrency.DataTextField = "Description";
+        //ddlCurrency.DataBind();
 
         IList<QuotationPricingType> pricingTypes = (from C in dataContext.QuotationPricingTypes select C).ToList();
         ddlPricingTypeID.DataSource = pricingTypes;
@@ -82,6 +86,11 @@ public partial class Pages_QuotationChange : BasePage
             if (enquiry.StatusID == App.CustomModels.EnquiryStatus.Quoted)
             {
                 ShowErroMessag("V", enquiry.Number);
+                return;
+            }
+            else if (enquiry.StatusID == App.CustomModels.EnquiryStatus.Closed)
+            {
+                ShowErroMessag("VC", enquiry.Number);
                 return;
             }
         }
@@ -149,6 +158,8 @@ public partial class Pages_QuotationChange : BasePage
             WebUtil.ShowMessageBox(divMessage, "Sorry! requested Quotation was not found.", true);
         else if (msgType == "V")
             WebUtil.ShowMessageBox(divMessage, String.Format("Sorry! Enquiry {0} has already been Quotated .", enquiryNumber), true);
+        else if (msgType == "VC")
+            WebUtil.ShowMessageBox(divMessage, String.Format("Sorry! Enquiry {0} has been closed .", enquiryNumber), true);
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
@@ -189,8 +200,12 @@ public partial class Pages_QuotationChange : BasePage
         quotation.ValidityDays = customQuotation.ValidityDays;
         quotation.SubmissionDate = WebUtil.GetDate(customQuotation.SubmissionDate);
         quotation.DecisionDate = WebUtil.GetDate(customQuotation.DecisionDate);
-
+        quotation.CurrencyID = customQuotation.CurrencyID;
+        //var currency = dataContext.Currencies.SingleOrDefault(C => C.Description == ddlCurrency.SelectedValue);
+        //if(currency != null)
+        //    quotation.CurrencyID = currency.ID;
     }
+
     private static void ProcessAndSaveQuotation(Quotation quotation, IList < App.CustomModels.CustomQuotationPricingLine > pricingLineItems, OMMDataContext dataContext)
     {
         Enquiry enquiry = dataContext.Enquiries.SingleOrDefault(E => E.ID == quotation.EnquiryID);

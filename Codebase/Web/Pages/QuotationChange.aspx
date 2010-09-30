@@ -29,7 +29,7 @@
             if (Page_ClientValidate(validationGroup))
             {                
                 //SaveQuotationInformation();
-                MoveNext(stepID);
+                MoveNext(stepID);                
             }
         }
         function PrepareQuotationObject() {
@@ -47,6 +47,10 @@
         function SaveQuotationInformation() {
             ShowProgress();
             PrepareQuotationObject();
+            var currencyID = $('#<%= ddlCurrency.ClientID %>').val().split(':')[0];
+            alert(currencyID);
+            _CustomQuotation.CurrencyID = currencyID;
+            
             PageMethods.SaveQuotation(_CustomQuotation, _PricingList, OnSaveEnquirySuccess, OnAjax_Error, OnAjax_TimeOut);
         }
         function OnSaveEnquirySuccess(result)
@@ -81,7 +85,7 @@
             if(_EditIndex > -1)
                 _PricingList[_EditIndex] = pricingLine;
             else        
-                _PricingList.push(pricingLine);    
+                _PricingList.push(pricingLine);
         }
         function ShowPricingForm(showPricing) {
             if(showPricing)
@@ -123,8 +127,9 @@
                 
                 html += '<tr>';
                 html += '   <th>Item</th><th>Description</th><th>Pricing Type</th><th>Unit Price</th><th>Quantity</th><th style="text-align:right;">Price</th><th style="text-align:center;">Edit</th>';
-                html += '</tr>';
-                var currency = $('#<%= ddlCurrency.ClientID %>').val();
+                html += '</tr>';                
+                var currencySymbol = $('#<%= ddlCurrency.ClientID %>').val().split(':')[1];               
+                
                 var totalPrice = 0;
                 for(i = 0; i < _PricingList.length; i++)
                 {
@@ -135,13 +140,13 @@
                     html += '   <td>' + pricingLine.PricingType + '</td>';
                     html += '   <td>' + pricingLine.UnitPrice + '</td>';
                     html += '   <td>' + pricingLine.Quantity + '</td>';
-                    html += '   <td style="text-align:right;">' + jQuery.trim(currency) + pricingLine.Price + '</td>';
+                    html += '   <td style="text-align:right;">' + jQuery.trim(currencySymbol) + pricingLine.Price + '</td>';
                     html += '   <td style="text-align:center;"><a href="javascript:void(0);" onclick="LoadPricingForEdit(' + i + ')">Edit</a></td>';
                     html += '</tr>';                    
                     totalPrice += pricingLine.Price;
                 }
                 html += '<tr>';
-                html += '   <td colspan="6" style="text-align:right;"><b>Total Price:</b> &nbsp;<input type="text" readonly="readonly" value="' + jQuery.trim(currency) + totalPrice + '" style="text-align:right;" /></td>'; 
+                html += '   <td colspan="6" style="text-align:right;"><b>Total Price:</b> &nbsp;<input type="text" readonly="readonly" value="' + jQuery.trim(currencySymbol) + totalPrice + '" style="text-align:right;" /></td>'; 
                 html += '   <td></td>';
                 html += '</tr>';
                 html += '</table>';
