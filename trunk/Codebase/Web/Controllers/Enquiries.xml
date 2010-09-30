@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="Enquiries" conflictDetection="overwriteChanges" label="Enquiries" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="Enquiries" conflictDetection="overwriteChanges" label="Enquiries" actionHandlerType="CustomClass" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <command id="command1" type="Text">
       <text><![CDATA[select
