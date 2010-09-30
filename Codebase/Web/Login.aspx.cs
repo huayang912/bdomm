@@ -57,7 +57,7 @@ public partial class Login : BasePage
                 String userName = txtUserName.Text;
                 String password = txtUserPassword.Text;
                 //userName = ReplaceBadWords(userName);
-                var user = _DataContext.Users.SingleOrDefault(P => P.UserName == userName && P.Password == password);                
+                var user = _DataContext.Users.SingleOrDefault(P => P.UserNameWeb == userName && P.Password == password);                
                 LoginUser(user, userName, chkRememberMe.Checked);
             }
         }
