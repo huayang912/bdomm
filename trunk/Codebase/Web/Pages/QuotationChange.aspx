@@ -48,7 +48,7 @@
             ShowProgress();
             PrepareQuotationObject();
             var currencyID = $('#<%= ddlCurrency.ClientID %>').val().split(':')[0];
-            alert(currencyID);
+            //alert(currencyID);
             _CustomQuotation.CurrencyID = currencyID;
             
             PageMethods.SaveQuotation(_CustomQuotation, _PricingList, OnSaveEnquirySuccess, OnAjax_Error, OnAjax_TimeOut);

@@ -82,11 +82,18 @@ public partial class Pages_QuotationDecision : BasePage
         var quotation = dataContext.Quotations.SingleOrDefault(Q => Q.ID == quotationID);
         if (quotation != null)
         {
-            //quotation.StatusID = decision;
-            //quotation.ChangedByUserID = SessionCache.CurrentUser.ID;
-            //quotation.ChangedByUsername = SessionCache.CurrentUser.UserNameWeb;
-            //quotation.ChangedOn = DateTime.Now;
-            //dataContext.SubmitChanges();
+            quotation.StatusID = decision;
+            quotation.ChangedByUserID = SessionCache.CurrentUser.ID;
+            quotation.ChangedByUsername = SessionCache.CurrentUser.UserNameWeb;
+            quotation.ChangedOn = DateTime.Now;
+            //if (decision == App.CustomModels.QuotationStatus.Successful || decision == App.CustomModels.QuotationStatus.Unsuccessful)
+            //    quotation.Enquiry.StatusID = App.CustomModels.EnquiryStatus.Closed;
+            //else if (decision == App.CustomModels.QuotationStatus.ReQquoteRequested)
+            //{
+            //    //Create a New Quotation for this Enquiry with this objects data
+
+            //}
+            dataContext.SubmitChanges();
             return true;
         }
         return false;
