@@ -7,6 +7,11 @@ select
 	"Users"."ID" "ID"
 	,"Users"."UserName" "UserName"
 	,"Users"."DisplayName" "DisplayName"
+	,"Users"."Email" "Email"
+	,"Users"."Password" "Password"
+	,"Users"."ModifiedBy" "ModifiedBy"
+	,"Users"."Modified" "Modified"
+	,"Users"."UserNameWeb" "UserNameWeb"
 from "dbo"."Users" "Users"
 ]]></text>
     </command>
@@ -19,8 +24,9 @@ from "dbo"."Users" "Users"
   </commands>
   <fields xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" readOnly="true" label="Id" />
-    <field name="UserName" type="String" allowNulls="false" label="User Name" showInSummary="true" />
+    <field name="UserNameWeb" type="String" allowNulls="false" label="User Name" showInSummary="true" />
     <field name="DisplayName" type="String" allowNulls="false" label="Display Name" showInSummary="true" />
+    <field name="Password" type="String" allowNulls="false" label="Password" showInSummary="true" />
   </fields>
   <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <view id="grid1" type="Grid" commandId="command1" label="Users">
@@ -36,8 +42,9 @@ from "dbo"."Users" "Users"
         <category headerText="Users" newColumn="true">
           <description>$DefaultEditDescription</description>
           <dataFields>
-            <dataField fieldName="UserName" />
+            <dataField fieldName="UserNameWeb" />
             <dataField fieldName="DisplayName" />
+            <dataField fieldName="Password" />
           </dataFields>
         </category>
       </categories>
@@ -48,11 +55,13 @@ from "dbo"."Users" "Users"
         <category headerText="New Users" newColumn="true">
           <description>$DefaultNewDescription</description>
           <dataFields>
-            <dataField fieldName="UserName" />
+            <dataField fieldName="UserNameWeb" readOnly="" />
             <dataField fieldName="DisplayName" />
+            <dataField fieldName="Password" hidden="false" />
           </dataFields>
         </category>
       </categories>
+      <a:dataFields />
     </view>
   </views>
   <actions xmlns:a="urn:schemas-codeontime-com:data-aquarium">
