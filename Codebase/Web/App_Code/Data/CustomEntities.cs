@@ -35,6 +35,7 @@ namespace App.CustomModels
         public String MainEquipment { get; set; }
         public String SubmissionDate { get; set; }
         public String DecisionDate { get; set; }
+        public int CurrencyID { get; set; }
     }
     public class CustomQuotationPricingLine
     {

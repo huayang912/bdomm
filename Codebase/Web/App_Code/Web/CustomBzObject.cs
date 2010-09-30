@@ -15,28 +15,24 @@ namespace BUDI2_NS.Rules
         {
         }
 
-
-   
-
         protected override void BeforeSqlAction(ActionArgs args, ActionResult result)
         {
             try
             {
-			
-			   MembershipUser User = Membership.GetUser();
+                ///There is no need for the following line of Code.
+                ///Because We have Removed the MemberShip Provider from OMM project
+                //MembershipUser User = Membership.GetUser();
 
-                if (args.CommandName == "Insert" && args["CreatedByUsername"].Value == null)
+                //if (args.CommandName == "Insert" && args["CreatedByUsername"].Value == null)
+                if (args.CommandName == "Insert" && args["CreatedByUserID"].Value == null)
                 {
-                    
-                     
-                        args["CreatedByUsername"].NewValue = User.UserName;
-                        args["CreatedByUsername"].Modified = true;
+                    //args["CreatedByUsername"].NewValue = User.UserName;
+                    //args["CreatedByUsername"].Modified = true;
 
-                        //     args["CreatedByUserID"].NewValue = WindowsIdentity.GetCurrent().Name; 
-                        //      args["CreatedByUserID"].Modified = true;
-
-                    
-
+                    ///Currently Logged In User Object is Stored in Session
+                    ///So, get the UserID from There
+                    args["CreatedByUserID"].NewValue = SessionCache.CurrentUser.ID;
+                    args["CreatedByUserID"].Modified = true;
 
                     /*
                     MembershipUser User = Membership.GetUser();
@@ -60,36 +56,25 @@ namespace BUDI2_NS.Rules
                     */
 
                 }
-				
-				   if (args.CommandName == "Update")
+
+                if (args.CommandName == "Update")
                 {
-                    
-                        args["ChangedByUsername"].NewValue = User.UserName;
-                        args["ChangedByUsername"].Modified = true;
-
-                     
-
+                    //args["ChangedByUsername"].NewValue = User.UserName;
+                    //args["ChangedByUsername"].Modified = true;
+                    args["CreatedByUserID"].NewValue = SessionCache.CurrentUser.ID;
+                    args["CreatedByUserID"].Modified = true;
                 }
-				
-					   if (args.CommandName == "Insert")
+                if (args.CommandName == "Insert")
                 {
-                    
-                        args["ChangedByUsername"].NewValue = User.UserName;
-                        args["ChangedByUsername"].Modified = true;
-
-                     
-
+                    //args["ChangedByUsername"].NewValue = User.UserName;
+                    //args["ChangedByUsername"].Modified = true;
+                    args["CreatedByUserID"].NewValue = SessionCache.CurrentUser.ID;
+                    args["CreatedByUserID"].Modified = true;
                 }
-				
-				
-            } 
-
+            }
             catch
             {
             }
         }
-         
-
     }
-     
 }
