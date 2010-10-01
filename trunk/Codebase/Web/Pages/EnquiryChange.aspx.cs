@@ -56,6 +56,7 @@ public partial class Pages_EnquiryChange : BasePage
         ddlContact.DataTextField = "Name";
         ddlContact.DataValueField = "ID";        
         ddlContact.DataBind();
+        ddlContact.Items.Insert(0, new ListItem(String.Empty, String.Empty));
 
         ///Bind Enquiry Type Dropdown List
         var enquiryTypes = from P in context.EnquiryTypes

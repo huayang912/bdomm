@@ -14,6 +14,7 @@
         var _PricingList = new Array();
         var _CustomQuotation = null;
         var _QuotationID = <%=_ID.ToString() %>;
+        var _NewQuotationID = _QuotationID;
         var _EnquiryID = <%=_EnquiryID.ToString() %>;
         var _EditIndex = -1;
         
@@ -51,12 +52,12 @@
             //alert(currencyID);
             _CustomQuotation.CurrencyID = currencyID;
             
-            PageMethods.SaveQuotation(_CustomQuotation, _PricingList, OnSaveEnquirySuccess, OnAjax_Error, OnAjax_TimeOut);
+            PageMethods.SaveQuotation(_CustomQuotation, _PricingList, OnSaveQuotationSuccess, OnAjax_Error, OnAjax_TimeOut);
         }
-        function OnSaveEnquirySuccess(result)
+        function OnSaveQuotationSuccess(result)
         {
             HideProgress();
-            var id = result.split(':')[0];
+            _NewQuotationID = result.split(':')[0];
             var number = result.split(':')[1];                     
             $('#<%=lblQuotationMessage.ClientID %>').html('Quotation <b>' + number + '</b> has been successfully created.');
             MoveNext(3);            
@@ -189,7 +190,11 @@
         }
         function SubmitQuotation()
         {
-            ///There Is No Operation Specified in the Windows Application for this
+            if($('#<%=chkSubmitQuotation.ClientID %>').is(':checked'))
+            {
+                if(_NewQuotationID > 0)
+                    window.location = '<%=AppConstants.Pages.QUOTATION_SUBMIT + "?" + AppConstants.QueryString.ID %>=' + _NewQuotationID;
+            }
         }
         ///Page Load
         $(document).ready(function(){
@@ -432,13 +437,13 @@
             <div>
                 <asp:Label ID="lblQuotationMessage" runat="server" Text=""></asp:Label>               
                 <div style="margin-top:15px;">
-                    <asp:CheckBox ID="chkSubmitQuotation" Enabled="false" runat="server" Text="Submit this quotation now." />
+                    <asp:CheckBox ID="chkSubmitQuotation" runat="server" Text="Submit this quotation now." />
                 </div>                
             </div>
             <%-- Next Previous Buttons --%>
             <div style="margin-top:20px;">
                 <%--<input type="button" value="< Back" onclick="MoveNext(2);" />&nbsp;--%>
-                <input type="button" value="Close" disabled="disabled" onclick="SubmitQuotation();" />
+                <input type="button" value="Close" onclick="SubmitQuotation();" />
             </div>
         </div>
         

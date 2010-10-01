@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -204,14 +205,14 @@ public class WebUtil
     {
         if (HttpContext.Current.User.Identity.IsAuthenticated && SessionCache.CurrentUser == null)
         {
-            //String userName = HttpContext.Current.User.Identity.Name;
+            String userName = HttpContext.Current.User.Identity.Name;
 
-            //App.DAL.Admin.AdminSystemUserDAO userDAO = new App.DAL.Admin.AdminSystemUserDAO();
-            //App.Models.Admin.AdminSystemUser user = userDAO.GetByUserName(userName);
-            //if (user != null)
-            //{
-            //    SessionCache.CurrentUser = user;
-            //}
+            OMMDataContext dataContext = new OMMDataContext();
+            var user = dataContext.Users.SingleOrDefault(U => U.UserNameWeb == userName);
+            if (user != null)
+            {
+                SessionCache.CurrentUser = user;
+            }
         }
     }
     /// <summary>

@@ -27,7 +27,7 @@ public class BasePage : System.Web.UI.Page
         //
         // TODO: Add constructor logic here
         //
-        //WebUtil.LoginUser();
+        WebUtil.LoginUser();
     }
 
     #region Overridden Page load event
