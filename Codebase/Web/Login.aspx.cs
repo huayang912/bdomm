@@ -90,7 +90,7 @@ public partial class Login : BasePage
 
             ///After Successfull Login Redirect to the Requested Page
             //System.Web.Security.FormsAuthentication.RedirectFromLoginPage(user.UserLogInName, rememberMe);
-            FormsAuthenticationUtil.RedirectFromLoginPage(user.UserName, "Administrator", rememberMe);
+            FormsAuthenticationUtil.RedirectFromLoginPage(user.UserNameWeb, "Administrator", rememberMe);
         }
     }
     protected void LogOutUser()

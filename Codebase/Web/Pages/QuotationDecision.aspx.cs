@@ -83,6 +83,10 @@ public partial class Pages_QuotationDecision : BasePage
         if (quotation != null)
         {
             quotation.StatusID = decision;
+            ///If Requote is Requested for this quotation
+            if (decision == App.CustomModels.QuotationStatus.ReQquoteRequested)
+                quotation.Number = dataContext.GenerateNewQuotationNumber(quotation.EnquiryID, true);
+
             quotation.ChangedByUserID = SessionCache.CurrentUser.ID;
             quotation.ChangedByUsername = SessionCache.CurrentUser.UserNameWeb;
             quotation.ChangedOn = DateTime.Now;

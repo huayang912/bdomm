@@ -72,6 +72,9 @@ public class AppConstants
         public const String ORGANIZATION_MANAGEMENT = "/Pages/Private/OrganizationManagement.aspx";
         public const String SHOW_CONTENT = "/Pages/Public/ShowContent.aspx";
         public const String SHOW_MESSAGE = "/Pages/Public/ShowMessage.aspx";
+
+        public const String QUOTATION_SUBMIT = "QuotationSubmit.aspx";
+        public const String QUOTATION_DECISION = "QuotationDecision.aspx";
         #endregion
     }
     #endregion
