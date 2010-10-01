@@ -63,6 +63,7 @@ public class AjaxService : System.Web.Services.WebService {
         if (quotation != null)
         {
             quotation.StatusID = App.CustomModels.QuotationStatus.Submitted;
+            quotation.Number = dataContext.GenerateNewQuotationNumber(quotation.EnquiryID, true);
             dataContext.SubmitChanges();
             return quotation.Number;
         }
