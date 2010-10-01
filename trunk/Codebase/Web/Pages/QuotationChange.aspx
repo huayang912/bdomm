@@ -193,7 +193,7 @@
             if($('#<%=chkSubmitQuotation.ClientID %>').is(':checked'))
             {
                 if(_NewQuotationID > 0)
-                    window.location = '<%=AppConstants.Pages.QUOTATION_SUBMIT + "?" + AppConstants.QueryString.ID %>=' + _NewQuotationID;
+                    window.location = '<%=AppConstants.Pages.QUOTATION_SUBMIT + "?" + AppConstants.QueryString.ID %>=' + _NewQuotationID + '&Rnd=' + GetRandomNumber();
             }
         }
         ///Page Load
