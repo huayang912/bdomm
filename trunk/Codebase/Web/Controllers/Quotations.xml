@@ -249,6 +249,7 @@
       <action id="a6" />
       <action id="a2" commandName="Edit" />
       <action id="a8" commandName="New" commandArgument="grid1" />
+	    <action id="a103" commandName="Navigate" commandArgument="~/pages/QuotationDecision.aspx?ID={ID}" headerText="Submit This Quotation" causesValidation="true" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
