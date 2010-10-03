@@ -43,13 +43,7 @@ public partial class Pages_QuotationChange : BasePage
     /// </summary>
     protected void BindDropDownLists()
     {
-        OMMDataContext dataContext = new OMMDataContext();
-
-        ///TODO: Where In example in LINQ
-        //int[] ids = {1,2,3};        
-        //IList<Message_Recipient> recipients = (from R in dataContext.Message_Recipients
-        //                                       where (from I in ids select I).Contains(R.ID)
-        //                                       select R).ToList();
+        OMMDataContext dataContext = new OMMDataContext();       
 
         IList<Currency> currencies = (from C in dataContext.Currencies select C).ToList();
         ddlCurrency.DataSource = currencies;
@@ -57,9 +51,6 @@ public partial class Pages_QuotationChange : BasePage
         {
             ddlCurrency.Items.Add(new ListItem(c.Description, String.Format("{0}:{1}", c.ID, c.ShortCode)));
         }
-        //ddlCurrency.DataValueField = "ShortCode";
-        //ddlCurrency.DataTextField = "Description";
-        //ddlCurrency.DataBind();
 
         IList<QuotationPricingType> pricingTypes = (from C in dataContext.QuotationPricingTypes select C).ToList();
         ddlPricingTypeID.DataSource = pricingTypes;
@@ -83,12 +74,13 @@ public partial class Pages_QuotationChange : BasePage
         else
         {
             ltrHeading.Text = String.Format("Create New Quotation Wizard - Enquiry {0}", enquiry.Number);
-            if (enquiry.StatusID == App.CustomModels.EnquiryStatus.Quoted)
-            {
-                ShowErroMessag("V", enquiry.Number);
-                return;
-            }
-            else if (enquiry.StatusID == App.CustomModels.EnquiryStatus.Closed)
+            //if (enquiry.StatusID == App.CustomModels.EnquiryStatus.Quoted)
+            //{
+            //    ShowErroMessag("V", enquiry.Number);
+            //    return;
+            //}
+            //else 
+            if (enquiry.StatusID == App.CustomModels.EnquiryStatus.Closed)
             {
                 ShowErroMessag("VC", enquiry.Number);
                 return;
@@ -103,31 +95,20 @@ public partial class Pages_QuotationChange : BasePage
             if (enquiry == null || quotation == null)
                 ShowErroMessag("Q", String.Empty);            
             else
-            {                
-                //txtNumber.Text = entity.Number;
-                //ddlEnquiryID.SetSelectedItem(entity.EnquiryID);
-                //ddlStatusID.SetSelectedItem(entity.StatusID);
-                txtSubcontractor.Text = quotation.Subcontractor;
-                txtScopeOfWork.Text = quotation.ScopeOfWork;
-                txtMainEquipment.Text = quotation.MainEquipment;
-                txtValidityDays.Text = quotation.ValidityDays.ToString();
-                txtSchedule.Text = quotation.Schedule;
-                txtSubmissionDate.Text = quotation.SubmissionDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat);
-                //chkDecisionSuccessful.Checked = entity.DecisionSuccessful;
-                txtDecisionDate.Text = quotation.DecisionDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat);
-                //txtCreatedOn.Text = entity.CreatedOn.ToString(ConfigReader.CSharpCalendarDateFormat));
-                //ddlCreatedByUserID.SetSelectedItem(entity.CreatedByUserID);
-                //txtChangedOn.Text = entity.ChangedOn.ToString(ConfigReader.CSharpCalendarDateFormat));
-                //ddlChangedByUserID.SetSelectedItem(entity.ChangedByUserID);
-                //txtVersion.Text = entity.Version;
-                //ddlSubmittedToClientContactID.SetSelectedItem(entity.SubmittedToClientContactID);
-                //ddlCurrencyID.SetSelectedItem(entity.CurrencyID);
-                //txtCreatedByUsername.Text = entity.CreatedByUsername;
-                //txtChangedByUsername.Text = entity.ChangedByUsername;
-                //txtContractawardedto.Text = entity.Contractawardedto;
-                //txtContractawardedValue.Text = entity.ContractawardedValue;
-                //txtNewStatusID.Text = entity.NewStatusID; 
-                BindQuotationPricingList(dataContext);     
+            {
+                if (quotation.StatusID == App.CustomModels.QuotationStatus.NotSubmitted)
+                {
+                    txtSubcontractor.Text = quotation.Subcontractor;
+                    txtScopeOfWork.Text = quotation.ScopeOfWork;
+                    txtMainEquipment.Text = quotation.MainEquipment;
+                    txtValidityDays.Text = quotation.ValidityDays.ToString();
+                    txtSchedule.Text = quotation.Schedule;
+                    txtSubmissionDate.Text = quotation.SubmissionDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat);
+                    txtDecisionDate.Text = quotation.DecisionDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat);
+                    BindQuotationPricingList(dataContext);
+                }
+                else                
+                    ShowErroMessag("QCE", String.Empty);                
             }            
         }
     }
@@ -138,9 +119,21 @@ public partial class Pages_QuotationChange : BasePage
     /// <param name="dataContext"></param>
     protected void BindQuotationPricingList(OMMDataContext dataContext)
     {
-        IList<QuotationPricingLine> pricings = (from Q in dataContext.QuotationPricingLines
+        IList<App.CustomModels.CustomQuotationPricingLine> pricings = (from Q in dataContext.QuotationPricingLines
                                                 where Q.QuotationID == _ID
-                                                select Q).ToList();
+                                                select new App.CustomModels.CustomQuotationPricingLine
+                                                {
+                                                    ID = Q.ID,
+                                                    Description = Q.Description,
+                                                    Item = Q.Item,
+                                                    PricingTypeID = Q.PricingTypeID.GetValueOrDefault(),
+                                                    Price = Q.UnitPrice.GetValueOrDefault() * Q.Quantity.GetValueOrDefault(),
+                                                    PricingType = Q.PricingTypeID == null ? String.Empty : Q.QuotationPricingType.Name,
+                                                    Quantity = Q.Quantity.GetValueOrDefault(),
+                                                    QuotationID = Q.QuotationID,
+                                                    UnitPrice = Q.UnitPrice.GetValueOrDefault()
+                                                }
+                                                ).ToList();
         
         if(pricings != null && pricings.Count > 0)
             hdnQuotationPricings.Value = pricings.ToJSON();
@@ -152,14 +145,16 @@ public partial class Pages_QuotationChange : BasePage
     protected void ShowErroMessag(String msgType,  String enquiryNumber)
     {
         pnlDetails.Visible = false;
-        if(msgType == "E")
+        if (msgType == "E")
             WebUtil.ShowMessageBox(divMessage, "Sorry! requested Enquiry was not found.", true);
-        else if(msgType == "Q")
+        else if (msgType == "Q")
             WebUtil.ShowMessageBox(divMessage, "Sorry! requested Quotation was not found.", true);
         else if (msgType == "V")
             WebUtil.ShowMessageBox(divMessage, String.Format("Sorry! Enquiry {0} has already been Quotated .", enquiryNumber), true);
         else if (msgType == "VC")
             WebUtil.ShowMessageBox(divMessage, String.Format("Sorry! Enquiry {0} has been closed .", enquiryNumber), true);
+        else if (msgType == "QCE")
+            WebUtil.ShowMessageBox(divMessage, "Sorry! This Quotation cannot be edited", true);
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
@@ -215,7 +210,7 @@ public partial class Pages_QuotationChange : BasePage
             enquiry.StatusID = App.CustomModels.EnquiryStatus.Quoted;
             dataContext.Quotations.InsertOnSubmit(quotation);            
         }
-        else if (quotation.StatusID == 3)
+        else if (quotation.StatusID == App.CustomModels.QuotationStatus.Unsuccessful)// 3)
             enquiry.StatusID = App.CustomModels.EnquiryStatus.Closed;
         else if (quotation.StatusID == App.CustomModels.QuotationStatus.Successful)
             enquiry.StatusID = App.CustomModels.EnquiryStatus.Closed;
@@ -225,10 +220,13 @@ public partial class Pages_QuotationChange : BasePage
             ///QuotationDataset.cs. Line 591
         }
         ///QuotationPricingLine Section
-        foreach (App.CustomModels.CustomQuotationPricingLine pricing in pricingLineItems)
+        if (pricingLineItems != null && pricingLineItems.Count > 0)
         {
-            quotation.QuotationPricingLines.Add(PreparePricingLineItem(pricing));
-        }        
+            foreach (App.CustomModels.CustomQuotationPricingLine pricing in pricingLineItems)
+            {
+                quotation.QuotationPricingLines.Add(PreparePricingLineItem(pricing));
+            }
+        }
 
         ///Project Section
         ///TODO: Could not found the code that how it is bind to the UI while creating quotation
