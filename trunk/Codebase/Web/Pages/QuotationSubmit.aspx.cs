@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Services;
+using App.Core.Extensions;
 
 public partial class Pages_QuotationDecision : BasePage
 {
@@ -75,9 +76,22 @@ public partial class Pages_QuotationDecision : BasePage
             {
                 ShowErroMessag("V", quotation.Number);
                 return;
-            }            
+            }
+            else
+                BindClientContactInfo(quotation.Enquiry);
         }
         Page.Title = ltrHeading.Text;       
+    }
+    protected void BindClientContactInfo(Enquiry enquiry)
+    {
+        if (enquiry != null)
+        {
+            ddlContact.SetSelectedItem(enquiry.ContactID.ToString());
+            txtClientName.Text = enquiry.ClientContact.Client.Name;
+            txtContactName.Text = enquiry.ClientContact.Name;
+            txtJobTitle.Text = enquiry.ClientContact.JobTitle;
+            txtCountry.Text = enquiry.ClientContact.Country.Name;
+        }
     }
     /// <summary>
     /// Shows a Message in the UI and Hides the Data Editing Controls
@@ -88,7 +102,7 @@ public partial class Pages_QuotationDecision : BasePage
         if (msgType == "Q")
             WebUtil.ShowMessageBox(divMessage, "Sorry! requested Quotation was not found.", true);
         else if (msgType == "V")
-            WebUtil.ShowMessageBox(divMessage, String.Format("Sorry! You cannot Submit this type of Quotation. Quotation Number is {0}", quotationNumber), true);
+            WebUtil.ShowMessageBox(divMessage, String.Format("Sorry! Only <b>Not Submit</b> Quotations can be Submitted."), true);
         else if (msgType == "VC")
             WebUtil.ShowMessageBox(divMessage, String.Format("Sorry! Enquiry {0} has been closed .", quotationNumber), true);
     }

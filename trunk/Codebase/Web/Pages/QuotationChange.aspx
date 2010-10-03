@@ -23,6 +23,10 @@
                 document.getElementById('divStep' + i).style.display = 'none';
             }
             document.getElementById('divStep' + stepIndex).style.display = 'block';
+            if(stepIndex == 2)
+            {
+                ShowPricingForm(false);
+            }
         }
         ///Quotations 
         function ValidateAndMoveNext(validationGroup, stepID)
@@ -52,7 +56,7 @@
             //alert(currencyID);
             _CustomQuotation.CurrencyID = currencyID;
             
-            PageMethods.SaveQuotation(_CustomQuotation, _PricingList, OnSaveQuotationSuccess, OnAjax_Error, OnAjax_TimeOut);
+            PageMethods.SaveQuotation(_CustomQuotation, _PricingList.length == 0 ? null : _PricingList, OnSaveQuotationSuccess, OnAjax_Error, OnAjax_TimeOut);
         }
         function OnSaveQuotationSuccess(result)
         {
