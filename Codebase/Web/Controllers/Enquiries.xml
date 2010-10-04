@@ -165,11 +165,7 @@ from "dbo"."Enquiries" "Enquiries"
   <actions xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <actionGroup id="ag1" scope="Grid">
       <action id="a1" commandName="Select" commandArgument="editForm1" />
-      <action id="a2" commandName="Edit" />
-      <action id="a3" commandName="Delete" />
       <action id="a6" />
-      <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
-      <action id="a8" commandName="New" commandArgument="grid1" />
       <action id="a100" commandName="Navigate" commandArgument="~/pages/QuotationChange.aspx?ENQID={ID}" causesValidation="true" headerText="Add Quotation" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
@@ -185,7 +181,8 @@ from "dbo"."Enquiries" "Enquiries"
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a1" commandName="Navigate" commandArgument="~/pages/EnquiryChange.aspx"  causesValidation="true" headerText="New" />
+
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
