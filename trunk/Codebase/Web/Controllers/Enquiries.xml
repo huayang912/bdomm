@@ -140,10 +140,10 @@ from "dbo"."Enquiries" "Enquiries"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Enquiries">
+    <view id="createForm1" type="Form" commandId="command1" label="New Enquiry">
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
-        <category headerText="New Enquiries" newColumn="true">
+        <category headerText="New Enquiry" newColumn="true">
           <description>$DefaultNewDescription</description>
           <dataFields>
             <dataField fieldName="Number" hidden="true" columns="50" />
@@ -181,8 +181,9 @@ from "dbo"."Enquiries" "Enquiries"
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="Navigate" commandArgument="~/pages/EnquiryChange.aspx"  causesValidation="true" headerText="New" />
-
+      <!--<action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />-->
+      <!--<action id="a103" commandName="Navigate" commandArgument="~/pages/QuotationSubmit.aspx?ID={ID}" headerText="Submit This Quotation" causesValidation="true" />-->
+      <action id="a1" commandName="Navigate" commandArgument="~/Pages/EnquiryChange.aspx" headerText="New Enquiry" cssClass="NewIcon"/>    
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
