@@ -222,9 +222,13 @@ public partial class Pages_QuotationChange : BasePage
         ///QuotationPricingLine Section
         if (pricingLineItems != null && pricingLineItems.Count > 0)
         {
+            ///If in Edit Mode Delete existing data first then insert new ones
+            if (quotation.ID > 0)
+                quotation.QuotationPricingLines.Clear();
+
             foreach (App.CustomModels.CustomQuotationPricingLine pricing in pricingLineItems)
             {
-                quotation.QuotationPricingLines.Add(PreparePricingLineItem(pricing));
+                quotation.QuotationPricingLines.Add(PreparePricingLineItem(pricing, quotation.ID));
             }
         }
 
@@ -253,9 +257,10 @@ public partial class Pages_QuotationChange : BasePage
         dataContext.SubmitChanges();        
     }
 
-    private static QuotationPricingLine PreparePricingLineItem(App.CustomModels.CustomQuotationPricingLine pricing)
+    private static QuotationPricingLine PreparePricingLineItem(App.CustomModels.CustomQuotationPricingLine pricing, int quotationID)
     {
         QuotationPricingLine lineItem = new QuotationPricingLine();
+        lineItem.QuotationID = quotationID;
         lineItem.Description = pricing.Description;
         lineItem.Item = pricing.Item;
         lineItem.PricingTypeID = pricing.PricingTypeID;

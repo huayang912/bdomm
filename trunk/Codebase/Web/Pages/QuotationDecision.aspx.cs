@@ -9,6 +9,7 @@ using System.Web.Services;
 public partial class Pages_QuotationDecision : BasePage
 {
     protected int _QuotationID = 0;
+    protected int _EnquiryID = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -52,7 +53,8 @@ public partial class Pages_QuotationDecision : BasePage
             {
                 ShowErroMessag("V", quotation.Number);
                 return;
-            }            
+            }
+            _EnquiryID = quotation.EnquiryID;
         }
         Page.Title = ltrHeading.Text;       
     }
@@ -76,7 +78,7 @@ public partial class Pages_QuotationDecision : BasePage
     /// <param name="decision"></param>
     /// <returns></returns>
     [WebMethod]
-    public static bool SaveDecision(int quotationID, int decision)
+    public static String SaveDecision(int quotationID, int decision)
     {
         OMMDataContext dataContext = new OMMDataContext();
         var quotation = dataContext.Quotations.SingleOrDefault(Q => Q.ID == quotationID);
@@ -85,7 +87,10 @@ public partial class Pages_QuotationDecision : BasePage
             quotation.StatusID = decision;
             ///If Requote is Requested for this quotation
             if (decision == App.CustomModels.QuotationStatus.ReQquoteRequested)
+            {
                 quotation.Number = dataContext.GenerateNewQuotationNumber(quotation.EnquiryID, true);
+                quotation.StatusID = App.CustomModels.QuotationStatus.NotSubmitted;
+            }
 
             quotation.ChangedByUserID = SessionCache.CurrentUser.ID;
             quotation.ChangedByUsername = SessionCache.CurrentUser.UserNameWeb;
@@ -98,8 +103,8 @@ public partial class Pages_QuotationDecision : BasePage
 
             //}
             dataContext.SubmitChanges();
-            return true;
+            return String.Format("{0}:{1}", quotation.ID, quotation.Number);
         }
-        return false;
+        return String.Empty ;
     }
 }

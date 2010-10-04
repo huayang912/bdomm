@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <script language="javascript" type="text/javascript">
         var _QuotationID = <%= _QuotationID.ToString()%>;
+        var _EnquiryID = <%= _EnquiryID.ToString() %>;
         var _Decision = null;
         
         function MoveNext(stepIndex) {
@@ -29,7 +30,7 @@
         function OnSaveDecisionSuccess(result)
         {
             HideProgress();
-            if(result == true)
+            if(result.length > 0)
             {
                 MoveNext(2);
                 if(_Decision == 4 || _Decision == 3) ///Successfull OR Not Successfull
@@ -43,6 +44,16 @@
                     $('#divCheckContainer').show();                    
                 }                                
             }
+        }
+        function MovePage()
+        {
+            if(_Decision == 5) ///Requote
+            {
+                //$('#divDecisionMessage').html('The quotation has been updated, and a new quotation based on this one has been created.');
+                //$('#divCheckContainer').show();
+                if($('#<%=chkRevisedQuotation.ClientID %>').is(':checked')) 
+                    window.location = '<%=AppConstants.Pages.QUOTATION_CHANGE + "?" + AppConstants.QueryString.ID %>=' + _QuotationID + '&<%=String.Format("{0}={1}", AppConstants.QueryString.ENQUIRY_ID, _EnquiryID) %>&Rnd=' + GetRandomNumber();
+            }                        
         }
     </script>    
 </asp:Content>
@@ -105,13 +116,13 @@
                 <div id="divDecisionMessage"></div>
                 
                 <div id="divCheckContainer" style="margin-top:15px;">
-                    <asp:CheckBox ID="chkSubmitQuotation" Enabled="false" runat="server" Text="Submit this quotation now." />
+                    <asp:CheckBox ID="chkRevisedQuotation" runat="server" Text="View Revised Quotation Now." />
                 </div>                
             </div>
             <%-- Next Previous Buttons --%>
             <div style="margin-top:20px;">
                 <%--<input type="button" value="< Back" onclick="MoveNext(2);" />&nbsp;--%>
-                <input type="button" value="Close" disabled="disabled" onclick="MovePage();" />
+                <input type="button" value="Close" onclick="MovePage();" />
             </div>
         </div>
     
