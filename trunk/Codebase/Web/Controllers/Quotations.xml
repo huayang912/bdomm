@@ -247,8 +247,6 @@
       <action id="a101" headerText="Successful" causesValidation="true" commandName="Custom" commandArgument="SetQuoteStatusSuccess" />
       <action id="a102" headerText="Closed" causesValidation="true" commandName="Custom" commandArgument="SetQuoteStatusClosed" />
       <action id="a6" />
-      <action id="a2" commandName="Edit" />
-      <action id="a8" commandName="New" commandArgument="grid1" />
 	    <action id="a103" commandName="Navigate" commandArgument="~/pages/QuotationSubmit.aspx?ID={ID}" headerText="Submit This Quotation" causesValidation="true" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
@@ -263,9 +261,7 @@
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
-    </actionGroup>
+  
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
