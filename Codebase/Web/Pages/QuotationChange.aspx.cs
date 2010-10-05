@@ -223,8 +223,9 @@ public partial class Pages_QuotationChange : BasePage
         if (pricingLineItems != null && pricingLineItems.Count > 0)
         {
             ///If in Edit Mode Delete existing data first then insert new ones
-            if (quotation.ID > 0)
-                quotation.QuotationPricingLines.Clear();
+            //TODO: We will need to change it to work in edit mode. 
+            //if (quotation.ID > 0)
+            //    quotation.QuotationPricingLines.Clear();
 
             foreach (App.CustomModels.CustomQuotationPricingLine pricing in pricingLineItems)
             {

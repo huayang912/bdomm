@@ -149,7 +149,7 @@
                 <asp:RequiredFieldValidator ID="rfvDetails" runat="server"
                     SetFocusOnError="true" Display="Dynamic"
                     ControlToValidate="txtDetails" ValidationGroup="SaveInfo3"
-                    ErrorMessage="Please Enter Details.">                    
+                    ErrorMessage="Please Enter Enquiry Details.">                    
                 </asp:RequiredFieldValidator>
             </div>
             <%--<div style="height:100px;">&nbsp;</div>--%>

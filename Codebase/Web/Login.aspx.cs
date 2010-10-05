@@ -34,11 +34,11 @@ public partial class Login : BasePage
             {
                 base.SignoutUser();
             }
-            //else if (SessionCache.CurrentUser != null)
-            //{
-            //    Response.Redirect(AppConstants.Pages.PERFORMENCE_TABLE, false);
-            //    return;
-            //}
+            else if (SessionCache.CurrentUser != null)
+            {
+                Response.Redirect(AppConstants.Pages.HOME_PAGE, false);
+                return;
+            }
             txtUserName.Focus();
         }
     }

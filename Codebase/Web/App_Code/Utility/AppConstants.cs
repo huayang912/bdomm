@@ -23,8 +23,8 @@ public class AppConstants
     #region Pages
     public class Pages
     {        
-        public const String HOME_PAGE = "/Default.aspx";
-        public const String LOG_IN = "/Pages/Public/Login.aspx";
+        public const String HOME_PAGE = "~/Pages/Home.aspx";
+        public const String LOG_IN = "~/Login.aspx";
         public const String ERROR = "/Error.aspx";
         public const String ORGANIZATION_MANAGEMENT = "/Pages/Private/OrganizationManagement.aspx";
         public const String SHOW_CONTENT = "/Pages/Public/ShowContent.aspx";

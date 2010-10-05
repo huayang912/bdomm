@@ -90,7 +90,8 @@ public partial class Pages_QuotationDecision : BasePage
             txtClientName.Text = enquiry.ClientContact.Client.Name;
             txtContactName.Text = enquiry.ClientContact.Name;
             txtJobTitle.Text = enquiry.ClientContact.JobTitle;
-            txtCountry.Text = enquiry.ClientContact.Country.Name;
+            if(enquiry.ClientContact.CountryID.GetValueOrDefault() > 0 ) 
+                txtCountry.Text = enquiry.ClientContact.Country.Name;
         }
     }
     /// <summary>
