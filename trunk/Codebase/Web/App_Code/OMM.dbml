@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="OMM" Class="OMMDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=MIMI-PC;Initial Catalog=OMM;Integrated Security=False;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BUDI2_NS" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=MOMIN-PC\SQLEXPRESS;Initial Catalog=OMM2;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BUDI2_NS" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Message_Recipients" Member="Message_Recipients">
     <Type Name="Message_Recipient">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -58,6 +58,7 @@
       <Association Name="Client_ClientContact" Member="Client" ThisKey="CompanyID" OtherKey="ID" Type="Client" IsForeignKey="true" />
       <Association Name="Country_ClientContact" Member="Country" ThisKey="CountryID" OtherKey="ID" Type="Country" IsForeignKey="true" />
       <Association Name="User_ClientContact" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+      <Association Name="Country_ClientContact1" Member="Country1" ThisKey="CountryID" OtherKey="ID" Type="Country" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Clients" Member="Clients">
@@ -90,6 +91,7 @@
       <Column Name="Code" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
       <Association Name="Country_ClientContact" Member="ClientContacts" ThisKey="ID" OtherKey="CountryID" Type="ClientContact" />
       <Association Name="Country_Client" Member="Clients" ThisKey="ID" OtherKey="CountryID" Type="Client" />
+      <Association Name="Country_ClientContact1" Member="ClientContacts1" ThisKey="ID" OtherKey="CountryID" Type="ClientContact" />
     </Type>
   </Table>
   <Table Name="dbo.Enquiries" Member="Enquiries">
