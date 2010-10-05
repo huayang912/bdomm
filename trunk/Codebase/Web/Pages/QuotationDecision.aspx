@@ -37,6 +37,7 @@
                 {
                     $('#divDecisionMessage').html('The quotation has been updated and the enquiry has been closed.');
                     $('#divCheckContainer').hide();
+                    $('#btnClose').hide();
                 }
                 else if(_Decision == 5) ///Requote
                 {
@@ -122,7 +123,7 @@
             <%-- Next Previous Buttons --%>
             <div style="margin-top:20px;">
                 <%--<input type="button" value="< Back" onclick="MoveNext(2);" />&nbsp;--%>
-                <input type="button" value="Close" onclick="MovePage();" />
+                <input id="btnClose" type="button" value="Close" onclick="MovePage();" />
             </div>
         </div>
     
