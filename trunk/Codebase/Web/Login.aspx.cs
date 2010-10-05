@@ -46,20 +46,17 @@ public partial class Login : BasePage
     {
         if (Page.IsValid)
         {
-            if (Page.IsValid)
+            if (SessionCache.FailedLoginAttemptCount >= 4)
             {
-                if (SessionCache.FailedLoginAttemptCount >= 4)
-                {
-                    SessionCache.NotificationMessage = "Repeated multiple attempts have been made trying to access this site.";
-                    Response.Redirect(AppConstants.Pages.SHOW_MESSAGE, false);
-                    return;
-                }
-                String userName = txtUserName.Text;
-                String password = txtUserPassword.Text;
-                //userName = ReplaceBadWords(userName);
-                var user = _DataContext.Users.SingleOrDefault(P => P.UserNameWeb == userName && P.Password == password);                
-                LoginUser(user, userName, chkRememberMe.Checked);
+                SessionCache.NotificationMessage = "Repeated multiple attempts have been made trying to access this site.";
+                Response.Redirect(AppConstants.Pages.SHOW_MESSAGE, false);
+                return;
             }
+            String userName = txtUserName.Text;
+            String password = txtUserPassword.Text;
+            //userName = ReplaceBadWords(userName);
+            var user = _DataContext.Users.SingleOrDefault(P => P.UserNameWeb == userName && P.Password == password);
+            LoginUser(user, userName, chkRememberMe.Checked);
         }
     }
 
