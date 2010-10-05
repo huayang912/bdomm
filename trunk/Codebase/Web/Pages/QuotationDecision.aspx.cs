@@ -15,7 +15,7 @@ public partial class Pages_QuotationDecision : BasePage
     {
         BindPageInfo();
         if (!IsPostBack)
-        {            
+        {
             BindQuotationsInfo();
         }
     }
@@ -24,10 +24,10 @@ public partial class Pages_QuotationDecision : BasePage
     /// </summary>
     protected void BindPageInfo()
     {
-        _QuotationID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);        
+        _QuotationID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);
 
         if (_QuotationID == 0)
-        {            
+        {
             //ltrHeading.Text = "Edit Quotations Wizard";
             //ShowErroMessag("Requested Quotation ");
         }
@@ -56,14 +56,14 @@ public partial class Pages_QuotationDecision : BasePage
             }
             _EnquiryID = quotation.EnquiryID;
         }
-        Page.Title = ltrHeading.Text;       
+        Page.Title = ltrHeading.Text;
     }
     /// <summary>
     /// Shows a Message in the UI and Hides the Data Editing Controls
     /// </summary>
     protected void ShowErroMessag(String msgType, String quotationNumber)
     {
-        pnlDetails.Visible = false;        
+        pnlDetails.Visible = false;
         if (msgType == "Q")
             WebUtil.ShowMessageBox(divMessage, "Sorry! requested Quotation was not found.", true);
         else if (msgType == "V")
@@ -102,9 +102,27 @@ public partial class Pages_QuotationDecision : BasePage
             //    //Create a New Quotation for this Enquiry with this objects data
 
             //}
+            if (decision == App.CustomModels.QuotationStatus.Successful)
+                quotation.Projects.Add(CreateProjectFromQuotation(quotation, dataContext));
+
             dataContext.SubmitChanges();
             return String.Format("{0}:{1}", quotation.ID, quotation.Number);
         }
-        return String.Empty ;
+        return String.Empty;
+    }
+
+    private static Project CreateProjectFromQuotation(Quotation quotation, OMMDataContext dataContext)
+    {
+        Project project = new Project();       
+        project.Description = quotation.Enquiry.EnguirySubject;
+        project.ChangedByUserID = project.CreatedByUserID = SessionCache.CurrentUser.ID;
+        project.CreatedByUsername = project.ChangedByUsername = SessionCache.CurrentUser.UserNameWeb;
+        project.CreatedOn = project.ChangedOn = DateTime.Now;
+        project.StatusID = App.CustomModels.ProjectStatus.InProgress;
+        project.StartDate = DateTime.Now;
+        project.EndDate = DateTime.Now.AddDays(quotation.ValidityDays);
+        project.Number = dataContext.GenerateNewProjectNumber();
+        project.Name = quotation.Enquiry.ClientContact.Name;
+        return project;
     }
 }

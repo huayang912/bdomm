@@ -6,7 +6,7 @@
     <title>Main</title>
     <link href="Scripts/Main.css" rel="Stylesheet" type="text/css" />    
     <script language="javascript" src="../Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>    
-    <asp:ContentPlaceHolder ID="head" runat="server" />
+    <asp:ContentPlaceHolder ID="head" runat="server" ></asp:ContentPlaceHolder>
     
   </head>
   
@@ -14,11 +14,17 @@
   
     <form id="form1" runat="server">
       <div>
+        
         <act:ToolkitScriptManager ID="sm" runat="server" ScriptMode="Release" EnableScriptGlobalization="True" EnablePageMethods="true" />
-        <aquarium:MembershipBar ID="mb" runat="server" DisplayMyAccount="False" DisplayLogin="False" />
+        <aquarium:MembershipBar ID="mb" runat="server" DisplayMyAccount="false" DisplayLogin="false" DisplayHelp="false" />
+        
         <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" ShowStartingNode="False" />
         <div id="PageHeader">
-          <div id="PageHeaderBar">BUDI</div>
+          <div id="PageHeaderBar">
+            <div class="floatleft">BUDI</div>
+            <div class="floatright" style="font-size:11px; font-weight:normal; margin-right:12px;"><asp:Literal ID="ltrUserName" runat="server"></asp:Literal> <asp:HyperLink ID="hplLogin" runat="server"></asp:HyperLink></div>
+            <div class="clearboth"></div>
+          </div>
           <div id="PageMenuBar" runat="server" class="PageMenuBar" />
         </div>
         <aquarium:MenuExtender ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1" TargetControlID="PageMenuBar" HoverStyle="Auto" PopupPosition="Left" ShowSiteActions="true" />
