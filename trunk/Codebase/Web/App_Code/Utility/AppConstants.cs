@@ -75,6 +75,9 @@ public class AppConstants
 
         public const String QUOTATION_SUBMIT = "QuotationSubmit.aspx";
         public const String QUOTATION_DECISION = "QuotationDecision.aspx";
+        public const String QUOTATION_CHANGE = "QuotationChange.aspx";
+
+        
         #endregion
     }
     #endregion
