@@ -146,7 +146,8 @@
     <view id="grid1" type="Grid" commandId="command1" label="Quotations" sortExpression="id desc">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Number" columns="50" />
+        <!--<dataField fieldName="Number" columns="50" hyperlinkFormatString="~/Pages/QuotationChange.aspx?ID={ID}&amp;EnqID={EnquiryID}" />-->
+        <dataField fieldName="Number" columns="50"/>
         <dataField fieldName="EnquiryID" aliasFieldName="EnquiryNumber" hyperlinkFormatString="~/Pages/Enquiries.aspx?Number={EnquiryNumber}" />
         <dataField fieldName="StatusID" aliasFieldName="StatusName" />
         <dataField fieldName="SubmittedToClientContactCompanyName" />

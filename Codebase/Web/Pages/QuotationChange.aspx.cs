@@ -152,7 +152,7 @@ public partial class Pages_QuotationChange : BasePage
         else if (msgType == "V")
             WebUtil.ShowMessageBox(divMessage, String.Format("Sorry! Enquiry {0} has already been Quotated .", enquiryNumber), true);
         else if (msgType == "VC")
-            WebUtil.ShowMessageBox(divMessage, String.Format("Sorry! Enquiry {0} has been closed .", enquiryNumber), true);
+            WebUtil.ShowMessageBox(divMessage, String.Format("Sorry! Enquiry {0} for this Quotation has been closed .", enquiryNumber), true);
         else if (msgType == "QCE")
             WebUtil.ShowMessageBox(divMessage, "Sorry! This Quotation cannot be edited", true);
     }
