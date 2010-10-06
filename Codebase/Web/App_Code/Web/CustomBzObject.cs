@@ -17,7 +17,7 @@ namespace BUDI2_NS.Rules
 
         protected override void BeforeSqlAction(ActionArgs args, ActionResult result)
         {
-            try
+            try //1
             {
                 ///There is no need for the following line of Code.
                 ///Because We have Removed the MemberShip Provider from OMM project
@@ -56,25 +56,57 @@ namespace BUDI2_NS.Rules
                     */
 
                 }
-
+                }  // try 1
+				
+				catch //1
+				{
+				}
+				
+				
+				try //2
+				{
                 if (args.CommandName == "Update")
                 {
                     //args["ChangedByUsername"].NewValue = User.UserName;
                     //args["ChangedByUsername"].Modified = true;
-                    args["CreatedByUserID"].NewValue = SessionCache.CurrentUser.ID;
-                    args["CreatedByUserID"].Modified = true;
+                  
+				  
+				    args["ChangedByUserID"].NewValue = SessionCache.CurrentUser.ID;
+                    args["ChangedByUserID"].Modified = true;
+					
+					
+					DateTime dtNow = DateTime.Now;
+               		args["ChangedOn"].NewValue = dtNow.ToString("dd/MM/yyyy");
+                    args["ChangedOn"].Modified = true;		
                 }
+				} //2
+				
+				catch //2
+				{
+				
+				}
+				
+				
+				try //3
+				{
                 if (args.CommandName == "Insert")
                 {
                     //args["ChangedByUsername"].NewValue = User.UserName;
                     //args["ChangedByUsername"].Modified = true;
                     args["CreatedByUserID"].NewValue = SessionCache.CurrentUser.ID;
                     args["CreatedByUserID"].Modified = true;
+					
+					DateTime dtNow2 = DateTime.Now;
+					args["CreatedOn"].NewValue =  dtNow2.ToString("dd/MM/yyyy");
+                    args["CreatedOn"].Modified = true;
+					
                 }
+				} //try
+				
+				catch //3
+				{
+				}
+				
             }
-            catch
-            {
-            }
+          }
         }
-    }
-}
