@@ -10,6 +10,7 @@ using App.Core.Extensions;
 public partial class Pages_QuotationDecision : BasePage
 {
     protected int _QuotationID = 0;
+    protected int _ClientContactID = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -86,6 +87,7 @@ public partial class Pages_QuotationDecision : BasePage
     {
         if (enquiry != null)
         {
+            _ClientContactID = enquiry.ContactID;
             ddlContact.SetSelectedItem(enquiry.ContactID.ToString());
             txtClientName.Text = enquiry.ClientContact.Client.Name;
             txtContactName.Text = enquiry.ClientContact.Name;

@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <script language="javascript" type="text/javascript">
         var _QuotationID = <%= _QuotationID.ToString()%>;
-        var _ClientContactID = null;
+        var _ClientContactID = <%= _ClientContactID.ToString()%>;
         
         function MoveNext(stepIndex) {
             for (i = 1; i < 3; i++) {
