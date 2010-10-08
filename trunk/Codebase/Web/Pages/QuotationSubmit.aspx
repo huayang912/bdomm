@@ -12,9 +12,12 @@
             document.getElementById('divStep' + stepIndex).style.display = 'block';
         }        
         function GetDetails(clientID) {
-            ShowProgress();            
-            _ClientContactID  = clientID
-            AjaxService.GetClientContact(_ClientContactID, OnGetClientSuccess, OnAjax_Error, OnAjax_TimeOut);
+            if(clientID > 0)
+            {
+                ShowProgress();            
+                _ClientContactID  = clientID
+                AjaxService.GetClientContact(_ClientContactID, OnGetClientSuccess, OnAjax_Error, OnAjax_TimeOut);
+            }
         }
         function OnGetClientSuccess(result) {
             HideProgress();
