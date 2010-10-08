@@ -48,7 +48,7 @@ public partial class Pages_QuotationDecision : BasePage
                        select new
                        {
                            P.ID,
-                           Name = String.Format("{0} ({1})", P.Name, P.Client.Name)
+                           Name = String.Format("{0} ({1})", P.Client.Name, P.Name)
                        };
         ddlContact.DataSource = contacts;
         ddlContact.DataTextField = "Name";

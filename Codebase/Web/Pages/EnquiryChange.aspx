@@ -4,8 +4,11 @@
     
     <script language="javascript" type="text/javascript">
         function GetDetails(clientID) {
-            ShowProgress();
-            PageMethods.GetClientContact(clientID, OnGetClientSuccess, OnAjaxFailure);
+            if(clientID > 0)
+            {
+                ShowProgress();
+                PageMethods.GetClientContact(clientID, OnGetClientSuccess, OnAjaxFailure);
+            }
         }
         function OnGetClientSuccess(result) {
             HideProgress();
