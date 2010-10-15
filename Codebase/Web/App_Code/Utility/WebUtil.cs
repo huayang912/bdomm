@@ -215,6 +215,21 @@ public class WebUtil
             }
         }
     }
+
+    public static int[] GetIntArray(string receiPientsList)
+    {
+        String[] ids = receiPientsList.Split(',');
+        IList<int> intIds = new List<int>();
+        foreach (String id in ids)
+        {
+            int value = 0;
+            int.TryParse(id, out value);
+            if (value > 0)
+                intIds.Add(value);
+        }
+        return intIds.ToArray();
+    }
+
     /// <summary>
     /// Binds a Dropdownlist Controls to a Collection
     /// </summary>

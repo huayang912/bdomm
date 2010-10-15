@@ -21,7 +21,10 @@ public partial class Pages_SendSMS : System.Web.UI.Page
                 "Original message will be passed by query string.";
             //Thorugh the query string mobile number list will be
             //sended with comma separator.
-            int[] ids = { 1, 2, 3 };
+            String commSeperatedID = WebUtil.GetQueryStringInString(AppConstants.QueryString.ID);
+
+            int[] ids = WebUtil.GetIntArray(commSeperatedID);
+
             OMMDataContext dataContext = new OMMDataContext();
             IList<Message_Recipient> recipients = (from R in dataContext.Message_Recipients
                                                    where (from I in ids select I).Contains(R.ID)
