@@ -115,7 +115,7 @@ public class AjaxService : System.Web.Services.WebService {
 
                 //int arrLength = arr.Length;
 
-                int[] ids = GetIntArray(receiPientsList);
+                int[] ids = WebUtil.GetIntArray(receiPientsList);
                 
                 //for (int i = 0; i < arr.Length; i++)
                 //{
@@ -157,25 +157,12 @@ public class AjaxService : System.Web.Services.WebService {
                 }
             }
         }
-    }
-
-    private int[] GetIntArray(string receiPientsList)
-    {
-        String [] ids = receiPientsList.Split(',');
-        IList<int> intIds = new List<int>();
-        foreach (String id in ids)
-        {
-            int value = 0;
-            int.TryParse(id, out value);
-            if (value > 0)
-                intIds.Add(value);
-        }
-        return intIds.ToArray();
-    }
+    }    
 
     private bool SendMessage(Message message, IList<Message_Recipient> receivers)
     {
-        Message smsr = null;
+        //Message smsr = null;
+        SMS_Message smsr = null;
         String userName = ConfigReader.TextAnywhereClientID;
         String password = ConfigReader.TextAnywhereClientPassword;
         String[] sendSMSReplyArray = null;
@@ -214,9 +201,9 @@ public class AjaxService : System.Web.Services.WebService {
         }
         if (ConfigReader.SendSmsToClient)
         {
-            SmsService.TextAnywhere_SMS ta_sms = new SmsService.TextAnywhere_SMS();
-            sendSmsReply = ta_sms.SendSMSEx(
-                        username,
+            SMSService.TextAnywhere_SMS smsService = new SMSService.TextAnywhere_SMS();            
+            sendSmsReply = smsService.SendSMSEx(
+                        userName,
                         password,
                         smsr.Client_Ref,
                         BILLING_REF,
