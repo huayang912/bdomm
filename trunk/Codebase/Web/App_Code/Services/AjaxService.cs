@@ -142,7 +142,7 @@ public class AjaxService : System.Web.Services.WebService {
                             // Number sent but not delivered -> Go to next contact
                             // Number sent and delivered -> Go to next contact
                             //if (mrr.Status_ID == (int)MESSAGE_STATUSES.NOT_SENT)
-                            if (receipient.Status_ID == (int)MessageStatus.NOT_SENT)
+                            if (receipient.Status_ID == (int)MessageStatuss.NOT_SENT)
                             {
                                 filteredReceivers.Add(receipient);
                             }
@@ -152,8 +152,8 @@ public class AjaxService : System.Web.Services.WebService {
                     ///TODO: Send Messages to the Filtered Receipients
                     ///
 
-                    //if (filteredReceivers.Count > 0)
-                    //    SendMessage(msg, filteredReceivers);
+                    if (filteredReceivers.Count > 0)
+                        SendMessage(msg, filteredReceivers);
                 }
             }
         }
@@ -161,6 +161,10 @@ public class AjaxService : System.Web.Services.WebService {
 
     private bool SendMessage(Message message, IList<Message_Recipient> receivers)
     {
+        string BILLING_REF = ConfigReader.BILLING_REF;
+        string ORIGINATOR = ConfigReader.ORIGINATOR;
+
+
         //Message smsr = null;
         SMS_Message smsr = null;
         String userName = ConfigReader.TextAnywhereClientID;
@@ -319,7 +323,7 @@ enum MESSAGE_STATUSES
     SENT_DELIVERED = 2,
     SENT_DELIVERY_FAILED = 3
 };
-enum MessageStatus
+enum MessageStatuss
 {
     NOT_SENT = 0,
     SENT_UNDELIVERED = 1,

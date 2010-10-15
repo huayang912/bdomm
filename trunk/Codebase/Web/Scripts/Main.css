@@ -195,7 +195,7 @@ textarea
 }
 .OddRowStyle
 {
-	background-color:#FF0000;
+	background-color:#e6eff6;
 }
 .OddRowStyle:hover
 {
@@ -203,7 +203,7 @@ textarea
 }
 .EventRowStyle
 {
-	background-color:#000000;
+	background-color:#e5e8ea;
 }
 .EventRowStyle:hover
 {

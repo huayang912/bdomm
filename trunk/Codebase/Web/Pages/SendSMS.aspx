@@ -25,14 +25,28 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
                 document.getElementById('divStep3').style.display = 'block';
             }
 
-//            if (stepIndex = 1) {
-//                document.getElementById('btnPrev').enabled = false;
-//                document.getElementById('btnNext').enabled = true;
+            if (stepIndex == 1) {
+
+                //document.getElementById('btnFinish').disabled = true;
+                document.getElementById('btnPrev').disabled = true;
+                document.getElementById('btnNext').disabled = false;
+            }
+
+            if (stepIndex == 2) {
+                //document.getElementById('btnFinish').disabled = false;
+                document.getElementById('btnPrev').disabled = false;
+                document.getElementById('btnNext').disabled = true;
+            }
+
+//            if (stepIndex == 1) {
+//                alert("1");
+//                document.getElementById('btnFinish').disabled = true;
+//               
 //            }
 
-//            if (stepIndex = 2) {
-//                document.getElementById('btnPrev').disabled = false;
-//                document.getElementById('btnNext').disabled = true;
+//            if (stepIndex == 2) {
+//                alert("2");
+//                document.getElementById('btnFinish').disabled = false;
 //            }
         }
         
@@ -88,12 +102,12 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
                 else
                     ids += ',' + $(this).val();
             });
-            alert(ids);
+            
             var message = $('#<%=tbxMessage.ClientID %>').val();
             AjaxService.SendSms(ids, message, OnSendSmsSuccess, OnAjax_Error, OnAjax_TimeOut);
         }
         function OnSendSmsSuccess(result) {
-            alert(result);
+            //alert(result);
         }
     </script>
 
@@ -110,7 +124,7 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
             <asp:ServiceReference Path="~/Services/AjaxService.asmx" />
         </Services>
     </asp:ScriptManagerProxy>
-    <input type="button" value="Test" onclick="SendMessage();"/>
+    
     <div class="GroupBox">
         <table cellpadding="5" cellspacing="0" border="0" width="100%">
         <tr>
@@ -124,7 +138,7 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
                 <div class="GroupBox" id="divStep2" style="display:none;">
                     <asp:GridView ID="GridView1" runat="server" CssClass="GridView" 
                         AutoGenerateColumns="False" CellPadding="3" CellSpacing="0"                         
-                        onrowdatabound="GridView1_RowDataBound">
+                        onrowdatabound="GridView1_RowDataBound" Enabled="False">
                         <%--
                         DataSourceID="LinqDataSource1" --%>
                         <Columns>
@@ -139,7 +153,7 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
                                 ReadOnly="True" SortExpression="Destination" />
                             <asp:BoundField DataField="SMS_Credits" HeaderText="SMS_Credits" 
                                 ReadOnly="True" SortExpression="SMS_Credits" />
-                            <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" 
+                            <asp:BoundField DataField="ID" HeaderText="ID" Visible="false" ReadOnly="True" 
                                 SortExpression="ID" />
                         </Columns>
                         <RowStyle CssClass="OddRowStyle" />
@@ -158,14 +172,17 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
         <tr>
             <td align="right">
                  <div id="divStep3" style="display:block;">
-                    <input type="button" id="btnPrev" value="< Previous" onclick="MoveNext(1);" />&nbsp;
+                    <input type="button" id="btnPrev" value="< Previous" onclick="MoveNext(1);"  disabled="true"/>&nbsp;
                     <input type="button" id="btnNext" value="Next >" onclick="MoveNext(2);" />
                     
                     <%--<asp:Button ID="btnPrevious" runat="server" Text="< Previous" 
                          Enabled="false" onclick="javascript:MoveNext(1);"/>
                     <asp:Button ID="btnNext" runat="server" Text="Next >" 
                         onclick="MoveNext(2);" />--%>
-                    <asp:Button ID="btnFinish" runat="server" Text="Finish" onclick="btnFinish_Click" Enabled="false"/>
+                    <%--<asp:Button ID="btnFinish" runat="server" Text="Finish" onclick="SendMessage();" />--%>
+                    
+                    <input type="button" value="Finish" onclick="SendMessage();" />
+                    
                     <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
                 </div>
             </td>
