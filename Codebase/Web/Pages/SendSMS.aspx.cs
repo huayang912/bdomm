@@ -562,13 +562,13 @@ public partial class Pages_SendSMS : System.Web.UI.Page
         if (VerifyRecipients_V())
         {
             
-            btnFinish.Enabled = true;
+            //btnFinish.Enabled = true;
             lblMessage.Text = "";
             lblMessage.ForeColor = System.Drawing.Color.Green;
         }
         else
         {
-            btnFinish.Enabled = false;
+            //btnFinish.Enabled = false;
             //lblMessage.Text = "Not all recipients verified";
         }
         

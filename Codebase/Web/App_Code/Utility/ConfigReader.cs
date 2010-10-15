@@ -58,4 +58,22 @@ public class ConfigReader
             return false;
         }
     }
+
+    public static string BILLING_REF
+    {
+        get
+        {
+            String value = GetAppSettings("BILLING_REF");
+            return value;
+        }
+    }
+
+    public static string ORIGINATOR
+    {
+        get
+        {
+            String value = GetAppSettings("ORIGINATOR");
+            return value;
+        }
+    }
 }
