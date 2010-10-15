@@ -47,5 +47,15 @@ public class ConfigReader
         {
             return GetAppSettings("JSCalendarDateFormat");
         }
-    }          
+    }
+    public static bool SendSmsToClient
+    {
+        get
+        {
+            String value = GetAppSettings("SendSmsToClient");
+            if (String.Compare(value, "True", true) == 0)
+                return true;
+            return false;
+        }
+    }
 }

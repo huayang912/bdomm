@@ -79,6 +79,22 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
             }
         }
 
+
+        function SendMessage() {
+            var ids = '';
+            $("#<%=GridView1.ClientID %> input[type='checkbox']:checked").each(function(i) {
+                if(i == 0)
+                    ids += $(this).val();
+                else
+                    ids += ',' + $(this).val();
+            });
+            alert(ids);
+            var message = $('#<%=tbxMessage.ClientID %>').val();
+            AjaxService.SendSms(ids, message, OnSendSmsSuccess, OnAjax_Error, OnAjax_TimeOut);
+        }
+        function OnSendSmsSuccess(result) {
+            alert(result);
+        }
     </script>
 
 </asp:Content>
@@ -89,25 +105,34 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
 
 
 <asp:Content ID="Content4" ContentPlaceHolderID="PageContentPlaceHolder" Runat="Server">
-    <table cellpadding="5" cellspacing="0" border="0" width="100%" style="background-color:WhiteSmoke">
+    <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
+        <Services>
+            <asp:ServiceReference Path="~/Services/AjaxService.asmx" />
+        </Services>
+    </asp:ScriptManagerProxy>
+    <input type="button" value="Test" onclick="SendMessage();"/>
+    <div class="GroupBox">
+        <table cellpadding="5" cellspacing="0" border="0" width="100%">
         <tr>
             <td>
                <asp:Label ID="lblMessage" runat="server" Font-Bold="True" Font-Size="Medium"></asp:Label>
                 
                 <div id="divStep1" style="display:block;">
                     Please Insert The Message To Be Sent<br />
-                    <asp:TextBox ID="tbxMessage" runat="server" Height="300px" Width="99%"></asp:TextBox>
+                    <asp:TextBox ID="tbxMessage" runat="server" TextMode="MultiLine" Height="300px" Width="99%"></asp:TextBox>
                 </div>
-                <div id="divStep2" style="display:none;">
-                    <asp:GridView ID="GridView1" runat="server" 
-                        
-                        Width="100%" 
-                        AllowPaging="True" AutoGenerateColumns="False" Height="280px" 
-                        onselectedindexchanging="GridView1_SelectedIndexChanging" 
+                <div class="GroupBox" id="divStep2" style="display:none;">
+                    <asp:GridView ID="GridView1" runat="server" CssClass="GridView" 
+                        AutoGenerateColumns="False" CellPadding="3" CellSpacing="0"                         
                         onrowdatabound="GridView1_RowDataBound">
                         <%--
                         DataSourceID="LinqDataSource1" --%>
                         <Columns>
+                            <asp:TemplateField HeaderText="Select">
+                                <ItemTemplate>
+                                    <input type="checkbox" name="chkSelect" value="<%# ((int)Eval("ID")).ToString() %>" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:BoundField DataField="Recipient_Name" HeaderText="Recipient_Name" 
                                 ReadOnly="True" SortExpression="Recipient_Name" />
                             <asp:BoundField DataField="Destination" HeaderText="Destination" 
@@ -117,6 +142,8 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
                             <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" 
                                 SortExpression="ID" />
                         </Columns>
+                        <RowStyle CssClass="OddRowStyle" />
+                        <AlternatingRowStyle CssClass="EventRowStyle" />
                     </asp:GridView> <br />
                     
                     
@@ -180,7 +207,8 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
                 
             </td>
         </tr>
-    </table>
+    </table>    
+    </div>
     
     
     
