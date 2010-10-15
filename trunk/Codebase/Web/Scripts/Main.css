@@ -87,8 +87,9 @@ div.GroupHeader
 }
 .GridView th
 {
-	background-color:#CECDCD;
+	/*background-color:#CECDCD;*/
 	border:#F2F2F2 1px solid;
+	text-align:left;
 }
 .GridView td
 {
@@ -191,4 +192,20 @@ textarea
 .FormTable
 {
 	width:650px;
+}
+.OddRowStyle
+{
+	background-color:#FF0000;
+}
+.OddRowStyle:hover
+{
+	background-color:#FFFFFF;
+}
+.EventRowStyle
+{
+	background-color:#000000;
+}
+.EventRowStyle:hover
+{
+	background-color:#FFFFFF;
 }

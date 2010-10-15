@@ -727,31 +727,31 @@ public partial class Pages_SendSMS : System.Web.UI.Page
     }
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        try
-        {
-            ClientScript.GetPostBackClientHyperlink((GridView)sender, "Select$" + e.Row.RowIndex);
+        //try
+        //{
+        //    ClientScript.GetPostBackClientHyperlink((GridView)sender, "Select$" + e.Row.RowIndex);
 
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                e.Row.Attributes["onmouseover"] =
-                "javascript:setMouseOverColor(this);";
-                e.Row.Attributes["onmouseout"] =
-                "javascript:setMouseOutColor(this);";
-                e.Row.Attributes["onclick"] =
-                ClientScript.GetPostBackClientHyperlink
-                (this.GridView1, "Select$" + e.Row.RowIndex);
+        //    if (e.Row.RowType == DataControlRowType.DataRow)
+        //    {
+        //        e.Row.Attributes["onmouseover"] =
+        //        "javascript:setMouseOverColor(this);";
+        //        e.Row.Attributes["onmouseout"] =
+        //        "javascript:setMouseOutColor(this);";
+        //        e.Row.Attributes["onclick"] =
+        //        ClientScript.GetPostBackClientHyperlink
+        //        (this.GridView1, "Select$" + e.Row.RowIndex);
 
-                //e.Row.Height=10;
-            }
+        //        //e.Row.Height=10;
+        //    }
 
-            //Clean the error message
-            lblMessage.Text = "";
-        }
-        catch (Exception ex)
-        {
-            lblMessage.Text = ex.Message;
-            lblMessage.ForeColor = System.Drawing.Color.Red;
-        }
+        //    //Clean the error message
+        //    lblMessage.Text = "";
+        //}
+        //catch (Exception ex)
+        //{
+        //    lblMessage.Text = ex.Message;
+        //    lblMessage.ForeColor = System.Drawing.Color.Red;
+        //}
     }
     protected void btnBackToAll_Click(object sender, EventArgs e)
     {

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="OMM" Class="OMMDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=MIMI-PC;Initial Catalog=OMM;Integrated Security=False;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BUDI2_NS" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=BRAC-E9434D5251\SQLEXPRESS;Initial Catalog=OMM;Integrated Security=False;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BUDI2_NS" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Message_Recipients" Member="Message_Recipients">
     <Type Name="Message_Recipient">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -17,6 +17,7 @@
       <Column Name="Updated_On" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="Message_Statuse_Message_Recipient" Member="Message_Statuse" ThisKey="Status_ID" OtherKey="ID" Type="Message_Statuse" IsForeignKey="true" />
       <Association Name="Message_Message_Recipient" Member="Message" ThisKey="Message_ID" OtherKey="ID" Type="Message" IsForeignKey="true" />
+      <Association Name="SMS_Message_Message_Recipient" Member="SMS_Message" ThisKey="SMS_ID" OtherKey="ID" Type="SMS_Message" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Message_Statuses" Member="Message_Statuses">
@@ -275,6 +276,14 @@
       <Association Name="User_Quotation1" Member="Quotations1" ThisKey="ID" OtherKey="CreatedByUserID" Type="Quotation" />
       <Association Name="User_Project" Member="Projects" ThisKey="ID" OtherKey="CreatedByUserID" Type="Project" />
       <Association Name="User_Project1" Member="Projects1" ThisKey="ID" OtherKey="ChangedByUserID" Type="Project" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SMS_Messages" Member="SMS_Messages">
+    <Type Name="SMS_Message">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Client_Ref" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Sent_On" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="SMS_Message_Message_Recipient" Member="Message_Recipients" ThisKey="ID" OtherKey="SMS_ID" Type="Message_Recipient" />
     </Type>
   </Table>
   <Function Name="dbo.GenerateNewQuotationNumber" Method="GenerateNewQuotationNumber" IsComposable="true">
