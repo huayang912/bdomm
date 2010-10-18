@@ -95,7 +95,7 @@ from "dbo"."ClientContacts" "ClientContacts"
           <dataFields>
             <dataField fieldName="Name" />
             <dataField fieldName="JobTitle" />
-            <dataField fieldName="Address" />
+            <dataField fieldName="Address" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" />
             <dataField fieldName="CompanyID" aliasFieldName="CompanyName" />
@@ -132,7 +132,7 @@ from "dbo"."ClientContacts" "ClientContacts"
           <dataFields>
             <dataField fieldName="Name" />
             <dataField fieldName="JobTitle" />
-            <dataField fieldName="Address" />
+            <dataField fieldName="Address" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" />
             <dataField fieldName="Telephone" columns="50" />
