@@ -78,7 +78,7 @@ from "dbo"."Clients" "Clients"
           <dataFields>
             <dataField fieldName="Number" hidden="true" columns="50" />
             <dataField fieldName="Name" />
-            <dataField fieldName="Address" />
+            <dataField fieldName="Address" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" />
             <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
@@ -106,7 +106,7 @@ from "dbo"."Clients" "Clients"
           <dataFields>
             <dataField fieldName="Number" hidden="true" columns="50" />
             <dataField fieldName="Name" />
-            <dataField fieldName="Address" />
+            <dataField fieldName="Address" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" />
             <dataField fieldName="Telephone" columns="50" />
