@@ -287,6 +287,13 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 	{
 		return ((string)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), enquiryTypeID).ReturnValue));
 	}
+	
+	[Function(Name="dbo.reportMonthlyEnquery")]
+	public ISingleResult<reportMonthlyEnqueryResult> reportMonthlyEnquery()
+	{
+		IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		return ((ISingleResult<reportMonthlyEnqueryResult>)(result.ReturnValue));
+	}
 }
 
 [Table(Name="dbo.Message_Recipients")]
@@ -6633,6 +6640,122 @@ public partial class SMS_Message : INotifyPropertyChanging, INotifyPropertyChang
 	{
 		this.SendPropertyChanging();
 		entity.SMS_Message = null;
+	}
+}
+
+public partial class reportMonthlyEnqueryResult
+{
+	
+	private string _MonthName;
+	
+	private System.Nullable<int> _Year;
+	
+	private System.Nullable<int> _TotalInitiated;
+	
+	private System.Nullable<int> _Outstanding;
+	
+	private System.Nullable<int> _Quoted;
+	
+	private System.Nullable<int> _Closed;
+	
+	public reportMonthlyEnqueryResult()
+	{
+	}
+	
+	[Column(Storage="_MonthName", DbType="VarChar(9)")]
+	public string MonthName
+	{
+		get
+		{
+			return this._MonthName;
+		}
+		set
+		{
+			if ((this._MonthName != value))
+			{
+				this._MonthName = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_Year", DbType="Int")]
+	public System.Nullable<int> Year
+	{
+		get
+		{
+			return this._Year;
+		}
+		set
+		{
+			if ((this._Year != value))
+			{
+				this._Year = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_TotalInitiated", DbType="Int")]
+	public System.Nullable<int> TotalInitiated
+	{
+		get
+		{
+			return this._TotalInitiated;
+		}
+		set
+		{
+			if ((this._TotalInitiated != value))
+			{
+				this._TotalInitiated = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_Outstanding", DbType="Int")]
+	public System.Nullable<int> Outstanding
+	{
+		get
+		{
+			return this._Outstanding;
+		}
+		set
+		{
+			if ((this._Outstanding != value))
+			{
+				this._Outstanding = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_Quoted", DbType="Int")]
+	public System.Nullable<int> Quoted
+	{
+		get
+		{
+			return this._Quoted;
+		}
+		set
+		{
+			if ((this._Quoted != value))
+			{
+				this._Quoted = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_Closed", DbType="Int")]
+	public System.Nullable<int> Closed
+	{
+		get
+		{
+			return this._Closed;
+		}
+		set
+		{
+			if ((this._Closed != value))
+			{
+				this._Closed = value;
+			}
+		}
 	}
 }
 #pragma warning restore 1591
