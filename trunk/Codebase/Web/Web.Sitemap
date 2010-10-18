@@ -3,17 +3,18 @@
   <siteMapNode url="~/Default.aspx" title="Home" description="">
     <siteMapNode title="Home" description="Application home page" url="~/Pages/Home.aspx" />
     <siteMapNode title="Clients" description="View Clients" url="~/Pages/Clients.aspx" />
-    <siteMapNode title="Contacts" description="View Client Contacts" url="~/Pages/ClientContacts.aspx" />
+	 <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelView.aspx" roles="*">
+	  <siteMapNode title="Show Personnel" description="Personnel List" url="~/Pages/PersonnelVew.aspx" roles="*" />
+      <siteMapNode title="CV" description="Personnel CV" url="~/Pages/CVNew.aspx" roles="*" />
+      <siteMapNode title="Send SMS" description="Sends SMS to the Corresponding Client" url="~/Pages/SendSMS.aspx" roles="*" />
+    </siteMapNode>
     <siteMapNode title="Enquiries" description="Enquiry" url="~/Pages/EnquirySch.aspx" roles="*">
       <siteMapNode title="Create New Enquiry" description="Create a New Enquiry" url="~/Pages/EnquiryChange.aspx" roles="*" />
     </siteMapNode>
     
     <siteMapNode title="Quotations" description="Quotation" url="~/Pages/QuoteSrch.aspx" roles="*" />
     <siteMapNode title="Projects" description="Projrct" url="~/Pages/ProjectSrch.aspx" roles="*" />
-    <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelNew.aspx" roles="*">
-      <siteMapNode title="CV" description="Personnel CV" url="~/Pages/CVNew.aspx" roles="*" />
-      <siteMapNode title="Send SMS" description="Sends SMS to the Corresponding Client" url="~/Pages/SendSMS.aspx" roles="*" />
-    </siteMapNode>
+   
     <siteMapNode title="Configuration" description="" url="~/Pages/ListBox.aspx" roles="*">
       <siteMapNode title="Countries" description="View Countries" url="~/Pages/Countries.aspx" />
       <siteMapNode title="Currency" description="View Currency" url="~/Pages/Currency.aspx" />
