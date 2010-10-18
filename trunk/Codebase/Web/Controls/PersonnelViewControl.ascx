@@ -1,15 +1,16 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeFile="PersonnelAdvPageControl.ascx.cs"
-    Inherits="Controls_PersonnelAdvPageControl" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="PersonnelViewControl.ascx.cs" Inherits="Controls_PersonnelViewControl"  %>
+
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
         <table width="100%" border="0">
     <tr>
-      <td valign="top"><div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
+    <td><form><input type="button" value=" GO TO EDIT PAGE" onClick="window.location.href='PersonnelNew.aspx'"></form></td></tr>
+     <tr> <td valign="top"><div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
              <act:TabContainer ID="OrderManager" runat="server">
-            <act:TabPanel ID="CustomersTab" runat="server" HeaderText="Personnel">
+            <act:TabPanel ID="CustomersTab" runat="server" HeaderText="Personnel" PageSize="25">
               <ContentTemplate>
                 <div id="view1" runat="server"></div>
-                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Contacts"   PageSize="25"/>
+                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="ContactsView" PageSize="25" />
               </ContentTemplate>
             </act:TabPanel>
             <act:TabPanel ID="EmploymentHistoryTab" runat="server" HeaderText="Employment History">
@@ -97,14 +98,14 @@
       <td>
       <td width="50%" valign="top">
 	  <div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
-              <div id="view12" runat="server"></div>
-                <aquarium:DataViewExtender id="view12Extender" runat="server" TargetControlID="view12" Controller="TelephoneNumbers" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="true" />
+              <div id="view12" runat="server" style="background-color:#A9D0F5"></div>
+                <aquarium:DataViewExtender id="view12Extender" runat="server" TargetControlID="view12" Controller="TelephoneNumbers" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="false" />
             <div id="view4" runat="server"></div>
-                <aquarium:DataViewExtender id="view4Extender" runat="server" TargetControlID="view4" Controller="ContactRoles" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="true"/>
-           <div id="view8" runat="server"></div>
-                <aquarium:DataViewExtender id="view8Extender" runat="server" TargetControlID="view8" Controller="EmailAddresses" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="true"/>
+                <aquarium:DataViewExtender id="view4Extender" runat="server" TargetControlID="view4" Controller="ContactRoles" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="false"/>
+           <div id="view8" runat="server" style="background-color:#A9D0F5"></div>
+                <aquarium:DataViewExtender id="view8Extender" runat="server" TargetControlID="view8" Controller="EmailAddresses" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="false"/>
           <div id="view6" runat="server"></div>
-                <aquarium:DataViewExtender id="view6Extender" runat="server" TargetControlID="view6" Controller="ContactsNotes" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="true"/>
+                <aquarium:DataViewExtender id="view6Extender" runat="server" TargetControlID="view6" Controller="ContactsNotes" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="false" />
         
              
         </div></td>
