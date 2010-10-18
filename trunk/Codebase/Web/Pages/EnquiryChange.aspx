@@ -169,7 +169,7 @@
                 <asp:Label ID="lblStep4Message" Text="Enquiry information Saved." runat="server"></asp:Label>
             </div>
             <div style="min-height:100px;">
-                <a id="aNewQuation" href="javascript:void(0);">Create a new quation now</a>.
+                <a id="aNewQuation" href="javascript:void(0);">Create a new quotation now</a>.
             </div>        
         </div>
     
