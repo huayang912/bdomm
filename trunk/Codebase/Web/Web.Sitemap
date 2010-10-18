@@ -27,5 +27,10 @@
       <siteMapNode title="Certificate Types" description="View Certificate Types" url="~/Pages/CertificateTypes.aspx" />
       <siteMapNode title="Telephone Number Types" description="View Telephone Number Types" url="~/Pages/TelephoneNumberTypes.aspx" />
     </siteMapNode>
+
+    <siteMapNode title="Reports" description="Reports" url="#" roles="*">
+      <siteMapNode title="Monthly Enquery" description="Monthly Enquery Report" url="~/Reports/monthlyEnqueryReport.aspx" roles="*" />
+      
+    </siteMapNode>
   </siteMapNode>
 </siteMap>

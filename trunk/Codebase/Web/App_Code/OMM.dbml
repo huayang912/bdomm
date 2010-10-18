@@ -298,4 +298,14 @@
     <Parameter Name="EnquiryTypeID" Parameter="enquiryTypeID" Type="System.Int32" DbType="Int" />
     <Return Type="System.String" />
   </Function>
+  <Function Name="dbo.reportMonthlyEnquery" Method="reportMonthlyEnquery">
+    <ElementType Name="reportMonthlyEnqueryResult">
+      <Column Name="MonthName" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalInitiated" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Outstanding" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Quoted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Closed" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>
