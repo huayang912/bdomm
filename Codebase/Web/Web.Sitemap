@@ -30,6 +30,7 @@
 
     <siteMapNode title="Reports" description="Reports" url="#" roles="*">
       <siteMapNode title="Monthly Enquery" description="Monthly Enquery Report" url="~/Reports/monthlyEnqueryReport.aspx" roles="*" />
+      <siteMapNode title="Monthly Quotation" description="Monthly Quotation Report" url="~/Reports/monthlyQuotationReport.aspx" roles="*" />
       
     </siteMapNode>
   </siteMapNode>

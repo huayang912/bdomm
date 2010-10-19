@@ -89,7 +89,7 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   #endregion
 	
 	public OMMDataContext() : 
-			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["BUDI2_NS"].ConnectionString, mappingSource)
+			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["OMMConnectionString"].ConnectionString, mappingSource)
 	{
 		OnCreated();
 	}
@@ -293,6 +293,13 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 	{
 		IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 		return ((ISingleResult<reportMonthlyEnqueryResult>)(result.ReturnValue));
+	}
+	
+	[Function(Name="dbo.reportMonthlyQuotations")]
+	public ISingleResult<reportMonthlyQuotationsResult> reportMonthlyQuotations()
+	{
+		IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		return ((ISingleResult<reportMonthlyQuotationsResult>)(result.ReturnValue));
 	}
 }
 
@@ -6738,6 +6745,194 @@ public partial class reportMonthlyEnqueryResult
 			if ((this._Quoted != value))
 			{
 				this._Quoted = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_Closed", DbType="Int")]
+	public System.Nullable<int> Closed
+	{
+		get
+		{
+			return this._Closed;
+		}
+		set
+		{
+			if ((this._Closed != value))
+			{
+				this._Closed = value;
+			}
+		}
+	}
+}
+
+public partial class reportMonthlyQuotationsResult
+{
+	
+	private string _MonthName;
+	
+	private System.Nullable<int> _Year;
+	
+	private System.Nullable<int> _TotalInitiated;
+	
+	private System.Nullable<int> _NotSubmitted;
+	
+	private System.Nullable<int> _Submitted;
+	
+	private System.Nullable<int> _Unsuccessful;
+	
+	private System.Nullable<int> _Successful;
+	
+	private System.Nullable<int> _RequoteRequested;
+	
+	private System.Nullable<int> _Revised;
+	
+	private System.Nullable<int> _Closed;
+	
+	public reportMonthlyQuotationsResult()
+	{
+	}
+	
+	[Column(Storage="_MonthName", DbType="VarChar(9)")]
+	public string MonthName
+	{
+		get
+		{
+			return this._MonthName;
+		}
+		set
+		{
+			if ((this._MonthName != value))
+			{
+				this._MonthName = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_Year", DbType="Int")]
+	public System.Nullable<int> Year
+	{
+		get
+		{
+			return this._Year;
+		}
+		set
+		{
+			if ((this._Year != value))
+			{
+				this._Year = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_TotalInitiated", DbType="Int")]
+	public System.Nullable<int> TotalInitiated
+	{
+		get
+		{
+			return this._TotalInitiated;
+		}
+		set
+		{
+			if ((this._TotalInitiated != value))
+			{
+				this._TotalInitiated = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_NotSubmitted", DbType="Int")]
+	public System.Nullable<int> NotSubmitted
+	{
+		get
+		{
+			return this._NotSubmitted;
+		}
+		set
+		{
+			if ((this._NotSubmitted != value))
+			{
+				this._NotSubmitted = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_Submitted", DbType="Int")]
+	public System.Nullable<int> Submitted
+	{
+		get
+		{
+			return this._Submitted;
+		}
+		set
+		{
+			if ((this._Submitted != value))
+			{
+				this._Submitted = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_Unsuccessful", DbType="Int")]
+	public System.Nullable<int> Unsuccessful
+	{
+		get
+		{
+			return this._Unsuccessful;
+		}
+		set
+		{
+			if ((this._Unsuccessful != value))
+			{
+				this._Unsuccessful = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_Successful", DbType="Int")]
+	public System.Nullable<int> Successful
+	{
+		get
+		{
+			return this._Successful;
+		}
+		set
+		{
+			if ((this._Successful != value))
+			{
+				this._Successful = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_RequoteRequested", DbType="Int")]
+	public System.Nullable<int> RequoteRequested
+	{
+		get
+		{
+			return this._RequoteRequested;
+		}
+		set
+		{
+			if ((this._RequoteRequested != value))
+			{
+				this._RequoteRequested = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_Revised", DbType="Int")]
+	public System.Nullable<int> Revised
+	{
+		get
+		{
+			return this._Revised;
+		}
+		set
+		{
+			if ((this._Revised != value))
+			{
+				this._Revised = value;
 			}
 		}
 	}
