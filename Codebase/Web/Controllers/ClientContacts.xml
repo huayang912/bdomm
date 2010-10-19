@@ -111,7 +111,7 @@ from "dbo"."ClientContacts" "ClientContacts"
             <dataField fieldName="Department" />
           </dataFields>
         </category>
-        <category headerText="Reference Information" newColumn="true">
+        <category headerText="Reference Information" newColumn="false">
           <description>$DefaultReferenceDescription</description>
           <dataFields>
             <dataField fieldName="CompanyCountryName" />
@@ -157,6 +157,7 @@ from "dbo"."ClientContacts" "ClientContacts"
       <action id="a6" />
       <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
       <action id="a8" commandName="New" commandArgument="grid1" />
+	   <action id="a100" commandName="Navigate" commandArgument="_blank:~/pages/ClientContactsView.aspx?ID={ID}" causesValidation="true" headerText="Contact Details" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
