@@ -101,9 +101,9 @@ from "dbo"."ClientContactsNotes" "ClientContactsNotes"
           <description>$DefaultNewDescription</description>
           <dataFields>
             <dataField fieldName="ClientContactID" aliasFieldName="ClientContactName" />
-            <dataField fieldName="Notes" />
+            <dataField fieldName="Notes" rows="3"/>
             <dataField fieldName="ChangedByUserId" hidden="true" aliasFieldName="ChangedByUserUserName" />
-            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="ChangedOn"  hidden="true" columns="10" />
           </dataFields>
         </category>
       </categories>

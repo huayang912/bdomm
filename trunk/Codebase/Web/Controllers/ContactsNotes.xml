@@ -52,9 +52,9 @@ from "dbo"."ContactsNotes" "ContactsNotes"
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
             <dataField fieldName="Notes" rows="5" />
-            <dataField fieldName="ChangedOn" columns="10" />
-            <dataField fieldName="CreatedByUsername" columns="50" />
-            <dataField fieldName="ChangedByUsername" columns="50" />
+            <dataField fieldName="ChangedOn" columns="10"  hidden="true"/>
+            <dataField fieldName="CreatedByUsername" columns="50"  hidden="true" />
+            <dataField fieldName="ChangedByUsername" columns="50"  hidden="true" />
           </dataFields>
         </category>
       </categories>
@@ -67,9 +67,9 @@ from "dbo"."ContactsNotes" "ContactsNotes"
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
             <dataField fieldName="Notes" rows="5" />
-            <dataField fieldName="ChangedOn" columns="10" />
-            <dataField fieldName="CreatedByUsername" columns="50" />
-            <dataField fieldName="ChangedByUsername" columns="50" />
+            <dataField fieldName="ChangedOn" columns="10"  hidden="true" />
+            <dataField fieldName="CreatedByUsername" columns="50"  hidden="true"/>
+            <dataField fieldName="ChangedByUsername" columns="50"  hidden="true" />
           </dataFields>
         </category>
       </categories>

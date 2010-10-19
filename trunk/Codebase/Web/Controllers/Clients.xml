@@ -86,7 +86,7 @@ from "dbo"."Clients" "Clients"
             <dataField fieldName="Version" hidden="true" columns="15" />
           </dataFields>
         </category>
-        <category headerText="Contact Details" newColumn="true">
+        <category headerText="Contact Details" newColumn="false">
           <description>Client contact details</description>
           <dataFields>
             <dataField fieldName="Telephone" />
