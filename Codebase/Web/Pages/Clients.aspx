@@ -5,13 +5,21 @@
     <div class="DataViewHeader">Clients</div>
     <div id="view1" runat="server"></div>
     <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Clients" view="grid1" ShowInSummary="True" PageSize="25"/>
+	
+	
   </div>
+  
   <div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
+
+  
     <div factory:activator="Tab|Client Contacts">
       <div id="view2" runat="server"></div>
       <aquarium:DataViewExtender id="view2Extender" runat="server" TargetControlID="view2" Controller="ClientContacts" view="grid1" FilterSource="view1Extender" FilterFields="CompanyID" PageSize="5" AutoHide="Container" />
     </div>
-    <div factory:activator="Tab|Clients Notes">
+	
+	
+ 	
+    <div factory:activator="Tab|Notes">
       <div id="view5" runat="server"></div>
       <aquarium:DataViewExtender id="view5Extender" runat="server" TargetControlID="view5" Controller="ClientsNotes" view="grid1" FilterSource="view1Extender" FilterFields="ClientID" PageSize="5" AutoHide="Container" />
     </div>
