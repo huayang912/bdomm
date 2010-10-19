@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="OMM" Class="OMMDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=BRAC-E9434D5251\SQLEXPRESS;Initial Catalog=OMM;Integrated Security=False;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BUDI2_NS" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=BRAC-E9434D5251\SQLEXPRESS;Initial Catalog=OMM;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="OMMConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Message_Recipients" Member="Message_Recipients">
     <Type Name="Message_Recipient">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -305,6 +305,20 @@
       <Column Name="TotalInitiated" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Outstanding" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Quoted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Closed" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.reportMonthlyQuotations" Method="reportMonthlyQuotations">
+    <ElementType Name="reportMonthlyQuotationsResult">
+      <Column Name="MonthName" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalInitiated" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NotSubmitted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Submitted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Unsuccessful" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Successful" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RequoteRequested" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Revised" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Closed" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
