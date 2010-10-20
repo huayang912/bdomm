@@ -12,7 +12,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="PageContentPlaceHolder" Runat="Server">
 
     <div class="GroupBox">
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table cellpadding="0" cellspacing="0" border="0"  width="100%">
         
         <tr>
             <td>
