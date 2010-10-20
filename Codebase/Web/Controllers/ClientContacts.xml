@@ -111,7 +111,7 @@ from "dbo"."ClientContacts" "ClientContacts"
             <dataField fieldName="Department" />
           </dataFields>
         </category>
-        <category headerText="Reference Information" newColumn="false">
+        <category headerText="Reference Information" newColumn="true">
           <description>$DefaultReferenceDescription</description>
           <dataFields>
             <dataField fieldName="CompanyCountryName" />
