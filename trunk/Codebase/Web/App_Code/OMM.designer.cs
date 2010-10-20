@@ -86,6 +86,9 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   partial void InsertSMS_Message(SMS_Message instance);
   partial void UpdateSMS_Message(SMS_Message instance);
   partial void DeleteSMS_Message(SMS_Message instance);
+  partial void InsertProjectStatus(ProjectStatus instance);
+  partial void UpdateProjectStatus(ProjectStatus instance);
+  partial void DeleteProjectStatus(ProjectStatus instance);
   #endregion
 	
 	public OMMDataContext() : 
@@ -267,6 +270,14 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<SMS_Message>();
+		}
+	}
+	
+	public System.Data.Linq.Table<ProjectStatus> ProjectStatus
+	{
+		get
+		{
+			return this.GetTable<ProjectStatus>();
 		}
 	}
 	
@@ -5467,6 +5478,8 @@ public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntityRef<User> _User1;
 	
+	private EntityRef<ProjectStatus> _ProjectStatuse;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5508,6 +5521,7 @@ public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
 		this._Quotation = default(EntityRef<Quotation>);
 		this._User = default(EntityRef<User>);
 		this._User1 = default(EntityRef<User>);
+		this._ProjectStatuse = default(EntityRef<ProjectStatus>);
 		OnCreated();
 	}
 	
@@ -5814,6 +5828,10 @@ public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
 		{
 			if ((this._StatusID != value))
 			{
+				if (this._ProjectStatuse.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
 				this.OnStatusIDChanging(value);
 				this.SendPropertyChanging();
 				this._StatusID = value;
@@ -5921,6 +5939,40 @@ public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
 					this._ChangedByUserID = default(Nullable<int>);
 				}
 				this.SendPropertyChanged("User1");
+			}
+		}
+	}
+	
+	[Association(Name="ProjectStatuse_Project", Storage="_ProjectStatuse", ThisKey="StatusID", OtherKey="ID", IsForeignKey=true)]
+	public ProjectStatus ProjectStatuse
+	{
+		get
+		{
+			return this._ProjectStatuse.Entity;
+		}
+		set
+		{
+			ProjectStatus previousValue = this._ProjectStatuse.Entity;
+			if (((previousValue != value) 
+						|| (this._ProjectStatuse.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._ProjectStatuse.Entity = null;
+					previousValue.Projects.Remove(this);
+				}
+				this._ProjectStatuse.Entity = value;
+				if ((value != null))
+				{
+					value.Projects.Add(this);
+					this._StatusID = value.ID;
+				}
+				else
+				{
+					this._StatusID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("ProjectStatuse");
 			}
 		}
 	}
@@ -6647,6 +6699,120 @@ public partial class SMS_Message : INotifyPropertyChanging, INotifyPropertyChang
 	{
 		this.SendPropertyChanging();
 		entity.SMS_Message = null;
+	}
+}
+
+[Table(Name="dbo.ProjectStatuses")]
+public partial class ProjectStatus : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private string _Name;
+	
+	private EntitySet<Project> _Projects;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+	
+	public ProjectStatus()
+	{
+		this._Projects = new EntitySet<Project>(new Action<Project>(this.attach_Projects), new Action<Project>(this.detach_Projects));
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string Name
+	{
+		get
+		{
+			return this._Name;
+		}
+		set
+		{
+			if ((this._Name != value))
+			{
+				this.OnNameChanging(value);
+				this.SendPropertyChanging();
+				this._Name = value;
+				this.SendPropertyChanged("Name");
+				this.OnNameChanged();
+			}
+		}
+	}
+	
+	[Association(Name="ProjectStatuse_Project", Storage="_Projects", ThisKey="ID", OtherKey="StatusID")]
+	public EntitySet<Project> Projects
+	{
+		get
+		{
+			return this._Projects;
+		}
+		set
+		{
+			this._Projects.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_Projects(Project entity)
+	{
+		this.SendPropertyChanging();
+		entity.ProjectStatuse = this;
+	}
+	
+	private void detach_Projects(Project entity)
+	{
+		this.SendPropertyChanging();
+		entity.ProjectStatuse = null;
 	}
 }
 
