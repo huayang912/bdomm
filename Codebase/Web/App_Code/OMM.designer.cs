@@ -89,7 +89,7 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   #endregion
 	
 	public OMMDataContext() : 
-			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["OMMConnectionString"].ConnectionString, mappingSource)
+			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["BUDI2_NS"].ConnectionString, mappingSource)
 	{
 		OnCreated();
 	}
