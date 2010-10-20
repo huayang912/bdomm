@@ -7,15 +7,17 @@
       <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="ClientContacts" StartCommandName="Select" StartCommandArgument="editForm1" ShowInSummary="True" />
     </div>
 		</div>
-	<div factory:flow="NewColumn" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
-    <div factory:activator="Tab|Client Contacts Notes">
-      <div id="view4" runat="server"></div>
-      <aquarium:DataViewExtender id="view4Extender" runat="server" TargetControlID="view4" Controller="ClientContactsNotes" view="grid1" FilterSource="view1Extender" FilterFields="ClientContactID" PageSize="5" />
-    </div>
+	
 
 	
   </div>
   <div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
+    
+      <div factory:activator="Tab|Client Contacts Notes">
+      <div id="view4" runat="server"></div>
+      <aquarium:DataViewExtender id="view4Extender" runat="server" TargetControlID="view4" Controller="ClientContactsNotes" view="grid1" FilterSource="view1Extender" FilterFields="ClientContactID" PageSize="5" />
+ 
+    
     <div factory:activator="Tab|Enquiries">
       <div id="view2" runat="server"></div>
       <aquarium:DataViewExtender id="view2Extender" runat="server" TargetControlID="view2" Controller="Enquiries" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" />
