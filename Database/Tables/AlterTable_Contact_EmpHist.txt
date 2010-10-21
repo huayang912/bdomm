@@ -1,0 +1,8 @@
+ALTER TABLE EmploymentHistory  ADD Contract_days [int] NULL
+
+ALTER TABLE ClientContacts ADD [NL_All] [bit] NOT NULL CONSTRAINT [DF_NL_All]  DEFAULT ((0))
+ALTER TABLE ClientContacts ADD [NL_Procurement] [bit] NOT NULL CONSTRAINT [DF_NL_Procurement]  DEFAULT ((0))
+ALTER TABLE ClientContacts ADD [NL_Personnel] [bit] NOT NULL CONSTRAINT [DF_NL_Personne]  DEFAULT ((0))
+ALTER TABLE ClientContacts ADD [NL_O_M] [bit] NOT NULL CONSTRAINT [DF_NL_O_M]  DEFAULT ((0))
+ALTER TABLE ClientContacts ADD [NL_Project] [bit] NOT NULL CONSTRAINT [DF_NL_Project]  DEFAULT ((0))
+
