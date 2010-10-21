@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using App.Core.Extensions;
 using System.Text;
+using App.Core.Extensions;
+
 
 public partial class Pages_ProjectDetails : System.Web.UI.Page
 {
@@ -65,11 +66,64 @@ public partial class Pages_ProjectDetails : System.Web.UI.Page
                 if(project.Quotation.Enquiry != null)
                     sb.AppendFormat("<b>Enquiry No.:</b> <a href='javascript:void(0);'>{0}</a><br/>", project.Quotation.Enquiry.Number);
                 sb.AppendFormat("<br/><b>Scope of the Work:</b> <br/>{0}<br/>", project.Quotation.ScopeOfWork.IsNullOrEmpty() ? "NA" : WebUtil.FormatText(project.Quotation.ScopeOfWork));
+
+                sb.Append(GetQuotationPricingList(project.Quotation));
             }
 
             divDetails.InnerHtml = sb.ToString();
         }
     }
+
+    protected String GetQuotationPricingList(Quotation quotation)
+    {
+        StringBuilder sb = new StringBuilder(10);
+        sb.Append("<br/><b>Item Details:</b> <br/>");
+        if (quotation.QuotationPricingLines != null && quotation.QuotationPricingLines.Count > 0)
+        {            
+            sb.Append("<table class='GridView' cellpadding='3' cellspacing='0' style='width:100%;'>");
+            sb.Append(" <colgroup>");
+            sb.Append("   <col style='width:12%;' />");
+            sb.Append("   <col style='width:35%;' />");
+            sb.Append("   <col style='width:15%;' />");
+            sb.Append("   <col/>");
+            sb.Append("   <col style='width:10%;' />");
+            //sb.Append("   <col style='width:10%;' />");
+            //sb.Append("   <col style='width:8%;' />");
+            sb.Append("   <col />");
+            sb.Append(" </colgroup>");
+
+            sb.Append("<tr>");
+            sb.Append("   <th>Item</th><th>Description</th><th>Pricing Type</th><th style='text-align:right;'>Unit Price</th><th style='text-align:center;'>Quantity</th><th style='text-align:right;'>Price</th>");
+            sb.Append("</tr>");
+            String currencySymbol = quotation.Currency == null ? String.Empty : quotation.Currency.ShortCode;
+
+            decimal totalPrice = 0;
+            for (int i = 0; i < quotation.QuotationPricingLines.Count; i++)
+            {
+                QuotationPricingLine pricingLine = quotation.QuotationPricingLines[i];
+                decimal price = pricingLine.UnitPrice.GetValueOrDefault() * pricingLine.Quantity.GetValueOrDefault();
+                sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowListing" : "EvenRowListing");
+                sb.AppendFormat("   <td>{0}</td>", pricingLine.Item.IsNullOrEmpty() ? "NA" : pricingLine.Item.HtmlEncode());
+                sb.AppendFormat("   <td>{0}</td>", pricingLine.Description.IsNullOrEmpty() ? "NA" : WebUtil.FormatText(pricingLine.Description));
+                sb.AppendFormat("   <td>{0}</td>", pricingLine.QuotationPricingType == null ? "NA" : pricingLine.QuotationPricingType.Name);
+                sb.AppendFormat("   <td style='text-align:right;'>{0}{1}</td>", currencySymbol, String.Format(AppConstants.ValueOf.DECIMAL_FORMAT, pricingLine.UnitPrice.GetValueOrDefault()));
+                sb.AppendFormat("   <td style='text-align:center;'>{0}</td>", pricingLine.Quantity.GetValueOrDefault());
+                sb.AppendFormat("   <td style='text-align:right;'>{0}{1}</td>", currencySymbol, String.Format(AppConstants.ValueOf.DECIMAL_FORMAT, price));
+                //sb.AppendFormat("   <td style='text-align:center;'><a href='javascript:void(0);' onclick='LoadPricingForEdit(' + i + ')'>Edit</a></td>';
+                sb.Append("</tr>");
+                totalPrice += price;
+            }
+            sb.Append("<tr>");
+            sb.AppendFormat("   <td colspan='6' style='text-align:right;'><b>Total Price:</b> &nbsp;{0}{1}</td>", currencySymbol, String.Format(AppConstants.ValueOf.DECIMAL_FORMAT, totalPrice));
+            //sb.Append("   <td></td>");
+            sb.Append("</tr>");
+            sb.Append("</table>");
+        }
+        else
+            sb.Append("NA");
+        return sb.ToString();
+    }
+
     protected void ShowErrorMessage()
     {
         //pnlDetails.Visible = false;

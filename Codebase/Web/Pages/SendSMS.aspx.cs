@@ -14,7 +14,7 @@ public partial class Pages_SendSMS : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        BindPageInfo();
         if (!IsPostBack)
         {
             tbxMessage.Text = "This is a test message. "+
@@ -24,18 +24,31 @@ public partial class Pages_SendSMS : System.Web.UI.Page
             String commSeperatedID = WebUtil.GetQueryStringInString(AppConstants.QueryString.ID);
 
             int[] ids = WebUtil.GetIntArray(commSeperatedID);
+            if (ids == null || ids.Length == 0)
+                ShowErrorMessage();
+            else
+            {
+                OMMDataContext dataContext = new OMMDataContext();
+                IList<Message_Recipient> recipients = (from R in dataContext.Message_Recipients
+                                                       where (from I in ids select I).Contains(R.ID)
+                                                       select R).ToList();
 
-            OMMDataContext dataContext = new OMMDataContext();
-            IList<Message_Recipient> recipients = (from R in dataContext.Message_Recipients
-                                                   where (from I in ids select I).Contains(R.ID)
-                                                   select R).ToList();
-
-            GridView1.DataSource = recipients;
-            GridView1.DataBind();
+                GridView1.DataSource = recipients;
+                GridView1.DataBind();
+            }
         }
 
         //OMMDataContext context = new OMMDataContext();
         //context.Message_Recipients
+    }
+    protected void ShowErrorMessage()
+    {
+        tblContainer.Visible = false;
+        WebUtil.ShowMessageBox(divMessage, "Sorry! the requested receipient was not found.", true);
+    }
+    protected void BindPageInfo()
+    {
+        Page.Title = WebUtil.GetPageTitle("Send SMS");
     }
     protected void btnNext_Click(object sender, EventArgs e)
     {
