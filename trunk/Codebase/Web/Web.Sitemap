@@ -2,9 +2,9 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" xmlns:app="urn:schemas-codeontime-com:data-aquarium-application">
   <siteMapNode url="~/Default.aspx" title="Home" description="">
     <siteMapNode title="Home" description="Application home page" url="~/Pages/Home.aspx" />
-    <siteMapNode title="Clients" description="View Clients" url="~/Pages/Clients.aspx" />
+    <siteMapNode title="Clients" description="View Clients" url="~/Pages/ClientNew.aspx" />
 	 <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelView.aspx" roles="*">
-	  <siteMapNode title="Show Personnel" description="Personnel List" url="~/Pages/PersonnelVew.aspx" roles="*" />
+	  <siteMapNode title="Show Personnel" description="Personnel List" url="~/Pages/PersonnelViewRedirect.asp" roles="*" />
       <siteMapNode title="CV" description="Personnel CV" url="~/Pages/CVNew.aspx" roles="*" />
       <siteMapNode title="Send SMS" description="Sends SMS to the Corresponding Client" url="~/Pages/SendSMS.aspx" roles="*" />
     </siteMapNode>
@@ -14,8 +14,14 @@
     
     <siteMapNode title="Quotations" description="Quotation" url="~/Pages/QuoteSrch.aspx" roles="*" />
     <siteMapNode title="Projects" description="Projrct" url="~/Pages/ProjectSrch.aspx" roles="*" />
-   
-    <siteMapNode title="Configuration" description="" url="~/Pages/ListBox.aspx" roles="*">
+
+    <siteMapNode title="Options" description="" url="~/Pages/ListBox.aspx" roles="*">
+      <siteMapNode title="Departments" description="" url="" roles="*">
+        <siteMapNode title="Commercial" description="" url="_blank:http://companyweb/Commercial/default.aspx" roles="*"/>
+
+        </siteMapNode>
+
+        <siteMapNode title="Configuration" description="" url="" roles="*">
       <siteMapNode title="Countries" description="View Countries" url="~/Pages/Countries.aspx" />
       <siteMapNode title="Currency" description="View Currency" url="~/Pages/Currency.aspx" />
       <siteMapNode title="Enquiry Statuses" description="View Enquiry Statuses" url="~/Pages/EnquiryStatuses.aspx" />
@@ -26,6 +32,7 @@
       <siteMapNode title="Quotation Statuses" description="View Quotation Statuses" url="~/Pages/QuotationStatuses.aspx" />
       <siteMapNode title="Certificate Types" description="View Certificate Types" url="~/Pages/CertificateTypes.aspx" />
       <siteMapNode title="Telephone Number Types" description="View Telephone Number Types" url="~/Pages/TelephoneNumberTypes.aspx" />
+    </siteMapNode>
     </siteMapNode>
 
     <siteMapNode title="Reports" description="Reports" url="#" roles="*">
