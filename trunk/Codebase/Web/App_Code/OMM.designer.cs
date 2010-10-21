@@ -312,6 +312,13 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 		return ((ISingleResult<reportMonthlyQuotationsResult>)(result.ReturnValue));
 	}
+	
+	[Function(Name="dbo.reportTypeWiseMOnthlyEnqueryDetails")]
+	public ISingleResult<reportTypeWiseMOnthlyEnqueryDetailsResult> reportTypeWiseMOnthlyEnqueryDetails()
+	{
+		IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		return ((ISingleResult<reportTypeWiseMOnthlyEnqueryDetailsResult>)(result.ReturnValue));
+	}
 }
 
 [Table(Name="dbo.Message_Recipients")]
@@ -5943,7 +5950,7 @@ public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	[Association(Name="ProjectStatuse_Project", Storage="_ProjectStatuse", ThisKey="StatusID", OtherKey="ID", IsForeignKey=true)]
+	[Association(Name="ProjectStatus_Project", Storage="_ProjectStatuse", ThisKey="StatusID", OtherKey="ID", IsForeignKey=true)]
 	public ProjectStatus ProjectStatuse
 	{
 		get
@@ -6770,7 +6777,7 @@ public partial class ProjectStatus : INotifyPropertyChanging, INotifyPropertyCha
 		}
 	}
 	
-	[Association(Name="ProjectStatuse_Project", Storage="_Projects", ThisKey="ID", OtherKey="StatusID")]
+	[Association(Name="ProjectStatus_Project", Storage="_Projects", ThisKey="ID", OtherKey="StatusID")]
 	public EntitySet<Project> Projects
 	{
 		get
@@ -7099,6 +7106,140 @@ public partial class reportMonthlyQuotationsResult
 			if ((this._Revised != value))
 			{
 				this._Revised = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_Closed", DbType="Int")]
+	public System.Nullable<int> Closed
+	{
+		get
+		{
+			return this._Closed;
+		}
+		set
+		{
+			if ((this._Closed != value))
+			{
+				this._Closed = value;
+			}
+		}
+	}
+}
+
+public partial class reportTypeWiseMOnthlyEnqueryDetailsResult
+{
+	
+	private string _CreatedMonth;
+	
+	private System.Nullable<int> _CreatedYear;
+	
+	private string _EnqueryType;
+	
+	private System.Nullable<int> _TotalSubmitted;
+	
+	private System.Nullable<int> _Outstanding;
+	
+	private System.Nullable<int> _Quoted;
+	
+	private System.Nullable<int> _Closed;
+	
+	public reportTypeWiseMOnthlyEnqueryDetailsResult()
+	{
+	}
+	
+	[Column(Storage="_CreatedMonth", DbType="VarChar(9)")]
+	public string CreatedMonth
+	{
+		get
+		{
+			return this._CreatedMonth;
+		}
+		set
+		{
+			if ((this._CreatedMonth != value))
+			{
+				this._CreatedMonth = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_CreatedYear", DbType="Int")]
+	public System.Nullable<int> CreatedYear
+	{
+		get
+		{
+			return this._CreatedYear;
+		}
+		set
+		{
+			if ((this._CreatedYear != value))
+			{
+				this._CreatedYear = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_EnqueryType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string EnqueryType
+	{
+		get
+		{
+			return this._EnqueryType;
+		}
+		set
+		{
+			if ((this._EnqueryType != value))
+			{
+				this._EnqueryType = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_TotalSubmitted", DbType="Int")]
+	public System.Nullable<int> TotalSubmitted
+	{
+		get
+		{
+			return this._TotalSubmitted;
+		}
+		set
+		{
+			if ((this._TotalSubmitted != value))
+			{
+				this._TotalSubmitted = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_Outstanding", DbType="Int")]
+	public System.Nullable<int> Outstanding
+	{
+		get
+		{
+			return this._Outstanding;
+		}
+		set
+		{
+			if ((this._Outstanding != value))
+			{
+				this._Outstanding = value;
+			}
+		}
+	}
+	
+	[Column(Storage="_Quoted", DbType="Int")]
+	public System.Nullable<int> Quoted
+	{
+		get
+		{
+			return this._Quoted;
+		}
+		set
+		{
+			if ((this._Quoted != value))
+			{
+				this._Quoted = value;
 			}
 		}
 	}

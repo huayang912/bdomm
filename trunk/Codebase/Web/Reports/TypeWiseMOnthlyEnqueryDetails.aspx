@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="monthlyEnqueryReport.aspx.cs" Inherits="Reports_monthlyEnqueryReport" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="TypeWiseMOnthlyEnqueryDetails.aspx.cs" Inherits="Reports_TypeWiseMOnthlyEnqueryDetails" %>
 
 <%@ Register Assembly="CrystalDecisions.Web, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304"
     Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
@@ -15,7 +15,12 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="PageContentPlaceHolder" Runat="Server">
     <%--Filter Box--%>
     <div class="GroupBox">
-        <div class="floatleft">Select Year:</div>
+        <div class="floatleft">Select Month:</div>
+        <div class="floatleft" style="margin-left:10px; width:120px;">
+            <asp:DropDownList ID="ddlMonth" runat="server" CssClass="DropDownListCommon"></asp:DropDownList>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="floatleft">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   Select Year:</div>
         <div class="floatleft" style="margin-left:10px; width:120px;">
             <asp:DropDownList ID="ddlYear" runat="server" CssClass="DropDownListCommon"></asp:DropDownList>
         </div>
