@@ -45,5 +45,7 @@ public partial class Main : System.Web.UI.MasterPage
             hplLogin.Text = "Log Out";
             ltrUserName.Text = String.Format("Welcome {0} | ", SessionCache.CurrentUser.UserNameWeb);
         }
+        if (IsPostBack)
+            Menu1.DataBind();
     }
 }
