@@ -54,8 +54,10 @@ public partial class Pages_ProjectDetails : System.Web.UI.Page
                 sb.AppendFormat("<br/><b>Main Equipments:</b> <br/>{0}<br/>", WebUtil.FormatText(mainEquipment.IsNullOrEmpty() ? "NA" : mainEquipment));
 
                 
-                sb.AppendFormat("<br/><span style='color:red;'><b>Subcontractor(s):</b> {0}</span><br/>", project.Quotation.Subcontractor);
+                sb.AppendFormat("<br/><b>Subcontractor(s):</b> {0}<br/>", GetSubContractors(project, context));
+                sb.Append(GetQuotationPricingList(project.Quotation));
             }
+            sb.AppendFormat("<b>Status:</b> {0}<br/>", project.StatusID.GetValueOrDefault() > 0 ? project.ProjectStatuse.Name : "NA");
             sb.AppendFormat("<b>Description:</b> {0}<br/>",  WebUtil.FormatText(project.Description.IsNullOrEmpty() ? "NA" : project.Description));
             sb.AppendFormat("<b>Start Date:</b> {0}<br/>", project.StartDate == DateTime.MinValue ? "NA" : project.StartDate.GetValueOrDefault().ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
             sb.AppendFormat("<b>End Date:</b> {0}<br/>", project.EndDate == DateTime.MinValue ? "NA" : project.EndDate.GetValueOrDefault().ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
@@ -66,18 +68,23 @@ public partial class Pages_ProjectDetails : System.Web.UI.Page
                 if(project.Quotation.Enquiry != null)
                     sb.AppendFormat("<b>Enquiry No.:</b> <a href='javascript:void(0);'>{0}</a><br/>", project.Quotation.Enquiry.Number);
                 sb.AppendFormat("<br/><b>Scope of the Work:</b> <br/>{0}<br/>", project.Quotation.ScopeOfWork.IsNullOrEmpty() ? "NA" : WebUtil.FormatText(project.Quotation.ScopeOfWork));
-
-                sb.Append(GetQuotationPricingList(project.Quotation));
+                
             }
 
             divDetails.InnerHtml = sb.ToString();
         }
     }
 
+    private string GetSubContractors(Project project, OMMDataContext context)
+    {
+        //var subContractors = from P in context.
+        return "NA";
+    }
+
     protected String GetQuotationPricingList(Quotation quotation)
     {
         StringBuilder sb = new StringBuilder(10);
-        sb.Append("<br/><b>Item Details:</b> <br/>");
+        sb.Append("<b>Item Details:</b> <br/>");
         if (quotation.QuotationPricingLines != null && quotation.QuotationPricingLines.Count > 0)
         {            
             sb.Append("<table class='GridView' cellpadding='3' cellspacing='0' style='width:100%;'>");
