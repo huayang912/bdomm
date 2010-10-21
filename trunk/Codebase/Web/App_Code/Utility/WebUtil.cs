@@ -37,8 +37,10 @@ public class WebUtil
     /// </summary>
     /// <param name="text"></param>
     /// <returns></returns>
-    public static string FormatText(String text)
+    public static String FormatText(String text)
     {
+        if (text.IsNullOrEmpty())
+            return String.Empty;
         return Encode(text).Replace(Environment.NewLine, "<br />").Replace("\n", "<br />");
     }
     /// <summary>
@@ -218,16 +220,20 @@ public class WebUtil
 
     public static int[] GetIntArray(string receiPientsList)
     {
-        String[] ids = receiPientsList.Split(',');
-        IList<int> intIds = new List<int>();
-        foreach (String id in ids)
+        if (!receiPientsList.IsNullOrEmpty())
         {
-            int value = 0;
-            int.TryParse(id, out value);
-            if (value > 0)
-                intIds.Add(value);
+            String[] ids = receiPientsList.Split(',');
+            IList<int> intIds = new List<int>();
+            foreach (String id in ids)
+            {
+                int value = 0;
+                int.TryParse(id, out value);
+                if (value > 0)
+                    intIds.Add(value);
+            }
+            return intIds.ToArray();
         }
-        return intIds.ToArray();
+        return null;
     }
 
     /// <summary>
