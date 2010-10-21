@@ -49,7 +49,8 @@
         
         <tr>
             <td>
-                <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
+                <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" 
+                    AutoDataBind="true" DisplayToolbar="False" />
             </td>
         </tr>
     </table>
