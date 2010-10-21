@@ -125,8 +125,11 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
         </Services>
     </asp:ScriptManagerProxy>
     
-    <div class="GroupBox">
-        <table cellpadding="5" cellspacing="0" border="0" width="100%">
+    <div class="GroupBox">        
+        
+        <div id="divMessage" runat="server" enableviewstate="false" visible="false"></div>
+        
+        <table id="tblContainer" runat="server" cellpadding="5" cellspacing="0" border="0" width="100%">
         <tr>
             <td>
                <asp:Label ID="lblMessage" runat="server" Font-Bold="True" Font-Size="Medium"></asp:Label>
