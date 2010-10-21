@@ -76,22 +76,13 @@ from "dbo"."ClientContactsNotes" "ClientContactsNotes"
           <description>$DefaultEditDescription</description>
           <dataFields>
             <dataField fieldName="ClientContactID" aliasFieldName="ClientContactName" />
-            <dataField fieldName="Notes" />
-            <dataField fieldName="ChangedByUserId" hidden="true" aliasFieldName="ChangedByUserUserName" />
-            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="Notes" rows="3"/>
+            <dataField fieldName="ChangedByUserId"   hidden="true" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn" hidden="true" columns="10" />
             <dataField fieldName="Version" hidden="true" columns="15" />
           </dataFields>
         </category>
-        <category headerText="Reference Information">
-          <description>$DefaultReferenceDescription</description>
-          <dataFields>
-            <dataField fieldName="ClientContactCompanyName" />
-            <dataField fieldName="ClientContactCompanyCountryName" />
-            <dataField fieldName="ClientContactCompanyChangedByUserUserName" hidden="true" />
-            <dataField fieldName="ClientContactCountryName" />
-            <dataField fieldName="ClientContactChangedByUserUserName" hidden="true" />
-          </dataFields>
-        </category>
+       
       </categories>
     </view>
     <view id="createForm1" type="Form" commandId="command1" label="New Client Contacts Notes">

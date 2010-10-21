@@ -2,7 +2,8 @@
 <dataController name="ClientContacts" conflictDetection="overwriteChanges" label="Client Contacts" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <command id="command1" type="Text">
-      <text><![CDATA[
+      <text>
+    <![CDATA[
 select
 	"ClientContacts"."ID" "ID"
 	,"ClientContacts"."Name" "Name"
@@ -26,6 +27,11 @@ select
 	,"ClientContacts"."Mobile" "Mobile"
 	,"ClientContacts"."Department" "Department"
 	,"ClientContacts"."Imported" "Imported"
+	,"ClientContacts"."NL_All" "NL_All"
+	,"ClientContacts"."NL_Procurement" "NL_Procurement"
+	,"ClientContacts"."NL_Personnel" "NL_Personnel"
+	,"ClientContacts"."NL_O_M" "NL_O_M"
+	,"ClientContacts"."NL_Project" "NL_Project"  
 from "dbo"."ClientContacts" "ClientContacts"
 	left join "dbo"."Countries" "Country" on "ClientContacts"."CountryID" = "Country"."ID"
 	left join "dbo"."Clients" "Company" on "ClientContacts"."CompanyID" = "Company"."ID"
@@ -65,25 +71,45 @@ from "dbo"."ClientContacts" "ClientContacts"
       <items style="Lookup" dataController="Users" newDataView="createForm1" />
     </field>
     <field name="ChangedByUserUserName" type="String" readOnly="true" label="Changed By User Name" />
-    <field name="ChangedOn" type="DateTime" allowNulls="false" default="(getdate())" label="Changed On" />
+    <field name="ChangedOn" type="DateTime" allowNulls="true" default="(getdate())" label="Changed On" />
     <field name="Version" type="Byte[]" allowNulls="false" readOnly="true" label="Version" />
     <field name="Mobile" type="String" label="Mobile" />
     <field name="Department" type="String" label="Department" />
     <field name="Imported" type="DateTime" label="Imported" />
+    
+    <field name="NL_All" type="Boolean" allowNulls="false" default="((0))" label="CRM - All" >
+    <items style="CheckBox"/>
+    </field>
+
+ 
+    <field name="NL_Procurement" type="Boolean" allowNulls="false" default="((0))" label="CRM - Procurement" >
+      <items style="CheckBox"/>
+    </field>
+    <field name="NL_Personnel" type="Boolean" allowNulls="false" default="((0))" label="CRM - Personnel" >
+      <items style="CheckBox"/>
+    </field>
+
+    <field name="NL_O_M" type="Boolean" allowNulls="false" default="((0))" label="CRM - OandM" >
+      <items style="CheckBox"/>
+    </field>
+    <field name="NL_Project" type="Boolean" allowNulls="false" default="((0))" label="CRM - Project" >
+      <items style="CheckBox"/>
+    </field>
+
   </fields>
   <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <view id="grid1" type="Grid" commandId="command1" label="Client Contacts" sortExpression="CompanyName,Name ASC">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Name" />
-        <dataField fieldName="JobTitle" />
-        <dataField fieldName="Address" hidden="true" />
-        <dataField fieldName="Postcode" hidden="true" columns="20" />
+        <dataField fieldName="Name" columns="30"/>
+        <dataField fieldName="JobTitle" columns="30"/>
+        <dataField fieldName="Address" hidden="true" columns="30"/>
+        <dataField fieldName="Postcode" hidden="true" columns="30" />
         <dataField fieldName="CountryID" hidden="true" aliasFieldName="CountryName" />
         <dataField fieldName="Telephone" hidden="true" columns="50" />
         <dataField fieldName="Fax" hidden="true" columns="50" />
         <dataField fieldName="Email" hidden="true" />
-        <dataField fieldName="CompanyID" aliasFieldName="CompanyName" />
+        <dataField fieldName="CompanyID" aliasFieldName="CompanyName" columns="30"/>
         <dataField fieldName="DateOfBirth" hidden="true" columns="10" />
       </dataFields>
     </view>
@@ -93,33 +119,39 @@ from "dbo"."ClientContacts" "ClientContacts"
         <category headerText="Client Contacts" newColumn="true">
           <description>$DefaultEditDescription</description>
           <dataFields>
-            <dataField fieldName="Name" />
-            <dataField fieldName="JobTitle" />
-            <dataField fieldName="Address" rows="3"/>
+            <dataField fieldName="Name" columns="30"/>
+            <dataField fieldName="JobTitle" columns="30" />
+            <dataField fieldName="Address" columns="30" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
-            <dataField fieldName="CountryID" aliasFieldName="CountryName" />
-            <dataField fieldName="CompanyID" aliasFieldName="CompanyName" />
+            <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30"/>
+            <dataField fieldName="CompanyID" aliasFieldName="CompanyName" columns="30"/>
             <dataField fieldName="DateOfBirth" columns="10" />
           <!--
 		    <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
 			-->
-			            <dataField fieldName="ChangedByUserID" hidden="true"/>
 
           <dataField fieldName="ChangedOn" columns="10" hidden="true"/>
 	 
             <dataField fieldName="Version" hidden="true" columns="15" />
-            <dataField fieldName="Department" />
+            <dataField fieldName="Department" columns="30"/>
+            <dataField fieldName="ChangedByUserID"  aliasFieldName="ChangedByUserUserName" />
+
           </dataFields>
         </category>
         <category headerText="Reference Information" newColumn="true">
           <description>$DefaultReferenceDescription</description>
           <dataFields>
-            <dataField fieldName="CompanyCountryName" />
-            <dataField fieldName="Telephone" />
-            <dataField fieldName="Mobile" />
-            <dataField fieldName="Fax" />
-            <dataField fieldName="Email" hyperlinkFormatString="mailto://{ClientContacts}" />
-            <dataField fieldName="ChangedByUserUserName" /> 
+            <dataField fieldName="CompanyCountryName" columns="30"/>
+            <dataField fieldName="Telephone" columns="30"/>
+            <dataField fieldName="Mobile" columns="30"/>
+            <dataField fieldName="Fax" columns="30"/>
+            <dataField fieldName="Email" hyperlinkFormatString="mailto://{ClientContacts}" columns="30"/>
+            <dataField fieldName="NL_All"/>
+            <dataField fieldName="NL_Procurement" />
+              <dataField fieldName="NL_Personnel" />
+                <dataField fieldName="NL_O_M" />
+                  <dataField fieldName="NL_Project" />
+
           </dataFields>
         </category>
       </categories>
@@ -130,23 +162,45 @@ from "dbo"."ClientContacts" "ClientContacts"
         <category headerText="New Client Contacts" newColumn="true">
           <description>$DefaultNewDescription</description>
           <dataFields>
-            <dataField fieldName="Name" />
-            <dataField fieldName="JobTitle" />
-            <dataField fieldName="Address" rows="3"/>
+            <dataField fieldName="Name" columns="30"  />
+            <dataField fieldName="JobTitle" columns="30" />
+            <dataField fieldName="Address" columns="30"  rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
-            <dataField fieldName="CountryID" aliasFieldName="CountryName" />
-            <dataField fieldName="Telephone" columns="50" />
-            <dataField fieldName="Fax" columns="50" />
-            <dataField fieldName="Email" />
-            <dataField fieldName="CompanyID" aliasFieldName="CompanyName" />
+            <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30" />
+            <dataField fieldName="Telephone" columns="30" />
+            <dataField fieldName="Fax" columns="30" />
+            <dataField fieldName="Email" columns="30" />
+            <dataField fieldName="CompanyID" aliasFieldName="CompanyName" columns="30" />
             <dataField fieldName="DateOfBirth" columns="10" />
             <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
-            <dataField fieldName="ChangedOn" columns="10" />
-            <dataField fieldName="Mobile" columns="50" />
-            <dataField fieldName="Department" />
+            <dataField fieldName="ChangedOn"  hidden="true" columns="10" />
+            <dataField fieldName="Mobile" columns="30" />
+            <dataField fieldName="Department" columns="30" />
           </dataFields>
         </category>
+
+        <category headerText="CRM Information" newColumn="true">
+          <dataFields>
+           
+            <dataField fieldName="NL_All"/>
+
+            <dataField fieldName="NL_Procurement" />
+            <dataField fieldName="NL_Personnel" />
+            <dataField fieldName="NL_O_M" />
+            <dataField fieldName="NL_Project" />
+
+
+          </dataFields>
+        </category>
+        
+        
+        
       </categories>
+      
+      
+      
+      
+      
     </view>
   </views>
   <actions xmlns:a="urn:schemas-codeontime-com:data-aquarium">

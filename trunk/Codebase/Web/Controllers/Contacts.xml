@@ -2,7 +2,8 @@
 <dataController name="Contacts" conflictDetection="overwriteChanges" label="Contacts" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <command id="command1" type="Text">
-      <text><![CDATA[select
+      <text>
+    <![CDATA[select
 	"Contacts"."ID" "ID"
 	,"Contacts"."FirstNames" "FirstNames"
 	,"Contacts"."LastName" "LastName"
@@ -31,6 +32,7 @@
 	,"ChangedByUser"."UserName" "ChangedByUserUserName"
 	,"Contacts"."ChangedOn" "ChangedOn"
 	,"Contacts"."Version" "Version"
+  ,"Contacts"."Contract_days" "Contract_days"
 	,"Contacts"."DayRateCurrencyID" "DayRateCurrencyID"
 from "dbo"."Contacts" "Contacts"
 	left join "dbo"."VewPersonnelRoles" "PersonnelRoles" on "Contacts"."ID" = "PersonnelRoles"."ID"

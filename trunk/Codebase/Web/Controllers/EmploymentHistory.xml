@@ -2,7 +2,8 @@
 <dataController name="EmploymentHistory" conflictDetection="overwriteChanges" label="Employment History" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <command id="command1" type="Text">
-      <text><![CDATA[select
+      <text>
+    <![CDATA[select
 	"EmploymentHistory"."ID" "ID"
 	,"EmploymentHistory"."ContactID" "ContactID"
 	,"Contact"."FirstNames" "ContactFirstNames"
@@ -38,6 +39,7 @@
 	,"ChangedByUser"."UserName" "ChangedByUserUserName"
 	,"EmploymentHistory"."ChangedOn" "ChangedOn"
 	,"EmploymentHistory"."Version" "Version"
+  ,"EmploymentHistory"."Contract_days" "Contract_days"
 from "dbo"."EmploymentHistory" "EmploymentHistory"
 	left join "dbo"."Contacts" "Contact" on "EmploymentHistory"."ContactID" = "Contact"."ID"
 	left join "dbo"."Countries" "ContactCountry" on "Contact"."CountryID" = "ContactCountry"."ID"
@@ -96,6 +98,12 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
     <field name="Notes" type="String" label="Notes" />
     <field name="ChangedOn" type="DateTime" allowNulls="false" default="(getdate())" label="Changed On" />
     <field name="Version" type="Byte[]" allowNulls="false" readOnly="true" label="Version" />
+    <field name="Contract_days" type="Int32" label="Contract Days#">
+      <items style="RadioButtonList">
+        <item text="5 Days" value="5"/>
+        <item text="7 Days" value="7"/>
+      </items>
+      </field>
     <field name="ProjectQuotationNumber" type="String" allowNulls="false" label="Quotation#" formatOnClient="true" allowQBE="false" allowSorting="false" />
     <field name="ClientName" type="String" allowNulls="false" readOnly="true" label="Client Name" formatOnClient="true" />
   </fields>
@@ -110,9 +118,10 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
         <dataField fieldName="ClientID" aliasFieldName="ClientName" />
         <dataField fieldName="RoleID" aliasFieldName="RoleName" />
         <dataField fieldName="DayRate" columns="15" />
-        <dataField fieldName="Notes" />
+        <dataField fieldName="Contract_days" />
+        <dataField fieldName="Notes" hidden="true"/>
         <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
-        <dataField fieldName="ChangedOn" columns="10" />
+        <dataField fieldName="ChangedOn" hidden="true" columns="10" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Employment History">
@@ -128,15 +137,17 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
             <dataField fieldName="ClientID" aliasFieldName="ClientName" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
             <dataField fieldName="DayRate" columns="15" />
-            <dataField fieldName="Notes" />
-            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="Contract_days" />
+             
+            <dataField fieldName="Notes"  rows="3"/>
+            <dataField fieldName="ChangedOn"  readOnly="true" columns="10" />
             <dataField fieldName="Version" hidden="true" columns="15" />
           </dataFields>
         </category>
         <category headerText="Reference Information">
           <description>$DefaultReferenceDescription</description>
           <dataFields>
-            <dataField fieldName="ProjectQuotationNumber" columns="50" />
+            <dataField fieldName="ProjectQuotationNumber"  readOnly="true" columns="50" />
             <dataField fieldName="ProjectStatusName" columns="50" />
           </dataFields>
         </category>
@@ -155,9 +166,11 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
             <dataField fieldName="ClientID" aliasFieldName="ClientName" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
             <dataField fieldName="DayRate" columns="15" />
-            <dataField fieldName="Notes" />
+            <dataField fieldName="Contract_days" />
+
+            <dataField fieldName="Notes"  rows="3"/>
             <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
-            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="ChangedOn" hidden="true"  columns="10" />
           </dataFields>
         </category>
       </categories>
