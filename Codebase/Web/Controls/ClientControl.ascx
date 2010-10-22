@@ -14,7 +14,7 @@
                 <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Clients"   PageSize="25"/>
               </ContentTemplate>
             </act:TabPanel>
-                 <a href="~/Controls/AddNewPersonnelControl.ascx">~/Controls/AddNewPersonnelControl.ascx</a>   <act:TabPanel ID="PurchaseOrdersTab" runat="server" HeaderText="Purchase Orders">
+               <act:TabPanel ID="PurchaseOrdersTab" runat="server" HeaderText="Purchase Orders">
               <ContentTemplate>
                 <div id="view7" runat="server"></div>
                  <aquarium:DataViewExtender id="view7Extender" runat="server" TargetControlID="view7" Controller="ClientPurchaseOrders" view="grid1" FilterSource="view1Extender" FilterFields="ClientID" />
