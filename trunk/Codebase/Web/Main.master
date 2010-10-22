@@ -31,11 +31,9 @@
         <table id="PageBody" cellpadding="0" cellspacing="0">
           <tr>
             <td id="PageHeaderSideBar">
-              <asp:Image ID="Image5" runat="server" SkinID="PageLogo" CssClass="PageLogo" />
-            </td>
+                &nbsp;</td>
             <td id="PageHeaderLeftSide">
-              <asp:Image ID="Image1" runat="server" SkinID="Placeholder" />
-            </td>
+                &nbsp;</td>
             <td id="PageHeaderContent">
               <div class="Header">
                 <asp:SiteMapPath ID="SiteMapPath1" runat="server" SkinID="SiteMapPath" />
@@ -52,7 +50,6 @@
             <td id="PageContentSideBar" valign="top">
               <div class="SideBarBody">
                 <asp:ContentPlaceHolder ID="SideBarPlaceHolder" runat="server" />
-                <asp:Image runat="server" SkinID="Placeholder" />
               </div>
             </td>
             <td id="PageContentLeftSide">
