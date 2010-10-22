@@ -138,7 +138,7 @@ from "dbo"."ClientContacts" "ClientContacts"
             <dataField fieldName="Fax" columns="30"/>
             <dataField fieldName="Email" hyperlinkFormatString="mailto://{ClientContacts}" columns="30"/>
             <dataField fieldName="NL_All"/>
-            <dataField fieldName="NL_Procurement" />
+            <dataField fieldName="NL_Procurement"  />
               <dataField fieldName="NL_Personnel" />
                 <dataField fieldName="NL_O_M" />
                   <dataField fieldName="NL_Project" />
@@ -196,13 +196,13 @@ from "dbo"."ClientContacts" "ClientContacts"
   </views>
   <actions xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <actionGroup id="ag1" scope="Grid">
+      <action id="a100" commandName="Navigate" commandArgument="_blank:~/pages/ClientContactsView.aspx?ID={ID}" causesValidation="true" headerText="Contact Details" />
       <action id="a1" commandName="Select" commandArgument="editForm1" />
       <action id="a2" commandName="Edit" />
       <action id="a3" commandName="Delete" />
       <action id="a6" />
       <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
       <action id="a8" commandName="New" commandArgument="grid1" />
-	   <action id="a100" commandName="Navigate" commandArgument="_blank:~/pages/ClientContactsView.aspx?ID={ID}" causesValidation="true" headerText="Contact Details" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
