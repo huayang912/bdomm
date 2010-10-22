@@ -96,11 +96,11 @@ from "dbo"."Contacts" "Contacts"
     <view id="grid1" type="Grid" commandId="command1" label="Contacts" sortExpression="LastName,FirstNames">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="LastName" columns="50" />
-        <dataField fieldName="FirstNames" columns="50" />
-        <dataField fieldName="PrimaryRole" />
-        <dataField fieldName="SecondaryRole" />
-        <dataField fieldName="TertiaryRole" />
+        <dataField fieldName="LastName" columns="30" />
+        <dataField fieldName="FirstNames" columns="30"  />
+        <dataField fieldName="PrimaryRole" columns="30" />
+        <dataField fieldName="SecondaryRole" columns="30" />
+        <dataField fieldName="TertiaryRole" columns="30" />
         <dataField fieldName="Postcode" hidden="true" columns="20" />
         <dataField fieldName="CountryID" hidden="true" aliasFieldName="CountryName" />
         <dataField fieldName="DateOfBirth" hidden="true" columns="10" />
@@ -117,11 +117,11 @@ from "dbo"."Contacts" "Contacts"
         <category headerText="Contacts" newColumn="true">
           <description>$DefaultEditDescription</description>
           <dataFields>
-            <dataField fieldName="FirstNames" columns="50" />
-            <dataField fieldName="LastName" columns="50" />
-            <dataField fieldName="Address" />
+            <dataField fieldName="FirstNames" columns="30"  />
+            <dataField fieldName="LastName" columns="30"  />
+            <dataField fieldName="Address" columns="30" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
-            <dataField fieldName="CountryID" aliasFieldName="CountryName" />
+            <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30" />
             <dataField fieldName="DateOfBirth" columns="10" />
             <dataField fieldName="MaritalStatusID" aliasFieldName="MaritalStatusName" />
             <dataField fieldName="PhotoID" hidden="true" aliasFieldName="PreferredDayRate" />
@@ -135,9 +135,9 @@ from "dbo"."Contacts" "Contacts"
         <category headerText="Other" tab="Other Details">
           <description>Other Details</description>
           <dataFields>
-            <dataField fieldName="PlaceOfBirth" />
-            <dataField fieldName="CountryOfBirthID" />
-            <dataField fieldName="CountryOfBirthName" />
+            <dataField fieldName="PlaceOfBirth" columns="30" />
+            <dataField fieldName="CountryOfBirthID" columns="30" />
+            <dataField fieldName="CountryOfBirthName" columns="30" />
           </dataFields>
         </category>
         <category headerText="Business Details" tab="Business Details">
@@ -158,9 +158,9 @@ from "dbo"."Contacts" "Contacts"
         <category headerText="New Contacts" newColumn="true">
           <description>$DefaultNewDescription</description>
           <dataFields>
-            <dataField fieldName="FirstNames" columns="50" />
-            <dataField fieldName="LastName" columns="50" />
-            <dataField fieldName="Address" />
+            <dataField fieldName="FirstNames" columns="30"  />
+            <dataField fieldName="LastName" columns="30"  />
+            <dataField fieldName="Address" columns="30" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" />
             <dataField fieldName="DateOfBirth" columns="10" />
