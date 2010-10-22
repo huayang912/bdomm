@@ -32,11 +32,19 @@ namespace BUDI2_NS.Rules
                     //args["ChangedByUsername"].NewValue = User.UserName;
                     //args["ChangedByUsername"].Modified = true;
 
+
+
+                    if (args.Controller == "ClientContactsNotes")
+                  
+
+
+
                     try //2
                     {
                         args["ChangedByUserID"].NewValue = SessionCache.CurrentUser.ID;
                         args["ChangedByUserID"].Modified = true;
-
+                        
+                       
                     }
 
                     catch //2
