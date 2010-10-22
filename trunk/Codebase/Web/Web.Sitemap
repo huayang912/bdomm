@@ -2,7 +2,7 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" xmlns:app="urn:schemas-codeontime-com:data-aquarium-application">
   <siteMapNode url="~/Default.aspx" title="Home" description="">
     <siteMapNode title="Home" description="Application home page" url="~/Pages/Home.aspx" />
-    <siteMapNode title="Clients" description="View Clients" url="~/Pages/ClientNew.aspx" />
+    <siteMapNode title="Clients" description="View Clients" url="~/Pages/ClientNew_a.aspx" />
 	 <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelView.aspx" roles="*">
 	  <siteMapNode title="Show Personnel" description="Personnel List" url="~/Pages/PersonnelViewRedirect.asp" roles="*" />
       <siteMapNode title="CV" description="Personnel CV" url="~/Pages/CVNew.aspx" roles="*" />
