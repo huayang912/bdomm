@@ -24,40 +24,57 @@ namespace BUDI2_NS.Rules
 
             //if (args.CommandName == "Insert" && args["CreatedByUsername"].Value == null)
 
-
-
-            if (args.CommandName == "Update")
+            try
             {
-                //args["ChangedByUsername"].NewValue = User.UserName;
-                //args["ChangedByUsername"].Modified = true;
 
-                try //2
+                if (args.CommandName == "Update")
                 {
-                    args["ChangedByUserID"].NewValue = SessionCache.CurrentUser.ID;
-                    args["ChangedByUserID"].Modified = true;
-                }
+                    //args["ChangedByUsername"].NewValue = User.UserName;
+                    //args["ChangedByUsername"].Modified = true;
 
-                catch //2
-                {
-                    //throw;
-                }
-                try //2
-                {
-                    DateTime dtNow = DateTime.Now;
-                    args["ChangedOn"].NewValue = dtNow.ToString("dd/MM/yyyy");
-                    args["ChangedOn"].Modified = true;
-                }
-                catch //2
-                {
+                    try //2
+                    {
+                        args["ChangedByUserID"].NewValue = SessionCache.CurrentUser.ID;
+                        args["ChangedByUserID"].Modified = true;
 
-                }
-            } //2
+                    }
+
+                    catch //2
+                    {
+                        //throw;
+                    }
+
+                    // ID speel different ;)
+
+                    try //2
+                    {
+                        args["ChangedByUserId"].NewValue = SessionCache.CurrentUser.ID;
+                        args["ChangedByUserId"].Modified = true;
+                    }
+
+                    catch //2
+                    {
+                        //  throw;
+                    }
 
 
 
+                    try //2
+                    {
+                        DateTime dtNow = DateTime.Now;
+                        args["ChangedOn"].NewValue = dtNow.ToString("dd/MM/yyyy");
+                        args["ChangedOn"].Modified = true;
+                    }
+                    catch //2
+                    {
+
+                    }
+                } //2
+
+            
 
 
-            if (args.CommandName == "Insert")
+            if (args.CommandName == "Insert" )
             {
 
                 try //3
@@ -70,7 +87,35 @@ namespace BUDI2_NS.Rules
                 catch //3
                 {
                 }
+                //
 
+                try //2
+                {
+                    args["ChangedByUserID"].NewValue = SessionCache.CurrentUser.ID;
+                    args["ChangedByUserID"].Modified = true;
+
+                }
+
+                catch //2
+                {
+                    //throw;
+                }
+                //
+
+                try //2
+                {
+                    args["ChangedByUserId"].NewValue = SessionCache.CurrentUser.ID;
+                    args["ChangedByUserId"].Modified = true;
+                }
+
+                catch //2
+                {
+                    //  throw;
+                }
+
+
+
+              
                 try //3
                 {
                     DateTime dtNow2 = DateTime.Now;
@@ -83,6 +128,11 @@ namespace BUDI2_NS.Rules
                 }
 
             } //try
+
+            } //try
+            catch //3
+            {
+            }
 
         }	
 				
