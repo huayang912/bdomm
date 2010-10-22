@@ -18,9 +18,8 @@ select
 	,"ClientContacts"."CompanyID" "CompanyID"
 	,"Company"."Name" "CompanyName"
 	,"CompanyCountry"."Name" "CompanyCountryName"
-	,"CompanyChangedByUser"."UserName" "CompanyChangedByUserUserName"
 	,"ClientContacts"."DateOfBirth" "DateOfBirth"
-	,"ClientContacts"."ChangedByUserID" "ChangedByUserID"
+  ,"ClientContacts"."ChangedByUserID" "ChangedByUserID"
 	,"ChangedByUser"."UserName" "ChangedByUserUserName"
 	,"ClientContacts"."ChangedOn" "ChangedOn"
 	,"ClientContacts"."Version" "Version"
@@ -36,7 +35,6 @@ from "dbo"."ClientContacts" "ClientContacts"
 	left join "dbo"."Countries" "Country" on "ClientContacts"."CountryID" = "Country"."ID"
 	left join "dbo"."Clients" "Company" on "ClientContacts"."CompanyID" = "Company"."ID"
 	left join "dbo"."Countries" "CompanyCountry" on "Company"."CountryID" = "CompanyCountry"."ID"
-	left join "dbo"."Users" "CompanyChangedByUser" on "Company"."ChangedByUserID" = "CompanyChangedByUser"."ID"
 	left join "dbo"."Users" "ChangedByUser" on "ClientContacts"."ChangedByUserID" = "ChangedByUser"."ID"
 ]]></text>
     </command>
@@ -65,7 +63,6 @@ from "dbo"."ClientContacts" "ClientContacts"
     </field>
     <field name="CompanyName" type="String" readOnly="true" label="Company Name" />
     <field name="CompanyCountryName" type="String" readOnly="true" label="Company Country Name" />
-    <field name="CompanyChangedByUserUserName" type="String" readOnly="true" label="Company Changed By User Name" />
     <field name="DateOfBirth" type="DateTime" label="Date Of Birth" />
     <field name="ChangedByUserID" type="Int32" label="Changed By User#">
       <items style="Lookup" dataController="Users" newDataView="createForm1" />
@@ -125,17 +122,11 @@ from "dbo"."ClientContacts" "ClientContacts"
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30"/>
             <dataField fieldName="CompanyID" aliasFieldName="CompanyName" columns="30"/>
-            <dataField fieldName="DateOfBirth" columns="10" />
-          <!--
-		    <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
-			-->
-
-          <dataField fieldName="ChangedOn" columns="10" hidden="true"/>
-	 
+            <dataField fieldName="DateOfBirth" columns="10" />       
+          <dataField fieldName="ChangedOn" columns="10" hidden="true"/>	 
             <dataField fieldName="Version" hidden="true" columns="15" />
             <dataField fieldName="Department" columns="30"/>
-            <dataField fieldName="ChangedByUserID"  aliasFieldName="ChangedByUserUserName" />
-
+            <dataField fieldName="ChangedByUserID"  readOnly="true" aliasFieldName="ChangedByUserUserName" />
           </dataFields>
         </category>
         <category headerText="Reference Information" newColumn="true">
