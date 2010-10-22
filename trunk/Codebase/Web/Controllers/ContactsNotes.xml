@@ -2,17 +2,23 @@
 <dataController name="ContactsNotes" conflictDetection="overwriteChanges" label="Contacts Notes" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <command id="command1" type="Text">
-      <text><![CDATA[select
+      <text>
+    <![CDATA[select
 	"ContactsNotes"."ID" "ID"
 	,"ContactsNotes"."ContactID" "ContactID"
 	,"Contact"."FirstNames" "ContactFirstNames"
 	,"ContactsNotes"."ChangedByUsername" "ChangedByUsername"
 	,"ContactsNotes"."CreatedByUsername" "CreatedByUsername"
+  	,"ContactsNotes"."ChangedByUserID" "ChangedByUserID"
+	,"ChangedByUser"."UserName" "ChangedByUserUserName"
 	,"ContactsNotes"."Notes" "Notes"
 	,"ContactsNotes"."ChangedOn" "ChangedOn"
 	,"ContactsNotes"."Version" "Version"
 from "dbo"."ContactsNotes" "ContactsNotes"
-	left join "dbo"."Contacts" "Contact" on "ContactsNotes"."ContactID" = "Contact"."ID"]]></text>
+	left join "dbo"."Contacts" "Contact" on "ContactsNotes"."ContactID" = "Contact"."ID"
+  	left join "dbo"."Users" "ChangedByUser" on "ContactsNotes"."ChangedByUserID" = "ChangedByUser"."ID"
+  
+  ]]></text>
     </command>
     <command id="IDIdentityCommand" type="Text" event="Inserted">
       <text><![CDATA[select @@identity]]></text>
@@ -32,16 +38,21 @@ from "dbo"."ContactsNotes" "ContactsNotes"
     <field name="ChangedOn" type="DateTime" allowNulls="false" default="(getdate())" readOnly="true" label="Changed On" showInSummary="true" />
     <field name="CreatedByUsername" type="String" label="Created By Username" />
     <field name="ChangedByUsername" type="String" label="Changed By Username" />
+    <field name="ChangedByUserID" type="Int32" label="Changed By User#" showInSummary="true">
+      <items style="Lookup" dataController="Users" newDataView="createForm1" />
+    </field>
+    <field name="ChangedByUserUserName" type="String" readOnly="true" label="Changed By User Name" />
+
   </fields>
   <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <view id="grid1" type="Grid" commandId="command1" label="Contacts Notes">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
+        <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" hidden="true"/>
         <dataField fieldName="Notes" rows="5" />
         <dataField fieldName="ChangedOn" columns="10" />
-        <dataField fieldName="CreatedByUsername" columns="50" />
-        <dataField fieldName="ChangedByUsername" columns="50" />
+        <dataField fieldName="CreatedByUsername" columns="50" hidden="true" />
+        <dataField fieldName="ChangedByUsername" columns="50" hidden="true" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Contacts Notes">
@@ -55,6 +66,8 @@ from "dbo"."ContactsNotes" "ContactsNotes"
             <dataField fieldName="ChangedOn" columns="10"  hidden="true"/>
             <dataField fieldName="CreatedByUsername" columns="50"  hidden="true" />
             <dataField fieldName="ChangedByUsername" columns="50"  hidden="true" />
+            <dataField fieldName="ChangedByUserID"  readOnly="true" aliasFieldName="ChangedByUserUserName" />
+
           </dataFields>
         </category>
       </categories>
@@ -65,7 +78,7 @@ from "dbo"."ContactsNotes" "ContactsNotes"
         <category headerText="New Contacts Notes" newColumn="true">
           <description>$DefaultNewDescription</description>
           <dataFields>
-            <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
+            <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" hidden="true"/>
             <dataField fieldName="Notes" rows="5" />
             <dataField fieldName="ChangedOn" columns="10"  hidden="true" />
             <dataField fieldName="CreatedByUsername" columns="50"  hidden="true"/>
