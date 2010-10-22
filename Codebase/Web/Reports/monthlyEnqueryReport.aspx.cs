@@ -18,7 +18,17 @@ public partial class Reports_monthlyEnqueryReport : BasePage
         {
             BindYearDropDownlist();
         }
+
+        else
+        {
+            //btnShowReport_Click(sender, e);
+            loadReport();
+        }
     }
+
+    /// <summary>
+    /// Load list of year in the dropdown control
+    /// </summary>
     protected void BindYearDropDownlist()
     {
         for (int i = DateTime.Now.Year - 5; i <= DateTime.Now.Year + 5; i++)
@@ -26,7 +36,14 @@ public partial class Reports_monthlyEnqueryReport : BasePage
             ddlYear.Items.Add(new ListItem(i.ToString(), i.ToString()));
         }
     }
+    
     protected void btnShowReport_Click(object sender, EventArgs e)
+    {
+        //Necessary Method called from the PostBack 
+        //Occured after click the button
+    }
+
+    public void loadReport()
     {
         OMMDataContext dataContext = new OMMDataContext();
         var query1 = from i in dataContext.reportMonthlyEnquery()
@@ -41,22 +58,11 @@ public partial class Reports_monthlyEnqueryReport : BasePage
         repDoc.Load(HttpContext.Current.Request.PhysicalApplicationPath.Trim()
                     + @"\Reports\monthlyEnqueryReport.rpt");
 
-
-        //repDoc.SetDataSource = DBNull.Value;
-        
         CrystalReportViewer1.Visible = true;
         CrystalReportViewer1.ReportSource = repDoc;
-        //CrystalReportViewer1.DataBind();
-
         repDoc.SetDataSource(dtEnqueryDetails);
 
-
         divReportContainer.Visible = true;
-
-
-     
-
-
     }
 
 

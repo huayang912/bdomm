@@ -33,7 +33,8 @@
     <%--Crystal Report Viewer Box--%>
     <div id="divReportContainer" runat="server" visible="false" class="GroupBox" style="margin-bottom:0px;">
         <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" 
-            AutoDataBind="true" DisplayToolbar="False" />
+            AutoDataBind="true" ReuseParameterValuesOnRefresh="True" 
+            DisplayGroupTree="False" HasToggleGroupTreeButton="False" />
     </div>
 </asp:Content>
 

@@ -19,6 +19,14 @@ public partial class Reports_TypeWiseMOnthlyEnqueryDetails : BasePage
             BindMonthDropDownlist();
             BindYearDropDownlist();
         }
+        else
+        {
+            //btnShowReport_Click(sender, e);
+            loadReport();
+        }
+
+
+
     }
     protected void BindYearDropDownlist()
     {
@@ -51,6 +59,12 @@ public partial class Reports_TypeWiseMOnthlyEnqueryDetails : BasePage
 
     protected void btnShowReport_Click(object sender, EventArgs e)
     {
+        
+    }
+
+
+    public void loadReport()
+    {
         OMMDataContext dataContext = new OMMDataContext();
         var query1 = from i in dataContext.reportTypeWiseMOnthlyEnqueryDetails()
                      where i.CreatedYear == Convert.ToInt32(ddlYear.Text)
@@ -64,6 +78,8 @@ public partial class Reports_TypeWiseMOnthlyEnqueryDetails : BasePage
         ReportDocument repDoc = new ReportDocument();
         repDoc.Load(HttpContext.Current.Request.PhysicalApplicationPath.Trim()
                     + @"\Reports\TypeWiseMOnthlyEnqueryDetails.rpt");
+
+
 
 
         //repDoc.SetDataSource = DBNull.Value;
