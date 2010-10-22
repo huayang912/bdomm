@@ -83,11 +83,7 @@ from "dbo"."Clients" "Clients"
             <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30"/>
             <dataField fieldName="ChangedOn"  readOnly="true" columns="10" />
             <dataField fieldName="Version" hidden="true" columns="15" />
-          </dataFields>
-        </category>
-        <category headerText="Contact Details" newColumn="true">
-          <description>Client contact details</description>
-          <dataFields>
+         
             <dataField fieldName="Telephone" columns="30"/>
             <dataField fieldName="Mobile" columns="30"/>
             <dataField fieldName="Fax" columns="30"/>
