@@ -13,7 +13,7 @@ select
 	,"ClientContactCountry"."Name" "ClientContactCountryName"
 	,"ClientContactChangedByUser"."UserName" "ClientContactChangedByUserUserName"
 	,"ClientContactsNotes"."Notes" "Notes"
-	,"ClientContactsNotes"."ChangedByUserId" "ChangedByUserId"
+	,"ClientContactsNotes"."ChangedByUserID" "ChangedByUserID"
 	,"ChangedByUser"."UserName" "ChangedByUserUserName"
 	,"ClientContactsNotes"."ChangedOn" "ChangedOn"
 	,"ClientContactsNotes"."Version" "Version"
@@ -24,7 +24,7 @@ from "dbo"."ClientContactsNotes" "ClientContactsNotes"
 	left join "dbo"."Users" "ClientContactCompanyChangedByUser" on "ClientContactCompany"."ChangedByUserID" = "ClientContactCompanyChangedByUser"."ID"
 	left join "dbo"."Countries" "ClientContactCountry" on "ClientContact"."CountryID" = "ClientContactCountry"."ID"
 	left join "dbo"."Users" "ClientContactChangedByUser" on "ClientContact"."ChangedByUserID" = "ClientContactChangedByUser"."ID"
-	left join "dbo"."Users" "ChangedByUser" on "ClientContactsNotes"."ChangedByUserId" = "ChangedByUser"."ID"
+	left join "dbo"."Users" "ChangedByUser" on "ClientContactsNotes"."ChangedByUserID" = "ChangedByUser"."ID"
 ]]></text>
     </command>
     <command id="IDIdentityCommand" type="Text" event="Inserted">
@@ -46,7 +46,7 @@ from "dbo"."ClientContactsNotes" "ClientContactsNotes"
     <field name="ClientContactCountryName" type="String" readOnly="true" label="Client Contact Country Name" />
     <field name="ClientContactChangedByUserUserName" type="String" readOnly="true" label="Client Contact Changed By User Name" />
     <field name="Notes" type="String" allowNulls="false" label="Notes" showInSummary="true" />
-    <field name="ChangedByUserId" type="Int32" label="Changed By User#" showInSummary="true">
+    <field name="ChangedByUserID" type="Int32" label="Changed By User#" showInSummary="true">
       <items style="Lookup" dataController="Users" newDataView="createForm1" />
     </field>
     <field name="ChangedByUserUserName" type="String" readOnly="true" label="Changed By User Name" />
@@ -58,15 +58,11 @@ from "dbo"."ClientContactsNotes" "ClientContactsNotes"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="ClientContactID" aliasFieldName="ClientContactName" />
-        <dataField fieldName="Notes" />
-        <dataField fieldName="ChangedByUserId" hidden="true" aliasFieldName="ChangedByUserUserName" />
+        <dataField fieldName="Notes" columns="60" rows="3"/>
+        <dataField fieldName="ChangedByUserID" hidden="false" aliasFieldName="ChangedByUserUserName" />
         <dataField fieldName="ChangedOn" columns="10" />
         <dataField fieldName="Version" hidden="true" columns="15" />
-        <dataField fieldName="ClientContactCompanyName" />
-        <dataField fieldName="ClientContactCompanyCountryName" />
-        <dataField fieldName="ClientContactCompanyChangedByUserUserName" hidden="true" />
-        <dataField fieldName="ClientContactCountryName" />
-        <dataField fieldName="ClientContactChangedByUserUserName" hidden="true" />
+   
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Client Contacts Notes">
@@ -76,8 +72,8 @@ from "dbo"."ClientContactsNotes" "ClientContactsNotes"
           <description>$DefaultEditDescription</description>
           <dataFields>
             <dataField fieldName="ClientContactID" aliasFieldName="ClientContactName" />
-            <dataField fieldName="Notes" rows="3"/>
-            <dataField fieldName="ChangedByUserId"   hidden="true" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="Notes" columns="30" rows="3"/>
+            <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
             <dataField fieldName="ChangedOn" hidden="true" columns="10" />
             <dataField fieldName="Version" hidden="true" columns="15" />
           </dataFields>
@@ -93,7 +89,7 @@ from "dbo"."ClientContactsNotes" "ClientContactsNotes"
           <dataFields>
             <dataField fieldName="ClientContactID" aliasFieldName="ClientContactName" />
             <dataField fieldName="Notes" rows="3"/>
-            <dataField fieldName="ChangedByUserId" hidden="true" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
             <dataField fieldName="ChangedOn"  hidden="true" columns="10" />
           </dataFields>
         </category>
