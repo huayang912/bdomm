@@ -11,7 +11,7 @@
             <act:TabPanel ID="Clients" runat="server" HeaderText="Clients">
               <ContentTemplate>
                 <div id="view1" runat="server"></div>
-                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Clients"   PageSize="25"/>
+                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Clients"   StartCommandName="Edit" StartCommandArgument="editForm1"/>
               </ContentTemplate>
             </act:TabPanel>
                <act:TabPanel ID="PurchaseOrdersTab" runat="server" HeaderText="Purchase Orders">
@@ -37,15 +37,18 @@
 			
           </act:TabContainer>
         </div></td>
-       </tr> <tr>
-      <td width="50%" valign="top">
-	  <div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
-              <div id="view2" runat="server"></div>
-              <aquarium:DataViewExtender id="view2Extender" runat="server" TargetControlID="view2" Controller="ClientContacts" view="grid1" FilterSource="view1Extender" FilterFields="CompanyID" PageSize="5" AutoHide="Container" />
         
+        <td> <div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
+              <div id="view2" runat="server"></div>
+              <aquarium:DataViewExtender id="DataViewExtender1" runat="server" TargetControlID="view2" Controller="ClientContacts" view="grid1" FilterSource="view1Extender" FilterFields="CompanyID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="true"/>
+        
+         <div id="view5" runat="server"></div>
+      <aquarium:DataViewExtender id="view5Extender" runat="server" TargetControlID="view5" Controller="ClientsNotes" view="grid1" FilterSource="view1Extender" FilterFields="ClientID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="true" />
+    </div>
+    
              
         </div></td>
-    </tr>
+       </tr> 
   </table>
 </ContentTemplate>
 
