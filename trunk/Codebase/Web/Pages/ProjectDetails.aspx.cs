@@ -8,7 +8,7 @@ using System.Text;
 using App.Core.Extensions;
 
 
-public partial class Pages_ProjectDetails : System.Web.UI.Page
+public partial class Pages_ProjectDetails : BasePage
 {
     private int _ID = 0;
 
@@ -87,7 +87,7 @@ public partial class Pages_ProjectDetails : System.Web.UI.Page
         sb.Append("<b>Item Details:</b> <br/>");
         if (quotation.QuotationPricingLines != null && quotation.QuotationPricingLines.Count > 0)
         {            
-            sb.Append("<table class='GridView' cellpadding='3' cellspacing='0' style='width:100%;'>");
+            sb.Append("<table class='GridView' cellpadding='3' cellspacing='0' style='width:550px;'>");
             sb.Append(" <colgroup>");
             sb.Append("   <col style='width:12%;' />");
             sb.Append("   <col style='width:35%;' />");

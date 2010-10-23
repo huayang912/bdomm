@@ -102,8 +102,8 @@ public partial class Pages_QuotationDecision : BasePage
             //    //Create a New Quotation for this Enquiry with this objects data
 
             //}
-            if (decision == App.CustomModels.QuotationStatus.Successful)
-                quotation.Projects.Add(CreateProjectFromQuotation(quotation, dataContext));
+            //if (decision == App.CustomModels.QuotationStatus.Successful)
+            //    quotation.Projects.Add(CreateProjectFromQuotation(quotation, dataContext));
 
             dataContext.SubmitChanges();
             return String.Format("{0}:{1}", quotation.ID, quotation.Number);

@@ -69,6 +69,39 @@ public class AjaxService : System.Web.Services.WebService {
         }
         return String.Empty;
     }
+
+    [WebMethod (EnableSession=true)]
+    public String SaveProject(App.CustomModels.CustomProject customProject)
+    {
+        OMMDataContext context = new OMMDataContext();
+
+        Project project = new Project();
+        if (customProject.ID > 0)
+        {
+            project = context.Projects.SingleOrDefault(P => P.ID == customProject.ID);
+            project.ChangedByUserID = SessionCache.CurrentUser.ID;
+            project.ChangedByUsername = SessionCache.CurrentUser.UserNameWeb;
+            project.ChangedOn = DateTime.Now;
+        }
+        else
+        {
+            context.Projects.InsertOnSubmit(project);
+            project.CreatedByUserID = project.ChangedByUserID = SessionCache.CurrentUser.ID;
+            project.CreatedByUsername = project.ChangedByUsername = SessionCache.CurrentUser.UserNameWeb;
+            project.CreatedOn = project.ChangedOn = DateTime.Now;
+            project.Number = context.GenerateNewProjectNumber();
+            project.StatusID = App.CustomModels.ProjectStatus.InProgress;
+        }
+        project.QuotationID = customProject.QuotationID;
+        project.Name = customProject.Name;
+        project.Description = customProject.Description;
+        project.StartDate = WebUtil.GetDate(customProject.StartDate);
+        project.EndDate = WebUtil.GetDate(customProject.EndDate);
+        
+        context.SubmitChanges();
+        return String.Format("{0}:{1}", project.ID, project.Number);
+    }
+
     #region SMS Sending Operations
 
     readonly char[] COMMA_SEPARATOR = { ',' };

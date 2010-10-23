@@ -73,31 +73,12 @@ public class AppConstants
 
     #region Query String Params
     public class QueryString
-    {
-        //public const String ORG_CODE = "OrgCode";
-        //public const String STAFF_ID = "StaffID";
-        //public const String USER_ID = "UserID";
+    {        
         public const String ID = "ID";
         public const String ENQUIRY_ID = "EnqID";
         public const String LOG_OUT = "Logout";
-        //public const String STARTS_WITH = "Start";
-        //public const String KEYWORD = "K";
-        //public const String DISTRICT_CODE = "District";
-        //public const String UPAZILLA_CODE = "Upazilla";
-        //public const String UNION_CODE = "Union";
-        //public const String VILLAGE_CODE = "Village";
-        //public const String SERVICE_SITE_CODE = "ServiceSite";
-        //public const String FDP_CODE = "FDP";
-        //public const String WAREHOUSE_CODE = "WareHouse";
-        //public const String PROGRAM_CODE = "Prog";
-        //public const String TRACKING_ID = "Tracking";
-        //public const String WAY_BILL_NO = "WB";
-        //public const String BL_NO = "BL";
-        //public const String WAY_BILL_STACKID = "StackID";
-        //public const String CARD_NUMBER = "CardID";
-        //public const String RLDC = "Rldc";
-        //public const String DELETE = "Delete";
-        //public const String DAM = "DAM";
+        public const String QUOTATION_ID = "QuotationID";
+        
     }
 
     #endregion

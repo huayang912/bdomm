@@ -49,7 +49,15 @@ namespace App.CustomModels
         public int Quantity { get; set; }
         public decimal Price { get; set; }
     }
-
+    public class CustomProject
+    {
+        public int ID { get; set; }
+        public int QuotationID { get; set; }
+        public String Name { get; set; }
+        public String Description { get; set; }
+        public String StartDate { get; set; }
+        public String EndDate { get; set; }
+    }
 
     #region Enum Like Classes
     public static class EnquiryStatus

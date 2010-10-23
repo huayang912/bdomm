@@ -33,9 +33,17 @@
             if(result.length > 0)
             {
                 MoveNext(2);
-                if(_Decision == 4 || _Decision == 3) ///Successfull OR Not Successfull
+                if(_Decision == 3) ///Not Successfull
                 {
                     $('#divDecisionMessage').html('The quotation has been updated and the enquiry has been closed.');
+                    $('#divCheckContainer').hide();
+                    $('#btnClose').hide();
+                }
+                else if(_Decision == 4) ///Successfull 
+                {
+                    var message = 'The quotation has been updated and the enquiry has been closed.';
+                    message += '<br/><a href="ProjectChange.aspx?<%=AppConstants.QueryString.QUOTATION_ID %>=' + _QuotationID + '">Click here</a> to create a project.';
+                    $('#divDecisionMessage').html(message);
                     $('#divCheckContainer').hide();
                     $('#btnClose').hide();
                 }
