@@ -31,7 +31,8 @@
         <table id="PageBody" cellpadding="0" cellspacing="0">
           <tr>
             <td id="PageHeaderSideBar">
-              <asp:Image ID="Image5" runat="server" SkinID="PageLogo" CssClass="PageLogo" />
+              <%--<asp:Image ID="Image5" runat="server" SkinID="PageLogo" CssClass="PageLogo" /--%>
+              &nbsp;&nbsp;
             </td>
             <td id="PageHeaderLeftSide">
               <asp:Image ID="Image1" runat="server" SkinID="Placeholder" />
@@ -50,7 +51,7 @@
           </tr>
           <tr>
             <td id="PageContentSideBar" valign="top">
-              <div class="SideBarBody">
+              <div class="SideBarBody" style="display:none">
                 <asp:ContentPlaceHolder ID="SideBarPlaceHolder" runat="server" />
                 <asp:Image runat="server" SkinID="Placeholder" />
               </div>
