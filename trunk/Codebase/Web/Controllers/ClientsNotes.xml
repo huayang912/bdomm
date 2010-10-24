@@ -50,10 +50,9 @@ from "dbo"."ClientsNotes" "ClientsNotes"
       <dataFields>
         <dataField fieldName="ClientID" aliasFieldName="ClientName" />
         <dataField fieldName="Notes" />
-        <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
+        <dataField fieldName="ChangedByUserID"  aliasFieldName="ChangedByUserUserName" />
         <dataField fieldName="ChangedOn" columns="10" />
         <dataField fieldName="Version" hidden="true" columns="15" />
-        <dataField fieldName="ClientCountryName" />
         <dataField fieldName="ClientChangedByUserUserName" hidden="true" />
       </dataFields>
     </view>
@@ -64,19 +63,13 @@ from "dbo"."ClientsNotes" "ClientsNotes"
           <description>$DefaultEditDescription</description>
           <dataFields>
             <dataField fieldName="ClientID" aliasFieldName="ClientName" />
-            <dataField fieldName="Notes" />
-            <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
-            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="Notes"   rows="3"/>
+            <dataField fieldName="ChangedByUserID"  readOnly="true" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn"  hidden="true" columns="10" />
             <dataField fieldName="Version" hidden="true" columns="15" />
           </dataFields>
         </category>
-        <category headerText="Reference Information">
-          <description>$DefaultReferenceDescription</description>
-          <dataFields>
-            <dataField fieldName="ClientCountryName" />
-            <dataField fieldName="ClientChangedByUserUserName" hidden="true" />
-          </dataFields>
-        </category>
+      
       </categories>
     </view>
     <view id="createForm1" type="Form" commandId="command1" label="New Clients Notes">
@@ -86,9 +79,9 @@ from "dbo"."ClientsNotes" "ClientsNotes"
           <description>$DefaultNewDescription</description>
           <dataFields>
             <dataField fieldName="ClientID" aliasFieldName="ClientName" />
-            <dataField fieldName="Notes" />
+            <dataField fieldName="Notes" rows="3"/>
             <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
-            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="ChangedOn"  hidden="true" columns="10" />
           </dataFields>
         </category>
       </categories>
