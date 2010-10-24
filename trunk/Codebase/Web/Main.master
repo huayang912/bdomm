@@ -31,7 +31,7 @@
         <table id="PageBody" cellpadding="0" cellspacing="0">
           <tr>
             <td id="PageHeaderSideBar">
-              <asp:Image ID="Image5" runat="server" SkinID="PageLogo" CssClass="PageLogo" />
+              <%--<asp:Image ID="Image5" runat="server" SkinID="PageLogo" CssClass="PageLogo" />--%>
               &nbsp;&nbsp;
             </td>
             <td id="PageHeaderLeftSide">
