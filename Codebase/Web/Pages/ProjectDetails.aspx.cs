@@ -182,7 +182,7 @@ public partial class Pages_ProjectDetails : BasePage
     protected String GetPersonnelLink(EmploymentHistory personnel)
     {
         return String.Format("<a href='{0}?{1}={2}' target='_blank'>{3}</a>", AppConstants.Pages.PERSONNEL_DETAILS,
-            AppConstants.QueryString.ID, personnel.ID, personnel.Contact.FirstNames.HtmlEncode());
+            AppConstants.QueryString.ID, personnel.ContactID, personnel.Contact.FirstNames.HtmlEncode());
     }
 
     protected void ShowErrorMessage()
