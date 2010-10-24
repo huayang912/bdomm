@@ -10,7 +10,7 @@ using App.Core.Extensions;
 
 public partial class Pages_ProjectDetails : BasePage
 {
-    private int _ID = 0;
+    private int _ProjectID = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,13 +22,13 @@ public partial class Pages_ProjectDetails : BasePage
     }
     protected void BindPageInfo()
     {
-        _ID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);
+        _ProjectID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);
         Page.Title = WebUtil.GetPageTitle("Project Details");
     }
     protected void BindProjectDetails()
     {
         OMMDataContext context = new OMMDataContext();
-        Project project = context.Projects.SingleOrDefault(P => P.ID == _ID);
+        Project project = context.Projects.SingleOrDefault(P => P.ID == _ProjectID);
         if (project == null)
             ShowErrorMessage();
         else
@@ -57,6 +57,7 @@ public partial class Pages_ProjectDetails : BasePage
                 sb.AppendFormat("<br/><b>Subcontractor(s):</b> {0}<br/>", GetSubContractors(project, context));
                 sb.Append(GetQuotationPricingList(project.Quotation));
             }
+            sb.Append(GetPersonnelList(context));
             sb.AppendFormat("<b>Status:</b> {0}<br/>", project.StatusID.GetValueOrDefault() > 0 ? project.ProjectStatuse.Name : "NA");
             sb.AppendFormat("<b>Description:</b> {0}<br/>",  WebUtil.FormatText(project.Description.IsNullOrEmpty() ? "NA" : project.Description));
             sb.AppendFormat("<b>Start Date:</b> {0}<br/>", project.StartDate == DateTime.MinValue ? "NA" : project.StartDate.GetValueOrDefault().ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
@@ -64,9 +65,11 @@ public partial class Pages_ProjectDetails : BasePage
 
             if (project.Quotation != null)
             {
-                sb.AppendFormat("<b>Quotation No.:</b> <a href='javascript:void(0);'>{0}</a><br/>", project.Quotation.Number);
+                sb.AppendFormat("<b>Quotation No.:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.QUOTATION_DETAILS, 
+                    AppConstants.QueryString.ID, project.QuotationID, project.Quotation.Number);
                 if(project.Quotation.Enquiry != null)
-                    sb.AppendFormat("<b>Enquiry No.:</b> <a href='javascript:void(0);'>{0}</a><br/>", project.Quotation.Enquiry.Number);
+                    sb.AppendFormat("<b>Enquiry No.:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.ENQUIRY_DETAILS,
+                        AppConstants.QueryString.ID, project.Quotation.EnquiryID, project.Quotation.Enquiry.Number);
                 sb.AppendFormat("<br/><b>Scope of the Work:</b> <br/>{0}<br/>", project.Quotation.ScopeOfWork.IsNullOrEmpty() ? "NA" : WebUtil.FormatText(project.Quotation.ScopeOfWork));
                 
             }
@@ -87,30 +90,29 @@ public partial class Pages_ProjectDetails : BasePage
         sb.Append("<b>Item Details:</b> <br/>");
         if (quotation.QuotationPricingLines != null && quotation.QuotationPricingLines.Count > 0)
         {            
-            sb.Append("<table class='GridView' cellpadding='3' cellspacing='0' style='width:550px;'>");
+            sb.Append("<table class='GridView' cellpadding='3' cellspacing='0' style='width:570px;'>");
             sb.Append(" <colgroup>");
-            sb.Append("   <col style='width:12%;' />");
-            sb.Append("   <col style='width:35%;' />");
-            sb.Append("   <col style='width:15%;' />");
-            sb.Append("   <col/>");
             sb.Append("   <col style='width:10%;' />");
-            //sb.Append("   <col style='width:10%;' />");
-            //sb.Append("   <col style='width:8%;' />");
-            sb.Append("   <col />");
+            sb.Append("   <col/>");
+            sb.Append("   <col style='width:14%;' />");
+            sb.Append("   <col style='width:12%;' />");
+            sb.Append("   <col style='width:10%;' />");          
+            sb.Append("   <col style='width:10%;' />");
             sb.Append(" </colgroup>");
 
             sb.Append("<tr>");
-            sb.Append("   <th>Item</th><th>Description</th><th>Pricing Type</th><th style='text-align:right;'>Unit Price</th><th style='text-align:center;'>Quantity</th><th style='text-align:right;'>Price</th>");
+            sb.Append("   <th style='text-align:center;'>Item</th><th>Description</th><th>Pricing Type</th><th style='text-align:right;'>Unit Price</th><th style='text-align:center;'>Quantity</th><th style='text-align:right;'>Price</th>");
             sb.Append("</tr>");
-            String currencySymbol = quotation.Currency == null ? String.Empty : quotation.Currency.ShortCode;
+            String currencySymbol = quotation.Currency == null ? String.Empty : quotation.Currency.ShortCode.Trim();
 
             decimal totalPrice = 0;
             for (int i = 0; i < quotation.QuotationPricingLines.Count; i++)
             {
                 QuotationPricingLine pricingLine = quotation.QuotationPricingLines[i];
                 decimal price = pricingLine.UnitPrice.GetValueOrDefault() * pricingLine.Quantity.GetValueOrDefault();
-                sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowListing" : "EvenRowListing");
-                sb.AppendFormat("   <td>{0}</td>", pricingLine.Item.IsNullOrEmpty() ? "NA" : pricingLine.Item.HtmlEncode());
+                //sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowStyle" : "EventRowStyle");
+                sb.Append("<tr>");
+                sb.AppendFormat("   <td style='text-align:center;'>{0}</td>", pricingLine.Item.IsNullOrEmpty() ? "NA" : pricingLine.Item.HtmlEncode());
                 sb.AppendFormat("   <td>{0}</td>", pricingLine.Description.IsNullOrEmpty() ? "NA" : WebUtil.FormatText(pricingLine.Description));
                 sb.AppendFormat("   <td>{0}</td>", pricingLine.QuotationPricingType == null ? "NA" : pricingLine.QuotationPricingType.Name);
                 sb.AppendFormat("   <td style='text-align:right;'>{0}{1}</td>", currencySymbol, String.Format(AppConstants.ValueOf.DECIMAL_FORMAT, pricingLine.UnitPrice.GetValueOrDefault()));
@@ -127,8 +129,60 @@ public partial class Pages_ProjectDetails : BasePage
             sb.Append("</table>");
         }
         else
-            sb.Append("NA");
+            sb.Append("NA <br/>");
         return sb.ToString();
+    }
+    protected String GetPersonnelList(OMMDataContext context)
+    {
+        var personnels = from P in context.EmploymentHistories
+                         where P.ProjectID == _ProjectID
+                         select P;
+
+        StringBuilder sb = new StringBuilder(10);
+        sb.Append("<b>Personnel:</b> <br/>");
+        if (personnels != null && personnels.Count() > 0)
+        {
+            sb.Append("<table class='GridView' cellpadding='3' cellspacing='0' style='width:570px;'>");
+            //sb.Append(" <colgroup>");
+            //sb.Append("   <col style='width:10%;' />");
+            //sb.Append("   <col/>");
+            //sb.Append("   <col style='width:14%;' />");
+            //sb.Append("   <col style='width:12%;' />");
+            //sb.Append("   <col style='width:10%;' />");
+            //sb.Append("   <col style='width:10%;' />");
+            //sb.Append("   <col/>");
+            //sb.Append(" </colgroup>");
+
+            sb.Append("<tr>");
+            sb.Append("   <th>First Name</th><th>Last Name</th><th>Start Date</th><th>End Date</th><th>Role Name</th><th style='text-align:right;'>Day Rate</th><th style='text-align:center;'>Contract Days#</th>");
+            sb.Append("</tr>");
+            //String currencySymbol = quotation.Currency == null ? String.Empty : quotation.Currency.ShortCode;
+
+            //decimal totalPrice = 0;
+            foreach (EmploymentHistory personnel in personnels)
+            {                
+                //sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowStyle" : "EventRowStyle");
+                sb.Append("<tr>");
+                sb.AppendFormat("   <td>{0}</td>", GetPersonnelLink(personnel));
+                sb.AppendFormat("   <td>{0}</td>", personnel.Contact.FirstNames.HtmlEncode());
+                sb.AppendFormat("   <td>{0}</td>", personnel.StartDate.GetValueOrDefault() == DateTime.MinValue ? "NA" : personnel.StartDate.GetValueOrDefault().ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
+                sb.AppendFormat("   <td>{0}</td>", personnel.EndDate.GetValueOrDefault() == DateTime.MinValue ? "NA" : personnel.EndDate.GetValueOrDefault().ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
+                sb.AppendFormat("   <td>{0}</td>", personnel.Role == null ? "NA" : personnel.Role.Name.HtmlEncode());
+                sb.AppendFormat("   <td style='text-align:right;'>{0}</td>", personnel.DayRate.GetValueOrDefault() > 0 ? String.Format(AppConstants.ValueOf.DECIMAL_FORMAT, personnel.DayRate.GetValueOrDefault()) : "NA");
+                sb.AppendFormat("   <td style='text-align:center;'>{0}</td>", personnel.Contract_days.GetValueOrDefault() > 0 ? personnel.Contract_days.GetValueOrDefault().ToString() : "NA");
+                sb.Append("</tr>");                
+            }            
+            sb.Append("</table>");
+        }
+        else
+            sb.Append("NA <br/>");
+        return sb.ToString();
+    }
+
+    protected String GetPersonnelLink(EmploymentHistory personnel)
+    {
+        return String.Format("<a href='{0}?{1}={2}' target='_blank'>{3}</a>", AppConstants.Pages.PERSONNEL_DETAILS,
+            AppConstants.QueryString.ID, personnel.ID, personnel.Contact.FirstNames.HtmlEncode());
     }
 
     protected void ShowErrorMessage()
