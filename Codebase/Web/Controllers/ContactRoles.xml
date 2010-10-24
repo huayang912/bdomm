@@ -65,7 +65,7 @@ from "dbo"."ContactRoles" "ContactRoles"
   </fields>
   <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <view id="grid1" type="Grid" commandId="command1" label="Contact Roles">
-      <headerText>$DefaultGridViewDescription</headerText>
+      <headerText>Roles</headerText>
       <dataFields>
         <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
         <dataField fieldName="RoleID" aliasFieldName="RoleName" />
