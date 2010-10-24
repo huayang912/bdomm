@@ -81,7 +81,7 @@ from "dbo"."CVs" "CVs"
       <dataFields>
         <dataField fieldName="ContactID" columns="20" aliasFieldName="ContactFirstNames" hidden="false" readOnly="" />
 		<dataField fieldName="ContactLastNames" columns="20" hidden="false" />
-		<dataField fieldName="ID"  hidden="false" readOnly=""  columns="20" hyperlinkFormatString="~/Pages/PersonnelNew.aspx?ID={ContactID}"/>
+		<dataField fieldName="ID"  hidden="false" readOnly=""  columns="20" hyperlinkFormatString="~/Pages/PersonnelDetails.aspx?ID={ContactID}"/>
 
 
 
@@ -97,8 +97,10 @@ from "dbo"."CVs" "CVs"
       <action id="a2" commandName="Edit" />
       <action id="a3" commandName="Delete" />
       <action id="a6" />
-      <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
       <action id="a8" commandName="New" commandArgument="grid1" />
+      
+      <action id="a100" commandName="Navigate" commandArgument="~/Pages/PersonnelDetails.aspx?ID={ContactID}" causesValidation="true" headerText="Personnel Details" />
+
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />

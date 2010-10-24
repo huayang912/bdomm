@@ -46,7 +46,7 @@ from "dbo"."EmailAddresses" "EmailAddresses"
   </fields>
   <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <view id="grid1" type="Grid" commandId="command1" label="Email Addresses">
-      <headerText>$DefaultGridViewDescription</headerText>
+      <headerText>Emails</headerText>
       <dataFields>
         <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
         <dataField fieldName="Address" />
