@@ -1,13 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="PersonnelDetails.aspx.cs" Inherits="Pages_PersonnelDetails" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="PersonnelDetails.aspx.cs" Inherits="Pages_PersonnelView"  Title="Personnel"%>
+<%@ Register Src="~/Controls/PersonnelDetails.ascx" TagName="PersonnelViewControl"  TagPrefix="uc"%>
+<asp:Content ID="Content1" ContentPlaceHolderID="PageHeaderContentPlaceHolder" runat="Server">Personnel</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
+  <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory"><uc:PersonnelViewControl ID="c100" runat="server"></uc:PersonnelViewControl></div>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="PageHeaderContentPlaceHolder" Runat="Server">
-    <asp:Literal ID="ltrHeading" runat="server" Text="Personnel Details"></asp:Literal>
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="SideBarPlaceHolder" Runat="Server">
-</asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="PageContentPlaceHolder" Runat="Server">
-    Under Constuction
-</asp:Content>
-
