@@ -4,26 +4,30 @@
     <ContentTemplate>
         <table width="100%" border="0">
     <tr>
-    <td><form><input type="button" value=" GO TO EDIT PAGE" onClick="window.location.href='PersonnelNew.aspx'"></form></td></tr>
+    <td>
+    <!--
+    <form><input type="button" value=" GO TO EDIT PAGE" onClick="window.location.href='PersonnelNew.aspx'"></form>
+    -->
+    </td></tr>
      <tr> <td valign="top"><div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
              <act:TabContainer ID="OrderManager" runat="server">
             <act:TabPanel ID="CustomersTab" runat="server" HeaderText="Personnel" PageSize="25">
               <ContentTemplate>
                 <div id="view1" runat="server"></div>
-                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="ContactsView" PageSize="25" />
-              </ContentTemplate>
+                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="ContactsView" PageSize="25"  ShowViewSelector="false"/>
+               </ContentTemplate>
             </act:TabPanel>
             <act:TabPanel ID="EmploymentHistoryTab" runat="server" HeaderText="Employment History">
               <ContentTemplate>
                 <div id="view9" runat="server"></div>
-                <aquarium:DataViewExtender id="view9Extender" runat="server" TargetControlID="view9" Controller="EmploymentHistory" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5"  />
+                <aquarium:DataViewExtender id="view9Extender" runat="server" TargetControlID="view9" Controller="EmploymentHistory" view="grid1" FilterSource="view1Extender" FilterFields="ContactID"  ShowViewSelector="false" PageSize="5"  />
               </ContentTemplate>
             </act:TabPanel>
 			
 			      <act:TabPanel ID="CVTab" runat="server" HeaderText="Personnel CV">
               <ContentTemplate>
                 <div id="view91" runat="server"></div>
-                <aquarium:DataViewExtender id="view91Extender" runat="server" TargetControlID="view91" Controller="CVs_m" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5"  />
+                <aquarium:DataViewExtender id="view91Extender" runat="server" TargetControlID="view91" Controller="CVs_m" view="grid1" FilterSource="view1Extender" FilterFields="ContactID"   ShowViewSelector="false" PageSize="5"  />
               </ContentTemplate>
             </act:TabPanel>
 			
@@ -34,13 +38,13 @@
                   <act:TabPanel ID="NextOgKinTab" runat="server" HeaderText="Main">
                     <ContentTemplate>
                       <div id="view5" runat="server"></div>
-                      <aquarium:DataViewExtender id="view5Extender" runat="server" TargetControlID="view5" Controller="ContactsNextOfKin" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5"  />
+                      <aquarium:DataViewExtender id="view5Extender" runat="server" TargetControlID="view5" Controller="ContactsNextOfKin" view="grid1" FilterSource="view1Extender" FilterFields="ContactID"  ShowViewSelector="false" PageSize="5"  />
                     </ContentTemplate>
                   </act:TabPanel>
                   <act:TabPanel ID="NextOgKinDetailsTab" runat="server" HeaderText="Next Of Kin Details">
                     <ContentTemplate>
                       <div id="view10" runat="server"></div>
-                      <aquarium:DataViewExtender id="view10Extender" runat="server" TargetControlID="view10" Controller="NextOfKin" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" />
+                      <aquarium:DataViewExtender id="view10Extender" runat="server" TargetControlID="view10" Controller="NextOfKin" view="grid1" FilterSource="view1Extender" FilterFields="ContactID"  ShowViewSelector="false" PageSize="5" />
                     </ContentTemplate>
                   </act:TabPanel>
                 </act:TabContainer>
@@ -50,14 +54,14 @@
 			 <act:TabPanel ID="CertificateTab" runat="server" HeaderText="Certificates">
               <ContentTemplate>
                 <div id="view3" runat="server"></div>
-                <aquarium:DataViewExtender id="view3Extender" runat="server" TargetControlID="view3" Controller="Certificates" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" />
-              </ContentTemplate>
+                <aquarium:DataViewExtender id="view3Extender" runat="server" TargetControlID="view3" Controller="Certificates" FilterSource="view1Extender" FilterFields="ContactID"  ShowViewSelector="false" PageSize="5" />
+              </ContentTemplate> 
             </act:TabPanel>
 			
 			  <act:TabPanel ID="BankTab" runat="server" HeaderText="Bank Details">
               <ContentTemplate>
       <div id="view2" runat="server"></div>
-      <aquarium:DataViewExtender id="view2Extender" runat="server" TargetControlID="view2" Controller="BankDetails" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5"  />
+      <aquarium:DataViewExtender id="view2Extender" runat="server" TargetControlID="view2" Controller="BankDetails" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" ShowViewSelector="false"  PageSize="5"  />
               </ContentTemplate>
             </act:TabPanel>
 			
@@ -68,20 +72,20 @@
                   <act:TabPanel ID="TravrlDetTab" runat="server" HeaderText="Travel">
                     <ContentTemplate>
                          <div id="view7" runat="server"></div>
-      <aquarium:DataViewExtender id="view7Extender" runat="server" TargetControlID="view7" Controller="ContactsTravel" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5"  />
+      <aquarium:DataViewExtender id="view7Extender" runat="server" TargetControlID="view7" Controller="ContactsTravel" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" ShowViewSelector="false" PageSize="5"  />
                   </ContentTemplate>
                   </act:TabPanel>
                   <act:TabPanel ID="VisaTab" runat="server" HeaderText="Visa">
                     <ContentTemplate>
     <div id="view13" runat="server"></div>
-      <aquarium:DataViewExtender id="view13Extender" runat="server" TargetControlID="view13" Controller="Visas" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5"/>
+      <aquarium:DataViewExtender id="view13Extender" runat="server" TargetControlID="view13" Controller="Visas" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" ShowViewSelector="false"  PageSize="5"/>
 
                     </ContentTemplate>
                   </act:TabPanel>
 				     <act:TabPanel ID="PassportTab" runat="server" HeaderText="Passport">
                     <ContentTemplate>
     <div id="view11" runat="server"></div>
-      <aquarium:DataViewExtender id="view11Extender" runat="server" TargetControlID="view11" Controller="Passports" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" />
+      <aquarium:DataViewExtender id="view11Extender" runat="server" TargetControlID="view11" Controller="Passports" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" ShowViewSelector="false" PageSize="5" />
 
 
                     </ContentTemplate>

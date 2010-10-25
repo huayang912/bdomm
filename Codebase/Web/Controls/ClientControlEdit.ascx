@@ -1,4 +1,5 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ClientControl.ascx.cs" Inherits="Controls_ClientControl"  %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ClientControlEdit.ascx.cs" Inherits="Controls_ClientControl"  %>
+
 
 
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -11,7 +12,7 @@
             <act:TabPanel ID="Clients" runat="server" HeaderText="Clients">
               <ContentTemplate>
                 <div id="view1" runat="server"></div>             
-                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Clients"   StartCommandName="Select" StartCommandArgument="editForm1" ShowViewSelector="false" />
+                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Clients"   StartCommandName="Edit" StartCommandArgument="editForm1" ShowViewSelector="false" />
               </ContentTemplate>
             </act:TabPanel>
                <act:TabPanel ID="PurchaseOrdersTab" runat="server" HeaderText="Purchase Orders">
