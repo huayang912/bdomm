@@ -6,7 +6,6 @@
 	 <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelView.aspx" roles="*">
 	  <siteMapNode title="Show Personnel" description="Personnel List" url="~/Pages/PersonnelViewRedirect.asp" roles="*" />
       <siteMapNode title="CV" description="Personnel CV" url="~/Pages/CVNew.aspx" roles="*" />
-      <siteMapNode title="Send SMS" description="Sends SMS to the Corresponding Client" url="~/Pages/SendSMS.aspx" roles="*" />
     </siteMapNode>
     <siteMapNode title="Enquiries" description="Enquiry" url="~/Pages/EnquirySch.aspx" roles="*">
       <siteMapNode title="Create New Enquiry" description="Create a New Enquiry" url="~/Pages/EnquiryChange.aspx" roles="*" />
