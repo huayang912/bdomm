@@ -164,7 +164,7 @@ public partial class Pages_ProjectDetails : BasePage
                 //sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowStyle" : "EventRowStyle");
                 sb.Append("<tr>");
                 sb.AppendFormat("   <td>{0}</td>", GetPersonnelLink(personnel));
-                sb.AppendFormat("   <td>{0}</td>", personnel.Contact.FirstNames.HtmlEncode());
+                sb.AppendFormat("   <td>{0}</td>", personnel.Contact.LastName.HtmlEncode());
                 sb.AppendFormat("   <td>{0}</td>", personnel.StartDate.GetValueOrDefault() == DateTime.MinValue ? "NA" : personnel.StartDate.GetValueOrDefault().ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
                 sb.AppendFormat("   <td>{0}</td>", personnel.EndDate.GetValueOrDefault() == DateTime.MinValue ? "NA" : personnel.EndDate.GetValueOrDefault().ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
                 sb.AppendFormat("   <td>{0}</td>", personnel.Role == null ? "NA" : personnel.Role.Name.HtmlEncode());
