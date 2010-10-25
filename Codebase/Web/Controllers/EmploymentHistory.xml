@@ -81,8 +81,8 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
     <field name="ContactFirstNames" type="String" readOnly="true" label="Contact First Names" />
     <field name="StartDate" type="DateTime" label="Start Date" showInSummary="true" />
     <field name="EndDate" type="DateTime" label="End Date" showInSummary="true" />
-    <field name="ProjectID" type="Int32" label="Project#" showInSummary="true">
-      <items style="Lookup" dataController="Projects" newDataView="createForm1" />
+    <field name="ProjectID" type="Int32" label="Project#" showInSummary="true" allowNulls="false">
+      <items style="Lookup" dataController="ProjectsLookup" newDataView="createForm1" />
     </field>
     <field name="ProjectName" type="String" readOnly="true" label="Project Name" />
     <field name="ProjectQuotationEnquiryNumber" type="String" readOnly="true" label="Project Quotation Enquiry Number" />
@@ -109,13 +109,13 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
   </fields>
   <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <view id="grid1" type="Grid" commandId="command1" label="Employment History">
-      <headerText>$DefaultGridViewDescription</headerText>
+      <headerText></headerText>
       <dataFields>
+        <dataField fieldName="ProjectID" aliasFieldName="ProjectName" />
         <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
-        <dataField fieldName="ProjectID" aliasFieldName="ProjectName" />
-        <dataField fieldName="ClientID" aliasFieldName="ClientName" />
+        <dataField fieldName="ClientID" hidden="true" aliasFieldName="ClientName" />
         <dataField fieldName="RoleID" aliasFieldName="RoleName" />
         <dataField fieldName="DayRate" columns="15" />
         <dataField fieldName="Contract_days" />
@@ -125,19 +125,19 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Employment History">
-      <headerText>$DefaultEditViewDescription</headerText>
+      <headerText></headerText>
       <categories>
         <category headerText="Employment History" newColumn="true">
-          <description>$DefaultEditDescription</description>
+          <description></description>
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
             <dataField fieldName="ProjectID" aliasFieldName="ProjectName" />
-            <dataField fieldName="ClientID" aliasFieldName="ClientName" />
+            <dataField fieldName="ClientID" hidden="true" aliasFieldName="ClientName" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
             <dataField fieldName="DayRate" columns="15" />
-            <dataField fieldName="Contract_days" />
+            <dataField fieldName="Contract_days" /> 
              
             <dataField fieldName="Notes"  rows="3"/>
             <dataField fieldName="ChangedOn"  readOnly="true" columns="10" />
@@ -154,16 +154,16 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
       </categories>
     </view>
     <view id="createForm1" type="Form" commandId="command1" label="New Employment History">
-      <headerText>$DefaultCreateViewDescription</headerText>
+      <headerText></headerText>
       <categories>
         <category headerText="New Employment History" newColumn="true">
-          <description>$DefaultNewDescription</description>
+          <description></description>
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
             <dataField fieldName="ProjectID" aliasFieldName="ProjectName" />
-            <dataField fieldName="ClientID" aliasFieldName="ClientName" />
+            <dataField fieldName="ClientID" hidden="true" aliasFieldName="ClientName" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
             <dataField fieldName="DayRate" columns="15" />
             <dataField fieldName="Contract_days" />
@@ -190,7 +190,9 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
       <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <!--
       <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      -->
       <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
@@ -200,18 +202,9 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
       <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
     </actionGroup>
-    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
-      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
-      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
-    </actionGroup>
-    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
-      <action id="a2" />
-      <action id="a3" commandName="ExportRowset" />
-    </actionGroup>
+  
+   
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
-      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
-      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
