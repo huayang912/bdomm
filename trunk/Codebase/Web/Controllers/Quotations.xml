@@ -171,6 +171,8 @@
           <dataFields>
             <dataField fieldName="Number" readOnly="true" columns="50" />
             <dataField fieldName="EnquiryID" aliasFieldName="EnquiryNumber" hyperlinkFormatString="~/Pages/Enquiries.aspx?Number={EnquiryNumber}" />
+            <dataField fieldName="EnquiryTypeName" columns="50" />
+
             <dataField fieldName="StatusID" aliasFieldName="StatusName" />
             <dataField fieldName="Subcontractor" columns="50" />
             <dataField fieldName="ScopeOfWork" rows="5" />
@@ -199,7 +201,6 @@
             <dataField fieldName="EnquiryContactCountryName" />
             <dataField fieldName="EnquiryContactChangedByUserUserName" hidden="true" />
             <dataField fieldName="EnquiryStatusName" columns="50" />
-            <dataField fieldName="EnquiryTypeName" columns="50" />
             <dataField fieldName="EnquiryCreatedByUserUserName" hidden="true" />
             <dataField fieldName="EnquiryChangedByUserUserName" hidden="true" />
             <dataField fieldName="SubmittedToClientContactCompanyChangedByUserUserName" hidden="true" />
