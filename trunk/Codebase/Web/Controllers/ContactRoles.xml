@@ -136,11 +136,7 @@ from "dbo"."ContactRoles" "ContactRoles"
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
-    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
-      <action id="a2" />
-      <action id="a3" commandName="ExportRowset" />
-    </actionGroup>
+   
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />

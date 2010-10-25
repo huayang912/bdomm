@@ -71,10 +71,10 @@ from "dbo"."Clients" "Clients"
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Clients">
-      <headerText>$DefaultEditViewDescription</headerText>
+      <headerText></headerText>
       <categories>
         <category headerText="Clients" newColumn="true">
-          <description>$DefaultEditDescription</description>
+          <description></description>
           <dataFields>
             <dataField fieldName="Number" hidden="true" columns="50" />
             <dataField fieldName="Name" columns="30"/>
@@ -128,12 +128,16 @@ from "dbo"."Clients" "Clients"
       <action id="a8" commandName="New" commandArgument="grid1" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
-      <action id="a1" commandName="Edit" />
-      <action id="a2" commandName="Delete" />
-      <action id="a3" commandName="Cancel" />
+      <action id="a1" commandName="Edit" whenHRef="ClientControlEdit" />
+      <!-- 
+      <action id="a2" commandName="Delete" whenHRef="ClientControlEdit" />
+      -->
+      <action id="a3" commandName="Cancel" whenHRef="ClientControlEdit" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <!--
       <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
-      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+     -->
+     <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
@@ -147,9 +151,8 @@ from "dbo"."Clients" "Clients"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
-      <action id="a2" />
-      <action id="a3" commandName="ExportRowset" />
+      <action id="a100" commandName="Navigate" commandArgument="~/pages/ClientNewEdit.aspx?ID={ID}" causesValidation="true" headerText="Edit" />
+
     </actionGroup>
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />

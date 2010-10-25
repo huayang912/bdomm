@@ -213,11 +213,16 @@ from "dbo"."Contacts" "Contacts"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a1" commandName="ExportCsv" />
+      <action id="a101" commandName="Navigate" commandArgument="~/pages/PersonnelNew.aspx?ID={ID}" headerText="Edit" causesValidation="true"  whenLastCommandArgument="Select"/>
+
+      
       <action id="a2" />
+      <!--
+      <action id="a1" commandName="ExportCsv" />
       <action id="a3" commandName="ExportRowset" />
       <action id="a100" commandName="Navigate" commandArgument="~/pages/Certificates.aspx?ContactID={ID}" headerText="Certificates" causesValidation="true" whenHRef="Contacts_bak" />
-    </actionGroup>
+       -->
+   </actionGroup>
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
