@@ -76,4 +76,4 @@
 <div id="QuotationList" runat="server">
 </div>
 <aquarium:DataViewExtender ID="QuotationListExtender" runat="server" TargetControlID="QuotationList"
-    Controller="Quotations" ShowDescription="false" ShowQuickFind="false" PageSize="25" />
+    Controller="Quotations" ShowDescription="false" ShowQuickFind="false"  ShowViewSelector="false" PageSize="25" />

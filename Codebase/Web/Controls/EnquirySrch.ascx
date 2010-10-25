@@ -77,4 +77,4 @@
 <div id="EnquiryList" runat="server">
 </div>
 <aquarium:DataViewExtender ID="EnquiryListExtender" runat="server" TargetControlID="EnquiryList"
-    Controller="Enquiries" ShowDescription="false" ShowQuickFind="false" PageSize="25"  />
+    Controller="Enquiries" ShowDescription="false" ShowQuickFind="false"  ShowViewSelector="false"  PageSize="25"  />
