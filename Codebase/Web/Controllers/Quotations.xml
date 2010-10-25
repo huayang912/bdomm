@@ -149,12 +149,14 @@
         <!--<dataField fieldName="Number" columns="50" hyperlinkFormatString="~/Pages/QuotationChange.aspx?ID={ID}&amp;EnqID={EnquiryID}" />-->
         <dataField fieldName="Number" columns="50"/>
         <dataField fieldName="EnquiryID" aliasFieldName="EnquiryNumber" hyperlinkFormatString="~/Pages/Enquiries.aspx?Number={EnquiryNumber}" />
+        <dataField fieldName="EnquiryTypeName" />
+
         <dataField fieldName="StatusID" aliasFieldName="StatusName" />
         <dataField fieldName="SubmittedToClientContactCompanyName" />
         <dataField fieldName="EnquiryContactCountryName" />
         <dataField fieldName="CreatedOn" />
         <dataField fieldName="ExpiryDate" formatOnClient="true" />
-        <dataField fieldName="IsExpired" />
+        <dataField fieldName="IsExpired"  hidden="true"/>
         <dataField fieldName="QuotationStatusID" hidden="true" />
       </dataFields>
       <a:styles>
