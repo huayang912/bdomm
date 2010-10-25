@@ -74,7 +74,7 @@
 </asp:UpdatePanel>
      <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory">
     <div id="view1" runat="server"></div>
-    <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Projects" view="grid1" ShowInSummary="True" PageSize="25"/>
+    <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Projects" view="grid1" ShowInSummary="True"  ShowActionBar ="true"  PageSize="25"/>
   </div>
 
   </div>
