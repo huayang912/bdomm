@@ -187,8 +187,14 @@ from "dbo"."Contacts" "Contacts"
       <action id="a1" commandName="Select" commandArgument="editForm1" />
       <action id="a2" commandName="Edit" />
       <action id="a3" commandName="Delete" />
+      <action id="a9" />
+      <action id="a100" commandName="Navigate" commandArgument="~/pages/SendSMS.aspx?ID={ID}" causesValidation="true" headerText="Send SMS" />
+
+
       <action id="a6" />
+      <!--
       <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
+     -->
       <action id="a8" commandName="New" commandArgument="grid1" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
