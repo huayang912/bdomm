@@ -4,19 +4,23 @@
     <ContentTemplate>
         <table width="100%" border="0">
     <tr>
-    <td><form><input type="button" value=" GO TO EDIT PAGE" onClick="window.location.href='PersonnelNew.aspx'"></form></td></tr>
+    <td>
+    <!--
+    <form><input type="button" value=" GO TO EDIT PAGE" onClick="window.location.href='PersonnelNew.aspx'"></form>
+    -->
+    </td></tr>
      <tr> <td valign="top"><div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
              <act:TabContainer ID="OrderManager" runat="server">
             <act:TabPanel ID="CustomersTab" runat="server" HeaderText="Personnel" PageSize="25">
               <ContentTemplate>
                 <div id="view1" runat="server"></div>
-                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" ShowActionBar="false" Controller="ContactsView" StartCommandName="Select" StartCommandArgument="editForm1" />
+                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="ContactsView" StartCommandName="Select" StartCommandArgument="editForm1" ShowActionBar="true"  ShowViewSelector="false"/>
               </ContentTemplate>
             </act:TabPanel>
             <act:TabPanel ID="EmploymentHistoryTab" runat="server" HeaderText="Employment History">
               <ContentTemplate>
                 <div id="view9" runat="server"></div>
-                <aquarium:DataViewExtender id="view9Extender" runat="server" TargetControlID="view9" Controller="EmploymentHistory" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5"  />
+                <aquarium:DataViewExtender id="view9Extender" runat="server" TargetControlID="view9" Controller="EmploymentHistory" view="grid1" FilterSource="view1Extender" FilterFields="ContactID"  ShowViewSelector="false" PageSize="5"  />
               </ContentTemplate>
             </act:TabPanel>
 			
