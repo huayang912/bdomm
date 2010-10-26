@@ -54,7 +54,7 @@ from "dbo"."ClientContactsNotes" "ClientContactsNotes"
     <field name="Version" type="Byte[]" allowNulls="false" readOnly="true" label="Version" showInSummary="true" />
   </fields>
   <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
-    <view id="grid1" type="Grid" commandId="command1" label="Client Contacts Notes">
+    <view id="grid1" type="Grid" commandId="command1" label="Client Contacts Notes" sortExpression="id desc">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="ClientContactID" hidden="true" aliasFieldName="ClientContactName" />
