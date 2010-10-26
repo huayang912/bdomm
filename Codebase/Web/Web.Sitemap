@@ -4,7 +4,7 @@
     <siteMapNode title="Home" description="Application home page" url="~/Pages/Home.aspx" />
     <siteMapNode title="Clients" description="View Clients" url="~/Pages/ClientNew_a.aspx" />
 	 <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelView.aspx" roles="*">
-	  <siteMapNode title="Show Personnel" description="Personnel List" url="~/Pages/PersonnelViewRedirect.asp" roles="*" />
+	  <siteMapNode title="Show Personnel" description="Personnel List" url="~/Pages/PersonnelViewRedirect.aspx" roles="*" />
       <siteMapNode title="CV" description="Personnel CV" url="~/Pages/CVNew.aspx" roles="*" />
     </siteMapNode>
     <siteMapNode title="Enquiries" description="Enquiry" url="~/Pages/EnquirySch.aspx" roles="*">
