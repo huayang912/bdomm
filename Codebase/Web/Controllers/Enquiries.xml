@@ -189,13 +189,14 @@ from "dbo"."Enquiries" "Enquiries"
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
 
+      <!--
       <action id="a1" commandName="Edit" />
 
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
 
       <action id="a3" commandName="Cancel" />
       
-
+-->
      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
