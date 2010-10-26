@@ -51,7 +51,7 @@ from "dbo"."Contacts" "Contacts"
     </command>
   </commands>
   <fields xmlns:a="urn:schemas-codeontime-com:data-aquarium">
-    <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" readOnly="true" label="Id" />
+    <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" readOnly="true" label="ID" />
     <field name="FirstNames" type="String" allowNulls="false" label="First Names" showInSummary="true" />
     <field name="LastName" type="String" allowNulls="false" label="Last Name" showInSummary="true" />
     <field name="Address" type="String" label="Address" showInSummary="true" />
@@ -101,6 +101,8 @@ from "dbo"."Contacts" "Contacts"
       <dataFields>
         <dataField fieldName="LastName" columns="30" />
         <dataField fieldName="FirstNames" columns="30"  />
+        <dataField fieldName="ID" columns="8" />
+
         <dataField fieldName="PrimaryRole" columns="30" />
         <dataField fieldName="SecondaryRole" columns="30" />
         <dataField fieldName="TertiaryRole" columns="30" />
@@ -120,8 +122,11 @@ from "dbo"."Contacts" "Contacts"
         <category headerText="Contacts" newColumn="true">
           <description></description>
           <dataFields>
+            <dataField fieldName="ID" columns="8" />
+
             <dataField fieldName="FirstNames" columns="30"  />
             <dataField fieldName="LastName" columns="30"  />
+
             <dataField fieldName="Address" columns="30" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30" />
@@ -163,7 +168,7 @@ from "dbo"."Contacts" "Contacts"
         <category headerText="New Contacts" newColumn="true">
           <description>$DefaultNewDescription</description>
           <dataFields>
-            <dataField fieldName="FirstNames" columns="30"  />
+                     <dataField fieldName="FirstNames" columns="30"  />
             <dataField fieldName="LastName" columns="30"  />
             <dataField fieldName="Address" columns="30" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
