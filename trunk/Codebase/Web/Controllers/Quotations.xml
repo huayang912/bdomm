@@ -182,11 +182,7 @@
             <dataField fieldName="SubmissionDate" columns="10" />
             <dataField fieldName="DecisionSuccessful" />
             <dataField fieldName="DecisionDate" columns="10" />
-            <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
-            <dataField fieldName="ChangedOn" columns="10" />
-            <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
-            <dataField fieldName="Version" hidden="true" columns="15" />
-            <dataField fieldName="ChangedByUsername" hidden="true" readOnly="true" columns="50" />
+                   <dataField fieldName="Version" hidden="true" columns="15" />
             <dataField fieldName="Contract_awarded_to" hidden="false" />
             <dataField fieldName="Contract_awarded_Value" hidden="false" />
           </dataFields>
@@ -208,8 +204,12 @@
             <dataField fieldName="SubmittedToClientContactChangedByUserUserName" hidden="true" />
             <dataField fieldName="CreatedOn" />
             <dataField fieldName="SubmittedToClientContactID" aliasFieldName="SubmittedToClientContactName" />
-            <dataField fieldName="CreatedByUserUserName" />
             <dataField fieldName="ExpiryDate" />
+            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyDescription" />
+            <dataField fieldName="CreatedByUserID"  aliasFieldName="CreatedByUserUserName" />
+            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="ChangedByUserID"  aliasFieldName="ChangedByUserUserName" />
+
           </dataFields>
         </category>
       </categories>
