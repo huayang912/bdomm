@@ -22,6 +22,7 @@ namespace App.CustomModels
         public String Details { get; set; }
         public int StatusID { get; set; }
         public int SourceTypeID { get; set; }
+        public String EnguirySubject { get; set; }
     }
     public class CustomQuotation
     {
