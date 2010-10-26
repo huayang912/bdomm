@@ -258,7 +258,7 @@
       <action id="a1" commandName="Edit" />
       
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
-      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+
 
       <action id="a3" commandName="Cancel" />
       <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />

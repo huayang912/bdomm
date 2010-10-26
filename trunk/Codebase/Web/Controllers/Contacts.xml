@@ -32,6 +32,7 @@
 	,"ChangedByUser"."UserName" "ChangedByUserUserName"
 	,"Contacts"."ChangedOn" "ChangedOn"
 	,"Contacts"."Version" "Version"
+  	,"Contacts"."PPE_Sizes" "PPE_Sizes"
   ,"Contacts"."Contract_days" "Contract_days"
 	,"Contacts"."DayRateCurrencyID" "DayRateCurrencyID"
 from "dbo"."Contacts" "Contacts"
@@ -89,6 +90,8 @@ from "dbo"."Contacts" "Contacts"
     <field name="Version" type="Byte[]" allowNulls="false" readOnly="true" label="Version" />
     <field name="DayRateCurrencyID" type="Int32" label="Day Rate Currency#" />
     <field name="PrimaryRole" type="String" readOnly="true" label="Primary Role" showInSummary="true" formatOnClient="true" />
+    <field name="PPE_Sizes" type="String" readOnly="false" label="PPE Sizes" formatOnClient="true" />
+
     <field name="SecondaryRole" type="String" readOnly="true" label="Secondary Role" showInSummary="true" formatOnClient="true" />
     <field name="TertiaryRole" type="String" readOnly="true" label="Tertiary Role" showInSummary="true" formatOnClient="true" />
   </fields>
@@ -138,6 +141,8 @@ from "dbo"."Contacts" "Contacts"
             <dataField fieldName="PlaceOfBirth" columns="30" />
             <dataField fieldName="CountryOfBirthID" columns="30" />
             <dataField fieldName="CountryOfBirthName" columns="30" />
+            <dataField fieldName="PPE_Sizes" columns="30" />
+
           </dataFields>
         </category>
         <category headerText="Business Details" tab="Business Details">
