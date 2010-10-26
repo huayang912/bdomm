@@ -155,7 +155,7 @@
                 Subject 
             </div>           
             <div>
-                <asp:TextBox ID="txtEnguirySubject" runat="server" TextMode="MultiLine" MaxLength="200" style="max-width:450px; min-height:110px;"></asp:TextBox>
+                <asp:TextBox ID="txtEnguirySubject" runat="server" TextMode="SingleLine"   MaxLength="100" style="max-width:650px; "></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvEnguirySubject" runat="server"
                     ControlToValidate="txtEnguirySubject" SetFocusOnError="true" Display="Dynamic"
                     ValidationGroup="SaveInfo2"
