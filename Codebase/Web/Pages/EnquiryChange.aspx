@@ -29,6 +29,13 @@
             }
             document.getElementById('divStep' + stepIndex).style.display = 'block';
         }
+        function ValidateAndMoveNext(validationGroup, stepID)
+        {
+            if(Page_ClientValidate(validationGroup))
+            {
+                MoveNext(stepID);
+            }
+        }
         var _Enquiry = null; //new App.CustomModels.CustomEnquiry();
         function PrepareObject() {
             _Enquiry = new App.CustomModels.CustomEnquiry();
@@ -37,7 +44,7 @@
             _Enquiry.ContactID = $('#<%= ddlContact.ClientID%>').val();
             _Enquiry.TypeID = $('#<%= ddlEnquiryType.ClientID%>').val();
             _Enquiry.SourceTypeID = $('#<%= ddlEnquirySourceTypes.ClientID%>').val();
-
+            _Enquiry.EnguirySubject = $('#<%= txtEnguirySubject.ClientID%>').val();
             _Enquiry.Details = $('#<%= txtDetails.ClientID%>').val();            
         }
         function SaveEnquiry() {
@@ -143,11 +150,21 @@
             </div>
             <div>
                  <asp:DropDownList ID="ddlEnquirySourceTypes" runat="server"></asp:DropDownList>
-
-            </div>            
-            <div style="margin-top:60px;">
+            </div> 
+            <div style="margin:10px 0px 5px 0px;">
+                Subject 
+            </div>           
+            <div>
+                <asp:TextBox ID="txtEnguirySubject" runat="server" TextMode="MultiLine" MaxLength="200" style="max-width:450px; min-height:110px;"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvEnguirySubject" runat="server"
+                    ControlToValidate="txtEnguirySubject" SetFocusOnError="true" Display="Dynamic"
+                    ValidationGroup="SaveInfo2"
+                    ErrorMessage="<br/>Please Enter Enquiry Subject.">
+                </asp:RequiredFieldValidator>
+            </div>
+            <div style="margin-top:10px;">
                 <input type="button" value="< Back" onclick="MoveNext(1);" />&nbsp;
-                <input type="button" value="Next >" onclick="MoveNext(3);" />
+                <input type="button" value="Next >" onclick="ValidateAndMoveNext('SaveInfo2', 3);" />
             </div>
         </div>
         

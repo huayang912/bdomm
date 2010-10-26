@@ -183,7 +183,8 @@ public partial class Pages_EnquiryChange : BasePage
         enquiry.ContactID = customEnquiry.ContactID;
         enquiry.TypeID = customEnquiry.TypeID;
         enquiry.StatusID = customEnquiry.StatusID;
-        
+        enquiry.EnguirySubject = customEnquiry.EnguirySubject;
+
         //if(customEnquiry.StatusID == EnquiryStatus.New)
         if (customEnquiry.ID == 0) ///Insert Mode
         {
