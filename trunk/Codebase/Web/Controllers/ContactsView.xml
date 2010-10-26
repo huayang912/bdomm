@@ -2,7 +2,8 @@
 <dataController name="ContactsView" conflictDetection="overwriteChanges" label="Contacts" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <command id="command1" type="Text">
-      <text><![CDATA[select
+      <text>
+    <![CDATA[select
 	"Contacts"."ID" "ID"
 	,"Contacts"."FirstNames" "FirstNames"
 	,"Contacts"."LastName" "LastName"
@@ -31,6 +32,7 @@
 	,"ChangedByUser"."UserName" "ChangedByUserUserName"
 	,"Contacts"."ChangedOn" "ChangedOn"
 	,"Contacts"."Version" "Version"
+    	,"Contacts"."PPE_Sizes" "PPE_Sizes"
 	,"Contacts"."DayRateCurrencyID" "DayRateCurrencyID"
 from "dbo"."Contacts" "Contacts"
 	left join "dbo"."VewPersonnelRoles" "PersonnelRoles" on "Contacts"."ID" = "PersonnelRoles"."ID"
@@ -87,6 +89,8 @@ from "dbo"."Contacts" "Contacts"
     <field name="Version" type="Byte[]" allowNulls="false" readOnly="true" label="Version" />
     <field name="DayRateCurrencyID" type="Int32" label="Day Rate Currency#" />
     <field name="PrimaryRole" type="String" readOnly="true" label="Primary Role" showInSummary="true" formatOnClient="true" />
+    <field name="PPE_Sizes" type="String" readOnly="false" label="PPE Sizes" formatOnClient="true" />
+
     <field name="SecondaryRole" type="String" readOnly="true" label="Secondary Role" showInSummary="true" formatOnClient="true" />
     <field name="TertiaryRole" type="String" readOnly="true" label="Tertiary Role" showInSummary="true" formatOnClient="true" />
   </fields>
@@ -136,6 +140,8 @@ from "dbo"."Contacts" "Contacts"
             <dataField fieldName="PlaceOfBirth" />
             <dataField fieldName="CountryOfBirthID" />
             <dataField fieldName="CountryOfBirthName" />
+            <dataField fieldName="PPE_Sizes" columns="30" />
+
           </dataFields>
         </category>
         <category headerText="Business Details" tab="Business Details">
