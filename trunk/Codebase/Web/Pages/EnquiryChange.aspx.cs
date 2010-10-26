@@ -188,6 +188,8 @@ public partial class Pages_EnquiryChange : BasePage
         if (customEnquiry.ID == 0) ///Insert Mode
         {
             enquiry.Number = context.GenerateNewEnquiryNumber(enquiry.TypeID);
+            ///Source Type ID will not be editable once set.
+            enquiry.SourceTypeID = customEnquiry.SourceTypeID;
             enquiry.CreatedByUserID = SessionCache.CurrentUser.ID;
             enquiry.CreatedByUsername = SessionCache.CurrentUser.UserName;
             enquiry.CreatedOn = DateTime.Now;            

@@ -137,16 +137,15 @@
                 <asp:DropDownList ID="ddlEnquiryType" runat="server"></asp:DropDownList>
 
             </div>
-            <div class="FormHeader">
+            <div style="margin:10px 0px 5px 0px;">
                 <b>Select Enquiry Source </b><br />
                 <asp:Label ID="Label11" Text="Select the  enquiry source. Note that this cannot be modified once set." runat="server"></asp:Label>
             </div>
             <div>
                  <asp:DropDownList ID="ddlEnquirySourceTypes" runat="server"></asp:DropDownList>
 
-            </div>
-            <div style="height:100px;">&nbsp;</div>
-            <div>
+            </div>            
+            <div style="margin-top:60px;">
                 <input type="button" value="< Back" onclick="MoveNext(1);" />&nbsp;
                 <input type="button" value="Next >" onclick="MoveNext(3);" />
             </div>

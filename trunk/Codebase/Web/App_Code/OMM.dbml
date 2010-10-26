@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="OMM" Class="OMMDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=MOMIN-PC\SQLEXPRESS;Initial Catalog=OMM2;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BUDI2_NS" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=MIMIXP-PC\SQLEXPRESS;Initial Catalog=OMM;Integrated Security=False;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BUDI2_NS" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Message_Recipients" Member="Message_Recipients">
     <Type Name="Message_Recipient">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -54,8 +54,8 @@
       <Column Name="Mobile" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Department" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="Imported" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="ClientContact_Enquiry" Member="Enquiries" ThisKey="ID" OtherKey="ContactID" Type="Enquiry" />
       <Association Name="ClientContact_Quotation" Member="Quotations" ThisKey="ID" OtherKey="SubmittedToClientContactID" Type="Quotation" />
+      <Association Name="ClientContact_Enquiry" Member="Enquiries" ThisKey="ID" OtherKey="ContactID" Type="Enquiry" />
       <Association Name="Client_ClientContact" Member="Client" ThisKey="CompanyID" OtherKey="ID" Type="Client" IsForeignKey="true" />
       <Association Name="Country_ClientContact" Member="Country" ThisKey="CountryID" OtherKey="ID" Type="Country" IsForeignKey="true" />
       <Association Name="User_ClientContact" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
@@ -96,31 +96,6 @@
       <Association Name="Country_Contact1" Member="Contacts1" ThisKey="ID" OtherKey="CountryOfBirthID" Type="Contact" />
     </Type>
   </Table>
-  <Table Name="dbo.Enquiries" Member="Enquiries">
-    <Type Name="Enquiry">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Number" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ContactID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="TypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CreatedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CreatedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="ChangedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Column Name="CreatedByUsername" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ChangedByUsername" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="EnguirySubject" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="SourceTypeID" Type="System.Int32" CanBeNull="false" UpdateCheck="Always" />
-      <Association Name="Enquiry_EnquiryLine" Member="EnquiryLines" ThisKey="ID" OtherKey="EnquiryID" Type="EnquiryLine" />
-      <Association Name="Enquiry_Quotation" Member="Quotations" ThisKey="ID" OtherKey="EnquiryID" Type="Quotation" />
-      <Association Name="ClientContact_Enquiry" Member="ClientContact" ThisKey="ContactID" OtherKey="ID" Type="ClientContact" IsForeignKey="true" />
-      <Association Name="EnquiryType_Enquiry" Member="EnquiryType" ThisKey="TypeID" OtherKey="ID" Type="EnquiryType" IsForeignKey="true" />
-      <Association Name="User_Enquiry" Member="User" ThisKey="CreatedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
-      <Association Name="User_Enquiry1" Member="User1" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
-      <Association Name="EnquirySourceType_Enquiry" Member="EnquirySourceType" ThisKey="SourceTypeID" OtherKey="ID" Type="EnquirySourceType" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.EnquiryTypes" Member="EnquiryTypes">
     <Type Name="EnquiryType">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -137,8 +112,8 @@
       <Column Name="ChangedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Association Name="Enquiry_EnquiryLine" Member="Enquiry" ThisKey="EnquiryID" OtherKey="ID" Type="Enquiry" IsForeignKey="true" />
       <Association Name="User_EnquiryLine" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+      <Association Name="Enquiry_EnquiryLine" Member="Enquiry" ThisKey="EnquiryID" OtherKey="ID" Type="Enquiry" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.UserInRole" Member="UserInRoles">
@@ -195,11 +170,11 @@
       <Association Name="Quotation_QuotationPricingLine" Member="QuotationPricingLines" ThisKey="ID" OtherKey="QuotationID" Type="QuotationPricingLine" />
       <Association Name="Quotation_Project" Member="Projects" ThisKey="ID" OtherKey="QuotationID" Type="Project" />
       <Association Name="ClientContact_Quotation" Member="ClientContact" ThisKey="SubmittedToClientContactID" OtherKey="ID" Type="ClientContact" IsForeignKey="true" />
-      <Association Name="Enquiry_Quotation" Member="Enquiry" ThisKey="EnquiryID" OtherKey="ID" Type="Enquiry" IsForeignKey="true" />
       <Association Name="QuotationStatuse_Quotation" Member="QuotationStatuse" ThisKey="StatusID" OtherKey="ID" Type="QuotationStatuse" IsForeignKey="true" />
       <Association Name="Currency_Quotation" Member="Currency" ThisKey="CurrencyID" OtherKey="ID" Type="Currency" IsForeignKey="true" />
       <Association Name="User_Quotation" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
       <Association Name="User_Quotation1" Member="User1" ThisKey="CreatedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+      <Association Name="Enquiry_Quotation" Member="Enquiry" ThisKey="EnquiryID" OtherKey="ID" Type="Enquiry" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.QuotationPricingTypes" Member="QuotationPricingTypes">
@@ -274,8 +249,6 @@
       <Column Name="UserNameWeb" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Association Name="User_ClientContact" Member="ClientContacts" ThisKey="ID" OtherKey="ChangedByUserID" Type="ClientContact" />
       <Association Name="User_Client" Member="Clients" ThisKey="ID" OtherKey="ChangedByUserID" Type="Client" />
-      <Association Name="User_Enquiry" Member="Enquiries" ThisKey="ID" OtherKey="CreatedByUserID" Type="Enquiry" />
-      <Association Name="User_Enquiry1" Member="Enquiries1" ThisKey="ID" OtherKey="ChangedByUserID" Type="Enquiry" />
       <Association Name="User_EnquiryLine" Member="EnquiryLines" ThisKey="ID" OtherKey="ChangedByUserID" Type="EnquiryLine" />
       <Association Name="User_UserInRole" Member="UserInRoles" ThisKey="ID" OtherKey="UserID" Type="UserInRole" />
       <Association Name="User_UserInRole1" Member="UserInRoles1" ThisKey="ID" OtherKey="ModifiedBy" Type="UserInRole" />
@@ -287,6 +260,8 @@
       <Association Name="User_EmploymentHistory" Member="EmploymentHistories" ThisKey="ID" OtherKey="ChangedByUserID" Type="EmploymentHistory" />
       <Association Name="User_Contact" Member="Contacts" ThisKey="ID" OtherKey="CreatedByUserID" Type="Contact" />
       <Association Name="User_Contact1" Member="Contacts1" ThisKey="ID" OtherKey="ChangedByUserID" Type="Contact" />
+      <Association Name="User_Enquiry" Member="Enquiries" ThisKey="ID" OtherKey="CreatedByUserID" Type="Enquiry" />
+      <Association Name="User_Enquiry1" Member="Enquiries1" ThisKey="ID" OtherKey="ChangedByUserID" Type="Enquiry" />
     </Type>
   </Table>
   <Table Name="dbo.SMS_Messages" Member="SMS_Messages">
@@ -356,11 +331,36 @@
       <Association Name="User_Contact1" Member="User1" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Enquiries" Member="Enquiries">
+    <Type Name="Enquiry">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Number" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ContactID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ChangedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="CreatedByUsername" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ChangedByUsername" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="EnguirySubject" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="SourceTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Enquiry_EnquiryLine" Member="EnquiryLines" ThisKey="ID" OtherKey="EnquiryID" Type="EnquiryLine" />
+      <Association Name="Enquiry_Quotation" Member="Quotations" ThisKey="ID" OtherKey="EnquiryID" Type="Quotation" />
+      <Association Name="ClientContact_Enquiry" Member="ClientContact" ThisKey="ContactID" OtherKey="ID" Type="ClientContact" IsForeignKey="true" />
+      <Association Name="EnquiryType_Enquiry" Member="EnquiryType" ThisKey="TypeID" OtherKey="ID" Type="EnquiryType" IsForeignKey="true" />
+      <Association Name="User_Enquiry" Member="User" ThisKey="CreatedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+      <Association Name="User_Enquiry1" Member="User1" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+      <Association Name="EnquirySourceType_Enquiry" Member="EnquirySourceType" ThisKey="SourceTypeID" OtherKey="ID" Type="EnquirySourceType" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.EnquirySourceTypes" Member="EnquirySourceTypes">
     <Type Name="EnquirySourceType">
-      <Column Name="ID" Type="System.Int32" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Member="Name" Type="System.String" CanBeNull="false" />
-      <Column Member="NumberSuffix" Type="System.String" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NumberSuffix" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
       <Association Name="EnquirySourceType_Enquiry" Member="Enquiries" ThisKey="ID" OtherKey="SourceTypeID" Type="Enquiry" />
     </Type>
   </Table>
