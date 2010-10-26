@@ -2,7 +2,8 @@
 <dataController name="Enquiries" conflictDetection="overwriteChanges" label="Enquiries" actionHandlerType="CustomClass" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <command id="command1" type="Text">
-      <text><![CDATA[select
+      <text>
+    <![CDATA[select
 	"Enquiries"."ID" "ID"
 	,"Enquiries"."Number" "Number"
 	,"Enquiries"."ContactID" "ContactID"
@@ -15,7 +16,11 @@
 	,"ContactCountry"."Name" "ContactCountryName"
 	,"ContactChangedByUser"."UserName" "ContactChangedByUserUserName"
 	,"Enquiries"."TypeID" "TypeID"
-	,"Type"."Name" "TypeName"
+  	,"Type"."Name" "TypeName"
+
+    ,"Enquiries"."SourceTypeID" "SourceTypeID"  	
+  ,"SourceType"."Name" "SourceTypeName"
+
 	,"Enquiries"."StatusID" "StatusID"
 	,"Status"."Name" "StatusName"
 	,"Enquiries"."CreatedByUserID" "CreatedByUserID"
@@ -37,7 +42,10 @@ from "dbo"."Enquiries" "Enquiries"
 	left join "dbo"."Countries" "ContactCountry" on "Contact"."CountryID" = "ContactCountry"."ID"
 	left join "dbo"."Users" "ContactChangedByUser" on "Contact"."ChangedByUserID" = "ContactChangedByUser"."ID"
 	left join "dbo"."EnquiryTypes" "Type" on "Enquiries"."TypeID" = "Type"."ID"
-	left join "dbo"."EnquiryStatuses" "Status" on "Enquiries"."StatusID" = "Status"."ID"
+	
+  left join "dbo"."EnquirySourceTypes" "SourceType" on "Enquiries"."SourceTypeID" = "SourceType"."ID"
+
+  left join "dbo"."EnquiryStatuses" "Status" on "Enquiries"."StatusID" = "Status"."ID"
 	left join "dbo"."Users" "CreatedByUser" on "Enquiries"."CreatedByUserID" = "CreatedByUser"."ID"
 	left join "dbo"."Users" "ChangedByUser" on "Enquiries"."ChangedByUserID" = "ChangedByUser"."ID"
 	left join "dbo"."EnquiryLines" "EnquiryLines" on "Enquiries"."ID" = "enquiryLines"."EnquiryID"]]></text>
@@ -63,6 +71,9 @@ from "dbo"."Enquiries" "Enquiries"
     <field name="ContactChangedByUserUserName" type="String" readOnly="true" label="Contact Changed By User Name" />
     <field name="TypeID" type="Int32" allowNulls="false" label="Type#" showInSummary="true">
       <items style="Lookup" dataController="EnquiryTypes" newDataView="createForm1" />
+    </field>
+    <field name="SourceTypeID" type="Int32" allowNulls="false" label="SourceType#" showInSummary="true">
+      <items style="Lookup" dataController="EnquirySourceTypes" newDataView="createForm1" />
     </field>
     <field name="TypeName" type="String" readOnly="true" label="Type Name" />
     <field name="StatusID" type="Int32" allowNulls="false" label="Status#" showInSummary="true">
