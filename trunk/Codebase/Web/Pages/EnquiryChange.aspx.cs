@@ -70,6 +70,23 @@ public partial class Pages_EnquiryChange : BasePage
         ddlEnquiryType.DataTextField = "Name";
         ddlEnquiryType.DataValueField = "ID";
         ddlEnquiryType.DataBind();
+
+        // NEw EnqSouretype -Momin
+        ///Bind EnquirySource Type Dropdown List
+        var enquirySourceTypes = from P in context.EnquirySourceTypes
+                           orderby P.Name
+                           select new
+                           {
+                               ID = P.ID,
+                               Name = P.Name
+                           };
+
+        ddlEnquirySourceTypes.DataSource = enquirySourceTypes;
+        ddlEnquirySourceTypes.DataTextField = "Name";
+        ddlEnquirySourceTypes.DataValueField = "ID";
+        ddlEnquirySourceTypes.DataBind();
+
+
     }
     /// <summary>
     /// Binds Enquiry Details for Edit Mode
@@ -93,6 +110,9 @@ public partial class Pages_EnquiryChange : BasePage
 
                 ddlEnquiryType.SetSelectedItem(enquiry.TypeID.ToString());
                 txtDetails.Text = enquiry.EnquiryLines.Count > 0 ? enquiry.EnquiryLines[0].Details : String.Empty;
+            
+            //Momin
+                ddlEnquirySourceTypes.SetSelectedItem(enquiry.SourceTypeID.ToString());
             }
         }
     }
