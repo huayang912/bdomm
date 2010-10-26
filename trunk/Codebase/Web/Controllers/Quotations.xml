@@ -169,46 +169,46 @@
         <category headerText="Quotations" newColumn="true">
           <description>$DefaultEditDescription</description>
           <dataFields>
-            <dataField fieldName="Number" readOnly="true" columns="50" />
-            <dataField fieldName="EnquiryID" aliasFieldName="EnquiryNumber" hyperlinkFormatString="~/Pages/Enquiries.aspx?Number={EnquiryNumber}" />
-            <dataField fieldName="EnquiryTypeName" columns="50" />
+            <dataField fieldName="Number" readOnly="true" columns="50"/>
+            <dataField fieldName="EnquiryID" aliasFieldName="EnquiryNumber" hyperlinkFormatString="~/Pages/Enquiries.aspx?Number={EnquiryNumber}" readOnly="true" />
+            <dataField fieldName="EnquiryTypeName" columns="50" readOnly="true"/>
 
-            <dataField fieldName="StatusID" aliasFieldName="StatusName" />
-            <dataField fieldName="Subcontractor" columns="50" />
-            <dataField fieldName="ScopeOfWork" rows="5" />
-            <dataField fieldName="MainEquipment" rows="5" />
-            <dataField fieldName="ValidityDays" columns="15" />
-            <dataField fieldName="Schedule" rows="5" />
-            <dataField fieldName="SubmissionDate" columns="10" />
-            <dataField fieldName="DecisionSuccessful" />
-            <dataField fieldName="DecisionDate" columns="10" />
+            <dataField fieldName="StatusID" aliasFieldName="StatusName" readOnly="true"/>
+            <dataField fieldName="Subcontractor" columns="50" readOnly="true"/>
+            <dataField fieldName="ScopeOfWork" rows="5" readOnly="true"/>
+            <dataField fieldName="MainEquipment" rows="5" readOnly="true"/>
+            <dataField fieldName="ValidityDays" columns="15" readOnly="true"/>
+            <dataField fieldName="Schedule" rows="5" readOnly="true"/>
+            <dataField fieldName="SubmissionDate" columns="10" readOnly="true"/>
+            <dataField fieldName="DecisionSuccessful" readOnly="true"/>
+            <dataField fieldName="DecisionDate" columns="10" readOnly="true" />
                    <dataField fieldName="Version" hidden="true" columns="15" />
-            <dataField fieldName="Contract_awarded_to" hidden="false" />
-            <dataField fieldName="Contract_awarded_Value" hidden="false" />
+            <dataField fieldName="Contract_awarded_to" hidden="false"  columns="30"/>
+            <dataField fieldName="Contract_awarded_Value" hidden="false" columns="30"/>
           </dataFields>
         </category>
         <category headerText="Reference Information" newColumn="true">
           <description>$DefaultReferenceDescription</description>
           <dataFields>
-            <dataField fieldName="EnquiryContactName" />
-            <dataField fieldName="ContactJobTitle" />
-            <dataField fieldName="ContactEmail" hyperlinkFormatString="mailto:{ContactEmail}" />
-            <dataField fieldName="EnquiryContactCompanyName" />
-            <dataField fieldName="EnquiryContactCountryName" />
+            <dataField fieldName="EnquiryContactName" readOnly="true"/>
+            <dataField fieldName="ContactJobTitle" readOnly="true"/>
+            <dataField fieldName="ContactEmail" hyperlinkFormatString="mailto:{ContactEmail}" readOnly="true"/>
+            <dataField fieldName="EnquiryContactCompanyName" readOnly="true"/>
+            <dataField fieldName="EnquiryContactCountryName" readOnly="true"/>
             <dataField fieldName="EnquiryContactChangedByUserUserName" hidden="true" />
-            <dataField fieldName="EnquiryStatusName" columns="50" />
+            <dataField fieldName="EnquiryStatusName" columns="50" readOnly="true"/>
             <dataField fieldName="EnquiryCreatedByUserUserName" hidden="true" />
             <dataField fieldName="EnquiryChangedByUserUserName" hidden="true" />
             <dataField fieldName="SubmittedToClientContactCompanyChangedByUserUserName" hidden="true" />
             <dataField fieldName="SubmittedToClientContactCountryName" hidden="true" />
             <dataField fieldName="SubmittedToClientContactChangedByUserUserName" hidden="true" />
             <dataField fieldName="CreatedOn" />
-            <dataField fieldName="SubmittedToClientContactID" aliasFieldName="SubmittedToClientContactName" />
+            <dataField fieldName="SubmittedToClientContactID" aliasFieldName="SubmittedToClientContactName" readOnly="true"/>
             <dataField fieldName="ExpiryDate" />
-            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyDescription" />
-            <dataField fieldName="CreatedByUserID"  aliasFieldName="CreatedByUserUserName" />
-            <dataField fieldName="ChangedOn" columns="10" />
-            <dataField fieldName="ChangedByUserID"  aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyDescription" readOnly="true"/>
+            <dataField fieldName="CreatedByUserID"  aliasFieldName="CreatedByUserUserName" readOnly="true"/>
+            <dataField fieldName="ChangedOn" columns="10" readOnly="true"/>
+            <dataField fieldName="ChangedByUserID"  aliasFieldName="ChangedByUserUserName" readOnly="true"/>
 
           </dataFields>
         </category>
@@ -255,6 +255,11 @@
       <action id="a103" commandName="Navigate" commandArgument="~/pages/QuotationDecision.aspx?ID={ID}" headerText="Quotation Decision" causesValidation="true" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+
       <action id="a3" commandName="Cancel" />
       <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
