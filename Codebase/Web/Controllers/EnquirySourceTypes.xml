@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="EnquiryTypes" conflictDetection="overwriteChanges" label="Enquiry Types" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="EnquirySourceTypes" conflictDetection="overwriteChanges" label="Enquiry Types" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <command id="command1" type="Text">
       <text>

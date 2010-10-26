@@ -76,6 +76,8 @@ from "dbo"."Enquiries" "Enquiries"
       <items style="Lookup" dataController="EnquirySourceTypes" newDataView="createForm1" />
     </field>
     <field name="TypeName" type="String" readOnly="true" label="Type Name" />
+    <field name="SourceTypeName" type="String" readOnly="true" label="Source Type Name" />
+
     <field name="StatusID" type="Int32" allowNulls="false" label="Status#" showInSummary="true">
       <items style="Lookup" dataController="EnquiryStatuses" newDataView="createForm1" />
     </field>
@@ -103,7 +105,10 @@ from "dbo"."Enquiries" "Enquiries"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Number" columns="50" />
-        <dataField fieldName="EnguirySubject" />
+        <dataField fieldName="EnguirySubject"  hidden="true"/>
+        <dataField fieldName="SourceTypeID" aliasFieldName="SourceTypeName" />
+
+
         <dataField fieldName="CreatedOn" columns="10" />
         <dataField fieldName="TypeID" aliasFieldName="TypeName" />
         <dataField fieldName="StatusID" aliasFieldName="StatusName" />
@@ -122,27 +127,30 @@ from "dbo"."Enquiries" "Enquiries"
         <category headerText="Enquiries" newColumn="true">
           <description>$DefaultEditDescription</description>
           <dataFields>
-            <dataField fieldName="Number" readOnly="true" columns="50" />
-            <dataField fieldName="TypeID" aliasFieldName="TypeName" />
-            <dataField fieldName="EnguirySubject" />
-            <dataField fieldName="StatusID" aliasFieldName="StatusName" />
+            <dataField fieldName="Number" readOnly="true" columns="30" />
+            <dataField fieldName="TypeID" aliasFieldName="TypeName" readOnly="true"/>
+            <dataField fieldName="EnguirySubject" columns="30" />
+            <dataField fieldName="SourceTypeID" aliasFieldName="SourceTypeName" />
+
+
+            <dataField fieldName="StatusID" aliasFieldName="StatusName" readOnly="true"/>
             <dataField fieldName="CreatedOn" readOnly="true" columns="10" />
-            <dataField fieldName="ContactID" aliasFieldName="ContactName" />
+            <dataField fieldName="ContactID" aliasFieldName="ContactName" readOnly="true"/>
             <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
             <dataField fieldName="ChangedOn" readOnly="true" columns="10" />
-            <dataField fieldName="ContactJobTitle" />
+            <dataField fieldName="ContactJobTitle" readOnly="true"/>
             <dataField fieldName="CreatedByUsername" readOnly="true" columns="50" hidden="false" />
-            <dataField fieldName="ContactEmail" hyperlinkFormatString="mailto:{ContactEmail}" />
+            <dataField fieldName="ContactEmail" hyperlinkFormatString="mailto:{ContactEmail}" readOnly="true"/>
             <dataField fieldName="Version" hidden="true" columns="15" />
-            <dataField fieldName="ChangedByUsername" columns="50" />
+            <dataField fieldName="ChangedByUsername" columns="50" readOnly="true"/>
             <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
           </dataFields>
         </category>
         <category headerText="Reference Information" newColumn="true">
           <description>$DefaultReferenceDescription</description>
           <dataFields>
-            <dataField fieldName="ContactCompanyName" />
-            <dataField fieldName="ContactCompanyCountryName" />
+            <dataField fieldName="ContactCompanyName" readOnly="true"/>
+            <dataField fieldName="ContactCompanyCountryName" readOnly="true"/>
             <dataField fieldName="ContactCompanyChangedByUserUserName" hidden="true" />
             <dataField fieldName="ContactCountryName" hidden="true" />
             <dataField fieldName="ContactChangedByUserUserName" hidden="true" />
@@ -180,7 +188,14 @@ from "dbo"."Enquiries" "Enquiries"
       <action id="a100" commandName="Navigate" commandArgument="~/pages/QuotationChange.aspx?ENQID={ID}" causesValidation="true" headerText="Add Quotation" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
-       <action id="a3" commandName="Cancel" />
+
+      <action id="a1" commandName="Edit" />
+
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+
+      <action id="a3" commandName="Cancel" />
+      
+
      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
