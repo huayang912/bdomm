@@ -21,6 +21,7 @@ namespace App.CustomModels
         public int TypeID { get; set; }
         public String Details { get; set; }
         public int StatusID { get; set; }
+        public int SourceTypeID { get; set; }
     }
     public class CustomQuotation
     {
