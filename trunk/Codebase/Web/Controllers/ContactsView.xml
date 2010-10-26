@@ -50,7 +50,7 @@ from "dbo"."Contacts" "Contacts"
     </command>
   </commands>
   <fields xmlns:a="urn:schemas-codeontime-com:data-aquarium">
-    <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" readOnly="true" label="ID" />
+    <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" readOnly="true" label="ID#" />
     <field name="FirstNames" type="String" allowNulls="false" label="First Names" showInSummary="true" />
     <field name="LastName" type="String" allowNulls="false" label="Last Name" showInSummary="true" />
     <field name="Address" type="String" label="Address" showInSummary="true" />
@@ -121,6 +121,7 @@ from "dbo"."Contacts" "Contacts"
         <category headerText="Personnel" newColumn="true">
           <description></description>
           <dataFields>
+            <dataField fieldName="ID" columns="8" />
             <dataField fieldName="FirstNames" columns="50" />
             <dataField fieldName="LastName" columns="50" />
             <dataField fieldName="Address" />
