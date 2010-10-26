@@ -36,6 +36,8 @@
             _Enquiry.StatusID = <%=_StatusID.ToString() %>;
             _Enquiry.ContactID = $('#<%= ddlContact.ClientID%>').val();
             _Enquiry.TypeID = $('#<%= ddlEnquiryType.ClientID%>').val();
+            _Enquiry.SourceTypeID = $('#<%= ddlEnquirySourceTypes.ClientID%>').val();
+
             _Enquiry.Details = $('#<%= txtDetails.ClientID%>').val();            
         }
         function SaveEnquiry() {
@@ -133,6 +135,15 @@
             </div>
             <div>
                 <asp:DropDownList ID="ddlEnquiryType" runat="server"></asp:DropDownList>
+
+            </div>
+            <div class="FormHeader">
+                <b>Select Enquiry Source </b><br />
+                <asp:Label ID="Label11" Text="Select the  enquiry source. Note that this cannot be modified once set." runat="server"></asp:Label>
+            </div>
+            <div>
+                 <asp:DropDownList ID="ddlEnquirySourceTypes" runat="server"></asp:DropDownList>
+
             </div>
             <div style="height:100px;">&nbsp;</div>
             <div>
