@@ -68,21 +68,21 @@ public partial class Pages_ExecuteQuery : BasePage
                 _DB.ExecuteCommand(txtQuery.Text);
                 WebUtil.ShowMessageBox(divMessage, "Executed Successfully", false);                
             }
-            else if (rdbExecuteAsScript.Checked)
-            {
-                _DB.ExecuteScript(txtQuery.Text);
-                WebUtil.ShowMessageBox(divMessage, "Executed Successfully", false);
+            //else if (rdbExecuteAsScript.Checked)
+            //{
+            //    _DB.ExecuteScript(txtQuery.Text);
+            //    WebUtil.ShowMessageBox(divMessage, "Executed Successfully", false);
                 
-            }
+            //}
             divQueryRestul.Visible = true;
         }
         catch (Exception ex)
         {
             String message = String.Empty;
-            if(rdbExecuteAsScript.Checked)
-                message = String.Format("Error Executing SQL.<br/><br/> {0}", WebUtil.FormatText(ex.InnerException.Message));
-            else
-                message = String.Format("Error Executing SQL.<br/><br/> {0}", WebUtil.FormatText(ex.Message));
+            //if(rdbExecuteAsScript.Checked)
+            //    message = String.Format("Error Executing SQL.<br/><br/> {0}", WebUtil.FormatText(ex.InnerException.Message));
+            //else
+            message = String.Format("Error Executing SQL.<br/><br/> {0}", WebUtil.FormatText(ex.Message));
             WebUtil.ShowMessageBox(divMessage, message, true);
             divQueryRestul.Visible = true;
         }

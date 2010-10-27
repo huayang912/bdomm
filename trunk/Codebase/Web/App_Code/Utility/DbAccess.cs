@@ -68,16 +68,16 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
                 Database.ExecuteScalar(command);                
             }
         }
-        /// <summary>
-        /// Executes Scripts With GO Statement within it
-        /// </summary>
-        /// <param name="commandText"></param>
-        public void ExecuteScript(String commandText)
-        {            
-            System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(_ConnectionString);
-            Microsoft.SqlServer.Management.Smo.Server server = new Microsoft.SqlServer.Management.Smo.Server(new Microsoft.SqlServer.Management.Common.ServerConnection(conn));
-            server.ConnectionContext.ExecuteNonQuery(commandText);
-        }
+        ///// <summary>
+        ///// Executes Scripts With GO Statement within it
+        ///// </summary>
+        ///// <param name="commandText"></param>
+        //public void ExecuteScript(String commandText)
+        //{            
+        //    System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(_ConnectionString);
+        //    Microsoft.SqlServer.Management.Smo.Server server = new Microsoft.SqlServer.Management.Smo.Server(new Microsoft.SqlServer.Management.Common.ServerConnection(conn));
+        //    server.ConnectionContext.ExecuteNonQuery(commandText);
+        //}
         ///// <summary>
         ///// Checks Whether an Object Exists in the Databae or Not
         ///// </summary>
