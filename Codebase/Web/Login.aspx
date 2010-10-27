@@ -79,7 +79,9 @@
             </tr>
             <tr>
                 <td colspan="2">
+                <!--
                     <a href="/Pages/ForgotPassword.aspx">Forgot Your Password?</a>
+                -->
                 </td>
             </tr>
         </table>
