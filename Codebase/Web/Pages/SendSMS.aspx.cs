@@ -786,6 +786,11 @@ public partial class Pages_SendSMS : System.Web.UI.Page
             lblMessage.ForeColor = System.Drawing.Color.Red;
         }
     }
+
+    //protected void  btnCancel_Click(object sender, EventArgs e)
+    //{
+    //    Response.Redirect(@"~\Pages\Home.aspx");
+    //}
 }
 
 
