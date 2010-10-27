@@ -33,8 +33,8 @@ public class AppConstants
         public const String QUOTATION_SUBMIT = "QuotationSubmit.aspx";
         public const String QUOTATION_DECISION = "QuotationDecision.aspx";
         public const String QUOTATION_CHANGE = "QuotationChange.aspx";
-        public const String QUOTATION_DETAILS = "QuotationDetails.aspx";
-        public const String ENQUIRY_DETAILS = "EnquiryDetails.aspx";
+        public const String QUOTATION_DETAILS = "QuoteSrch.aspx";
+        public const String ENQUIRY_DETAILS = "EnquirySch.aspx";
         public const String PERSONNEL_DETAILS = "PersonnelDetails.aspx";
     }
     #endregion
