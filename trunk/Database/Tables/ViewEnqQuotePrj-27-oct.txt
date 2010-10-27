@@ -1,7 +1,7 @@
-CREATE VIEW [dbo].[ViewEnqQuotePrj]
+CREATE VIEW [ViewEnqQuotePrj]
 AS
-SELECT     dbo.Enquiries.ID AS EnquiryID, dbo.Enquiries.Number AS EnquiryNumber, dbo.Projects.ID AS ProjectID, dbo.Projects.Number AS ProjectNumber, 
-                      dbo.Quotations.ID AS QuotationID, dbo.Quotations.Number AS QuotationNumber, dbo.Projects.Name AS ProjectName
-FROM         dbo.Projects RIGHT OUTER JOIN
-                      dbo.Quotations ON dbo.Projects.QuotationID = dbo.Quotations.ID RIGHT OUTER JOIN
-                      dbo.Enquiries ON dbo.Quotations.EnquiryID = dbo.Enquiries.ID
+SELECT     Enquiries.ID AS EnquiryID, Enquiries.Number AS EnquiryNumber, Projects.ID AS ProjectID, Projects.Number AS ProjectNumber, 
+                      Quotations.ID AS QuotationID, Quotations.Number AS QuotationNumber, Projects.Name AS ProjectName
+FROM         Projects RIGHT OUTER JOIN
+                      Quotations ON Projects.QuotationID = Quotations.ID RIGHT OUTER JOIN
+                      Enquiries ON Quotations.EnquiryID = Enquiries.ID
