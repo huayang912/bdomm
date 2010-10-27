@@ -2,11 +2,16 @@
 <dataController name="Quotations" conflictDetection="overwriteChanges" label="Quotations" actionHandlerType="CustomQuoteClass" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <command id="command1" type="Text">
-      <text><![CDATA[select
+      <text>
+    <![CDATA[select
 	"Quotations"."ID" "ID"
 	,"Quotations"."Number" "Number"
 	,"Quotations"."EnquiryID" "EnquiryID"
 	,"Enquiry"."Number" "EnquiryNumber"
+  
+    ,"ViewEnqQuotePrj"."ProjectNumber" "ProjectNumber"
+  ,"ViewEnqQuotePrj"."ProjectID" "ProjectID"
+    ,"ViewEnqQuotePrj"."ProjectName" "ProjectName"
 	,"EnquiryContact"."Name" "EnquiryContactName"
 ,"EnquiryContact"."JobTitle" "ContactJobTitle"
 ,"EnquiryContact"."Email" "ContactEmail"
@@ -53,7 +58,9 @@
      from "dbo"."Quotations" "Quotations"
 	left join "dbo"."VewQuotationExpDate" "QuotationExpiryDates" ON "Quotations"."ID" = "QuotationExpiryDates"."ID"
 	left join "dbo"."Enquiries" "Enquiry" on "Quotations"."EnquiryID" = "Enquiry"."ID"
-	left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "EnquiryContact"."ID"
+  left join "dbo"."ViewEnqQuotePrj" "ViewEnqQuotePrj" on "Quotations"."ID" = "ViewEnqQuotePrj"."QuotationID"
+
+left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "EnquiryContact"."ID"
 	left join "dbo"."Clients" "EnquiryContactCompany" on "EnquiryContact"."CompanyID" = "EnquiryContactCompany"."ID"
 	left join "dbo"."Countries" "EnquiryContactCountry" on "EnquiryContact"."CountryID" = "EnquiryContactCountry"."ID"
 	left join "dbo"."Users" "EnquiryContactChangedByUser" on "EnquiryContact"."ChangedByUserID" = "EnquiryContactChangedByUser"."ID"
@@ -87,7 +94,14 @@
     <field name="EnquiryID" type="Int32" allowNulls="false" label="Enquiry#" showInSummary="true">
       <items style="Lookup" dataController="Enquiries" newDataView="createForm1" />
     </field>
+   
+    
     <field name="EnquiryNumber" type="String" readOnly="true" label="Enquiry Number" />
+
+    <field name="ProjectNumber" type="String" readOnly="true" label="Project Number" />
+    <field name="ProjectID" type="String" readOnly="true" label="ProjectID"  />
+    <field name="ProjectName" type="String" readOnly="true" label="Project Name"  />
+
     <field name="EnquiryContactName" type="String" readOnly="true" label="Enquiry Contact Name" />
     <field name="EnquiryContactCompanyName" type="String" readOnly="true" label=" Company Name" />
     <field name="EnquiryContactCountryName" type="String" readOnly="true" label=" Country" />
@@ -149,6 +163,10 @@
         <!--<dataField fieldName="Number" columns="50" hyperlinkFormatString="~/Pages/QuotationChange.aspx?ID={ID}&amp;EnqID={EnquiryID}" />-->
         <dataField fieldName="Number" columns="50"/>
         <dataField fieldName="EnquiryID" aliasFieldName="EnquiryNumber" hyperlinkFormatString="~/Pages/Enquiries.aspx?Number={EnquiryNumber}" />
+        <dataField fieldName="ProjectNumber" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={ProjectID}"  />
+        <dataField fieldName="ProjectID" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={QuotationID}" hidden="true"  />
+
+
         <dataField fieldName="EnquiryTypeName" />
 
         <dataField fieldName="StatusID" aliasFieldName="StatusName" />
@@ -209,6 +227,9 @@
             <dataField fieldName="CreatedByUserID"  aliasFieldName="CreatedByUserUserName" readOnly="true"/>
             <dataField fieldName="ChangedOn" columns="10" readOnly="true"/>
             <dataField fieldName="ChangedByUserID"  aliasFieldName="ChangedByUserUserName" readOnly="true"/>
+            <dataField fieldName="ProjectNumber" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={ProjectID}"  />
+            <dataField fieldName="ProjectID" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={QuotationID}" hidden="true"  />
+            <dataField fieldName="ProjectName"  columns="30"/>
 
           </dataFields>
         </category>
