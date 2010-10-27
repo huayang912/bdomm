@@ -94,7 +94,7 @@ from "dbo"."Enquiries" "Enquiries"
     <field name="ChangedOn" type="DateTime" default="(getdate())" label="Changed On" />
     <field name="CreatedByUsername" type="String" label="Created By Username" />
     <field name="ChangedByUsername" type="String" label="Changed By Username" />
-    <field name="EnguirySubject" type="String" label="Enguiry Subject" showInSummary="true" />
+    <field name="EnguirySubject" type="String" label="Enquiry Subject" showInSummary="true" />
     <field name="Details" type="String" readOnly="true" label="Details" showInSummary="true" formatOnClient="true" allowQBE="false" allowSorting="false" />
     <field name="ContactJobTitle" type="String" allowNulls="false" readOnly="true" label="Contact Job Title" showInSummary="true" formatOnClient="true" allowQBE="false" allowSorting="false" />
     <field name="ContactEmail" type="String" allowNulls="false" readOnly="true" label="Contact Email" showInSummary="true" formatOnClient="true" allowQBE="false" allowSorting="false" />
@@ -189,14 +189,14 @@ from "dbo"."Enquiries" "Enquiries"
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
 
-      <!--
-      <action id="a1" commandName="Edit" />
+     
+      <action id="a1" commandName="Edit" headerText="EDIT"/>
 
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
 
       <action id="a3" commandName="Cancel" />
       
--->
+
      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
