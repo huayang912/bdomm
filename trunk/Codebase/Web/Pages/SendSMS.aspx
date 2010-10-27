@@ -94,6 +94,12 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
         }
 
 
+
+        function goHome() {
+            window.location = "home.aspx";
+        }
+
+
         function SendMessage() {
             var ids = '';
             $("#<%=GridView1.ClientID %> input[type='checkbox']:checked").each(function(i) {
@@ -138,7 +144,7 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
                     Please Insert The Message To Be Sent<br />
                     <asp:TextBox ID="tbxMessage" runat="server" TextMode="MultiLine" Height="300px" Width="99%"></asp:TextBox>
                 </div>
-                <div class="GroupBox" id="divStep2" style="display:none;">
+                <div class="GroupBox" id="divStep2" style="display:none; height:282px">
                     <asp:GridView ID="GridView1" runat="server" CssClass="GridView" 
                         AutoGenerateColumns="False" CellPadding="3" CellSpacing="0"                         
                         onrowdatabound="GridView1_RowDataBound" Enabled="False">
@@ -147,7 +153,7 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
                         <Columns>
                             <asp:TemplateField HeaderText="Select">
                                 <ItemTemplate>
-                                    <input type="checkbox" name="chkSelect" value="<%# ((int)Eval("ID")).ToString() %>" />
+                                    <input type="checkbox" name="chkSelect" checked="checked" value="<%# ((int)Eval("ID")).ToString() %>" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="Recipient_Name" HeaderText="Recipient_Name" 
@@ -166,8 +172,8 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
                     
                     
                     <asp:Button ID="btnVerifyPhoneNumbers" runat="server" 
-                        Text="Verify Phone Numbers" onclick="btnVerifyPhoneNumbers_Click"/>
-                    <asp:Button ID="btnDelete" runat="server" Text="Delete Recipient" 
+                        Text="Verify Phone Numbers" onclick="btnVerifyPhoneNumbers_Click" Visible="false"/>
+                    <asp:Button ID="btnDelete" runat="server" Text="Delete Recipient"  Visible="false"
                         onclick="btnDelete_Click"/>
                 </div>
             </td>
@@ -186,7 +192,10 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
                     
                     <input type="button" value="Finish" onclick="SendMessage();" />
                     
-                    <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+                    <input type="button" value="Cancel" onclick="goHome();" />
+                    
+                   <%-- <asp:Button ID="btnCancel" runat="server" Text="Cancel" 
+                         onclick="goHome();" />--%>
                 </div>
             </td>
         </tr>
