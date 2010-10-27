@@ -33,7 +33,7 @@
             &nbsp;
             <asp:RadioButton ID="rdbExecuteAsCommand" GroupName="MyQuery" runat="server" Text="Execute as DML Command" />
             &nbsp;
-            <asp:RadioButton ID="rdbExecuteAsScript" GroupName="MyQuery" runat="server" Text="Execute as SQL Script" />
+            <%--<asp:RadioButton ID="rdbExecuteAsScript" GroupName="MyQuery" runat="server" Text="Execute as SQL Script" />--%>
         </div>
         <div class="GroupBox">
             <asp:TextBox id="txtQuery" TextMode="MultiLine" runat="server" style="height:200px; width:100%;"></asp:TextBox>
@@ -48,7 +48,7 @@
             </div>
         </div>
         
-        <div id="divQueryRestul" runat="server" visible="false" class="GroupBox">
+        <div id="divQueryRestul" runat="server" visible="false" class="GroupBox" style="overflow-x:auto;">
             <div id="divMessage" runat="server" visible="false" enableviewstate="false"></div>
             <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="true" 
                 CssClass="GridView" Width="100%" CellPadding="3" CellSpacing="0" EnableViewState="false">
