@@ -75,6 +75,8 @@ public partial class Pages_ProjectDetails : BasePage
             }
 
             divDetails.InnerHtml = sb.ToString();
+            ucProjectNotes.ProjectID = _ProjectID;
+            ucProjectNotes.DataBind();
         }
     }
 
@@ -110,8 +112,8 @@ public partial class Pages_ProjectDetails : BasePage
             {
                 QuotationPricingLine pricingLine = quotation.QuotationPricingLines[i];
                 decimal price = pricingLine.UnitPrice.GetValueOrDefault() * pricingLine.Quantity.GetValueOrDefault();
-                //sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowStyle" : "EventRowStyle");
-                sb.Append("<tr>");
+                sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowListing" : "EventRowListing");
+                //sb.Append("<tr>");
                 sb.AppendFormat("   <td style='text-align:center;'>{0}</td>", pricingLine.Item.IsNullOrEmpty() ? "NA" : pricingLine.Item.HtmlEncode());
                 sb.AppendFormat("   <td>{0}</td>", pricingLine.Description.IsNullOrEmpty() ? "NA" : WebUtil.FormatText(pricingLine.Description));
                 sb.AppendFormat("   <td>{0}</td>", pricingLine.QuotationPricingType == null ? "NA" : pricingLine.QuotationPricingType.Name);
@@ -120,7 +122,7 @@ public partial class Pages_ProjectDetails : BasePage
                 sb.AppendFormat("   <td style='text-align:right;'>{0}{1}</td>", currencySymbol, String.Format(AppConstants.ValueOf.DECIMAL_FORMAT, price));
                 //sb.AppendFormat("   <td style='text-align:center;'><a href='javascript:void(0);' onclick='LoadPricingForEdit(' + i + ')'>Edit</a></td>';
                 sb.Append("</tr>");
-                totalPrice += price;
+                totalPrice += price;                
             }
             sb.Append("<tr>");
             sb.AppendFormat("   <td colspan='6' style='text-align:right;'><b>Total Price:</b> &nbsp;{0}{1}</td>", currencySymbol, String.Format(AppConstants.ValueOf.DECIMAL_FORMAT, totalPrice));
@@ -159,10 +161,12 @@ public partial class Pages_ProjectDetails : BasePage
             //String currencySymbol = quotation.Currency == null ? String.Empty : quotation.Currency.ShortCode;
 
             //decimal totalPrice = 0;
+            int i = 0;
             foreach (EmploymentHistory personnel in personnels)
             {                
                 //sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowStyle" : "EventRowStyle");
-                sb.Append("<tr>");
+                sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowListing" : "EventRowListing");
+                //sb.Append("<tr>");
                 sb.AppendFormat("   <td>{0}</td>", GetPersonnelLink(personnel));
                 sb.AppendFormat("   <td>{0}</td>", personnel.Contact.LastName.HtmlEncode());
                 sb.AppendFormat("   <td>{0}</td>", personnel.StartDate.GetValueOrDefault() == DateTime.MinValue ? "NA" : personnel.StartDate.GetValueOrDefault().ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
@@ -170,7 +174,8 @@ public partial class Pages_ProjectDetails : BasePage
                 sb.AppendFormat("   <td>{0}</td>", personnel.Role == null ? "NA" : personnel.Role.Name.HtmlEncode());
                 sb.AppendFormat("   <td style='text-align:right;'>{0}</td>", personnel.DayRate.GetValueOrDefault() > 0 ? String.Format(AppConstants.ValueOf.DECIMAL_FORMAT, personnel.DayRate.GetValueOrDefault()) : "NA");
                 sb.AppendFormat("   <td style='text-align:center;'>{0}</td>", personnel.Contract_days.GetValueOrDefault() > 0 ? personnel.Contract_days.GetValueOrDefault().ToString() : "NA");
-                sb.Append("</tr>");                
+                sb.Append("</tr>");
+                i++;
             }            
             sb.Append("</table>");
         }

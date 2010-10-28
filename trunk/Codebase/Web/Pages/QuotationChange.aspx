@@ -118,7 +118,7 @@
         {
             if(_PricingList.length > 0)
             {            
-                var html = '<table cellpadding="3" cellspacing="0" style="width:100%;">';
+                var html = '<table class="GridView" cellpadding="3" cellspacing="0">';
                 html += '<colgroup>';
                 html += '   <col style="width:12%;" />';
                 html += '   <col style="width:35%;" />';
@@ -138,8 +138,10 @@
                 var totalPrice = 0;
                 for(i = 0; i < _PricingList.length; i++)
                 {
-                    var pricingLine = _PricingList[i];                    
-                    html += '<tr>';
+                    var pricingLine = _PricingList[i];   
+                    var cssClass = i % 2 == 0 ? 'OddRowListing' : 'EvenRowListing';
+                    html += '<tr class="' + cssClass + '">';                 
+                    //html += '<tr>';
                     html += '   <td>' + pricingLine.Item + '</td>';
                     html += '   <td>' + FormatText(pricingLine.Description) + '</td>';
                     html += '   <td>' + pricingLine.PricingType + '</td>';

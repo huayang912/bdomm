@@ -60,7 +60,12 @@ namespace App.CustomModels
         public String StartDate { get; set; }
         public String EndDate { get; set; }
     }
-
+    public class CustomProjectNote
+    {
+        public long ID { get; set; }
+        public int ProjectID { get; set; }
+        public String Details { get; set; }
+    }
     #region Enum Like Classes
     public static class EnquiryStatus
     {

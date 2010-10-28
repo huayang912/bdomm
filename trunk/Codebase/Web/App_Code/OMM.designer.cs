@@ -98,6 +98,9 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   partial void InsertEnquirySourceType(EnquirySourceType instance);
   partial void UpdateEnquirySourceType(EnquirySourceType instance);
   partial void DeleteEnquirySourceType(EnquirySourceType instance);
+  partial void InsertProjectNote(ProjectNote instance);
+  partial void UpdateProjectNote(ProjectNote instance);
+  partial void DeleteProjectNote(ProjectNote instance);
   #endregion
 	
 	public OMMDataContext() : 
@@ -311,6 +314,14 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<EnquirySourceType>();
+		}
+	}
+	
+	public System.Data.Linq.Table<ProjectNote> ProjectNotes
+	{
+		get
+		{
+			return this.GetTable<ProjectNote>();
 		}
 	}
 	
@@ -5056,6 +5067,8 @@ public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<EmploymentHistory> _EmploymentHistories;
 	
+	private EntitySet<ProjectNote> _ProjectNotes;
+	
 	private EntityRef<Quotation> _Quotation;
 	
 	private EntityRef<User> _User;
@@ -5103,6 +5116,7 @@ public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
 	public Project()
 	{
 		this._EmploymentHistories = new EntitySet<EmploymentHistory>(new Action<EmploymentHistory>(this.attach_EmploymentHistories), new Action<EmploymentHistory>(this.detach_EmploymentHistories));
+		this._ProjectNotes = new EntitySet<ProjectNote>(new Action<ProjectNote>(this.attach_ProjectNotes), new Action<ProjectNote>(this.detach_ProjectNotes));
 		this._Quotation = default(EntityRef<Quotation>);
 		this._User = default(EntityRef<User>);
 		this._User1 = default(EntityRef<User>);
@@ -5439,6 +5453,19 @@ public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="Project_ProjectNote", Storage="_ProjectNotes", ThisKey="ID", OtherKey="ProjectID")]
+	public EntitySet<ProjectNote> ProjectNotes
+	{
+		get
+		{
+			return this._ProjectNotes;
+		}
+		set
+		{
+			this._ProjectNotes.Assign(value);
+		}
+	}
+	
 	[Association(Name="Quotation_Project", Storage="_Quotation", ThisKey="QuotationID", OtherKey="ID", IsForeignKey=true)]
 	public Quotation Quotation
 	{
@@ -5602,6 +5629,18 @@ public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_EmploymentHistories(EmploymentHistory entity)
+	{
+		this.SendPropertyChanging();
+		entity.Project = null;
+	}
+	
+	private void attach_ProjectNotes(ProjectNote entity)
+	{
+		this.SendPropertyChanging();
+		entity.Project = this;
+	}
+	
+	private void detach_ProjectNotes(ProjectNote entity)
 	{
 		this.SendPropertyChanging();
 		entity.Project = null;
@@ -8569,6 +8608,205 @@ public partial class EnquirySourceType : INotifyPropertyChanging, INotifyPropert
 	{
 		this.SendPropertyChanging();
 		entity.EnquirySourceType = null;
+	}
+}
+
+[Table(Name="dbo.ProjectNotes")]
+public partial class ProjectNote : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private long _ID;
+	
+	private int _ProjectID;
+	
+	private string _Details;
+	
+	private int _CreatedBy;
+	
+	private System.DateTime _CreatedDate;
+	
+	private EntityRef<Project> _Project;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(long value);
+    partial void OnIDChanged();
+    partial void OnProjectIDChanging(int value);
+    partial void OnProjectIDChanged();
+    partial void OnDetailsChanging(string value);
+    partial void OnDetailsChanged();
+    partial void OnCreatedByChanging(int value);
+    partial void OnCreatedByChanged();
+    partial void OnCreatedDateChanging(System.DateTime value);
+    partial void OnCreatedDateChanged();
+    #endregion
+	
+	public ProjectNote()
+	{
+		this._Project = default(EntityRef<Project>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public long ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ProjectID", DbType="Int NOT NULL")]
+	public int ProjectID
+	{
+		get
+		{
+			return this._ProjectID;
+		}
+		set
+		{
+			if ((this._ProjectID != value))
+			{
+				if (this._Project.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnProjectIDChanging(value);
+				this.SendPropertyChanging();
+				this._ProjectID = value;
+				this.SendPropertyChanged("ProjectID");
+				this.OnProjectIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Details", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+	public string Details
+	{
+		get
+		{
+			return this._Details;
+		}
+		set
+		{
+			if ((this._Details != value))
+			{
+				this.OnDetailsChanging(value);
+				this.SendPropertyChanging();
+				this._Details = value;
+				this.SendPropertyChanged("Details");
+				this.OnDetailsChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_CreatedBy", DbType="Int NOT NULL")]
+	public int CreatedBy
+	{
+		get
+		{
+			return this._CreatedBy;
+		}
+		set
+		{
+			if ((this._CreatedBy != value))
+			{
+				this.OnCreatedByChanging(value);
+				this.SendPropertyChanging();
+				this._CreatedBy = value;
+				this.SendPropertyChanged("CreatedBy");
+				this.OnCreatedByChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_CreatedDate", DbType="DateTime NOT NULL")]
+	public System.DateTime CreatedDate
+	{
+		get
+		{
+			return this._CreatedDate;
+		}
+		set
+		{
+			if ((this._CreatedDate != value))
+			{
+				this.OnCreatedDateChanging(value);
+				this.SendPropertyChanging();
+				this._CreatedDate = value;
+				this.SendPropertyChanged("CreatedDate");
+				this.OnCreatedDateChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Project_ProjectNote", Storage="_Project", ThisKey="ProjectID", OtherKey="ID", IsForeignKey=true)]
+	public Project Project
+	{
+		get
+		{
+			return this._Project.Entity;
+		}
+		set
+		{
+			Project previousValue = this._Project.Entity;
+			if (((previousValue != value) 
+						|| (this._Project.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Project.Entity = null;
+					previousValue.ProjectNotes.Remove(this);
+				}
+				this._Project.Entity = value;
+				if ((value != null))
+				{
+					value.ProjectNotes.Add(this);
+					this._ProjectID = value.ID;
+				}
+				else
+				{
+					this._ProjectID = default(int);
+				}
+				this.SendPropertyChanged("Project");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
 	}
 }
 
