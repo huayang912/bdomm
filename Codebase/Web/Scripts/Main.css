@@ -91,10 +91,10 @@ div.GroupHeader
 	border:#F2F2F2 1px solid;
 	text-align:left;
 }
-.GridView td
+/*.GridView td
 {
 	border:#F2F2F2 1px solid;
-}
+}*/
 textarea
 {
 	width:100%;
@@ -215,7 +215,10 @@ textarea
 }
 .OddRowListing:hover
 {
-    background-color:#b2d0f9;
+    /*background-color:#b2d0f9;*/
+    border-top: solid 1px #D2B47A;
+    border-bottom: solid 1px #D2B47A;
+    background-color: #FFE6A0;
 }
 .EvenRowListing
 {
@@ -223,5 +226,8 @@ textarea
 }
 .EvenRowListing:hover
 {
-    background-color:#b2d0f9;
+    /*background-color:#b2d0f9;*/
+    border-top: solid 1px #D2B47A;
+    border-bottom: solid 1px #D2B47A;
+    background-color: #FFE6A0;
 }
