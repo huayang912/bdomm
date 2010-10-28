@@ -87,7 +87,7 @@ div.GroupHeader
 }
 .GridView th
 {
-	/*background-color:#CECDCD;*/
+	background-color:#c6d9f3;
 	border:#F2F2F2 1px solid;
 	text-align:left;
 }
@@ -193,7 +193,7 @@ textarea
 {
 	width:650px;
 }
-.OddRowStyle
+/*.OddRowStyle
 {
 	background-color:#e6eff6;
 }
@@ -208,4 +208,20 @@ textarea
 .EventRowStyle:hover
 {
 	background-color:#FFFFFF;
+}*/
+.OddRowListing
+{
+    background-color:#d7e6f6;
+}
+.OddRowListing:hover
+{
+    background-color:#b2d0f9;
+}
+.EvenRowListing
+{
+    background-color:#e9f0f8;
+}
+.EvenRowListing:hover
+{
+    background-color:#b2d0f9;
 }

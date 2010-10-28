@@ -102,6 +102,26 @@ public class AjaxService : System.Web.Services.WebService {
         return String.Format("{0}:{1}", project.ID, project.Number);
     }
 
+    [WebMethod (EnableSession=true)]
+    public long SaveProjectNote(App.CustomModels.CustomProjectNote customNote)
+    {
+        OMMDataContext context = new OMMDataContext();
+        ProjectNote note = null;
+        if (customNote.ID > 0)
+            note = context.ProjectNotes.SingleOrDefault(P => P.ID == customNote.ID);
+        else
+        {
+            note = new ProjectNote();
+            context.ProjectNotes.InsertOnSubmit(note);
+        }
+        note.ProjectID = customNote.ProjectID;
+        note.Details = customNote.Details;
+        note.CreatedBy = SessionCache.CurrentUser.ID;
+        note.CreatedDate = DateTime.Now;
+        context.SubmitChanges();
+        return note.ID;
+    }
+
     #region SMS Sending Operations
 
     readonly char[] COMMA_SEPARATOR = { ',' };

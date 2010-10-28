@@ -231,6 +231,7 @@
       <Column Name="ChangedByUsername" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Project_EmploymentHistory" Member="EmploymentHistories" ThisKey="ID" OtherKey="ProjectID" Type="EmploymentHistory" />
+      <Association Name="Project_ProjectNote" Member="ProjectNotes" ThisKey="ID" OtherKey="ProjectID" Type="ProjectNote" />
       <Association Name="Quotation_Project" Member="Quotation" ThisKey="QuotationID" OtherKey="ID" Type="Quotation" IsForeignKey="true" />
       <Association Name="User_Project" Member="User" ThisKey="CreatedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
       <Association Name="User_Project1" Member="User1" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
@@ -362,6 +363,16 @@
       <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="NumberSuffix" Type="System.String" DbType="NVarChar(5) NOT NULL" CanBeNull="false" />
       <Association Name="EnquirySourceType_Enquiry" Member="Enquiries" ThisKey="ID" OtherKey="SourceTypeID" Type="Enquiry" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProjectNotes" Member="ProjectNotes">
+    <Type Name="ProjectNote">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProjectID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Details" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Project_ProjectNote" Member="Project" ThisKey="ProjectID" OtherKey="ID" Type="Project" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.GenerateNewQuotationNumber" Method="GenerateNewQuotationNumber" IsComposable="true">

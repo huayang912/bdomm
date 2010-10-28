@@ -209,5 +209,92 @@ namespace App.Core.Extensions
         {
             return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 00, 00, 00, 00);
         }
+
+        #region Date Difference In String
+        /// <summary>
+        /// Converts Date Difference into a Logical Human Readable Text
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static String GetDifference(this DateTime date)
+        {
+            double minutes = DateTime.Now.Subtract(date).TotalMinutes;
+            minutes = Math.Ceiling(minutes);
+            if (minutes < 60)
+                return String.Format("{0} ago", GetPluralText(minutes, "Minute"));
+            else
+            {
+                double hour = Math.Floor(minutes / 60);
+                if (hour < 24)
+                {
+                    double remainingMinute = minutes % 60;
+                    return String.Format("{0} {1} ago", GetPluralText(hour, "Hour"), GetPluralText(remainingMinute, "Minute"));
+                }
+                else
+                {
+                    double day = Math.Floor(hour / 24);
+                    //postfix = "Hour(s) ago";
+                    if (day < 30)
+                    {
+                        double remainingHours = hour % 24;
+                        return String.Format("{0} {1} ago", GetPluralText(day, "Day"), GetPluralText(remainingHours, "Hour"));
+                    }
+                    else
+                    {
+                        double month = Math.Floor(day / 30);
+                        if (month < 12)
+                        {
+                            double remainingDays = day % 30;
+                            return String.Format("{0} {1} ago", GetPluralText(month, "Month"), GetPluralText(remainingDays, "Day"));
+                        }
+                        else
+                        {
+                            double year = Math.Floor(month / 12);
+                            double remainingMonth = month % 12;
+                            return String.Format("{0} {1} ago", GetPluralText(year, "Year"), GetPluralText(remainingMonth, "Month"));
+                        }
+                    }
+                }
+            }
+        }
+        private static String GetPluralText(double value, String text)
+        {
+            if (value == 0 || value > 1)
+            {
+                if (value == 0 && text != "Minute")
+                    return String.Empty;
+                else
+                    return String.Format("{0} {1}s", value, text);
+            }
+            else //if(value == 1)
+                return String.Format("{0} {1}", value, text);
+        }
+
+        /// <summary>
+        /// Gets Logical Text Depending on different input count
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="textToUse"></param>
+        /// <returns></returns>
+        private static String GetLogicalText(int count, String textToUse)
+        {
+            if (count > 1)
+                return String.Format("+{0} {1}s", count, textToUse);
+            else if (count < 0)
+            {
+                if (count == -1)
+                    return String.Format("{0} {1}", count, textToUse);
+                else// if (count < -1)
+                    return String.Format("{0} {1}s", count, textToUse);
+            }
+            //else if (count < -1)
+            //    return String.Format("{0} {1}s", count, textToUse);
+            else if (count == 0)
+                return String.Format("0 {0}s", textToUse);
+            else
+                return String.Format("+1 {0}", textToUse);
+
+        }
+        #endregion
     }
 }
