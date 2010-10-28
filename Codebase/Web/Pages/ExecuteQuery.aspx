@@ -50,7 +50,7 @@
         
         <div id="divQueryRestul" runat="server" visible="false" class="GroupBox" style="overflow-x:auto;">
             <div id="divMessage" runat="server" visible="false" enableviewstate="false"></div>
-            <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="true" 
+            <asp:GridView ID="gvResult" runat="server" AutoGenerateColumns="true" GridLines="None" 
                 CssClass="GridView" Width="100%" CellPadding="3" CellSpacing="0" EnableViewState="false">
                 <RowStyle CssClass="OddRowListing" />
                 <AlternatingRowStyle CssClass="EvenRowListing" />
