@@ -2,10 +2,17 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" xmlns:app="urn:schemas-codeontime-com:data-aquarium-application">
   <siteMapNode url="~/Default.aspx" title="Home" description="">
     <siteMapNode title="Home" description="Application home page" url="~/Pages/Home.aspx" />
-    <siteMapNode title="Clients" description="View Clients" url="~/Pages/ClientNew_a.aspx" />
-	 <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelView.aspx" roles="*">
+    <siteMapNode title="Clients" description="View Clients" url="~/Pages/ClientNew_a.aspx" >
+      <siteMapNode title="Show Clients" description="Client Contacts" url="~/Pages/ClientViewRedirect.aspx" roles="*"/>
+
+      <siteMapNode title="Show Client Contacts" description="Client Contacts" url="~/Pages/ClientContacts.aspx" roles="*"/>
+
+      </siteMapNode>
+    <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelView.aspx" roles="*">
 	  <siteMapNode title="Show Personnel" description="Personnel List" url="~/Pages/PersonnelViewRedirect.aspx" roles="*" />
-      <siteMapNode title="CV" description="Personnel CV" url="~/Pages/CVNew.aspx" roles="*" />
+            <siteMapNode title="CV" description="Personnel CV" url="~/Pages/CVNew.aspx" roles="*" />
+
+
     </siteMapNode>
     <siteMapNode title="Enquiries" description="Enquiry" url="~/Pages/EnquirySch.aspx" roles="*">
       <siteMapNode title="Create New Enquiry" description="Create a New Enquiry" url="~/Pages/EnquiryChange.aspx" roles="*" />
