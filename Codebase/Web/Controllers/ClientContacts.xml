@@ -108,6 +108,13 @@ from "dbo"."ClientContacts" "ClientContacts"
         <dataField fieldName="Email" hidden="true" />
         <dataField fieldName="CompanyID" aliasFieldName="CompanyName" columns="30" hyperlinkFormatString="_Blank:~/pages/ClientNew.aspx?id={CompanyID}" />
         <dataField fieldName="DateOfBirth" hidden="true" columns="10" />
+
+        <dataField fieldName="NL_All" hidden="true"/> 
+        <dataField fieldName="NL_Procurement"  hidden="true"  />
+        <dataField fieldName="NL_Personnel"  hidden="true"/>
+        <dataField fieldName="NL_O_M"  hidden="true"/>
+        <dataField fieldName="NL_Project"  hidden="true"/>
+
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Client Contacts">
