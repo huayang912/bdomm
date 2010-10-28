@@ -75,8 +75,8 @@ from "dbo"."Contacts" "Contacts"
       <items style="Lookup" dataController="Photos" newDataView="createForm1" />
     </field>
     <field name="PreferredDayRate" type="Decimal" label="Preferred Day Rate" />
-    <field name="Inactive" type="Boolean" allowNulls="false" default="((0))" label="Inactive" />
-    <field name="NoSMSorEmail" type="Boolean" allowNulls="false" default="((0))" label="No SM Sor Email" />
+    <field name="Inactive" type="Boolean" allowNulls="true" default="((0))" label="Inactive" />
+    <field name="NoSMSorEmail" type="Boolean" allowNulls="true" default="((0))" label="No SM Sor Email" />
     <field name="CreatedByUserID" type="Int32" label="Created By User#">
       <items style="Lookup" dataController="Users" newDataView="createForm1" />
     </field>
@@ -211,8 +211,14 @@ from "dbo"."Contacts" "Contacts"
       <action id="a1" commandName="Edit" />
       <action id="a2" commandName="Delete" />
       <action id="a3" commandName="Cancel" />
+
+      <action id="a41"    whenLastCommandName="Edit" commandName="Update" commandArgument="ShowProduct" headerText="SAVE"/>
+      <action whenLastCommandName="Update" whenLastCommandArgument="ShowProduct"
+          commandName="Select" commandArgument="createForm1"/>
+
+
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
-      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" /> 
       <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a7" whenLastCommandName="New" commandName="Insert" />
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
