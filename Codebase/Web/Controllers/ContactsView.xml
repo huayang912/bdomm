@@ -74,8 +74,8 @@ from "dbo"."Contacts" "Contacts"
       <items style="Lookup" dataController="Photos" newDataView="createForm1" />
     </field>
     <field name="PreferredDayRate" type="Decimal" label="Preferred Day Rate" />
-    <field name="Inactive" type="Boolean" allowNulls="false" default="((0))" label="Inactive" />
-    <field name="NoSMSorEmail" type="Boolean" allowNulls="false" default="((0))" label="No SM Sor Email" />
+    <field name="Inactive" type="Boolean" allowNulls="true" default="((0))" label="Inactive" />
+    <field name="NoSMSorEmail" type="Boolean" allowNulls="true" default="((0))" label="No SM Sor Email" />
     <field name="CreatedByUserID" type="Int32" label="Created By User#">
       <items style="Lookup" dataController="Users" newDataView="createForm1" />
     </field>
