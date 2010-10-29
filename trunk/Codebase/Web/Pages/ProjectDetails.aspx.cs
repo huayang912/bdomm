@@ -65,10 +65,10 @@ public partial class Pages_ProjectDetails : BasePage
 
             if (project.Quotation != null)
             {
-                sb.AppendFormat("<b>Quotation No.:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.QUOTATION_DETAILS, 
+                sb.AppendFormat("<b>Quotation No:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.QUOTATION_DETAILS, 
                     AppConstants.QueryString.ID, project.QuotationID, project.Quotation.Number);
                 if(project.Quotation.Enquiry != null)
-                    sb.AppendFormat("<b>Enquiry No.:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.ENQUIRY_DETAILS,
+                    sb.AppendFormat("<b>Enquiry No:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.ENQUIRY_DETAILS,
                         AppConstants.QueryString.ID, project.Quotation.EnquiryID, project.Quotation.Enquiry.Number);
                 sb.AppendFormat("<br/><b>Scope of the Work:</b> <br/>{0}<br/>", project.Quotation.ScopeOfWork.IsNullOrEmpty() ? "NA" : WebUtil.FormatText(project.Quotation.ScopeOfWork));
                 
