@@ -56,7 +56,7 @@ public partial class Pages_ExecuteQuery : BasePage
         {
             if (rdbSelectQuery.Checked)
             {
-                DataSet ds = _DB.GetData(txtQuery.Text);
+                DataSet ds = _DB.GetData(txtQuery.Text, null, false);
                 if (ds != null && ds.Tables.Count > 0)
                 {
                     gvResult.DataSource = ds.Tables[0];

@@ -101,6 +101,9 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   partial void InsertProjectNote(ProjectNote instance);
   partial void UpdateProjectNote(ProjectNote instance);
   partial void DeleteProjectNote(ProjectNote instance);
+  partial void InsertEnquiryFile(EnquiryFile instance);
+  partial void UpdateEnquiryFile(EnquiryFile instance);
+  partial void DeleteEnquiryFile(EnquiryFile instance);
   #endregion
 	
 	public OMMDataContext() : 
@@ -322,6 +325,14 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<ProjectNote>();
+		}
+	}
+	
+	public System.Data.Linq.Table<EnquiryFile> EnquiryFiles
+	{
+		get
+		{
+			return this.GetTable<EnquiryFile>();
 		}
 	}
 	
@@ -7876,6 +7887,8 @@ public partial class Enquiry : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<Quotation> _Quotations;
 	
+	private EntitySet<EnquiryFile> _EnquiryFiles;
+	
 	private EntityRef<ClientContact> _ClientContact;
 	
 	private EntityRef<EnquiryType> _EnquiryType;
@@ -7924,6 +7937,7 @@ public partial class Enquiry : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this._EnquiryLines = new EntitySet<EnquiryLine>(new Action<EnquiryLine>(this.attach_EnquiryLines), new Action<EnquiryLine>(this.detach_EnquiryLines));
 		this._Quotations = new EntitySet<Quotation>(new Action<Quotation>(this.attach_Quotations), new Action<Quotation>(this.detach_Quotations));
+		this._EnquiryFiles = new EntitySet<EnquiryFile>(new Action<EnquiryFile>(this.attach_EnquiryFiles), new Action<EnquiryFile>(this.detach_EnquiryFiles));
 		this._ClientContact = default(EntityRef<ClientContact>);
 		this._EnquiryType = default(EntityRef<EnquiryType>);
 		this._User = default(EntityRef<User>);
@@ -8258,6 +8272,19 @@ public partial class Enquiry : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="Enquiry_EnquiryFile", Storage="_EnquiryFiles", ThisKey="ID", OtherKey="EnquiryID")]
+	public EntitySet<EnquiryFile> EnquiryFiles
+	{
+		get
+		{
+			return this._EnquiryFiles;
+		}
+		set
+		{
+			this._EnquiryFiles.Assign(value);
+		}
+	}
+	
 	[Association(Name="ClientContact_Enquiry", Storage="_ClientContact", ThisKey="ContactID", OtherKey="ID", IsForeignKey=true)]
 	public ClientContact ClientContact
 	{
@@ -8467,6 +8494,18 @@ public partial class Enquiry : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_Quotations(Quotation entity)
+	{
+		this.SendPropertyChanging();
+		entity.Enquiry = null;
+	}
+	
+	private void attach_EnquiryFiles(EnquiryFile entity)
+	{
+		this.SendPropertyChanging();
+		entity.Enquiry = this;
+	}
+	
+	private void detach_EnquiryFiles(EnquiryFile entity)
 	{
 		this.SendPropertyChanging();
 		entity.Enquiry = null;
@@ -8785,6 +8824,205 @@ public partial class ProjectNote : INotifyPropertyChanging, INotifyPropertyChang
 					this._ProjectID = default(int);
 				}
 				this.SendPropertyChanged("Project");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[Table(Name="dbo.EnquiryFiles")]
+public partial class EnquiryFile : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private long _ID;
+	
+	private int _EnquiryID;
+	
+	private string _FileName;
+	
+	private int _UploadedBy;
+	
+	private System.DateTime _UploadedOn;
+	
+	private EntityRef<Enquiry> _Enquiry;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(long value);
+    partial void OnIDChanged();
+    partial void OnEnquiryIDChanging(int value);
+    partial void OnEnquiryIDChanged();
+    partial void OnFileNameChanging(string value);
+    partial void OnFileNameChanged();
+    partial void OnUploadedByChanging(int value);
+    partial void OnUploadedByChanged();
+    partial void OnUploadedOnChanging(System.DateTime value);
+    partial void OnUploadedOnChanged();
+    #endregion
+	
+	public EnquiryFile()
+	{
+		this._Enquiry = default(EntityRef<Enquiry>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public long ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_EnquiryID", DbType="Int NOT NULL")]
+	public int EnquiryID
+	{
+		get
+		{
+			return this._EnquiryID;
+		}
+		set
+		{
+			if ((this._EnquiryID != value))
+			{
+				if (this._Enquiry.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnEnquiryIDChanging(value);
+				this.SendPropertyChanging();
+				this._EnquiryID = value;
+				this.SendPropertyChanged("EnquiryID");
+				this.OnEnquiryIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_FileName", DbType="VarChar(350) NOT NULL", CanBeNull=false)]
+	public string FileName
+	{
+		get
+		{
+			return this._FileName;
+		}
+		set
+		{
+			if ((this._FileName != value))
+			{
+				this.OnFileNameChanging(value);
+				this.SendPropertyChanging();
+				this._FileName = value;
+				this.SendPropertyChanged("FileName");
+				this.OnFileNameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_UploadedBy", DbType="Int NOT NULL")]
+	public int UploadedBy
+	{
+		get
+		{
+			return this._UploadedBy;
+		}
+		set
+		{
+			if ((this._UploadedBy != value))
+			{
+				this.OnUploadedByChanging(value);
+				this.SendPropertyChanging();
+				this._UploadedBy = value;
+				this.SendPropertyChanged("UploadedBy");
+				this.OnUploadedByChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_UploadedOn", DbType="DateTime NOT NULL")]
+	public System.DateTime UploadedOn
+	{
+		get
+		{
+			return this._UploadedOn;
+		}
+		set
+		{
+			if ((this._UploadedOn != value))
+			{
+				this.OnUploadedOnChanging(value);
+				this.SendPropertyChanging();
+				this._UploadedOn = value;
+				this.SendPropertyChanged("UploadedOn");
+				this.OnUploadedOnChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Enquiry_EnquiryFile", Storage="_Enquiry", ThisKey="EnquiryID", OtherKey="ID", IsForeignKey=true)]
+	public Enquiry Enquiry
+	{
+		get
+		{
+			return this._Enquiry.Entity;
+		}
+		set
+		{
+			Enquiry previousValue = this._Enquiry.Entity;
+			if (((previousValue != value) 
+						|| (this._Enquiry.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Enquiry.Entity = null;
+					previousValue.EnquiryFiles.Remove(this);
+				}
+				this._Enquiry.Entity = value;
+				if ((value != null))
+				{
+					value.EnquiryFiles.Add(this);
+					this._EnquiryID = value.ID;
+				}
+				else
+				{
+					this._EnquiryID = default(int);
+				}
+				this.SendPropertyChanged("Enquiry");
 			}
 		}
 	}

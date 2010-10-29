@@ -4,7 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="PageHeaderContentPlaceHolder" Runat="Server">
-    <asp:Literal ID="ltrHeading" runat="server" Text="Enquiry Details"></asp:Literal>
+    <asp:Literal ID="ltrHeading" runat="server" Text="Execute Query"></asp:Literal>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="SideBarPlaceHolder" Runat="Server">

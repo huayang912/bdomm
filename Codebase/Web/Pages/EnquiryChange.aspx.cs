@@ -8,10 +8,11 @@ using BUDI2_NS.Data;
 using System.Web.Services;
 using App.CustomModels;
 using App.Core.Extensions;
+using System.IO;
+using System.Text;
 
 public partial class Pages_EnquiryChange : BasePage
-{
-    private const String ENQUIRY_ID = "ID";
+{    
     private bool _IsEditMode = false;
     protected int _EnquiryID = 0;    
     protected int _StatusID = 1;
@@ -30,7 +31,7 @@ public partial class Pages_EnquiryChange : BasePage
     /// </summary>
     protected void BindPageInfo()
     {
-        _EnquiryID = WebUtil.GetQueryStringInInt(ENQUIRY_ID);        
+        _EnquiryID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);        
         if (_EnquiryID > 0)
         {
             _IsEditMode = true;
@@ -101,6 +102,7 @@ public partial class Pages_EnquiryChange : BasePage
                 ShowNotFoundMessage();
             else
             {
+                ddlContact.SetSelectedItem(enquiry.ContactID.ToString());
                 _StatusID = enquiry.StatusID;
                 txtClientName.Text = enquiry.ClientContact.Client.Name;
                 txtContactName.Text = enquiry.ClientContact.Name;
@@ -113,8 +115,43 @@ public partial class Pages_EnquiryChange : BasePage
             
             //Momin
                 ddlEnquirySourceTypes.SetSelectedItem(enquiry.SourceTypeID.ToString());
+                txtEnguirySubject.Text = enquiry.EnguirySubject.Trim();
+                BindAttachments(enquiry);
+                SessionCache.CurrentEnquiryFiles = null;
             }
         }
+    }
+
+    protected void BindAttachments(Enquiry enquiry)
+    {
+        StringBuilder sb = new StringBuilder(10);
+        foreach (EnquiryFile file in enquiry.EnquiryFiles)
+        {
+            String fileNameToShow = GetFormattedFileName(file.FileName);
+            sb.AppendFormat("<li><a href='..{0}/{1}/{2}' target='_blank'>{3}</a> <img onclick='DeleteAttachment({4}, this)' src='../Images/delete.png' style='cursor:pointer;' alt='Delete' title='Delete'/></li>",
+                AppConstants.ENQUIRY_ATTACHMENTS, enquiry.ID, file.FileName, fileNameToShow, file.ID);
+        }
+        ltrAttachmentList.Text = sb.ToString();
+    }
+
+    protected String GetFormattedFileName(String fileName)
+    {
+        if (!fileName.IsNullOrEmpty())
+        {
+            if (fileName.IndexOf('_') > -1)
+            {
+                String[] nameParts = fileName.Split('_');
+                StringBuilder sb = new StringBuilder(10);
+                for (int i = 0; i < nameParts.Length; i++)
+                {
+                    if (i > 0)
+                        sb.Append(nameParts[i]);
+                }
+                return sb.ToString();
+            }
+            return fileName;
+        }
+        return String.Empty;
     }
     /// <summary>
     /// Shows a not found message in the UI
@@ -124,6 +161,8 @@ public partial class Pages_EnquiryChange : BasePage
         WebUtil.ShowMessageBox(divMessage, "Sorry! the requested Enquiry was not found.", true);
         pnlDetails.Visible = false;
     }
+
+    #region Page Methods
     /// <summary>
     /// Page Method to Save Enquiry (Ajax Method)
     /// </summary>
@@ -143,10 +182,40 @@ public partial class Pages_EnquiryChange : BasePage
             enquiry = context.Enquiries.SingleOrDefault(P => P.ID == customEnquiry.ID);
 
         MapEnquiry(customEnquiry, enquiry, context);
-        
-        context.SubmitChanges();
+        foreach (EnquiryFile file in SessionCache.CurrentEnquiryFiles)
+        {
+            enquiry.EnquiryFiles.Add(file);
+        }        
+        context.SubmitChanges();        
         SaveEnquiryLineItems(customEnquiry, enquiry, context);
+        MoveAttachedFiles(enquiry, context);
+        SessionCache.CurrentEnquiryFiles = null;
         return String.Format("{0}:{1}", enquiry.ID, enquiry.Number);
+    }
+
+    private static void MoveAttachedFiles(Enquiry enquiry, OMMDataContext context)
+    {
+        IList<EnquiryFile> files = SessionCache.CurrentEnquiryFiles;
+        foreach (EnquiryFile file in files)
+        {
+            ///Move Files from Temp Directory to User Directory
+            String tempFilePath = Path.Combine(HttpContext.Current.Server.MapPath(AppConstants.TEMP_DIRECTORY), file.FileName);
+            String actualFilePath = HttpContext.Current.Server.MapPath(AppConstants.ENQUIRY_ATTACHMENTS);
+            actualFilePath = Path.Combine(actualFilePath, enquiry.ID.ToString());
+            if (!Directory.Exists(actualFilePath))
+                Directory.CreateDirectory(actualFilePath);
+
+            String fileName = String.Format("{0}_{1}", file.ID, file.FileName);
+            actualFilePath = Path.Combine(actualFilePath, fileName);
+
+            File.Copy(tempFilePath, actualFilePath, true);
+            file.FileName = fileName;
+            context.SubmitChanges();
+            
+            ///Delete Temporay File
+            if(File.Exists(tempFilePath))
+                File.Delete(tempFilePath);
+        }
     }
     /// <summary>
     /// Saves Enquiry Line Items
@@ -233,4 +302,47 @@ public partial class Pages_EnquiryChange : BasePage
         }
         return customContact;
     }
+    [WebMethod]
+    public static bool DeleteEnquiryAttachment(int fileId, String fileName)
+    {
+        OMMDataContext context = new OMMDataContext();
+        EnquiryFile file = context.EnquiryFiles.SingleOrDefault(F => F.ID == fileId);
+        if (file == null)
+        {
+            ///Deleting Attachement in Enquiry Add Mode
+            if (!fileName.IsNullOrEmpty())
+            {
+                if (fileName.StartsWith(".."))
+                    fileName = fileName.Replace("..", String.Empty);
+                fileName = HttpContext.Current.Server.MapPath(fileName);
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+
+                fileName = Path.GetFileName(fileName);
+                RemoveAttachmentFromSession(fileName);
+            }
+        }
+        else
+        {
+            String filePath = Path.Combine(HttpContext.Current.Server.MapPath(AppConstants.ENQUIRY_ATTACHMENTS), String.Format(@"{0}\{1}", file.EnquiryID, file.FileName));
+            if (File.Exists(filePath))
+                File.Delete(filePath);
+            context.EnquiryFiles.DeleteOnSubmit(file);
+            context.SubmitChanges();
+            RemoveAttachmentFromSession(Path.GetFileName(filePath));
+            return true;
+        }
+        return false;
+    }
+    public static void RemoveAttachmentFromSession(String fileName)
+    {
+        IList<EnquiryFile> files = SessionCache.CurrentEnquiryFiles;
+        EnquiryFile attachment = files.SingleOrDefault(F => F.FileName == fileName);
+        if (attachment != null)
+        {
+            files.Remove(attachment);
+            SessionCache.CurrentEnquiryFiles = files;
+        }
+    }
+    #endregion Page Methods
 }

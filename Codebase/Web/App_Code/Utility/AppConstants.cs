@@ -16,9 +16,11 @@ using System.Xml.Linq;
 public class AppConstants
 {
     public const String ERROR_MESSAGE = @"Sorry!<br/>System encountered a problem while saving your preference. An administrator has been notified about the details of this problem. Please try after some time.";
-    public const String SLIDER_DIRECTORY = "/Images/SliderImages";
-    public const String UPLOADED_RATE_DIRECTORY = "/UploadedRate";
-    public const String CONFIRMATION_MSG_CUSTOM_ATTR = "ConfirmationMessage";    
+    //public const String SLIDER_DIRECTORY = "/Images/SliderImages";
+    //public const String UPLOADED_RATE_DIRECTORY = "/UploadedRate";
+    public const String CONFIRMATION_MSG_CUSTOM_ATTR = "ConfirmationMessage";
+    public const String TEMP_DIRECTORY = "/Temp";
+    public const String ENQUIRY_ATTACHMENTS = "/EnquiryAttachments";
 
     #region Pages
     public class Pages

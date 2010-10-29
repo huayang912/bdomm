@@ -365,5 +365,22 @@ namespace App.Core.Extensions
             return sb.ToString();
             //return Regex.Match(text, @"(\w+\s+){40}").ToString().Trim(); 
         }
+        /// <summary>
+        /// Converts a String to Integer
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static int ToInt(this String str)
+        {
+            int result = 0;
+            int.TryParse(str, out result);
+            return result;
+        }
+        public static long ToLong(this String str)
+        {
+            long result = 0;
+            long.TryParse(str, out result);
+            return result;
+        }
     }
 }

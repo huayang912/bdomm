@@ -9,6 +9,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
+using System.Collections.Generic;
 //using App.Models.Admin;
 //using App.Models.Commodity;
 
@@ -103,5 +104,20 @@ public class SessionCache
             }
         }
     }
-    
+    public static IList<EnquiryFile> CurrentEnquiryFiles
+    {
+        get
+        {
+            if (HttpContext.Current.Session == null || HttpContext.Current.Session["CURRENT_ENQUIRY_FILES"] == null)
+                return new List<EnquiryFile>();
+            return HttpContext.Current.Session["CURRENT_ENQUIRY_FILES"] as List<EnquiryFile>;
+        }
+        set
+        {
+            if (HttpContext.Current.Session != null)
+            {
+                HttpContext.Current.Session["CURRENT_ENQUIRY_FILES"] = value;
+            }
+        }
+    }
 }
