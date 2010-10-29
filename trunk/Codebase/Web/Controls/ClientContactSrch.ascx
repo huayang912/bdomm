@@ -4,7 +4,6 @@
 
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
-       <div class="SettingsPanel">
      <table width="100%" border="0">
   <tr>
     <td><table>
@@ -12,8 +11,7 @@
                 
                     
                     <td>
-                        Type:<br />
-                       
+                        Type:                 
                         
                         <asp:DropDownList ID="CRM_Type" runat="server">
                         <asp:ListItem>Show All</asp:ListItem>                     
@@ -24,7 +22,7 @@
                             <asp:ListItem>Project</asp:ListItem>
                         </asp:DropDownList>                  </td>
                   <td>
-                        <br />
+                      
                         <asp:Button ID="SearchButton" runat="server" Text="Search" 
                             onclick="SearchButton_Click" />                  </td>
                 </tr>
@@ -33,7 +31,7 @@
                 <tr>
                 
                  <td>
-                    <br />
+         
                     <asp:Button ID="ShowAllButton" runat="server" Text="Show All" 
                             onclick="ShowAllButton_Click" />                    </td>
                 </tr>

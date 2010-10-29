@@ -4,7 +4,6 @@
 
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
-       <div class="SettingsPanel">
      <table width="100%" border="0">
   <tr>
     <td><table>
@@ -12,7 +11,7 @@
                 
                     
                     <td>
-                        Status:<br />
+                        Status:
                        
                         
                         <asp:DropDownList ID="StatusList" runat="server">
@@ -22,7 +21,7 @@
                          <asp:ListItem>Closed</asp:ListItem>
                         </asp:DropDownList>                  </td>
                   <td>
-                        <br />
+              
                         <asp:Button ID="SearchButton" runat="server" Text="Search" 
                             onclick="SearchButton_Click" />                  </td>
                 </tr>
@@ -31,7 +30,7 @@
                 <tr>
                 
                     <td>
-                      Year:<br />
+                      Year:
                        
                         
                       <asp:DropDownList ID="YearList" runat="server">
@@ -42,7 +41,7 @@
                       </asp:DropDownList>                      </td>
                         
                                          <td>
-                        Month:<br />
+                        Month:
                        
                         
                         <asp:DropDownList ID="MonthList" runat="server">
@@ -63,7 +62,7 @@
                         </asp:DropDownList>                        </td>
                         
                  <td>
-                    <br />
+                    
                     <asp:Button ID="ShowAllButton" runat="server" Text="Show All" 
                             onclick="ShowAllButton_Click" />                    </td>
                 </tr>
