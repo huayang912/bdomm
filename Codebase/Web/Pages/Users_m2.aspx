@@ -1,4 +1,4 @@
-<%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="Users.aspx.cs" Inherits="Pages_Users"  Title="Users"%>
+<%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="Users_m2.aspx.cs" Inherits="Pages_Users_m2"  Title="Users"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="PageHeaderContentPlaceHolder" runat="Server">Users</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
   <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory">
