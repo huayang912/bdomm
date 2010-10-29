@@ -48,12 +48,14 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
         /// </summary>
         /// <param name="SQL"></param>
         /// <returns></returns>
-        public DataSet GetData(String SQL)
+        public DataSet GetData(String SQL, SqlParameter[] parameters, bool isStoredProcedure)
         {
-            using (DbCommand command = Database.GetSqlStringCommand(SQL))
-            {
-                return Database.ExecuteDataSet(command);
-            }
+            DbCommand command = Database.GetSqlStringCommand(SQL);
+            if (isStoredProcedure)
+                command = Database.GetStoredProcCommand(SQL);
+            
+            SetParameters(command, parameters);
+            return Database.ExecuteDataSet(command);
         }
         /// <summary>
         /// Creates A Database Object like Table, Stored Procedure, Function or Trigger
@@ -66,6 +68,25 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
                 command.CommandType = CommandType.Text;
                 command.CommandTimeout = 90;
                 Database.ExecuteScalar(command);                
+            }
+        }
+        /// <summary>
+        /// Sets Parameters to a Given DbCommand Object
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="parameters"></param>
+        protected void SetParameters(DbCommand command, SqlParameter[] parameters)
+        {
+            if (parameters != null && parameters.Length > 0)
+            {
+                for (int i = 0; i < parameters.Length; i++)
+                {
+                    SqlParameter parameter = parameters[i];
+                    if (parameter.IsOutParameter)
+                        Database.AddOutParameter(command, parameter.Name, parameter.DataType, parameter.OutParameterSize);
+                    else
+                        Database.AddInParameter(command, parameter.Name, parameter.DataType, parameter.Value);
+                }
             }
         }
         ///// <summary>
