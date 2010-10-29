@@ -56,7 +56,7 @@ from "dbo"."Clients" "Clients"
   </fields>
   <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <view id="grid1" type="Grid" commandId="command1" label="Clients" sortExpression="Name ASC">
-      <headerText>$DefaultGridViewDescription</headerText>
+      <headerText></headerText>
       <dataFields>
         <dataField fieldName="Name" />
         <dataField fieldName="Number" hidden="true" columns="50" />
@@ -71,10 +71,10 @@ from "dbo"."Clients" "Clients"
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Clients">
-      <headerText>$DefaultEditViewDescription</headerText>
+      <headerText></headerText>
       <categories>
         <category headerText="Clients" newColumn="true">
-          <description>$DefaultEditDescription</description>
+          <description></description>
           <dataFields>
             <dataField fieldName="Number" hidden="true" columns="50" />
             <dataField fieldName="Name" columns="30"/>
