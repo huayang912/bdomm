@@ -8,6 +8,8 @@ using System.Data;
 using System.Reflection;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using App.Core.Extensions;
+using System.Data.Common;
 
 
 public partial class Reports_TypeWiseMOnthlyEnqueryDetails : BasePage
@@ -43,18 +45,18 @@ public partial class Reports_TypeWiseMOnthlyEnqueryDetails : BasePage
         //    ddlMonth.Items.Add(new ListItem(i.ToString(), i.ToString()));
         //}
 
-        ddlMonth.Items.Add(new ListItem("January", "January"));
-        ddlMonth.Items.Add(new ListItem("February", "February"));
-        ddlMonth.Items.Add(new ListItem("March", "March"));
-        ddlMonth.Items.Add(new ListItem("April", "April"));
-        ddlMonth.Items.Add(new ListItem("May", "May"));
-        ddlMonth.Items.Add(new ListItem("June", "June"));
-        ddlMonth.Items.Add(new ListItem("July", "July"));
-        ddlMonth.Items.Add(new ListItem("August", "August"));
-        ddlMonth.Items.Add(new ListItem("September", "September"));
-        ddlMonth.Items.Add(new ListItem("October", "October"));
-        ddlMonth.Items.Add(new ListItem("November", "November"));
-        ddlMonth.Items.Add(new ListItem("December", "December"));
+        ddlMonth.Items.Add(new ListItem("January", "1"));
+        ddlMonth.Items.Add(new ListItem("February", "2"));
+        ddlMonth.Items.Add(new ListItem("March", "3"));
+        ddlMonth.Items.Add(new ListItem("April", "4"));
+        ddlMonth.Items.Add(new ListItem("May", "5"));
+        ddlMonth.Items.Add(new ListItem("June", "6"));
+        ddlMonth.Items.Add(new ListItem("July", "7"));
+        ddlMonth.Items.Add(new ListItem("August", "8"));
+        ddlMonth.Items.Add(new ListItem("September", "9"));
+        ddlMonth.Items.Add(new ListItem("October", "10"));
+        ddlMonth.Items.Add(new ListItem("November", "11"));
+        ddlMonth.Items.Add(new ListItem("December", "12"));
     }
 
     protected void btnShowReport_Click(object sender, EventArgs e)
@@ -65,13 +67,20 @@ public partial class Reports_TypeWiseMOnthlyEnqueryDetails : BasePage
 
     public void loadReport()
     {
-        OMMDataContext dataContext = new OMMDataContext();
-        var query1 = from i in dataContext.reportTypeWiseMOnthlyEnqueryDetails()
-                     where i.CreatedYear == Convert.ToInt32(ddlYear.Text)
-                     && i.CreatedMonth == ddlMonth.Text.Trim()
-                     //orderby i.Price
-                     select i;
-        DataTable dtEnqueryDetails = LINQToDataTable(query1);
+        //OMMDataContext dataContext = new OMMDataContext();
+        //var query1 = from i in dataContext.reportTypeWiseMOnthlyEnqueryDetails()
+        //             where i.CreatedYear == ddlYear.SelectedValue.ToInt()
+        //             && i.CreatedMonth == ddlMonth.SelectedValue
+        //             //orderby i.Price
+        //             select i;
+        //DataTable dtEnqueryDetails = LINQToDataTable(query1);               
+
+        SqlParameter[] parameters = new[]{
+            new SqlParameter("CreatedYear", DbType.Int32, ddlYear.SelectedValue.ToInt()),
+            new SqlParameter("CreatedMonth", DbType.Int32, ddlMonth.SelectedValue.ToInt())
+        };
+        DbAccess db = new DbAccess();
+        DataSet ds = db.GetData("reportTypeWiseMOnthlyEnqueryDetails", parameters, true);
 
 
 
@@ -83,53 +92,53 @@ public partial class Reports_TypeWiseMOnthlyEnqueryDetails : BasePage
 
 
         //repDoc.SetDataSource = DBNull.Value;
-        repDoc.SetDataSource(dtEnqueryDetails);
+        repDoc.SetDataSource(ds.Tables[0]);
 
         CrystalReportViewer1.ReportSource = repDoc;
         divReportContainer.Visible = true;
     }
 
 
-    public DataTable LINQToDataTable<T>(IEnumerable<T> varlist)
-    {
-        DataTable dtReturn = new DataTable();
+    //public DataTable LINQToDataTable<T>(IEnumerable<T> varlist)
+    //{
+    //    DataTable dtReturn = new DataTable();
 
-        // column names 
-        PropertyInfo[] oProps = null;
+    //    // column names 
+    //    PropertyInfo[] oProps = null;
 
-        if (varlist == null) return dtReturn;
+    //    if (varlist == null) return dtReturn;
 
-        foreach (T rec in varlist)
-        {
-            // Use reflection to get property names, to create table, Only first time, others 
-            //will follow 
-            if (oProps == null)
-            {
-                oProps = ((Type)rec.GetType()).GetProperties();
-                foreach (PropertyInfo pi in oProps)
-                {
-                    Type colType = pi.PropertyType;
+    //    foreach (T rec in varlist)
+    //    {
+    //        // Use reflection to get property names, to create table, Only first time, others 
+    //        //will follow 
+    //        if (oProps == null)
+    //        {
+    //            oProps = ((Type)rec.GetType()).GetProperties();
+    //            foreach (PropertyInfo pi in oProps)
+    //            {
+    //                Type colType = pi.PropertyType;
 
-                    if ((colType.IsGenericType) && (colType.GetGenericTypeDefinition()
-                    == typeof(Nullable<>)))
-                    {
-                        colType = colType.GetGenericArguments()[0];
-                    }
+    //                if ((colType.IsGenericType) && (colType.GetGenericTypeDefinition()
+    //                == typeof(Nullable<>)))
+    //                {
+    //                    colType = colType.GetGenericArguments()[0];
+    //                }
 
-                    dtReturn.Columns.Add(new DataColumn(pi.Name, colType));
-                }
-            }
+    //                dtReturn.Columns.Add(new DataColumn(pi.Name, colType));
+    //            }
+    //        }
 
-            DataRow dr = dtReturn.NewRow();
+    //        DataRow dr = dtReturn.NewRow();
 
-            foreach (PropertyInfo pi in oProps)
-            {
-                dr[pi.Name] = pi.GetValue(rec, null) == null ? DBNull.Value : pi.GetValue
-                (rec, null);
-            }
+    //        foreach (PropertyInfo pi in oProps)
+    //        {
+    //            dr[pi.Name] = pi.GetValue(rec, null) == null ? DBNull.Value : pi.GetValue
+    //            (rec, null);
+    //        }
 
-            dtReturn.Rows.Add(dr);
-        }
-        return dtReturn;
-    }
+    //        dtReturn.Rows.Add(dr);
+    //    }
+    //    return dtReturn;
+    //}
 }
