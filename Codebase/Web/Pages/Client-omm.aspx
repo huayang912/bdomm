@@ -18,14 +18,14 @@
     <td align="center">&nbsp;<a href="ClientNew_a.aspx"><img src="../App_Themes/BUDI2_NS/omm-log-bg.gif" alt="Client" width="51" height="52" border="0"  /></a></td>
 	    <td align="center">&nbsp;<a href="ClientsAdd.aspx"><img src="../App_Themes/BUDI2_NS/omm-log-bg.gif" alt="Personnel" width="51" height="52" border="0"  /></a></td>
 
-    <td align="center">&nbsp;<a href="ClientContacts.aspx"><img src="../App_Themes/BUDI2_NS/omm-log-bg.gif" alt="Enquiries" width="51" height="52" border="0"  /></a></td>
+    <td align="center">&nbsp;<a href="ClientContactSrch.aspx"><img src="../App_Themes/BUDI2_NS/omm-log-bg.gif" alt="Enquiries" width="51" height="52" border="0"  /></a></td>
     <td align="center">&nbsp;<a href="ClientContactsAdd.aspx"><img src="../App_Themes/BUDI2_NS/omm-log-bg.gif" alt="Quotations" width="51" height="52" border="0"  /></a></td>
 	  
   </tr>
   <tr>
     <td align="center">&nbsp;<a href="ClientNew_a.aspx">Client Search</a></td>
 	    <td align="center">&nbsp;<a href="ClientsAdd.aspx">Add New Client</a></td>
-    <td align="center">&nbsp;<a href="ClientContacts.aspx">Contact Search</a></td>
+    <td align="center">&nbsp;<a href="ClientContactSrch.aspx">Contact Search</a></td>
     <td align="center">&nbsp;<a href="ClientContactsAdd.aspx">Add New Contact</a></td>
 	
   </tr>
