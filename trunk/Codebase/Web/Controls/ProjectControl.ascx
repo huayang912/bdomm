@@ -11,7 +11,7 @@
                 
                     
                     <td>
-                        Status:<br />
+                        Status:
                        
                         
                         <asp:DropDownList ID="StatusList" runat="server">
@@ -20,7 +20,7 @@
                          <asp:ListItem>Complete</asp:ListItem>
                         </asp:DropDownList>                  </td>
                   <td>
-                        <br />
+                       
                         <asp:Button ID="SearchButton" runat="server" Text="Search" 
                             onclick="SearchButton_Click" />                  </td>
                 </tr>
@@ -29,7 +29,7 @@
                 <tr>
                 
                     <td>
-                      Year:<br />
+                      Year:
                        
                         
                       <asp:DropDownList ID="YearList" runat="server">
@@ -40,7 +40,7 @@
                       </asp:DropDownList>                      </td>
                         
                                          <td>
-                        Month:<br />
+                        Month:
                        
                         
                         <asp:DropDownList ID="MonthList" runat="server">
@@ -61,7 +61,7 @@
                         </asp:DropDownList>                        </td>
                         
                  <td>
-                    <br />
+                   
                     <asp:Button ID="ShowAllButton" runat="server" Text="Show All" 
                             onclick="ShowAllButton_Click" />                    </td>
                 </tr>
@@ -74,7 +74,7 @@
 </asp:UpdatePanel>
      <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory">
     <div id="view1" runat="server"></div>
-    <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Projects" view="grid1" ShowInSummary="True"  ShowActionBar ="true"  PageSize="25"/>
+    <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Projects" view="grid1" ShowInSummary="True"  ShowActionBar ="true"  ShowViewSelector="false" PageSize="25"/>
   </div>
 
   </div>
