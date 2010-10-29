@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="PageHeaderContentPlaceHolder" runat="Server">Clients</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
   <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory">
-    <div class="DataViewHeader">Clients</div>
+    <div class="DataViewHeader"></div>
     <div id="view1" runat="server"></div>
     <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="ClientNew_a" view="grid1" ShowInSummary="True" PageSize="25"/>
 	
