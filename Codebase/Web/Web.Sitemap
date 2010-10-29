@@ -5,7 +5,7 @@
     <siteMapNode title="Clients" description="View Clients" url="~/Pages/ClientNew_a.aspx" >
       <siteMapNode title="Show Clients" description="Client Contacts" url="~/Pages/ClientViewRedirect.aspx" roles="*"/>
 
-      <siteMapNode title="Show Client Contacts" description="Client Contacts" url="~/Pages/ClientContacts.aspx" roles="*"/>
+      <siteMapNode title="Show Client Contacts" description="Client Contacts" url="~/Pages/ClientContactSrch.aspx" roles="*"/>
 
       </siteMapNode>
     <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelView.aspx" roles="*">
