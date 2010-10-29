@@ -350,6 +350,7 @@
       <Column Name="SourceTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Enquiry_EnquiryLine" Member="EnquiryLines" ThisKey="ID" OtherKey="EnquiryID" Type="EnquiryLine" />
       <Association Name="Enquiry_Quotation" Member="Quotations" ThisKey="ID" OtherKey="EnquiryID" Type="Quotation" />
+      <Association Name="Enquiry_EnquiryFile" Member="EnquiryFiles" ThisKey="ID" OtherKey="EnquiryID" Type="EnquiryFile" />
       <Association Name="ClientContact_Enquiry" Member="ClientContact" ThisKey="ContactID" OtherKey="ID" Type="ClientContact" IsForeignKey="true" />
       <Association Name="EnquiryType_Enquiry" Member="EnquiryType" ThisKey="TypeID" OtherKey="ID" Type="EnquiryType" IsForeignKey="true" />
       <Association Name="User_Enquiry" Member="User" ThisKey="CreatedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
@@ -373,6 +374,16 @@
       <Column Name="CreatedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="Project_ProjectNote" Member="Project" ThisKey="ProjectID" OtherKey="ID" Type="Project" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EnquiryFiles" Member="EnquiryFiles">
+    <Type Name="EnquiryFile">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EnquiryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FileName" Type="System.String" DbType="VarChar(350) NOT NULL" CanBeNull="false" />
+      <Column Name="UploadedBy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UploadedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Enquiry_EnquiryFile" Member="Enquiry" ThisKey="EnquiryID" OtherKey="ID" Type="Enquiry" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.GenerateNewQuotationNumber" Method="GenerateNewQuotationNumber" IsComposable="true">

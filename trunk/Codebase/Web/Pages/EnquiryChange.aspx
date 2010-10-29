@@ -3,6 +3,31 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">    
     
     <script language="javascript" type="text/javascript">
+        var _ImgElement = null;
+        var _FileID = 0;
+        function DeleteAttachment(fileId, imgElement)
+        {        
+            _ImgElement = imgElement;    
+            _FileID = fileId;
+            if(fileId > 0)
+            {
+                ShowProgress();                                
+                PageMethods.DeleteEnquiryAttachment(fileId, '', OnAttachmentDelete, OnAjax_Error, OnAjax_TimeOut)
+            }
+            else
+            {
+                $(imgElement).parent().remove();
+                var filePath = $(imgElement).parent().find('a').attr('href');
+                //alert(filePath);
+                PageMethods.DeleteEnquiryAttachment(fileId, filePath, OnAttachmentDelete, OnAjax_Error, OnAjax_TimeOut);
+            }
+        }
+        function OnAttachmentDelete(hasDeleted)
+        {
+            HideProgress();
+            if(_FileID  > 0 && hasDeleted == true)
+                $(_ImgElement).parent().remove();            
+        }
         function GetDetails(clientID) {
             if(clientID > 0)
             {
@@ -78,6 +103,11 @@
                 $('#aNewQuation').attr('href', 'QuotationChange.aspx?<%=AppConstants.QueryString.ENQUIRY_ID %>=' + enquiryID);
             }            
         }
+        function AddAttachmentLink(fileName)
+        {
+            var element = '<li><a href="..<%=AppConstants.TEMP_DIRECTORY %>/' + fileName + '" target="_blank">' + fileName + '</a> <img onclick="DeleteAttachment(0, this)" src="../Images/delete.png" style="cursor:pointer;" alt="Delete" title="Delete"/></li>';
+            $('#ulAttachedFiles li:last').after(element);
+        }
         //View the quotations related to this enquiry
         //document.getElementById('aNewQuation').href = '/Pages/QuationChange.aspx?ID=' + 777777;
         
@@ -140,29 +170,43 @@
                 <b>Select Enquiry Type</b><br />
                 <asp:Label ID="lblStep2Title" Text="Select the type of enquiry being made. Note that this cannot be modified once set." runat="server"></asp:Label>
             </div>
-            <div>
-                <asp:DropDownList ID="ddlEnquiryType" runat="server"></asp:DropDownList>
-
+            <div class="floatleft">
+                <div>
+                    <asp:DropDownList ID="ddlEnquiryType" runat="server"></asp:DropDownList>
+                </div>
+                <div style="margin:10px 0px 5px 0px;">
+                    <b>Select Enquiry Source </b><br />
+                    <asp:Label ID="Label11" Text="Select the  enquiry source. Note that this cannot be modified once set." runat="server"></asp:Label>
+                </div>
+                <div>
+                     <asp:DropDownList ID="ddlEnquirySourceTypes" runat="server"></asp:DropDownList>
+                </div> 
+                <div style="margin:10px 0px 5px 0px;">
+                    Subject 
+                </div>           
+                <div>
+                    <asp:TextBox ID="txtEnguirySubject" runat="server" TextMode="SingleLine" MaxLength="100" style="width:200px; "></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvEnguirySubject" runat="server"
+                        ControlToValidate="txtEnguirySubject" SetFocusOnError="true" Display="Dynamic"
+                        ValidationGroup="SaveInfo2"
+                        ErrorMessage="<br/>Please Enter Enquiry Subject.">
+                    </asp:RequiredFieldValidator>
+                </div>
             </div>
-            <div style="margin:10px 0px 5px 0px;">
-                <b>Select Enquiry Source </b><br />
-                <asp:Label ID="Label11" Text="Select the  enquiry source. Note that this cannot be modified once set." runat="server"></asp:Label>
+            <div class="floatleft" style="margin-left:20px;">
+                <div style="margin:10px 0px 5px 0px;"><b>Attach File(s)</b></div>
+                <div>
+                    <ul id="ulAttachedFiles">
+                        <li style="display:none;">&nbsp;</li>
+                        <asp:Literal ID="ltrAttachmentList" runat="server" Text=""></asp:Literal>
+                    </ul>
+                </div>
+                <div>
+                    <a href="javascript:void(0);" onclick="ShowCenteredPopUp('EnquiryFiles.aspx?ID=<%=_EnquiryID %>', 'EnquiryAttachment', 500, 330, false);">Attach Document</a>
+                </div>
             </div>
-            <div>
-                 <asp:DropDownList ID="ddlEnquirySourceTypes" runat="server"></asp:DropDownList>
-            </div> 
-            <div style="margin:10px 0px 5px 0px;">
-                Subject 
-            </div>           
-            <div>
-                <asp:TextBox ID="txtEnguirySubject" runat="server" TextMode="SingleLine"   MaxLength="100" style="max-width:650px; "></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvEnguirySubject" runat="server"
-                    ControlToValidate="txtEnguirySubject" SetFocusOnError="true" Display="Dynamic"
-                    ValidationGroup="SaveInfo2"
-                    ErrorMessage="<br/>Please Enter Enquiry Subject.">
-                </asp:RequiredFieldValidator>
-            </div>
-            <div style="margin-top:10px;">
+            <div class="clearboth"></div>
+            <div style="margin-top:30px;">
                 <input type="button" value="< Back" onclick="MoveNext(1);" />&nbsp;
                 <input type="button" value="Next >" onclick="ValidateAndMoveNext('SaveInfo2', 3);" />
             </div>
