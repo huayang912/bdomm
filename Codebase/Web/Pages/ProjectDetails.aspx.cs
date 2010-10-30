@@ -67,9 +67,12 @@ public partial class Pages_ProjectDetails : BasePage
             {
                 sb.AppendFormat("<b>Quotation No:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.QUOTATION_DETAILS, 
                     AppConstants.QueryString.ID, project.QuotationID, project.Quotation.Number);
-                if(project.Quotation.Enquiry != null)
+                if (project.Quotation.Enquiry != null)
+                {
                     sb.AppendFormat("<b>Enquiry No:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.ENQUIRY_DETAILS,
                         AppConstants.QueryString.ID, project.Quotation.EnquiryID, project.Quotation.Enquiry.Number);
+                    sb.AppendFormat("<b>Attachments: </b><br/>{0}", GetAttachmentsList(project.Quotation.Enquiry));
+                }
                 sb.AppendFormat("<br/><b>Scope of the Work:</b> <br/>{0}<br/>", project.Quotation.ScopeOfWork.IsNullOrEmpty() ? "NA" : WebUtil.FormatText(project.Quotation.ScopeOfWork));
                 
             }
@@ -78,6 +81,25 @@ public partial class Pages_ProjectDetails : BasePage
             ucProjectNotes.ProjectID = _ProjectID;
             ucProjectNotes.DataBind();
         }
+    }
+
+    protected String GetAttachmentsList(Enquiry enquiry)
+    {
+        if (enquiry.EnquiryFiles.Count > 0)
+        {
+            StringBuilder sb = new StringBuilder(10);
+            sb.Append("<ul style='margin:0px 0px 0px 0px;'>");
+            foreach (EnquiryFile file in enquiry.EnquiryFiles)
+            {
+                String fileNameToShow = WebUtil.GetFormattedFileName(file.FileName);
+                sb.AppendFormat("<li><a href='..{0}/{1}/{2}' target='_blank'>{3}</a></li>",
+                    AppConstants.ENQUIRY_ATTACHMENTS, enquiry.ID, file.FileName, fileNameToShow);
+            }
+            sb.Append("</ul>");
+            return sb.ToString();
+        }
+        else
+            return "NA";
     }
 
     private string GetSubContractors(Project project, OMMDataContext context)
@@ -112,7 +134,7 @@ public partial class Pages_ProjectDetails : BasePage
             {
                 QuotationPricingLine pricingLine = quotation.QuotationPricingLines[i];
                 decimal price = pricingLine.UnitPrice.GetValueOrDefault() * pricingLine.Quantity.GetValueOrDefault();
-                sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowListing" : "EventRowListing");
+                sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowListing" : "EvenRowListing");
                 //sb.Append("<tr>");
                 sb.AppendFormat("   <td style='text-align:center;'>{0}</td>", pricingLine.Item.IsNullOrEmpty() ? "NA" : pricingLine.Item.HtmlEncode());
                 sb.AppendFormat("   <td>{0}</td>", pricingLine.Description.IsNullOrEmpty() ? "NA" : WebUtil.FormatText(pricingLine.Description));
@@ -165,7 +187,7 @@ public partial class Pages_ProjectDetails : BasePage
             foreach (EmploymentHistory personnel in personnels)
             {                
                 //sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowStyle" : "EventRowStyle");
-                sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowListing" : "EventRowListing");
+                sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowListing" : "EvenRowListing");
                 //sb.Append("<tr>");
                 sb.AppendFormat("   <td>{0}</td>", GetPersonnelLink(personnel));
                 sb.AppendFormat("   <td>{0}</td>", personnel.Contact.LastName.HtmlEncode());

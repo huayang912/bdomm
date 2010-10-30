@@ -235,7 +235,25 @@ public class WebUtil
         }
         return null;
     }
-
+    public static String GetFormattedFileName(String fileName)
+    {
+        if (!fileName.IsNullOrEmpty())
+        {
+            if (fileName.IndexOf('_') > -1)
+            {
+                String[] nameParts = fileName.Split('_');
+                StringBuilder sb = new StringBuilder(10);
+                for (int i = 0; i < nameParts.Length; i++)
+                {
+                    if (i > 0)
+                        sb.Append(nameParts[i]);
+                }
+                return sb.ToString();
+            }
+            return fileName;
+        }
+        return String.Empty;
+    }
     /// <summary>
     /// Binds a Dropdownlist Controls to a Collection
     /// </summary>
