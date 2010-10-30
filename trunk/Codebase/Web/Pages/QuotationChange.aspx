@@ -142,7 +142,7 @@
                     var cssClass = i % 2 == 0 ? 'OddRowListing' : 'EvenRowListing';
                     html += '<tr class="' + cssClass + '">';                 
                     //html += '<tr>';
-                    html += '   <td>' + pricingLine.Item + '</td>';
+                    html += '   <td>' + HtmlEncode(pricingLine.Item) + '</td>';
                     html += '   <td>' + FormatText(pricingLine.Description) + '</td>';
                     html += '   <td>' + pricingLine.PricingType + '</td>';
                     html += '   <td>' + pricingLine.UnitPrice + '</td>';

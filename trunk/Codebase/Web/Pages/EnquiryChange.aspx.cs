@@ -127,31 +127,11 @@ public partial class Pages_EnquiryChange : BasePage
         StringBuilder sb = new StringBuilder(10);
         foreach (EnquiryFile file in enquiry.EnquiryFiles)
         {
-            String fileNameToShow = GetFormattedFileName(file.FileName);
+            String fileNameToShow = WebUtil.GetFormattedFileName(file.FileName);
             sb.AppendFormat("<li><a href='..{0}/{1}/{2}' target='_blank'>{3}</a> <img onclick='DeleteAttachment({4}, this)' src='../Images/delete.png' style='cursor:pointer;' alt='Delete' title='Delete'/></li>",
                 AppConstants.ENQUIRY_ATTACHMENTS, enquiry.ID, file.FileName, fileNameToShow, file.ID);
         }
         ltrAttachmentList.Text = sb.ToString();
-    }
-
-    protected String GetFormattedFileName(String fileName)
-    {
-        if (!fileName.IsNullOrEmpty())
-        {
-            if (fileName.IndexOf('_') > -1)
-            {
-                String[] nameParts = fileName.Split('_');
-                StringBuilder sb = new StringBuilder(10);
-                for (int i = 0; i < nameParts.Length; i++)
-                {
-                    if (i > 0)
-                        sb.Append(nameParts[i]);
-                }
-                return sb.ToString();
-            }
-            return fileName;
-        }
-        return String.Empty;
     }
     /// <summary>
     /// Shows a not found message in the UI
