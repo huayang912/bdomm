@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="PageHeaderContentPlaceHolder" runat="Server">Start</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
   
-  <table width="800" border="0" background="">
+  <table width="100%" border="0" background="">
   <tr>
 	<td>&nbsp;</td>
     <td><table width="100%" border="0">
@@ -32,6 +32,10 @@
   
   
 </table></td>
+  </tr> <tr>
+    <td align="center"><img src="../App_Themes/BUDI2_NS/omm-background.jpg" alt="Client" width="888" height="170" border="0"  />
+
+</td>
   </tr>
 </table>
 &nbsp;</td>
