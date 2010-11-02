@@ -147,31 +147,116 @@ public class AjaxService : System.Web.Services.WebService {
         //string[] arr = receiPients.Split(',');
         //PrepareDataAndSendSMS(receiPients);
 
-        SaveMessage(receiPients, message);
+        //at first save the message to Messages Table
+        string currIdentity = saveToMessagesTable(message);
+
+        //Now save details message for individual reciepents in : Message_Recipients TABLE
+        saveToMessageRecipientsTable(Convert.ToInt32(currIdentity), receiPients);
+        
+        //Finally send message to the reciepents mobile
+        sendMessage(receiPients, message);
 
         return true;
     }
 
-    private void SaveMessage(String receiPients, String message)
+    private string saveToMessagesTable(String message)
     {
-        IList<Message_Recipient> filteredReceivers = new List<Message_Recipient>();
-        IList<Message> messages = _DataContext.Messages.ToList();
-        IList<Message_Recipient> recipients = new List<Message_Recipient>();
-        int lastRecipientID = 0;
+        OMMDataContext dataContext = new OMMDataContext();
+        Message msg = new Message();
+        //IList<Message_Recipient> recipients = new List<Message_Recipient>();
 
+        msg.Text = message;
+        msg.Delivered = true;
+        dataContext.Messages.InsertOnSubmit(msg);
+        dataContext.SubmitChanges(); 
+
+
+        //Collect current identity value from the messages table
+        var i = from p in dataContext.Messages
+                orderby p.ID descending
+                select p;
+
+        return (i.First().ID.ToString());
+
+
+    }
+
+    private void saveToMessageRecipientsTable(int message_id, String receiPients)
+    {
+        //Get Int array from the receipients list
         int[] ids = WebUtil.GetIntArray(receiPients);
 
-        recipients = (from P in _DataContext.Message_Recipients
+
+        
+        //collect all receipents number from the telephone number table
+        OMMDataContext dataContext = new OMMDataContext();
+        IList<TelephoneNumber> recipients = new List<TelephoneNumber>();
+        
+        recipients = (from P in _DataContext.TelephoneNumbers
                       where 
-                      //P.Message_ID == msg.ID
-                      //&& 
                       (from I in ids select I).Contains(P.ID)
-                      orderby P.Recipient_ID, P.Try_Order
                       select P).ToList();
 
         if (recipients != null && recipients.Count > 0)
         {
-            foreach (Message_Recipient receipient in recipients)
+            foreach (TelephoneNumber receipient in recipients)
+            {
+                Message_Recipient msgrecipients = new Message_Recipient();
+
+
+                msgrecipients.Message_ID = message_id;
+                msgrecipients.Recipient_ID = receipient.ID;
+                msgrecipients.Recipient_Name = "Test";
+                msgrecipients.Destination = receipient.Number;
+                msgrecipients.Try_Order = 1;
+                msgrecipients.Is_Phone_Number = true;
+                msgrecipients.Status_ID = 1;
+                msgrecipients.Updated_On = System.DateTime.Now;
+
+                dataContext.Message_Recipients.InsertOnSubmit(msgrecipients);
+                dataContext.SubmitChanges(); 
+            }
+        }
+
+    }
+
+    private void sendMessage(String receiPients, String message)
+    {
+        //IList<Message_Recipient> filteredReceivers = new List<Message_Recipient>();
+        //IList<Message> messages = _DataContext.Messages.ToList();
+        //IList<Message_Recipient> recipients = new List<Message_Recipient>();
+        //int lastRecipientID = 0;
+
+        //int[] ids = WebUtil.GetIntArray(receiPients);
+
+        //recipients = (from P in _DataContext.Message_Recipients
+        //              where 
+        //              //P.Message_ID == msg.ID
+        //              //&& 
+        //              (from I in ids select I).Contains(P.ID)
+        //              orderby P.Recipient_ID, P.Try_Order
+        //              select P).ToList();
+
+
+        //Get Int array from the receipients list
+        int[] ids = WebUtil.GetIntArray(receiPients);
+        int lastRecipientID = 0;
+
+
+        //collect all receipents number from the telephone number table
+        OMMDataContext dataContext = new OMMDataContext();
+        IList<TelephoneNumber> recipients = new List<TelephoneNumber>();
+        IList<TelephoneNumber> filteredRecipients = new List<TelephoneNumber>();
+        Message_Recipient msgrecipients = new Message_Recipient();
+
+        recipients = (from P in _DataContext.TelephoneNumbers
+                      where
+                      (from I in ids select I).Contains(P.ID)
+                      select P).ToList();
+
+        if (recipients != null && recipients.Count > 0)
+        {
+            foreach (TelephoneNumber receipient in recipients)
             {
                 if (lastRecipientID != receipient.ID)
                 {
@@ -183,7 +268,7 @@ public class AjaxService : System.Web.Services.WebService {
                     ////if (mrr.Status_ID == (int)MESSAGE_STATUSES.NOT_SENT)
                     //if (receipient.Status_ID == (int)MessageStatuss.NOT_SENT)
                     //{
-                        filteredReceivers.Add(receipient);
+                    filteredRecipients.Add(receipient);
                     //}
                 }
                 lastRecipientID = receipient.ID;
@@ -191,13 +276,13 @@ public class AjaxService : System.Web.Services.WebService {
             ///TODO: Send Messages to the Filtered Receipients
             ///
 
-            if (filteredReceivers.Count > 0)
-                SendFinalMessage(message, filteredReceivers);
+            if (filteredRecipients.Count > 0)
+                SendFinalMessage(message, filteredRecipients);
         }
     }
 
 
-    private bool SendFinalMessage(string message, IList<Message_Recipient> receivers)
+    private bool SendFinalMessage(string message, IList<TelephoneNumber> receivers)
     {
         string BILLING_REF = ConfigReader.BILLING_REF;
         string ORIGINATOR = ConfigReader.ORIGINATOR;
@@ -226,15 +311,16 @@ public class AjaxService : System.Web.Services.WebService {
         }
 
         // Build destination number list
-        foreach (Message_Recipient mrr in receivers)
+        foreach (TelephoneNumber mrr in receivers)
         {
             if (destinationNumbers.Length > 0)
             {
                 destinationNumbers.Append(COMMA_SEPARATOR);
             }
 
-            destinationNumbers.Append(mrr.Destination);
+            destinationNumbers.Append(mrr.Number);
         }
+
         if (ConfigReader.SendSmsToClient)
         {
             SMSService.TextAnywhere_SMS smsService = new SMSService.TextAnywhere_SMS();
