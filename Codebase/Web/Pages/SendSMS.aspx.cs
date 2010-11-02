@@ -17,8 +17,7 @@ public partial class Pages_SendSMS : System.Web.UI.Page
         BindPageInfo();
         if (!IsPostBack)
         {
-            tbxMessage.Text = "This is a test message. "+
-                "Original message will be passed by query string.";
+            tbxMessage.Text = "This is a test message. ";
             //Thorugh the query string mobile number list will be
             //sended with comma separator.
             String commSeperatedID = WebUtil.GetQueryStringInString(AppConstants.QueryString.ID);
@@ -29,9 +28,17 @@ public partial class Pages_SendSMS : System.Web.UI.Page
             else
             {
                 OMMDataContext dataContext = new OMMDataContext();
-                IList<Message_Recipient> recipients = (from R in dataContext.Message_Recipients
-                                                       where (from I in ids select I).Contains(R.ID)
-                                                       select R).ToList();
+                //IList<TelephoneNumber> recipients = (from R in dataContext.TelephoneNumbers
+                //                                       where (from I in ids select I).Contains(R.ContactID)
+                //                                       select new{R.ContactID,R.ID,R.Number}).SingleOrDefault();
+                                                     
+                //select R)..ToList();
+
+                var recipients = (from R in dataContext.TelephoneNumbers
+                                  where 
+                                  (from I in ids select I).Contains(R.ContactID)
+                                  && (R.TypeID==2)
+                                  select new { R.ContactID, R.ID, R.Number });
 
                 GridView1.DataSource = recipients;
                 GridView1.DataBind();

@@ -146,7 +146,7 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
                 </div>
                 <div class="GroupBox" id="divStep2" style="display:none; height:282px">
                     <asp:GridView ID="GridView1" runat="server" CssClass="GridView" 
-                        AutoGenerateColumns="False" CellPadding="3" CellSpacing="0"                         
+                        AutoGenerateColumns="False" CellPadding="3"                         
                         onrowdatabound="GridView1_RowDataBound" Enabled="False">
                         <%--
                         DataSourceID="LinqDataSource1" --%>
@@ -156,12 +156,8 @@ Inherits="Pages_SendSMS" enableEventValidation="false" %>
                                     <input type="checkbox" name="chkSelect" checked="checked" value="<%# ((int)Eval("ID")).ToString() %>" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:BoundField DataField="Recipient_Name" HeaderText="Recipient_Name" 
-                                ReadOnly="True" SortExpression="Recipient_Name" />
-                            <asp:BoundField DataField="Destination" HeaderText="Destination" 
+                            <asp:BoundField DataField="Number" HeaderText="Destination" 
                                 ReadOnly="True" SortExpression="Destination" />
-                            <asp:BoundField DataField="SMS_Credits" HeaderText="SMS_Credits" 
-                                ReadOnly="True" SortExpression="SMS_Credits" />
                             <asp:BoundField DataField="ID" HeaderText="ID" Visible="false" ReadOnly="True" 
                                 SortExpression="ID" />
                         </Columns>

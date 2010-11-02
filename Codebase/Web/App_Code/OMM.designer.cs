@@ -104,6 +104,12 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   partial void InsertEnquiryFile(EnquiryFile instance);
   partial void UpdateEnquiryFile(EnquiryFile instance);
   partial void DeleteEnquiryFile(EnquiryFile instance);
+  partial void InsertTelephoneNumber(TelephoneNumber instance);
+  partial void UpdateTelephoneNumber(TelephoneNumber instance);
+  partial void DeleteTelephoneNumber(TelephoneNumber instance);
+  partial void InsertTelephoneNumberType(TelephoneNumberType instance);
+  partial void UpdateTelephoneNumberType(TelephoneNumberType instance);
+  partial void DeleteTelephoneNumberType(TelephoneNumberType instance);
   #endregion
 	
 	public OMMDataContext() : 
@@ -333,6 +339,22 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<EnquiryFile>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TelephoneNumber> TelephoneNumbers
+	{
+		get
+		{
+			return this.GetTable<TelephoneNumber>();
+		}
+	}
+	
+	public System.Data.Linq.Table<TelephoneNumberType> TelephoneNumberTypes
+	{
+		get
+		{
+			return this.GetTable<TelephoneNumberType>();
 		}
 	}
 	
@@ -5710,6 +5732,8 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<Enquiry> _Enquiries1;
 	
+	private EntitySet<TelephoneNumber> _TelephoneNumbers;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5749,6 +5773,7 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		this._Contacts1 = new EntitySet<Contact>(new Action<Contact>(this.attach_Contacts1), new Action<Contact>(this.detach_Contacts1));
 		this._Enquiries = new EntitySet<Enquiry>(new Action<Enquiry>(this.attach_Enquiries), new Action<Enquiry>(this.detach_Enquiries));
 		this._Enquiries1 = new EntitySet<Enquiry>(new Action<Enquiry>(this.attach_Enquiries1), new Action<Enquiry>(this.detach_Enquiries1));
+		this._TelephoneNumbers = new EntitySet<TelephoneNumber>(new Action<TelephoneNumber>(this.attach_TelephoneNumbers), new Action<TelephoneNumber>(this.detach_TelephoneNumbers));
 		OnCreated();
 	}
 	
@@ -6107,6 +6132,19 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="User_TelephoneNumber", Storage="_TelephoneNumbers", ThisKey="ID", OtherKey="ChangedByUserID")]
+	public EntitySet<TelephoneNumber> TelephoneNumbers
+	{
+		get
+		{
+			return this._TelephoneNumbers;
+		}
+		set
+		{
+			this._TelephoneNumbers.Assign(value);
+		}
+	}
+	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -6305,6 +6343,18 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this.SendPropertyChanging();
 		entity.User1 = null;
+	}
+	
+	private void attach_TelephoneNumbers(TelephoneNumber entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_TelephoneNumbers(TelephoneNumber entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
 	}
 }
 
@@ -7165,6 +7215,8 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<EmploymentHistory> _EmploymentHistories;
 	
+	private EntitySet<TelephoneNumber> _TelephoneNumbers;
+	
 	private EntityRef<Country> _Country;
 	
 	private EntityRef<Country> _Country1;
@@ -7224,6 +7276,7 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 	public Contact()
 	{
 		this._EmploymentHistories = new EntitySet<EmploymentHistory>(new Action<EmploymentHistory>(this.attach_EmploymentHistories), new Action<EmploymentHistory>(this.detach_EmploymentHistories));
+		this._TelephoneNumbers = new EntitySet<TelephoneNumber>(new Action<TelephoneNumber>(this.attach_TelephoneNumbers), new Action<TelephoneNumber>(this.detach_TelephoneNumbers));
 		this._Country = default(EntityRef<Country>);
 		this._Country1 = default(EntityRef<Country>);
 		this._User = default(EntityRef<User>);
@@ -7680,6 +7733,19 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="Contact_TelephoneNumber", Storage="_TelephoneNumbers", ThisKey="ID", OtherKey="ContactID")]
+	public EntitySet<TelephoneNumber> TelephoneNumbers
+	{
+		get
+		{
+			return this._TelephoneNumbers;
+		}
+		set
+		{
+			this._TelephoneNumbers.Assign(value);
+		}
+	}
+	
 	[Association(Name="Country_Contact", Storage="_Country", ThisKey="CountryID", OtherKey="ID", IsForeignKey=true)]
 	public Country Country
 	{
@@ -7843,6 +7909,18 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_EmploymentHistories(EmploymentHistory entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = null;
+	}
+	
+	private void attach_TelephoneNumbers(TelephoneNumber entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = this;
+	}
+	
+	private void detach_TelephoneNumbers(TelephoneNumber entity)
 	{
 		this.SendPropertyChanging();
 		entity.Contact = null;
@@ -9045,6 +9123,449 @@ public partial class EnquiryFile : INotifyPropertyChanging, INotifyPropertyChang
 		{
 			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
+	}
+}
+
+[Table(Name="dbo.TelephoneNumbers")]
+public partial class TelephoneNumber : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private int _ContactID;
+	
+	private int _TypeID;
+	
+	private string _Number;
+	
+	private System.Data.Linq.Binary _TimeStamp;
+	
+	private System.Nullable<int> _ChangedByUserID;
+	
+	private System.DateTime _ChangedOn;
+	
+	private EntityRef<Contact> _Contact;
+	
+	private EntityRef<User> _User;
+	
+	private EntityRef<TelephoneNumberType> _TelephoneNumberType;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnContactIDChanging(int value);
+    partial void OnContactIDChanged();
+    partial void OnTypeIDChanging(int value);
+    partial void OnTypeIDChanged();
+    partial void OnNumberChanging(string value);
+    partial void OnNumberChanged();
+    partial void OnTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnTimeStampChanged();
+    partial void OnChangedByUserIDChanging(System.Nullable<int> value);
+    partial void OnChangedByUserIDChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    #endregion
+	
+	public TelephoneNumber()
+	{
+		this._Contact = default(EntityRef<Contact>);
+		this._User = default(EntityRef<User>);
+		this._TelephoneNumberType = default(EntityRef<TelephoneNumberType>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ContactID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int ContactID
+	{
+		get
+		{
+			return this._ContactID;
+		}
+		set
+		{
+			if ((this._ContactID != value))
+			{
+				if (this._Contact.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnContactIDChanging(value);
+				this.SendPropertyChanging();
+				this._ContactID = value;
+				this.SendPropertyChanged("ContactID");
+				this.OnContactIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_TypeID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int TypeID
+	{
+		get
+		{
+			return this._TypeID;
+		}
+		set
+		{
+			if ((this._TypeID != value))
+			{
+				if (this._TelephoneNumberType.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnTypeIDChanging(value);
+				this.SendPropertyChanging();
+				this._TypeID = value;
+				this.SendPropertyChanged("TypeID");
+				this.OnTypeIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Number", DbType="NVarChar(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Number
+	{
+		get
+		{
+			return this._Number;
+		}
+		set
+		{
+			if ((this._Number != value))
+			{
+				this.OnNumberChanging(value);
+				this.SendPropertyChanging();
+				this._Number = value;
+				this.SendPropertyChanged("Number");
+				this.OnNumberChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_TimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary TimeStamp
+	{
+		get
+		{
+			return this._TimeStamp;
+		}
+		set
+		{
+			if ((this._TimeStamp != value))
+			{
+				this.OnTimeStampChanging(value);
+				this.SendPropertyChanging();
+				this._TimeStamp = value;
+				this.SendPropertyChanged("TimeStamp");
+				this.OnTimeStampChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> ChangedByUserID
+	{
+		get
+		{
+			return this._ChangedByUserID;
+		}
+		set
+		{
+			if ((this._ChangedByUserID != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnChangedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUserID = value;
+				this.SendPropertyChanged("ChangedByUserID");
+				this.OnChangedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Contact_TelephoneNumber", Storage="_Contact", ThisKey="ContactID", OtherKey="ID", IsForeignKey=true)]
+	public Contact Contact
+	{
+		get
+		{
+			return this._Contact.Entity;
+		}
+		set
+		{
+			Contact previousValue = this._Contact.Entity;
+			if (((previousValue != value) 
+						|| (this._Contact.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Contact.Entity = null;
+					previousValue.TelephoneNumbers.Remove(this);
+				}
+				this._Contact.Entity = value;
+				if ((value != null))
+				{
+					value.TelephoneNumbers.Add(this);
+					this._ContactID = value.ID;
+				}
+				else
+				{
+					this._ContactID = default(int);
+				}
+				this.SendPropertyChanged("Contact");
+			}
+		}
+	}
+	
+	[Association(Name="User_TelephoneNumber", Storage="_User", ThisKey="ChangedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.TelephoneNumbers.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.TelephoneNumbers.Add(this);
+					this._ChangedByUserID = value.ID;
+				}
+				else
+				{
+					this._ChangedByUserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	[Association(Name="TelephoneNumberType_TelephoneNumber", Storage="_TelephoneNumberType", ThisKey="TypeID", OtherKey="ID", IsForeignKey=true)]
+	public TelephoneNumberType TelephoneNumberType
+	{
+		get
+		{
+			return this._TelephoneNumberType.Entity;
+		}
+		set
+		{
+			TelephoneNumberType previousValue = this._TelephoneNumberType.Entity;
+			if (((previousValue != value) 
+						|| (this._TelephoneNumberType.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._TelephoneNumberType.Entity = null;
+					previousValue.TelephoneNumbers.Remove(this);
+				}
+				this._TelephoneNumberType.Entity = value;
+				if ((value != null))
+				{
+					value.TelephoneNumbers.Add(this);
+					this._TypeID = value.ID;
+				}
+				else
+				{
+					this._TypeID = default(int);
+				}
+				this.SendPropertyChanged("TelephoneNumberType");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[Table(Name="dbo.TelephoneNumberTypes")]
+public partial class TelephoneNumberType : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private string _Name;
+	
+	private EntitySet<TelephoneNumber> _TelephoneNumbers;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+	
+	public TelephoneNumberType()
+	{
+		this._TelephoneNumbers = new EntitySet<TelephoneNumber>(new Action<TelephoneNumber>(this.attach_TelephoneNumbers), new Action<TelephoneNumber>(this.detach_TelephoneNumbers));
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string Name
+	{
+		get
+		{
+			return this._Name;
+		}
+		set
+		{
+			if ((this._Name != value))
+			{
+				this.OnNameChanging(value);
+				this.SendPropertyChanging();
+				this._Name = value;
+				this.SendPropertyChanged("Name");
+				this.OnNameChanged();
+			}
+		}
+	}
+	
+	[Association(Name="TelephoneNumberType_TelephoneNumber", Storage="_TelephoneNumbers", ThisKey="ID", OtherKey="TypeID")]
+	public EntitySet<TelephoneNumber> TelephoneNumbers
+	{
+		get
+		{
+			return this._TelephoneNumbers;
+		}
+		set
+		{
+			this._TelephoneNumbers.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_TelephoneNumbers(TelephoneNumber entity)
+	{
+		this.SendPropertyChanging();
+		entity.TelephoneNumberType = this;
+	}
+	
+	private void detach_TelephoneNumbers(TelephoneNumber entity)
+	{
+		this.SendPropertyChanging();
+		entity.TelephoneNumberType = null;
 	}
 }
 
