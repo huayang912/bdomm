@@ -66,11 +66,11 @@ from "dbo"."Enquiries" "Enquiries"
   </commands>
   <fields xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" readOnly="true" label="Id" />
-    <field name="QuotationNumber" type="String" readOnly="true" label="Quotation Number" />
-    <field name="QuotationID" type="String" readOnly="true" label="QuotationID" />
-    <field name="ProjectNumber" type="String" readOnly="true" label="Project Number" />
-    <field name="ProjectID" type="String" readOnly="true" label="ProjectID"  />
-    <field name="ProjectName" type="String" readOnly="true" label="Project Name"  />
+    <field name="QuotationNumber" type="String" readOnly="true"  hidden="true" label="Quotation Number" />
+    <field name="QuotationID" type="String" readOnly="true"  hidden="true" label="QuotationID" />
+    <field name="ProjectNumber" type="String" readOnly="true"  hidden="true" label="Project Number" />
+    <field name="ProjectID" type="String" readOnly="true"  hidden="true" label="ProjectID"  />
+    <field name="ProjectName" type="String" readOnly="true"  hidden="true" label="Project Name"  />
 
     
     <field name="Number" type="String" label="Number" showInSummary="true" />
@@ -119,10 +119,10 @@ from "dbo"."Enquiries" "Enquiries"
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
         <dataField fieldName="Number" columns="50" />
-        <dataField fieldName="QuotationNumber" hyperlinkFormatString="_blank:~/Pages/Quotations.aspx?ID={QuotationID}"  />
+        <dataField fieldName="QuotationNumber" hyperlinkFormatString="_blank:~/Pages/Quotations.aspx?ID={QuotationID}"   hidden="true"/>
         <dataField fieldName="QuotationID" hyperlinkFormatString="_blank:~/Pages/Quotations.aspx?ID={QuotationID}"   hidden="true"/>
 
-        <dataField fieldName="ProjectNumber" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={ProjectID}"  />
+        <dataField fieldName="ProjectNumber" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={ProjectID}"   hidden="true" />
         <dataField fieldName="ProjectID" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={QuotationID}" hidden="true"  />
 
         <dataField fieldName="EnguirySubject"  hidden="true"/>
