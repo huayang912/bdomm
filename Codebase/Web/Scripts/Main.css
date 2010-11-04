@@ -90,11 +90,13 @@ div.GroupHeader
 	background-color:#c6d9f3;
 	border:#F2F2F2 1px solid;
 	text-align:left;
+	height:25px;
 }
-/*.GridView td
+.GridView td
 {
-	border:#F2F2F2 1px solid;
-}*/
+	/*border:#F2F2F2 1px solid;*/
+	height:25px;
+}
 textarea
 {
 	width:100%;
