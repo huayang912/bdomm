@@ -45,7 +45,7 @@
             if (process.StatusID > 0)
                 serverReply = 'SMS Sent Succesfully to the following Mobile Numbers:<br/><br/>' + process.Message;                
             else
-                serverReply = 'Sorry an Error Occured. Review the following error message.<br/><br/>' + process.Message;            
+                serverReply = 'Sorry an Error Occurred. Review the following error message.<br/><br/>' + process.Message;            
 
             $('#divSummary').html(serverReply);
             MoveNext(3);            
