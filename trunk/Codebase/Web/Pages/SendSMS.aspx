@@ -114,7 +114,7 @@
     
     <asp:Panel ID="pnlMainContainer" runat="server">
         <%--The Message Step1--%>
-        <div id="divStep1" class="GroupBox" style="display:none;">
+        <div id="divStep1" class="GroupBox" style="display:block;">
             <div class="FormHeader">
                 <b>Create Message</b>
                 <div>Create the Message to be Sent</div>
@@ -140,7 +140,7 @@
         </div>
         
         <%--The Telephone Number Listing Step--%>
-        <div id="divStep2" class="GroupBox" style="display:block;">
+        <div id="divStep2" class="GroupBox" style="display:none;">
             <div class="FormHeader">
                 <b>Review Recipients</b>
                 <div>Please review the recipients of the Message.</div>
