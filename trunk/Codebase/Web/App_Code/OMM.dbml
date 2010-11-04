@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="OMM" Class="OMMDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=BRAC-E9434D5251\SQLEXPRESS;Initial Catalog=OMM;Integrated Security=False;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BUDI2_NS" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=MIMIXP-PC\SQLEXPRESS;Initial Catalog=OMM;Integrated Security=False;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BUDI2_NS" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Message_Recipients" Member="Message_Recipients">
     <Type Name="Message_Recipient">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -267,7 +267,7 @@
     </Type>
   </Table>
   <Table Name="dbo.SMS_Messages" Member="SMS_Messages">
-    <Type Name="SMS_Message">
+    <Type Name="SMS_Message" Id="ID1">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Client_Ref" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Sent_On" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
@@ -455,5 +455,10 @@
       <Column Name="Quoted" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Closed" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.dalSMSMessagesInsert" Method="dalSMSMessagesInsert">
+    <Parameter Name="Client_Ref" Parameter="client_Ref" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Sent_On" Parameter="sent_On" Type="System.DateTime" DbType="DateTime" />
+    <ElementType IdRef="ID1" />
   </Function>
 </Database>

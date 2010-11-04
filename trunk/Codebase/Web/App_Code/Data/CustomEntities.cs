@@ -66,6 +66,18 @@ namespace App.CustomModels
         public int ProjectID { get; set; }
         public String Details { get; set; }
     }
+    /// <summary>
+    /// This is Used to Return the Send SMS Process Reply to the Client [Client Browser] through a AJAX Call    
+    /// </summary>
+    public class SendSmsStatus
+    {
+        /// <summary>
+        /// StatusID == 1   > Successfully Sent SMS
+        /// StatusID == -1  > Unable to Send SMS. 
+        /// </summary>
+        public int StatusID { get; set; }
+        public String Message { get; set; }
+    }
     #region Enum Like Classes
     public static class EnquiryStatus
     {

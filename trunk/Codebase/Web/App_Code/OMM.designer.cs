@@ -396,6 +396,13 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 		return ((ISingleResult<reportTypeWiseMOnthlyEnqueryDetailsResult>)(result.ReturnValue));
 	}
+	
+	[Function(Name="dbo.dalSMSMessagesInsert")]
+	public ISingleResult<SMS_Message> dalSMSMessagesInsert([Parameter(Name="Client_Ref", DbType="NVarChar(50)")] string client_Ref, [Parameter(Name="Sent_On", DbType="DateTime")] System.Nullable<System.DateTime> sent_On)
+	{
+		IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), client_Ref, sent_On);
+		return ((ISingleResult<SMS_Message>)(result.ReturnValue));
+	}
 }
 
 [Table(Name="dbo.Message_Recipients")]
