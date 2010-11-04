@@ -195,7 +195,14 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
             <dataField fieldName="ProjectID" aliasFieldName="ProjectNumber" />
             <dataField fieldName="ClientID" hidden="true" aliasFieldName="ClientName" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
-            <dataField fieldName="DayRate" columns="15" />
+
+            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyShortCode"   />
+            <dataField fieldName="TravelRate" columns="10" />
+            <dataField fieldName="TravelCost" columns="10"  />
+
+
+            <dataField fieldName="DayRate" columns="10" />
+            
             <dataField fieldName="Contract_days" />
 
             <dataField fieldName="Notes"  rows="3"/>
