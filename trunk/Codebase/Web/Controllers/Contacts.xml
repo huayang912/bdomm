@@ -16,6 +16,7 @@
 	,"Country"."Name" "CountryName"
 	,"Contacts"."DateOfBirth" "DateOfBirth"
 	,"Contacts"."DateOfLastMeeting" "DateOfLastMeeting"
+  ,"Currency"."ShortCode" "CurrencyShortCode"
 	,"Contacts"."MaritalStatusID" "MaritalStatusID"
 	,"MaritalStatus"."Name" "MaritalStatusName"
 	,"Contacts"."PlaceOfBirth" "PlaceOfBirth"
@@ -41,6 +42,7 @@ from "dbo"."Contacts" "Contacts"
 	left join "dbo"."MaritalStatuses" "MaritalStatus" on "Contacts"."MaritalStatusID" = "MaritalStatus"."ID"
 	left join "dbo"."Countries" "CountryOfBirth" on "Contacts"."CountryOfBirthID" = "CountryOfBirth"."ID"
 	left join "dbo"."Users" "CreatedByUser" on "Contacts"."CreatedByUserID" = "CreatedByUser"."ID"
+  	left join "dbo"."Currency" "Currency" on "Contacts"."DayRateCurrencyID" = "Currency"."ID"
 	left join "dbo"."Users" "ChangedByUser" on "Contacts"."ChangedByUserID" = "ChangedByUser"."ID"]]></text>
     </command>
     <command id="IDIdentityCommand" type="Text" event="Inserted">
@@ -60,6 +62,9 @@ from "dbo"."Contacts" "Contacts"
       <items style="Lookup" dataController="Countries" newDataView="createForm1" />
     </field>
     <field name="CountryName" type="String" readOnly="true" label="Country Name" />
+    
+    <field name="CurrencyShortCode" type="String" readOnly="true" label="Currency Code" />
+    
     <field name="DateOfBirth" type="DateTime" label="Date Of Birth" />
     <field name="DateOfLastMeeting" type="DateTime" label="Date Of Last Meeting" />
     <field name="MaritalStatusID" type="Int32" allowNulls="false" label="Marital Status#">
@@ -88,7 +93,12 @@ from "dbo"."Contacts" "Contacts"
     <field name="ChangedByUserUserName" type="String" readOnly="true" label="Changed By User Name" />
     <field name="ChangedOn" type="DateTime" allowNulls="false" default="(getdate())" readOnly="true" label="Changed On" />
     <field name="Version" type="Byte[]" allowNulls="false" readOnly="true" label="Version" />
-    <field name="DayRateCurrencyID" type="Int32" label="Day Rate Currency#" />
+    
+    <!-- <field name="DayRateCurrencyID" type="Int32" label="Day Rate Currency#" /> -->
+
+    <field name="DayRateCurrencyID" type="Int32" label="Day Rate Currency#">
+      <items style="Lookup" dataController="Currency" newDataView="createForm1" />
+    </field>
     <field name="PrimaryRole" type="String" readOnly="true" label="Primary Role" showInSummary="true" formatOnClient="true" />
     <field name="PPE_Sizes" type="String" readOnly="false" label="PPE Sizes" formatOnClient="true" />
 
@@ -155,7 +165,7 @@ from "dbo"."Contacts" "Contacts"
           <dataFields>
             <dataField fieldName="DateOfLastMeeting" />
             <dataField fieldName="PreferredDayRate" />
-            <dataField fieldName="DayRateCurrencyID" />
+            <dataField fieldName="DayRateCurrencyID" aliasFieldName="CurrencyShortCode"/>
             <dataField fieldName="NoSMSorEmail" />
             <dataField fieldName="Inactive" />
           </dataFields>

@@ -16,6 +16,7 @@
 	,"EmploymentHistory"."EndDate" "EndDate"
 	,"EmploymentHistory"."ProjectID" "ProjectID"
 	,"Project"."Name" "ProjectName"
+  	,"Project"."Number" "ProjectNumber"
 	,"ProjectStatus"."Name" "ProjectStatusName"
 	,"ProjectQuotation"."Number" "ProjectQuotationNumber"
 	,"ProjectQuotationSubmittedToClientContact"."Name" "ProjectQuotationSubmittedToClientContactName"
@@ -35,6 +36,15 @@
 	,"RoleChangedByUser"."UserName" "RoleChangedByUserUserName"
 	,"EmploymentHistory"."DayRate" "DayRate"
 	,"EmploymentHistory"."Notes" "Notes"
+   ,"Currency"."ShortCode" "CurrencyShortCode"
+   
+   	,"EmploymentHistory"."CurrencyID" "CurrencyID"
+    	,"EmploymentHistory"."TravelRate" "TravelRate"
+      	,"EmploymentHistory"."TravelCost" "TravelCost"
+   
+   
+   
+   
 	,"EmploymentHistory"."ChangedByUserID" "ChangedByUserID"
 	,"ChangedByUser"."UserName" "ChangedByUserUserName"
 	,"EmploymentHistory"."ChangedOn" "ChangedOn"
@@ -52,7 +62,9 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
 	left join "dbo"."Quotations" "ProjectQuotation" on "Project"."QuotationID" = "ProjectQuotation"."ID"
 	left join "dbo"."ClientContacts" "ProjectQuotationSubmittedToClientContact" on "ProjectQuotation"."SubmittedToClientContactID" = "ProjectQuotationSubmittedToClientContact"."ID"
 	left join "dbo"."Currency" "ProjectQuotationCurrency" on "ProjectQuotation"."CurrencyID" = "ProjectQuotationCurrency"."ID"
-	left join "dbo"."Enquiries" "ProjectQuotationEnquiry" on "ProjectQuotation"."EnquiryID" = "ProjectQuotationEnquiry"."ID"
+		left join "dbo"."Currency" "Currency" on "EmploymentHistory"."CurrencyID" = "Currency"."ID"
+
+  left join "dbo"."Enquiries" "ProjectQuotationEnquiry" on "ProjectQuotation"."EnquiryID" = "ProjectQuotationEnquiry"."ID"
 	left join "dbo"."QuotationStatuses" "ProjectQuotationStatus" on "ProjectQuotation"."StatusID" = "ProjectQuotationStatus"."ID"
 	left join "dbo"."Users" "ProjectQuotationChangedByUser" on "ProjectQuotation"."ChangedByUserID" = "ProjectQuotationChangedByUser"."ID"
 	left join "dbo"."Users" "ProjectQuotationCreatedByUser" on "ProjectQuotation"."CreatedByUserID" = "ProjectQuotationCreatedByUser"."ID"
@@ -85,6 +97,7 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
       <items style="Lookup" dataController="ProjectsLookup" newDataView="createForm1" />
     </field>
     <field name="ProjectName" type="String" readOnly="true" label="Project Name" />
+    <field name="ProjectNumber" type="String" readOnly="true" label="Project Number" />
     <field name="ProjectQuotationEnquiryNumber" type="String" readOnly="true" label="Project Quotation Enquiry Number" />
     <field name="ProjectStatusName" type="String" readOnly="true" label="Project Status Name" />
     <field name="ClientID" type="Int32" label="Client#" showInSummary="true">
@@ -93,6 +106,17 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
     <field name="RoleID" type="Int32" label="Role#">
       <items style="Lookup" dataController="Roles" newDataView="createForm1" />
     </field>
+
+
+    <field name="CurrencyID" type="Int32" label="Currency">
+      <items style="Lookup" dataController="Currency" newDataView="createForm1" />
+    </field>
+    
+    <field name="TravelRate" type="Int32"  label="Travel Rate" />
+    <field name="TravelCost" type="Int32"  label="Travel Cost" />
+    <field name="CurrencyShortCode" type="String" readOnly="true" label="Currency Code" />
+
+
     <field name="RoleName" type="String" readOnly="true" label="Role Name" />
     <field name="DayRate" type="Decimal" label="Day Rate" />
     <field name="Notes" type="String" label="Notes" />
@@ -111,7 +135,7 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
     <view id="grid1" type="Grid" commandId="command1" label="Employment History">
       <headerText></headerText>
       <dataFields>
-        <dataField fieldName="ProjectID" aliasFieldName="ProjectName" />
+        <dataField fieldName="ProjectID" aliasFieldName="ProjectNumber" />
         <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
@@ -133,10 +157,16 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
-            <dataField fieldName="ProjectID" aliasFieldName="ProjectName" />
+            <dataField fieldName="ProjectID" aliasFieldName="ProjectNumber" />
             <dataField fieldName="ClientID" hidden="true" aliasFieldName="ClientName" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
-            <dataField fieldName="DayRate" columns="15" />
+
+            <dataField fieldName="CurrencyID" aliasFieldName="CurrencyShortCode"   />
+            <dataField fieldName="TravelRate" columns="10" />
+            <dataField fieldName="TravelCost" columns="10"  />
+            
+            
+            <dataField fieldName="DayRate" columns="10" />
             <dataField fieldName="Contract_days" /> 
              
             <dataField fieldName="Notes"  rows="3"/>
@@ -162,7 +192,7 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
-            <dataField fieldName="ProjectID" aliasFieldName="ProjectName" />
+            <dataField fieldName="ProjectID" aliasFieldName="ProjectNumber" />
             <dataField fieldName="ClientID" hidden="true" aliasFieldName="ClientName" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
             <dataField fieldName="DayRate" columns="15" />
