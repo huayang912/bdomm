@@ -24,3 +24,6 @@ ALTER TABLE [dbo].[ProjectNotes]  WITH CHECK ADD  CONSTRAINT [FK_ProjectNotes_Pr
 REFERENCES [dbo].[Projects] ([ID])
 GO
 ALTER TABLE [dbo].[ProjectNotes] CHECK CONSTRAINT [FK_ProjectNotes_Project]
+
+GO
+ALTER TABLE ProjectNotes ALTER COLUMN Details VARCHAR(MAX) NOT NULL
