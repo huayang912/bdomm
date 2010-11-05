@@ -103,8 +103,6 @@ textarea
 	font-family:Verdana;
 	font-size:12px;
 }
-
-
 /**Modal Popup With Progress ANimation***/
 .blockingContainer 
 {         
@@ -195,22 +193,6 @@ textarea
 {
 	width:650px;
 }
-/*.OddRowStyle
-{
-	background-color:#e6eff6;
-}
-.OddRowStyle:hover
-{
-	background-color:#FFFFFF;
-}
-.EventRowStyle
-{
-	background-color:#e5e8ea;
-}
-.EventRowStyle:hover
-{
-	background-color:#FFFFFF;
-}*/
 .OddRowListing
 {
     background-color:#d7e6f6;
@@ -233,3 +215,7 @@ textarea
     border-bottom: solid 1px #D2B47A;
     background-color: #FFE6A0;
 }
+.NoteDate
+{
+    color:#8695aa;
+}   

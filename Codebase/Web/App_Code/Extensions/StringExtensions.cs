@@ -351,6 +351,7 @@ namespace App.Core.Extensions
         /// <returns></returns>
         public static string GetWords(this String text, int wordCount)
         {
+            wordCount = wordCount > 1 ? wordCount - 1 : wordCount;
             String[] words = text.Split(' ');
             StringBuilder sb = new StringBuilder(10);
             for (int i = 0; i < words.Length; i++)

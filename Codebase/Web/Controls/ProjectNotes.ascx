@@ -8,23 +8,30 @@
     .NotesTable td
     {
         height:50px;       
-    }
-    .NoteDate
-    {
-        color:#8695aa;
-    }    
+    }     
 </style>
 <script language="javascript" type="text/javascript">
     var _Note = null;
+    var _NoteWordCount = <%= _NoteWordCount.ToString() %>;
     
     function GetNoteHtml() {
+        var noteDetails = GetPrunnedWords(_Note.Details, _Note.ID);                  
         var rowStyle = $('#tblProjectList tr').length % 2 == 0 ? 'EvenRowListing' : 'OddRowListing';
         var html = '<tr class="' + rowStyle + '">';
         html += '   <td>' + $('#<%= hdnUserName.ClientID%>').val() + '<div class="NoteDate">Now</div></td>';
-        html += '   <td>' + FormatText(_Note.Details) + '</td>';
+        html += '   <td>' + noteDetails + '</td>';
         html += '   <td>&nbsp;</td>';
         html += '</tr>'; 
         return html;       
+    }
+    function GetPrunnedWords(text, id)
+    {
+        var detailsLink = '<div style="margin-top:5px;"><a href="javascript:void(0);" onclick="ShowCenteredPopUp(\'<%=AppConstants.Pages.PROJECT_NOTE_DETAILS %>?<%=AppConstants.QueryString.ID %>=' + id + '\', \'NoteDetails\', 650, 580, true)">More..</a></div>';
+        var noteDetails = FormatText(GetWords(text, _NoteWordCount));
+        //alert('wjklj count: ' + GetWordCount(text));
+        if(GetWordCount(text) > _NoteWordCount)
+            noteDetails += detailsLink;  
+        return noteDetails;
     }
     function PrepareNoteObject() {
         _Note = new App.CustomModels.CustomProjectNote();
@@ -46,13 +53,14 @@
         HideProgress();
         if(result > 0)
         {
+            _Note.ID = result;
             $('#tblProjectList tr:last').after(GetNoteHtml());
             $('#<%= txtDetails.ClientID %>').val('');
         }
     }
     function ValidateDetailsTextLength(sender, args)
     {
-        if(args.Value.length <= 4000)
+        if(args.Value.length <= 8000)
             args.IsValid = true;
         else
             args.IsValid = false;
@@ -90,7 +98,7 @@
 </table>
 <div>
     <div style="margin:10px 0px 2px 0px;">Add a Note for this Project</div>
-    <asp:TextBox ID="txtDetails" runat="server" TextMode="MultiLine" MaxLength="1000" style="width:500px; height:100px;"></asp:TextBox>
+    <asp:TextBox ID="txtDetails" runat="server" TextMode="MultiLine" MaxLength="8000" style="width:700px; height:150px;"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvDetails" runat="server"
         ControlToValidate="txtDetails" SetFocusOnError="true" Display="Dynamic"
         ValidationGroup="SaveNote"
@@ -99,9 +107,9 @@
     <asp:CustomValidator ID="cvDetails" runat="server"
         ControlToValidate="txtDetails" SetFocusOnError="true" Display="Dynamic"
         ValidationGroup="SaveNote" ClientValidationFunction="ValidateDetailsTextLength"
-        ErrorMessage="<br />Sorry! Note Details Cannot be more than 4000 Characters long.">
+        ErrorMessage="<br />Sorry! Note Details Cannot be more than 8000 Characters long.">
     </asp:CustomValidator>
 </div>
-<div>
+<div style="margin-top:5px;">
     <input type="button" value="Save Note" onclick="SaveProjectNote();" />
 </div>
