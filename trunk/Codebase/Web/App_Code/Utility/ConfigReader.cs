@@ -76,4 +76,19 @@ public class ConfigReader
             return value;
         }
     }
+    public static int ProjectNoteWordCount
+    {
+        get
+        {
+            String value = GetAppSettings("ProjectNoteWordCount");
+            if (String.IsNullOrEmpty(value))
+                return 15;
+            else
+            {
+                int configValue = 0;
+                int.TryParse(value, out configValue);
+                return configValue;
+            }
+        }
+    }
 }

@@ -38,6 +38,7 @@ public class AppConstants
         public const String QUOTATION_DETAILS = "QuoteSrch.aspx";
         public const String ENQUIRY_DETAILS = "EnquirySch.aspx";
         public const String PERSONNEL_DETAILS = "PersonnelDetails.aspx";
+        public const String PROJECT_NOTE_DETAILS = "ProjectNoteDetails.aspx";
     }
     #endregion
 
@@ -53,7 +54,7 @@ public class AppConstants
         //public const string DECIMAL_FORMAT_CALCULATION = "{0:00.#############}";
         //public const String DECIMAL_FORMAT_CALCULATION = "{0:00.###}";
         public const String DATE_FROMAT_DISPLAY = "MMMM dd, yyyy";
-        //public const String DATE_FROMAT_DISPLAY_WITH_TIME = "dddd, MMMM dd, yyyy hh:mm:ss tt";
+        public const String DATE_FROMAT_DISPLAY_WITH_TIME = "dddd, MMMM dd, yyyy hh:mm:ss tt";
     }
     #endregion
 
