@@ -113,9 +113,9 @@ public partial class Pages_EnquiryChange : BasePage
                 ddlEnquiryType.SetSelectedItem(enquiry.TypeID.ToString());
                 txtDetails.Text = enquiry.EnquiryLines.Count > 0 ? enquiry.EnquiryLines[0].Details : String.Empty;
             
-            //Momin
+                //Momin
                 ddlEnquirySourceTypes.SetSelectedItem(enquiry.SourceTypeID.ToString());
-                txtEnguirySubject.Text = enquiry.EnguirySubject.Trim();
+                txtEnguirySubject.Text = enquiry.EnguirySubject.TrimString();
                 BindAttachments(enquiry);
                 SessionCache.CurrentEnquiryFiles = null;
             }
