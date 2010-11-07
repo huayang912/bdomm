@@ -75,7 +75,12 @@ namespace App.Core.Extensions
             }
             return strArray;
         }
-
+        public static string TrimString(this string str)
+        {
+            if (String.IsNullOrEmpty(str))
+                return String.Empty;
+            return str.Trim();
+        }
         /// <summary>
         /// Checks to see if a string is null or empty, including
         /// whether its full of only spaces
