@@ -33,7 +33,7 @@
   
 </table></td>
   </tr> <tr>
-    <td align="center"><img src="../App_Themes/BUDI2_NS/omm-background.jpg" alt="Client" width="888" height="170" border="0"  />
+    <td align="center"><img src="../App_Themes/BUDI2_NS/omm-background.jpg" alt="Client" width="688" height="170" border="0"  />
 
 </td>
   </tr>
