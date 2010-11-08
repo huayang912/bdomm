@@ -16,7 +16,7 @@
 	
   <tr>
 
-    <td align="center">&nbsp;<a href="PersonnelView.aspx"><img src="../App_Themes/BUDI2_NS/omm-log-bg.gif" alt="Enquiries" width="51" height="52" border="0"  /></a></td>
+    <td align="center">&nbsp;<a href="PersonnelViewList.aspx"><img src="../App_Themes/BUDI2_NS/omm-log-bg.gif" alt="Enquiries" width="51" height="52" border="0"  /></a></td>
     <td align="center">&nbsp;<a href="PersonnelAdd.aspx"><img src="../App_Themes/BUDI2_NS/omm-log-bg.gif" alt="Quotations" width="51" height="52" border="0"  /></a></td>
 	  
     <td align="center">&nbsp;<a href="CVNew.aspx"><img src="../App_Themes/BUDI2_NS/omm-log-bg.gif" alt="Enquiries" width="51" height="52" border="0"  /></a></td>
@@ -24,7 +24,7 @@
 	
   </tr>
   <tr>
-    <td align="center"><a href="PersonnelView.aspx">Personnel Search</a></td>
+    <td align="center"><a href="PersonnelViewList.aspx">Personnel Search</a></td>
     <td align="center">&nbsp;<a href="PersonnelAdd.aspx">Add New Personnel</a></td>
 	  <td align="center"><a href="CVNew.aspx">CV Search</a></td>
     <td align="center">&nbsp;<a href="CVAdd.aspx">Add New CV</a></td>
@@ -34,7 +34,7 @@
   
 </table></td>
   </tr> <tr>
-    <td align="center"><img src="../App_Themes/BUDI2_NS/omm-background.jpg" alt="Client" width="888" height="170" border="0"  />
+    <td align="center"><img src="../App_Themes/BUDI2_NS/omm-background.jpg" alt="Client" width="688" height="170" border="0"  />
 
 </td>
   </tr>
