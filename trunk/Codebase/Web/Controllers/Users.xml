@@ -75,7 +75,7 @@ from "dbo"."Users" "Users"
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
-      <action id="a2" commandName="Delete" />
+
       <action id="a3" commandName="Cancel" />
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
