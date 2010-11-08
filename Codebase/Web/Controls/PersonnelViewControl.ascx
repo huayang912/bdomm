@@ -3,19 +3,21 @@
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
         <table width="100%" border="0">
-    <tr>
-    <td>
-    <!--
-    <form><input type="button" value=" GO TO EDIT PAGE" onClick="window.location.href='PersonnelNew.aspx'"></form>
-    -->
-    </td></tr>
+    
      <tr> <td valign="top"><div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
              <act:TabContainer ID="OrderManager" runat="server">
             <act:TabPanel ID="CustomersTab" runat="server" HeaderText="Personnel" PageSize="25">
               <ContentTemplate>
                 <div id="view1" runat="server"></div>
-                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="ContactsView" PageSize="25"  ShowViewSelector="false"/>
-               </ContentTemplate>
+                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="ContactsView" PageSize="25"   StartCommandName="Select" StartCommandArgument="editForm1" ShowViewSelector="false"/>
+              
+			  
+			   
+			     </ContentTemplate>   
+			   
+			   
+			   
+			   
             </act:TabPanel>
             <act:TabPanel ID="EmploymentHistoryTab" runat="server" HeaderText="Employment History">
               <ContentTemplate>
@@ -99,9 +101,14 @@
 			
           </act:TabContainer>
         </div></td>
-      <td>
-      <td width="50%" valign="top">
-	  <div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
+     
+<td>  
+<Table bgcolor="#669933">
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td>
+<tr><td>
+			    <div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
               <div id="view12" runat="server" style="background-color:#A9D0F5"></div>
                 <aquarium:DataViewExtender id="view12Extender" runat="server" TargetControlID="view12" Controller="TelephoneNumbers" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="false" />
               <div id="view8" runat="server" style="background-color:#A9D0F5"></div>
@@ -113,7 +120,10 @@
                 <aquarium:DataViewExtender id="view6Extender" runat="server" TargetControlID="view6" Controller="ContactsNotes" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="false" />
         
              
-        </div></td>
+        </div>  
+	</td></tr></Table>	
+		</td>
+
     </tr>
   </table>
     </ContentTemplate>

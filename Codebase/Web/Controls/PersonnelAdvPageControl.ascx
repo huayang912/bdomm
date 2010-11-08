@@ -95,7 +95,7 @@
           </act:TabContainer>
         </div></td>
       <td>
-      <td width="50%" valign="top">
+      <td  valign="top">
 	  
 	 	  <Table>
 <tr><td>&nbsp;</td></tr>
