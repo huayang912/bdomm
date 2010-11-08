@@ -191,7 +191,10 @@ from "dbo"."Contacts" "Contacts"
   </views>
   <actions xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <actionGroup id="ag1" scope="Grid">
-      <action id="a1" commandName="Select" commandArgument="editForm1" />
+
+      <action id="a1011" commandName="Navigate" commandArgument="_blank:~/pages/PersonnelView.aspx?ID={ID}" headerText="Detail" causesValidation="true"  whenHRef="PersonnelViewList.aspx"/>
+
+      <action id="a1" commandName="Select" commandArgument="editForm1"  whenHRef="PersonnelView.aspx" />
       <action id="a2" commandName="Edit" />
       <action id="a3" commandName="Delete" />
       <action id="a9" />
