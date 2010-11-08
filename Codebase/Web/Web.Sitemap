@@ -8,7 +8,7 @@
       <siteMapNode title="Show Client Contacts" description="Client Contacts" url="~/Pages/ClientContactSrch.aspx" roles="*"/>
 
       </siteMapNode>
-    <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelView.aspx" roles="*">
+    <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelViewList.aspx" roles="*">
 	  <siteMapNode title="Show Personnel" description="Personnel List" url="~/Pages/PersonnelViewRedirect.aspx" roles="*" />
             <siteMapNode title="CV" description="Personnel CV" url="~/Pages/CVNew.aspx" roles="*" />
 
