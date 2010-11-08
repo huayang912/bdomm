@@ -96,6 +96,13 @@
         </div></td>
       <td>
       <td width="50%" valign="top">
+	  
+	 	  <Table>
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td>
+<tr><td> 
+	  
 	  <div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
               <div id="view12" runat="server"></div>
                 <aquarium:DataViewExtender id="view12Extender" runat="server" TargetControlID="view12" Controller="TelephoneNumbers" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="true"   /> 
@@ -109,7 +116,11 @@
                 <aquarium:DataViewExtender id="view6Extender" runat="server" TargetControlID="view6" Controller="ContactsNotes" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="true"/>
         
              
-        </div></td>
+        </div>
+		
+			</td></tr></Table>		
+		
+		</td>
     </tr>
   </table>
     </ContentTemplate>
