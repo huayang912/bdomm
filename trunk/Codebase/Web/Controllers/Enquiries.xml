@@ -232,7 +232,7 @@ from "dbo"."Enquiries" "Enquiries"
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <!--<action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />-->
+  <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon"  whenHRef="Enquiries.aspx"/>
       <!--<action id="a103" commandName="Navigate" commandArgument="~/pages/QuotationSubmit.aspx?ID={ID}" headerText="Submit This Quotation" causesValidation="true" />-->
       <action id="a1" commandName="Navigate" commandArgument="~/Pages/EnquiryChange.aspx" headerText="New Enquiry" cssClass="NewIcon"/>    
     </actionGroup>
