@@ -9,7 +9,7 @@
             <act:TabPanel ID="CustomersTab" runat="server" HeaderText="Personnel">
               <ContentTemplate>
                 <div id="view1" runat="server"></div>
-                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Contacts"   StartCommandName="Edit" StartCommandArgument="editForm1"  ShowViewSelector="false"/>
+                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Contacts"    ShowViewSelector="false"/>
               </ContentTemplate>
             </act:TabPanel>
             <act:TabPanel ID="EmploymentHistoryTab" runat="server" HeaderText="Employment History" >

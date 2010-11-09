@@ -9,11 +9,8 @@
             <act:TabPanel ID="CustomersTab" runat="server" HeaderText="Personnel" PageSize="25">
               <ContentTemplate>
                 <div id="view1" runat="server"></div>
-                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="ContactsView" PageSize="25"   StartCommandName="Select" StartCommandArgument="editForm1" ShowViewSelector="false"/>
-              
-			  
-			   
-			     </ContentTemplate>   
+			    <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="ContactsView" view="grid1" PageSize="25"  ShowViewSelector="false"/>
+			</ContentTemplate>   
 			   
 			   
 			   
@@ -23,6 +20,63 @@
               <ContentTemplate>
                 <div id="view9" runat="server"></div>
                 <aquarium:DataViewExtender id="view9Extender" runat="server" TargetControlID="view9" Controller="EmploymentHistory" view="grid1" FilterSource="view1Extender" FilterFields="ContactID"  ShowViewSelector="false" PageSize="5"  />
+              
+              <div id="EmploymentHistory_editForm1" style="display: none">
+        <table style="width: 100%">
+            <tr>
+                <td width="50%" valign="top">
+				<div>
+                        {ContactID}
+                    </div>
+                    <div>
+                        {StartDate}
+                    </div>
+                    <div>
+                        {EndtDate}
+                    </div>
+                    <div>
+                        {ProjectID}
+                    </div>
+                    <div>
+                        {RoleID}
+                    </div>
+					 <div>
+                        {Contract_days}
+                    </div>
+					 <div>
+                        {Notes}
+                    </div>
+					
+					
+                </td>
+                <td width="50%" valign="top">
+                    <div>
+                        {CurrencyID}
+                    </div>
+                    <div>
+                        {TravelRate}
+                    </div>
+                    <div>
+                        {TravelCost}
+                    </div>
+                    <div>
+                        {OffshoreRate}
+                    </div>
+                    <div>
+                        {Office_Onsh_Rate_type}
+                    </div>
+					 <div>
+                        {OfficeOnshoreRate}
+                    </div>
+					 <div>
+                        {Hour_Standby_Rate_type} - {HourStandbyRate}
+                    </div>
+					 
+					
+                </td>
+            </tr>
+        </table>
+    </div>
               </ContentTemplate>
             </act:TabPanel>
 			
