@@ -29,20 +29,11 @@
 			
             <act:TabPanel ID="NextOfKinTab" runat="server" HeaderText="Next Of Kin">
               <ContentTemplate>
-                <act:TabContainer ID="KinManager" runat="server">
-                  <act:TabPanel ID="NextOgKinTab" runat="server" HeaderText="Main">
-                    <ContentTemplate>
-                      <div id="view5" runat="server"></div>
-                      <aquarium:DataViewExtender id="view5Extender" runat="server" TargetControlID="view5" Controller="ContactsNextOfKin" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5"  />
-                    </ContentTemplate>
-                  </act:TabPanel>
-                  <act:TabPanel ID="NextOgKinDetailsTab" runat="server" HeaderText="Next Of Kin Details">
-                    <ContentTemplate>
+            
                       <div id="view10" runat="server"></div>
                       <aquarium:DataViewExtender id="view10Extender" runat="server" TargetControlID="view10" Controller="NextOfKin" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" />
-                    </ContentTemplate>
-                  </act:TabPanel>
-                </act:TabContainer>
+                   
+              
               </ContentTemplate>
             </act:TabPanel>
 			
@@ -97,7 +88,7 @@
       <td>
       <td  valign="top">
 	  
-	 	  <Table bgcolor="#3399FF">
+	 	  <Table bgcolor="#6699FF">
 <tr><td>&nbsp;</td></tr>
 <tr><td>&nbsp;</td></tr>
 <tr><td>
