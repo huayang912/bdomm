@@ -76,10 +76,12 @@ from "dbo"."Contacts" "Contacts"
       <items style="Lookup" dataController="Countries" newDataView="createForm1" />
     </field>
     <field name="CountryOfBirthName" type="String" readOnly="true" label="Country Of Birth Name" />
-    <field name="PhotoID" type="Int32" label="Photo#">
+    <!--
+    hotoID" type="Int32" label="Photo#"  >
       <items style="Lookup" dataController="Photos" newDataView="createForm1" />
     </field>
-    <field name="PreferredDayRate" type="Decimal" label="Preferred Day Rate" />
+    -->
+    <field name="PreferredDayRate" type="Int32" label="Preferred Day Rate" />
     <field name="Inactive" type="Boolean" allowNulls="true" default="((0))" label="Inactive" />
     <field name="NoSMSorEmail" type="Boolean" allowNulls="true" default="((0))" label="No SM Sor Email" />
     <field name="CreatedByUserID" type="Int32" label="Created By User#">
@@ -142,7 +144,7 @@ from "dbo"."Contacts" "Contacts"
             <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30" />
             <dataField fieldName="DateOfBirth" columns="10" />
             <dataField fieldName="MaritalStatusID" aliasFieldName="MaritalStatusName" />
-            <dataField fieldName="PhotoID" hidden="true" aliasFieldName="PreferredDayRate" />
+            <dataField fieldName="PhotoID" hidden="true" aliasFieldName="PreferredDayRate"  />
             <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
             <dataField fieldName="CreatedOn" columns="10" />
             <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
@@ -188,7 +190,7 @@ from "dbo"."Contacts" "Contacts"
             <dataField fieldName="MaritalStatusID" aliasFieldName="MaritalStatusName" />
             <dataField fieldName="PlaceOfBirth" />
             <dataField fieldName="CountryOfBirthID" aliasFieldName="CountryOfBirthName" />
-            <dataField fieldName="PhotoID" aliasFieldName="PreferredDayRate" />
+            <dataField fieldName="PhotoID" aliasFieldName="PreferredDayRate"  hidden="true" />
             <dataField fieldName="PreferredDayRate" columns="15" />
             <dataField fieldName="Inactive" />
             <dataField fieldName="NoSMSorEmail" />

@@ -175,7 +175,7 @@ from "dbo"."Contacts" "Contacts"
             <dataField fieldName="MaritalStatusID" aliasFieldName="MaritalStatusName" />
             <dataField fieldName="PlaceOfBirth" />
             <dataField fieldName="CountryOfBirthID" aliasFieldName="CountryOfBirthName" />
-            <dataField fieldName="PhotoID" aliasFieldName="PreferredDayRate" />
+            <dataField fieldName="PhotoID" aliasFieldName="PreferredDayRate"  hidden="true"/>
             <dataField fieldName="PreferredDayRate" columns="15" />
             <dataField fieldName="Inactive" />
             <dataField fieldName="NoSMSorEmail" />
