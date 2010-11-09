@@ -24,8 +24,19 @@
     <siteMapNode title="Options" description="" url="~/Pages/ListBox.aspx" roles="*">
       <siteMapNode title="Departments" description="" url="" roles="*">
         <siteMapNode title="Commercial" description="" url="_blank:http://companyweb/Commercial/default.aspx" roles="*"/>
+        <siteMapNode title="Project" description="" url="_blank:http://companyweb/projects/default.aspx" roles="*"/>
+        <siteMapNode title="Personnel" description="" url="_blank:http://companyweb/personnel/default.aspx" roles="*"/>
+        <siteMapNode title="Security" description="" url="_blank:http://companyweb/security/default.aspx" roles="*"/>
+        <siteMapNode title="Academy" description="" url="_blank:http://companyweb/academy/default.aspx" roles="*"/>
+        <siteMapNode title="Vessels" description="" url="_blank:http://companyweb/vessels/default.aspx" roles="*"/>
+        <siteMapNode title="Marketing" description="" url="_blank:http://companyweb/marketing/default.aspx" roles="*"/>
+        <siteMapNode title="Finance" description="" url="_blank:http://companyweb/finance/default.aspx" roles="*"/>
+        <siteMapNode title="IT" description="" url="_blank:http://companyweb/IT/default.aspx" roles="*"/>
+        <siteMapNode title="HR" description="" url="_blank:http://companyweb/HR/default.aspx" roles="*"/>
+        <siteMapNode title="HSE" description="" url="_blank:http://companyweb/HSE/default.aspx" roles="*"/>
+        <siteMapNode title="QA" description="" url="_blank:http://companyweb/QA/default.aspx" roles="*"/>
 
-        </siteMapNode>
+      </siteMapNode>
 
         <siteMapNode title="Configuration" description="" url="" roles="*">
       <siteMapNode title="Countries" description="View Countries" url="~/Pages/Countries.aspx" />
