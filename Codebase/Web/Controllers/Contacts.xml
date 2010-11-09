@@ -9,6 +9,12 @@
 	,"Contacts"."LastName" "LastName"
 	,"Contacts"."Address" "Address"
 	,"Contacts"."Postcode" "Postcode"
+  
+    	,"Contacts"."Coverall" "Coverall"
+	,"Contacts"."Boots" "Boots"
+	,"Contacts"."employment_status" "employment_status"
+  	,"Contacts"."Insurance" "Insurance"
+  
 	,"Contacts"."CountryID" "CountryID"
 	,"PersonnelRoles"."PrimaryRole" "PrimaryRole"
 	,"PersonnelRoles"."SecondaryRole" "SecondaryRole"
@@ -35,6 +41,7 @@
 	,"Contacts"."Version" "Version"
   	,"Contacts"."PPE_Sizes" "PPE_Sizes"
   ,"Contacts"."Contract_days" "Contract_days"
+         ,"Currency"."ShortCode" "CurrencyShortCode"
 	,"Contacts"."DayRateCurrencyID" "DayRateCurrencyID"
 from "dbo"."Contacts" "Contacts"
 	left join "dbo"."VewPersonnelRoles" "PersonnelRoles" on "Contacts"."ID" = "PersonnelRoles"."ID"
@@ -58,6 +65,42 @@ from "dbo"."Contacts" "Contacts"
     <field name="LastName" type="String" allowNulls="false" label="Last Name" showInSummary="true" />
     <field name="Address" type="String" label="Address" showInSummary="true" />
     <field name="Postcode" type="String" label="Postcode" showInSummary="true" />
+
+    <field name="Coverall" type="String" label="Coverall" showInSummary="true" />
+
+    <field name="Boots" type="Int32" label="Boots Size">
+      <items style="DropDownList">
+        <item text="4" value="4"/>
+        <item text="5" value="5"/>
+        <item text="6" value="6"/>
+        <item text="7" value="7"/>
+        <item text="8" value="8"/>
+        <item text="9" value="9"/>
+        <item text="10" value="10"/>
+        <item text="11" value="11"/>
+        <item text="12" value="12"/>
+        <item text="13" value="13"/>
+        <item text="14" value="14"/>
+        <item text="15" value="15"/>
+      </items>
+    </field>
+    <field name="employment_status" type="String" label="Employment Status">
+      <items style="DropDownList">
+        <item text="Self Employed" value="Self Employed"/>
+        <item text="LTD" value="LTD"/>
+        <item text="Sole Trader" value="Sole Trader"/>       
+        
+      </items>
+    </field>
+    
+    
+    <field name="Insurance" type="String" label="Insurance">
+      <items style="DropDownList">
+        <item text="Own" value="Own"/>
+        <item text="OMM" value="OMM"/>
+           </items>
+    </field>
+
     <field name="CountryID" type="Int32" label="Country#" showInSummary="true">
       <items style="Lookup" dataController="Countries" newDataView="createForm1" />
     </field>
@@ -65,8 +108,8 @@ from "dbo"."Contacts" "Contacts"
     
     <field name="CurrencyShortCode" type="String" readOnly="true" label="Currency Code" />
     
-    <field name="DateOfBirth" type="DateTime" label="Date Of Birth" />
-    <field name="DateOfLastMeeting" type="DateTime" label="Date Of Last Meeting" />
+    <field name="DateOfBirth" type="DateTime" label="Date Of Birth"  />
+    <field name="DateOfLastMeeting" type="DateTime" label="Date Of Last Meeting"  />
     <field name="MaritalStatusID" type="Int32" allowNulls="false" label="Marital Status#">
       <items style="Lookup" dataController="MaritalStatuses" newDataView="createForm1" />
     </field>
@@ -83,7 +126,7 @@ from "dbo"."Contacts" "Contacts"
     -->
     <field name="PreferredDayRate" type="Int32" label="Preferred Day Rate" />
     <field name="Inactive" type="Boolean" allowNulls="true" default="((0))" label="Inactive" />
-    <field name="NoSMSorEmail" type="Boolean" allowNulls="true" default="((0))" label="No SM Sor Email" />
+    <field name="NoSMSorEmail" type="Boolean" allowNulls="true" default="((0))" label="No SMS Or Email" />
     <field name="CreatedByUserID" type="Int32" label="Created By User#">
       <items style="Lookup" dataController="Users" newDataView="createForm1" />
     </field>
@@ -101,8 +144,21 @@ from "dbo"."Contacts" "Contacts"
     <field name="DayRateCurrencyID" type="Int32" label="Day Rate Currency#">
       <items style="Lookup" dataController="Currency" newDataView="createForm1" />
     </field>
+    <field name="CurrencyShortCode" type="String" readOnly="true" label="Currency Code" />
+
     <field name="PrimaryRole" type="String" readOnly="true" label="Primary Role" showInSummary="true" formatOnClient="true" />
-    <field name="PPE_Sizes" type="String" readOnly="false" label="PPE Sizes" formatOnClient="true" />
+  <!--  <field name="PPE_Sizes" type="String" readOnly="false" label="PPE Sizes" formatOnClient="true" />
+-->
+    <field name="PPE_Sizes" type="String" label="PPE Sizes">
+      <items style="DropDownList">
+        <item text="XM" value="XM"/>
+        <item text="M" value="M"/>
+        <item text="L" value="L"/>
+        <item text="XL" value="XL"/>
+        <item text="XXL" value="XXL"/>
+        <item text="XXXL" value="XXXL"/>
+      </items>
+    </field>
 
     <field name="SecondaryRole" type="String" readOnly="true" label="Secondary Role" showInSummary="true" formatOnClient="true" />
     <field name="TertiaryRole" type="String" readOnly="true" label="Tertiary Role" showInSummary="true" formatOnClient="true" />
@@ -157,19 +213,27 @@ from "dbo"."Contacts" "Contacts"
           <dataFields>
             <dataField fieldName="PlaceOfBirth" columns="30" />
             <dataField fieldName="CountryOfBirthID" columns="30" />
-            <dataField fieldName="CountryOfBirthName" columns="30" />
+            <dataField fieldName="CountryOfBirthName" columns="30"  hidden="true"/>
             <dataField fieldName="PPE_Sizes" columns="30" />
-
-          </dataFields>
-        </category>
-        <category headerText="Business Details" tab="Business Details">
-          <description>Business Details</description>
-          <dataFields>
-            <dataField fieldName="DateOfLastMeeting" />
-            <dataField fieldName="PreferredDayRate" />
+            <dataField fieldName="PreferredDayRate" columns="30"  />
             <dataField fieldName="DayRateCurrencyID" aliasFieldName="CurrencyShortCode"/>
             <dataField fieldName="NoSMSorEmail" />
             <dataField fieldName="Inactive" />
+
+          </dataFields>
+        </category>
+        <category headerText="Employment Status" tab="Employment Status">
+          <description>Employment Status</description>
+          <dataFields>
+<dataField fieldName="DateOfLastMeeting"  hidden="true"/> 
+    
+
+            <dataField fieldName="Coverall"  columns="30" />
+            <dataField fieldName="Boots" />
+            <dataField fieldName="employment_status" />
+            <dataField fieldName="Insurance" />       
+            
+
           </dataFields>
         </category>
       </categories>
@@ -186,19 +250,26 @@ from "dbo"."Contacts" "Contacts"
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" />
             <dataField fieldName="DateOfBirth" columns="10" />
-            <dataField fieldName="DateOfLastMeeting" columns="10" />
+            <dataField fieldName="DateOfLastMeeting" columns="10" hidden="true"/>
             <dataField fieldName="MaritalStatusID" aliasFieldName="MaritalStatusName" />
             <dataField fieldName="PlaceOfBirth" />
             <dataField fieldName="CountryOfBirthID" aliasFieldName="CountryOfBirthName" />
             <dataField fieldName="PhotoID" aliasFieldName="PreferredDayRate"  hidden="true" />
+            <dataField fieldName="PPE_Sizes" columns="30" />
+
             <dataField fieldName="PreferredDayRate" columns="15" />
+            <dataField fieldName="DayRateCurrencyID" aliasFieldName="CurrencyShortCode" />
+
             <dataField fieldName="Inactive" />
             <dataField fieldName="NoSMSorEmail" />
             <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
             <dataField fieldName="CreatedOn" columns="10" />
             <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
             <dataField fieldName="ChangedOn" columns="10" />
-            <dataField fieldName="DayRateCurrencyID" columns="15" />
+            <dataField fieldName="Coverall"  columns="30" />
+            <dataField fieldName="Boots" />
+            <dataField fieldName="employment_status" />
+            <dataField fieldName="Insurance" />
           </dataFields>
         </category>
       </categories>

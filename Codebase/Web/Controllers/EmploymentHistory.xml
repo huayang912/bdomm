@@ -15,6 +15,13 @@
 	,"EmploymentHistory"."StartDate" "StartDate"
 	,"EmploymentHistory"."EndDate" "EndDate"
 	,"EmploymentHistory"."ProjectID" "ProjectID"
+  
+  	,"EmploymentHistory"."OffshoreRate" "OffshoreRate"
+	,"EmploymentHistory"."Office_Onsh_Rate_type" "Office_Onsh_Rate_type"
+	,"EmploymentHistory"."OfficeOnshoreRate" "OfficeOnshoreRate"
+  ,"EmploymentHistory"."Hour_Standby_Rate_type" "Hour_Standby_Rate_type"
+	,"EmploymentHistory"."HourStandbyRate" "HourStandbyRate"
+  
 	,"Project"."Name" "ProjectName"
   	,"Project"."Number" "ProjectNumber"
 	,"ProjectStatus"."Name" "ProjectStatusName"
@@ -130,6 +137,24 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
       </field>
     <field name="ProjectQuotationNumber" type="String" allowNulls="false" label="Quotation#" formatOnClient="true" allowQBE="false" allowSorting="false" />
     <field name="ClientName" type="String" allowNulls="false" readOnly="true" label="Client Name" formatOnClient="true" />
+
+    <field name="OffshoreRate" type="Int32" label="Offshore Rate#"/>
+    <field name="Office_Onsh_Rate_type" type="String" label="Rate Type">
+      <items style="DropDownList">
+        <item text="Office Rate" value="Office Rate"/>
+        <item text="Onshore Rate" value="Onshore Rate"/>
+        </items>
+    </field>    
+    <field name="OfficeOnshoreRate" type="Int32" label="Rate"/>
+
+    <field name="Hour_Standby_Rate_type" type="String" label="Hour/Standby">
+      <items style="DropDownList">
+        <item text="Hourly Rate" value="Hourly Rate"/>
+        <item text="Standby Rate" value="Standby Rate"/>
+      </items>
+    </field>
+    <field name="HourStandbyRate" type="Int32" label="Hourly/Standby Rate"/>
+
   </fields>
   <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <view id="grid1" type="Grid" commandId="command1" label="Employment History">
@@ -163,10 +188,18 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
 
             <dataField fieldName="CurrencyID" aliasFieldName="CurrencyShortCode"   />
             <dataField fieldName="TravelRate" columns="10" />
-            <dataField fieldName="TravelCost" columns="10"  />
-            
+            <dataField fieldName="TravelCost" columns="10"  />            
             
             <dataField fieldName="DayRate" columns="10" />
+
+            <dataField fieldName="OffshoreRate"  columns="10"/>
+            <dataField fieldName="Office_Onsh_Rate_type" columns="10"/>
+            <dataField fieldName="OfficeOnshoreRate"  columns="10"/>
+            <dataField fieldName="Hour_Standby_Rate_type"  columns="10"/>
+            <dataField fieldName="HourStandbyRate"  columns="10"/>
+
+
+
             <dataField fieldName="Contract_days" /> 
              
             <dataField fieldName="Notes"  rows="3"/>
