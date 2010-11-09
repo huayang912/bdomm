@@ -24,7 +24,9 @@ from "dbo"."Users" "Users"
   </commands>
   <fields xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" readOnly="true" label="Id" />
-    <field name="UserNameWeb" type="String" allowNulls="false" label="User Name" showInSummary="true" />
+	
+	    <field name="UserName" type="String" allowNulls="false" label="User Name Win" showInSummary="true" />
+    <field name="UserNameWeb" type="String" allowNulls="false" label="User Name Web" showInSummary="true" />
     <field name="DisplayName" type="String" allowNulls="false" label="Display Name" showInSummary="true" />
     <field name="Password" type="String" allowNulls="false" label="Password" showInSummary="true" />
   </fields>
@@ -45,6 +47,7 @@ from "dbo"."Users" "Users"
             <dataField fieldName="UserNameWeb" />
             <dataField fieldName="DisplayName" />
             <dataField fieldName="Password" />
+						<dataField fieldName="UserName" />
           </dataFields>
         </category>
       </categories>
@@ -58,6 +61,7 @@ from "dbo"."Users" "Users"
             <dataField fieldName="UserNameWeb" readOnly="" />
             <dataField fieldName="DisplayName" />
             <dataField fieldName="Password" hidden="false" />
+			<dataField fieldName="UserName" />
           </dataFields>
         </category>
       </categories>
