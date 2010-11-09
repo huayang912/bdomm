@@ -235,7 +235,14 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
 
 
             <dataField fieldName="DayRate" columns="10" />
-            
+            <dataField fieldName="OffshoreRate"  columns="10"/>
+            <dataField fieldName="Office_Onsh_Rate_type" columns="10"/>
+            <dataField fieldName="OfficeOnshoreRate"  columns="10"/>
+            <dataField fieldName="Hour_Standby_Rate_type"  columns="10"/>
+            <dataField fieldName="HourStandbyRate"  columns="10"/>
+
+
+
             <dataField fieldName="Contract_days" />
 
             <dataField fieldName="Notes"  rows="3"/>

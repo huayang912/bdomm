@@ -291,6 +291,7 @@ from "dbo"."Contacts" "Contacts"
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a10" whenLastCommandName="Select" commandName="Cancel" />
       <action id="a100" commandName="Update" commandArgument="~/pages/Contacts_bak.aspx?ID={ID}" headerText="Update" causesValidation="true" whenLastCommandName="Edit" whenHRef="Contacts_bak" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
@@ -301,8 +302,8 @@ from "dbo"."Contacts" "Contacts"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a101" commandName="Navigate" commandArgument="~/pages/PersonnelNew.aspx?ID={ID}" headerText="Edit" causesValidation="true"  whenLastCommandArgument="Select"/>
-
+      <!-- <action id="a101" commandName="Navigate" commandArgument="~/pages/PersonnelNew.aspx?ID={ID}" headerText="Edit" causesValidation="true"  whenLastCommandArgument="Select"/>-->
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" whenLastCommandArgument="Select" headerText="Edit"/>
       
       <action id="a2" />
       <!--
