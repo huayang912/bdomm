@@ -9,6 +9,6 @@ public partial class Pages_PersonnelViewRedirect : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Response.Redirect("ClientNew_a.aspx");
+        Response.Redirect("ClientNew.aspx");
     }
 }
