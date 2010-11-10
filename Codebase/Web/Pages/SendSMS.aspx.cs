@@ -231,7 +231,7 @@ public partial class Pages_SendSMS : BasePage
             //SMSService.TextAnywhere_SMS smsService = new SMSService.TextAnywhere_SMS();
             WSSendSmsReply = _SmsService.SendSMSEx(userName, password,
                         smsMessageRef.Client_Ref, ConfigReader.BILLING_REF,                        
-                        (int)CONNECTION_TYPES.TEST, ConfigReader.ORIGINATOR,
+                        (int)CONNECTION_TYPES.LOW_VOLUME, ConfigReader.ORIGINATOR,
                         (int)ORIGINATOR_TYPES.NAME, sb.ToString(),
                         message.Text, 0, (int)REPLY_TYPES.NONE, String.Empty);
         }
