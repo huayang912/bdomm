@@ -6,12 +6,12 @@
 <ContentTemplate>
  <table width="100%" border="0">
     <tr>
-      <td valign="top"  width="50%" ><div factory:flow="NewRow" style="padding-top:8px; width:400px " xmlns:factory="urn:codeontime:app-factory" >
+      <td valign="top"  ><div factory:flow="NewRow" style="padding-top:8px;  xmlns:factory="urn:codeontime:app-factory" >
              <act:TabContainer ID="OrderManager" runat="server">
             <act:TabPanel ID="Clients" runat="server" HeaderText="Clients">
               <ContentTemplate>
                 <div id="view1" runat="server"></div>             
-                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Clients"   StartCommandName="Select" StartCommandArgument="editForm1" ShowViewSelector="false" />
+                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Clients"  view="grid1"  ShowViewSelector="false" />
               </ContentTemplate>
             </act:TabPanel>
                <act:TabPanel ID="PurchaseOrdersTab" runat="server" HeaderText="Purchase Orders">
