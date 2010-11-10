@@ -58,7 +58,7 @@ from "dbo"."Clients" "Clients"
     <view id="grid1" type="Grid" commandId="command1" label="Clients" sortExpression="Name ASC">
       <headerText>$DefaultGridViewDescription</headerText>
       <dataFields>
-        <dataField fieldName="Name" />
+        <dataField fieldName="Name"  columns="50"/>
         <dataField fieldName="Number" hidden="true" columns="50" />
         <dataField fieldName="Address" hidden="true" />
         <dataField fieldName="Postcode" hidden="true" columns="20" />
@@ -77,7 +77,7 @@ from "dbo"."Clients" "Clients"
           <description></description>
           <dataFields>
             <dataField fieldName="Number" hidden="true" columns="50" />
-            <dataField fieldName="Name" columns="30"/>
+            <dataField fieldName="Name" columns="50"/>
             <dataField fieldName="Address" columns="30" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30"/>
@@ -133,6 +133,8 @@ from "dbo"."Clients" "Clients"
       <action id="a2" commandName="Delete" whenHRef="ClientControlEdit" />
       -->
       <action id="a3" commandName="Cancel" whenHRef="ClientControlEdit" />
+      <action id="a3" commandName="Cancel" whenLastCommandName="Select" />
+
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <!--
       <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
@@ -151,8 +153,8 @@ from "dbo"."Clients" "Clients"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <action id="a100" commandName="Navigate" commandArgument="~/pages/ClientNewEdit.aspx?ID={ID}" causesValidation="true" headerText="Edit" />
-
+      <!--<action id="a100" commandName="Navigate" commandArgument="~/pages/ClientNewEdit.aspx?ID={ID}" causesValidation="true" headerText="Edit" />-->
+      <action id="a100" whenLastCommandName="Select" commandName="Edit" />
     </actionGroup>
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
