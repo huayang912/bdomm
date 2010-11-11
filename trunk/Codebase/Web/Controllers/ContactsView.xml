@@ -212,7 +212,7 @@ from "dbo"."Contacts" "Contacts"
             <dataField fieldName="DateOfBirth" columns="10" />
             <dataField fieldName="MaritalStatusID" aliasFieldName="MaritalStatusName" />
             <dataField fieldName="PhotoID" hidden="true" aliasFieldName="PreferredDayRate" />
-            <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
+            <dataField fieldName="CreatedByUserID" hidden="false" aliasFieldName="CreatedByUserUserName" />
             <dataField fieldName="CreatedOn" columns="10" />
             <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
             <dataField fieldName="ChangedOn" columns="10" />
@@ -269,24 +269,44 @@ from "dbo"."Contacts" "Contacts"
             <dataField fieldName="DateOfBirth" columns="10" />
             <dataField fieldName="DateOfLastMeeting" columns="10" hidden="true"/>
             <dataField fieldName="MaritalStatusID" aliasFieldName="MaritalStatusName" />
-            <dataField fieldName="PlaceOfBirth" />
-            <dataField fieldName="CountryOfBirthID" aliasFieldName="CountryOfBirthName" />
-            <dataField fieldName="PhotoID" aliasFieldName="PreferredDayRate"  hidden="true"/>
-            <dataField fieldName="PPE_Sizes" columns="30" />
-
-            <dataField fieldName="PreferredDayRate" columns="15" />
-            <dataField fieldName="DayRateCurrencyID" aliasFieldName="CurrencyShortCode" />
-
-            <dataField fieldName="Inactive" />
-            <dataField fieldName="NoSMSorEmail" />
             <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
             <dataField fieldName="CreatedOn" columns="10" />
             <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
+
+          </dataFields>
+        </category>
+        <category headerText="Other" tab="Other Details">
+          <description>Other Details</description>
+          <dataFields>    
+            <dataField fieldName="PlaceOfBirth" />
+            <dataField fieldName="CountryOfBirthID" aliasFieldName="CountryOfBirthName" />
+            <dataField fieldName="PhotoID" aliasFieldName="PreferredDayRate"  hidden="true"/>
+
+            <dataField fieldName="PreferredDayRate" columns="15" />
+            <dataField fieldName="DayRateCurrencyID" aliasFieldName="CurrencyShortCode" />
+            <dataField fieldName="PPE_Sizes" columns="30" />
+
+
             <dataField fieldName="ChangedOn" columns="10" />
             <dataField fieldName="Coverall"  columns="30"/>
             <dataField fieldName="Boots" />
+            <dataField fieldName="Inactive" />
+            <dataField fieldName="NoSMSorEmail" />
+
+          </dataFields>
+        </category>
+        <category headerText="Employment Status" tab="Employment Status">
+          <description>Employment Status</description>
+          <dataFields>
+
+            <dataField fieldName="CopmpanyName" columns="30" />
+            <dataField fieldName="CompanyReg" columns="30" />
+            <dataField fieldName="CompanyVat" columns="30" />
+            <dataField fieldName="CompanyAddress" rows="3" />
+
             <dataField fieldName="employment_status" />
             <dataField fieldName="Insurance" />
+            
           </dataFields>
         </category>
       </categories>
@@ -328,17 +348,19 @@ from "dbo"."Contacts" "Contacts"
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
+    <!--
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
-      <!-- <action id="a101" commandName="Navigate" commandArgument="~/pages/PersonnelNew.aspx?ID={ID}" headerText="Edit" causesValidation="true"  whenLastCommandArgument="Select"/>-->
+      <action id="a101" commandName="Navigate" commandArgument="~/pages/PersonnelNew.aspx?ID={ID}" headerText="Edit" causesValidation="true"  whenLastCommandArgument="Select"/>
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" whenLastCommandArgument="Select" headerText="Edit"/>
       
       <action id="a2" />
-      <!--
+  
       <action id="a1" commandName="ExportCsv" />
       <action id="a3" commandName="ExportRowset" />
       <action id="a100" commandName="Navigate" commandArgument="~/pages/Certificates.aspx?ContactID={ID}" headerText="Certificates" causesValidation="true" whenHRef="Contacts_bak" />
-       -->
+       
    </actionGroup>
+    -->
 
     <actionGroup id="ag31" scope="ActionBar" headerText="Edit" flat="true">
       <action id="a1" commandName="Edit" commandArgument="createForm1" whenLastCommandArgument="Select" whenKeySelected="true" />
