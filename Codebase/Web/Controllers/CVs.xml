@@ -50,7 +50,7 @@ from "dbo"."CVs" "CVs"
         <category headerText="New CV" newColumn="true">
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" hidden="false" />
-            <dataField fieldName="CV" hidden="false" columns="100" rows="50" />
+            <dataField fieldName="CV" hidden="false" columns="100" rows="50" textMode="Note"/>
             <dataField fieldName="Notes" hidden="false" columns="50" rows="5" />
           </dataFields>
           <description>$DefaultNewDescription</description>
@@ -65,7 +65,7 @@ from "dbo"."CVs" "CVs"
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" hidden="false" />
             <dataField fieldName="CV" columns="100" rows="50" hidden="false" />
-            <dataField fieldName="Notes" columns="40" rows="5" hidden="false" />
+            <dataField fieldName="Notes" columns="40" rows="5" hidden="false" textMode="Note"/>
           </dataFields>
           <description>$DefaultEditDescription</description>
         </category>
