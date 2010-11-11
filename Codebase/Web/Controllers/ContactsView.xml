@@ -287,11 +287,12 @@ from "dbo"."Contacts" "Contacts"
             <dataField fieldName="PPE_Sizes" columns="30" />
 
 
-            <dataField fieldName="ChangedOn" columns="10" />
             <dataField fieldName="Coverall"  columns="30"/>
             <dataField fieldName="Boots" />
             <dataField fieldName="Inactive" />
             <dataField fieldName="NoSMSorEmail" />
+            <dataField fieldName="ChangedOn" columns="10" />
+
 
           </dataFields>
         </category>
