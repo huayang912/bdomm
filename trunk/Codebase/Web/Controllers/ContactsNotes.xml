@@ -49,7 +49,7 @@ from "dbo"."ContactsNotes" "ContactsNotes"
       <headerText>Notes</headerText>
       <dataFields>
         <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" hidden="true"/>
-        <dataField fieldName="Notes" rows="5" />
+        <dataField fieldName="Notes" rows="5"  columns="20"/>
         <dataField fieldName="ChangedOn" columns="10" />
         <dataField fieldName="CreatedByUsername" columns="50" hidden="true" />
         <dataField fieldName="ChangedByUsername" columns="50" hidden="true" />
@@ -62,7 +62,7 @@ from "dbo"."ContactsNotes" "ContactsNotes"
           <description>$DefaultEditDescription</description>
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
-            <dataField fieldName="Notes" rows="5" />
+            <dataField fieldName="Notes" rows="5" columns="20"/>
             <dataField fieldName="ChangedOn" columns="10"  hidden="true"/>
             <dataField fieldName="CreatedByUsername" columns="50"  hidden="true" />
             <dataField fieldName="ChangedByUsername" columns="50"  hidden="true" />
@@ -73,13 +73,13 @@ from "dbo"."ContactsNotes" "ContactsNotes"
       </categories>
     </view>
     <view id="createForm1" type="Form" commandId="command1" label="New Contacts Notes">
-      <headerText>$DefaultCreateViewDescription</headerText>
+      <headerText></headerText>
       <categories>
         <category headerText="New Contacts Notes" newColumn="true">
-          <description>$DefaultNewDescription</description>
+          <description></description>
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" hidden="true"/>
-            <dataField fieldName="Notes" rows="5" />
+            <dataField fieldName="Notes" rows="5" columns="20"/>
             <dataField fieldName="ChangedOn" columns="10"  hidden="true" />
             <dataField fieldName="CreatedByUsername" columns="50"  hidden="true"/>
             <dataField fieldName="ChangedByUsername" columns="50"  hidden="true" />

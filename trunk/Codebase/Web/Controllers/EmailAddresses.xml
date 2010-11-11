@@ -40,7 +40,7 @@ from "dbo"."EmailAddresses" "EmailAddresses"
       <items style="Lookup" dataController="Contacts" newDataView="createForm1" />
     </field>
     <field name="ContactFirstNames" type="String" readOnly="true" label="Contact First Names" />
-    <field name="Address" type="String" allowNulls="false" label="Address" showInSummary="true" />
+    <field name="Address" type="String" allowNulls="false" label="Email" showInSummary="true" />
     <field name="ChangedOn" type="DateTime" allowNulls="false" default="(getdate())" label="Changed On" showInSummary="true" />
     <field name="TimeStamp" type="Byte[]" allowNulls="false" readOnly="true" label="Time Stamp" showInSummary="true" />
   </fields>
@@ -49,35 +49,35 @@ from "dbo"."EmailAddresses" "EmailAddresses"
       <headerText>Emails</headerText>
       <dataFields>
         <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
-        <dataField fieldName="Address" />
-        <dataField fieldName="ChangedOn" columns="10" />
+        <dataField fieldName="Address" columns="20"/>
+        <dataField fieldName="ChangedOn" columns="10" hidden="true"/>
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Email Addresses">
-      <headerText>$DefaultEditViewDescription</headerText>
+      <headerText></headerText>
       <categories>
         <category headerText="Email Addresses" newColumn="true">
-          <description>$DefaultEditDescription</description>
+          <description></description>
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
-            <dataField fieldName="Address" />
-            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="Address" columns="20"/>
+            <dataField fieldName="ChangedOn" columns="10" hidden="true"/>
           </dataFields>
         </category>
         <category headerText="Reference Information">
-          <description>$DefaultReferenceDescription</description>
+          <description></description>
           <dataFields />
         </category>
       </categories>
     </view>
     <view id="createForm1" type="Form" commandId="command1" label="New Email Addresses">
-      <headerText>$DefaultCreateViewDescription</headerText>
+      <headerText>$</headerText>
       <categories>
         <category headerText="New Email Addresses" newColumn="true">
-          <description>$DefaultNewDescription</description>
+          <description></description>
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
-            <dataField fieldName="Address" />
+            <dataField fieldName="Address" columns="20"/>
             <dataField fieldName="ChangedOn" columns="10" />
           </dataFields>
         </category>

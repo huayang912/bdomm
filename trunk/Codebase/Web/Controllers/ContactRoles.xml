@@ -70,15 +70,15 @@ from "dbo"."ContactRoles" "ContactRoles"
         <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
         <dataField fieldName="RoleID" aliasFieldName="RoleName" />
         <dataField fieldName="RoleOrder" columns="15" />
-        <dataField fieldName="ChangedOn" columns="10" />
+        <dataField fieldName="ChangedOn" columns="10" hidden="true"/>
         <dataField fieldName="Version" hidden="true" columns="15" />
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Contact Roles">
-      <headerText>$DefaultEditViewDescription</headerText>
+      <headerText></headerText>
       <categories>
         <category headerText="Contact Roles" newColumn="true">
-          <description>$DefaultEditDescription</description>
+          <description></description>
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
@@ -88,16 +88,16 @@ from "dbo"."ContactRoles" "ContactRoles"
           </dataFields>
         </category>
         <category headerText="Reference Information">
-          <description>$DefaultReferenceDescription</description>
+          <description></description>
           <dataFields />
         </category>
       </categories>
     </view>
     <view id="createForm1" type="Form" commandId="command1" label="New Contact Roles">
-      <headerText>$DefaultCreateViewDescription</headerText>
+      <headerText></headerText>
       <categories>
         <category headerText="New Contact Roles" newColumn="true">
-          <description>$DefaultNewDescription</description>
+          <description></description>
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
