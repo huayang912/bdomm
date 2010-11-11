@@ -38,6 +38,9 @@
                         {ProjectID}
                     </div>
                     <div>
+                        {ProjectCode_other}
+                    </div>
+                    <div>
                         {RoleID}
                     </div>
 					 <div>
