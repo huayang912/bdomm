@@ -206,7 +206,7 @@ from "dbo"."Contacts" "Contacts"
             <dataField fieldName="ID" columns="8" />
             <dataField fieldName="FirstNames" columns="50" />
             <dataField fieldName="LastName" columns="50" />
-            <dataField fieldName="Address" />
+            <dataField fieldName="Address" columns="50"/>
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" />
             <dataField fieldName="DateOfBirth" columns="10" />
@@ -263,7 +263,7 @@ from "dbo"."Contacts" "Contacts"
           <dataFields>
             <dataField fieldName="FirstNames" columns="50" />
             <dataField fieldName="LastName" columns="50" />
-            <dataField fieldName="Address" />
+            <dataField fieldName="Address" columns="50"/>
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" />
             <dataField fieldName="DateOfBirth" columns="10" />
