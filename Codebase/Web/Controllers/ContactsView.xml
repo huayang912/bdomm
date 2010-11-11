@@ -222,7 +222,7 @@ from "dbo"."Contacts" "Contacts"
         <category headerText="Other" tab="Other Details">
           <description>Other Details</description>
           <dataFields>
-            <dataField fieldName="PlaceOfBirth" />
+            <dataField fieldName="PlaceOfBirth" columns="30"/>
             <dataField fieldName="CountryOfBirthID" />
         <!--    <dataField fieldName="CountryOfBirthName" /> -->
             <dataField fieldName="PPE_Sizes" columns="30" />
@@ -278,7 +278,7 @@ from "dbo"."Contacts" "Contacts"
         <category headerText="Other" tab="Other Details">
           <description>Other Details</description>
           <dataFields>    
-            <dataField fieldName="PlaceOfBirth" />
+            <dataField fieldName="PlaceOfBirth" columns="30"/>
             <dataField fieldName="CountryOfBirthID" aliasFieldName="CountryOfBirthName" />
             <dataField fieldName="PhotoID" aliasFieldName="PreferredDayRate"  hidden="true"/>
 
