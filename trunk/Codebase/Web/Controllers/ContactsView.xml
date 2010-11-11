@@ -15,6 +15,17 @@
 	,"Contacts"."employment_status" "employment_status"
   	,"Contacts"."Insurance" "Insurance"
   
+  
+  	,"Contacts"."PPE_Sent_date" "PPE_Sent_Date"
+	,"Contacts"."PPE_Note" "PPE_Note"
+  	,"Contacts"."CopmpanyName" "CopmpanyName"
+    
+      	,"Contacts"."CompanyReg" "CompanyReg"
+  	,"Contacts"."CompanyVat" "CompanyVat"
+  	,"Contacts"."CompanyAddress" "CompanyAddress"
+
+    
+  
 	,"Contacts"."CountryID" "CountryID"
 	,"PersonnelRoles"."PrimaryRole" "PrimaryRole"
 	,"PersonnelRoles"."SecondaryRole" "SecondaryRole"
@@ -102,6 +113,13 @@ from "dbo"."Contacts" "Contacts"
     </field>
 
 
+    <field name="PPE_Sent_Date" type="DateTime" label="PPE Sent Date"/>
+    <field name="PPE_Note" type="String" label="Note"/>
+
+    <field name="CopmpanyName" type="String" label="Copmpany Name"/>
+    <field name="CompanyReg" type="String" label="Copmpany Reg"/>
+    <field name="CompanyVat" type="String" label="Copmpany Vat"/>
+    <field name="CompanyAddress" type="String" label="Copmpany Address"/>
 
     <field name="CountryID" type="Int32" label="Country#" showInSummary="true">
       <items style="Lookup" dataController="Countries" newDataView="createForm1" />
@@ -208,6 +226,12 @@ from "dbo"."Contacts" "Contacts"
             <dataField fieldName="CountryOfBirthID" />
         <!--    <dataField fieldName="CountryOfBirthName" /> -->
             <dataField fieldName="PPE_Sizes" columns="30" />
+            <dataField fieldName="Coverall"  columns="30"/>
+            <dataField fieldName="Boots" columns="30"/>
+            <dataField fieldName="PPE_Sent_Date" />
+            <dataField fieldName="PPE_Note" rows="3"/>
+
+
             <dataField fieldName="DateOfLastMeeting" hidden="true"/>
             <dataField fieldName="PreferredDayRate" columns="30" />
             <dataField fieldName="DayRateCurrencyID" aliasFieldName="CurrencyShortCode" />
@@ -218,10 +242,13 @@ from "dbo"."Contacts" "Contacts"
         <category headerText="Employment Status" tab="Employment Status">
           <description>Employment Status</description>
           <dataFields>
-      
 
-            <dataField fieldName="Coverall"  columns="30"/>
-            <dataField fieldName="Boots" />
+            <dataField fieldName="CopmpanyName" columns="30" />
+            <dataField fieldName="CompanyReg" columns="30" />
+            <dataField fieldName="CompanyVat" columns="30" />
+            <dataField fieldName="CompanyAddress" rows="3" />
+
+
             <dataField fieldName="employment_status" />
             <dataField fieldName="Insurance" />
           </dataFields>
