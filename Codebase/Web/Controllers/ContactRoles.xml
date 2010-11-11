@@ -64,7 +64,7 @@ from "dbo"."ContactRoles" "ContactRoles"
     <field name="Version" type="Byte[]" allowNulls="false" readOnly="true" label="Version" />
   </fields>
   <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
-    <view id="grid1" type="Grid" commandId="command1" label="Contact Roles">
+    <view id="grid1" type="Grid" commandId="command1" label="Contact Roles" sortExpression="RoleName">
       <headerText>Roles</headerText>
       <dataFields>
         <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
@@ -83,7 +83,7 @@ from "dbo"."ContactRoles" "ContactRoles"
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
             <dataField fieldName="RoleOrder" columns="15" />
-            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="ChangedOn" columns="10" readOnly="true" />
             <dataField fieldName="Version" hidden="true" columns="15" />
           </dataFields>
         </category>
@@ -102,7 +102,7 @@ from "dbo"."ContactRoles" "ContactRoles"
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
             <dataField fieldName="RoleOrder" columns="15" />
-            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="ChangedOn" columns="10" readOnly="true" />
           </dataFields>
         </category>
       </categories>
