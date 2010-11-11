@@ -57,10 +57,10 @@ from "dbo"."ClientsNotes" "ClientsNotes"
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Clients Notes">
-      <headerText>$DefaultEditViewDescription</headerText>
+      <headerText></headerText>
       <categories>
         <category headerText="Clients Notes" newColumn="true">
-          <description>$DefaultEditDescription</description>
+          <description></description>
           <dataFields>
             <dataField fieldName="ClientID" aliasFieldName="ClientName" />
             <dataField fieldName="Notes"   rows="3"/>
@@ -73,10 +73,10 @@ from "dbo"."ClientsNotes" "ClientsNotes"
       </categories>
     </view>
     <view id="createForm1" type="Form" commandId="command1" label="New Clients Notes">
-      <headerText>$DefaultCreateViewDescription</headerText>
+      <headerText></headerText>
       <categories>
         <category headerText="New Clients Notes" newColumn="true">
-          <description>$DefaultNewDescription</description>
+          <description></description>
           <dataFields>
             <dataField fieldName="ClientID" aliasFieldName="ClientName" />
             <dataField fieldName="Notes" rows="3"/>
