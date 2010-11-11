@@ -16,6 +16,8 @@
 	,"EmploymentHistory"."EndDate" "EndDate"
 	,"EmploymentHistory"."ProjectID" "ProjectID"
   
+  	,"EmploymentHistory"."ProjectCode_other" "ProjectCode_other"
+  
   	,"EmploymentHistory"."OffshoreRate" "OffshoreRate"
 	,"EmploymentHistory"."Office_Onsh_Rate_type" "Office_Onsh_Rate_type"
 	,"EmploymentHistory"."OfficeOnshoreRate" "OfficeOnshoreRate"
@@ -100,11 +102,11 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
     <field name="ContactFirstNames" type="String" readOnly="true" label="Contact First Names" />
     <field name="StartDate" type="DateTime" label="Start Date" showInSummary="true" />
     <field name="EndDate" type="DateTime" label="End Date" showInSummary="true" />
-    <field name="ProjectID" type="Int32" label="Project#" showInSummary="true" allowNulls="false">
+    <field name="ProjectID" type="Int32" label="Project#" showInSummary="true" allowNulls="true">
       <items style="Lookup" dataController="ProjectsLookup" newDataView="createForm1" />
     </field>
     <field name="ProjectName" type="String" readOnly="true" label="Project Name" />
-    <field name="ProjectNumber" type="String" readOnly="true" label="Project Number" />
+    <field name="ProjectNumber" type="String" readOnly="true" label="Project" />
     <field name="ProjectQuotationEnquiryNumber" type="String" readOnly="true" label="Project Quotation Enquiry Number" />
     <field name="ProjectStatusName" type="String" readOnly="true" label="Project Status Name" />
     <field name="ClientID" type="Int32" label="Client#" showInSummary="true">
@@ -122,6 +124,8 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
     <field name="TravelRate" type="Int32"  label="Travel Rate" />
     <field name="TravelCost" type="Int32"  label="Travel Cost" />
     <field name="CurrencyShortCode" type="String" readOnly="true" label="Currency Code" />
+
+    <field name="ProjectCode_other" type="String"  label="Project Code" />
 
 
     <field name="RoleName" type="String" readOnly="true" label="Role Name" />
@@ -183,6 +187,8 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
             <dataField fieldName="ProjectID" aliasFieldName="ProjectNumber" />
+            <dataField fieldName="ProjectCode_other" columns="10" />
+
             <dataField fieldName="ClientID" hidden="true" aliasFieldName="ClientName" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
 
@@ -226,6 +232,8 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
             <dataField fieldName="StartDate" columns="10" />
             <dataField fieldName="EndDate" columns="10" />
             <dataField fieldName="ProjectID" aliasFieldName="ProjectNumber" />
+            <dataField fieldName="ProjectCode_other" columns="10" />
+
             <dataField fieldName="ClientID" hidden="true" aliasFieldName="ClientName" />
             <dataField fieldName="RoleID" aliasFieldName="RoleName" />
 

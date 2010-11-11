@@ -50,13 +50,13 @@ from "dbo"."CVs" "CVs"
         <category headerText="New CV" newColumn="true">
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" hidden="false" />
-            <dataField fieldName="CV" hidden="false" columns="200" rows="50" />
+            <dataField fieldName="CV" hidden="false" columns="100" rows="50" />
             <dataField fieldName="Notes" hidden="false" columns="50" rows="5" />
           </dataFields>
           <description>$DefaultNewDescription</description>
         </category>
       </categories>
-      <dataFields />
+    
       <headerText>$DefaultCreateViewDescription</headerText>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review CV">
@@ -70,11 +70,11 @@ from "dbo"."CVs" "CVs"
           <description>$DefaultEditDescription</description>
         </category>
       </categories>
-      <dataFields />
+     
       <headerText>$DefaultEditViewDescription</headerText>
     </view>
     <view id="grid1" type="Grid" commandId="command1" label="CV">
-      <categories />
+   
       <dataFields>
         <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" hidden="false" />
         <dataField fieldName="CV" columns="100" rows="4" hidden="false" />
