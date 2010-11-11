@@ -116,10 +116,10 @@ from "dbo"."Contacts" "Contacts"
     <field name="PPE_Sent_Date" type="DateTime" label="PPE Sent Date"/>
     <field name="PPE_Note" type="String" label="Note"/>
 
-    <field name="CopmpanyName" type="String" label="Copmpany Name"/>
-    <field name="CompanyReg" type="String" label="Copmpany Reg"/>
-    <field name="CompanyVat" type="String" label="Copmpany Vat"/>
-    <field name="CompanyAddress" type="String" label="Copmpany Address"/>
+    <field name="CopmpanyName" type="String" label="Company Name"/>
+    <field name="CompanyReg" type="String" label="Company Reg"/>
+    <field name="CompanyVat" type="String" label="Company Vat"/>
+    <field name="CompanyAddress" type="String" label="Company Address"/>
 
     <field name="CountryID" type="Int32" label="Country#" showInSummary="true">
       <items style="Lookup" dataController="Countries" newDataView="createForm1" />
