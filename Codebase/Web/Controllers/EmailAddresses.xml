@@ -49,7 +49,8 @@ from "dbo"."EmailAddresses" "EmailAddresses"
       <headerText>Emails</headerText>
       <dataFields>
         <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
-        <dataField fieldName="Address" columns="20"/>
+
+        <dataField fieldName="Address" columns="20" hyperlinkFormatString="_blank:mailto:{Address}"/>
         <dataField fieldName="ChangedOn" columns="10" hidden="true"/>
       </dataFields>
     </view>
@@ -71,14 +72,14 @@ from "dbo"."EmailAddresses" "EmailAddresses"
       </categories>
     </view>
     <view id="createForm1" type="Form" commandId="command1" label="New Email Addresses">
-      <headerText>$</headerText>
+      <headerText></headerText>
       <categories>
         <category headerText="New Email Addresses" newColumn="true">
           <description></description>
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
             <dataField fieldName="Address" columns="20"/>
-            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="ChangedOn" columns="10" hidden="true" />
           </dataFields>
         </category>
       </categories>
