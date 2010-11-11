@@ -11,7 +11,7 @@
             <act:TabPanel ID="Clients" runat="server" HeaderText="Clients">
               <ContentTemplate>
                 <div id="view1" runat="server"></div>             
-                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Clients"  view="grid1"  ShowViewSelector="false" />
+                <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Clients"  view="grid1"  ShowViewSelector="false"  PageSize="25"/>
               </ContentTemplate>
             </act:TabPanel>
                <act:TabPanel ID="PurchaseOrdersTab" runat="server" HeaderText="Purchase Orders">
