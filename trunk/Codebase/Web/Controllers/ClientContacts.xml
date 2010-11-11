@@ -56,8 +56,8 @@ from "dbo"."ClientContacts" "ClientContacts"
     </field>
     <field name="CountryName" type="String" readOnly="true" label="Country Name" />
     <field name="Telephone" type="String" label="Telephone" />
-    <field name="Fax" type="String" label="Fax" />
-    <field name="Email" type="String" label="Email" />
+    <field name="Fax" type="String" label="Fax"/>
+    <field name="Email" type="String" label="Email"   />
     <field name="CompanyID" type="Int32" allowNulls="false" label="Company#">
       <items style="Lookup" dataController="Clients" newDataView="createForm1" />
     </field>
@@ -105,7 +105,7 @@ from "dbo"."ClientContacts" "ClientContacts"
         <dataField fieldName="CountryID" hidden="true" aliasFieldName="CountryName" />
         <dataField fieldName="Telephone" hidden="true" columns="50" />
         <dataField fieldName="Fax" hidden="true" columns="50" />
-        <dataField fieldName="Email" hidden="true" />
+        <dataField fieldName="Email" hidden="true"  hyperlinkFormatString="mailto:{Email}"/>
         <dataField fieldName="CompanyID" aliasFieldName="CompanyName" columns="30" hyperlinkFormatString="_Blank:~/pages/ClientNew.aspx?id={CompanyID}" />
         <dataField fieldName="DateOfBirth" hidden="true" columns="10" />
 
@@ -143,7 +143,7 @@ from "dbo"."ClientContacts" "ClientContacts"
             <dataField fieldName="Telephone" columns="30"/>
             <dataField fieldName="Mobile" columns="30"/>
             <dataField fieldName="Fax" columns="30"/>
-            <dataField fieldName="Email" hyperlinkFormatString="mailto://{ClientContacts}" columns="30"/>
+            <dataField fieldName="Email"   hyperlinkFormatString="mailto:{Email}" columns="30"/>
             <dataField fieldName="NL_All"/>
             <dataField fieldName="NL_Procurement"  />
               <dataField fieldName="NL_Personnel" />
@@ -166,7 +166,7 @@ from "dbo"."ClientContacts" "ClientContacts"
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30" />
             <dataField fieldName="Telephone" columns="30" />
-            <dataField fieldName="Fax" columns="30" />
+            <dataField fieldName="Fax" columns="30"   hyperlinkFormatString="_blank:mailto:{Email}" />
             <dataField fieldName="Email" columns="30" />
             <dataField fieldName="CompanyID" aliasFieldName="CompanyName" columns="30" />
             <dataField fieldName="DateOfBirth" columns="10" />
