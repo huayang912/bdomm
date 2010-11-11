@@ -77,7 +77,7 @@ from "dbo"."Clients" "Clients"
           <description></description>
           <dataFields>
             <dataField fieldName="Number" hidden="true" columns="50" />
-            <dataField fieldName="Name" columns="50"/>
+            <dataField fieldName="Name" columns="40"/>
             <dataField fieldName="Address" columns="30" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30"/>
