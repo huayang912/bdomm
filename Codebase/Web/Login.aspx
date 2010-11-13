@@ -73,8 +73,11 @@
                 <td colspan="2"><asp:CheckBox ID="chkRememberMe" Text="Remember Me on this Computer"  runat="server" /></td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align:right;">
-                    <asp:Button ID="btnLogin" Text="Log In" ValidationGroup="SaveInfo" OnClick="btnLogin_Click" runat="server" />
+                <td colspan="2">
+                    <div class="floatleft"><a href="Pages/ForgotPassword.aspx">Forgot Password?</a></div>
+                    <div class="floatright" style="text-align:right;">
+                        <asp:Button ID="btnLogin" Text="Log In" ValidationGroup="SaveInfo" OnClick="btnLogin_Click" runat="server" />                   
+                    </div>
                 </td>
             </tr>
             <tr>

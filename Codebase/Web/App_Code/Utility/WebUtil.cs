@@ -11,6 +11,7 @@ using System.IO;
 using System.Web.Security;
 //using App.Core.Base.Model;
 using App.Core.Extensions;
+using System.Net.Mail;
 //using App.DAL.Utility;
 //using App.DAL;
 
@@ -108,7 +109,9 @@ public class WebUtil
     {
         String filePath = HttpContext.Current.Server.MapPath("/EmailTemplates");
         filePath = Path.Combine(filePath, templateFileName);
-        return File.ReadAllText(filePath);
+        if(File.Exists(filePath))
+            return File.ReadAllText(filePath);
+        throw new FileNotFoundException(String.Format("The Email Template: {0} was not found.", templateFileName));
     }
     /// <summary>
     /// Gets Currently Hosted Domain Address
@@ -349,4 +352,55 @@ public class WebUtil
     //{
     //    return String.Format("javascript:alert('{0}');javascript:void(0);", AppConstants.Message.DELETE_PERMISSION_DENIED);
     //}
+
+    #region Email Helper
+    public static bool SendMail(string mailTo, string mailCc, string mailBcc, string mailFrom, string mailSubject, string mailBody)
+    {
+        try
+        {
+            using (MailMessage mailMessage = new MailMessage())
+            {
+                mailMessage.From = new MailAddress(mailFrom);
+
+                //Spliting the to addresses by ','
+                string[] emailAddesses = mailTo.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string to in emailAddesses)
+                {
+                    mailMessage.To.Add(new MailAddress(to.Trim()));
+                }
+
+                //Spliting the cc Adresses by ','
+                string[] ccAddresses = mailCc.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string cc in ccAddresses)
+                {
+                    mailMessage.CC.Add(new MailAddress(cc.Trim()));
+                }
+
+                //determining the BCC of the mail.
+                string[] bccAddresses = mailBcc.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string bcc in bccAddresses)
+                {
+                    mailMessage.Bcc.Add(new MailAddress(bcc.Trim()));
+                }
+
+                mailMessage.Subject = mailSubject;
+                mailMessage.Body = mailBody;
+                mailMessage.IsBodyHtml = true;
+
+                //sending the mail.
+                SmtpClient smtpClient = new SmtpClient();
+                smtpClient.Host = ConfigReader.SmtpHost;//SmtpHost; //smtpHost;
+                smtpClient.Port = ConfigReader.SmtpPort; //smtpPort;
+                smtpClient.Send(mailMessage);
+                return true;
+            }
+        }
+        catch //(Exception ex)
+        {
+            //Exception excToUse = ex.InnerException ?? ex;
+            //throw new CommunicationException(excToUse.Message, excToUse);
+        }
+        return false;
+    }
+    #endregion Email helper
 }
