@@ -91,4 +91,33 @@ public class ConfigReader
             }
         }
     }
+    public static String AdminEmail
+    {
+        get
+        {
+            return GetAppSettings("AdminEmail");
+        }
+    }
+    public static String SmtpHost
+    {
+        get
+        {
+            return GetAppSettings("SmtpHost");
+        }
+    }
+    public static int SmtpPort
+    {
+        get
+        {
+            String value = GetAppSettings("SmtpPort");
+            if (String.IsNullOrEmpty(value))
+                return 25;
+            else
+            {
+                int configValue = 0;
+                int.TryParse(value, out configValue);
+                return configValue;
+            }
+        }
+    }
 }
