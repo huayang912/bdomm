@@ -78,6 +78,15 @@ namespace App.CustomModels
         public int StatusID { get; set; }
         public String Message { get; set; }
     }
+    public class AjaxStatus
+    {
+        /// <summary>
+        /// StatusID == 1   > Successfully Sent SMS
+        /// StatusID == -1  > Unable to Send SMS. 
+        /// </summary>
+        public int StatusID { get; set; }
+        public String Message { get; set; }
+    }
     #region Enum Like Classes
     public static class EnquiryStatus
     {
