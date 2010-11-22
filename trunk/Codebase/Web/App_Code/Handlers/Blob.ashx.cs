@@ -502,8 +502,11 @@ namespace BUDI2_NS.Handlers
                 if (String.IsNullOrEmpty(fileName))
                 	fileName = String.Format("{0}{1}.{2}", handler.Key, handler.Reference, contentType.Substring((contentType.IndexOf("/") + 1)));
                 context.Response.ContentType = contentType;
-                context.Response.AddHeader("Content-Disposition", ("filename=" + fileName));
-                context.Response.AddHeader("Content-Length", stream.Length.ToString());
+                //context.Response.AddHeader("Content-Disposition", ("filename=" + fileName));
+                //context.Response.AppendHeader("content-disposition", "attachment; filename=" + fileName);
+                context.Response.AppendHeader("content-disposition", "filename=" + fileName);
+                //context.Response.AddHeader("Content-Length", stream.Length.ToString());
+                context.Response.AddHeader("content-length", stream.Length.ToString());
                 stream.Position = offset;
                 buffer = new byte[(1024 * 32)];
                 int bytesRead = stream.Read(buffer, 0, buffer.Length);
