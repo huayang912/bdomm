@@ -506,7 +506,7 @@ namespace BUDI2_NS.Handlers
                 //context.Response.AppendHeader("content-disposition", "attachment; filename=" + fileName);
                 context.Response.AppendHeader("content-disposition", "filename=" + fileName);
                 //context.Response.AddHeader("Content-Length", stream.Length.ToString());
-                context.Response.AddHeader("content-length", stream.Length.ToString());
+                //context.Response.AddHeader("content-length", stream.Length.ToString());
                 stream.Position = offset;
                 buffer = new byte[(1024 * 32)];
                 int bytesRead = stream.Read(buffer, 0, buffer.Length);

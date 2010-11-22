@@ -372,7 +372,16 @@ namespace BUDI2_NS.Data
                                 writer.WriteStartElement("note");
                                 writer.WriteAttributeString("timestamp", DateTime.Now.ToString("o"));
                                 writer.WriteAttributeString("username", HttpContext.Current.User.Identity.Name);
-                                MembershipUser user = Membership.GetUser();
+                                //MembershipUser user = Membership.GetUser();
+                                if (SessionCache.CurrentUser == null)
+                                    WebUtil.LoginUser();
+                                User user = SessionCache.CurrentUser;
+                                if (user == null)
+                                    user = new User();
+
+                                if (String.IsNullOrEmpty(user.Email))
+                                    user.Email = "annonymous@omm.com";
+
                                 writer.WriteAttributeString("email", user.Email);
                                 writer.WriteString(Convert.ToString(v.NewValue));
                                 writer.WriteEndElement();
@@ -418,6 +427,7 @@ namespace BUDI2_NS.Data
         {
             if (context.Request.Files.Count != 1)
             	return false;
+            
             HttpPostedFile file = context.Request.Files[0];
             string p = AnnotationPlugIn.GenerateDataRecordPath();
             if (!(Directory.Exists(p)))
@@ -446,7 +456,16 @@ namespace BUDI2_NS.Data
                         writer.WriteStartElement("attachment");
                         writer.WriteAttributeString("timestamp", DateTime.Now.ToString("o"));
                         writer.WriteAttributeString("username", HttpContext.Current.User.Identity.Name);
-                        MembershipUser user = Membership.GetUser();
+                        //MembershipUser user = Membership.GetUser();
+                        if(SessionCache.CurrentUser == null)
+                            WebUtil.LoginUser();
+                        User user = SessionCache.CurrentUser;
+                        if (user == null)                        
+                            user = new User();                           
+                        
+                        if(String.IsNullOrEmpty(user.Email))
+                            user.Email = "annonymous@omm.com";
+
                         writer.WriteAttributeString("email", user.Email);
                         writer.WriteAttributeString("fileName", Path.GetFileName(file.FileName));
                         writer.WriteAttributeString("contentType", file.ContentType);
@@ -473,11 +492,13 @@ namespace BUDI2_NS.Data
             Match m = Regex.Match(this.Value, "_Annotation_Attachment(\\w+)\\|", RegexOptions.Compiled);
             string fileName = Path.Combine(p, (m.Groups[1].Value + ".xml"));
             XPathNavigator nav = new XPathDocument(fileName).CreateNavigator().SelectSingleNode("/*");
+            string attrValue = nav.GetAttribute("fileName", String.Empty);
             fileName = Path.Combine(p, ((Path.GetFileNameWithoutExtension(fileName) + "_") 
                             + Path.GetExtension(nav.GetAttribute("fileName", String.Empty))));
             if (!(this.Value.StartsWith("t|")))
             {
-                this.ContentType = nav.GetAttribute("contentLength", String.Empty);
+                //this.ContentType = nav.GetAttribute("contentLength", String.Empty);
+                this.ContentType = nav.GetAttribute("contentType", String.Empty);
                 HttpContext.Current.Response.ContentType = this.ContentType;
             }
             this.FileName = nav.GetAttribute("fileName", String.Empty);
