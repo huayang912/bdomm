@@ -15,13 +15,13 @@
     <td>&nbsp;<table width="100%" border="0">
 	
   <tr>
-    <td align="center">&nbsp;<a href="enquiries.aspx"><img src="../App_Themes/BUDI2_NS/omm-log-bg.gif" alt="Client" width="51" height="52" border="0"  /></a></td>
+    <td align="center">&nbsp;<a href="EnquirySch.aspx"><img src="../App_Themes/BUDI2_NS/omm-log-bg.gif" alt="Client" width="51" height="52" border="0"  /></a></td>
 	    <td align="center">&nbsp;<a href="EnquiryChange.aspx"><img src="../App_Themes/BUDI2_NS/omm-log-bg.gif" alt="Personnel" width="51" height="52" border="0"  /></a></td>
 
 	  
   </tr>
   <tr>
-    <td align="center">&nbsp;<a href="enquiries.aspx">Enquiry Search</a></td>
+    <td align="center">&nbsp;<a href="EnquirySch.aspx">Enquiry Search</a></td>
 	    <td align="center">&nbsp;<a href="EnquiryChange.aspx">Add New Emquiry</a></td>
 	
   </tr>
