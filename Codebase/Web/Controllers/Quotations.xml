@@ -34,6 +34,8 @@
 	,"Quotations"."DecisionSuccessful" "DecisionSuccessful"
 	,"Quotations"."DecisionDate" "DecisionDate"
 	,"Quotations"."CreatedOn" "CreatedOn"
+	
+		,"Quotations"."ExpiryDate" "QuoteExpiryDate"
 	,"Quotations"."CreatedByUserID" "CreatedByUserID"
 	,"CreatedByUser"."UserName" "CreatedByUserUserName"
 	,"Quotations"."ChangedOn" "ChangedOn"
@@ -120,6 +122,9 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
     <field name="ValidityDays" type="Int32" allowNulls="false" default="((60))" label="Validity Days" />
     <field name="Schedule" type="String" label="Schedule" allowQBE="false" allowSorting="false" />
     <field name="SubmissionDate" type="DateTime" label="Submission Date" />
+	    <field name="QuoteExpiryDate" type="DateTime" label="Validity of Quote" />
+
+	
     <field name="DecisionSuccessful" type="Boolean" label="Decision Successful" />
     <field name="DecisionDate" type="DateTime" label="Decision Date" />
     <field name="CreatedOn" type="DateTime" default="(getdate())" readOnly="true" label="Created On" />
@@ -203,6 +208,9 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
                    <dataField fieldName="Version" hidden="true" columns="15" />
             <dataField fieldName="Contract_awarded_to" hidden="false"  columns="30"/>
             <dataField fieldName="Contract_awarded_Value" hidden="false" columns="30"/>
+			            <dataField fieldName="QuoteExpiryDate" hidden="false" columns="30"/>
+
+			
           </dataFields>
         </category>
         <category headerText="Reference Information" newColumn="true">
