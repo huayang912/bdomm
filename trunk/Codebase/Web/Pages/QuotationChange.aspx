@@ -309,11 +309,11 @@
 					<td>Decision Date</td>
 					<td>
 						<asp:TextBox ID="txtDecisionDate" MaxLength="50" CssClass="CalendarTextBox" runat="server"></asp:TextBox>
-						<asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" 
+						<%--<asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" 
                             ControlToValidate="txtDecisionDate" SetFocusOnError="true" 
                             ErrorMessage="<br/>Please Select Decision Date." Display="Dynamic"
                             ValidationGroup="SaveInfo1">
-                        </asp:RequiredFieldValidator>                        
+                        </asp:RequiredFieldValidator>--%>                        
                         <asp:CustomValidator ID="CustomValidator3" runat="server" 
                             ControlToValidate="txtDecisionDate" SetFocusOnError="true" 
                             Display="Dynamic" ClientValidationFunction="ValidateDate"

@@ -194,7 +194,11 @@ public partial class Pages_QuotationChange : BasePage
         quotation.Schedule = customQuotation.Scheduel;
         quotation.ValidityDays = customQuotation.ValidityDays;
         quotation.SubmissionDate = WebUtil.GetDate(customQuotation.SubmissionDate);
-        quotation.DecisionDate = WebUtil.GetDate(customQuotation.DecisionDate);
+        if (customQuotation.DecisionDate.IsNullOrEmpty())
+            quotation.DecisionDate = null;
+        else
+            quotation.DecisionDate = WebUtil.GetDate(customQuotation.DecisionDate);
+
         quotation.CurrencyID = customQuotation.CurrencyID;
         //var currency = dataContext.Currencies.SingleOrDefault(C => C.Description == ddlCurrency.SelectedValue);
         //if(currency != null)
