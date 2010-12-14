@@ -233,6 +233,9 @@ from "dbo"."ClientContacts" "ClientContacts"
     </actionGroup>
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <!--<action id="a100" commandName="Navigate" commandArgument="~/pages/ClientNewEdit.aspx?ID={ID}" causesValidation="true" headerText="Edit" />-->
+	   <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
       <action id="a100" whenLastCommandName="Select" commandName="Edit" />
     </actionGroup>
  
