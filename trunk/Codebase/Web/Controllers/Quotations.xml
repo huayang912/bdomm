@@ -58,14 +58,14 @@
         ,"Quotations"."Contract_awarded_to" "Contract_awarded_to"
         ,"Quotations"."Contract_awarded_Value" "Contract_awarded_Value"
      from "dbo"."Quotations" "Quotations"
-	left join "dbo"."VewQuotationExpDate" "QuotationExpiryDates" ON "Quotations"."ID" = "QuotationExpiryDates"."ID"
 	left join "dbo"."Enquiries" "Enquiry" on "Quotations"."EnquiryID" = "Enquiry"."ID"
-  left join "dbo"."ViewEnqQuotePrj" "ViewEnqQuotePrj" on "Quotations"."ID" = "ViewEnqQuotePrj"."QuotationID"
 
 left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "EnquiryContact"."ID"
+	left join "dbo"."ClientContacts" "SubmittedToClientContact" on "Quotations"."SubmittedToClientContactID" = "SubmittedToClientContact"."ID"
 	left join "dbo"."Clients" "EnquiryContactCompany" on "EnquiryContact"."CompanyID" = "EnquiryContactCompany"."ID"
-	left join "dbo"."Countries" "EnquiryContactCountry" on "EnquiryContact"."CountryID" = "EnquiryContactCountry"."ID"
-	left join "dbo"."Users" "EnquiryContactChangedByUser" on "EnquiryContact"."ChangedByUserID" = "EnquiryContactChangedByUser"."ID"
+		left join "dbo"."Users" "EnquiryContactChangedByUser" on "EnquiryContact"."ChangedByUserID" = "EnquiryContactChangedByUser"."ID"
+
+	left join "dbo"."Countries" "EnquiryContactCountry" on "EnquiryContactCompany"."CountryID" = "EnquiryContactCountry"."ID"
 	left join "dbo"."EnquiryStatuses" "EnquiryStatus" on "Enquiry"."StatusID" = "EnquiryStatus"."ID"
 	left join "dbo"."EnquiryTypes" "EnquiryType" on "Enquiry"."TypeID" = "EnquiryType"."ID"
 	left join "dbo"."Users" "EnquiryCreatedByUser" on "Enquiry"."CreatedByUserID" = "EnquiryCreatedByUser"."ID"
@@ -73,7 +73,11 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
 	left join "dbo"."QuotationStatuses" "Status" on "Quotations"."StatusID" = "Status"."ID"
 	left join "dbo"."Users" "CreatedByUser" on "Quotations"."CreatedByUserID" = "CreatedByUser"."ID"
 	left join "dbo"."Users" "ChangedByUser" on "Quotations"."ChangedByUserID" = "ChangedByUser"."ID"
-	left join "dbo"."ClientContacts" "SubmittedToClientContact" on "Quotations"."SubmittedToClientContactID" = "SubmittedToClientContact"."ID"
+
+	  left join "dbo"."ViewEnqQuotePrj" "ViewEnqQuotePrj" on "Quotations"."ID" = "ViewEnqQuotePrj"."QuotationID"
+	left join "dbo"."VewQuotationExpDate" "QuotationExpiryDates" ON "Quotations"."ID" = "QuotationExpiryDates"."ID"
+
+	
 	left join "dbo"."Clients" "SubmittedToClientContactCompany" on "SubmittedToClientContact"."CompanyID" = "SubmittedToClientContactCompany"."ID"
 	left join "dbo"."Countries" "SubmittedToClientContactCompanyCountry" on "SubmittedToClientContactCompany"."CountryID" = "SubmittedToClientContactCompanyCountry"."ID"
 	left join "dbo"."Users" "SubmittedToClientContactCompanyChangedByUser" on "SubmittedToClientContactCompany"."ChangedByUserID" = "SubmittedToClientContactCompanyChangedByUser"."ID"
@@ -175,7 +179,7 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
         <dataField fieldName="EnquiryTypeName" />
 
         <dataField fieldName="StatusID" aliasFieldName="StatusName" />
-        <dataField fieldName="SubmittedToClientContactCompanyName" />
+        <dataField fieldName="EnquiryContactCompanyName" />
         <dataField fieldName="EnquiryContactCountryName" />
         <dataField fieldName="CreatedOn" />
         <dataField fieldName="ExpiryDate" formatOnClient="true" />
