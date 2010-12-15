@@ -105,7 +105,7 @@ from "dbo"."ClientContacts" "ClientContacts"
         <dataField fieldName="CountryID" hidden="true" aliasFieldName="CountryName" />
         <dataField fieldName="Telephone" hidden="true" columns="50" />
         <dataField fieldName="Fax" hidden="true" columns="50" />
-        <dataField fieldName="Email" hidden="true"  hyperlinkFormatString="mailto:{Email}"/>
+        <dataField fieldName="Email" hidden="false"  hyperlinkFormatString="mailto:{Email}"/>
         <dataField fieldName="CompanyID" aliasFieldName="CompanyName" columns="30" hyperlinkFormatString="_Blank:~/pages/ClientNew.aspx?id={CompanyID}" />
         <dataField fieldName="DateOfBirth" hidden="true" columns="10" />
 
