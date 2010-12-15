@@ -138,15 +138,23 @@ textarea
 .PopupBody {	
 	background-color:#FFFFFF;	
 	min-width: 305px;	
-	padding: 5px 25px 5px 25px;	
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	/*line-height: 20px;*/
-	border-top:#FF0000 solid 1px;
+	min-height:50px;
+	padding: 5px 15px 5px 15px;	
+	font-family: Verdana, Arial, Helvetica, sans-serif;		
+}
+#popupHeader
+{
+    padding:5px;
+    font-weight:bold;
+    border-bottom:#FF0000 solid 1px;
+    background-color:#d7e6f6;
 }
 .PopupButtonContainer 
 {	
 	text-align: right;
-	padding:10px 15px 20px 0px;	
+	/*padding:10px 15px 20px 0px;	*/
+	background-color:#EFEFEF;
+	border-top:#CCCCCC 1px solid;
 }
 /*Progress Animation Start */
 .progressanimation
