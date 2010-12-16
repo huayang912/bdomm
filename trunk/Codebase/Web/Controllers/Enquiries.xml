@@ -216,6 +216,7 @@ from "dbo"."Enquiries" "Enquiries"
       <action id="a1" commandName="Select" commandArgument="editForm1" />
       <action id="a6" />
       <action id="a100" commandName="Navigate" commandArgument="~/pages/QuotationChange.aspx?ENQID={ID}" causesValidation="true" headerText="Add Quotation" />
+	        <action id="a105" commandName="Navigate" commandArgument="~/pages/EnquiryDetails.aspx?ID={ID}" causesValidation="true" headerText="Close Enquiry" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
 
