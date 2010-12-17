@@ -42,7 +42,7 @@
         </div>
         
         <div style="margin-top:30px;">
-            <input id="btnCloseEnquery" type="button" value="Close this Enquery" onclick="ShowCloseDialogBox();" <%= _HasClosed ? "disabled='disabled'" : String.Empty %>/>
+            <input id="btnCloseEnquery" type="button" value="Close this Enquiry" onclick="ShowCloseDialogBox();" <%= _HasClosed ? "disabled='disabled'" : String.Empty %>/>
         </div>
         
         
