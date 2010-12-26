@@ -164,7 +164,7 @@
                 //html += '<div style="margin: 10px 0px 0px 3px; width:100%; text-align:right;"></div>'
                 $('#divPricingList').html(html);
                 ShowPricingForm(false);
-            }
+            }            
         }
         
         function LoadPricingForEdit(index)
@@ -183,81 +183,11 @@
         function BindPricingListDelete(index)
         {
             //remove data from the array for the given index
-            _PricingList.splice(index,1); 
-        
-            if(_PricingList.length > 0)
-            {            
-                var html = '<table class="GridView" cellpadding="3" cellspacing="0">';
-                html += '<colgroup>';
-                html += '   <col style="width:12%;" />';
-                html += '   <col style="width:35%;" />';
-                html += '   <col style="width:15%;" />';
-                html += '   <col style="width:10%;" />';
-                html += '   <col style="width:10%;" />';
-                html += '   <col style="width:10%;" />';
-                html += '   <col style="width:8%;" />';
-                html += '   <col />';
-                html += '</colgroup>';
-                
-                html += '<tr>';
-                html += '   <th>Item</th><th>Description</th><th>Pricing Type</th><th>Unit Price</th><th>Quantity</th><th style="text-align:right;">Price</th><th style="text-align:center;">Edit</th><th style="text-align:center;">Delete</th>';
-                html += '</tr>';                
-                var currencySymbol = $('#<%= ddlCurrency.ClientID %>').val().split(':')[1];               
-                
-                var totalPrice = 0;
-                for(i = 0; i < _PricingList.length; i++)
-                {
-                    var pricingLine = _PricingList[i];   
-                    var cssClass = i % 2 == 0 ? 'OddRowListing' : 'EvenRowListing';
-                    html += '<tr class="' + cssClass + '">';                 
-                    //html += '<tr>';
-                    html += '   <td>' + HtmlEncode(pricingLine.Item) + '</td>';
-                    html += '   <td>' + FormatText(pricingLine.Description) + '</td>';
-                    html += '   <td>' + pricingLine.PricingType + '</td>';
-                    html += '   <td>' + pricingLine.UnitPrice + '</td>';
-                    html += '   <td>' + pricingLine.Quantity + '</td>';
-                    html += '   <td style="text-align:right;">' + jQuery.trim(currencySymbol) + pricingLine.Price + '</td>';
-                    html += '   <td style="text-align:center;"><a href="javascript:void(0);" onclick="LoadPricingForEdit(' + i + ')">Edit</a></td>';
-                    html += '   <td style="text-align:center;"><a href="javascript:void(0);" onclick="BindPricingListDelete(' + i + ')">Delete</a></td>';
-                    html += '</tr>';                    
-                    totalPrice += pricingLine.Price;
-                }
-                html += '<tr>';
-                html += '   <td colspan="7" style="text-align:right;"><b>Total Price:</b> &nbsp;<input type="text" readonly="readonly" value="' + jQuery.trim(currencySymbol) + totalPrice + '" style="text-align:right;" /></td>'; 
-                html += '   <td></td>';
-                html += '</tr>';
-                html += '</table>';
-                //html += '<div style="margin: 10px 0px 0px 3px; width:100%; text-align:right;"></div>'
-                $('#divPricingList').html(html);
-                ShowPricingForm(false);
-            }
-            
-            
-            else
-            {      
-                var html = '<table class="GridView" cellpadding="3" cellspacing="0">';
-                html += '<colgroup>';
-                html += '   <col style="width:12%;" />';
-                html += '   <col style="width:35%;" />';
-                html += '   <col style="width:15%;" />';
-                html += '   <col style="width:10%;" />';
-                html += '   <col style="width:10%;" />';
-                html += '   <col style="width:10%;" />';
-                html += '   <col style="width:8%;" />';
-                html += '   <col />';
-                html += '</colgroup>';
-                
-                html += '<tr>';
-                html += '   <th>Item</th><th>Description</th><th>Pricing Type</th><th>Unit Price</th><th>Quantity</th><th style="text-align:right;">Price</th><th style="text-align:center;">Edit</th><th style="text-align:center;">Delete</th>';
-                html += '</tr>';
-                
-                html += '<tr>';
-                html += '   <td colspan="7" style="text-align:right;"><b>Total Price:</b> &nbsp;<input type="text" readonly="readonly" value="' + jQuery.trim(currencySymbol) + 0 + '" style="text-align:right;" /></td>'; 
-                html += '   <td></td>';
-                html += '</tr>';
-                html += '</table>';
-                //html += '<div style="margin: 10px 0px 0px 3px; width:100%; text-align:right;"></div>'
-                $('#divPricingList').html(html);
+            _PricingList.splice(index, 1);             
+            BindPricingList();
+            if(_PricingList.length == 0)
+            {
+                $('#divPricingList').html('');
                 ShowPricingForm(false);
             }
         }
