@@ -51,7 +51,6 @@ Partial Public Class Controls_ClientContactSrch
             filter.Add(New FieldFilter("NL_Personnel", RowFilterOperation.None))
             filter.Add(New FieldFilter("NL_O_M", RowFilterOperation.None))
             filter.Add(New FieldFilter("NL_Project", RowFilterOperation.None))
-
         ElseIf CRM_Type.Text = "All" Then
             filter.Add(New FieldFilter("NL_All", RowFilterOperation.Equal, True))
 
@@ -59,7 +58,6 @@ Partial Public Class Controls_ClientContactSrch
             filter.Add(New FieldFilter("NL_Personnel", RowFilterOperation.None))
             filter.Add(New FieldFilter("NL_O_M", RowFilterOperation.None))
             filter.Add(New FieldFilter("NL_Project", RowFilterOperation.None))
-
         ElseIf CRM_Type.Text = "Procurement" Then
             filter.Add(New FieldFilter("NL_Procurement", RowFilterOperation.Equal, True))
 
@@ -98,6 +96,12 @@ Partial Public Class Controls_ClientContactSrch
 
         End If
 
+        'The Like Filter for name added on 8th January 2010
+        If String.IsNullOrEmpty(ddlNameStartsWith.SelectedValue) Then
+            filter.Add(New FieldFilter("Name", RowFilterOperation.None))
+        Else
+            filter.Add(New FieldFilter("Name", RowFilterOperation.Like, String.Format("{0}%", ddlNameStartsWith.SelectedValue)))
+        End If
   
         ClientContactListExtender.AssignFilter(filter)
        End Sub
