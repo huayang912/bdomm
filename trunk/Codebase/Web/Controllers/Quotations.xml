@@ -194,7 +194,7 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category headerText="Quotations" newColumn="true">
-          <description>$DefaultEditDescription</description>
+        <!--  <description>$DefaultEditDescription</description> -->
           <dataFields>
             <dataField fieldName="Number" readOnly="true" columns="50"/>
             <dataField fieldName="EnquiryID" aliasFieldName="EnquiryNumber" hyperlinkFormatString="~/Pages/Enquiries.aspx?Number={EnquiryNumber}" readOnly="true" />
@@ -217,8 +217,9 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
 			
           </dataFields>
         </category>
-        <category headerText="Reference Information" newColumn="true">
-          <description>$DefaultReferenceDescription</description>
+		<category newColumn="true">
+       <!-- <category headerText="Reference Information" newColumn="true">
+          <description>$DefaultReferenceDescription</description> -->
           <dataFields>
             <dataField fieldName="EnquiryContactName" readOnly="true"/>
             <dataField fieldName="ContactJobTitle" readOnly="true"/>
@@ -289,6 +290,9 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
       <action id="a106" />
       <action id="a107" commandName="Navigate" commandArgument="~/pages/ProjectChange.aspx?QuotationID={ID}" headerText="Create Project" causesValidation="true" />
       <action id="a108" />
+	        <action id="a1061" />
+      <action id="a1071" commandName="Navigate" commandArgument="~/pages/QuotationChange.aspx?ENQID={ID}" headerText="Modify Quote" causesValidation="true" />
+      <action id="a1081" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
       <action id="a1" commandName="Edit" />
