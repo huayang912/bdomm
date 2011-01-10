@@ -158,7 +158,7 @@ from "dbo"."Enquiries" "Enquiries"
 
             <dataField fieldName="StatusID" aliasFieldName="StatusName" readOnly="true"/>
             <dataField fieldName="CreatedOn" readOnly="true" columns="10" />
-            <dataField fieldName="ContactID" aliasFieldName="ContactName" readOnly="true"/>
+            <dataField fieldName="ContactID" aliasFieldName="ContactName" readOnly="false"/>
             <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
             <dataField fieldName="ChangedOn" readOnly="true" columns="10" />
             <dataField fieldName="ContactJobTitle" readOnly="true"/>
