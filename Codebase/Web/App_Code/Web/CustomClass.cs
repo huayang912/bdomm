@@ -67,7 +67,7 @@ public class CustomClass:ActionHandlerBase
 
         }
 		
-		
+/*
      if (args.CommandName == "Update" && args["ChangedByUsername"].Value == null)
 
         {
@@ -79,6 +79,6 @@ public class CustomClass:ActionHandlerBase
             //      args["CreatedByUserID"].Modified = true;
 
         }
-
+*/
     }
 }
