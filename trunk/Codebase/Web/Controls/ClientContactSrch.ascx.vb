@@ -94,6 +94,17 @@ Partial Public Class Controls_ClientContactSrch
             filter.Add(New FieldFilter("NL_O_M", RowFilterOperation.None))
 
 
+
+        ElseIf CRM_Type.Text = "Like" Then
+            filter.Add(New FieldFilter("StatusName", RowFilterOperation.Like, "phd"))
+            filter.Add(New FieldFilter("NL_Project", RowFilterOperation.None))
+            filter.Add(New FieldFilter("NL_Personnel", RowFilterOperation.None))
+            filter.Add(New FieldFilter("NL_All", RowFilterOperation.None))
+            filter.Add(New FieldFilter("NL_Procurement", RowFilterOperation.None))
+            'filter.Add(New FieldFilter("NL_Personnel", RowFilterOperation.None))
+            filter.Add(New FieldFilter("NL_O_M", RowFilterOperation.None))
+
+
         End If
 
         'The Like Filter for name added on 8th January 2010
