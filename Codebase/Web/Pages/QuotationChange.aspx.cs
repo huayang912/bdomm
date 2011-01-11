@@ -21,6 +21,8 @@ public partial class Pages_QuotationChange : BasePage
             BindDropDownLists();
             BindQuotationsInfo();
         }
+
+        //BindQuotationsInfo();
     }
     /// <summary>
     /// Bindis the Page Initialization Variables
@@ -57,6 +59,17 @@ public partial class Pages_QuotationChange : BasePage
         ddlPricingTypeID.DataValueField = "ID";
         ddlPricingTypeID.DataTextField = "Name";
         ddlPricingTypeID.DataBind();
+
+
+
+        int thisYear = 2010;// System.DateTime.Today.Year;
+        ddlYear.Items.Add("Select");
+
+        for (int i= 0 ;i < 10;i++) 
+        {
+            ddlYear.Items.Add(thisYear.ToString());
+            thisYear++;
+        }
     }
     /// <summary>
     /// Binds Quotations Info Requested through Query Strings
@@ -104,8 +117,12 @@ public partial class Pages_QuotationChange : BasePage
                     txtValidityDays.Text = quotation.ValidityDays.ToString();
                     txtSchedule.Text = quotation.Schedule;
                     txtSubmissionDate.Text = quotation.SubmissionDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat);
-                    txtDecisionDate.Text = quotation.DecisionDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat);
+                    txtDecisionDate.Text = quotation.DecisionDate == null ? String.Empty : quotation.DecisionDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat);
+                    ddlYear.Text = quotation.ProjectYear == null ? "Select" : quotation.ProjectYear.ToString();
+                    
+                    
                     BindQuotationPricingList(dataContext);
+                    
                 }
                 else                
                     ShowErroMessag("QCE", String.Empty);                
@@ -200,6 +217,9 @@ public partial class Pages_QuotationChange : BasePage
             quotation.DecisionDate = WebUtil.GetDate(customQuotation.DecisionDate);
 
         quotation.CurrencyID = customQuotation.CurrencyID;
+        quotation.ProjectYear = customQuotation.ProjectYear;
+
+
         //var currency = dataContext.Currencies.SingleOrDefault(C => C.Description == ddlCurrency.SelectedValue);
         //if(currency != null)
         //    quotation.CurrencyID = currency.ID;
@@ -233,7 +253,15 @@ public partial class Pages_QuotationChange : BasePage
 
             foreach (App.CustomModels.CustomQuotationPricingLine pricing in pricingLineItems)
             {
-                quotation.QuotationPricingLines.Add(PreparePricingLineItem(pricing, quotation.ID));
+                if (pricing.ID > 0)
+                {
+                    ///For Edit
+                    QuotationPricingLine linqPricing = dataContext.QuotationPricingLines.SingleOrDefault(P => P.ID == pricing.ID);
+                    ///Map Objects  
+                    PreparePricingLineItem(pricing, quotation.ID, linqPricing);
+                }
+                else   
+                    quotation.QuotationPricingLines.Add(PreparePricingLineItem(pricing, quotation.ID, new QuotationPricingLine()));
             }
         }
 
@@ -262,9 +290,9 @@ public partial class Pages_QuotationChange : BasePage
         dataContext.SubmitChanges();        
     }
 
-    private static QuotationPricingLine PreparePricingLineItem(App.CustomModels.CustomQuotationPricingLine pricing, int quotationID)
+    private static QuotationPricingLine PreparePricingLineItem(App.CustomModels.CustomQuotationPricingLine pricing, int quotationID, QuotationPricingLine lineItem)
     {
-        QuotationPricingLine lineItem = new QuotationPricingLine();
+        //QuotationPricingLine lineItem = new QuotationPricingLine();
         lineItem.QuotationID = quotationID;
         lineItem.Description = pricing.Description;
         lineItem.Item = pricing.Item;
@@ -293,5 +321,20 @@ public partial class Pages_QuotationChange : BasePage
         //dataContext.SubmitChanges();
         return String.Format("{0}:{1}", quotation.ID, quotation.Number);
     }
+
+    //Rabbani : 11-Jan-2011
+    [WebMethod]
+    public static void DeletePricingLine(int ID)
+    {
+        OMMDataContext dataContext = new OMMDataContext();
+        QuotationPricingLine qPricingLine = new QuotationPricingLine();
+        qPricingLine = dataContext.QuotationPricingLines.SingleOrDefault(P => P.ID == ID);
+
+        dataContext.QuotationPricingLines.DeleteOnSubmit(qPricingLine);
+        dataContext.SubmitChanges();
+ 
+    }
+
+
     #endregion
 }

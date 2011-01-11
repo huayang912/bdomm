@@ -47,7 +47,8 @@
             _CustomQuotation.Scheduel = $('#<%=txtSchedule.ClientID %>').val();
             _CustomQuotation.ValidityDays = $('#<%=txtValidityDays.ClientID %>').val();
             _CustomQuotation.SubmissionDate = $('#<%=txtSubmissionDate.ClientID %>').val();
-            _CustomQuotation.DecisionDate = $('#<%=txtDecisionDate.ClientID %>').val();        
+            _CustomQuotation.DecisionDate = $('#<%=txtDecisionDate.ClientID %>').val(); 
+            _CustomQuotation.ProjectYear = $('#<%=ddlYear.ClientID %>').val();       
         }
         function SaveQuotationInformation() {
             ShowProgress();
@@ -143,8 +144,11 @@
                 {
                     var pricingLine = _PricingList[i];   
                     var cssClass = i % 2 == 0 ? 'OddRowListing' : 'EvenRowListing';
+                    //alert();
+                    
                     html += '<tr class="' + cssClass + '">';                 
                     //html += '<tr>';
+                    //html += '   <td>' + HtmlEncode(pricingLine.ID) + '</td>';
                     html += '   <td>' + HtmlEncode(pricingLine.Item) + '</td>';
                     html += '   <td>' + FormatText(pricingLine.Description) + '</td>';
                     html += '   <td>' + pricingLine.PricingType + '</td>';
@@ -152,7 +156,7 @@
                     html += '   <td>' + pricingLine.Quantity + '</td>';
                     html += '   <td style="text-align:right;">' + jQuery.trim(currencySymbol) + pricingLine.Price + '</td>';
                     html += '   <td style="text-align:center;"><a href="javascript:void(0);" onclick="LoadPricingForEdit(' + i + ')">Edit</a></td>';
-                    html += '   <td style="text-align:center;"><a href="javascript:void(0);" onclick="BindPricingListDelete(' + i + ')">Delete</a></td>';
+                    html += '   <td style="text-align:center;"><a href="javascript:void(0);" onclick="BindPricingListDelete(' + i + ','+pricingLine.ID+')">Delete</a></td>';
                     html += '</tr>';                    
                     totalPrice += pricingLine.Price;
                 }
@@ -180,16 +184,39 @@
         }
         
         //Rabbani: 23-Dec-2010        
-        function BindPricingListDelete(index)
+        function BindPricingListDelete(index,PricingLinesID)
         {
-            //remove data from the array for the given index
-            _PricingList.splice(index, 1);             
-            BindPricingList();
-            if(_PricingList.length == 0)
+        
+            //Edit mode
+            if(_QuotationID>0)
             {
-                $('#divPricingList').html('');
-                ShowPricingForm(false);
+                if(confirm('Are you sure? Delete......') == true)
+                {
+                    PageMethods.DeletePricingLine(PricingLinesID);
+                    
+                    //remove data from the array for the given index
+                    _PricingList.splice(index, 1);             
+                    BindPricingList();
+                    if(_PricingList.length == 0)
+                    {
+                        $('#divPricingList').html('');
+                        ShowPricingForm(false);
+                    }
+                }
             }
+            
+            else
+            {
+                //remove data from the array for the given index
+                _PricingList.splice(index, 1);             
+                BindPricingList();
+                if(_PricingList.length == 0)
+                {
+                    $('#divPricingList').html('');
+                    ShowPricingForm(false);
+                }
+            }
+
         }
         //End Rabbani
         
@@ -341,7 +368,24 @@
                             ValidationGroup="SaveInfo1">
                         </asp:CustomValidator>
 					</td>
-				</tr>				                
+				</tr>
+				
+				<tr>
+					<td>Year</td>
+					<td>
+                        <asp:DropDownList ID="ddlYear" runat="server" EnableViewState="False">
+                        </asp:DropDownList>
+						<%--<asp:TextBox ID="txtYear" MaxLength="50" CssClass="CalendarTextBox" runat="server"></asp:TextBox>
+						<asp:CustomValidator ID="CustomValidator2" runat="server" 
+                            ControlToValidate="txtDecisionDate" SetFocusOnError="true" 
+                            Display="Dynamic" ClientValidationFunction="ValidateDate"
+                            ErrorMessage="<br/>Enter a Valid Date."
+                            ValidationGroup="SaveInfo1">
+                        </asp:CustomValidator>--%>
+					</td>
+				</tr>		
+				
+								                
             </table> 
             <div>
                 <%--<input type="button" value="< Back" onclick="MoveNext(1);" />&nbsp;--%>
