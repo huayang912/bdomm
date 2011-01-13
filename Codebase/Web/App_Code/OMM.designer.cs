@@ -113,7 +113,7 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   #endregion
 	
 	public OMMDataContext() : 
-			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["BUDI2_NS"].ConnectionString, mappingSource)
+			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["OMMConnectionString"].ConnectionString, mappingSource)
 	{
 		OnCreated();
 	}
@@ -8716,7 +8716,7 @@ public partial class Quotation : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private System.Nullable<System.DateTime> _ExpiryDate;
 	
-	private string _ProjectYear;
+	private int _ProjectYear;
 	
 	private EntitySet<QuotationPricingLine> _QuotationPricingLines;
 	
@@ -8788,7 +8788,7 @@ public partial class Quotation : INotifyPropertyChanging, INotifyPropertyChanged
     partial void OnNewStatusIDChanged();
     partial void OnExpiryDateChanging(System.Nullable<System.DateTime> value);
     partial void OnExpiryDateChanged();
-    partial void OnProjectYearChanging(string value);
+    partial void OnProjectYearChanging(int value);
     partial void OnProjectYearChanged();
     #endregion
 	
@@ -9329,8 +9329,8 @@ public partial class Quotation : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	[Column(Storage="_ProjectYear", DbType="VarChar(4)", UpdateCheck=UpdateCheck.Never)]
-	public string ProjectYear
+	[Column(Storage="_ProjectYear", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int ProjectYear
 	{
 		get
 		{

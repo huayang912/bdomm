@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="OMM" Class="OMMDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=BRAC-E9434D5251\SQLEXPRESS;Initial Catalog=OMM;Integrated Security=False;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BUDI2_NS" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=BRAC-E9434D5251\SQLEXPRESS;Initial Catalog=OMM;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="OMMConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Message_Recipients" Member="Message_Recipients">
     <Type Name="Message_Recipient">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -400,7 +400,7 @@
       <Column Name="Contract_awarded_Value" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="NewStatusID" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="ExpiryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ProjectYear" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="ProjectYear" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Quotation_QuotationPricingLine" Member="QuotationPricingLines" ThisKey="ID" OtherKey="QuotationID" Type="QuotationPricingLine" />
       <Association Name="Quotation_Project" Member="Projects" ThisKey="ID" OtherKey="QuotationID" Type="Project" />
       <Association Name="ClientContact_Quotation" Member="ClientContact" ThisKey="SubmittedToClientContactID" OtherKey="ID" Type="ClientContact" IsForeignKey="true" />
