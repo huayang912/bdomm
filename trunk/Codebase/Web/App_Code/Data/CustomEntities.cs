@@ -38,7 +38,7 @@ namespace App.CustomModels
         public String SubmissionDate { get; set; }
         public String DecisionDate { get; set; }
         public int CurrencyID { get; set; }
-        public String ProjectYear { get; set; }
+        public int ProjectYear { get; set; }
     }
     public class CustomQuotationPricingLine
     {
