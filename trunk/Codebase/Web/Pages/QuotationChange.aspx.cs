@@ -63,7 +63,7 @@ public partial class Pages_QuotationChange : BasePage
 
 
         int thisYear = 2010;// System.DateTime.Today.Year;
-        ddlYear.Items.Add("Select");
+        ddlYear.Items.Add("0");
 
         for (int i= 0 ;i < 10;i++) 
         {
@@ -118,7 +118,7 @@ public partial class Pages_QuotationChange : BasePage
                     txtSchedule.Text = quotation.Schedule;
                     txtSubmissionDate.Text = quotation.SubmissionDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat);
                     txtDecisionDate.Text = quotation.DecisionDate == null ? String.Empty : quotation.DecisionDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat);
-                    ddlYear.Text = quotation.ProjectYear == null ? "Select" : quotation.ProjectYear.ToString();
+                    ddlYear.Text = quotation.ProjectYear.ToString();
                     
                     
                     BindQuotationPricingList(dataContext);

@@ -371,7 +371,7 @@
 				</tr>
 				
 				<tr>
-					<td>Year</td>
+					<td>Project Started Year</td>
 					<td>
                         <asp:DropDownList ID="ddlYear" runat="server" EnableViewState="False">
                         </asp:DropDownList>
