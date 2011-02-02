@@ -193,18 +193,24 @@
                     </asp:RequiredFieldValidator>
                 </div>
             </div>
+			
+			<!--
             <div class="floatleft" style="margin-left:20px;">
                 <div style="margin:10px 0px 5px 0px;"><b>Attach File(s)</b></div>
                 <div>
                     <ul id="ulAttachedFiles">
                         <li style="display:none;">&nbsp;</li>
-                        <asp:Literal ID="ltrAttachmentList" runat="server" Text=""></asp:Literal>
-                    </ul>
+						                        <asp:Literal ID="ltrAttachmentList" runat="server" Text=""></asp:Literal>
+                  
+				    </ul>
                 </div>
                 <div>
+				
                     <a href="javascript:void(0);" onclick="ShowCenteredPopUp('EnquiryFiles.aspx?ID=<%=_EnquiryID %>', 'EnquiryAttachment', 500, 330, false);">Attach Document</a>
                 </div>
+				
             </div>
+			-->
             <div class="clearboth"></div>
             <div style="margin-top:30px;">
                 <input type="button" value="< Back" onclick="MoveNext(1);" />&nbsp;
