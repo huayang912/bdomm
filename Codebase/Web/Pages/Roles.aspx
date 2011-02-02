@@ -3,7 +3,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
   <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory">
     <div id="view1" runat="server"></div>
-    <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Roles" view="grid1" ShowInSummary="True" />
+    <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Roles" view="grid1" ShowInSummary="True"  PageSize="25" />
   </div>
   <div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
     <div factory:activator="Tab|Contact Roles">
