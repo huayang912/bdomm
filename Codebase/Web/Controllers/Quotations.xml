@@ -7,6 +7,7 @@
 	"Quotations"."ID" "ID"
 	,"Quotations"."Number" "Number"
 	,"Quotations"."EnquiryID" "EnquiryID"
+	,"Quotations"."ProjectYear" "ProjectYear"
 	,"Enquiry"."Number" "EnquiryNumber"
   
     ,"ViewEnqQuotePrj"."ProjectNumber" "ProjectNumber"
@@ -101,6 +102,8 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
       <items style="Lookup" dataController="Enquiries" newDataView="createForm1" />
     </field>
    
+       <field name="ProjectYear" type="Int32" label="Likely Project Start Year" showInSummary="true" />
+
     
     <field name="EnquiryNumber" type="String" readOnly="true" label="Enquiry Number" />
 
@@ -201,6 +204,9 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
             <dataField fieldName="EnquiryTypeName" columns="50" readOnly="true"/>
 
             <dataField fieldName="StatusID" aliasFieldName="StatusName" readOnly="true"/>
+			            <dataField fieldName="ProjectYear" columns="5" readOnly="true"/>
+
+			
             <dataField fieldName="Subcontractor" columns="50" readOnly="true"/>
             <dataField fieldName="ScopeOfWork" rows="5" readOnly="true"/>
             <dataField fieldName="MainEquipment" rows="5" readOnly="true"/>
@@ -291,7 +297,7 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
       <action id="a107" commandName="Navigate" commandArgument="~/pages/ProjectChange.aspx?QuotationID={ID}" headerText="Create Project" causesValidation="true" />
       <action id="a108" />
 	        <action id="a1061" />
-      <action id="a1071" commandName="Navigate" commandArgument="~/pages/QuotationChange.aspx?ENQID={ID}" headerText="Modify Quote" causesValidation="true" />
+      <action id="a1071" commandName="Navigate" commandArgument="~/pages/QuotationChange.aspx?ENQID={EnquiryID}&amp;ID={ID}" headerText="Modify Quote" causesValidation="true" />
       <action id="a1081" />
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
