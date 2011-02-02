@@ -15,6 +15,10 @@ Partial Public Class Controls_ClientContactSrch
             ' EnquiryStatusText.Text = Session("EnquiryStatusText")
             'SupplierCompanyNameText.Text = Session("SupplierCompanyName")
             'CategoryCategoryNameText.Text = Session("CategoryCategoryName")
+            Dim chars As New List(Of App.CustomModels.StartsWith)
+            chars = App.CustomModels.StartsWith.GetStartsWith()
+            rptStartsWith.DataSource = chars
+            rptStartsWith.DataBind()
         End If
     End Sub
 
@@ -34,8 +38,7 @@ Partial Public Class Controls_ClientContactSrch
         ClientContactListExtender.AssignFilter(filter)
     End Sub
 
-
-    Protected Sub SearchButton_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles SearchButton.Click
+    Protected Sub SearchClientContact(ByVal startsWith As String)
         Dim filter As List(Of FieldFilter) = New List(Of FieldFilter)
         '   If String.IsNullOrEmpty(EnquiryStatusText.Text) Then
         '       filter.Add(New FieldFilter("StatusName", RowFilterOperation.None))
@@ -43,7 +46,7 @@ Partial Public Class Controls_ClientContactSrch
         '       filter.Add(New FieldFilter("StatusName", RowFilterOperation.Like, EnquiryStatusText.Text))
         '   End If
 
-    
+
 
         If CRM_Type.Text = "Show All" Then
             filter.Add(New FieldFilter("NL_All", RowFilterOperation.None))
@@ -108,15 +111,31 @@ Partial Public Class Controls_ClientContactSrch
         End If
 
         'The Like Filter for name added on 8th January 2010
-        If String.IsNullOrEmpty(ddlNameStartsWith.SelectedValue) Then
+        If String.IsNullOrEmpty(startsWith) Then
             filter.Add(New FieldFilter("Name", RowFilterOperation.None))
         Else
-            filter.Add(New FieldFilter("Name", RowFilterOperation.Like, String.Format("{0}%", ddlNameStartsWith.SelectedValue)))
+            filter.Add(New FieldFilter("Name", RowFilterOperation.Like, String.Format("{0}%", startsWith)))
         End If
-  
+
         ClientContactListExtender.AssignFilter(filter)
-       End Sub
+    End Sub
+    Protected Sub SearchButton_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles SearchButton.Click
+        SearchClientContact(String.Empty)
+    End Sub
 
+    Protected Sub rptStartsWith_ItemDataBound(ByVal sender As Object, ByVal e As RepeaterItemEventArgs)
+        Dim start As App.CustomModels.StartsWith
+        start = CType(e.Item.DataItem, App.CustomModels.StartsWith)
 
-    
+        'Dim ltrStartsWith As Literal
+        'ltrStartsWith = CType(e.Item.FindControl("ltrStartsWith"), Literal)
+        'ltrStartsWith.Text = "Another Day In Paradise" 'GetHtml(start.Start);
+        Dim lkbCommand As LinkButton
+        lkbCommand = CType(e.Item.FindControl("lkbCommand"), LinkButton)
+        lkbCommand.CommandArgument = start.Start
+        lkbCommand.Text = String.Format("&nbsp;{0}", start.Start)
+    End Sub
+    Protected Sub rptStartsWith_Command(ByVal sender As Object, ByVal e As RepeaterCommandEventArgs)
+        SearchClientContact(e.CommandArgument)
+    End Sub
 End Class
