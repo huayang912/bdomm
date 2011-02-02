@@ -21,7 +21,7 @@
                             <td>
                                 <asp:Button ID="SearchButton" runat="server" Text="Search" OnClick="SearchButton_Click" />
                             </td>
-                            <td style="padding-left:15px;">
+                            <td style="padding-left:15px; padding-top:3px;">
                                 <div class="floatleft">|</div>
                                 <asp:Repeater ID="rptStartsWith" runat="server" 
                                     onitemdatabound="rptStartsWith_ItemDataBound"
@@ -29,7 +29,7 @@
                                     <ItemTemplate>
                                         <div class="floatleft">
                                             <%--<asp:Literal ID="ltrStartsWith" runat="server"></asp:Literal>--%>
-                                            <asp:LinkButton ID="lkbCommand" CommandName="Filter" runat="server"></asp:LinkButton>&nbsp;| 
+                                            &nbsp;<asp:LinkButton ID="lkbCommand" CommandName="Filter" runat="server"></asp:LinkButton>&nbsp;| 
                                         </div>
                                     </ItemTemplate>
                                     <%--<AlternatingItemTemplate>

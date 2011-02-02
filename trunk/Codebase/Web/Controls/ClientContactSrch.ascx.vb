@@ -133,7 +133,7 @@ Partial Public Class Controls_ClientContactSrch
         Dim lkbCommand As LinkButton
         lkbCommand = CType(e.Item.FindControl("lkbCommand"), LinkButton)
         lkbCommand.CommandArgument = start.Start
-        lkbCommand.Text = String.Format("&nbsp;{0}", start.Start)
+        lkbCommand.Text = start.Start
     End Sub
     Protected Sub rptStartsWith_Command(ByVal sender As Object, ByVal e As RepeaterCommandEventArgs)
         SearchClientContact(e.CommandArgument)
