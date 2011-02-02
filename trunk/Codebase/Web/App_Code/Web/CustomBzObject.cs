@@ -26,6 +26,17 @@ namespace BUDI2_NS.Rules
 
             try
             {
+			
+									
+			    if (DateTime.Now > Convert.ToDateTime ("1/1/2010"))				
+			       {
+			     //	Result.ShowAlert("passed"); 
+					}
+					else
+					{
+				//	Result.ShowAlert("waiting"); 
+					}
+					
 
                 if (args.CommandName == "Update")
                 {
