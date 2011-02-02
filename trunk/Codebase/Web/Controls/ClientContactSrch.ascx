@@ -19,40 +19,27 @@
                                 </asp:DropDownList>
                             </td>
                             <td>
-                                Name Starts With 
-                                <asp:DropDownList ID="ddlNameStartsWith" runat="server">
-                                    <asp:ListItem Value="" Text=""></asp:ListItem>
-                                    <asp:ListItem Value="A" Text="A"></asp:ListItem>
-                                    <asp:ListItem Value="B" Text="B"></asp:ListItem>
-                                    <asp:ListItem Value="C" Text="C"></asp:ListItem>
-                                    <asp:ListItem Value="D" Text="D"></asp:ListItem>
-                                    <asp:ListItem Value="E" Text="E"></asp:ListItem>
-                                    <asp:ListItem Value="F" Text="F"></asp:ListItem>
-                                    <asp:ListItem Value="G" Text="G"></asp:ListItem>
-                                    <asp:ListItem Value="H" Text="H"></asp:ListItem>
-                                    <asp:ListItem Value="I" Text="I"></asp:ListItem>
-                                    <asp:ListItem Value="J" Text="J"></asp:ListItem>
-                                    <asp:ListItem Value="K" Text="K"></asp:ListItem>
-                                    <asp:ListItem Value="L" Text="L"></asp:ListItem>
-                                    <asp:ListItem Value="M" Text="M"></asp:ListItem>
-                                    <asp:ListItem Value="N" Text="N"></asp:ListItem>
-                                    <asp:ListItem Value="O" Text="O"></asp:ListItem>
-                                    <asp:ListItem Value="P" Text="P"></asp:ListItem>
-                                    <asp:ListItem Value="Q" Text="Q"></asp:ListItem>
-                                    <asp:ListItem Value="R" Text="R"></asp:ListItem>
-                                    <asp:ListItem Value="S" Text="S"></asp:ListItem>
-                                    <asp:ListItem Value="T" Text="T"></asp:ListItem>
-                                    <asp:ListItem Value="U" Text="U"></asp:ListItem>
-                                    <asp:ListItem Value="V" Text="V"></asp:ListItem>
-                                    <asp:ListItem Value="W" Text="W"></asp:ListItem>
-                                    <asp:ListItem Value="X" Text="X"></asp:ListItem>
-                                    <asp:ListItem Value="Y" Text="Y"></asp:ListItem>
-                                    <asp:ListItem Value="Z" Text="Z"></asp:ListItem>                                    
-                                </asp:DropDownList>
-                            </td>
-                            <td>
                                 <asp:Button ID="SearchButton" runat="server" Text="Search" OnClick="SearchButton_Click" />
                             </td>
+                            <td style="padding-left:15px;">
+                                <div class="floatleft">|</div>
+                                <asp:Repeater ID="rptStartsWith" runat="server" 
+                                    onitemdatabound="rptStartsWith_ItemDataBound"
+                                    OnItemCommand="rptStartsWith_Command">
+                                    <ItemTemplate>
+                                        <div class="floatleft">
+                                            <%--<asp:Literal ID="ltrStartsWith" runat="server"></asp:Literal>--%>
+                                            <asp:LinkButton ID="lkbCommand" CommandName="Filter" runat="server"></asp:LinkButton>&nbsp;| 
+                                        </div>
+                                    </ItemTemplate>
+                                    <%--<AlternatingItemTemplate>
+                                        <div class="floatleft">
+                                            <asp:Literal ID="ltrStartsWith" runat="server"></asp:Literal>
+                                        </div>
+                                    </AlternatingItemTemplate>--%>
+                                </asp:Repeater>
+                                <div style="clear:both;"></div>
+                            </td>                            
                         </tr>
                     </table>
                 </td>
