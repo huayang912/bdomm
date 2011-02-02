@@ -111,4 +111,49 @@ namespace App.CustomModels
         public const int Completed = 2;
     }
     #endregion
+
+    public class StartsWith
+    {
+        public String Start
+        {
+            get;
+            set;
+        }
+
+        public static List<StartsWith> GetStartsWith()
+        {
+            List<StartsWith> chars = new List<StartsWith>
+            {
+                new StartsWith(){Start = "A"},
+                new StartsWith(){Start = "B"},
+                new StartsWith(){Start = "C"},
+                new StartsWith(){Start = "D"},
+                new StartsWith(){Start = "E"},
+                new StartsWith(){Start = "F"},
+                new StartsWith(){Start = "G"},
+                new StartsWith(){Start = "H"},
+                new StartsWith(){Start = "I"},
+                new StartsWith(){Start = "J"},
+                new StartsWith(){Start = "K"},
+                new StartsWith(){Start = "L"},
+                new StartsWith(){Start = "M"},
+                new StartsWith(){Start = "N"},
+                new StartsWith(){Start = "O"},
+                new StartsWith(){Start = "P"},
+                new StartsWith(){Start = "Q"},
+                new StartsWith(){Start = "R"},
+                new StartsWith(){Start = "S"},
+                new StartsWith(){Start = "T"},
+                new StartsWith(){Start = "U"},
+                new StartsWith(){Start = "V"},
+                new StartsWith(){Start = "W"},
+                new StartsWith(){Start = "X"},
+                new StartsWith(){Start = "Y"},
+                new StartsWith(){Start = "Z"}
+            };
+            //rptStartsWith.DataSource = chars;
+            //rptStartsWith.DataBind();
+            return chars;
+        }
+    }    
 }
