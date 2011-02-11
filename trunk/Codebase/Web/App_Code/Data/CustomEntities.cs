@@ -109,6 +109,7 @@ namespace App.CustomModels
     {
         public const int InProgress = 1;
         public const int Completed = 2;
+        public const int Closed = 3;
     }
     #endregion
 
