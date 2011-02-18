@@ -195,6 +195,8 @@ from "dbo"."Projects" "Projects"
   <actions xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <actionGroup id="ag1" scope="Grid">
       <action id="a100" commandName="Navigate" commandArgument="~/pages/ProjectDetails.aspx?ID={ID}" causesValidation="true" headerText="Details" />
+	        <action id="a102" headerText="Close Project" causesValidation="true" commandName="Custom" commandArgument="SetProjectStatusClosed" />
+
       <!--
       <action id="a1" commandName="Select" commandArgument="editForm1" />
     
