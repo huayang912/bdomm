@@ -67,4 +67,37 @@ public class CustomPrjClass:ActionHandlerBase
 
            
     }
+	
+	//
+		protected override void ExecuteAction(ActionArgs args, ActionResult result)
+	{
+		// Added for project page oes not go well with page name
+		   if (args.CommandName == "Custom" && args.CommandArgument == "SetProjectStatusClosed")
+        {
+		
+		 using (SqlText updatePrice = new SqlText(
+                "update [Projects] set StatusID=@StatusID where ID=@ID"))
+             {
+                 updatePrice.AddParameter("@StatusID", 2);
+                 updatePrice.AddParameter("@ID", args["ID"].Value);
+                 updatePrice.ExecuteNonQuery();
+
+                }
+		
+		
+            result.ClientScript = "this.set_lastCommandName(null);" + "this.goToView('grid1');";
+            Result.ShowAlert("Project Closed.");
+
+        }
+		
+		
+	}
+
+	
+	
+	//
+	
+	
+	
+	
 }
