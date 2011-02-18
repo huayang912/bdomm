@@ -30,11 +30,15 @@ namespace BUDI2_NS.Rules
 									
 			    if (DateTime.Now > Convert.ToDateTime ("1/1/2010"))				
 			       {
-			     //	Result.ShowAlert("passed"); 
+			 //    Result.ShowAlert("passed"); 
+				//this.Close(); 
+				// throw new Exception("passed");
+				
 					}
 					else
 					{
 				//	Result.ShowAlert("waiting"); 
+				//throw new Exception("waiting");
 					}
 					
 
