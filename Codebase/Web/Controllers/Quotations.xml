@@ -57,7 +57,10 @@
         ,"QuotationExpiryDates"."ExpiryDate" "ExpiryDate"
         ,"QuotationExpiryDates"."IsExpired" "IsExpired"
         ,"Quotations"."Contract_awarded_to" "Contract_awarded_to"
-        ,"Quotations"."Contract_awarded_Value" "Contract_awarded_Value"
+        ,"Quotations"."Contract_awarded_Value" "Contract_awarded_Value"		
+		   ,"EnquiryFiles"."FileName" "FileName"	
+		   ,"UploadedByUser"."UserName" "UploadedByUserName"
+		
      from "dbo"."Quotations" "Quotations"
 	left join "dbo"."Enquiries" "Enquiry" on "Quotations"."EnquiryID" = "Enquiry"."ID"
 
@@ -85,6 +88,9 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
 	left join "dbo"."Countries" "SubmittedToClientContactCountry" on "SubmittedToClientContact"."CountryID" = "SubmittedToClientContactCountry"."ID"
 	left join "dbo"."Users" "SubmittedToClientContactChangedByUser" on "SubmittedToClientContact"."ChangedByUserID" = "SubmittedToClientContactChangedByUser"."ID"
 	left join "dbo"."Currency" "Currency" on "Quotations"."CurrencyID" = "Currency"."ID"
+	
+	   left join "dbo"."EnquiryFiles" "EnquiryFiles" on "Quotations"."EnquiryID" = "EnquiryFiles"."EnquiryID"
+   left join "dbo"."Users" "UploadedByUser" on "EnquiryFiles"."UploadedBy" = "UploadedByUser"."ID"
 
 ]]></text>
     </command>
@@ -157,6 +163,13 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
     <field name="CurrencyID" type="Int32" label="Currency#">
       <items style="Lookup" dataController="Currency" newDataView="createForm1" />
     </field>
+	
+	
+	  <field name="FileName" type="String" readOnly="true" label="File" />  
+	    <field name="UploadedByUserName" type="String" readOnly="true" label="File Uploaded By" />  
+	   
+	
+	
     <field name="CurrencyDescription" type="String" readOnly="true" label="Currency Description" />
     <field name="CreatedByUsername" type="String" label="Created By Username" />
     <field name="ChangedByUsername" type="String" label="Changed By Username" />
@@ -196,7 +209,7 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
     <view id="editForm1" type="Form" commandId="command1" label="Review Quotations">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
-        <category headerText="Quotations" newColumn="true">
+        <category headerText="" newColumn="true">
         <!--  <description>$DefaultEditDescription</description> -->
           <dataFields>
             <dataField fieldName="Number" readOnly="true" columns="50"/>
@@ -219,7 +232,9 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
             <dataField fieldName="Contract_awarded_to" hidden="false"  columns="30"/>
             <dataField fieldName="Contract_awarded_Value" hidden="false" columns="30"/>
 			            <dataField fieldName="QuoteExpiryDate" hidden="false" columns="30"/>
-
+     <dataField fieldName="CreatedByUserID"  aliasFieldName="CreatedByUserUserName" readOnly="true"/>
+            <dataField fieldName="ChangedOn" columns="10" readOnly="true"/>
+            <dataField fieldName="ChangedByUserID"  aliasFieldName="ChangedByUserUserName" readOnly="true"/>
 			
           </dataFields>
         </category>
@@ -243,14 +258,23 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
             <dataField fieldName="SubmittedToClientContactID" aliasFieldName="SubmittedToClientContactName" readOnly="true"/>
             <dataField fieldName="ExpiryDate" />
             <dataField fieldName="CurrencyID" aliasFieldName="CurrencyDescription" readOnly="true"/>
-            <dataField fieldName="CreatedByUserID"  aliasFieldName="CreatedByUserUserName" readOnly="true"/>
-            <dataField fieldName="ChangedOn" columns="10" readOnly="true"/>
-            <dataField fieldName="ChangedByUserID"  aliasFieldName="ChangedByUserUserName" readOnly="true"/>
+       
             <dataField fieldName="ProjectNumber" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={ProjectID}"  />
             <dataField fieldName="ProjectID" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={QuotationID}" hidden="true"  />
             <dataField fieldName="ProjectName"  columns="30"/>
 
           </dataFields>
+        </category>
+		
+		  <category headerText="Attachments" newColumn="false">
+             <description></description>
+            <dataFields>
+          	   <dataField fieldName="UploadedByUserName"  columns="30"/>
+			   <dataField fieldName="FileName"   hyperlinkFormatString="_blank:~/EnquiryAttachments/{EnquiryID}/{FileName}" />
+          </dataFields>
+		
+		   
+		  
         </category>
       </categories>
     </view>

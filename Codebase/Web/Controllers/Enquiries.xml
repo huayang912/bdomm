@@ -39,6 +39,10 @@
 ,"Enquiries"."EnguirySubject" "EnguirySubject"
 	,"Enquiries"."CreatedByUsername" "CreatedByUsername"
 	,"EnquiryLines"."Details" "Details"
+		,"EnquiryFiles"."FileName" "FileName"	
+		,"UploadedByUser"."UserName" "UploadedByUserName"
+		
+
 from "dbo"."Enquiries" "Enquiries"
 	left join "dbo"."ClientContacts" "Contact" on "Enquiries"."ContactID" = "Contact"."ID"
 	left join "dbo"."Clients" "ContactCompany" on "Contact"."CompanyID" = "ContactCompany"."ID"
@@ -54,8 +58,11 @@ from "dbo"."Enquiries" "Enquiries"
 	left join "dbo"."Users" "CreatedByUser" on "Enquiries"."CreatedByUserID" = "CreatedByUser"."ID"
 	left join "dbo"."Users" "ChangedByUser" on "Enquiries"."ChangedByUserID" = "ChangedByUser"."ID"
   left join "dbo"."ViewEnqQuotePrj" "ViewEnqQuotePrj" on "Enquiries"."ID" = "ViewEnqQuotePrj"."EnquiryID"
-
-	left join "dbo"."EnquiryLines" "EnquiryLines" on "Enquiries"."ID" = "enquiryLines"."EnquiryID"]]></text>
+  
+   left join "dbo"."EnquiryFiles" "EnquiryFiles" on "Enquiries"."ID" = "EnquiryFiles"."EnquiryID"
+   left join "dbo"."Users" "UploadedByUser" on "EnquiryFiles"."UploadedBy" = "UploadedByUser"."ID"
+      
+   	left join "dbo"."EnquiryLines" "EnquiryLines" on "Enquiries"."ID" = "enquiryLines"."EnquiryID"]]></text>
     </command>
     <command id="IDIdentityCommand" type="Text" event="Inserted">
       <text><![CDATA[select @@identity]]></text>
@@ -104,6 +111,15 @@ from "dbo"."Enquiries" "Enquiries"
     <field name="ChangedByUserID" type="Int32" label="Changed By User#">
       <items style="Lookup" dataController="Users" newDataView="createForm1" />
     </field>
+	
+	
+	   <field name="FileName" type="String" readOnly="true" label="File" />  
+	    <field name="UploadedByUserName" type="String" readOnly="true" label="File Uploaded By" />  
+	   
+	
+      
+    
+	
     <field name="ChangedByUserUserName" type="String" readOnly="true" label="Changed By User Name" />
     <field name="ChangedOn" type="DateTime" default="(getdate())" label="Changed On" />
     <field name="CreatedByUsername" type="String" label="Created By Username" />
@@ -145,10 +161,10 @@ from "dbo"."Enquiries" "Enquiries"
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Enquiries">
-      <headerText>$DefaultEditViewDescription</headerText>
+      <headerText></headerText>
       <categories>
-        <category headerText="Enquiries" newColumn="true">
-          <description>$DefaultEditDescription</description>
+        <category headerText="" newColumn="true">
+          <description></description>
           <dataFields>
             <dataField fieldName="Number" readOnly="true" columns="30" />
             <dataField fieldName="TypeID" aliasFieldName="TypeName" readOnly="true"/>
@@ -169,8 +185,8 @@ from "dbo"."Enquiries" "Enquiries"
             <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
           </dataFields>
         </category>
-        <category headerText="Reference Information" newColumn="true">
-          <description>$DefaultReferenceDescription</description>
+        <category headerText="" newColumn="true">
+          <description></description>
           <dataFields>
             <dataField fieldName="ContactCompanyName" readOnly="true"/>
             <dataField fieldName="ContactCompanyCountryName" readOnly="true"/>
@@ -184,8 +200,21 @@ from "dbo"."Enquiries" "Enquiries"
             <dataField fieldName="ProjectNumber" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={ProjectID}"  />
             <dataField fieldName="ProjectID" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={QuotationID}" hidden="true"  />
             <dataField fieldName="ProjectName"  columns="30"/>
-
+		         </dataFields>
+		
+		   
+		  
+        </category>
+		
+		    <category headerText="Attachments" newColumn="false">
+          <description></description>
+          <dataFields>
+          			   <dataField fieldName="UploadedByUserName"  columns="30"/>
+			   <dataField fieldName="FileName"   hyperlinkFormatString="_blank:~/EnquiryAttachments/{ID}/{FileName}" />
           </dataFields>
+		
+		   
+		  
         </category>
       </categories>
     </view>
@@ -217,8 +246,11 @@ from "dbo"."Enquiries" "Enquiries"
       <action id="a6" />
       <action id="a100" commandName="Navigate" commandArgument="~/pages/QuotationChange.aspx?ENQID={ID}" causesValidation="true" headerText="Add Quotation" />
 	        <action id="a105" commandName="Navigate" commandArgument="~/pages/EnquiryDetails.aspx?ID={ID}" causesValidation="true" headerText="Close Enquiry" />
+			
+			  <action id="a500" />
+      <action id="a700" commandName="Navigate" commandArgument="~/pages/EnquiryChange.aspx?ID={ID}" headerText="Modify Enquiry" causesValidation="true" /> 
     </actionGroup>
-    <actionGroup id="ag2" scope="Form">
+    <actionGroup id="a800" scope="Form">
 
      
       <action id="a1" commandName="Edit" headerText="EDIT"/>
@@ -235,7 +267,9 @@ from "dbo"."Enquiries" "Enquiries"
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
   <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon"  whenHRef="Enquiries.aspx"/>
       <!--<action id="a103" commandName="Navigate" commandArgument="~/pages/QuotationSubmit.aspx?ID={ID}" headerText="Submit This Quotation" causesValidation="true" />-->
-      <action id="a1" commandName="Navigate" commandArgument="~/Pages/EnquiryChange.aspx" headerText="New Enquiry" cssClass="NewIcon"/>    
+      <action id="a1" commandName="Navigate" commandArgument="~/Pages/EnquiryChange.aspx" headerText="New Enquiry" cssClass="NewIcon"/>   
+	  
+	   
     </actionGroup>
   
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
