@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-public partial class Pages_VewPersonnelRoles : System.Web.UI.Page
+public partial class Pages_VewPersonnelRoles : BasePage
 {
     
     public string CssClass

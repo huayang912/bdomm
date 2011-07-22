@@ -43,7 +43,7 @@ public partial class Main : System.Web.UI.MasterPage
         {
             hplLogin.NavigateUrl = String.Format("{0}?{1}=True", AppConstants.Pages.LOG_IN, AppConstants.QueryString.LOG_OUT);
             hplLogin.Text = "Log Out";
-            ltrUserName.Text = String.Format("Welcome {0} | ", SessionCache.CurrentUser.UserNameWeb);
+            ltrUserName.Text = String.Format("Welcome {0} | ", SessionCache.CurrentUser.UserName);//SessionCache.CurrentUser.UserNameWeb);
         }
         if (IsPostBack)
             Menu1.DataBind();

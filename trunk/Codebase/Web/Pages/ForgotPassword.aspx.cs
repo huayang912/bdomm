@@ -43,7 +43,7 @@ public partial class Pages_ForgotPassword : System.Web.UI.Page
             StringBuilder sb = new StringBuilder(10);            
             sb.AppendFormat("Dear {0},<br/>", user.DisplayName.HtmlEncode());
             sb.AppendFormat("Below is your {0} User Name and Password.<br/><br/>", WebUtil.GetDomainAddress());
-            sb.AppendFormat("<b>User Name:</b> {0}<br/>", user.UserNameWeb.HtmlEncode());
+            sb.AppendFormat("<b>User Name:</b> {0}<br/>", user.UserName.HtmlEncode());//user.UserNameWeb.HtmlEncode());
             sb.AppendFormat("<b>Password:</b> {0}<br/><br/>", user.Password.HtmlEncode());
 
             sb.AppendFormat("Click the link below to login.<br/>");

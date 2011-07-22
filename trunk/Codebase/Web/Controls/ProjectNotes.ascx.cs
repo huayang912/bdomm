@@ -17,7 +17,7 @@ public partial class Controls_ProjectNotes : System.Web.UI.UserControl
     #endregion
     protected void Page_Load(object sender, EventArgs e)
     {
-        hdnUserName.Value = SessionCache.CurrentUser.UserNameWeb;
+        hdnUserName.Value = SessionCache.CurrentUser.UserName; //SessionCache.CurrentUser.UserNameWeb;
     }
     public override void DataBind()
     {
@@ -33,7 +33,7 @@ public partial class Controls_ProjectNotes : System.Web.UI.UserControl
             ProjectNote note = e.Item.DataItem as ProjectNote;
             User user = _DataContext.Users.SingleOrDefault(U => U.ID == note.CreatedBy);
             Literal ltrUserName = e.Item.FindControl("ltrUserName") as Literal;
-            ltrUserName.Text = user == null ? "Annonymus" : user.UserNameWeb;
+            ltrUserName.Text = user == null ? "Annonymus" : user.UserName; //user.UserNameWeb;
             //String noteDate = note.CreatedDate.ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY);
             ltrUserName.Text = String.Format("{0}<div class='NoteDate'>{1}</div>", ltrUserName.Text, note.CreatedDate.ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY_WITH_TIME));
 

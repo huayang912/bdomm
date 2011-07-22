@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-public partial class Pages_EnquiryLines : System.Web.UI.Page
+public partial class Pages_EnquiryLines : BasePage
 {
     
     public string CssClass

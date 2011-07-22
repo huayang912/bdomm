@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-public partial class Pages_TelephoneNumberTypes : System.Web.UI.Page
+public partial class Pages_TelephoneNumberTypes : BasePage
 {
     
     public string CssClass

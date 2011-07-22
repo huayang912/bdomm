@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-public partial class Pages_Message_Statuses : System.Web.UI.Page
+public partial class Pages_Message_Statuses : BasePage
 {
     
     public string CssClass

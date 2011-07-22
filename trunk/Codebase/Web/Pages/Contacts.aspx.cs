@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-public partial class Pages_Contacts : System.Web.UI.Page
+public partial class Pages_Contacts : BasePage
 {
     
     public string CssClass

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-public partial class Pages_PersonnelView : System.Web.UI.Page
+public partial class Pages_PersonnelView : BasePage
 {
     
     public string CssClass

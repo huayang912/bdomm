@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-public partial class Pages_Currency : System.Web.UI.Page
+public partial class Pages_Currency : BasePage
 {
     
     public string CssClass

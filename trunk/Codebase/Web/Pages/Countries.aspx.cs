@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-public partial class Pages_Countries : System.Web.UI.Page
+public partial class Pages_Countries : BasePage
 {
     
     public string CssClass

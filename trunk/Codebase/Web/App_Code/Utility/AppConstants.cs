@@ -26,6 +26,7 @@ public class AppConstants
     public class Pages
     {        
         public const String HOME_PAGE = "~/Pages/Home.aspx";
+        public const String ACCESS_DENIED = "~/AccessDenied.aspx";
         public const String LOG_IN = "~/Login.aspx";
         public const String ERROR = "/Error.aspx";
         public const String ORGANIZATION_MANAGEMENT = "/Pages/Private/OrganizationManagement.aspx";
