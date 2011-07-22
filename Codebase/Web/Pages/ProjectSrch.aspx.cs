@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-public partial class Pages_ProjectSrch : System.Web.UI.Page
+public partial class Pages_ProjectSrch : BasePage
 {
     
     public string CssClass

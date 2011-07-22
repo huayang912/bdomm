@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-public partial class Pages_QuotationStatuses : System.Web.UI.Page
+public partial class Pages_QuotationStatuses : BasePage
 {
     
     public string CssClass

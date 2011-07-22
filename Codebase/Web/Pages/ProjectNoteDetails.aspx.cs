@@ -33,7 +33,7 @@ public partial class Pages_ProjectNoteDetails : BasePage
         {
             ltrProjectName.Text = String.Format("<b>Project Number: </b>{0}<br /><b>Project Name: </b>{1}", note.Project.Number, note.Project.Name.HtmlEncode());
             User user = context.Users.SingleOrDefault(U => U.ID == note.CreatedBy);            
-            ltrUserName.Text = user == null ? "Annonymus" : user.UserNameWeb;            
+            ltrUserName.Text = user == null ? "Annonymus" : user.UserName;//user.UserNameWeb;            
             ltrUserName.Text = String.Format("{0}<div class='NoteDate'>{1}</div>", ltrUserName.Text, note.CreatedDate.ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY_WITH_TIME));
 
             ltrDetails.Text = WebUtil.FormatText(note.Details);

@@ -207,13 +207,14 @@ public class WebUtil
     /// Logins the user.
     /// </summary>
     public static void LoginUser()
-    {
+    {        
         if (HttpContext.Current.User.Identity.IsAuthenticated && SessionCache.CurrentUser == null)
         {
             String userName = HttpContext.Current.User.Identity.Name;
 
             OMMDataContext dataContext = new OMMDataContext();
-            var user = dataContext.Users.SingleOrDefault(U => U.UserNameWeb == userName);
+            //var user = dataContext.Users.SingleOrDefault(U => U.UserNameWeb == userName);///For Forms Authentication
+            var user = dataContext.Users.SingleOrDefault(U => String.Compare(U.UserName, userName, true) == 0); ///For Windows Authentication            
             if (user != null)
             {
                 SessionCache.CurrentUser = user;
@@ -226,7 +227,7 @@ public class WebUtil
         if (!receiPientsList.IsNullOrEmpty())
         {
             String[] ids = receiPientsList.Split(',');
-            IList<int> intIds = new List<int>();
+            IList<int> intIds = new List<int>();            
             foreach (String id in ids)
             {
                 int value = 0;

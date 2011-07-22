@@ -81,7 +81,7 @@ public partial class Pages_EnquiryDetails : BasePage
             if (enquiry != null)
             {
                 enquiry.StatusID = EnquiryStatus.Closed;
-                enquiry.ChangedByUsername = SessionCache.CurrentUser.UserNameWeb;
+                enquiry.ChangedByUsername = SessionCache.CurrentUser.UserName;//SessionCache.CurrentUser.UserNameWeb;
                 enquiry.ChangedByUserID = SessionCache.CurrentUser.ID;
                 enquiry.ChangedOn = DateTime.Now;
                 dataContext.SubmitChanges();

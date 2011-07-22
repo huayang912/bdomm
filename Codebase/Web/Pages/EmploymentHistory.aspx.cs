@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-public partial class Pages_EmploymentHistory : System.Web.UI.Page
+public partial class Pages_EmploymentHistory : BasePage
 {
     
     public string CssClass

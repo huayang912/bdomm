@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-public partial class Pages_EmailAddresses : System.Web.UI.Page
+public partial class Pages_EmailAddresses : BasePage
 {
     
     public string CssClass

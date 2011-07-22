@@ -93,7 +93,7 @@ public partial class Pages_QuotationDecision : BasePage
             }
 
             quotation.ChangedByUserID = SessionCache.CurrentUser.ID;
-            quotation.ChangedByUsername = SessionCache.CurrentUser.UserNameWeb;
+            quotation.ChangedByUsername = SessionCache.CurrentUser.UserName; //SessionCache.CurrentUser.UserNameWeb;
             quotation.ChangedOn = DateTime.Now;
             //if (decision == App.CustomModels.QuotationStatus.Successful || decision == App.CustomModels.QuotationStatus.Unsuccessful)
             //    quotation.Enquiry.StatusID = App.CustomModels.EnquiryStatus.Closed;
@@ -116,7 +116,7 @@ public partial class Pages_QuotationDecision : BasePage
         Project project = new Project();       
         project.Description = quotation.Enquiry.EnguirySubject;
         project.ChangedByUserID = project.CreatedByUserID = SessionCache.CurrentUser.ID;
-        project.CreatedByUsername = project.ChangedByUsername = SessionCache.CurrentUser.UserNameWeb;
+        project.CreatedByUsername = project.ChangedByUsername = SessionCache.CurrentUser.UserName; //SessionCache.CurrentUser.UserNameWeb;
         project.CreatedOn = project.ChangedOn = DateTime.Now;
         project.StatusID = App.CustomModels.ProjectStatus.InProgress;
         project.StartDate = DateTime.Now;
