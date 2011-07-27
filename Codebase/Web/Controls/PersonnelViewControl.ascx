@@ -16,7 +16,9 @@
         </div>
     </ContentTemplate>
 </asp:UpdatePanel>
-        
+        <div class='box'>
+ <div class='boxtop'><div></div></div>
+  <div class='boxcontent'>
         <table width="100%" border="0">    
             <tr> 
                 <td valign="top">
@@ -178,10 +180,19 @@
                                 </act:TabContainer>
                             </ContentTemplate>
                         </act:TabPanel>
+						
                     </act:TabContainer>
                 </div>
+				
+				<div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
+                       
+						             <div id="view611" runat="server"></div>
+                                <aquarium:DataViewExtender id="view611Extender" runat="server" TargetControlID="view611" Controller="ContactsCommsNotes" view="grid1" FilterSource="view1Extender" FilterFields="ContactID" PageSize="5" AutoHide="Container" ShowViewSelector="False" ShowQuickFind="false" ShowActionBar="true" />
+
+			   </div>
             </td>     
             <td>  
+			
                 <table bgcolor="#6699FF">
                     <tr>
                         <td>&nbsp;</td>
@@ -208,8 +219,12 @@
 	                    </td>
 	                </tr>
 	            </table>	
+
 		    </td>
         </tr>
   </table>
+  				</div>
+ <div class='boxbottom'><div></div></div>
+</div>
 <%--    </ContentTemplate>
 </asp:UpdatePanel>--%>
