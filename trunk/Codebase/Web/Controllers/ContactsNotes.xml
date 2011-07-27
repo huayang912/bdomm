@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<dataController name="ContactsNotes" conflictDetection="overwriteChanges" label="Contacts Notes" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
+<dataController name="ContactsNotes" conflictDetection="overwriteChanges" label="Notes" plugIn="BUDI2_NS.Data.AnnotationPlugIn" xmlns="urn:schemas-codeontime-com:data-aquarium">
   <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <command id="command1" type="Text">
       <text>
@@ -45,7 +45,7 @@ from "dbo"."ContactsNotes" "ContactsNotes"
 
   </fields>
   <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
-    <view id="grid1" type="Grid" commandId="command1" label="Contacts Notes"  sortExpression="id desc">
+    <view id="grid1" type="Grid" commandId="command1" label="Notes"  sortExpression="id desc">
       <headerText>Notes</headerText>
       <dataFields>
         <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" hidden="true"/>
@@ -55,7 +55,7 @@ from "dbo"."ContactsNotes" "ContactsNotes"
         <dataField fieldName="ChangedByUsername" columns="50" hidden="true" />
       </dataFields>
     </view>
-    <view id="editForm1" type="Form" commandId="command1" label="Review Contacts Notes">
+    <view id="editForm1" type="Form" commandId="command1" label="Review Notes">
       <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category headerText="Contacts Notes" newColumn="true">
@@ -72,7 +72,7 @@ from "dbo"."ContactsNotes" "ContactsNotes"
         </category>
       </categories>
     </view>
-    <view id="createForm1" type="Form" commandId="command1" label="New Contacts Notes">
+    <view id="createForm1" type="Form" commandId="command1" label="New Notes">
       <headerText></headerText>
       <categories>
         <category headerText="New Contacts Notes" newColumn="true">
