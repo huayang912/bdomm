@@ -127,7 +127,7 @@ from "dbo"."Contacts" "Contacts"
     <field name="CountryName" type="String" readOnly="true" label="Country Name" />
     <field name="DateOfBirth" type="DateTime" label="Date Of Birth" />
     <field name="DateOfLastMeeting" type="DateTime" label="Date Of Last Meeting" />
-    <field name="MaritalStatusID" type="Int32" allowNulls="false" label="Marital Status#">
+    <field name="MaritalStatusID" type="Int32" allowNulls="true" label="Marital Status#">
       <items style="Lookup" dataController="MaritalStatuses" newDataView="createForm1" />
     </field>
     <field name="MaritalStatusName" type="String" readOnly="true" label="Marital Status Name" />
