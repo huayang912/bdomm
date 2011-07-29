@@ -79,7 +79,7 @@ from "dbo"."ContactsNotes" "ContactsNotes"
           <description></description>
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" hidden="true"/>
-            <dataField fieldName="Notes" columns="40" textMode="Note"/>
+            <dataField fieldName="Notes" columns="40" textMode="Note" rows="3"/>
             <dataField fieldName="ChangedOn" columns="10"  hidden="true" />
             <dataField fieldName="CreatedByUsername" columns="50"  hidden="true"/>
             <dataField fieldName="ChangedByUsername" columns="50"  hidden="true" />
