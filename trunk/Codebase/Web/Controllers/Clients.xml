@@ -152,7 +152,10 @@ from "dbo"."Clients" "Clients"
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
+	<!--
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+	-->
+	 <actionGroup id="ag31" scope="ActionBar" headerText="Edit" flat="true">
       <!--<action id="a100" commandName="Navigate" commandArgument="~/pages/ClientNewEdit.aspx?ID={ID}" causesValidation="true" headerText="Edit" />-->
       <action id="a100" whenLastCommandName="Select" commandName="Edit" />
     </actionGroup>

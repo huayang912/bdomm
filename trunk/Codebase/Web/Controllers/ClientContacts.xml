@@ -162,7 +162,7 @@ from "dbo"."ClientContacts" "ClientContacts"
           <dataFields>
             <dataField fieldName="Name" columns="30"  />
             <dataField fieldName="JobTitle" columns="30" />
-            <dataField fieldName="Address" columns="50" />
+            <dataField fieldName="Address" columns="30" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
             <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30" />
             <dataField fieldName="Telephone" columns="30" />
@@ -231,13 +231,19 @@ from "dbo"."ClientContacts" "ClientContacts"
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
+	 <actionGroup id="ag51" scope="ActionBar" headerText="Edit" flat="true">
+      <action id="a100" whenLastCommandName="Select" commandName="Edit" />
+    </actionGroup>
+	
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <!--<action id="a100" commandName="Navigate" commandArgument="~/pages/ClientNewEdit.aspx?ID={ID}" causesValidation="true" headerText="Edit" />-->
 	   <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
       <action id="a3" commandName="ExportRowset" />
-      <action id="a100" whenLastCommandName="Select" commandName="Edit" />
+      <!--<action id="a100" whenLastCommandName="Select" commandName="Edit" />-->
     </actionGroup>
+	
+	
  
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
