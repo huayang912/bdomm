@@ -150,11 +150,7 @@ left join "dbo"."ClientContacts" "Contact" on "Enquiry"."ContactID" = "Contact".
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
-    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
-      <action id="a1" commandName="ReportAsPdf" />
-      <action id="a2" commandName="ReportAsImage" />
-      <action id="a3" commandName="ReportAsExcel" />
-    </actionGroup>
+   
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
