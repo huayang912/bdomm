@@ -1,3 +1,5 @@
+USE [OMMBUDI_Test]
+GO
 
 CREATE TABLE [dbo].[ContactCommsTypes](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
@@ -30,9 +32,17 @@ GO
 ALTER TABLE [dbo].[ContactsCommsNotes]  WITH CHECK ADD  CONSTRAINT [FK_ContactsCommsNotes_Contacts] FOREIGN KEY([ContactID])
 REFERENCES [dbo].[Contacts] ([ID])
 GO
+
+
+ALTER TABLE [dbo].[ContactCommsTypes]
+ADD CONSTRAINT [PK_ContactCommsTypes] PRIMARY KEY ( [ID] )
+GO
+
 ALTER TABLE [dbo].[ContactsCommsNotes]  WITH CHECK ADD  CONSTRAINT [FK_ContactsCommsNotes_ContactCommsTypes] FOREIGN KEY([ContactCommsTypeID])
 REFERENCES [dbo].[ContactCommsTypes] ([ID])
 GO
+
+
 ALTER TABLE [dbo].[ContactsCommsNotes] CHECK CONSTRAINT [FK_ContactsCommsNotes_Contacts]
 GO
 ALTER TABLE [dbo].[ContactsCommsNotes]  WITH CHECK ADD  CONSTRAINT [FK_ContactsCommsNotes_Users] FOREIGN KEY([ChangedByUserID])
