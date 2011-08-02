@@ -4,6 +4,10 @@
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 
 <ContentTemplate>
+
+<div class="container">
+ <b class="rtop"><b class="r1"></b> <b class="r2"></b> <b class="r3"></b> <b class="r4"></b></b>
+
  <table width="100%" border="0">
     <tr>
       <td valign="top"  ><div factory:flow="NewRow" style="padding-top:8px;  xmlns:factory="urn:codeontime:app-factory" >
@@ -50,6 +54,10 @@
         </div></td>
        </tr> 
   </table>
+  
+  				 <b class="rbottom"><b class="r4"></b> <b class="r3"></b> <b class="r2"></b> <b class="r1"></b></b>
+
+  
 </ContentTemplate>
 
 </asp:UpdatePanel>
