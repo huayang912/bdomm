@@ -18,13 +18,22 @@
 </asp:UpdatePanel>
         <div class='box'>
  <div class='boxtop'><div></div></div>
+ 
+			<div class="container">
+ <b class="rtop"><b class="r1"></b> <b class="r2"></b> <b class="r3"></b> <b class="r4"></b></b>
+ 
+ 
   <div class='boxcontent'>
         <table width="100%" border="0">    
             <tr> 
                 <td valign="top">
                     <div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
                         <act:TabContainer ID="OrderManager" runat="server">
-                            <act:TabPanel ID="CustomersTab" runat="server" HeaderText="Personnel" PageSize="25">                                
+                           
+						    <div class="container">
+
+						   
+						    <act:TabPanel ID="CustomersTab" runat="server" HeaderText="Personnel" PageSize="25">                                
                                 <ContentTemplate>
                                     <div id="view1" runat="server"></div>
 			                        <aquarium:DataViewExtender id="view1Extender" runat="server" 
@@ -32,7 +41,10 @@
 			                            ShowViewSelector="false" ShowQuickFind="true"/>
 			                    </ContentTemplate>
                             </act:TabPanel>
-                            
+          
+							
+							
+							
                             <act:TabPanel ID="EmploymentHistoryTab" runat="server" HeaderText="Employment History">
                                 <ContentTemplate>
                                     <div id="view9" runat="server"></div>
@@ -112,6 +124,17 @@
                                         ShowViewSelector="false" PageSize="5"  />
                                 </ContentTemplate>
                             </act:TabPanel>
+							
+							  <act:TabPanel ID="PlacementTab" runat="server" HeaderText="Placement History">
+                                <ContentTemplate>
+                                    <div id="view91p" runat="server"></div>
+                                    <aquarium:DataViewExtender id="view91pExtender" runat="server" 
+                                        TargetControlID="view91p" Controller="ContactPlacementHistory" 
+                                        view="grid1" FilterSource="view1Extender" FilterFields="ContactID"
+                                        ShowViewSelector="false" PageSize="5"  />
+                                </ContentTemplate>
+                            </act:TabPanel>
+							
                             
                             <act:TabPanel ID="NextOfKinTab" runat="server" HeaderText="Next Of Kin">
                                 <ContentTemplate>
@@ -193,6 +216,10 @@
             </td>     
             <td>  
 			
+
+			
+			
+			
                 <table bgcolor="#6699FF">
                     <tr>
                         <td>&nbsp;</td>
@@ -220,10 +247,19 @@
 	                </tr>
 	            </table>	
 
+
+ </div>
+
+
+
 		    </td>
         </tr>
   </table>
   				</div>
+				
+				 <b class="rbottom"><b class="r4"></b> <b class="r3"></b> <b class="r2"></b> <b class="r1"></b></b>
+				
+				
  <div class='boxbottom'><div></div></div>
 </div>
 <%--    </ContentTemplate>
