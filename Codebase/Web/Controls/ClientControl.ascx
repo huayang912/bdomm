@@ -48,8 +48,11 @@
         
          <div id="view5" runat="server"></div>
       <aquarium:DataViewExtender id="view5Extender" runat="server" TargetControlID="view5" Controller="ClientsNotes" view="grid1" FilterSource="view1Extender" FilterFields="ClientID" PageSize="5" AutoHide="Container"  ShowQuickFind="false" ShowActionBar="true" ShowViewSelector="false"/>
-    </div>
     
+	 <div id="view21" runat="server"></div>
+      <aquarium:DataViewExtender id="view21Extender" runat="server" TargetControlID="view21" Controller="ViewAllClientContactNote" view="grid1" FilterSource="view1Extender" FilterFields="ClientID" PageSize="5" AutoHide="Container"  ShowQuickFind="false" ShowActionBar="true" ShowViewSelector="false"/>
+  
+    </div>
              
         </div></td>
        </tr> 
