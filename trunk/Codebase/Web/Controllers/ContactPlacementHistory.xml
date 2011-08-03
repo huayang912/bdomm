@@ -74,7 +74,7 @@ left join "dbo"."ClientContacts" "Contact" on "Enquiry"."ContactID" = "Contact".
         <dataField fieldName="CompanyName" hidden="false" hyperlinkFormatString="_Blank:~/Pages/Enquiries.aspx?ID={EnquiryID}" />
         <dataField fieldName="ContactName" hidden="false" />
         <dataField fieldName="Notes" rows="5" />
-        <dataField fieldName="ChangedByUserID" columns="15" readOnly="true" />
+        <dataField fieldName="ChangedByUserID" columns="15"  />
         <dataField fieldName="ChangedOn" columns="10" readOnly="true" />
       </dataFields>
     </view>
