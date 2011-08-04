@@ -14,7 +14,9 @@
 	,"Contacts"."Boots" "Boots"
 	,"Contacts"."employment_status" "employment_status"
   	,"Contacts"."Insurance" "Insurance"
-  
+	
+    ,"Contacts"."AvailabilityDate" "AvailabilityDate"
+
   
   	,"Contacts"."PPE_Sent_date" "PPE_Sent_Date"
 	,"Contacts"."PPE_Note" "PPE_Note"
@@ -75,6 +77,7 @@ from "dbo"."Contacts" "Contacts"
     <field name="Address" type="String" label="Address" showInSummary="true" />
     <field name="Postcode" type="String" label="Postcode" showInSummary="true" />
 
+	    <field name="AvailabilityDate" type="DateTime" label="Availability Date"  />
 
 
     <field name="Coverall" type="String" label="Coverall" showInSummary="true"  />
@@ -187,6 +190,9 @@ from "dbo"."Contacts" "Contacts"
         <dataField fieldName="PrimaryRole" />
         <dataField fieldName="SecondaryRole" />
         <dataField fieldName="TertiaryRole" />
+		
+		        <dataField fieldName="AvailabilityDate" />
+
         <dataField fieldName="Postcode" hidden="true" columns="20" />
         <dataField fieldName="CountryID" hidden="true" aliasFieldName="CountryName" />
         <dataField fieldName="DateOfBirth" hidden="true" columns="10" />
@@ -211,6 +217,7 @@ from "dbo"."Contacts" "Contacts"
             <dataField fieldName="CountryID" aliasFieldName="CountryName" />
             <dataField fieldName="DateOfBirth" columns="10" />
             <dataField fieldName="MaritalStatusID" aliasFieldName="MaritalStatusName" />
+			<dataField fieldName="AvailabilityDate" columns="10" />
             <dataField fieldName="PhotoID" hidden="true" aliasFieldName="PreferredDayRate" />
             <dataField fieldName="CreatedByUserID" hidden="false" aliasFieldName="CreatedByUserUserName" />
             <dataField fieldName="CreatedOn" columns="10" />
@@ -269,6 +276,8 @@ from "dbo"."Contacts" "Contacts"
             <dataField fieldName="DateOfBirth" columns="10" />
             <dataField fieldName="DateOfLastMeeting" columns="10" hidden="true"/>
             <dataField fieldName="MaritalStatusID" aliasFieldName="MaritalStatusName" />
+						<dataField fieldName="AvailabilityDate" columns="10" />
+
             <dataField fieldName="CreatedByUserID" hidden="true" aliasFieldName="CreatedByUserUserName" />
             <dataField fieldName="CreatedOn" columns="10" />
             <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
