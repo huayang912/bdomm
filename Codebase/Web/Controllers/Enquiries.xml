@@ -141,7 +141,7 @@ from "dbo"."Enquiries" "Enquiries"
         <dataField fieldName="ProjectNumber" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={ProjectID}"   hidden="true" />
         <dataField fieldName="ProjectID" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={QuotationID}" hidden="true"  />
 
-        <dataField fieldName="EnguirySubject"  hidden="true"/>
+        <dataField fieldName="EnguirySubject"  hidden="false"/>
         
         <dataField fieldName="SourceTypeID" aliasFieldName="SourceTypeName" />
 
