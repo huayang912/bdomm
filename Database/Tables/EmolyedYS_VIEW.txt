@@ -1,0 +1,5 @@
+CREATE VIEW [dbo].[ViewEmployedYN]
+AS
+SELECT DISTINCT ContactID AS PersonnelID, CAST(CASE WHEN (StartDate IS NOT NULL) AND (EndDate IS NULL) OR
+                      (StartDate IS NOT NULL) AND (EndDate > GETDATE()) THEN 1 ELSE 0 END AS BIT) AS Employed
+FROM         dbo.EmploymentHistory AS E
