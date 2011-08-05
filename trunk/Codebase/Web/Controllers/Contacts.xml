@@ -9,7 +9,7 @@
 	,"Contacts"."LastName" "LastName"
 	,"Contacts"."Address" "Address"
 	,"Contacts"."Postcode" "Postcode"
-  
+  ,"Contacts"."AvailabilityDate" "AvailabilityDate"
     	,"Contacts"."Coverall" "Coverall"
 	,"Contacts"."Boots" "Boots"
 	,"Contacts"."employment_status" "employment_status"
@@ -115,6 +115,11 @@ from "dbo"."Contacts" "Contacts"
     </field>
     <field name="MaritalStatusName" type="String" readOnly="true" label="Marital Status Name" />
     <field name="PlaceOfBirth" type="String" label="Place Of Birth" />
+	
+	    <field name="AvailabilityDate" type="DateTime" label="Availability Date"  />
+
+	
+	
     <field name="CountryOfBirthID" type="Int32" label="Country Of Birth#">
       <items style="Lookup" dataController="Countries" newDataView="createForm1" />
     </field>
