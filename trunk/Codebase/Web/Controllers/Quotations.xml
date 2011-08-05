@@ -9,7 +9,7 @@
 	,"Quotations"."EnquiryID" "EnquiryID"
 	,"Quotations"."ProjectYear" "ProjectYear"
 	,"Enquiry"."Number" "EnquiryNumber"
-  
+  ,"Enquiry"."EnguirySubject" "EnguirySubject"
     ,"ViewEnqQuotePrj"."ProjectNumber" "ProjectNumber"
   ,"ViewEnqQuotePrj"."ProjectID" "ProjectID"
     ,"ViewEnqQuotePrj"."ProjectName" "ProjectName"
@@ -109,7 +109,7 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
     </field>
    
        <field name="ProjectYear" type="Int32" label="Likely Project Start Year" showInSummary="true" />
-
+    <field name="EnguirySubject" type="String" label="Enquiry Subject" showInSummary="true" />
     
     <field name="EnquiryNumber" type="String" readOnly="true" label="Enquiry Number" />
 
@@ -188,7 +188,8 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
         <!--<dataField fieldName="Number" columns="50" hyperlinkFormatString="~/Pages/QuotationChange.aspx?ID={ID}&amp;EnqID={EnquiryID}" />-->
         <dataField fieldName="Number" columns="50"/>
         <dataField fieldName="EnquiryID" aliasFieldName="EnquiryNumber" hyperlinkFormatString="~/Pages/Enquiries.aspx?Number={EnquiryNumber}" />
-        <dataField fieldName="ProjectNumber" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={ProjectID}"  />
+              <dataField fieldName="EnguirySubject"  hidden="false"/>
+		<dataField fieldName="ProjectNumber" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={ProjectID}"  />
         <dataField fieldName="ProjectID" hyperlinkFormatString="_blank:~/Pages/ProjectDetails.aspx?ID={QuotationID}" hidden="true"  />
 
 
