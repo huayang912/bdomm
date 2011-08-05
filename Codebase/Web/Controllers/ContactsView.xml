@@ -54,6 +54,7 @@
     	,"Contacts"."PPE_Sizes" "PPE_Sizes"
        ,"Currency"."ShortCode" "CurrencyShortCode"
 	,"Contacts"."DayRateCurrencyID" "DayRateCurrencyID"
+	,"EmployedYN"."Employed" "Employed"
 from "dbo"."Contacts" "Contacts"
 	left join "dbo"."VewPersonnelRoles" "PersonnelRoles" on "Contacts"."ID" = "PersonnelRoles"."ID"
 	left join "dbo"."Countries" "Country" on "Contacts"."CountryID" = "Country"."ID"
@@ -61,6 +62,8 @@ from "dbo"."Contacts" "Contacts"
 	left join "dbo"."Countries" "CountryOfBirth" on "Contacts"."CountryOfBirthID" = "CountryOfBirth"."ID"
 	left join "dbo"."Users" "CreatedByUser" on "Contacts"."CreatedByUserID" = "CreatedByUser"."ID"
   		left join "dbo"."Currency" "Currency" on "Contacts"."DayRateCurrencyID" = "Currency"."ID"
+			  	left join "dbo"."ViewEmployedYN" "EmployedYN" on "Contacts"."ID" = "EmployedYN"."PersonnelID"
+
 	left join "dbo"."Users" "ChangedByUser" on "Contacts"."ChangedByUserID" = "ChangedByUser"."ID"]]></text>
     </command>
     <command id="IDIdentityCommand" type="Text" event="Inserted">
@@ -78,6 +81,8 @@ from "dbo"."Contacts" "Contacts"
     <field name="Postcode" type="String" label="Postcode" showInSummary="true" />
 
 	    <field name="AvailabilityDate" type="DateTime" label="Availability Date"  />
+		
+    <field name="Employed" type="Int16" readOnly="true" label="Employed" formatOnClient="true" allowQBE="false" allowSorting="false" />
 
 
     <field name="Coverall" type="String" label="Coverall" showInSummary="true"  />
@@ -192,6 +197,10 @@ from "dbo"."Contacts" "Contacts"
         <dataField fieldName="TertiaryRole" />
 		
 		        <dataField fieldName="AvailabilityDate" />
+						        <dataField fieldName="Employed" hidden="true" />
+
+	 
+
 
         <dataField fieldName="Postcode" hidden="true" columns="20" />
         <dataField fieldName="CountryID" hidden="true" aliasFieldName="CountryName" />
@@ -202,6 +211,9 @@ from "dbo"."Contacts" "Contacts"
         <dataField fieldName="CountryOfBirthID" hidden="true" aliasFieldName="CountryOfBirthName" />
         <dataField fieldName="Address" hidden="true" />
       </dataFields>
+	   <a:styles>
+        <expression type="ClientScript" test="[Employed] &gt; 0" result="QuoteExpired" />
+      </a:styles>    
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Contacts">
       <headerText></headerText>
