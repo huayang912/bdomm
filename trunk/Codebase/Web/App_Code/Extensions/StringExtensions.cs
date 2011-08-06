@@ -388,5 +388,13 @@ namespace App.Core.Extensions
             long.TryParse(str, out result);
             return result;
         }
+        public static DateTime ToDateTime(this string s, String format)
+        {
+            if (!s.IsNullOrEmpty())
+            {
+                return DateTime.ParseExact(s, format, null);
+            }
+            return DateTime.MinValue;
+        }
     }
 }

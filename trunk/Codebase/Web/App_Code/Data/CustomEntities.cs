@@ -156,5 +156,42 @@ namespace App.CustomModels
             //rptStartsWith.DataBind();
             return chars;
         }
-    }    
+    }
+
+    public class Personnel
+    {
+        public int ID { get; set; }
+        public String FirstName {get;set; }
+        public String LastName { get; set; }
+        public String Address { get; set; }
+        public String PostCode { get; set; }
+        public int CountryID { get; set; }
+        public int MaritalStatus { get; set; }
+        public String PlaceOfBirth { get; set; }
+        public String CountryOfBirthID { get; set; }
+        public String DateOfBirth { get; set; }
+        public String DateOfLastMeeting { get; set; }
+        public decimal? PreferredDayRate { get; set; }
+        public int DayRateCurrencyID { get; set; }
+        public bool NoSMSOrEmail { get; set; }
+        public bool InActive { get; set; }        
+    }
+
+    public class PersonnelTelephone
+    {
+        public int ID { get; set; }
+        public String Number { get; set; }
+        public int TypeID { get; set; }
+    }
+    public class PersonnelEmail
+    {
+        public int ID { get; set; }
+        public String Email { get; set; }
+    }
+    public class PersonnelRole
+    {
+        public int ID { get; set; }
+        public int Order { get; set; }
+        public int RoleID { get; set; }
+    }
 }
