@@ -21,7 +21,7 @@ using System.Reflection;
 
 
 
-[System.Data.Linq.Mapping.DatabaseAttribute(Name="OMM")]
+[System.Data.Linq.Mapping.DatabaseAttribute(Name="OMM_Production")]
 public partial class OMMDataContext : System.Data.Linq.DataContext
 {
 	
@@ -110,6 +110,18 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   partial void InsertQuotation(Quotation instance);
   partial void UpdateQuotation(Quotation instance);
   partial void DeleteQuotation(Quotation instance);
+  partial void InsertMaritalStatuse(MaritalStatuse instance);
+  partial void UpdateMaritalStatuse(MaritalStatuse instance);
+  partial void DeleteMaritalStatuse(MaritalStatuse instance);
+  partial void InsertEmailAddress(EmailAddress instance);
+  partial void UpdateEmailAddress(EmailAddress instance);
+  partial void DeleteEmailAddress(EmailAddress instance);
+  partial void InsertContactRole(ContactRole instance);
+  partial void UpdateContactRole(ContactRole instance);
+  partial void DeleteContactRole(ContactRole instance);
+  partial void InsertContactCV(ContactCV instance);
+  partial void UpdateContactCV(ContactCV instance);
+  partial void DeleteContactCV(ContactCV instance);
   #endregion
 	
 	public OMMDataContext() : 
@@ -355,6 +367,38 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<Quotation>();
+		}
+	}
+	
+	public System.Data.Linq.Table<MaritalStatuse> MaritalStatuses
+	{
+		get
+		{
+			return this.GetTable<MaritalStatuse>();
+		}
+	}
+	
+	public System.Data.Linq.Table<EmailAddress> EmailAddresses
+	{
+		get
+		{
+			return this.GetTable<EmailAddress>();
+		}
+	}
+	
+	public System.Data.Linq.Table<ContactRole> ContactRoles
+	{
+		get
+		{
+			return this.GetTable<ContactRole>();
+		}
+	}
+	
+	public System.Data.Linq.Table<ContactCV> ContactCVs
+	{
+		get
+		{
+			return this.GetTable<ContactCV>();
 		}
 	}
 	
@@ -3218,6 +3262,8 @@ public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<EmploymentHistory> _EmploymentHistories;
 	
+	private EntitySet<ContactRole> _ContactRoles;
+	
 	private EntityRef<User> _User;
 	
     #region Extensibility Method Definitions
@@ -3242,6 +3288,7 @@ public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this._UserInRoles = new EntitySet<UserInRole>(new Action<UserInRole>(this.attach_UserInRoles), new Action<UserInRole>(this.detach_UserInRoles));
 		this._EmploymentHistories = new EntitySet<EmploymentHistory>(new Action<EmploymentHistory>(this.attach_EmploymentHistories), new Action<EmploymentHistory>(this.detach_EmploymentHistories));
+		this._ContactRoles = new EntitySet<ContactRole>(new Action<ContactRole>(this.attach_ContactRoles), new Action<ContactRole>(this.detach_ContactRoles));
 		this._User = default(EntityRef<User>);
 		OnCreated();
 	}
@@ -3396,6 +3443,19 @@ public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="Role_ContactRole", Storage="_ContactRoles", ThisKey="ID", OtherKey="RoleID")]
+	public EntitySet<ContactRole> ContactRoles
+	{
+		get
+		{
+			return this._ContactRoles;
+		}
+		set
+		{
+			this._ContactRoles.Assign(value);
+		}
+	}
+	
 	[Association(Name="User_Role", Storage="_User", ThisKey="ChangedByUserID", OtherKey="ID", IsForeignKey=true)]
 	public User User
 	{
@@ -3469,6 +3529,18 @@ public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_EmploymentHistories(EmploymentHistory entity)
+	{
+		this.SendPropertyChanging();
+		entity.Role = null;
+	}
+	
+	private void attach_ContactRoles(ContactRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Role = this;
+	}
+	
+	private void detach_ContactRoles(ContactRole entity)
 	{
 		this.SendPropertyChanging();
 		entity.Role = null;
@@ -4825,6 +4897,10 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<Quotation> _Quotations1;
 	
+	private EntitySet<EmailAddress> _EmailAddresses;
+	
+	private EntitySet<ContactRole> _ContactRoles;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -4865,6 +4941,8 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		this._TelephoneNumbers = new EntitySet<TelephoneNumber>(new Action<TelephoneNumber>(this.attach_TelephoneNumbers), new Action<TelephoneNumber>(this.detach_TelephoneNumbers));
 		this._Quotations = new EntitySet<Quotation>(new Action<Quotation>(this.attach_Quotations), new Action<Quotation>(this.detach_Quotations));
 		this._Quotations1 = new EntitySet<Quotation>(new Action<Quotation>(this.attach_Quotations1), new Action<Quotation>(this.detach_Quotations1));
+		this._EmailAddresses = new EntitySet<EmailAddress>(new Action<EmailAddress>(this.attach_EmailAddresses), new Action<EmailAddress>(this.detach_EmailAddresses));
+		this._ContactRoles = new EntitySet<ContactRole>(new Action<ContactRole>(this.attach_ContactRoles), new Action<ContactRole>(this.detach_ContactRoles));
 		OnCreated();
 	}
 	
@@ -5236,6 +5314,32 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="User_EmailAddress", Storage="_EmailAddresses", ThisKey="ID", OtherKey="ChangedByUserID")]
+	public EntitySet<EmailAddress> EmailAddresses
+	{
+		get
+		{
+			return this._EmailAddresses;
+		}
+		set
+		{
+			this._EmailAddresses.Assign(value);
+		}
+	}
+	
+	[Association(Name="User_ContactRole", Storage="_ContactRoles", ThisKey="ID", OtherKey="ChangedByUserID")]
+	public EntitySet<ContactRole> ContactRoles
+	{
+		get
+		{
+			return this._ContactRoles;
+		}
+		set
+		{
+			this._ContactRoles.Assign(value);
+		}
+	}
+	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -5446,6 +5550,30 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this.SendPropertyChanging();
 		entity.User1 = null;
+	}
+	
+	private void attach_EmailAddresses(EmailAddress entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_EmailAddresses(EmailAddress entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_ContactRoles(ContactRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_ContactRoles(ContactRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
 	}
 }
 
@@ -6308,6 +6436,12 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<TelephoneNumber> _TelephoneNumbers;
 	
+	private EntitySet<EmailAddress> _EmailAddresses;
+	
+	private EntitySet<ContactRole> _ContactRoles;
+	
+	private EntitySet<ContactCV> _ContactCVs;
+	
 	private EntityRef<Country> _Country;
 	
 	private EntityRef<Country> _Country1;
@@ -6315,6 +6449,8 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 	private EntityRef<User> _User;
 	
 	private EntityRef<User> _User1;
+	
+	private EntityRef<MaritalStatuse> _MaritalStatuse;
 	
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -6368,10 +6504,14 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this._EmploymentHistories = new EntitySet<EmploymentHistory>(new Action<EmploymentHistory>(this.attach_EmploymentHistories), new Action<EmploymentHistory>(this.detach_EmploymentHistories));
 		this._TelephoneNumbers = new EntitySet<TelephoneNumber>(new Action<TelephoneNumber>(this.attach_TelephoneNumbers), new Action<TelephoneNumber>(this.detach_TelephoneNumbers));
+		this._EmailAddresses = new EntitySet<EmailAddress>(new Action<EmailAddress>(this.attach_EmailAddresses), new Action<EmailAddress>(this.detach_EmailAddresses));
+		this._ContactRoles = new EntitySet<ContactRole>(new Action<ContactRole>(this.attach_ContactRoles), new Action<ContactRole>(this.detach_ContactRoles));
+		this._ContactCVs = new EntitySet<ContactCV>(new Action<ContactCV>(this.attach_ContactCVs), new Action<ContactCV>(this.detach_ContactCVs));
 		this._Country = default(EntityRef<Country>);
 		this._Country1 = default(EntityRef<Country>);
 		this._User = default(EntityRef<User>);
 		this._User1 = default(EntityRef<User>);
+		this._MaritalStatuse = default(EntityRef<MaritalStatuse>);
 		OnCreated();
 	}
 	
@@ -6550,6 +6690,10 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 		{
 			if ((this._MaritalStatusID != value))
 			{
+				if (this._MaritalStatuse.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
 				this.OnMaritalStatusIDChanging(value);
 				this.SendPropertyChanging();
 				this._MaritalStatusID = value;
@@ -6837,6 +6981,45 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="Contact_EmailAddress", Storage="_EmailAddresses", ThisKey="ID", OtherKey="ContactID")]
+	public EntitySet<EmailAddress> EmailAddresses
+	{
+		get
+		{
+			return this._EmailAddresses;
+		}
+		set
+		{
+			this._EmailAddresses.Assign(value);
+		}
+	}
+	
+	[Association(Name="Contact_ContactRole", Storage="_ContactRoles", ThisKey="ID", OtherKey="ContactID")]
+	public EntitySet<ContactRole> ContactRoles
+	{
+		get
+		{
+			return this._ContactRoles;
+		}
+		set
+		{
+			this._ContactRoles.Assign(value);
+		}
+	}
+	
+	[Association(Name="Contact_ContactCV", Storage="_ContactCVs", ThisKey="ID", OtherKey="ContactID")]
+	public EntitySet<ContactCV> ContactCVs
+	{
+		get
+		{
+			return this._ContactCVs;
+		}
+		set
+		{
+			this._ContactCVs.Assign(value);
+		}
+	}
+	
 	[Association(Name="Country_Contact", Storage="_Country", ThisKey="CountryID", OtherKey="ID", IsForeignKey=true)]
 	public Country Country
 	{
@@ -6973,6 +7156,40 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="MaritalStatuse_Contact", Storage="_MaritalStatuse", ThisKey="MaritalStatusID", OtherKey="ID", IsForeignKey=true)]
+	public MaritalStatuse MaritalStatuse
+	{
+		get
+		{
+			return this._MaritalStatuse.Entity;
+		}
+		set
+		{
+			MaritalStatuse previousValue = this._MaritalStatuse.Entity;
+			if (((previousValue != value) 
+						|| (this._MaritalStatuse.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._MaritalStatuse.Entity = null;
+					previousValue.Contacts.Remove(this);
+				}
+				this._MaritalStatuse.Entity = value;
+				if ((value != null))
+				{
+					value.Contacts.Add(this);
+					this._MaritalStatusID = value.ID;
+				}
+				else
+				{
+					this._MaritalStatusID = default(int);
+				}
+				this.SendPropertyChanged("MaritalStatuse");
+			}
+		}
+	}
+	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -7012,6 +7229,42 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_TelephoneNumbers(TelephoneNumber entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = null;
+	}
+	
+	private void attach_EmailAddresses(EmailAddress entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = this;
+	}
+	
+	private void detach_EmailAddresses(EmailAddress entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = null;
+	}
+	
+	private void attach_ContactRoles(ContactRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = this;
+	}
+	
+	private void detach_ContactRoles(ContactRole entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = null;
+	}
+	
+	private void attach_ContactCVs(ContactCV entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = this;
+	}
+	
+	private void detach_ContactCVs(ContactCV entity)
 	{
 		this.SendPropertyChanging();
 		entity.Contact = null;
@@ -9621,6 +9874,936 @@ public partial class Quotation : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this.SendPropertyChanging();
 		entity.Quotation = null;
+	}
+}
+
+[Table(Name="dbo.MaritalStatuses")]
+public partial class MaritalStatuse : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private string _Name;
+	
+	private EntitySet<Contact> _Contacts;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+	
+	public MaritalStatuse()
+	{
+		this._Contacts = new EntitySet<Contact>(new Action<Contact>(this.attach_Contacts), new Action<Contact>(this.detach_Contacts));
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string Name
+	{
+		get
+		{
+			return this._Name;
+		}
+		set
+		{
+			if ((this._Name != value))
+			{
+				this.OnNameChanging(value);
+				this.SendPropertyChanging();
+				this._Name = value;
+				this.SendPropertyChanged("Name");
+				this.OnNameChanged();
+			}
+		}
+	}
+	
+	[Association(Name="MaritalStatuse_Contact", Storage="_Contacts", ThisKey="ID", OtherKey="MaritalStatusID")]
+	public EntitySet<Contact> Contacts
+	{
+		get
+		{
+			return this._Contacts;
+		}
+		set
+		{
+			this._Contacts.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_Contacts(Contact entity)
+	{
+		this.SendPropertyChanging();
+		entity.MaritalStatuse = this;
+	}
+	
+	private void detach_Contacts(Contact entity)
+	{
+		this.SendPropertyChanging();
+		entity.MaritalStatuse = null;
+	}
+}
+
+[Table(Name="dbo.EmailAddresses")]
+public partial class EmailAddress : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private int _ContactID;
+	
+	private string _Address;
+	
+	private System.Nullable<int> _ChangedByUserID;
+	
+	private System.DateTime _ChangedOn;
+	
+	private System.Data.Linq.Binary _TimeStamp;
+	
+	private EntityRef<Contact> _Contact;
+	
+	private EntityRef<User> _User;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnContactIDChanging(int value);
+    partial void OnContactIDChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnChangedByUserIDChanging(System.Nullable<int> value);
+    partial void OnChangedByUserIDChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    partial void OnTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnTimeStampChanged();
+    #endregion
+	
+	public EmailAddress()
+	{
+		this._Contact = default(EntityRef<Contact>);
+		this._User = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ContactID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int ContactID
+	{
+		get
+		{
+			return this._ContactID;
+		}
+		set
+		{
+			if ((this._ContactID != value))
+			{
+				if (this._Contact.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnContactIDChanging(value);
+				this.SendPropertyChanging();
+				this._ContactID = value;
+				this.SendPropertyChanged("ContactID");
+				this.OnContactIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Address", DbType="NVarChar(100) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string Address
+	{
+		get
+		{
+			return this._Address;
+		}
+		set
+		{
+			if ((this._Address != value))
+			{
+				this.OnAddressChanging(value);
+				this.SendPropertyChanging();
+				this._Address = value;
+				this.SendPropertyChanged("Address");
+				this.OnAddressChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> ChangedByUserID
+	{
+		get
+		{
+			return this._ChangedByUserID;
+		}
+		set
+		{
+			if ((this._ChangedByUserID != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnChangedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUserID = value;
+				this.SendPropertyChanged("ChangedByUserID");
+				this.OnChangedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_TimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary TimeStamp
+	{
+		get
+		{
+			return this._TimeStamp;
+		}
+		set
+		{
+			if ((this._TimeStamp != value))
+			{
+				this.OnTimeStampChanging(value);
+				this.SendPropertyChanging();
+				this._TimeStamp = value;
+				this.SendPropertyChanged("TimeStamp");
+				this.OnTimeStampChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Contact_EmailAddress", Storage="_Contact", ThisKey="ContactID", OtherKey="ID", IsForeignKey=true)]
+	public Contact Contact
+	{
+		get
+		{
+			return this._Contact.Entity;
+		}
+		set
+		{
+			Contact previousValue = this._Contact.Entity;
+			if (((previousValue != value) 
+						|| (this._Contact.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Contact.Entity = null;
+					previousValue.EmailAddresses.Remove(this);
+				}
+				this._Contact.Entity = value;
+				if ((value != null))
+				{
+					value.EmailAddresses.Add(this);
+					this._ContactID = value.ID;
+				}
+				else
+				{
+					this._ContactID = default(int);
+				}
+				this.SendPropertyChanged("Contact");
+			}
+		}
+	}
+	
+	[Association(Name="User_EmailAddress", Storage="_User", ThisKey="ChangedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.EmailAddresses.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.EmailAddresses.Add(this);
+					this._ChangedByUserID = value.ID;
+				}
+				else
+				{
+					this._ChangedByUserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[Table(Name="dbo.ContactRoles")]
+public partial class ContactRole : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private int _ContactID;
+	
+	private int _RoleID;
+	
+	private int _RoleOrder;
+	
+	private System.Nullable<int> _ChangedByUserID;
+	
+	private System.DateTime _ChangedOn;
+	
+	private System.Data.Linq.Binary _Version;
+	
+	private EntityRef<Contact> _Contact;
+	
+	private EntityRef<Role> _Role;
+	
+	private EntityRef<User> _User;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnContactIDChanging(int value);
+    partial void OnContactIDChanged();
+    partial void OnRoleIDChanging(int value);
+    partial void OnRoleIDChanged();
+    partial void OnRoleOrderChanging(int value);
+    partial void OnRoleOrderChanged();
+    partial void OnChangedByUserIDChanging(System.Nullable<int> value);
+    partial void OnChangedByUserIDChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    partial void OnVersionChanging(System.Data.Linq.Binary value);
+    partial void OnVersionChanged();
+    #endregion
+	
+	public ContactRole()
+	{
+		this._Contact = default(EntityRef<Contact>);
+		this._Role = default(EntityRef<Role>);
+		this._User = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ContactID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int ContactID
+	{
+		get
+		{
+			return this._ContactID;
+		}
+		set
+		{
+			if ((this._ContactID != value))
+			{
+				if (this._Contact.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnContactIDChanging(value);
+				this.SendPropertyChanging();
+				this._ContactID = value;
+				this.SendPropertyChanged("ContactID");
+				this.OnContactIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_RoleID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int RoleID
+	{
+		get
+		{
+			return this._RoleID;
+		}
+		set
+		{
+			if ((this._RoleID != value))
+			{
+				if (this._Role.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnRoleIDChanging(value);
+				this.SendPropertyChanging();
+				this._RoleID = value;
+				this.SendPropertyChanged("RoleID");
+				this.OnRoleIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_RoleOrder", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int RoleOrder
+	{
+		get
+		{
+			return this._RoleOrder;
+		}
+		set
+		{
+			if ((this._RoleOrder != value))
+			{
+				this.OnRoleOrderChanging(value);
+				this.SendPropertyChanging();
+				this._RoleOrder = value;
+				this.SendPropertyChanged("RoleOrder");
+				this.OnRoleOrderChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> ChangedByUserID
+	{
+		get
+		{
+			return this._ChangedByUserID;
+		}
+		set
+		{
+			if ((this._ChangedByUserID != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnChangedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUserID = value;
+				this.SendPropertyChanged("ChangedByUserID");
+				this.OnChangedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Version", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary Version
+	{
+		get
+		{
+			return this._Version;
+		}
+		set
+		{
+			if ((this._Version != value))
+			{
+				this.OnVersionChanging(value);
+				this.SendPropertyChanging();
+				this._Version = value;
+				this.SendPropertyChanged("Version");
+				this.OnVersionChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Contact_ContactRole", Storage="_Contact", ThisKey="ContactID", OtherKey="ID", IsForeignKey=true)]
+	public Contact Contact
+	{
+		get
+		{
+			return this._Contact.Entity;
+		}
+		set
+		{
+			Contact previousValue = this._Contact.Entity;
+			if (((previousValue != value) 
+						|| (this._Contact.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Contact.Entity = null;
+					previousValue.ContactRoles.Remove(this);
+				}
+				this._Contact.Entity = value;
+				if ((value != null))
+				{
+					value.ContactRoles.Add(this);
+					this._ContactID = value.ID;
+				}
+				else
+				{
+					this._ContactID = default(int);
+				}
+				this.SendPropertyChanged("Contact");
+			}
+		}
+	}
+	
+	[Association(Name="Role_ContactRole", Storage="_Role", ThisKey="RoleID", OtherKey="ID", IsForeignKey=true)]
+	public Role Role
+	{
+		get
+		{
+			return this._Role.Entity;
+		}
+		set
+		{
+			Role previousValue = this._Role.Entity;
+			if (((previousValue != value) 
+						|| (this._Role.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Role.Entity = null;
+					previousValue.ContactRoles.Remove(this);
+				}
+				this._Role.Entity = value;
+				if ((value != null))
+				{
+					value.ContactRoles.Add(this);
+					this._RoleID = value.ID;
+				}
+				else
+				{
+					this._RoleID = default(int);
+				}
+				this.SendPropertyChanged("Role");
+			}
+		}
+	}
+	
+	[Association(Name="User_ContactRole", Storage="_User", ThisKey="ChangedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.ContactRoles.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.ContactRoles.Add(this);
+					this._ChangedByUserID = value.ID;
+				}
+				else
+				{
+					this._ChangedByUserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[Table(Name="dbo.ContactCV")]
+public partial class ContactCV : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private int _ContactID;
+	
+	private string _FileName;
+	
+	private int _CreatedBy;
+	
+	private int _ChangedBy;
+	
+	private System.DateTime _ChangedOn;
+	
+	private EntityRef<Contact> _Contact;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnContactIDChanging(int value);
+    partial void OnContactIDChanged();
+    partial void OnFileNameChanging(string value);
+    partial void OnFileNameChanged();
+    partial void OnCreatedByChanging(int value);
+    partial void OnCreatedByChanged();
+    partial void OnChangedByChanging(int value);
+    partial void OnChangedByChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    #endregion
+	
+	public ContactCV()
+	{
+		this._Contact = default(EntityRef<Contact>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ContactID", DbType="Int NOT NULL")]
+	public int ContactID
+	{
+		get
+		{
+			return this._ContactID;
+		}
+		set
+		{
+			if ((this._ContactID != value))
+			{
+				if (this._Contact.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnContactIDChanging(value);
+				this.SendPropertyChanging();
+				this._ContactID = value;
+				this.SendPropertyChanged("ContactID");
+				this.OnContactIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_FileName", DbType="NVarChar(350) NOT NULL", CanBeNull=false)]
+	public string FileName
+	{
+		get
+		{
+			return this._FileName;
+		}
+		set
+		{
+			if ((this._FileName != value))
+			{
+				this.OnFileNameChanging(value);
+				this.SendPropertyChanging();
+				this._FileName = value;
+				this.SendPropertyChanged("FileName");
+				this.OnFileNameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_CreatedBy", DbType="Int NOT NULL")]
+	public int CreatedBy
+	{
+		get
+		{
+			return this._CreatedBy;
+		}
+		set
+		{
+			if ((this._CreatedBy != value))
+			{
+				this.OnCreatedByChanging(value);
+				this.SendPropertyChanging();
+				this._CreatedBy = value;
+				this.SendPropertyChanged("CreatedBy");
+				this.OnCreatedByChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedBy", DbType="Int NOT NULL")]
+	public int ChangedBy
+	{
+		get
+		{
+			return this._ChangedBy;
+		}
+		set
+		{
+			if ((this._ChangedBy != value))
+			{
+				this.OnChangedByChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedBy = value;
+				this.SendPropertyChanged("ChangedBy");
+				this.OnChangedByChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL")]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Contact_ContactCV", Storage="_Contact", ThisKey="ContactID", OtherKey="ID", IsForeignKey=true)]
+	public Contact Contact
+	{
+		get
+		{
+			return this._Contact.Entity;
+		}
+		set
+		{
+			Contact previousValue = this._Contact.Entity;
+			if (((previousValue != value) 
+						|| (this._Contact.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Contact.Entity = null;
+					previousValue.ContactCVs.Remove(this);
+				}
+				this._Contact.Entity = value;
+				if ((value != null))
+				{
+					value.ContactCVs.Add(this);
+					this._ContactID = value.ID;
+				}
+				else
+				{
+					this._ContactID = default(int);
+				}
+				this.SendPropertyChanged("Contact");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
 	}
 }
 
