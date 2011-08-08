@@ -9,7 +9,7 @@ using System.IO;
 public partial class Pages_EnquiryFiles : BasePage
 {
     private int _EnquiryID = 0;
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
         BindPageInfo();
@@ -21,7 +21,7 @@ public partial class Pages_EnquiryFiles : BasePage
     protected void BindPageInfo()
     {
         Page.Title = WebUtil.GetPageTitle("Upload File for Enquiry");
-        _EnquiryID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);        
+        _EnquiryID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);
     }
     protected void BindEnquiryDetails()
     {
@@ -45,7 +45,7 @@ public partial class Pages_EnquiryFiles : BasePage
         if (Page.IsValid)
         {
             String fileName = UploadAndSaveFile();
-            SaveInSession(fileName);            
+            SaveInSession(fileName);
         }
     }
     protected void SaveInSession(String fileName)
@@ -60,7 +60,7 @@ public partial class Pages_EnquiryFiles : BasePage
             attachment.UploadedBy = SessionCache.CurrentUser.ID;
             attachment.UploadedOn = DateTime.Now;
             IList<EnquiryFile> files = SessionCache.CurrentEnquiryFiles;
-            if(files.SingleOrDefault(F => F.FileName == fileName) == null)
+            if (files.SingleOrDefault(F => F.FileName == fileName) == null)
                 files.Add(attachment);
             SessionCache.CurrentEnquiryFiles = files;
             hdnFileName.Value = fileName;
@@ -80,12 +80,12 @@ public partial class Pages_EnquiryFiles : BasePage
                 fileEnquiry.SaveAs(Path.Combine(uploadDirectory, fileName));
                 return fileName;
             }
-            else            
+            else
                 WebUtil.ShowMessageBox(divMessage, "only Microsoft Word (*.doc, *.docx) and PDF (*.pdf) documents are allowed for attachment.", true);
-            
+
         }
         return String.Empty;
-    }   
+    }
     /// <summary>
     /// Checks Whethear the Uploaded file Is a Valid Document
     /// </summary>
@@ -99,7 +99,7 @@ public partial class Pages_EnquiryFiles : BasePage
         else if (String.Compare(extension, ".docx", true) == 0)
             return true;
         else if (String.Compare(extension, ".pdf", true) == 0)
-            return true;        
+            return true;
         return false;
     }
 }
