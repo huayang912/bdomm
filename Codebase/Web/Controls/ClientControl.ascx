@@ -18,6 +18,14 @@
                 <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Clients"  view="grid1"  ShowViewSelector="false"  PageSize="25"/>
               </ContentTemplate>
             </act:TabPanel>
+			
+			  <act:TabPanel ID="EventsTab" runat="server" HeaderText="Events History">
+              <ContentTemplate>
+                <div id="view12" runat="server"></div>
+                 <aquarium:DataViewExtender id="view12Extender" runat="server" TargetControlID="view12" Controller="ClientsEvents" view="grid1" FilterSource="view1Extender" FilterFields="ClientID" ShowViewSelector="false"/>
+              </ContentTemplate>
+            </act:TabPanel>
+			
                <act:TabPanel ID="PurchaseOrdersTab" runat="server" HeaderText="Purchase Orders">
               <ContentTemplate>
                 <div id="view7" runat="server"></div>
