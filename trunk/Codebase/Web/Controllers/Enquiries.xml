@@ -62,7 +62,9 @@ from "dbo"."Enquiries" "Enquiries"
    left join "dbo"."EnquiryFiles" "EnquiryFiles" on "Enquiries"."ID" = "EnquiryFiles"."EnquiryID"
    left join "dbo"."Users" "UploadedByUser" on "EnquiryFiles"."UploadedBy" = "UploadedByUser"."ID"
       
-   	left join "dbo"."EnquiryLines" "EnquiryLines" on "Enquiries"."ID" = "enquiryLines"."EnquiryID"]]></text>
+   	left join "dbo"."EnquiryLines" "EnquiryLines" on "Enquiries"."ID" = "enquiryLines"."EnquiryID"
+	WHERE Enquiries.StatusID <> 2
+	]]></text>
     </command>
     <command id="IDIdentityCommand" type="Text" event="Inserted">
       <text><![CDATA[select @@identity]]></text>
