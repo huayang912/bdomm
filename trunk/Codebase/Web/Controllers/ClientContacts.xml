@@ -31,6 +31,11 @@ select
 	,"ClientContacts"."NL_Personnel" "NL_Personnel"
 	,"ClientContacts"."NL_O_M" "NL_O_M"
 	,"ClientContacts"."NL_Project" "NL_Project"  
+	,"ClientContacts"."NL_Survey" "NL_Survey"
+	,"ClientContacts"."NL_Software" "NL_Software"
+	,"ClientContacts"."NL_Supply" "NL_Supply"
+	,"ClientContacts"."NL_Vessels" "NL_Vessels"
+	,"ClientContacts"."NL_HSE" "NL_HSE"  
 from "dbo"."ClientContacts" "ClientContacts"
 	left join "dbo"."Countries" "Country" on "ClientContacts"."CountryID" = "Country"."ID"
 	left join "dbo"."Clients" "Company" on "ClientContacts"."CompanyID" = "Company"."ID"
@@ -92,6 +97,28 @@ from "dbo"."ClientContacts" "ClientContacts"
     <field name="NL_Project" type="Boolean" allowNulls="false" default="((0))" label="CRM - Project" >
       <items style="CheckBox"/>
     </field>
+	
+	
+	
+	<field name="NL_Survey" type="Boolean" allowNulls="false" default="((0))" label="CRM - Survey" >
+    <items style="CheckBox"/>
+    </field>
+
+ 
+    <field name="NL_Software" type="Boolean" allowNulls="false" default="((0))" label="CRM - Software" >
+      <items style="CheckBox"/>
+    </field>
+    <field name="NL_Supply" type="Boolean" allowNulls="false" default="((0))" label="CRM - Supply" >
+      <items style="CheckBox"/>
+    </field>
+
+    <field name="NL_Vessels" type="Boolean" allowNulls="false" default="((0))" label="CRM - Vessels" >
+      <items style="CheckBox"/>
+    </field>
+    <field name="NL_HSE" type="Boolean" allowNulls="false" default="((0))" label="CRM - HSE" >
+      <items style="CheckBox"/>
+    </field>
+	
 
   </fields>
   <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
@@ -109,11 +136,7 @@ from "dbo"."ClientContacts" "ClientContacts"
         <dataField fieldName="CompanyID" aliasFieldName="CompanyName" columns="30" hyperlinkFormatString="_Blank:~/pages/ClientNew.aspx?id={CompanyID}" />
         <dataField fieldName="DateOfBirth" hidden="true" columns="10" />
 
-        <dataField fieldName="NL_All" hidden="true"/> 
-        <dataField fieldName="NL_Procurement"  hidden="true"  />
-        <dataField fieldName="NL_Personnel"  hidden="true"/>
-        <dataField fieldName="NL_O_M"  hidden="true"/>
-        <dataField fieldName="NL_Project"  hidden="true"/>
+
 
       </dataFields>
     </view>
@@ -144,11 +167,35 @@ from "dbo"."ClientContacts" "ClientContacts"
             <dataField fieldName="Mobile" columns="30"/>
             <dataField fieldName="Fax" columns="30"/>
             <dataField fieldName="Email"   hyperlinkFormatString="mailto:{Email}" columns="30"/>
-            <dataField fieldName="NL_All"/>
-            <dataField fieldName="NL_Procurement"  />
-              <dataField fieldName="NL_Personnel" />
-                <dataField fieldName="NL_O_M" />
-                  <dataField fieldName="NL_Project" />
+           
+
+          </dataFields>
+        </category>
+		
+		 <category headerText="CRM Information" newColumn="true">
+          <description>$DefaultReferenceDescription</description>
+          <dataFields>
+		  
+		  
+	        <dataField fieldName="NL_All"/>	  
+ <dataField fieldName="NL_HSE" />			
+ <dataField fieldName="NL_Project" />
+    <dataField fieldName="NL_O_M" />
+	 <dataField fieldName="NL_Survey"/>
+	     <dataField fieldName="NL_Personnel" /> 
+	    <dataField fieldName="NL_Software"  />	 
+   <dataField fieldName="NL_Vessels" />
+           <dataField fieldName="NL_Procurement"  />
+    
+                                 
+				  
+
+         
+              <dataField fieldName="NL_Supply" />
+              
+                 	  
+
+
 
           </dataFields>
         </category>
@@ -180,16 +227,23 @@ from "dbo"."ClientContacts" "ClientContacts"
         <category headerText="CRM Information" newColumn="true">
           <dataFields>
            
-            <dataField fieldName="NL_All"/>
+   
+				        <dataField fieldName="NL_All"/>	  
+ <dataField fieldName="NL_HSE" />			
+ <dataField fieldName="NL_Project" />
+    <dataField fieldName="NL_O_M" />
+	 <dataField fieldName="NL_Survey"/>
 
-            <dataField fieldName="NL_Procurement" />
-            <dataField fieldName="NL_Personnel" />
-            <dataField fieldName="NL_O_M" />
-            <dataField fieldName="NL_Project" />
+	     <dataField fieldName="NL_Personnel" /> 
+	    <dataField fieldName="NL_Software"  />	 
+   <dataField fieldName="NL_Vessels" />
+           <dataField fieldName="NL_Procurement"  />
 
 
           </dataFields>
         </category>
+		
+		
         
         
         
