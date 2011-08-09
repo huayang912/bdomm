@@ -271,7 +271,7 @@
             </div>
             <div>
                 <% if (_ID > 0) {%>
-                <a href="javascript:void(0);" onclick="ShowCenteredPopUp('RabbanisPage.aspx?ID=<%= _ID.ToString() %>', 'ManageCV', 500, 350, true);">Manage CV</a>
+                <a href="javascript:void(0);" onclick="ShowCenteredPopUp('CVUpload.aspx?ID=<%= _ID.ToString() %>', 'ManageCV', 500, 350, true);">Manage CV</a>
                 <%} %>
             </div>
             
