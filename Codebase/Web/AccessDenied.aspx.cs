@@ -9,6 +9,6 @@ public partial class AccessDenied : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        WebUtil.ShowMessageBox(divMessage, "You are not authorized to access OMM. Please contact with the Administrator to include your User Information in the OMM System.", true);
+        WebUtil.ShowMessageBox(divMessage, "IIS (Internet Information Services) Is Passing Blank String as User Name. This Indicates that there is some configuration issue in Windows Authentication.", true);
     }
 }
