@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Message_Recipients" conflictDetection="overwriteChanges" label="Message Recipients" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"Message_Recipients"."ID" "ID"
+	,"Message_Recipients"."Message_ID" "Message_ID"
+	,"Message_"."Text" "Message_Text"
+	,"Message_Recipients"."Recipient_ID" "Recipient_ID"
+	,"Message_Recipients"."Recipient_Name" "Recipient_Name"
+	,"Message_Recipients"."Destination" "Destination"
+	,"Message_Recipients"."Try_Order" "Try_Order"
+	,"Message_Recipients"."SMS_Credits" "SMS_Credits"
+	,"Message_Recipients"."Is_Phone_Number" "Is_Phone_Number"
+	,"Message_Recipients"."SMS_ID" "SMS_ID"
+	,"SMS_"."Client_Ref" "SMS_Client_Ref"
+	,"Message_Recipients"."SMS_Status_ID" "SMS_Status_ID"
+	,"SMS_Status_"."Description" "SMS_Status_Description"
+	,"Message_Recipients"."Status_ID" "Status_ID"
+	,"Status_"."Description" "Status_Description"
+	,"Message_Recipients"."Updated_On" "Updated_On"
+from "dbo"."Message_Recipients" "Message_Recipients"
+	left join "dbo"."Messages" "Message_" on "Message_Recipients"."Message_ID" = "Message_"."ID"
+	left join "dbo"."SMS_Messages" "SMS_" on "Message_Recipients"."SMS_ID" = "SMS_"."ID"
+	left join "dbo"."SMS_Statuses" "SMS_Status_" on "Message_Recipients"."SMS_Status_ID" = "SMS_Status_"."ID"
+	left join "dbo"."Message_Statuses" "Status_" on "Message_Recipients"."Status_ID" = "Status_"."ID"
+]]></text>
+    </command>
+    <command id="IDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id" readOnly="true" />
+    <field name="Message_ID" type="Int32" allowNulls="false" label="Message#" showInSummary="true">
+      <items style="Lookup" dataController="Messages" newDataView="createForm1" />
+    </field>
+    <field name="Message_Text" type="String" readOnly="true" allowQBE="false" allowSorting="false" label="Message Text" />
+    <field name="Recipient_ID" type="Int32" allowNulls="false" label="Recipient#" showInSummary="true" />
+    <field name="Recipient_Name" type="String" allowNulls="false" label="Recipient Name" showInSummary="true" />
+    <field name="Destination" type="String" allowNulls="false" label="Destination" showInSummary="true" />
+    <field name="Try_Order" type="Int32" allowNulls="false" label="Try Order" showInSummary="true" />
+    <field name="SMS_Credits" type="Decimal" label="SMS Credits" />
+    <field name="Is_Phone_Number" type="Boolean" allowNulls="false" label="Is Phone Number" />
+    <field name="SMS_ID" type="Int32" label="Sms#">
+      <items style="Lookup" dataController="SMS_Messages" newDataView="createForm1" />
+    </field>
+    <field name="SMS_Client_Ref" type="String" readOnly="true" label="SMS Client Ref" />
+    <field name="SMS_Status_ID" type="Int32" label="SMS Status#">
+      <items style="Lookup" dataController="SMS_Statuses" newDataView="createForm1" />
+    </field>
+    <field name="SMS_Status_Description" type="String" readOnly="true" label="SMS Status Description" />
+    <field name="Status_ID" type="Int32" allowNulls="false" default="((0))" label="Status#">
+      <items style="Lookup" dataController="Message_Statuses" newDataView="createForm1" />
+    </field>
+    <field name="Status_Description" type="String" readOnly="true" label="Status Description" />
+    <field name="Updated_On" type="DateTime" allowNulls="false" default="(getdate())" label="Updated On" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Message Recipients">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="Message_ID" aliasFieldName="Message_Text" />
+        <dataField fieldName="Recipient_ID" columns="15" />
+        <dataField fieldName="Recipient_Name" />
+        <dataField fieldName="Destination" />
+        <dataField fieldName="Try_Order" columns="15" />
+        <dataField fieldName="SMS_Credits" columns="15" />
+        <dataField fieldName="Is_Phone_Number" />
+        <dataField fieldName="SMS_ID" aliasFieldName="SMS_Client_Ref" />
+        <dataField fieldName="SMS_Status_ID" aliasFieldName="SMS_Status_Description" />
+        <dataField fieldName="Status_ID" aliasFieldName="Status_Description" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Message Recipients">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category headerText="Message Recipients" newColumn="true">
+          <description>$DefaultEditDescription</description>
+          <dataFields>
+            <dataField fieldName="Message_ID" aliasFieldName="Message_Text" />
+            <dataField fieldName="Recipient_ID" columns="15" />
+            <dataField fieldName="Recipient_Name" />
+            <dataField fieldName="Destination" />
+            <dataField fieldName="Try_Order" columns="15" />
+            <dataField fieldName="SMS_Credits" columns="15" />
+            <dataField fieldName="Is_Phone_Number" />
+            <dataField fieldName="SMS_ID" aliasFieldName="SMS_Client_Ref" />
+            <dataField fieldName="SMS_Status_ID" aliasFieldName="SMS_Status_Description" />
+            <dataField fieldName="Status_ID" aliasFieldName="Status_Description" />
+            <dataField fieldName="Updated_On" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Message Recipients">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category headerText="New Message Recipients" newColumn="true">
+          <description>$DefaultNewDescription</description>
+          <dataFields>
+            <dataField fieldName="Message_ID" aliasFieldName="Message_Text" />
+            <dataField fieldName="Recipient_ID" columns="15" />
+            <dataField fieldName="Recipient_Name" />
+            <dataField fieldName="Destination" />
+            <dataField fieldName="Try_Order" columns="15" />
+            <dataField fieldName="SMS_Credits" columns="15" />
+            <dataField fieldName="Is_Phone_Number" />
+            <dataField fieldName="SMS_ID" aliasFieldName="SMS_Client_Ref" />
+            <dataField fieldName="SMS_Status_ID" aliasFieldName="SMS_Status_Description" />
+            <dataField fieldName="Status_ID" aliasFieldName="Status_Description" />
+            <dataField fieldName="Updated_On" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a8" commandName="New" commandArgument="grid1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

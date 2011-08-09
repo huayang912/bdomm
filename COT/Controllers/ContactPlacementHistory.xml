@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ContactPlacementHistory" conflictDetection="overwriteChanges" label="Contact Placement History" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[select
+	"ContactPlacementHistory"."ID" "ID"
+	,"ContactPlacementHistory"."ContactID" "ContactID"
+	,"ContactPlacementHistory"."EnquiryID" "EnquiryID"
+	,"ContactPlacementHistory"."ContactPlacementStatusID" "ContactPlacementStatusID"
+	,"ContactPlacementHistory"."Notes" "Notes"
+	,"ContactPlacementHistory"."ChangedByUserID" "ChangedByUserID"
+	,"ContactPlacementHistory"."ChangedOn" "ChangedOn"
+	,"Contact"."Name" "ContactName"
+	,"ContactCompany"."Name" "CompanyName"
+	,"Enquiry"."Number" "Number"
+	,"ContactPlacementStatusTypes"."Name" "StatusName"
+		,"Personnel"."FirstNames" "pFirstNames"
+	
+from "dbo"."ContactPlacementHistory" "ContactPlacementHistory"
+
+	left join "dbo"."Enquiries" "Enquiry" on "ContactPlacementHistory"."EnquiryID" = "Enquiry"."ID"
+		left join "dbo"."Contacts" "Personnel" on "ContactPlacementHistory"."ContactID" = "Personnel"."ID"
+		left join "dbo"."ContactPlacementStatusTypes" "ContactPlacementStatusTypes" on "ContactPlacementHistory"."ContactPlacementStatusID" = "ContactPlacementStatusTypes"."ID"
+left join "dbo"."ClientContacts" "Contact" on "Enquiry"."ContactID" = "Contact"."ID"
+	left join "dbo"."Clients" "ContactCompany" on "Contact"."CompanyID" = "ContactCompany"."ID"
+]]></text>
+    </command>
+    <command id="IDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id" readOnly="true" />
+    <field name="ContactID" type="Int32" label="Contractor" showInSummary="true">
+      <items style="Lookup" dataController="Contacts" dataValueField="ID" dataTextField="FirstNames" />
+    </field>
+    <field name="EnquiryID" type="String" allowNulls="false" label="Enquiry#" showInSummary="true">
+      <items style="Lookup" dataController="Enquiries" dataValueField="ID" dataTextField="Number" />
+    </field>
+    <field name="ContactPlacementStatusID" type="Int32" allowNulls="false" label="Status" showInSummary="true">
+      <items style="Lookup" dataController="ContactPlacementStatusTypes" dataValueField="ID" dataTextField="Name" />
+    </field>
+    <field name="Notes" type="String" allowQBE="false" allowSorting="false" label="Notes" showInSummary="true" />
+    <field name="ChangedByUserID" type="Int32" label="Changed By User#" showInSummary="true">
+      <items style="Lookup" dataController="Users" dataValueField="ID" dataTextField="DisplayName" />
+    </field>
+    <field name="ChangedOn" type="DateTime" allowNulls="false" default="(getdate())" label="Changed On" />
+    <field name="CompanyName" type="String" allowNulls="false" isPrimaryKey="false" computed="false" calculated="false" onDemand="false" label="Client" readOnly="true" showInSummary="false" htmlEncode="false" formatOnClient="true" allowQBE="false" allowSorting="false" allowLEV="false">
+      <items searchOnStart="false" autoSelect="false" />
+    </field>
+    <field name="ContactName" type="String" allowNulls="false" isPrimaryKey="false" computed="false" calculated="false" onDemand="false" label="Contact" readOnly="true" showInSummary="false" htmlEncode="false" formatOnClient="true" allowQBE="false" allowSorting="false" allowLEV="false">
+      <items searchOnStart="false" autoSelect="false" />
+    </field>
+    <field name="Number" type="String" allowNulls="false" isPrimaryKey="false" computed="false" calculated="false" onDemand="false" label="Enquiry Number" readOnly="true" showInSummary="false" htmlEncode="false" formatOnClient="true" allowQBE="false" allowSorting="false" allowLEV="false">
+      <items searchOnStart="false" autoSelect="false" />
+    </field>
+    <field name="StatusName" type="String" allowNulls="false" isPrimaryKey="false" computed="false" calculated="false" onDemand="false" label="Status" readOnly="false" showInSummary="false" htmlEncode="false" formatOnClient="true" allowQBE="false" allowSorting="false" allowLEV="false">
+      <items searchOnStart="false" autoSelect="false" />
+    </field>
+    <field name="pFirstNames" type="String" allowNulls="false" isPrimaryKey="false" computed="false" calculated="false" onDemand="false" label="Contractor" readOnly="true" showInSummary="false" htmlEncode="false" formatOnClient="true" allowQBE="false" allowSorting="false" allowLEV="false">
+      <items searchOnStart="false" autoSelect="false" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Contact Placement History">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="EnquiryID" columns="50" aliasFieldName="Number" />
+        <dataField fieldName="ContactID" columns="15" aliasFieldName="pFirstNames" />
+        <dataField fieldName="ContactPlacementStatusID" columns="15" aliasFieldName="StatusName" />
+        <dataField fieldName="CompanyName" hidden="false" hyperlinkFormatString="_Blank:~/Pages/Enquiries.aspx?ID={EnquiryID}" />
+        <dataField fieldName="ContactName" hidden="false" />
+        <dataField fieldName="Notes" rows="5" />
+        <dataField fieldName="ChangedByUserID" columns="15" readOnly="true" />
+        <dataField fieldName="ChangedOn" columns="10" readOnly="true" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Contact Placement History">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category headerText="Contact Placement History" newColumn="true">
+          <description>$DefaultEditDescription</description>
+          <dataFields>
+            <dataField fieldName="ContactID" columns="15" aliasFieldName="pFirstNames" />
+            <dataField fieldName="EnquiryID" columns="50" aliasFieldName="Number" />
+            <dataField fieldName="ContactPlacementStatusID" columns="15" aliasFieldName="StatusName" />
+            <dataField fieldName="Notes" rows="5" />
+            <dataField fieldName="ChangedByUserID" columns="15" readOnly="true" />
+            <dataField fieldName="ChangedOn" columns="10" readOnly="true" />
+          </dataFields>
+        </category>
+      </categories>
+      <a:dataFields xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+        <dataField fieldName="CompanyName" hidden="false" />
+        <dataField fieldName="ContactName" hidden="false" />
+      </a:dataFields>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Contact Placement History">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category headerText="New Contact Placement History" newColumn="true">
+          <description>$DefaultNewDescription</description>
+          <dataFields>
+            <dataField fieldName="ContactID" columns="15" />
+            <dataField fieldName="EnquiryID" columns="50" />
+            <dataField fieldName="ContactPlacementStatusID" columns="15" />
+            <dataField fieldName="Notes" rows="5" />
+            <dataField fieldName="ChangedByUserID" columns="15" readOnly="true" />
+            <dataField fieldName="ChangedOn" columns="10" readOnly="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a8" commandName="New" commandArgument="grid1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

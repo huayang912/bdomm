@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ContactRoles" conflictDetection="overwriteChanges" label="Contact Roles" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"ContactRoles"."ID" "ID"
+	,"ContactRoles"."ContactID" "ContactID"
+	,"Contact"."FirstNames" "ContactFirstNames"
+	,"ContactCountry"."Name" "ContactCountryName"
+	,"ContactCountryOfBirth"."Name" "ContactCountryOfBirthName"
+	,"ContactMaritalStatus"."Name" "ContactMaritalStatusName"
+	,"ContactCreatedByUser"."UserName" "ContactCreatedByUserUserName"
+	,"ContactChangedByUser"."UserName" "ContactChangedByUserUserName"
+	,"ContactRoles"."RoleID" "RoleID"
+	,"Role"."Name" "RoleName"
+	,"RoleChangedByUser"."UserName" "RoleChangedByUserUserName"
+	,"ContactRoles"."RoleOrder" "RoleOrder"
+	,"ContactRoles"."ChangedByUserID" "ChangedByUserID"
+	,"ChangedByUser"."UserName" "ChangedByUserUserName"
+	,"ContactRoles"."ChangedOn" "ChangedOn"
+	,"ContactRoles"."Version" "Version"
+from "dbo"."ContactRoles" "ContactRoles"
+	left join "dbo"."Contacts" "Contact" on "ContactRoles"."ContactID" = "Contact"."ID"
+	left join "dbo"."Countries" "ContactCountry" on "Contact"."CountryID" = "ContactCountry"."ID"
+	left join "dbo"."Countries" "ContactCountryOfBirth" on "Contact"."CountryOfBirthID" = "ContactCountryOfBirth"."ID"
+	left join "dbo"."MaritalStatuses" "ContactMaritalStatus" on "Contact"."MaritalStatusID" = "ContactMaritalStatus"."ID"
+	left join "dbo"."Users" "ContactCreatedByUser" on "Contact"."CreatedByUserID" = "ContactCreatedByUser"."ID"
+	left join "dbo"."Users" "ContactChangedByUser" on "Contact"."ChangedByUserID" = "ContactChangedByUser"."ID"
+	left join "dbo"."Roles" "Role" on "ContactRoles"."RoleID" = "Role"."ID"
+	left join "dbo"."Users" "RoleChangedByUser" on "Role"."ChangedByUserID" = "RoleChangedByUser"."ID"
+	left join "dbo"."Users" "ChangedByUser" on "ContactRoles"."ChangedByUserID" = "ChangedByUser"."ID"
+]]></text>
+    </command>
+    <command id="IDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="ID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Id" readOnly="true" />
+    <field name="ContactID" type="Int32" allowNulls="false" label="Contact#" showInSummary="true">
+      <items style="Lookup" dataController="Contacts" newDataView="createForm1" />
+    </field>
+    <field name="ContactFirstNames" type="String" readOnly="true" label="Contact First Names" />
+    <field name="ContactCountryName" type="String" readOnly="true" label="Contact Country Name" />
+    <field name="ContactCountryOfBirthName" type="String" readOnly="true" label="Contact Country Of Birth Name" />
+    <field name="ContactMaritalStatusName" type="String" readOnly="true" label="Contact Marital Status Name" />
+    <field name="ContactCreatedByUserUserName" type="String" readOnly="true" label="Contact Created By User Name" />
+    <field name="ContactChangedByUserUserName" type="String" readOnly="true" label="Contact Changed By User Name" />
+    <field name="RoleID" type="Int32" allowNulls="false" label="Role#" showInSummary="true">
+      <items style="Lookup" dataController="Roles" newDataView="createForm1" />
+    </field>
+    <field name="RoleName" type="String" readOnly="true" label="Role Name" />
+    <field name="RoleChangedByUserUserName" type="String" readOnly="true" label="Role Changed By User Name" />
+    <field name="RoleOrder" type="Int32" allowNulls="false" label="Role Order" showInSummary="true" />
+    <field name="ChangedByUserID" type="Int32" label="Changed By User#" showInSummary="true">
+      <items style="Lookup" dataController="Users" newDataView="createForm1" />
+    </field>
+    <field name="ChangedByUserUserName" type="String" readOnly="true" label="Changed By User Name" />
+    <field name="ChangedOn" type="DateTime" allowNulls="false" default="(getdate())" label="Changed On" showInSummary="true" />
+    <field name="Version" type="Byte[]" allowNulls="false" label="Version" readOnly="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Contact Roles">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
+        <dataField fieldName="RoleID" aliasFieldName="RoleName" />
+        <dataField fieldName="RoleOrder" columns="15" />
+        <dataField fieldName="ChangedByUserID" aliasFieldName="ChangedByUserUserName" />
+        <dataField fieldName="ChangedOn" columns="10" />
+        <dataField fieldName="Version" columns="15" />
+        <dataField fieldName="ContactCountryName" />
+        <dataField fieldName="ContactCountryOfBirthName" />
+        <dataField fieldName="ContactMaritalStatusName" columns="50" />
+        <dataField fieldName="ContactCreatedByUserUserName" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Contact Roles">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category headerText="Contact Roles" newColumn="true">
+          <description>$DefaultEditDescription</description>
+          <dataFields>
+            <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
+            <dataField fieldName="RoleID" aliasFieldName="RoleName" />
+            <dataField fieldName="RoleOrder" columns="15" />
+            <dataField fieldName="ChangedByUserID" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="Version" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Reference Information">
+          <description>$DefaultReferenceDescription</description>
+          <dataFields>
+            <dataField fieldName="ContactCountryName" />
+            <dataField fieldName="ContactCountryOfBirthName" />
+            <dataField fieldName="ContactMaritalStatusName" columns="50" />
+            <dataField fieldName="ContactCreatedByUserUserName" />
+            <dataField fieldName="ContactChangedByUserUserName" />
+            <dataField fieldName="RoleChangedByUserUserName" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Contact Roles">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category headerText="New Contact Roles" newColumn="true">
+          <description>$DefaultNewDescription</description>
+          <dataFields>
+            <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
+            <dataField fieldName="RoleID" aliasFieldName="RoleName" />
+            <dataField fieldName="RoleOrder" columns="15" />
+            <dataField fieldName="ChangedByUserID" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a8" commandName="New" commandArgument="grid1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

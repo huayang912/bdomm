@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="EnquiryFiles" conflictDetection="overwriteChanges" label="Enquiry Files" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"EnquiryFiles"."ID" "ID"
+	,"EnquiryFiles"."EnquiryID" "EnquiryID"
+	,"Enquiry"."Number" "EnquiryNumber"
+	,"EnquiryContact"."Name" "EnquiryContactName"
+	,"EnquiryContactCompany"."Name" "EnquiryContactCompanyName"
+	,"EnquiryContactCountry"."Name" "EnquiryContactCountryName"
+	,"EnquiryContactChangedByUser"."UserName" "EnquiryContactChangedByUserUserName"
+	,"EnquiryStatus"."Name" "EnquiryStatusName"
+	,"EnquiryType"."Name" "EnquiryTypeName"
+	,"EnquiryCreatedByUser"."UserName" "EnquiryCreatedByUserUserName"
+	,"EnquiryChangedByUser"."UserName" "EnquiryChangedByUserUserName"
+	,"EnquiryFiles"."FileName" "FileName"
+	,"EnquiryFiles"."UploadedBy" "UploadedBy"
+	,"EnquiryFiles"."UploadedOn" "UploadedOn"
+from "dbo"."EnquiryFiles" "EnquiryFiles"
+	left join "dbo"."Enquiries" "Enquiry" on "EnquiryFiles"."EnquiryID" = "Enquiry"."ID"
+	left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "EnquiryContact"."ID"
+	left join "dbo"."Clients" "EnquiryContactCompany" on "EnquiryContact"."CompanyID" = "EnquiryContactCompany"."ID"
+	left join "dbo"."Countries" "EnquiryContactCountry" on "EnquiryContact"."CountryID" = "EnquiryContactCountry"."ID"
+	left join "dbo"."Users" "EnquiryContactChangedByUser" on "EnquiryContact"."ChangedByUserID" = "EnquiryContactChangedByUser"."ID"
+	left join "dbo"."EnquiryStatuses" "EnquiryStatus" on "Enquiry"."StatusID" = "EnquiryStatus"."ID"
+	left join "dbo"."EnquiryTypes" "EnquiryType" on "Enquiry"."TypeID" = "EnquiryType"."ID"
+	left join "dbo"."Users" "EnquiryCreatedByUser" on "Enquiry"."CreatedByUserID" = "EnquiryCreatedByUser"."ID"
+	left join "dbo"."Users" "EnquiryChangedByUser" on "Enquiry"."ChangedByUserID" = "EnquiryChangedByUser"."ID"
+]]></text>
+    </command>
+    <command id="IDIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="ID" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="ID" type="Int64" allowNulls="false" isPrimaryKey="true" label="Id" readOnly="true" />
+    <field name="EnquiryID" type="Int32" allowNulls="false" label="Enquiry#" showInSummary="true">
+      <items style="Lookup" dataController="Enquiries" newDataView="createForm1" />
+    </field>
+    <field name="EnquiryNumber" type="String" readOnly="true" label="Enquiry Number" />
+    <field name="EnquiryContactName" type="String" readOnly="true" label="Enquiry Contact Name" />
+    <field name="EnquiryContactCompanyName" type="String" readOnly="true" label="Enquiry Contact Company Name" />
+    <field name="EnquiryContactCountryName" type="String" readOnly="true" label="Enquiry Contact Country Name" />
+    <field name="EnquiryContactChangedByUserUserName" type="String" readOnly="true" label="Enquiry Contact Changed By User Name" />
+    <field name="EnquiryStatusName" type="String" readOnly="true" label="Enquiry Status Name" />
+    <field name="EnquiryTypeName" type="String" readOnly="true" label="Enquiry Type Name" />
+    <field name="EnquiryCreatedByUserUserName" type="String" readOnly="true" label="Enquiry Created By User Name" />
+    <field name="EnquiryChangedByUserUserName" type="String" readOnly="true" label="Enquiry Changed By User Name" />
+    <field name="FileName" type="String" allowNulls="false" label="File Name" showInSummary="true" />
+    <field name="UploadedBy" type="Int32" allowNulls="false" label="Uploaded By" showInSummary="true" />
+    <field name="UploadedOn" type="DateTime" allowNulls="false" label="Uploaded On" showInSummary="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Enquiry Files">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="EnquiryID" aliasFieldName="EnquiryNumber" />
+        <dataField fieldName="FileName" />
+        <dataField fieldName="UploadedBy" columns="15" />
+        <dataField fieldName="UploadedOn" columns="10" />
+        <dataField fieldName="EnquiryContactName" />
+        <dataField fieldName="EnquiryContactCompanyName" />
+        <dataField fieldName="EnquiryContactCountryName" />
+        <dataField fieldName="EnquiryContactChangedByUserUserName" />
+        <dataField fieldName="EnquiryStatusName" columns="50" />
+        <dataField fieldName="EnquiryTypeName" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Enquiry Files">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category headerText="Enquiry Files" newColumn="true">
+          <description>$DefaultEditDescription</description>
+          <dataFields>
+            <dataField fieldName="EnquiryID" aliasFieldName="EnquiryNumber" />
+            <dataField fieldName="FileName" />
+            <dataField fieldName="UploadedBy" columns="15" />
+            <dataField fieldName="UploadedOn" columns="10" />
+          </dataFields>
+        </category>
+        <category headerText="Reference Information">
+          <description>$DefaultReferenceDescription</description>
+          <dataFields>
+            <dataField fieldName="EnquiryContactName" />
+            <dataField fieldName="EnquiryContactCompanyName" />
+            <dataField fieldName="EnquiryContactCountryName" />
+            <dataField fieldName="EnquiryContactChangedByUserUserName" />
+            <dataField fieldName="EnquiryStatusName" columns="50" />
+            <dataField fieldName="EnquiryTypeName" columns="50" />
+            <dataField fieldName="EnquiryCreatedByUserUserName" />
+            <dataField fieldName="EnquiryChangedByUserUserName" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Enquiry Files">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category headerText="New Enquiry Files" newColumn="true">
+          <description>$DefaultNewDescription</description>
+          <dataFields>
+            <dataField fieldName="EnquiryID" aliasFieldName="EnquiryNumber" />
+            <dataField fieldName="FileName" />
+            <dataField fieldName="UploadedBy" columns="15" />
+            <dataField fieldName="UploadedOn" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a8" commandName="New" commandArgument="grid1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>

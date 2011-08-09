@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 
+  This file is provided to store the settings for your Data Aquarium project. 
+  You can safely delete this file if no further code generation is planned.
+--><project xmlns="urn:schemas-codeontime-com:data-aquarium-project" subscriptionLevel="" codeDomProvider="CSharp" targetFramework="3.5">
+  <connectionString>Data Source=MOMIN-PC\sqlexpress5;Initial Catalog=OMMBUDI_Test;Persist Security Info=True;User ID=sa;Password=jeddah;</connectionString>
+  <providerName>System.Data.SqlClient</providerName>
+  <namespace>BUDI2_NS</namespace>
+  <webServer run="false" port="33891"><webConfig></webConfig></webServer>
+<databaseObjectFilter></databaseObjectFilter><bll discoveryDepth="3" labelFormatExpression="" generate="false" selectMethod="Select" selectSingleMethod="SelectSingle" insertMethod="Insert" updateMethod="Update" deleteMethod="Delete" generateSharedBusinessRules="false" includeViews="true"><fieldMap></fieldMap><keys></keys><fieldsToIgnore></fieldsToIgnore><fieldsToHide></fieldsToHide><customLabels></customLabels></bll><reports enabled="true"/><membership enabled="false" providerName="System.Data.SqlClient" connectionString="" windowsAuthentication="true" customSecurity="false" dedicatedLogin="false" displayRememberMe="true" rememberMeSet="false" displaySignUp="true" displayPasswordRecovery="true" displayMyAccount="true" displayHelp="true" idleUserDetectionTimeout="-1"/><features pageHeader="BUDI" copyright="" annotations="false" annotationsPath="" newColumn="true" floating="false" maxGridFields="10" multiSelect="false" batchEdit="false" advancedSearch="false" advancedLookup="false" relationshipExplorer="false" enablePermalinks="false" enableHistory="false" enableTransactions="false" showModalForms="true"/><globalization uiCulture="en-GB" culture="en-GB" enableClientBasedCulture="false" supportedCultures="en-GB,en-GB; "/><layout name="Classic"/><theme name="Citrus"/></project>

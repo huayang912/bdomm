@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="vwQuotations" conflictDetection="overwriteChanges" label="vw Quotations" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"vwQuotations"."Number" "Number"
+	,"vwQuotations"."EnquiryTypeName" "EnquiryTypeName"
+	,"vwQuotations"."EnquiryStatusName" "EnquiryStatusName"
+	,"vwQuotations"."TypeID" "TypeID"
+	,"vwQuotations"."StatusID" "StatusID"
+	,"vwQuotations"."EnquiryNumber" "EnquiryNumber"
+	,"vwQuotations"."ContactName" "ContactName"
+	,"vwQuotations"."ClientName" "ClientName"
+	,"vwQuotations"."QuotationStatusName" "QuotationStatusName"
+	,"vwQuotations"."SubmissionDate" "SubmissionDate"
+from "dbo"."vwQuotations" "vwQuotations"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="Number" type="String" label="Number" showInSummary="true" />
+    <field name="EnquiryTypeName" type="String" allowNulls="false" label="Enquiry Type Name" showInSummary="true" />
+    <field name="EnquiryStatusName" type="String" allowNulls="false" label="Enquiry Status Name" showInSummary="true" />
+    <field name="TypeID" type="Int32" allowNulls="false" label="Type#" showInSummary="true" />
+    <field name="StatusID" type="Int32" allowNulls="false" label="Status#" showInSummary="true" />
+    <field name="EnquiryNumber" type="String" allowNulls="false" label="Enquiry Number" />
+    <field name="ContactName" type="String" allowNulls="false" label="Contact Name" />
+    <field name="ClientName" type="String" label="Client Name" />
+    <field name="QuotationStatusName" type="String" label="Quotation Status Name" />
+    <field name="SubmissionDate" type="DateTime" label="Submission Date" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="vw Quotations">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="EnquiryTypeName" columns="50" />
+        <dataField fieldName="Number" columns="50" />
+        <dataField fieldName="EnquiryStatusName" columns="50" />
+        <dataField fieldName="TypeID" columns="15" />
+        <dataField fieldName="StatusID" columns="15" />
+        <dataField fieldName="EnquiryNumber" columns="50" />
+        <dataField fieldName="ContactName" />
+        <dataField fieldName="ClientName" />
+        <dataField fieldName="QuotationStatusName" columns="50" />
+        <dataField fieldName="SubmissionDate" columns="10" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review vw Quotations">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category headerText="vw Quotations" newColumn="true">
+          <description>$DefaultEditDescription</description>
+          <dataFields>
+            <dataField fieldName="Number" columns="50" />
+            <dataField fieldName="EnquiryTypeName" columns="50" />
+            <dataField fieldName="EnquiryStatusName" columns="50" />
+            <dataField fieldName="TypeID" columns="15" />
+            <dataField fieldName="StatusID" columns="15" />
+            <dataField fieldName="EnquiryNumber" columns="50" />
+            <dataField fieldName="ContactName" />
+            <dataField fieldName="ClientName" />
+            <dataField fieldName="QuotationStatusName" columns="50" />
+            <dataField fieldName="SubmissionDate" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New vw Quotations">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category headerText="New vw Quotations" newColumn="true">
+          <description>$DefaultNewDescription</description>
+          <dataFields>
+            <dataField fieldName="Number" columns="50" />
+            <dataField fieldName="EnquiryTypeName" columns="50" />
+            <dataField fieldName="EnquiryStatusName" columns="50" />
+            <dataField fieldName="TypeID" columns="15" />
+            <dataField fieldName="StatusID" columns="15" />
+            <dataField fieldName="EnquiryNumber" columns="50" />
+            <dataField fieldName="ContactName" />
+            <dataField fieldName="ClientName" />
+            <dataField fieldName="QuotationStatusName" columns="50" />
+            <dataField fieldName="SubmissionDate" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a8" commandName="New" commandArgument="grid1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>
