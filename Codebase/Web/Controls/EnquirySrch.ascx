@@ -16,8 +16,7 @@
                         
                         <asp:DropDownList ID="StatusList" runat="server">
                         <asp:ListItem>All</asp:ListItem>                        
-                        <asp:ListItem>Outstanding</asp:ListItem>
-                         <asp:ListItem>Quoted</asp:ListItem>
+                        <asp:ListItem>Outstanding</asp:ListItem>                      
                          <asp:ListItem>Closed</asp:ListItem>
                         </asp:DropDownList>                  </td>
                   <td>
