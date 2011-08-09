@@ -37,7 +37,7 @@ public class BasePage : System.Web.UI.Page
     /// <param name="e"></param>
     protected override void OnLoad(EventArgs e)
     {
-        SessionCache.CurrentUser = null;
+        //SessionCache.CurrentUser = null;
         WebUtil.LoginUser();
         base.OnLoad(e);
         if (SessionCache.CurrentUser == null)
