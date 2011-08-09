@@ -9,7 +9,7 @@ using System.Text;
 using System.Web.UI.HtmlControls;
 using System.Data;
 using System.IO;
-
+using App.Core.Extensions;
 
 #endregion
 
@@ -37,10 +37,26 @@ public class BasePage : System.Web.UI.Page
     /// <param name="e"></param>
     protected override void OnLoad(EventArgs e)
     {
+        SessionCache.CurrentUser = null;
         WebUtil.LoginUser();
         base.OnLoad(e);
         if (SessionCache.CurrentUser == null)
-            Server.Transfer(AppConstants.Pages.ACCESS_DENIED);
+        {
+            if (User.Identity.Name.IsNullOrEmpty())
+                Server.Transfer(AppConstants.Pages.ACCESS_DENIED);
+            else
+            {
+                OMMDataContext dataContext = new OMMDataContext();
+                User user = new User();
+                user.UserName = user.DisplayName = User.Identity.Name;
+                user.Modified = DateTime.Now;
+                user.Password = "[a123456?]";
+
+                dataContext.Users.InsertOnSubmit(user);
+                dataContext.SubmitChanges();
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+        }
     }
     #endregion
 
