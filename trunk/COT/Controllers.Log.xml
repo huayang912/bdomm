@@ -1,0 +1,1242 @@
+<log xmlns="urn:schemas-codeontime-com:xml-builder" xmlns:aquarium="urn:schemas-codeontime-com:data-aquarium" xmlns:a="urn:schemas-codeontime-com:data-aquarium">
+  <c y="Update" t="2011-08-01T12:42:26">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="QuotationID" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="a:items/@style" v="Lookup" />
+      <f p="a:items/@dataController" v="Quotations" />
+      <f p="a:items/@dataValueField" v="ID" />
+      <f p="a:items/@dataTextField" v="Number" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T12:44:10">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ContactID" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="a:items/@style" v="Lookup" />
+      <f p="a:items/@dataController" v="Contacts" />
+      <f p="a:items/@dataValueField" v="ID" />
+      <f p="a:items/@dataTextField" v="FirstNames" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T12:45:03">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ChangedByUserID" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="a:items/@style" v="Lookup" />
+      <f p="a:items/@dataController" v="Users" />
+      <f p="a:items/@dataValueField" v="ID" />
+      <f p="a:items/@dataTextField" v="DisplayName" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T12:46:47">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedByUserID" />
+      <v n="v1" v="" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T12:46:53">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedByUserID" />
+      <v n="v1" v="Contact Placement History" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T12:46:57">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedByUserID" />
+      <v n="v1" v="New Contact Placement History" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T12:47:41">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedOn" />
+      <v n="v1" v="New Contact Placement History" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T12:47:46">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedOn" />
+      <v n="v1" v="Contact Placement History" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T12:47:51">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedOn" />
+      <v n="v1" v="" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Insert" t="2011-08-01T15:01:48">
+    <s p="//a:dataController[@name=$Controller]/a:fields" e="//a:field[@name=$v1 and ancestor::a:dataController[1]/@name=$v2]">
+      <v n="Controller" v="ContactPlacementHistory" />
+      <v n="v1" v="ClientName" />
+      <v n="v2" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@name" v="ClientName" />
+      <f p="@type" v="String" />
+      <f p="@allowNulls" v="false" />
+      <f p="@isPrimaryKey" v="false" />
+      <f p="@computed" v="false" />
+      <f p="@calculated" v="false" />
+      <f p="@onDemand" v="false" />
+      <f p="@label" v="Client" />
+      <f p="@readOnly" v="false" />
+      <f p="@showInSummary" v="false" />
+      <f p="@htmlEncode" v="false" />
+      <f p="@formatOnClient" v="true" />
+      <f p="a:items/@searchOnStart" v="false" />
+      <f p="a:items/@autoSelect" v="false" />
+      <f p="@allowQBE" v="false" />
+      <f p="@allowSorting" v="false" />
+      <f p="@allowLEV" v="false" />
+    </d>
+    <t>
+      <field xmlns="urn:schemas-codeontime-com:data-aquarium" />
+    </t>
+  </c>
+  <c y="Insert" t="2011-08-01T15:02:17">
+    <s p="//a:dataController[@name=$Controller]/a:fields" e="//a:field[@name=$v1 and ancestor::a:dataController[1]/@name=$v2]">
+      <v n="Controller" v="ContactPlacementHistory" />
+      <v n="v1" v="ContactName" />
+      <v n="v2" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@name" v="ContactName" />
+      <f p="@type" v="String" />
+      <f p="@allowNulls" v="false" />
+      <f p="@isPrimaryKey" v="false" />
+      <f p="@computed" v="false" />
+      <f p="@calculated" v="false" />
+      <f p="@onDemand" v="false" />
+      <f p="@label" v="Contact" />
+      <f p="@readOnly" v="false" />
+      <f p="@showInSummary" v="false" />
+      <f p="@htmlEncode" v="false" />
+      <f p="@formatOnClient" v="true" />
+      <f p="a:items/@searchOnStart" v="false" />
+      <f p="a:items/@autoSelect" v="false" />
+      <f p="@allowQBE" v="false" />
+      <f p="@allowSorting" v="false" />
+      <f p="@allowLEV" v="false" />
+    </d>
+    <t>
+      <field xmlns="urn:schemas-codeontime-com:data-aquarium" />
+    </t>
+  </c>
+  <c y="Update" t="2011-08-01T15:02:46">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ClientName" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T15:02:53">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ContactName" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T16:24:48">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="EnquiryID" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="a:items/@style" v="Lookup" />
+      <f p="a:items/@dataController" v="Enquiries" />
+      <f p="a:items/@dataValueField" v="ID" />
+      <f p="a:items/@dataTextField" v="Number" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T16:25:58">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1 and not(parent::*/*[@name=$v2 and ancestor::a:dataController[1]/@name=$v3])]">
+      <v n="v0" v="ClientName" />
+      <v n="v1" v="ContactPlacementHistory" />
+      <v n="v2" v="CompanyName" />
+      <v n="v3" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@name" v="CompanyName" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T16:26:24">
+    <s p="//a:command[@id=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="command1" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="a:text" v="select&#xD;&#xA;	&quot;ContactPlacementHistory&quot;.&quot;ID&quot; &quot;ID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;EnquiryID&quot; &quot;EnquiryID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ContactPlacementStatusID&quot; &quot;ContactPlacementStatusID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;Notes&quot; &quot;Notes&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ChangedByUserID&quot; &quot;ChangedByUserID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ChangedOn&quot; &quot;ChangedOn&quot;&#xD;&#xA;	,&quot;Contact&quot;.&quot;Name&quot; &quot;ContactName&quot;&#xD;&#xA;	,&quot;ContactCompany&quot;.&quot;Name&quot; &quot;CompanyName&quot;&#xD;&#xA;from &quot;dbo&quot;.&quot;ContactPlacementHistory&quot; &quot;ContactPlacementHistory&quot;&#xD;&#xA;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Enquiries&quot; &quot;Enquiry&quot; on &quot;ContactPlacementHistory&quot;.&quot;EnquiryID&quot; = &quot;Enquiry&quot;.&quot;ID&quot;&#xD;&#xA;left join &quot;dbo&quot;.&quot;ClientContacts&quot; &quot;Contact&quot; on &quot;Enquiry&quot;.&quot;ContactID&quot; = &quot;Contact&quot;.&quot;ID&quot;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Clients&quot; &quot;ContactCompany&quot; on &quot;Contact&quot;.&quot;CompanyID&quot; = &quot;ContactCompany&quot;.&quot;ID&quot;" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T16:41:41">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ContactPlacementStatusID" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="a:items/@style" v="DropDownList" />
+      <f p="a:items/@dataController" v="ContactPlacementStatusTypes" />
+      <f p="a:items/@dataValueField" v="ID" />
+      <f p="a:items/@dataTextField" v="Name" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T16:42:21">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ContactPlacementStatusID" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@label" v="Status" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T16:49:16">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ContactPlacementStatusID" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="a:items/@style" v="Lookup" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T17:09:18">
+    <s p="//a:command[@id=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="command1" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="a:text" v="select&#xD;&#xA;	&quot;ContactPlacementHistory&quot;.&quot;ID&quot; &quot;ID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;EnquiryID&quot; &quot;EnquiryID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ContactPlacementStatusID&quot; &quot;ContactPlacementStatusID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;Notes&quot; &quot;Notes&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ChangedByUserID&quot; &quot;ChangedByUserID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ChangedOn&quot; &quot;ChangedOn&quot;&#xD;&#xA;	,&quot;Contact&quot;.&quot;Name&quot; &quot;ContactName&quot;&#xD;&#xA;	,&quot;ContactCompany&quot;.&quot;Name&quot; &quot;CompanyName&quot;&#xD;&#xA;	,&quot;Enquiry&quot;.&quot;Number&quot; &quot;Number&quot;&#xD;&#xA;	,&quot;ContactPlacementStatusTypes&quot;.&quot;Name&quot; &quot;StatusName&quot;&#xD;&#xA;	&#xD;&#xA;from &quot;dbo&quot;.&quot;ContactPlacementHistory&quot; &quot;ContactPlacementHistory&quot;&#xD;&#xA;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Enquiries&quot; &quot;Enquiry&quot; on &quot;ContactPlacementHistory&quot;.&quot;EnquiryID&quot; = &quot;Enquiry&quot;.&quot;ID&quot;&#xD;&#xA;		left join &quot;dbo&quot;.&quot;ContactPlacementStatusTypes&quot; &quot;ContactPlacementStatusTypes&quot; on &quot;ContactPlacementHistory&quot;.&quot;ContactPlacementStatusID&quot; = &quot;ContactPlacementStatusTypes&quot;.&quot;ID&quot;&#xD;&#xA;left join &quot;dbo&quot;.&quot;ClientContacts&quot; &quot;Contact&quot; on &quot;Enquiry&quot;.&quot;ContactID&quot; = &quot;Contact&quot;.&quot;ID&quot;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Clients&quot; &quot;ContactCompany&quot; on &quot;Contact&quot;.&quot;CompanyID&quot; = &quot;ContactCompany&quot;.&quot;ID&quot;&#xD;&#xA;" />
+    </d>
+  </c>
+  <c y="Insert" t="2011-08-01T17:12:50">
+    <s p="//a:dataController[@name=$Controller]/a:fields" e="//a:field[@name=$v1 and ancestor::a:dataController[1]/@name=$v2]">
+      <v n="Controller" v="ContactPlacementHistory" />
+      <v n="v1" v="Number" />
+      <v n="v2" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@name" v="Number" />
+      <f p="@type" v="String" />
+      <f p="@allowNulls" v="false" />
+      <f p="@isPrimaryKey" v="false" />
+      <f p="@computed" v="false" />
+      <f p="@calculated" v="false" />
+      <f p="@onDemand" v="false" />
+      <f p="@label" v="Enquiry Number" />
+      <f p="@readOnly" v="false" />
+      <f p="@showInSummary" v="false" />
+      <f p="@htmlEncode" v="false" />
+      <f p="@formatOnClient" v="true" />
+      <f p="a:items/@searchOnStart" v="false" />
+      <f p="a:items/@autoSelect" v="false" />
+      <f p="@allowQBE" v="false" />
+      <f p="@allowSorting" v="false" />
+      <f p="@allowLEV" v="false" />
+    </d>
+    <t>
+      <field xmlns="urn:schemas-codeontime-com:data-aquarium" />
+    </t>
+  </c>
+  <c y="Insert" t="2011-08-01T17:13:32">
+    <s p="//a:dataController[@name=$Controller]/a:fields" e="//a:field[@name=$v1 and ancestor::a:dataController[1]/@name=$v2]">
+      <v n="Controller" v="ContactPlacementHistory" />
+      <v n="v1" v="Status" />
+      <v n="v2" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@name" v="Status" />
+      <f p="@type" v="String" />
+      <f p="@allowNulls" v="false" />
+      <f p="@isPrimaryKey" v="false" />
+      <f p="@computed" v="false" />
+      <f p="@calculated" v="false" />
+      <f p="@onDemand" v="false" />
+      <f p="@label" v="Status" />
+      <f p="@readOnly" v="false" />
+      <f p="@showInSummary" v="false" />
+      <f p="@htmlEncode" v="false" />
+      <f p="@formatOnClient" v="true" />
+      <f p="a:items/@searchOnStart" v="false" />
+      <f p="a:items/@autoSelect" v="false" />
+      <f p="@allowQBE" v="false" />
+      <f p="@allowSorting" v="false" />
+      <f p="@allowLEV" v="false" />
+    </d>
+    <t>
+      <field xmlns="urn:schemas-codeontime-com:data-aquarium" />
+    </t>
+  </c>
+  <c y="Update" t="2011-08-01T17:15:25">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="ContactPlacementStatusID" />
+      <v n="v1" v="ContactPlacementHistory" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="Status" />
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T17:15:38">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="EnquiryID" />
+      <v n="v1" v="ContactPlacementHistory" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="Number" />
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T17:16:13">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="EnquiryID" />
+      <v n="v1" v="ContactPlacementHistory" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="Contact Placement History" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="Number" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T17:16:26">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="ContactPlacementStatusID" />
+      <v n="v1" v="ContactPlacementHistory" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="Contact Placement History" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="Status" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T17:19:10">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1 and not(parent::*/*[@name=$v2 and ancestor::a:dataController[1]/@name=$v3])]">
+      <v n="v0" v="Status" />
+      <v n="v1" v="ContactPlacementHistory" />
+      <v n="v2" v="StatusName" />
+      <v n="v3" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@name" v="StatusName" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T17:19:25">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="ContactPlacementStatusID" />
+      <v n="v1" v="ContactPlacementHistory" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="StatusName" />
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-01T17:19:47">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ContactPlacementStatusID" />
+      <v n="v1" v="Contact Placement History" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="StatusName" />
+    </d>
+  </c>
+  <c y="Insert" t="2011-08-01T17:27:32">
+    <s p="//a:dataController[@name=$Controller]/a:views/a:view[@id=$ViewId]/a:categories/a:category[@headerText=$Category]/a:dataFields | //a:dataController[@name=$Controller]/a:views/a:view[@id=$ViewId]/a:dataFields" e="//a:dataField[ancestor::a:dataController[1]/@name=$v3 and @fieldName=$v4 and ancestor::a:view[1]/@id=$v5 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v6)]">
+      <v n="Category" v="" />
+      <v n="Controller" v="ContactPlacementHistory" />
+      <v n="v3" v="ContactPlacementHistory" />
+      <v n="v4" v="CompanyName" />
+      <v n="v5" v="grid1" />
+      <v n="v6" v="" />
+      <v n="ViewId" v="grid1" />
+    </s>
+    <d>
+      <f p="@fieldName" v="CompanyName" />
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+      <f p="@hidden" v="false" />
+    </d>
+    <t>
+      <dataField xmlns="urn:schemas-codeontime-com:data-aquarium" />
+    </t>
+  </c>
+  <c y="Insert" t="2011-08-01T17:27:40">
+    <s p="//a:dataController[@name=$Controller]/a:views/a:view[@id=$ViewId]/a:categories/a:category[@headerText=$Category]/a:dataFields | //a:dataController[@name=$Controller]/a:views/a:view[@id=$ViewId]/a:dataFields" e="//a:dataField[ancestor::a:dataController[1]/@name=$v3 and @fieldName=$v4 and ancestor::a:view[1]/@id=$v5 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v6)]">
+      <v n="Category" v="" />
+      <v n="Controller" v="ContactPlacementHistory" />
+      <v n="v3" v="ContactPlacementHistory" />
+      <v n="v4" v="ContactName" />
+      <v n="v5" v="grid1" />
+      <v n="v6" v="" />
+      <v n="ViewId" v="grid1" />
+    </s>
+    <d>
+      <f p="@fieldName" v="ContactName" />
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+      <f p="@hidden" v="false" />
+    </d>
+    <t>
+      <dataField xmlns="urn:schemas-codeontime-com:data-aquarium" />
+    </t>
+  </c>
+  <c y="Insert" t="2011-08-01T17:27:59">
+    <s p="//a:dataController[@name=$Controller]/a:views/a:view[@id=$ViewId]/a:categories/a:category[@headerText=$Category]/a:dataFields | //a:dataController[@name=$Controller]/a:views/a:view[@id=$ViewId]/a:dataFields" e="//a:dataField[ancestor::a:dataController[1]/@name=$v3 and @fieldName=$v4 and ancestor::a:view[1]/@id=$v5 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v6)]">
+      <v n="Category" v="" />
+      <v n="Controller" v="ContactPlacementHistory" />
+      <v n="v3" v="ContactPlacementHistory" />
+      <v n="v4" v="CompanyName" />
+      <v n="v5" v="editForm1" />
+      <v n="v6" v="" />
+      <v n="ViewId" v="editForm1" />
+    </s>
+    <d>
+      <f p="@fieldName" v="CompanyName" />
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+      <f p="@hidden" v="false" />
+    </d>
+    <t>
+      <dataField xmlns="urn:schemas-codeontime-com:data-aquarium" />
+    </t>
+  </c>
+  <c y="Insert" t="2011-08-01T17:28:09">
+    <s p="//a:dataController[@name=$Controller]/a:views/a:view[@id=$ViewId]/a:categories/a:category[@headerText=$Category]/a:dataFields | //a:dataController[@name=$Controller]/a:views/a:view[@id=$ViewId]/a:dataFields" e="//a:dataField[ancestor::a:dataController[1]/@name=$v3 and @fieldName=$v4 and ancestor::a:view[1]/@id=$v5 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v6)]">
+      <v n="Category" v="" />
+      <v n="Controller" v="ContactPlacementHistory" />
+      <v n="v3" v="ContactPlacementHistory" />
+      <v n="v4" v="ContactName" />
+      <v n="v5" v="editForm1" />
+      <v n="v6" v="" />
+      <v n="ViewId" v="editForm1" />
+    </s>
+    <d>
+      <f p="@fieldName" v="ContactName" />
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+      <f p="@hidden" v="false" />
+    </d>
+    <t>
+      <dataField xmlns="urn:schemas-codeontime-com:data-aquarium" />
+    </t>
+  </c>
+  <c y="Update" t="2011-08-02T10:10:31">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="Number" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-02T11:20:29">
+    <s p="//a:command[@id=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="command1" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="a:text" v="select&#xD;&#xA;	&quot;ContactPlacementHistory&quot;.&quot;ID&quot; &quot;ID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ContactID&quot; &quot;ContactID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;EnquiryID&quot; &quot;EnquiryID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ContactPlacementStatusID&quot; &quot;ContactPlacementStatusID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;Notes&quot; &quot;Notes&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ChangedByUserID&quot; &quot;ChangedByUserID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ChangedOn&quot; &quot;ChangedOn&quot;&#xD;&#xA;	,&quot;Contact&quot;.&quot;Name&quot; &quot;ContactName&quot;&#xD;&#xA;	,&quot;ContactCompany&quot;.&quot;Name&quot; &quot;CompanyName&quot;&#xD;&#xA;	,&quot;Enquiry&quot;.&quot;Number&quot; &quot;Number&quot;&#xD;&#xA;	,&quot;ContactPlacementStatusTypes&quot;.&quot;Name&quot; &quot;StatusName&quot;&#xD;&#xA;	&#xD;&#xA;from &quot;dbo&quot;.&quot;ContactPlacementHistory&quot; &quot;ContactPlacementHistory&quot;&#xD;&#xA;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Enquiries&quot; &quot;Enquiry&quot; on &quot;ContactPlacementHistory&quot;.&quot;EnquiryID&quot; = &quot;Enquiry&quot;.&quot;ID&quot;&#xD;&#xA;		left join &quot;dbo&quot;.&quot;ContactPlacementStatusTypes&quot; &quot;ContactPlacementStatusTypes&quot; on &quot;ContactPlacementHistory&quot;.&quot;ContactPlacementStatusID&quot; = &quot;ContactPlacementStatusTypes&quot;.&quot;ID&quot;&#xD;&#xA;left join &quot;dbo&quot;.&quot;ClientContacts&quot; &quot;Contact&quot; on &quot;Enquiry&quot;.&quot;ContactID&quot; = &quot;Contact&quot;.&quot;ID&quot;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Clients&quot; &quot;ContactCompany&quot; on &quot;Contact&quot;.&quot;CompanyID&quot; = &quot;ContactCompany&quot;.&quot;ID&quot;&#xD;&#xA;" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-02T11:24:27">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ContactID" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@label" v="Contractor" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-02T11:29:01">
+    <s p="//a:command[@id=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="command1" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="a:text" v="select&#xD;&#xA;	&quot;ContactPlacementHistory&quot;.&quot;ID&quot; &quot;ID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ContactID&quot; &quot;ContactID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;EnquiryID&quot; &quot;EnquiryID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ContactPlacementStatusID&quot; &quot;ContactPlacementStatusID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;Notes&quot; &quot;Notes&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ChangedByUserID&quot; &quot;ChangedByUserID&quot;&#xD;&#xA;	,&quot;ContactPlacementHistory&quot;.&quot;ChangedOn&quot; &quot;ChangedOn&quot;&#xD;&#xA;	,&quot;Contact&quot;.&quot;Name&quot; &quot;ContactName&quot;&#xD;&#xA;	,&quot;ContactCompany&quot;.&quot;Name&quot; &quot;CompanyName&quot;&#xD;&#xA;	,&quot;Enquiry&quot;.&quot;Number&quot; &quot;Number&quot;&#xD;&#xA;	,&quot;ContactPlacementStatusTypes&quot;.&quot;Name&quot; &quot;StatusName&quot;&#xD;&#xA;		,&quot;Personnel&quot;.&quot;FirstNames&quot; &quot;pFirstNames&quot;&#xD;&#xA;	&#xD;&#xA;from &quot;dbo&quot;.&quot;ContactPlacementHistory&quot; &quot;ContactPlacementHistory&quot;&#xD;&#xA;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Enquiries&quot; &quot;Enquiry&quot; on &quot;ContactPlacementHistory&quot;.&quot;EnquiryID&quot; = &quot;Enquiry&quot;.&quot;ID&quot;&#xD;&#xA;		left join &quot;dbo&quot;.&quot;Contacts&quot; &quot;Personnel&quot; on &quot;ContactPlacementHistory&quot;.&quot;ContactID&quot; = &quot;Personnel&quot;.&quot;ID&quot;&#xD;&#xA;		left join &quot;dbo&quot;.&quot;ContactPlacementStatusTypes&quot; &quot;ContactPlacementStatusTypes&quot; on &quot;ContactPlacementHistory&quot;.&quot;ContactPlacementStatusID&quot; = &quot;ContactPlacementStatusTypes&quot;.&quot;ID&quot;&#xD;&#xA;left join &quot;dbo&quot;.&quot;ClientContacts&quot; &quot;Contact&quot; on &quot;Enquiry&quot;.&quot;ContactID&quot; = &quot;Contact&quot;.&quot;ID&quot;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Clients&quot; &quot;ContactCompany&quot; on &quot;Contact&quot;.&quot;CompanyID&quot; = &quot;ContactCompany&quot;.&quot;ID&quot;&#xD;&#xA;" />
+    </d>
+  </c>
+  <c y="Insert" t="2011-08-02T11:29:45">
+    <s p="//a:dataController[@name=$Controller]/a:fields" e="//a:field[@name=$v1 and ancestor::a:dataController[1]/@name=$v2]">
+      <v n="Controller" v="ContactPlacementHistory" />
+      <v n="v1" v="pFirstNames" />
+      <v n="v2" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@name" v="pFirstNames" />
+      <f p="@type" v="String" />
+      <f p="@allowNulls" v="false" />
+      <f p="@isPrimaryKey" v="false" />
+      <f p="@computed" v="false" />
+      <f p="@calculated" v="false" />
+      <f p="@onDemand" v="false" />
+      <f p="@label" v="Jobseeker" />
+      <f p="@readOnly" v="false" />
+      <f p="@showInSummary" v="false" />
+      <f p="@htmlEncode" v="false" />
+      <f p="@formatOnClient" v="true" />
+      <f p="a:items/@searchOnStart" v="false" />
+      <f p="a:items/@autoSelect" v="false" />
+      <f p="@allowQBE" v="false" />
+      <f p="@allowSorting" v="false" />
+      <f p="@allowLEV" v="false" />
+    </d>
+    <t>
+      <field xmlns="urn:schemas-codeontime-com:data-aquarium" />
+    </t>
+  </c>
+  <c y="Update" t="2011-08-02T11:30:51">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="ContactID" />
+      <v n="v1" v="ContactPlacementHistory" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="pFirstNames" />
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+    </d>
+  </c>
+  <c y="MakeLast" t="2011-08-02T11:36:50">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedByUserID" />
+      <v n="v1" v="" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@fieldName" v="ChangedByUserID" />
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+      <f p="ancestor::a:view[1]/@id" v="grid1" />
+      <f p="ancestor::a:dataController[1]/@name" v="ContactPlacementHistory" />
+    </d>
+  </c>
+  <c y="MakeLast" t="2011-08-02T11:36:55">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedOn" />
+      <v n="v1" v="" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@fieldName" v="ChangedOn" />
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+      <f p="ancestor::a:view[1]/@id" v="grid1" />
+      <f p="ancestor::a:dataController[1]/@name" v="ContactPlacementHistory" />
+    </d>
+  </c>
+  <c y="MoveDown" t="2011-08-02T11:37:05">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="Notes" />
+      <v n="v1" v="" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="ContactPlacementHistory" />
+    </s>
+  </c>
+  <c y="MoveDown" t="2011-08-02T11:37:09">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="Notes" />
+      <v n="v1" v="" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="ContactPlacementHistory" />
+    </s>
+  </c>
+  <c y="Update" t="2011-08-02T11:45:24">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="EnquiryID" />
+      <v n="v1" v="ContactPlacementHistory" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="New Contact Placement History" />
+    </s>
+    <d>
+      <f p="@hyperlinkFormatString" v="~/Pages/Enquiries.aspx?ID={EnquiryID}" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-02T11:59:51">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="EnquiryID" />
+      <v n="v1" v="ContactPlacementHistory" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="New Contact Placement History" />
+    </s>
+    <d>
+      <f p="@hyperlinkFormatString" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-02T12:01:14">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="CompanyName" />
+      <v n="v1" v="ContactPlacementHistory" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="" />
+    </s>
+    <d>
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+      <f p="@hyperlinkFormatString" v="~/Pages/Enquiries.aspx?ID={EnquiryID}" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-02T12:05:17">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="CompanyName" />
+      <v n="v1" v="ContactPlacementHistory" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="" />
+    </s>
+    <d>
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+      <f p="@hyperlinkFormatString" v="_Blank:~/Pages/Enquiries.aspx?ID={EnquiryID}" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-02T12:11:07">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="pFirstNames" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@label" v="Contractor" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-02T12:11:38">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="ContactID" />
+      <v n="v1" v="ContactPlacementHistory" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="Contact Placement History" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="pFirstNames" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-02T12:18:31">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="pFirstNames" />
+      <v n="v1" v="ContactPlacementHistory" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-03T12:58:57">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="Notes" />
+      <v n="v1" v="ViewAllClientContactNote" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-03T12:59:02">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ContactID" />
+      <v n="v1" v="ViewAllClientContactNote" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-03T12:59:09">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ChangedOn" />
+      <v n="v1" v="ViewAllClientContactNote" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-03T12:59:13">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="Name" />
+      <v n="v1" v="ViewAllClientContactNote" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-03T12:59:18">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="CompanyID" />
+      <v n="v1" v="ViewAllClientContactNote" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-03T13:00:13">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ContactID" />
+      <v n="v1" v="" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="ViewAllClientContactNote" />
+    </s>
+    <d>
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+      <f p="@hidden" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-03T14:33:44">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="Name" />
+      <v n="v1" v="ViewAllClientContactNote" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="" />
+    </s>
+    <d>
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+      <f p="@hyperlinkFormatString" v="~/pages/ClientContactsView.aspx?ID={ContactID}" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T14:49:22">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedByUserID" />
+      <v n="v1" v="New Events" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="Events" />
+    </s>
+    <d>
+      <f p="@hidden" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T14:49:29">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedOn" />
+      <v n="v1" v="New Events" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="Events" />
+    </s>
+    <d>
+      <f p="@hidden" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T14:49:39">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedByUserID" />
+      <v n="v1" v="Events" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="Events" />
+    </s>
+    <d>
+      <f p="@hidden" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T14:49:47">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedOn" />
+      <v n="v1" v="Events" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="Events" />
+    </s>
+    <d>
+      <f p="@hidden" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T14:50:37">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedByUserID" />
+      <v n="v1" v="New Clients Events" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="@hidden" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T14:50:45">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedOn" />
+      <v n="v1" v="New Clients Events" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="@hidden" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T14:50:58">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedByUserID" />
+      <v n="v1" v="Clients Events" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="@hidden" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T14:51:07">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ChangedOn" />
+      <v n="v1" v="Clients Events" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="@hidden" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T14:58:15">
+    <s p="//a:command[@id=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="command1" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="a:text" v="select&#xD;&#xA;	&quot;ClientsEvents&quot;.&quot;ID&quot; &quot;ID&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;ClientID&quot; &quot;ClientID&quot;&#xD;&#xA;	,&quot;Client&quot;.&quot;Name&quot; &quot;ClientName&quot;&#xD;&#xA;	,&quot;ClientCountry&quot;.&quot;Name&quot; &quot;ClientCountryName&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;EventID&quot; &quot;EventID&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;ClientEventStatusID&quot; &quot;ClientEventStatusID&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;ChangedByUserID&quot; &quot;ChangedByUserID&quot;&#xD;&#xA;	,&quot;ChangedByUser&quot;.&quot;UserName&quot; &quot;ChangedByUserUserName&quot;&#xD;&#xA;	,&quot;Events&quot;.&quot;Name&quot; &quot;EventsName&quot;&#xD;&#xA;	,&quot;ClientEventStatus&quot;.&quot;Name&quot; &quot;ClientEventStatusName&quot;	&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;ChangedOn&quot; &quot;ChangedOn&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;Version&quot; &quot;Version&quot;&#xD;&#xA;from &quot;dbo&quot;.&quot;ClientsEvents&quot; &quot;ClientsEvents&quot;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Clients&quot; &quot;Client&quot; on &quot;ClientsEvents&quot;.&quot;ClientID&quot; = &quot;Client&quot;.&quot;ID&quot;	&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Users&quot; &quot;ChangedByUser&quot; on &quot;ClientsEvents&quot;.&quot;ChangedByUserID&quot; = &quot;ChangedByUser&quot;.&quot;ID&quot;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Events&quot; &quot;Events&quot; on &quot;ClientsEvents&quot;.&quot;EventID&quot; = &quot;Events&quot;.&quot;ID&quot;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;ClientEventStatus&quot; &quot;ClientEventStatus&quot; on &quot;ClientsEvents&quot;.&quot;ClientEventStatusID&quot; = &quot;ClientEventStatus&quot;.&quot;ID&quot;" />
+    </d>
+  </c>
+  <c y="Delete" t="2011-08-08T14:58:24">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ClientChangedByUserUserName" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+  </c>
+  <c y="Delete" t="2011-08-08T14:58:37">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ClientChangedByUserUserName" />
+      <v n="v1" v="Reference Information" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+  </c>
+  <c y="Delete" t="2011-08-08T14:58:41">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ClientChangedByUserUserName" />
+      <v n="v1" v="" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+  </c>
+  <c y="Delete" t="2011-08-08T14:59:16">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ClientCountryName" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+  </c>
+  <c y="Update" t="2011-08-08T14:59:38">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1 and not(parent::*/*[@name=$v2 and ancestor::a:dataController[1]/@name=$v3])]">
+      <v n="v0" v="ChangedByUserUserName" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="ChangedByUserName" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="@name" v="ChangedByUserName" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:00:38">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="ChangedByUserID" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="ChangedByUserName" />
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+    </d>
+  </c>
+  <c y="Insert" t="2011-08-08T15:01:51">
+    <s p="//a:dataController[@name=$Controller]/a:fields" e="//a:field[@name=$v1 and ancestor::a:dataController[1]/@name=$v2]">
+      <v n="Controller" v="ClientsEvents" />
+      <v n="v1" v="EventsName" />
+      <v n="v2" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="@name" v="EventsName" />
+      <f p="@type" v="String" />
+      <f p="@allowNulls" v="false" />
+      <f p="@isPrimaryKey" v="false" />
+      <f p="@computed" v="false" />
+      <f p="@calculated" v="false" />
+      <f p="@onDemand" v="false" />
+      <f p="@label" v="Event Name" />
+      <f p="@readOnly" v="false" />
+      <f p="@showInSummary" v="false" />
+      <f p="@htmlEncode" v="false" />
+      <f p="@formatOnClient" v="true" />
+      <f p="a:items/@searchOnStart" v="false" />
+      <f p="a:items/@autoSelect" v="false" />
+      <f p="@allowQBE" v="false" />
+      <f p="@allowSorting" v="false" />
+      <f p="@allowLEV" v="false" />
+    </d>
+    <t>
+      <field xmlns="urn:schemas-codeontime-com:data-aquarium" />
+    </t>
+  </c>
+  <c y="Update" t="2011-08-08T15:02:49">
+    <s p="//a:command[@id=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="command1" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="a:text" v="select&#xD;&#xA;	&quot;ClientsEvents&quot;.&quot;ID&quot; &quot;ID&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;ClientID&quot; &quot;ClientID&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;EventID&quot; &quot;EventID&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;ClientEventStatusID&quot; &quot;ClientEventStatusID&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;ChangedByUserID&quot; &quot;ChangedByUserID&quot;&#xD;&#xA;	,&quot;ChangedByUser&quot;.&quot;UserName&quot; &quot;ChangedByUserUserName&quot;&#xD;&#xA;	,&quot;Events&quot;.&quot;Name&quot; &quot;EventsName&quot;&#xD;&#xA;	,&quot;ClientEventStatus&quot;.&quot;Name&quot; &quot;ClientEventStatusName&quot;	&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;ChangedOn&quot; &quot;ChangedOn&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;Version&quot; &quot;Version&quot;&#xD;&#xA;from &quot;dbo&quot;.&quot;ClientsEvents&quot; &quot;ClientsEvents&quot;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Users&quot; &quot;ChangedByUser&quot; on &quot;ClientsEvents&quot;.&quot;ChangedByUserID&quot; = &quot;ChangedByUser&quot;.&quot;ID&quot;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Events&quot; &quot;Events&quot; on &quot;ClientsEvents&quot;.&quot;EventID&quot; = &quot;Events&quot;.&quot;ID&quot;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;ClientEventStatus&quot; &quot;ClientEventStatus&quot; on &quot;ClientsEvents&quot;.&quot;ClientEventStatusID&quot; = &quot;ClientEventStatus&quot;.&quot;ID&quot;&#xD;&#xA;" />
+    </d>
+  </c>
+  <c y="Delete" t="2011-08-08T15:02:55">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ClientName" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+  </c>
+  <c y="Update" t="2011-08-08T15:07:41">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="EventID" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="EventsName" />
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+    </d>
+  </c>
+  <c y="Insert" t="2011-08-08T15:09:05">
+    <s p="//a:dataController[@name=$Controller]/a:fields" e="//a:field[@name=$v1 and ancestor::a:dataController[1]/@name=$v2]">
+      <v n="Controller" v="ClientsEvents" />
+      <v n="v1" v="ClientEventStatusName" />
+      <v n="v2" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="@name" v="ClientEventStatusName" />
+      <f p="@type" v="String" />
+      <f p="@allowNulls" v="false" />
+      <f p="@isPrimaryKey" v="false" />
+      <f p="@computed" v="false" />
+      <f p="@calculated" v="false" />
+      <f p="@onDemand" v="false" />
+      <f p="@label" v="Event Status" />
+      <f p="@readOnly" v="false" />
+      <f p="@showInSummary" v="false" />
+      <f p="@htmlEncode" v="false" />
+      <f p="@formatOnClient" v="true" />
+      <f p="a:items/@searchOnStart" v="false" />
+      <f p="a:items/@autoSelect" v="false" />
+      <f p="@allowQBE" v="false" />
+      <f p="@allowSorting" v="false" />
+      <f p="@allowLEV" v="false" />
+    </d>
+    <t>
+      <field xmlns="urn:schemas-codeontime-com:data-aquarium" />
+    </t>
+  </c>
+  <c y="Update" t="2011-08-08T15:09:51">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="ClientEventStatusID" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="ClientEventStatusName" />
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:10:11">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="EventID" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="Clients Events" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="EventsName" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:10:20">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="ClientEventStatusID" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="Clients Events" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="ClientEventStatusName" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:10:54">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="ChangedByUserID" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="Clients Events" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="ChangedByUserName" />
+    </d>
+  </c>
+  <c y="Delete" t="2011-08-08T15:11:03">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ClientCountryName" />
+      <v n="v1" v="Reference Information" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+  </c>
+  <c y="Update" t="2011-08-08T15:11:33">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="EventID" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="New Clients Events" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="EventsName" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:11:42">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="ClientEventStatusID" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="New Clients Events" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="ClientEventStatusName" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:15:21">
+    <s p="//a:command[@id=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="command1" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="a:text" v="select&#xD;&#xA;	&quot;ClientsEvents&quot;.&quot;ID&quot; &quot;ID&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;ClientID&quot; &quot;ClientID&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;EventID&quot; &quot;EventID&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;ClientEventStatusID&quot; &quot;ClientEventStatusID&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;ChangedByUserID&quot; &quot;ChangedByUserID&quot;&#xD;&#xA;	,&quot;ChangedByUser&quot;.&quot;UserName&quot; &quot;ChangedByUserName&quot;&#xD;&#xA;	,&quot;Events&quot;.&quot;Name&quot; &quot;EventsName&quot;&#xD;&#xA;	,&quot;ClientEventStatus&quot;.&quot;Name&quot; &quot;ClientEventStatusName&quot;	&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;ChangedOn&quot; &quot;ChangedOn&quot;&#xD;&#xA;	,&quot;ClientsEvents&quot;.&quot;Version&quot; &quot;Version&quot;&#xD;&#xA;from &quot;dbo&quot;.&quot;ClientsEvents&quot; &quot;ClientsEvents&quot;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Users&quot; &quot;ChangedByUser&quot; on &quot;ClientsEvents&quot;.&quot;ChangedByUserID&quot; = &quot;ChangedByUser&quot;.&quot;ID&quot;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;Events&quot; &quot;Events&quot; on &quot;ClientsEvents&quot;.&quot;EventID&quot; = &quot;Events&quot;.&quot;ID&quot;&#xD;&#xA;	left join &quot;dbo&quot;.&quot;ClientEventStatus&quot; &quot;ClientEventStatus&quot; on &quot;ClientsEvents&quot;.&quot;ClientEventStatusID&quot; = &quot;ClientEventStatus&quot;.&quot;ID&quot;&#xD;&#xA;" />
+    </d>
+  </c>
+  <c y="Delete" t="2011-08-08T15:15:56">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ClientCountryName" />
+      <v n="v1" v="" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+  </c>
+  <c y="Update" t="2011-08-08T15:16:36">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="ChangedByUserID" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="New Clients Events" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="ChangedByUserName" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:23:27">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="EventID" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="a:items/@style" v="Lookup" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:24:16">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ClientEventStatusID" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="a:items/@style" v="Lookup" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:25:04">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="EventID" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="New Clients Events" />
+    </s>
+    <d>
+      <f p="@formatOnClient" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:25:35">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="ClientEventStatusID" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="New Clients Events" />
+    </s>
+    <d>
+      <f p="@formatOnClient" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:25:55">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="EventID" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="New Clients Events" />
+    </s>
+    <d>
+      <f p="@formatOnClient" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:26:04">
+    <s p="//a:dataField[@fieldName=$v0 and ancestor::a:dataController[1]/@name=$v1 and ancestor::a:view[1]/@id=$v2 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v3)]">
+      <v n="v0" v="ClientEventStatusID" />
+      <v n="v1" v="ClientsEvents" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="New Clients Events" />
+    </s>
+    <d>
+      <f p="@formatOnClient" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:54:08">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="EventID" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="a:items/@dataController" v="Events" />
+      <f p="a:items/@dataValueField" v="ID" />
+      <f p="a:items/@dataTextField" v="Name" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:54:37">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ClientEventStatusID" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="a:items/@dataController" v="ClientEventStatus" />
+      <f p="a:items/@dataValueField" v="ID" />
+      <f p="a:items/@dataTextField" v="Name" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T15:55:10">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ChangedByUserID" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="a:items/@dataValueField" v="ID" />
+      <f p="a:items/@dataTextField" v="UserName" />
+    </d>
+  </c>
+  <c y="Delete" t="2011-08-08T16:11:11">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ClientID" />
+      <v n="v1" v="" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+  </c>
+  <c y="Update" t="2011-08-08T16:12:07">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ClientID" />
+      <v n="v1" v="New Clients Events" />
+      <v n="v2" v="createForm1" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T16:12:18">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="ClientID" />
+      <v n="v1" v="Clients Events" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="@aliasFieldName" v="" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T16:21:07">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="ClientEventStatusName" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T16:21:13">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="EventsName" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="@readOnly" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T16:21:37">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="Version" />
+      <v n="v1" v="" />
+      <v n="v2" v="grid1" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="parent::a:dataFields/parent::a:category/@headerText" v="" />
+      <f p="@hidden" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T16:21:44">
+    <s p="//a:dataField[@fieldName=$v0 and (not(parent::a:dataFields/parent::a:category/@headerText) or parent::a:dataFields/parent::a:category/@headerText=$v1) and ancestor::a:view[1]/@id=$v2 and ancestor::a:dataController[1]/@name=$v3]">
+      <v n="v0" v="Version" />
+      <v n="v1" v="Clients Events" />
+      <v n="v2" v="editForm1" />
+      <v n="v3" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="@hidden" v="true" />
+    </d>
+  </c>
+  <c y="Update" t="2011-08-08T16:29:05">
+    <s p="//a:field[@name=$v0 and ancestor::a:dataController[1]/@name=$v1]">
+      <v n="v0" v="EventID" />
+      <v n="v1" v="ClientsEvents" />
+    </s>
+    <d>
+      <f p="a:items/@newDataView" v="editForm1" />
+    </d>
+  </c>
+</log>

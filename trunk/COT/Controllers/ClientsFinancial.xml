@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="ClientsFinancial" conflictDetection="overwriteChanges" label="Clients Financial" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"ClientsFinancial"."ClientID" "ClientID"
+	,"Client"."Name" "ClientName"
+	,"ClientCountry"."Name" "ClientCountryName"
+	,"ClientChangedByUser"."UserName" "ClientChangedByUserUserName"
+	,"ClientsFinancial"."CompanyRegistration" "CompanyRegistration"
+	,"ClientsFinancial"."VATNumber" "VATNumber"
+	,"ClientsFinancial"."ParentCompanyName" "ParentCompanyName"
+	,"ClientsFinancial"."BankName" "BankName"
+	,"ClientsFinancial"."BankAddress" "BankAddress"
+	,"ClientsFinancial"."SortCode" "SortCode"
+	,"ClientsFinancial"."AccountNumber" "AccountNumber"
+	,"ClientsFinancial"."AC" "AC"
+	,"ClientsFinancial"."Balance" "Balance"
+	,"ClientsFinancial"."CreditLimit" "CreditLimit"
+	,"ClientsFinancial"."ChangedByUserID" "ChangedByUserID"
+	,"ChangedByUser"."UserName" "ChangedByUserUserName"
+	,"ClientsFinancial"."ChangedOn" "ChangedOn"
+	,"ClientsFinancial"."Version" "Version"
+from "dbo"."ClientsFinancial" "ClientsFinancial"
+	left join "dbo"."Clients" "Client" on "ClientsFinancial"."ClientID" = "Client"."ID"
+	left join "dbo"."Countries" "ClientCountry" on "Client"."CountryID" = "ClientCountry"."ID"
+	left join "dbo"."Users" "ClientChangedByUser" on "Client"."ChangedByUserID" = "ClientChangedByUser"."ID"
+	left join "dbo"."Users" "ChangedByUser" on "ClientsFinancial"."ChangedByUserID" = "ChangedByUser"."ID"
+]]></text>
+    </command>
+  </commands>
+  <fields>
+    <field name="ClientID" type="Int32" allowNulls="false" isPrimaryKey="true" label="Client#" showInSummary="true">
+      <items style="Lookup" dataController="Clients" newDataView="createForm1" />
+    </field>
+    <field name="ClientName" type="String" readOnly="true" label="Client Name" />
+    <field name="ClientCountryName" type="String" readOnly="true" label="Client Country Name" />
+    <field name="ClientChangedByUserUserName" type="String" readOnly="true" label="Client Changed By User Name" />
+    <field name="CompanyRegistration" type="String" label="Company Registration" showInSummary="true" />
+    <field name="VATNumber" type="String" label="VAT Number" showInSummary="true" />
+    <field name="ParentCompanyName" type="String" label="Parent Company Name" showInSummary="true" />
+    <field name="BankName" type="String" label="Bank Name" showInSummary="true" />
+    <field name="BankAddress" type="String" label="Bank Address" />
+    <field name="SortCode" type="String" label="Sort Code" />
+    <field name="AccountNumber" type="String" label="Account Number" />
+    <field name="AC" type="String" label="Ac" />
+    <field name="Balance" type="Decimal" label="Balance" />
+    <field name="CreditLimit" type="Decimal" label="Credit Limit" />
+    <field name="ChangedByUserID" type="Int32" label="Changed By User#">
+      <items style="Lookup" dataController="Users" newDataView="createForm1" />
+    </field>
+    <field name="ChangedByUserUserName" type="String" readOnly="true" label="Changed By User Name" />
+    <field name="ChangedOn" type="DateTime" allowNulls="false" default="(getdate())" label="Changed On" />
+    <field name="Version" type="Byte[]" allowNulls="false" label="Version" readOnly="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Clients Financial">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="ClientID" aliasFieldName="ClientName" />
+        <dataField fieldName="CompanyRegistration" />
+        <dataField fieldName="VATNumber" columns="30" />
+        <dataField fieldName="ParentCompanyName" />
+        <dataField fieldName="BankName" columns="50" />
+        <dataField fieldName="BankAddress" />
+        <dataField fieldName="SortCode" columns="50" />
+        <dataField fieldName="AccountNumber" columns="50" />
+        <dataField fieldName="AC" columns="8" />
+        <dataField fieldName="Balance" dataFormatString="c" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Clients Financial">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category headerText="Clients Financial" newColumn="true">
+          <description>$DefaultEditDescription</description>
+          <dataFields>
+            <dataField fieldName="ClientID" aliasFieldName="ClientName" />
+            <dataField fieldName="CompanyRegistration" />
+            <dataField fieldName="VATNumber" columns="30" />
+            <dataField fieldName="ParentCompanyName" />
+            <dataField fieldName="BankName" columns="50" />
+            <dataField fieldName="BankAddress" />
+            <dataField fieldName="SortCode" columns="50" />
+            <dataField fieldName="AccountNumber" columns="50" />
+            <dataField fieldName="AC" columns="8" />
+            <dataField fieldName="Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="CreditLimit" dataFormatString="c" columns="15" />
+            <dataField fieldName="ChangedByUserID" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn" columns="10" />
+            <dataField fieldName="Version" columns="15" />
+          </dataFields>
+        </category>
+        <category headerText="Reference Information">
+          <description>$DefaultReferenceDescription</description>
+          <dataFields>
+            <dataField fieldName="ClientCountryName" />
+            <dataField fieldName="ClientChangedByUserUserName" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Clients Financial">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category headerText="New Clients Financial" newColumn="true">
+          <description>$DefaultNewDescription</description>
+          <dataFields>
+            <dataField fieldName="ClientID" aliasFieldName="ClientName" />
+            <dataField fieldName="CompanyRegistration" />
+            <dataField fieldName="VATNumber" columns="30" />
+            <dataField fieldName="ParentCompanyName" />
+            <dataField fieldName="BankName" columns="50" />
+            <dataField fieldName="BankAddress" />
+            <dataField fieldName="SortCode" columns="50" />
+            <dataField fieldName="AccountNumber" columns="50" />
+            <dataField fieldName="AC" columns="8" />
+            <dataField fieldName="Balance" dataFormatString="c" columns="15" />
+            <dataField fieldName="CreditLimit" dataFormatString="c" columns="15" />
+            <dataField fieldName="ChangedByUserID" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
+      <action id="a8" commandName="New" commandArgument="grid1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
+      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenKeySelected="true" whenClientScript="this.get_hasDetails()" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+</dataController>
