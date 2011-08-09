@@ -120,4 +120,20 @@ public class ConfigReader
             }
         }
     }
+
+    public static String CatelogName
+    {
+        get
+        {
+            return GetAppSettings("CatelogName");
+        }
+    }
+
+    public static String CatelogLocation
+    {
+        get
+        {
+            return GetAppSettings("CatelogLocation");
+        }
+    }
 }

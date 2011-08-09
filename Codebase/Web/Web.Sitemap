@@ -60,5 +60,8 @@
       <siteMapNode title="Type Wise Monthly Enquery Details" description="Type Wise Monthly Enquery Details" url="~/Reports/TypeWiseMOnthlyEnqueryDetails.aspx" roles="*" />
       
     </siteMapNode>
+
+    <siteMapNode title="Change Password" description="Change Password" url="~/Pages/ChangePassword.aspx" roles="*">
+    </siteMapNode>
   </siteMapNode>
 </siteMap>
