@@ -28,7 +28,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td>Select File:   
                     <asp:FileUpload ID="fileUploadCV" runat="server" />
                     <asp:Button ID="btnUpload" runat="server" Text="Upload" ValidationGroup="SaveInfo"
                         OnClick="btnUpload_onclick" />
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td>
-                    <asp:GridView ID="grdUploadedDocument" runat="server">
+                    <asp:GridView ID="grdUploadedDocument" runat="server" GridLines="None"  CssClass="GridView">
                     </asp:GridView>
                 </td>
             </tr>
