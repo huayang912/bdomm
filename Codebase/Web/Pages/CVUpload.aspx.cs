@@ -42,7 +42,10 @@ public partial class Pages_CVUpload : BasePage
     public void loadUploadedDoc(int contactID)
     {
         OMMDataContext context = new OMMDataContext();
-        IList<ContactCV> contactCV = (from P in context.ContactCVs where P.ContactID == contactID select P).ToList();
+        IList<ContactCV> contactCV = (from P 
+                                          in context.ContactCVs 
+                                      where P.ContactID == contactID 
+                                      select P).ToList();
         
 
         //OMMDataContext context = new OMMDataContext();
