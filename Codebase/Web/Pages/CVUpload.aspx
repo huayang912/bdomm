@@ -40,6 +40,30 @@
                     </asp:GridView>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <asp:GridView ID="grdsearch" runat="server" AutoGenerateColumns="False"  GridLines="None"  CssClass="GridView">
+                        <Columns>
+                            <asp:BoundField HeaderText="File Name" DataField="FileName" />
+                            <asp:BoundField HeaderText="Created On" DataField="ChangedOn" />
+                            <%-- <asp:TemplateField HeaderText="File Location">
+                                <ItemTemplate>
+                                    <a href='<%#Eval("PATH")%>'>Resume</a>
+                                    '<%# Eval("PATH").ToString().Replace("d:\\project\\ommm\\smssendingdummy\\codebase\\web\\uploadedcv\\", "http://omm.local.com//uploadedcv//") %>'
+                                </ItemTemplate>
+                            </asp:TemplateField>--%>
+                            <asp:TemplateField HeaderText="..">
+                                <ItemTemplate>
+                                    <%-- <a href='<%#Eval("PATH")%>'>Resume</a>--%>
+                                    <a href='http://omm.local.com//uploadedcv//<%# Eval("ID").ToString()%>_<%# Eval("FileName").ToString()%>'>
+                                        Download</a>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </td>
+            </tr>
+            
         </table>
     </div>
     

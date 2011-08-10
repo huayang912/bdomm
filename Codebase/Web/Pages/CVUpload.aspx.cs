@@ -59,10 +59,10 @@ public partial class Pages_CVUpload : BasePage
         }
         else
         {
-            
 
-            grdUploadedDocument.DataSource = contactCV;
-            grdUploadedDocument.DataBind();
+
+            grdsearch.DataSource = contactCV;
+            grdsearch.DataBind();
         }
     }
 
