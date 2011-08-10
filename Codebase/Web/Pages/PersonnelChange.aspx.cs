@@ -26,6 +26,7 @@ public partial class Pages_PersonnelChange : BasePage
         if (_ID > 0)
             ltrHeading.Text = "Edit Personnel";
         Page.Title = WebUtil.GetPageTitle(ltrHeading.Text);
+        lblStep1Title.Text = ltrHeading.Text;
     }
     protected void BindDropdownLists()
     {
