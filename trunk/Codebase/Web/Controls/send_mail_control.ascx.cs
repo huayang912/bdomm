@@ -61,7 +61,7 @@ public partial class Controls_send_mail_control : System.Web.UI.UserControl
         smtpClient.Port = 587;
         smtpClient.EnableSsl = true;
         smtpClient.UseDefaultCredentials = true;
-        smtpClient.Credentials = new System.Net.NetworkCredential("username", "password");
+        smtpClient.Credentials = new System.Net.NetworkCredential("quickezine@gmail.com", "casinova");
 
 			
 			
@@ -90,7 +90,7 @@ public partial class Controls_send_mail_control : System.Web.UI.UserControl
 
             // Message body content
 			
-            message.Body = "From:" + "  - " + txtMessage.Text;
+            message.Body = "From:" +  SessionCache.CurrentUser.UserNameWeb  + "  " + txtMessage.Text;
          
             // Send SMTP mail
             smtpClient.Send(message);
