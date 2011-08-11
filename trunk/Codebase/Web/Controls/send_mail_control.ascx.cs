@@ -61,7 +61,7 @@ public partial class Controls_send_mail_control : System.Web.UI.UserControl
         smtpClient.Port = 587;
         smtpClient.EnableSsl = true;
         smtpClient.UseDefaultCredentials = true;
-        smtpClient.Credentials = new System.Net.NetworkCredential("quickezine@gmail.com", "casinova");
+        smtpClient.Credentials = new System.Net.NetworkCredential("gmail username", "gmailpass");
 
 			
 			
