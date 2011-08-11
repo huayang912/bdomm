@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 
 
-public partial class send_mail : System.Web.UI.Page
+public partial class send_mail : BasePage
 {
     
     public string CssClass
