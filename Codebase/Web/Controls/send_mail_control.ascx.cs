@@ -19,7 +19,7 @@ using System.Web.UI.WebControls.WebParts;
 using BUDI2_NS.Data;
 
 using System.Collections.Generic;
-
+using App.Core.Extensions;
 
 public partial class Controls_send_mail_control : System.Web.UI.UserControl
 {
@@ -33,73 +33,79 @@ public partial class Controls_send_mail_control : System.Web.UI.UserControl
 		    #region  "Send email"
     protected void btnSendmail_Click(object sender, EventArgs e)
     {
-        // System.Web.Mail.SmtpMail.SmtpServer is obsolete in 2.0
-        // System.Net.Mail.SmtpClient is the alternate class for this in 2.0
-		
-       SmtpClient smtpClient = new SmtpClient();
-		
-        MailMessage message = new MailMessage();
-
         try
         {
-		
-	
-          MailAddress fromAddress = new MailAddress(txtEmail.Text, txtName.Text);
+            String messageBody = String.Format(@"From: {0},<br/>{1}"
+                , SessionCache.CurrentUser.UserName
+                , txtMessage.Text.HtmlEncode());
 
-            // You can specify the host name or ipaddress of your server
-            // Default in IIS will be localhost 
-			
-			/*
-            smtpClient.Host = "localhost";
+            WebUtil.SendEmailThroughGmail(txtEmail.Text, "BUDI - Feedback", messageBody);
 
-            //Default port will be 25
-            smtpClient.Port = 25;
-			*/
-			
-			
-			   smtpClient.Host = "smtp.gmail.com";   // We use gmail as our smtp client
-        smtpClient.Port = 587;
-        smtpClient.EnableSsl = true;
-        smtpClient.UseDefaultCredentials = true;
-        smtpClient.Credentials = new System.Net.NetworkCredential("gmail username", "gmailpass");
+            #region Old Code
+            // System.Web.Mail.SmtpMail.SmtpServer is obsolete in 2.0
+            // System.Net.Mail.SmtpClient is the alternate class for this in 2.0
 
-			
-			
-			
+            //  SmtpClient smtpClient = new SmtpClient();
 
-            //From address will be given as a MailAddress Object
-            message.From = fromAddress;
+            //   MailMessage message = new MailMessage();
 
-            // To address collection of MailAddress
-            message.To.Add("momin@emrex.com");
-            message.Subject = "BUDI - Feedback";
+            //   try
+            //   {
 
-            // CC and BCC optional
-            // MailAddressCollection class is used to send the email to various users
-            // You can specify Address as new MailAddress("admin1@yoursite.com")
-       //     message.CC.Add("admin1@yoursite.com");
-       //    message.CC.Add("admin2@yoursite.com");
 
-            // You can specify Address directly as string
-     //     message.Bcc.Add(new MailAddress("admin3@yoursite.com"));
-     //    message.Bcc.Add(new MailAddress("admin4@yoursite.com"));
+            //     MailAddress fromAddress = new MailAddress(txtEmail.Text, txtName.Text);
 
-            //Body can be Html or text format
-            //Specify true if it  is html message
-            message.IsBodyHtml = false;
+            //       // You can specify the host name or ipaddress of your server
+            //       // Default in IIS will be localhost 
 
-            // Message body content
-			
-            message.Body = "From:" +  SessionCache.CurrentUser.UserNameWeb  + "  " + txtMessage.Text;
-         
-            // Send SMTP mail
-            smtpClient.Send(message);
+            //       /*
+            //       smtpClient.Host = "localhost";
+
+            //       //Default port will be 25
+            //       smtpClient.Port = 25;
+            //       */
+
+
+            //          smtpClient.Host = "smtp.gmail.com";   // We use gmail as our smtp client
+            //   smtpClient.Port = 587;
+            //   smtpClient.EnableSsl = true;
+            //   smtpClient.UseDefaultCredentials = true;
+            //   smtpClient.Credentials = new System.Net.NetworkCredential("gmail username", "gmailpass");
+
+
+
+
+
+            //       //From address will be given as a MailAddress Object
+            //       message.From = fromAddress;
+
+            //       // To address collection of MailAddress
+            //       message.To.Add("momin@emrex.com");
+            //       message.Subject = "BUDI - Feedback";
+
+            //       // CC and BCC optional
+            //       // MailAddressCollection class is used to send the email to various users
+            //       // You can specify Address as new MailAddress("admin1@yoursite.com")
+            //  //     message.CC.Add("admin1@yoursite.com");
+            //  //    message.CC.Add("admin2@yoursite.com");
+
+            //       // You can specify Address directly as string
+            ////     message.Bcc.Add(new MailAddress("admin3@yoursite.com"));
+            ////    message.Bcc.Add(new MailAddress("admin4@yoursite.com"));
+
+            //       //Body can be Html or text format
+            //       //Specify true if it  is html message
+            //       message.IsBodyHtml = false;
+
+            //       // Message body content
+
+            //       message.Body = "From:" +  SessionCache.CurrentUser.UserNameWeb  + "  " + txtMessage.Text;
+
+            //       // Send SMTP mail
+            //       smtpClient.Send(message);
+            #endregion
 
             lblStatus.Text = "Email successfully sent.";
-			
-			
-			
-			
         }
         catch (Exception ex)
         {
