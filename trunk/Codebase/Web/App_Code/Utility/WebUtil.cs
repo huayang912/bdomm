@@ -403,5 +403,35 @@ public class WebUtil
         }
         return false;
     }
+
+    public static bool SendEmailThroughGmail(String toEmail, String subject, String body)
+    {
+        var fromAddress = new MailAddress("btcrealestate@gmail.com"
+                                        , "OMM");
+        var toAddress = new MailAddress(toEmail, String.Empty);
+        String fromPassword = "NoPassword";
+        //String subject = "Subject";
+        //const string body = "Body";
+
+        SmtpClient smtp = new SmtpClient
+        {
+            Host = "smtp.gmail.com",
+            Port = 587,
+            EnableSsl = true,
+            DeliveryMethod = SmtpDeliveryMethod.Network,
+            UseDefaultCredentials = false,
+            Credentials = new System.Net.NetworkCredential(fromAddress.Address, fromPassword)
+        };
+        using (var message = new MailMessage(fromAddress, toAddress)
+        {
+            IsBodyHtml = true,
+            Subject = subject,
+            Body = body
+        })
+        {
+            smtp.Send(message);
+        }
+        return true;
+    }
     #endregion Email helper
 }
