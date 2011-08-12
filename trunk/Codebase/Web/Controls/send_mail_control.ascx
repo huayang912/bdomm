@@ -11,12 +11,12 @@
       </div>
       <table align=center>
 				<tr>
-					<td><strong>Your Name:</strong></td>
-					<td><asp:textbox id="txtName" Width="241" Runat="server"></asp:textbox></td>
+					<td></td>
+					<td><asp:textbox style="display:none" id="txtName" Width="241" Runat="server"></asp:textbox></td>
 				</tr>
 				<tr>
 					<td><strong>Your Email Address</strong>:</td>
-					<td><asp:textbox id="txtEmail" Width="241" Runat="server"></asp:textbox></td>
+					<td><asp:textbox  id="txtEmail" Width="241" Runat="server"></asp:textbox></td>
 				</tr>
 				<tr>
 					<td colSpan="2" ><strong>Your Comments:</strong></td>
