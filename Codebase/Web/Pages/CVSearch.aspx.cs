@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Net;
+using System.IO;
 
 
 
@@ -23,15 +24,28 @@ public partial class Pages_CVSearch : BasePage
     protected void Page_Load(object sender, EventArgs e)
     {
     }
-
+    protected String GetRelativeDownloadUrl(String path)
+    {
+        if(rdbPersonnelCV.Checked)
+            return String.Format("{0}/{1}", AppConstants.PERSONNEL_CV_DIRECTORY, Path.GetFileName(path));
+        else
+            return String.Format("{0}/{1}", ConfigReader.CVBankDirectory  , Path.GetFileName(path));
+    }
     protected void Button1_Click(object sender, EventArgs e)
     {
+        grdsearch.DataSource = null;
+        grdsearch.DataBind();
+        
+
         //Dim strCatalog As String
         string strCatalog;
 
         //' Catalog Name
         //strCatalog = "TestCatalog"
-        strCatalog = ConfigReader.CatelogName.ToString();
+        if(rdbPersonnelCV.Checked)
+            strCatalog = ConfigReader.PersonnelCatelogName.ToString();
+        else
+            strCatalog = ConfigReader.CVBankCatelogName.ToString();
 
         //Dim strQuery As String
         string strQuery;
@@ -61,7 +75,6 @@ public partial class Pages_CVSearch : BasePage
 
         //GridView1.DataSource = testDataSet.Tables[0];
         //GridView1.DataBind();
-
 
         grdsearch.DataSource = testDataSet.Tables[0];
         grdsearch.DataBind();
