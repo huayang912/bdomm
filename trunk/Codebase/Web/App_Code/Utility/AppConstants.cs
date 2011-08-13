@@ -21,6 +21,8 @@ public class AppConstants
     public const String CONFIRMATION_MSG_CUSTOM_ATTR = "ConfirmationMessage";
     public const String TEMP_DIRECTORY = "/Temp";
     public const String ENQUIRY_ATTACHMENTS = "/EnquiryAttachments";
+    public const String PERSONNEL_CV_DIRECTORY = "/UploadedCV";
+    
 
     #region Pages
     public class Pages

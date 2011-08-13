@@ -121,19 +121,27 @@ public class ConfigReader
         }
     }
 
-    public static String CatelogName
+    public static String PersonnelCatelogName
     {
         get
         {
-            return GetAppSettings("CatelogName");
+            return GetAppSettings("PersonnelCatelogName");
         }
     }
 
-    public static String CatelogLocation
+    public static String CVBankCatelogName
     {
         get
         {
-            return GetAppSettings("CatelogLocation");
+            return GetAppSettings("CVBankCatelogName");
+        }
+    }
+
+    public static String CVBankDirectory
+    {
+        get
+        {
+            return GetAppSettings("CVBankDirectory");
         }
     }
 }
