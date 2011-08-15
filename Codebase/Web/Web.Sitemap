@@ -10,7 +10,7 @@
       </siteMapNode>
     <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelView.aspx" roles="*">
 	  <siteMapNode title="Show Personnel" description="Personnel List" url="~/Pages/PersonnelViewRedirect.aspx" roles="*" />
-            <siteMapNode title="CV" description="Personnel CV" url="~/Pages/CVNew.aspx" roles="*" />
+            <siteMapNode title="CV Search" description="Personnel CV" url="~/Pages/CVSearch.aspx" roles="*" />
 
 
     </siteMapNode>
@@ -61,7 +61,7 @@
       
     </siteMapNode>
 
-    <siteMapNode title="Change Password" description="Change Password" url="~/Pages/ChangePassword.aspx" roles="*">
-    </siteMapNode>
+ <siteMapNode title="Support" description="Support" url="~/pages/send_mail.aspx" roles="*"/>
+
   </siteMapNode>
 </siteMap>
