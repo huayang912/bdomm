@@ -14,17 +14,18 @@
                         Status:
                        
                         
-                        <asp:DropDownList style="display:none" ID="StatusList" runat="server">
-                        <asp:ListItem>All</asp:ListItem>                        
-                        <asp:ListItem>Outstanding</asp:ListItem>                      
+                        <asp:DropDownList ID="StatusList" runat="server">
+                        <asp:ListItem>All</asp:ListItem>                      
+                           
                          <asp:ListItem>Closed</asp:ListItem>
+						    <asp:ListItem>Quoted</asp:ListItem>
                         </asp:DropDownList>                  </td>
                   <td>
               
-                        <asp:Button style="display:none"  ID="SearchButton" runat="server" Text="Search" 
+                        <asp:Button ID="SearchButton" runat="server" Text="Search" 
                             onclick="SearchButton_Click" />                  </td>
                 </tr>
-            </table></td><td><a href="/pages/EnquirySch_archive.aspx">Archive</a></td>
+            </table></td>
     <td align="right"><table>
                 <tr>
                 
@@ -75,4 +76,4 @@
 <div id="EnquiryList" runat="server">
 </div>
 <aquarium:DataViewExtender ID="EnquiryListExtender" runat="server" TargetControlID="EnquiryList"
-    Controller="Enquiries" ShowDescription="false" ShowQuickFind="true"  ShowViewSelector="false"  PageSize="25"  />
+    Controller="Enquiries_archive" ShowDescription="false" ShowQuickFind="true"  ShowViewSelector="false"  PageSize="25"  />
