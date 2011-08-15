@@ -114,16 +114,7 @@
                                     </div>
                                 </ContentTemplate>
                             </act:TabPanel>
-			
-			                <act:TabPanel ID="CVTab" runat="server" HeaderText="Personnel CV">
-                                <ContentTemplate>
-                                    <div id="view91" runat="server"></div>
-                                    <aquarium:DataViewExtender id="view91Extender" runat="server" 
-                                        TargetControlID="view91" Controller="CVs_m" 
-                                        view="grid1" FilterSource="view1Extender" FilterFields="ContactID"
-                                        ShowViewSelector="false" PageSize="5"  />
-                                </ContentTemplate>
-                            </act:TabPanel>
+						              
 							
 							  <act:TabPanel ID="PlacementTab" runat="server" HeaderText="Placement History">
                                 <ContentTemplate>
