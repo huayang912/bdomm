@@ -388,7 +388,7 @@ from "dbo"."Contacts" "Contacts"
       <action id="a1" commandName="Edit" commandArgument="createForm1" whenLastCommandArgument="Select" whenKeySelected="true" />
     </actionGroup>
 	
-	  <actionGroup id="ag400" scope="ActionBar" headerText="CV" flat="true">
+	  <actionGroup id="ag400" scope="ActionBar" headerText="Personnel CV" flat="true">
 	        <action id="a1" whenKeySelected="true" commandName="Navigate" commandArgument="_Blank:~/pages/CVUpload.aspx?ID={ID}" headerText="CV"   />
     </actionGroup>
     
