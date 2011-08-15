@@ -1,20 +1,44 @@
 <%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="CVSearch.aspx.cs" 
 Inherits="Pages_CVSearch"  Title="Personnel CV"%>
 <%@ Register Src="~/Controls/cv_usr_control.ascx" TagName="cv_usr_control"  TagPrefix="uc"%>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="PageHeaderContentPlaceHolder" runat="Server">CV Search</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
+    <script language="javascript" type="text/javascript">
+        function ValidateKeyword(sender, args) {
+            if (args.Value.length > 1)
+                args.IsValid = true;
+            else
+                args.IsValid = false;
+        }
+    </script>
     <div class="WinGroupBox">
-        <div class="WinGroupBoxHeader">
-            Search Options</div>
-        Keyword
-        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-        <asp:RadioButton ID="rdbPersonnelCV" runat="server" Text="Personnel CV" GroupName="SearchType"
-            Checked="true" />
-        <!--<asp:RadioButton ID="rdbCVBank" runat="server" Text="CV Bank" GroupName="SearchType" /> -->
-        <asp:Button ID="Button1" runat="server" Text="Search" OnClick="Button1_Click" />
+        <div class="WinGroupBoxHeader">Search Options</div>
+        <div>
+            Keyword &nbsp;
+            <asp:TextBox ID="txtKeyword" MaxLength="50" runat="server"></asp:TextBox>
+            <asp:RadioButton ID="rdbPersonnelCV" runat="server" Text="Personnel CV" GroupName="SearchType" Checked="true" />
+            <!--<asp:RadioButton ID="rdbCVBank" runat="server" Text="CV Bank" GroupName="SearchType" /> -->
+            <asp:Button ID="btnSearch" runat="server" Text="Search" ValidationGroup="Search" OnClick="btnSearch_Click" />
+        </div>
+        <div>
+            <asp:RequiredFieldValidator ID="rfvSearch" runat="server"
+                SetFocusOnError="true" Display="Dynamic"
+                ControlToValidate="txtKeyword"
+                ErrorMessage="Please enter a Keyword to Search."
+                ValidationGroup="Search">
+            </asp:RequiredFieldValidator>
+            <asp:CustomValidator ID="RequiredFieldValidator1" runat="server"
+                SetFocusOnError="true" Display="Dynamic"
+                ControlToValidate="txtKeyword" ClientValidationFunction="ValidateKeyword"
+                ErrorMessage="Please enter More than One Letter as Keyword."
+                ValidationGroup="Search">
+            </asp:CustomValidator>
+        </div>
     </div>
   
     <div class="WinGroupBox">
+        <div class="WinGroupBoxHeader">Search Result</div>
         <asp:GridView ID="grdsearch" runat="server" GridLines="None" AutoGenerateColumns="False"
             CssClass="GridView">
             <Columns>
