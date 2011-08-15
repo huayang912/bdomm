@@ -27,7 +27,7 @@
                 </tr>
             </table></td>
     <td align="right"><table>
-                <tr><td><a href="/pages/quotations_unsuccess.aspx">Archived</a></td>
+                <tr><td><a href="quotations_unsuccess.aspx">Archived</a></td>
 				<td></td>
                 
                     <td>
