@@ -61,7 +61,15 @@ namespace App.Core.Extensions
         {
             return string.Format(CultureInfo.CurrentCulture, formatString, objects);
         }
-        
+        /// <summary>
+        /// Creates a SQL Safe Data String
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static String ToSqlSafeData(this String str)
+        {
+            return str.Replace("'", "''");
+        }
         /// <summary>
         /// Promoted from PObjectFieldMetadata
         /// </summary>
