@@ -55,7 +55,7 @@
                             <asp:TemplateField HeaderText="..">
                                 <ItemTemplate>
                                     <%-- <a href='<%#Eval("PATH")%>'>Resume</a>--%>
-                                    <a href='http://omm.local.com//uploadedcv//<%# Eval("ID").ToString()%>_<%# Eval("FileName").ToString()%>'>
+                                    <a href='/uploadedcv/<%# Eval("ID").ToString()%>_<%# Eval("FileName").ToString()%>'>
                                         Download</a>
                                 </ItemTemplate>
                             </asp:TemplateField>
