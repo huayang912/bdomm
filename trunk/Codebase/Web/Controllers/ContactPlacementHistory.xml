@@ -41,7 +41,7 @@ left join "dbo"."ClientContacts" "Contact" on "Enquiry"."ContactID" = "Contact".
       <items style="Lookup" dataController="Enquiries" dataValueField="ID" dataTextField="Number" />
     </field>
     <field name="ContactPlacementStatusID" type="Int32" allowNulls="false" label="Status" showInSummary="true">
-      <items style="Lookup" dataController="ContactPlacementStatusTypes" dataValueField="ID" dataTextField="Name" />
+      <items style="Lookup" dataController="ContactPlacementStatusTypes" dataValueField="ID" dataTextField="Name" newDataView="createForm1" />
     </field>
     <field name="Notes" type="String" allowQBE="false" allowSorting="false" label="Notes" showInSummary="true" />
     <field name="ChangedByUserID" type="Int32" label="Changed By User#" showInSummary="true">
