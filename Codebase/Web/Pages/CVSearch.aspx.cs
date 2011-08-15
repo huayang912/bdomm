@@ -7,22 +7,17 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Net;
 using System.IO;
-
-
+using App.Core.Extensions;
 
 public partial class Pages_CVSearch : BasePage
-{
-    
-    public string CssClass
-    {
-        get
-        {
-            return "";
-        }
-    }
-    
+{            
     protected void Page_Load(object sender, EventArgs e)
     {
+        BindPageInfo();
+    }
+    protected void BindPageInfo()
+    {
+        Page.Title = WebUtil.GetPageTitle("CV Search");
     }
     protected String GetRelativeDownloadUrl(String path)
     {
@@ -31,18 +26,18 @@ public partial class Pages_CVSearch : BasePage
         else
             return String.Format("{0}/{1}", ConfigReader.CVBankDirectory  , Path.GetFileName(path));
     }
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void SearchCV()
     {
         grdsearch.DataSource = null;
         grdsearch.DataBind();
-        
+
 
         //Dim strCatalog As String
         string strCatalog;
 
         //' Catalog Name
         //strCatalog = "TestCatalog"
-        if(rdbPersonnelCV.Checked)
+        if (rdbPersonnelCV.Checked)
             strCatalog = ConfigReader.PersonnelCatelogName.ToString();
         else
             strCatalog = ConfigReader.CVBankCatelogName.ToString();
@@ -50,7 +45,7 @@ public partial class Pages_CVSearch : BasePage
         //Dim strQuery As String
         string strQuery;
         //strQuery = "Select DocTitle,Filename,Size,PATH,URL from SCOPE() where FREETEXT('" & TextBox1.Text & "')"
-        strQuery = "Select DocTitle,Filename,Size,PATH,URL from SCOPE() where FREETEXT('" + TextBox1.Text + "')";
+        strQuery = "Select DocTitle, Filename, Size, PATH, URL from SCOPE() WHERE FREETEXT('" + txtKeyword.Text.ToSqlSafeData() + "')";
         //' TextBox1.Text is word that you type in the text box to query by using Index Service.
         //'
         //Dim connString As String = "Provider=MSIDXS.1;Integrated Security .='';Data Source='" & strCatalog & "'"
@@ -78,6 +73,13 @@ public partial class Pages_CVSearch : BasePage
 
         grdsearch.DataSource = testDataSet.Tables[0];
         grdsearch.DataBind();
+    }
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        if (Page.IsValid)
+        {
+            SearchCV();
+        }        
     }
 
 
