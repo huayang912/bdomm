@@ -24,7 +24,7 @@
                         <asp:Button style="display:none"  ID="SearchButton" runat="server" Text="Search" 
                             onclick="SearchButton_Click" />                  </td>
                 </tr>
-            </table></td><td><a href="/pages/EnquirySch_archive.aspx">Archive</a></td>
+            </table></td><td><a href="EnquirySch_archive.aspx">Archive</a></td>
     <td align="right"><table>
                 <tr>
                 
