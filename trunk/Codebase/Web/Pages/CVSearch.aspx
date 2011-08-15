@@ -10,7 +10,7 @@ Inherits="Pages_CVSearch"  Title="Personnel CV"%>
         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
         <asp:RadioButton ID="rdbPersonnelCV" runat="server" Text="Personnel CV" GroupName="SearchType"
             Checked="true" />
-        <asp:RadioButton ID="rdbCVBank" runat="server" Text="CV Bank" GroupName="SearchType" />
+        <!--<asp:RadioButton ID="rdbCVBank" runat="server" Text="CV Bank" GroupName="SearchType" /> -->
         <asp:Button ID="Button1" runat="server" Text="Search" OnClick="Button1_Click" />
     </div>
   
