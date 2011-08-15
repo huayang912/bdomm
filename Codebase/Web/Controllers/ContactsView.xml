@@ -389,7 +389,7 @@ from "dbo"."Contacts" "Contacts"
     </actionGroup>
 	
 	  <actionGroup id="ag400" scope="ActionBar" headerText="Personnel CV" flat="true">
-	        <action id="a1" whenKeySelected="true" commandName="Navigate" commandArgument="_Blank:~/pages/CVUpload.aspx?ID={ID}" headerText="CV"   />
+	        <action id="a1" whenKeySelected="true" commandName="Navigate" commandArgument="_Blank:~/pages/CVUpload.aspx?ID={ID}" headerText="Personnel CV"   />
     </actionGroup>
     
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
