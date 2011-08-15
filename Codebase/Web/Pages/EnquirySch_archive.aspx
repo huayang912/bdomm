@@ -5,7 +5,7 @@
    
 </asp:Content>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="PageHeaderContentPlaceHolder" runat="Server">Enquiries</asp:Content>
+<asp:Content ID="Content1" ContentPlaceHolderID="PageHeaderContentPlaceHolder" runat="Server">Enquiries Archived</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
     <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory">
