@@ -63,7 +63,7 @@ from "dbo"."Enquiries" "Enquiries"
    left join "dbo"."Users" "UploadedByUser" on "EnquiryFiles"."UploadedBy" = "UploadedByUser"."ID"
       
    	left join "dbo"."EnquiryLines" "EnquiryLines" on "Enquiries"."ID" = "enquiryLines"."EnquiryID"
-	WHERE Enquiries.StatusID <> 2 and Enquiries.StatusID <> 3
+	WHERE Enquiries.StatusID <> 1
 	]]></text>
     </command>
     <command id="IDIdentityCommand" type="Text" event="Inserted">
