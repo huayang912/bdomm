@@ -39,7 +39,7 @@ from "dbo"."ContactsCommsNotes" "ContactsCommsNotes"
     <field name="ContactFirstNames" type="String" readOnly="true" label="Contact First Names" />
    
     <field name="ContactCommsTypeID" type="Int32" label="Comms  Type#" showInSummary="true">
-	     <items style="Lookup" dataController="ContactCommsTypes" newDataView="createForm1" />
+	     <items style="dropdown" dataController="ContactCommsTypes" newDataView="createForm1" />
     </field>
 	<field name="ContactCommsTypeName" type="String" readOnly="true" label="Comms Type" />
  
@@ -69,10 +69,10 @@ from "dbo"."ContactsCommsNotes" "ContactsCommsNotes"
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Contacts Notes">
-      <headerText>$DefaultEditViewDescription</headerText>
+      <headerText></headerText>
       <categories>
         <category headerText="Contacts Comms Notes" newColumn="true">
-          <description>$DefaultEditDescription</description>
+          <description></description>
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
             <dataField fieldName="ContactCommsTypeID" columns="15" aliasFieldName="ContactCommsTypeName" />
@@ -87,7 +87,7 @@ from "dbo"."ContactsCommsNotes" "ContactsCommsNotes"
       <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category headerText="New Contacts Comms Notes" newColumn="true">
-          <description>$DefaultNewDescription</description>
+          <description></description>
           <dataFields>
             <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
             <dataField fieldName="ContactCommsTypeID" columns="15" aliasFieldName="ContactCommsTypeName" />
