@@ -55,6 +55,7 @@
        ,"Currency"."ShortCode" "CurrencyShortCode"
 	,"Contacts"."DayRateCurrencyID" "DayRateCurrencyID"
 	,"EmployedYN"."Employed" "Employed"
+	,"ContactCV"."FileName" "CVFileName"
 from "dbo"."Contacts" "Contacts"
 	left join "dbo"."VewPersonnelRoles" "PersonnelRoles" on "Contacts"."ID" = "PersonnelRoles"."ID"
 	left join "dbo"."Countries" "Country" on "Contacts"."CountryID" = "Country"."ID"
@@ -63,7 +64,7 @@ from "dbo"."Contacts" "Contacts"
 	left join "dbo"."Users" "CreatedByUser" on "Contacts"."CreatedByUserID" = "CreatedByUser"."ID"
   		left join "dbo"."Currency" "Currency" on "Contacts"."DayRateCurrencyID" = "Currency"."ID"
 			  	left join "dbo"."ViewEmployedYN" "EmployedYN" on "Contacts"."ID" = "EmployedYN"."PersonnelID"
-
+               	left join "dbo"."ContactCV" "ContactCV" on "Contacts"."ID" = "ContactCV"."ContactID"
 	left join "dbo"."Users" "ChangedByUser" on "Contacts"."ChangedByUserID" = "ChangedByUser"."ID"]]></text>
     </command>
     <command id="IDIdentityCommand" type="Text" event="Inserted">
@@ -180,6 +181,8 @@ from "dbo"."Contacts" "Contacts"
         <item text="XXXL" value="XXXL"/>
       </items>
     </field>
+	
+	<field name="CVFileName" type="String" readOnly="true" label="CV" />
 
     <field name="SecondaryRole" type="String" readOnly="true" label="Secondary Role" showInSummary="true" formatOnClient="true" />
     <field name="TertiaryRole" type="String" readOnly="true" label="Tertiary Role" showInSummary="true" formatOnClient="true" />
@@ -201,15 +204,10 @@ from "dbo"."Contacts" "Contacts"
 
 	 
 
+	        <dataField fieldName="CVFileName"  hyperlinkFormatString="~/UploadedCV/{CVFileName}" />
+			
 
-        <dataField fieldName="Postcode" hidden="true" columns="20" />
-        <dataField fieldName="CountryID" hidden="true" aliasFieldName="CountryName" />
-        <dataField fieldName="DateOfBirth" hidden="true" columns="10" />
-        <dataField fieldName="DateOfLastMeeting" hidden="true" columns="10" />
-        <dataField fieldName="MaritalStatusID" hidden="true" aliasFieldName="MaritalStatusName" />
-        <dataField fieldName="PlaceOfBirth" hidden="true" />
-        <dataField fieldName="CountryOfBirthID" hidden="true" aliasFieldName="CountryOfBirthName" />
-        <dataField fieldName="Address" hidden="true" />
+	
       </dataFields>
 	   <a:styles>
         <expression type="ClientScript" test="[Employed] &gt; 0" result="QuoteExpired" />
