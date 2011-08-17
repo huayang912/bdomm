@@ -3,7 +3,7 @@
   <commands xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <command id="command1" type="Text">
       <text>
-    <![CDATA[select
+    <![CDATA[select 
 	"Contacts"."ID" "ID"
 	,"Contacts"."FirstNames" "FirstNames"
 	,"Contacts"."LastName" "LastName"
@@ -204,7 +204,7 @@ from "dbo"."Contacts" "Contacts"
 
 	 
 
-	        <dataField fieldName="CVFileName"  hyperlinkFormatString="~/UploadedCV/{CVFileName}" />
+	        <dataField fieldName="CVFileName"  hyperlinkFormatString="~/UploadedCV/{CVFileName}"  columns="4" />
 			
 
 	
