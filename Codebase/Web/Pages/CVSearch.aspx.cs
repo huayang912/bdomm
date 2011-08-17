@@ -45,7 +45,7 @@ public partial class Pages_CVSearch : BasePage
         //Dim strQuery As String
         string strQuery;
         //strQuery = "Select DocTitle,Filename,Size,PATH,URL from SCOPE() where FREETEXT('" & TextBox1.Text & "')"
-        strQuery = "Select DocTitle, Filename, Size, PATH, URL from SCOPE() WHERE FREETEXT('" + txtKeyword.Text.ToSqlSafeData() + "')";
+        strQuery = "Select DocTitle, Filename, characterization , PATH, URL from SCOPE() WHERE FREETEXT('" + txtKeyword.Text.ToSqlSafeData() + "')";
         //' TextBox1.Text is word that you type in the text box to query by using Index Service.
         //'
         //Dim connString As String = "Provider=MSIDXS.1;Integrated Security .='';Data Source='" & strCatalog & "'"
