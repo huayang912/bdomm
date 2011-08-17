@@ -12,6 +12,7 @@ using System.Web.Security;
 //using App.Core.Base.Model;
 using App.Core.Extensions;
 using System.Net.Mail;
+using App.Data;
 //using App.DAL.Utility;
 //using App.DAL;
 
@@ -353,6 +354,25 @@ public class WebUtil
     //{
     //    return String.Format("javascript:alert('{0}');javascript:void(0);", AppConstants.Message.DELETE_PERMISSION_DENIED);
     //}
+
+    /// <summary>
+    /// Returns Formatted Data Returned from a Data Reader or a Data Table Cell
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
+    public static String FormatData(object data)
+    {
+        if (data.GetType() == typeof(String))
+            return WebUtil.FormatText(NullHandler.GetString(data));
+        else if (data.GetType() == typeof(DateTime))
+            return NullHandler.GetDateTime(data).ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY);
+        else if (data.GetType() == typeof(decimal))
+            return String.Format(AppConstants.ValueOf.DECIMAL_FORMAT, NullHandler.GetDecimal(data));
+        else if (data.GetType() == typeof(bool))
+            return NullHandler.GetBoolean(data) ? "Yes" : "No";
+        else
+            return NullHandler.GetString(data);
+    }
 
     #region Email Helper
     public static bool SendMail(string mailTo, string mailCc, string mailBcc, string mailFrom, string mailSubject, string mailBody)

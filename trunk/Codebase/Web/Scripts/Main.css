@@ -245,4 +245,19 @@ textarea
 .NoteDate
 {
     color:#8695aa;
-}   
+}  
+.TenPixelTopMargin
+{
+    margin-top:10px;
+} 
+.PopupBody
+{
+    margin-left:0px 10px 10px 10px;    
+}
+.PagerButton { float:left; border:#B9B9B9 1px solid; background-color:#FFFFFF; margin-left:5px; font-size:12px; font-weight:bold; padding:4px 8px; color:#a7b8a7;  }
+.CurrentPage { float:left; border:#B9B9B9 1px solid; background-color:#4a7abc; margin-left:5px; font-size:12px; font-weight:bold; padding:4px 8px;  color:#FFFFFF;} 
+.PagerButton:hover{background-color:#4a7abc;}
+.PagerButton a:link, .PagerButton a:visited{text-decoration:none; color:#4a7abc;}
+.PagerButton a:hover{text-decoration:underline; color:#FFFFFF;}
+.PagerPageCount{float:right; text-align:right; padding-top:5px; font-size:12px; color:#a7b8a7;}
+.PagerTotalRecordMessage{margin-top:5px; font-size:12px; color:#a7b8a7;}

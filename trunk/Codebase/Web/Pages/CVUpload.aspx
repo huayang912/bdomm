@@ -1,10 +1,8 @@
 <%@ Page Language="C#" MasterPageFile="~/MasterPagePopup.master" AutoEventWireup="true" CodeFile="CVUpload.aspx.cs"
     Inherits="Pages_CVUpload" Title="CV Upload" %>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">    
-
-
-    <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory">
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
+    <div class="PopupContainer">
         <table cellpadding="3" cellspacing="0" style="width: 90%;">
             <%--<tr>
             <td>

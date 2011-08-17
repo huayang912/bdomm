@@ -7,17 +7,17 @@
 
       <siteMapNode title="Show Client Contacts" description="Client Contacts" url="~/Pages/ClientContactSrch.aspx" roles="*"/>
 
-      </siteMapNode>
+    </siteMapNode>
     <siteMapNode title="Personnel" description="Personnel" url="~/Pages/PersonnelView.aspx" roles="*">
-	  <siteMapNode title="Show Personnel" description="Personnel List" url="~/Pages/PersonnelViewRedirect.aspx" roles="*" />
-            <siteMapNode title="CV Search" description="Personnel CV" url="~/Pages/CVSearch.aspx" roles="*" />
+      <siteMapNode title="Show Personnel" description="Personnel List" url="~/Pages/PersonnelViewRedirect.aspx" roles="*" />
+      <siteMapNode title="CV Search" description="Personnel CV" url="~/Pages/CVSearch.aspx" roles="*" />
 
 
     </siteMapNode>
     <siteMapNode title="Enquiries" description="Enquiry" url="~/Pages/EnquirySch.aspx" roles="*">
       <siteMapNode title="Create New Enquiry" description="Create a New Enquiry" url="~/Pages/EnquiryChange.aspx" roles="*" />
     </siteMapNode>
-    
+
     <siteMapNode title="Quotations" description="Quotation" url="~/Pages/QuoteSrch.aspx" roles="*" />
     <siteMapNode title="Projects" description="Projrct" url="~/Pages/ProjectSrch.aspx" roles="*" />
 
@@ -38,30 +38,30 @@
 
       </siteMapNode>
 
-        <siteMapNode title="Configuration" description="" url="" roles="*">
-      <siteMapNode title="Countries" description="View Countries" url="~/Pages/Countries.aspx" />
-      <siteMapNode title="Currency" description="View Currency" url="~/Pages/Currency.aspx" />
-      <siteMapNode title="Enquiry Statuses" description="View Enquiry Statuses" url="~/Pages/EnquiryStatuses.aspx" />
-      <siteMapNode title="Enquiry Types" description="View Enquiry Types" url="~/Pages/EnquiryTypes.aspx" />
-          <siteMapNode title="Enquiry Source" description="View Enquiry Source" url="~/Pages/EnquirySourceTypes.aspx" />
+      <siteMapNode title="Configuration" description="" url="" roles="*">
+        <siteMapNode title="Countries" description="View Countries" url="~/Pages/Countries.aspx" />
+        <siteMapNode title="Currency" description="View Currency" url="~/Pages/Currency.aspx" />
+        <siteMapNode title="Enquiry Statuses" description="View Enquiry Statuses" url="~/Pages/EnquiryStatuses.aspx" />
+        <siteMapNode title="Enquiry Types" description="View Enquiry Types" url="~/Pages/EnquiryTypes.aspx" />
+        <siteMapNode title="Enquiry Source" description="View Enquiry Source" url="~/Pages/EnquirySourceTypes.aspx" />
 
-          <siteMapNode title="Marital Statuses" description="View Marital Statuses" url="~/Pages/MaritalStatuses.aspx" />
-      <siteMapNode title="Project Statuses" description="View Project Statuses" url="~/Pages/ProjectStatuses.aspx" />
-      <siteMapNode title="Quotation Pricing Types" description="View Quotation Pricing Types" url="~/Pages/QuotationPricingTypes.aspx" />
-      <siteMapNode title="Quotation Statuses" description="View Quotation Statuses" url="~/Pages/QuotationStatuses.aspx" />
-      <siteMapNode title="Certificate Types" description="View Certificate Types" url="~/Pages/CertificateTypes.aspx" />
-      <siteMapNode title="Telephone Number Types" description="View Telephone Number Types" url="~/Pages/TelephoneNumberTypes.aspx" />
-    </siteMapNode>
+        <siteMapNode title="Marital Statuses" description="View Marital Statuses" url="~/Pages/MaritalStatuses.aspx" />
+        <siteMapNode title="Project Statuses" description="View Project Statuses" url="~/Pages/ProjectStatuses.aspx" />
+        <siteMapNode title="Quotation Pricing Types" description="View Quotation Pricing Types" url="~/Pages/QuotationPricingTypes.aspx" />
+        <siteMapNode title="Quotation Statuses" description="View Quotation Statuses" url="~/Pages/QuotationStatuses.aspx" />
+        <siteMapNode title="Certificate Types" description="View Certificate Types" url="~/Pages/CertificateTypes.aspx" />
+        <siteMapNode title="Telephone Number Types" description="View Telephone Number Types" url="~/Pages/TelephoneNumberTypes.aspx" />
+      </siteMapNode>
     </siteMapNode>
 
     <siteMapNode title="Reports" description="Reports" url="#" roles="*">
       <siteMapNode title="Monthly Enquery" description="Monthly Enquery Report" url="~/Reports/monthlyEnqueryReport.aspx" roles="*" />
       <siteMapNode title="Monthly Quotation" description="Monthly Quotation Report" url="~/Reports/monthlyQuotationReport.aspx" roles="*" />
       <siteMapNode title="Type Wise Monthly Enquery Details" description="Type Wise Monthly Enquery Details" url="~/Reports/TypeWiseMOnthlyEnqueryDetails.aspx" roles="*" />
-      
+
     </siteMapNode>
 
- <siteMapNode title="Support" description="Support" url="~/pages/send_mail.aspx" roles="*"/>
+    <siteMapNode title="Support" description="Support" url="~/pages/send_mail.aspx" roles="*"/>
 
   </siteMapNode>
 </siteMap>

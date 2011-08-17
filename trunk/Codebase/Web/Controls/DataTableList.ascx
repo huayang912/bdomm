@@ -1,6 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="DataTableList.ascx.cs" Inherits="UserControls_DataTableList" %>
-<%@ Register Src="~/UserControls/ModalConfirmationPopup.ascx" TagName="ModalConfirmationPopup" TagPrefix="UC" %>
-
 
 <div <% if(this.EnableScroller){ %> class="XScrollableListContainer"<%} %>>    
     <asp:Repeater ID="rptList" runat="server" OnItemDataBound="rptList_ItemDataBound">    
@@ -35,8 +33,3 @@
     <div id="divMessage" runat="server" enableviewstate="false" visible="false"></div>
 </div>
 
-
-
-<%-- Modal Confirmation PopUp Section Start --%>
-<UC:ModalConfirmationPopup ID="ucModalConfirmationPopup" runat="server" ModalDialogType="YesNo" JavaScriptCallBackMethod="SendToDeleteUrl" />  
-<%-- Modal Confirmation PopUp Section Start --%>
