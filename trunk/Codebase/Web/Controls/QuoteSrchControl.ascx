@@ -15,9 +15,9 @@
                         <asp:DropDownList ID="StatusList" runat="server">
                           <asp:ListItem>All</asp:ListItem>
                           <asp:ListItem>Not Submitted</asp:ListItem>
-                          <asp:ListItem>Submitted</asp:ListItem>               
-                          <asp:ListItem>Successful</asp:ListItem>
+                          <asp:ListItem>Submitted</asp:ListItem>  
                           <asp:ListItem>Re-quote Requested</asp:ListItem>
+						<asp:ListItem>Closed</asp:ListItem>
                         </asp:DropDownList></td>
 						
                   <td>
