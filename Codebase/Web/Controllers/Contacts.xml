@@ -43,6 +43,7 @@
   ,"Contacts"."Contract_days" "Contract_days"
          ,"Currency"."ShortCode" "CurrencyShortCode"
 	,"Contacts"."DayRateCurrencyID" "DayRateCurrencyID"
+	,"ContactCV"."FileName" "CVFileName"
 from "dbo"."Contacts" "Contacts"
 	left join "dbo"."VewPersonnelRoles" "PersonnelRoles" on "Contacts"."ID" = "PersonnelRoles"."ID"
 	left join "dbo"."Countries" "Country" on "Contacts"."CountryID" = "Country"."ID"
@@ -50,6 +51,7 @@ from "dbo"."Contacts" "Contacts"
 	left join "dbo"."Countries" "CountryOfBirth" on "Contacts"."CountryOfBirthID" = "CountryOfBirth"."ID"
 	left join "dbo"."Users" "CreatedByUser" on "Contacts"."CreatedByUserID" = "CreatedByUser"."ID"
   	left join "dbo"."Currency" "Currency" on "Contacts"."DayRateCurrencyID" = "Currency"."ID"
+	  	left join "dbo"."ContactCV" "ContactCV" on "Contacts"."ID" = "ContactCV"."ContactID"
 	left join "dbo"."Users" "ChangedByUser" on "Contacts"."ChangedByUserID" = "ChangedByUser"."ID"]]></text>
     </command>
     <command id="IDIdentityCommand" type="Text" event="Inserted">
@@ -105,6 +107,9 @@ from "dbo"."Contacts" "Contacts"
       <items style="Lookup" dataController="Countries" newDataView="createForm1" />
     </field>
     <field name="CountryName" type="String" readOnly="true" label="Country Name" />
+	
+	    <field name="CVFileName" type="String" readOnly="true" label="CV" />
+	
     
     <field name="CurrencyShortCode" type="String" readOnly="true" label="Currency Code" />
     
@@ -179,14 +184,8 @@ from "dbo"."Contacts" "Contacts"
         <dataField fieldName="PrimaryRole" columns="30" />
         <dataField fieldName="SecondaryRole" columns="30" />
         <dataField fieldName="TertiaryRole" columns="30" />
-        <dataField fieldName="Postcode" hidden="true" columns="20" />
-        <dataField fieldName="CountryID" hidden="true" aliasFieldName="CountryName" />
-        <dataField fieldName="DateOfBirth" hidden="true" columns="10" />
-        <dataField fieldName="DateOfLastMeeting" hidden="true" columns="10" />
-        <dataField fieldName="MaritalStatusID" hidden="true" aliasFieldName="MaritalStatusName" />
-        <dataField fieldName="PlaceOfBirth" hidden="true" />
-        <dataField fieldName="CountryOfBirthID" hidden="true" aliasFieldName="CountryOfBirthName" />
-        <dataField fieldName="Address" hidden="true" />
+        <dataField fieldName="CVFileName" columns="20" />
+       
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Contacts">
