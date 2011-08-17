@@ -91,7 +91,7 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
 	
 	   left join "dbo"."EnquiryFiles" "EnquiryFiles" on "Quotations"."EnquiryID" = "EnquiryFiles"."EnquiryID"
    left join "dbo"."Users" "UploadedByUser" on "EnquiryFiles"."UploadedBy" = "UploadedByUser"."ID"
-WHERE Quotations.StatusID<>3
+WHERE Quotations.StatusID<>3 AND Quotations.StatusID<>4
 ]]></text>
     </command>
     <command id="IDIdentityCommand" type="Text" event="Inserted">
