@@ -76,7 +76,7 @@ namespace App.Data
             SQL = string.Format(SQL, startRecord, endRecord);
 
             SqlConnection conn = new SqlConnection(ConnectionString);
-            DataSet ds = new DataSet("CustomeQueryResult");
+            DataSet ds = new DataSet("CustomQueryResult");
             try
             {
                 if (conn.State != ConnectionState.Open)

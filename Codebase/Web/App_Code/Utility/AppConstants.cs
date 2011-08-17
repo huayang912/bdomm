@@ -87,7 +87,9 @@ public class AppConstants
         public const String ENQUIRY_ID = "EnqID";
         public const String LOG_OUT = "Logout";
         public const String QUOTATION_ID = "QuotationID";
-        
+        public const String CONTACT_ID = "ContactID";
+        public const String SUCCESS_MSG = "SCMSG";
+        public const String DELETE = "Delete";
     }
 
     #endregion

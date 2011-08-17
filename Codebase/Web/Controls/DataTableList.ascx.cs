@@ -7,7 +7,8 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Text;
 using App.Core.Extensions;
-using App.Core.DB;
+using App.Data;
+//using App.Core.DB;
 
 public partial class UserControls_DataTableList : BaseUserControl
 {
@@ -152,11 +153,11 @@ public partial class UserControls_DataTableList : BaseUserControl
     {
         //_HasDeletePermission = base.HasDeletePermission;
         //_HasEditPermission = base.HasEditPermission;
-        if (!_HasDeletePermission)
-            ucModalConfirmationPopup.ModalDialogType = UserControls_ModalConfirmationPopup.DialogType.OK;
+        //if (!_HasDeletePermission)
+        //    ucModalConfirmationPopup.ModalDialogType = UserControls_ModalConfirmationPopup.DialogType.OK;
 
-        if (!this.AddConfirmationPopup)
-            ucModalConfirmationPopup.Visible = false;
+        //if (!this.AddConfirmationPopup)
+        //    ucModalConfirmationPopup.Visible = false;
 
         //base.DataBind();
         if (this.DataSource == null || this.DataSource.Rows.Count == 0)
@@ -277,10 +278,10 @@ public partial class UserControls_DataTableList : BaseUserControl
             String deleteLink = String.Format(this.DeleteLink, fields);
             if (this.CheckForDeletePermission)
             {
-                if (_HasDeletePermission)
+                //if (_HasDeletePermission)
                     deleteLink = String.Format("javascript: ConfirmDelete('{0}', '{1}'); void(0);", deleteLink, this.DeleteMessage.IsNullOrEmpty() ? "Sure to Delete Data?" : this.DeleteMessage);
-                else
-                    deleteLink = WebUtil.GetDeletePermissionDeniedMessage();
+                //else
+                //    deleteLink = WebUtil.GetDeletePermissionDeniedMessage();
             }
             else
                 deleteLink = String.Format("javascript: ConfirmDelete('{0}', '{1}'); void(0);", deleteLink, this.DeleteMessage.IsNullOrEmpty() ? "Sure to Delete Data?" : this.DeleteMessage);
