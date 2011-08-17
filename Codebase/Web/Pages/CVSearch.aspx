@@ -42,8 +42,7 @@ Inherits="Pages_CVSearch"  Title="Personnel CV"%>
         <asp:GridView ID="grdsearch" runat="server" GridLines="None" AutoGenerateColumns="False"
             CssClass="GridView">
             <Columns>
-                <asp:BoundField HeaderText="File Name" DataField="FILENAME" />
-                <asp:BoundField HeaderText="Coontent" DataField="characterization" />
+                <asp:BoundField HeaderText="File Name" DataField="FILENAME" />             
                 <asp:TemplateField HeaderText="..">
                     <ItemTemplate>
                         <%-- <a href='<%#Eval("PATH")%>'>Resume</a>--%>
