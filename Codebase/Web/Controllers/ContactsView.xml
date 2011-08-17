@@ -204,7 +204,7 @@ from "dbo"."Contacts" "Contacts"
 
 	 
 
-	        <dataField fieldName="CVFileName"  hyperlinkFormatString="~/UploadedCV/{CVFileName}"  columns="4" />
+	        <dataField fieldName="CVFileName"  hyperlinkFormatString="~/UploadedCV/{CVFileName}" AliasValue="View" />
 			
 
 	
