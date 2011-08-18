@@ -39,7 +39,9 @@ public class AppConstants
         public const String QUOTATION_DECISION = "QuotationDecision.aspx";
         public const String QUOTATION_CHANGE = "QuotationChange.aspx";
         public const String QUOTATION_DETAILS = "QuoteSrch.aspx";
+        public const String QUOTATION_DETAILS_Archive = "quotations_unsuccess.aspx";          
         public const String ENQUIRY_DETAILS = "EnquirySch.aspx";
+        public const String ENQUIRY_DETAILS_Archive = "EnquirySch_archive.aspx";
         public const String PERSONNEL_DETAILS = "PersonnelDetails.aspx";
         public const String PROJECT_NOTE_DETAILS = "ProjectNoteDetails.aspx";
     }
