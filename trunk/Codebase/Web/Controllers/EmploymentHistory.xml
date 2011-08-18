@@ -125,7 +125,7 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
     <field name="TravelCost" type="Int32"  label="Travel Cost" />
     <field name="CurrencyShortCode" type="String" readOnly="true" label="Currency Code" />
 
-    <field name="ProjectCode_other" type="String"  label="Project Code" />
+    <field name="ProjectCode_other" type="String"  label="Project Code (Other)" />
 
 
     <field name="RoleName" type="String" readOnly="true" label="Role Name" />
