@@ -206,6 +206,10 @@ public partial class Pages_ProjectDetails : BasePage
         }
         else
             sb.Append("NA <br/>");
+         Project project = context.Projects.SingleOrDefault(P => P.ID == _ProjectID);
+      
+        sb.Append(" <a href='EmploymentHistory.aspx?ProjectID=" + project.ID  + "&_controller=EmploymentHistory&_commandName=New&_commandArgument=createForm1' target='_blank'>Add Personnel</a><br/>");
+        
         return sb.ToString();
     }
 
