@@ -165,7 +165,7 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
       <headerText></headerText>
       <dataFields>
         <dataField fieldName="ProjectID" aliasFieldName="ProjectNumber" />
-        <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
+        <dataField fieldName="ContactID" aliasFieldName="Personnel Name" />
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
         <dataField fieldName="ClientID" hidden="true" aliasFieldName="ClientName" />
