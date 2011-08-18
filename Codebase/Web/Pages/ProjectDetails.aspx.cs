@@ -65,12 +65,15 @@ public partial class Pages_ProjectDetails : BasePage
 
             if (project.Quotation != null)
             {
-                sb.AppendFormat("<b>Quotation No:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.QUOTATION_DETAILS, 
-                    AppConstants.QueryString.ID, project.QuotationID, project.Quotation.Number);
+                sb.AppendFormat("<b>Quotation No:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.QUOTATION_DETAILS_Archive,
+                    AppConstants.QueryString.ID, project.QuotationID + "&_controllerName=Quotations&_commandName=Select&_commandArgument=editForm1", project.Quotation.Number);
+              //  sb.AppendFormat("<b>Quotation Create Date:</b> {0}<br/>", project.Quotation.CreatedOn == DateTime.MinValue ? "NA" : project.Quotation.CreatedOn.ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
+
                 if (project.Quotation.Enquiry != null)
                 {
-                    sb.AppendFormat("<b>Enquiry No:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.ENQUIRY_DETAILS,
-                        AppConstants.QueryString.ID, project.Quotation.EnquiryID, project.Quotation.Enquiry.Number);
+                    sb.AppendFormat("<b>Enquiry No:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.ENQUIRY_DETAILS_Archive,
+                        AppConstants.QueryString.ID, project.Quotation.EnquiryID + "&_controllerName=Enquiry&_commandName=Select&_commandArgument=editForm1", project.Quotation.Enquiry.Number);
+
                     sb.AppendFormat("<b>Attachments: </b><br/>{0}", GetAttachmentsList(project.Quotation.Enquiry));
                 }
                 sb.AppendFormat("<br/><b>Scope of the Work:</b> <br/>{0}<br/>", project.Quotation.ScopeOfWork.IsNullOrEmpty() ? "NA" : WebUtil.FormatText(project.Quotation.ScopeOfWork));
@@ -178,7 +181,7 @@ public partial class Pages_ProjectDetails : BasePage
             //sb.Append(" </colgroup>");
 
             sb.Append("<tr>");
-            sb.Append("   <th>First Name</th><th>Last Name</th><th>Start Date</th><th>End Date</th><th>Role Name</th><th style='text-align:right;'>Day Rate</th><th style='text-align:center;'>Contract Days#</th>");
+            sb.Append("   <th>Last Name</th><th>First Name</th><th>Start Date</th><th>End Date</th><th>Role Name</th><th style='text-align:right;'>Day Rate</th><th style='text-align:center;'>Contract Days#</th>");
             sb.Append("</tr>");
             //String currencySymbol = quotation.Currency == null ? String.Empty : quotation.Currency.ShortCode;
 
@@ -189,8 +192,8 @@ public partial class Pages_ProjectDetails : BasePage
                 //sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowStyle" : "EventRowStyle");
                 sb.AppendFormat("<tr class='{0}'>", i % 2 == 0 ? "OddRowListing" : "EvenRowListing");
                 //sb.Append("<tr>");
-                sb.AppendFormat("   <td>{0}</td>", GetPersonnelLink(personnel));
-                sb.AppendFormat("   <td>{0}</td>", personnel.Contact.LastName.HtmlEncode());
+                sb.AppendFormat("   <td>{0}</td>", GetPersonnelLNLink(personnel)); //personnel.Contact.LastName.HtmlEncode());
+                sb.AppendFormat("   <td>{0}</td>", GetPersonnelLink(personnel));        
                 sb.AppendFormat("   <td>{0}</td>", personnel.StartDate.GetValueOrDefault() == DateTime.MinValue ? "NA" : personnel.StartDate.GetValueOrDefault().ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
                 sb.AppendFormat("   <td>{0}</td>", personnel.EndDate.GetValueOrDefault() == DateTime.MinValue ? "NA" : personnel.EndDate.GetValueOrDefault().ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
                 sb.AppendFormat("   <td>{0}</td>", personnel.Role == null ? "NA" : personnel.Role.Name.HtmlEncode());
@@ -211,6 +214,14 @@ public partial class Pages_ProjectDetails : BasePage
         return String.Format("<a href='{0}?{1}={2}' target='_blank'>{3}</a>", AppConstants.Pages.PERSONNEL_DETAILS,
             AppConstants.QueryString.ID, personnel.ContactID, personnel.Contact.FirstNames.HtmlEncode());
     }
+
+
+    protected String GetPersonnelLNLink(EmploymentHistory personnel)
+    {
+        return String.Format("<a href='{0}?{1}={2}' target='_blank'>{3}</a>", AppConstants.Pages.PERSONNEL_DETAILS,
+            AppConstants.QueryString.ID, personnel.ContactID, personnel.Contact.LastName.HtmlEncode());
+    }
+
 
     protected void ShowErrorMessage()
     {
