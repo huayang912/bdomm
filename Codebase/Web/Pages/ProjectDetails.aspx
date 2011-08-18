@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="ProjectDetails.aspx.cs" Inherits="Pages_ProjectDetails" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="ProjectDetails.aspx.cs" Inherits="Pages_ProjectDetails" %>
 <%@ Register Src="~/Controls/ProjectNotes.ascx" TagName="ProjectNotes" TagPrefix="UC" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
@@ -24,7 +24,7 @@
         </Services>
     </asp:ScriptManagerProxy>
     <div class="GroupBox" style="margin-bottom:0px;">
-        <asp:Panel ID="pnlDetails" runat="server">
+        <asp:Panel ID="pnlDetails" runat="server" Width="70%">
             <div id="divDetails" runat="server" style="line-height:17px;"></div>
             <%--Project Notes--%>            
             <div>
