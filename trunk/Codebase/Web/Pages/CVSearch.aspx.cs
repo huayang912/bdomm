@@ -44,8 +44,10 @@ public partial class Pages_CVSearch : BasePage
 
         //Dim strQuery As String
         string strQuery;
-        //strQuery = "Select DocTitle,Filename,Size,PATH,URL from SCOPE() where FREETEXT('" & TextBox1.Text & "')"
-        strQuery = "Select DocTitle, Filename, characterization , PATH, URL from SCOPE() WHERE FREETEXT('" + txtKeyword.Text.ToSqlSafeData() + "')";
+        //strQuery = "Select DocTitle,Filename,Size,PATH,URL from SCOPE() where FREETEXT('" & TextBox1.Text & "')".... 
+        strQuery = "Select Contents,DocTitle, Filename, Size, PATH, URL,characterization from SCOPE() WHERE FREETEXT(Contents,'" + txtKeyword.Text.ToSqlSafeData() + "')";
+        //strQuery = "select doctitle, filename, vpath, rank, characterization from scope() where FREETEXT(Contents, '" + txtKeyword.Text.ToSqlSafeData() + "') order by rank desc ";
+        
         //' TextBox1.Text is word that you type in the text box to query by using Index Service.
         //'
         //Dim connString As String = "Provider=MSIDXS.1;Integrated Security .='';Data Source='" & strCatalog & "'"
@@ -62,17 +64,9 @@ public partial class Pages_CVSearch : BasePage
         //cmd.Fill(testDataSet)
         cmd.Fill(testDataSet);
 
-        //' Bind DataGrid to the DataSet. DataGrid is the ID for the 
-        //' DataGrid control in the HTML section.
-        //Dim source As New System.Data.DataView(testDataSet.Tables(0))
-        //DataGrid1.DataSource = source
-        //DataGrid1.DataBind()
-
-        //GridView1.DataSource = testDataSet.Tables[0];
-        //GridView1.DataBind();
-
         grdsearch.DataSource = testDataSet.Tables[0];
         grdsearch.DataBind();
+
     }
     protected void btnSearch_Click(object sender, EventArgs e)
     {

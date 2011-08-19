@@ -1,8 +1,25 @@
 <%@ Page Language="C#" MasterPageFile="~/MasterPagePopup.master" AutoEventWireup="true" CodeFile="CVUpload.aspx.cs"
     Inherits="Pages_CVUpload" Title="CV Upload" %>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
-    <div class="PopupContainer">
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">    
+    
+    
+    <script type="text/javascript" language="javascript">
+
+        function DeleteCV(id, filePath, contactID) {
+            alert(filePath);
+            PageMethods.DeleteCVT(id, filePath, contactID, DeleteCV_Success, OnAjax_Error, OnAjax_TimeOut);        
+            
+            
+        }
+
+        function DeleteCV_Success(result) {
+            alert('CV Deleted Successfully');
+        }
+    </script>
+    
+    <asp:Label runat="server" ID="lbl" ></asp:Label>
+    <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory">
         <table cellpadding="3" cellspacing="0" style="width: 90%;">
             <%--<tr>
             <td>
@@ -29,7 +46,7 @@
                 <td>Select File:   
                     <asp:FileUpload ID="fileUploadCV" runat="server" />
                     <asp:Button ID="btnUpload" runat="server" Text="Upload" ValidationGroup="SaveInfo"
-                        OnClick="btnUpload_onclick" />
+                        OnClick="btnUpload_onclick"  />
                 </td>
             </tr>
             <tr>
@@ -40,21 +57,27 @@
             </tr>
             <tr>
                 <td>
-                    <asp:GridView ID="grdsearch" runat="server" AutoGenerateColumns="False"  GridLines="None"  CssClass="GridView">
+                    <asp:GridView ID="grdsearch" runat="server" AutoGenerateColumns="False" GridLines="None"
+                        CssClass="GridView"
+                        OnRowCommand="GridView1_RowCommand" 
+                        OnRowDataBound="GridView1_RowDataBound"                         
+                        OnRowDeleting="GridView1_RowDeleting"  
+                        EmptyDataText = "No record found"                      
+                        >
                         <Columns>
                             <asp:BoundField HeaderText="File Name" DataField="FileName" />
                             <asp:BoundField HeaderText="Created On" DataField="ChangedOn" />
-                            <%-- <asp:TemplateField HeaderText="File Location">
-                                <ItemTemplate>
-                                    <a href='<%#Eval("PATH")%>'>Resume</a>
-                                    '<%# Eval("PATH").ToString().Replace("d:\\project\\ommm\\smssendingdummy\\codebase\\web\\uploadedcv\\", "http://omm.local.com//uploadedcv//") %>'
-                                </ItemTemplate>
-                            </asp:TemplateField>--%>
                             <asp:TemplateField HeaderText="..">
                                 <ItemTemplate>
-                                    <%-- <a href='<%#Eval("PATH")%>'>Resume</a>--%>
                                     <a href='/uploadedcv/<%# Eval("ID").ToString()%>_<%# Eval("FileName").ToString()%>'>
                                         Download</a>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="..">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="LinkButton1" CommandArgument='<%# Eval("ID") %>' CommandName="Delete"
+                                        runat="server">
+                                 Delete</asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -66,11 +89,3 @@
     </div>
     
  </asp:Content>   
-    
-<%--
-<%@ Register Src="~/Controls/cv_usr_control.ascx" TagName="cv_usr_control" TagPrefix="uc" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="PageHeaderContentPlaceHolder" runat="Server">
-    CV Upload</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">    
-</asp:Content>--%>
