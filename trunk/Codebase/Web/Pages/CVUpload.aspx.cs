@@ -181,8 +181,7 @@ public partial class Pages_CVUpload : BasePage
         {
             LinkButton l = (LinkButton)e.Row.FindControl("LinkButton1");
             l.Attributes.Add("onclick", "javascript:return " +
-            "confirm('Are you sure you want to delete this record " +
-            DataBinder.Eval(e.Row.DataItem, "ID") + "')");
+            "confirm('Sure to Delete This Document?')");
         }
     }
 
