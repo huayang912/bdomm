@@ -43,4 +43,34 @@ public static class BindDropdownList
         ddl.DataBind();
         //InsertBlankOption(ddl);
     }
+    public static void Clients(DropDownList ddl)
+    {
+        OMMDataContext context = new OMMDataContext();
+        var statuses = from P in context.Clients select new { ID = P.ID, Name = P.Name };
+        ddl.DataSource = statuses;
+        ddl.DataTextField = "Name";
+        ddl.DataValueField = "ID";
+        ddl.DataBind();
+        InsertBlankOption(ddl);
+    }
+    public static void Projects(DropDownList ddl)
+    {
+        OMMDataContext context = new OMMDataContext();
+        var statuses = from P in context.Projects select new { ID = P.ID, Name = P.Name };
+        ddl.DataSource = statuses;
+        ddl.DataTextField = "Name";
+        ddl.DataValueField = "ID";
+        ddl.DataBind();
+        InsertBlankOption(ddl);
+    }
+    public static void Roles(DropDownList ddl)
+    {
+        OMMDataContext context = new OMMDataContext();
+        var statuses = from P in context.Roles select new { ID = P.ID, Name = P.Name };
+        ddl.DataSource = statuses;
+        ddl.DataTextField = "Name";
+        ddl.DataValueField = "ID";
+        ddl.DataBind();
+        InsertBlankOption(ddl);
+    }
 }

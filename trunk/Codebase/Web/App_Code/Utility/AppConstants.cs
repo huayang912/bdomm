@@ -57,7 +57,7 @@ public class AppConstants
 
         public const String DECIMAL_FORMAT = "{0:0,0.00}";
         //public const string DECIMAL_FORMAT_CALCULATION = "{0:00.#############}";
-        //public const String DECIMAL_FORMAT_CALCULATION = "{0:00.###}";
+        public const String DECIMAL_FORMAT_FOR_TEXTBOX = "{0:0}";
         public const String DATE_FROMAT_DISPLAY = "MMMM dd, yyyy";
         public const String DATE_FROMAT_DISPLAY_WITH_TIME = "dddd, MMMM dd, yyyy hh:mm:ss tt";
     }
