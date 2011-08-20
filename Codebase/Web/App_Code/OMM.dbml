@@ -94,6 +94,7 @@
       <Association Name="Country_Client" Member="Clients" ThisKey="ID" OtherKey="CountryID" Type="Client" />
       <Association Name="Country_Contact" Member="Contacts" ThisKey="ID" OtherKey="CountryID" Type="Contact" />
       <Association Name="Country_Contact1" Member="Contacts1" ThisKey="ID" OtherKey="CountryOfBirthID" Type="Contact" />
+      <Association Name="Country_NextOfKin" Member="NextOfKins" ThisKey="ID" OtherKey="CountryID" Type="NextOfKin" />
     </Type>
   </Table>
   <Table Name="dbo.EnquiryTypes" Member="EnquiryTypes">
@@ -234,6 +235,7 @@
       <Association Name="User_ContactsNote" Member="ContactsNotes" ThisKey="ID" OtherKey="ChangedByUserID" Type="ContactsNote" />
       <Association Name="User_ContactsNextOfKin" Member="ContactsNextOfKins" ThisKey="ID" OtherKey="ChangedByUserID" Type="ContactsNextOfKin" />
       <Association Name="User_ContactsTravel" Member="ContactsTravels" ThisKey="ID" OtherKey="ChangedByUserID" Type="ContactsTravel" />
+      <Association Name="User_NextOfKin" Member="NextOfKins" ThisKey="ID" OtherKey="ChangedByUserID" Type="NextOfKin" />
     </Type>
   </Table>
   <Table Name="dbo.SMS_Messages" Member="SMS_Messages">
@@ -304,6 +306,7 @@
       <Association Name="Contact_ContactsNote" Member="ContactsNotes" ThisKey="ID" OtherKey="ContactID" Type="ContactsNote" />
       <Association Name="Contact_ContactsNextOfKin" Member="ContactsNextOfKin" ThisKey="ID" OtherKey="ContactID" Type="ContactsNextOfKin" Cardinality="One" />
       <Association Name="Contact_ContactsTravel" Member="ContactsTravel" ThisKey="ID" OtherKey="ContactID" Type="ContactsTravel" Cardinality="One" />
+      <Association Name="Contact_NextOfKin" Member="NextOfKins" ThisKey="ID" OtherKey="ContactID" Type="NextOfKin" />
       <Association Name="Country_Contact" Member="Country" ThisKey="CountryID" OtherKey="ID" Type="Country" IsForeignKey="true" />
       <Association Name="Country_Contact1" Member="Country1" ThisKey="CountryOfBirthID" OtherKey="ID" Type="Country" IsForeignKey="true" />
       <Association Name="User_Contact" Member="User" ThisKey="CreatedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
@@ -506,6 +509,27 @@
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Association Name="Contact_ContactsTravel" Member="Contact" ThisKey="ContactID" OtherKey="ID" Type="Contact" IsForeignKey="true" />
       <Association Name="User_ContactsTravel" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NextOfKin" Member="NextOfKins">
+    <Type Name="NextOfKin">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ContactID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Relationship" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Postcode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CountryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HomeNumber" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="WorkNumber" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="MobileNumber" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="ChangedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="Country_NextOfKin" Member="Country" ThisKey="CountryID" OtherKey="ID" Type="Country" IsForeignKey="true" />
+      <Association Name="Contact_NextOfKin" Member="Contact" ThisKey="ContactID" OtherKey="ID" Type="Contact" IsForeignKey="true" />
+      <Association Name="User_NextOfKin" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.GenerateNewQuotationNumber" Method="GenerateNewQuotationNumber" IsComposable="true">
