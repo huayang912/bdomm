@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 using App.Core.Extensions;
 using App.Data;
-using System.Data;
 
 
 public partial class Pages_PersonnelNotes : BasePage
@@ -104,28 +104,33 @@ public partial class Pages_PersonnelNotes : BasePage
     /// </summary>
     protected void BindContactsNotesInfo()
     {
-        if (_IsEditMode)
+        OMMDataContext context = new OMMDataContext();
+        if (context.Contacts.FirstOrDefault(P => P.ID == _ContactID) == null)
+            ShowNotFoundMessage();
+        else
         {
-            OMMDataContext context = new OMMDataContext();
-            ContactsNote entity = context.ContactsNotes.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);//dao.GetByID(_ID);
-            if (entity == null)
-                ShowErrorMessage();
-            else
-            {
-                //ddlContactID.SetSelectedItem(entity.ContactID.ToString());
-                txtNotes.Text = entity.Notes;
-                //ddlChangedByUserID.SetSelectedItem(entity.ChangedByUserID.ToString());
-                //txtChangedOn.Text = entity.ChangedOn.ToString(ConfigReader.CSharpCalendarDateFormat);
-                //txtVersion.Text = entity.Version;
-                //txtCreatedByUsername.Text = entity.CreatedByUsername;
-                //txtChangedByUsername.Text = entity.ChangedByUsername;
+            if (_IsEditMode)
+            {                
+                ContactsNote entity = context.ContactsNotes.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);//dao.GetByID(_ID);
+                if (entity == null)
+                    ShowNotFoundMessage();
+                else
+                {
+                    //ddlContactID.SetSelectedItem(entity.ContactID.ToString());
+                    txtNotes.Text = entity.Notes;
+                    //ddlChangedByUserID.SetSelectedItem(entity.ChangedByUserID.ToString());
+                    //txtChangedOn.Text = entity.ChangedOn.ToString(ConfigReader.CSharpCalendarDateFormat);
+                    //txtVersion.Text = entity.Version;
+                    //txtCreatedByUsername.Text = entity.CreatedByUsername;
+                    //txtChangedByUsername.Text = entity.ChangedByUsername;
+                }
             }
         }
     }
     /// <summary>
     /// Shows a Message in the UI and Hides the Data Editing Controls
     /// </summary>
-    protected void ShowErrorMessage()
+    protected void ShowNotFoundMessage()
     {
         pnlFormContainer.Visible = false;
         WebUtil.ShowMessageBox(divMessage, "Requested Note was not found.", true);

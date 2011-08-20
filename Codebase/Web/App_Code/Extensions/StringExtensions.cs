@@ -396,6 +396,17 @@ namespace App.Core.Extensions
             long.TryParse(str, out result);
             return result;
         }
+        /// <summary>
+        /// Converts a String to Decimal. In case of invalid input string, returns 0;
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static decimal ToDecimal(this string s)
+        {
+            decimal output = 0;
+            decimal.TryParse(s, out output);
+            return output;
+        }
         public static DateTime ToDateTime(this string s, String format)
         {
             if (!s.IsNullOrEmpty())

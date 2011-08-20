@@ -271,6 +271,7 @@
             </div>
             <div>
                 <% if (_ID > 0) {%>
+                <a href="javascript:void(0);" onclick="ShowCenteredPopUp('PersonnelEmploymentHistory.aspx?<%= AppConstants.QueryString.CONTACT_ID %>=<%= _ID.ToString() %>', 'ManageEmploymentHistory', 700, 450, true);">Employment History</a> &nbsp; &nbsp;
                 <a href="javascript:void(0);" onclick="ShowCenteredPopUp('CVUpload.aspx?ID=<%= _ID.ToString() %>', 'ManageCV', 500, 350, true);">Manage CV</a> &nbsp; &nbsp;
                 <a href="javascript:void(0);" onclick="ShowCenteredPopUp('PersonnelNotes.aspx?<%= AppConstants.QueryString.CONTACT_ID %>=<%= _ID.ToString() %>', 'ManageCV', 500, 350, true);">Notes</a>
                 <%} %>
