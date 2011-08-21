@@ -91,8 +91,6 @@ public partial class Pages_CVUpload : BasePage
                 contactCV.ChangedOn = DateTime.Now;
 
                 context.ContactCVs.InsertOnSubmit(contactCV);
-
-
                 context.SubmitChanges(); 
 
 
