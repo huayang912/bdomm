@@ -46,7 +46,7 @@ public static class BindDropdownList
     public static void Clients(DropDownList ddl)
     {
         OMMDataContext context = new OMMDataContext();
-        var statuses = from P in context.Clients select new { ID = P.ID, Name = P.Name };
+        var statuses = from P in context.Clients orderby P.Name select new { ID = P.ID, Name = P.Name };
         ddl.DataSource = statuses;
         ddl.DataTextField = "Name";
         ddl.DataValueField = "ID";
@@ -56,7 +56,7 @@ public static class BindDropdownList
     public static void Projects(DropDownList ddl)
     {
         OMMDataContext context = new OMMDataContext();
-        var statuses = from P in context.Projects select new { ID = P.ID, Name = P.Name };
+        var statuses = from P in context.Projects orderby P.Name select new { ID = P.ID, Name = P.Name };
         ddl.DataSource = statuses;
         ddl.DataTextField = "Name";
         ddl.DataValueField = "ID";
@@ -66,7 +66,7 @@ public static class BindDropdownList
     public static void Roles(DropDownList ddl)
     {
         OMMDataContext context = new OMMDataContext();
-        var statuses = from P in context.Roles select new { ID = P.ID, Name = P.Name };
+        var statuses = from P in context.Roles orderby P.Name select new { ID = P.ID, Name = P.Name };
         ddl.DataSource = statuses;
         ddl.DataTextField = "Name";
         ddl.DataValueField = "ID";
