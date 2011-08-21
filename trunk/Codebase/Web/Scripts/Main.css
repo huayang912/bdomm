@@ -48,7 +48,7 @@ div.pageheading, h1
 }
 .ButtonCommon {
 	/*background-color:#2aa1cc;*/
-	background-color:#4a7abc;
+	background-color:#3d7bcb;
 	border-style:outset;
 	border-width:1px;
 	color:#FFFFFF;
@@ -223,6 +223,7 @@ textarea
 .OddRowListing
 {
     background-color:#d7e6f6;
+    border-bottom:solid 1px #d7e6f6;
 }
 .OddRowListing:hover
 {
@@ -234,6 +235,7 @@ textarea
 .EvenRowListing
 {
     background-color:#e9f0f8;
+    border-bottom:solid 1px #e9f0f8;
 }
 .EvenRowListing:hover
 {

@@ -6,12 +6,12 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">    
-    <div class="PopupBody">
+    <div>
+        <div id="divMessage" runat="server" visible="false" enableviewstate="false"></div>
         <asp:Panel ID="pnlFormContainer" runat="server" DefaultButton="btnSave">
             <%--ContactsNotes Information Group Box Start--%>               
-            <div class="WinGroupBox" style="margin-top:0px;">                
-                <div class="WinGroupBoxHeader">Personnel Note</div>
-                <div id="divMessage" runat="server" visible="false" enableviewstate="false"></div>
+            <div class="WinGroupBox">                
+                <div class="WinGroupBoxHeader">Personnel Note</div>                
                 
                 <table cellpadding="3" cellspacing="0" style="width:100%;">
                     <colgroup>
