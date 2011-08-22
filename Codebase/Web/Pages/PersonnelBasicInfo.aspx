@@ -172,7 +172,7 @@
             $('#tblPhoneNumbersList').find('tr:gt(0)').remove();
             for (j = 0; j < _Telephones.length; j++) {
                 var obj = _Telephones[j];
-                var tr = '<tr><td><input type="text" value="' + obj.Number + '"/><input type="hidden" value="' + obj.ID + '"/></td><td>' + BindTelephoneTypeDropdown(obj.TypeID) + '</td><td><a href="javascript:void(0);" onclick="DeleteTelephone(this);">Delete</a></td></tr>';
+                var tr = '<tr><td><input type="text" value="' + obj.Number + '"/><input type="hidden" value="' + obj.ID + '"/></td><td>' + BindTelephoneTypeDropdown(obj.TypeID) + '</td><td><a href="javascript:void(0);" onclick="SendSMS(this);">SMS</a> &nbsp; <a href="javascript:void(0);" onclick="DeleteTelephone(this);">Delete</a></td></tr>';
                 $('#tblPhoneNumbersList').append(tr);
             }
             FormatTable($('#tblPhoneNumbersList'));
@@ -190,7 +190,7 @@
             $('#tblEmailAddressList').find('tr:gt(0)').remove();
             for (j = 0; j < _Emails.length; j++) {
                 var obj = _Emails[j];
-                var tr = '<tr><td><input type="text" value="' + obj.Email + '"/><input type="hidden" value="' + obj.ID + '"/></td><td><a href="javascript:void(0);" onclick="DeleteEmail(this);">Delete</a></td></tr>';
+                var tr = '<tr><td><input type="text" value="' + obj.Email + '"/><input type="hidden" value="' + obj.ID + '"/></td><td><a href="mailto:' + obj.Email + '">Email</a> &nbsp; <a href="javascript:void(0);" onclick="DeleteEmail(this);">Delete</a></td></tr>';
                 $('#tblEmailAddressList').append(tr);
             }
             FormatTable($('#tblEmailAddressList'));
@@ -281,6 +281,12 @@
         function HideParentLoading() {
             window.parent.HideLoading();
         }
+        function SendSMS(anchorElement) {
+            var telephone = $(anchorElement).parent().parent().find("input[type='text']").val();
+            window.parent.ShowPopupToSendSMS(telephone);
+        }
+        //_Tr = $(anchorElement).parent().parent();
+        //var id = $(_Tr).find("input[type='hidden']").val();
         $(document).ready(function() {
             PrepareCollection();
             BindTelephoneNumbers();
