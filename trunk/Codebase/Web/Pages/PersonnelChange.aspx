@@ -77,7 +77,10 @@
             document.getElementById('frmContainer').style.height = height + 'px';
         }
         function RefreshPage(newContactID) {
-            window.location = '<%=Request.Url.AbsolutePath %>?<%=AppConstants.QueryString.ID %>=' + newContactID + '&Rnd=' + GetRandomNumber(); 
+            window.location = '<%=Request.Url.AbsolutePath %>?<%=AppConstants.QueryString.ID %>=' + newContactID + '&Rnd=' + GetRandomNumber();
+        }
+        function ShowPopupToSendSMS(telephoneNumber) {
+            alert(telephoneNumber);
         }
         $(document).ready(function() {
             $('#TabContainer td').each(function(i, obj) {
