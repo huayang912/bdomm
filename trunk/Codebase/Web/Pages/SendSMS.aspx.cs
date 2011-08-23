@@ -263,7 +263,7 @@ public partial class Pages_SendSMS : BasePage
 
         if (String.IsNullOrEmpty(userName.Trim()) || String.IsNullOrEmpty(password.Trim()))
         {
-            _ErrorMessage = "Unable to connect to the TextAnyWhere SMS Web Service.<br/>Check your service username and password.";
+            _ErrorMessage = "Unable to connect to the TextAnyWhere SMS Web Service.<br/>Check application configuration for service username and password.";
             return false;
         }        
         serviceTestReply = _SmsService.ServiceTest(userName, password);

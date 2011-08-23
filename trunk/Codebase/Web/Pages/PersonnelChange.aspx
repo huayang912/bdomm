@@ -80,13 +80,56 @@
             window.location = '<%=Request.Url.AbsolutePath %>?<%=AppConstants.QueryString.ID %>=' + newContactID + '&Rnd=' + GetRandomNumber();
         }
         function ShowPopupToSendSMS(telephoneNumber) {
-            alert(telephoneNumber);
+            //alert(telephoneNumber);
+            $('#divTelephone').html(telephoneNumber);
+            ShowModalPopup('divSMSSending', '', '');
+        }
+        function UpdateSMSCharacterCount() {
+            var length = $('#<%=txtMessage.ClientID %>').val().length;
+            $('#divMsgCharacterCount').html('Total ' + length + ' character(s) entered.');
+        }
+        function SendSms() {
+            if (Page_ClientValidate('SendMessage')) {
+                ShowLoading();
+                PageMethods.SendSms($('#divTelephone').html(), $('#<%=txtMessage.ClientID %>').val(), OnSendSms_Success, OnSendSMS_Error, OnSendSMS_TimeOut);
+            }
+        }
+        function OnSendSms_Success(result) {
+            HideLoading();
+            var process = eval(result);
+            var serverReply = '';
+            var div = $('#divSendStatusMessage').removeClass('MessageBox ErrorMessageBox');
+            if (process.StatusID > 0) {
+                $(div).addClass('MessageBox');
+                serverReply = 'SMS Sent Succesfully to the following Number:<br/>' + process.Message;
+            }
+            else {
+                $(div).addClass('ErrorMessageBox');
+                serverReply = 'Sorry an Error Occurred. Review the following error message.<br/>' + process.Message;
+            }
+
+            $(div).show().html(serverReply);
+        }
+        function OnSendSMS_Error(error) {
+            HideLoading();
+            alert(error.get_message());
+        }
+        function OnSendSMS_TimeOut() {
+            HideLoading();
+            alert('Failed! Operation Timeout!');
         }
         $(document).ready(function() {
             $('#TabContainer td').each(function(i, obj) {
                 $(this).click(function() { ShowTab(obj, i); });
             });
             ShowTab($('#TabContainer td:first'), 0);
+
+            $('#<%=txtMessage.ClientID %>').keyup(function(event) {
+                UpdateSMSCharacterCount();
+            })
+            $('#<%=txtMessage.ClientID %>').change(function(event) {
+                UpdateSMSCharacterCount();
+            })
         });
     </script>
 </asp:Content>
@@ -120,5 +163,56 @@
             <iframe id="frmContainer" src="" style="height:350px; width:100%; border:none;" frameborder="0" scrolling="no"></iframe>
         </div>
     </asp:Panel>
+    
+    <%--Send SMS Modal Popup Start--%>
+    <div id="divSMSSending" class="PopupContainer" style="display: none; width:500px; height:auto;">        
+        <div class="PopupHeaderMiddle">Send SMS to Personnel</div> 
+        <div class="PopupBody" style="padding:10px;">                        
+            <%--<img id="imgSubscribeToNewsletterLoading" src="/Images/Loading.gif" alt="" title="" />--%>
+            <div>Please Enter the Message to be Sent</div>
+            <div>
+                <div class="floatleft">
+                    <asp:TextBox ID="txtMessage" runat="server" TextMode="MultiLine" CssClass="MessageTextBox" style="height:200px;"></asp:TextBox>                    
+                </div>
+                <div class="floatright" style="width:55%;">
+                    <table class="GridView" cellpadding="3" cellspacing="0" style="width:100%;">
+                        <colgroup>
+                            <col style="width:50%;"/>
+                            <col />
+                        </colgroup>
+                        <tr>
+                            <th>Number</th>
+                            <th>SMS Credit</th>
+                        </tr>
+                        <tr class="OddRowListing">
+                            <td><div id="divTelephone"></div></td>
+                            <td><div id="divSmsCredit"></div></td>
+                        </tr>
+                    </table>
+                    <div id="divMsgCharacterCount" style="margin:5px 0px 0px 5px; font-weight:bold;"></div>
+                    <div id="divSendStatusMessage" class="MessageBox" style="display:none;"></div>
+                    <div>
+                        <asp:RequiredFieldValidator ID="rfvMessage" runat="server"
+                            ControlToValidate="txtMessage" SetFocusOnError="true" Display="Dynamic"                        
+                            ValidationGroup="SendMessage"
+                            ErrorMessage="<br />Please write a Messsage.">
+                        </asp:RequiredFieldValidator>
+                    </div>
+                </div>
+                <div class="clearboth"></div>
+            </div>            
+        </div>
+        <div class="PopupButtonContainer">  
+            <div class="floatleft">
+                <%--<input type="button" value="Verify" class="ButtonInActive" onclick="VerifyPhoneNumber();" />&nbsp;--%>
+                <input type="button" value="Send SMS" class="ButtonCommon" onclick="SendSms();" />
+            </div>           
+            <div class="floatright">
+                <input type="button" value="Close" class="ButtonInActive" onclick="HideModalPopup();" />
+            </div>
+            <div class="clearboth"></div>
+        </div>
+    </div>
+    <%--Send SMS Modal Popup End--%>
 </asp:Content>
 

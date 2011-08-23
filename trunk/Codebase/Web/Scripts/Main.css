@@ -56,6 +56,23 @@ div.pageheading, h1
 	font-weight:bold;
 	padding:2px 10px;
 	cursor:pointer;	
+	letter-spacing:1px;
+	
+}
+.ButtonInActive {	
+	background-color:#CCCCCC;
+	border-style:outset;
+	border-width:1px;
+	border-color:#837a7a;
+	color:#616373;
+	font-size:11px;
+	font-weight:bold;	
+	cursor:pointer;	
+	padding:2px 10px;	
+	letter-spacing:1px;
+    /*-moz-box-shadow: 0px 0px 1px #999999;
+    -webkit-box-shadow: 0px 0px 1px #999999;
+    box-shadow: 0px 0px 1px #999999;*/
 }
 .DropDownListCommon
 {
@@ -131,21 +148,23 @@ textarea
 }   
 .modalpopupshadow
 {
-	position:absolute;
+	position:fixed;
 	z-index:19;
 	background-color:#3C3C3C;	
     filter:alpha(opacity=50);
-    opacity:0.5;      
+    opacity:0.5; 
+    -moz-border-radius: 8px;
+	border-radius: 8px;	     
 } 
 
 .PopupContainer {
 	background-color:#FFFFFF;
 	width:355px;	
-	position: absolute;        
+	position: fixed;        
     color: #333;
     z-index:20; 
 }
-.PopupHeaderMiddle {	
+/*.PopupHeaderMiddle {	
 	background-color:#FFFFFF;	
 	min-width: 325px;	
 	height: 22px;
@@ -153,12 +172,21 @@ textarea
 	color:#000000;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-weight: bold;	
+}*/
+.PopupHeaderMiddle {	
+	background-color:#C6D9F3;	
+	/*min-width: 325px;		*/
+	padding: 5px 15px 5px 15px;	
+	color:#000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;	
+	border-bottom:#3D7BCB solid 1px;
 }
 .PopupBody {	
 	background-color:#FFFFFF;	
 	min-width: 305px;	
 	min-height:50px;
-	padding: 5px 15px 5px 15px;	
+	padding: 10px 15px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;		
 }
 #popupHeader
@@ -170,8 +198,7 @@ textarea
 }
 .PopupButtonContainer 
 {	
-	text-align: right;
-	/*padding:10px 15px 20px 0px;	*/
+	padding:8px 15px;
 	background-color:#EFEFEF;
 	border-top:#CCCCCC 1px solid;
 }
@@ -263,3 +290,12 @@ textarea
 .PagerButton a:hover{text-decoration:underline; color:#FFFFFF;}
 .PagerPageCount{float:right; text-align:right; padding-top:5px; font-size:12px; color:#a7b8a7;}
 .PagerTotalRecordMessage{margin-top:5px; font-size:12px; color:#a7b8a7;}
+.MessageTextBox
+{
+    width:200px;
+    height:250px;
+    font-size:16px;
+    font-family:Verdana;
+    border:#A9A9A9 3px solid;
+    margin-top:5px;
+}

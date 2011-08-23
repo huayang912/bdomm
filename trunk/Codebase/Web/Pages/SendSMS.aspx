@@ -89,18 +89,7 @@
                 $(this).parent().parent().remove();                
             });
         }
-    </script>
-    <style type="text/css">
-        .MessageTextBox
-        {
-            width:200px;
-            height:250px;
-            font-size:16px;
-            font-family:Verdana;
-            border:#A9A9A9 3px solid;
-            margin-top:5px;
-        }
-    </style>
+    </script>    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageHeaderContentPlaceHolder" Runat="Server">
     <asp:Literal id="ltrHeading" runat="server">Send SMS Wizard</asp:Literal>    
