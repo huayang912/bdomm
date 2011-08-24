@@ -134,6 +134,12 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   partial void InsertNextOfKin(NextOfKin instance);
   partial void UpdateNextOfKin(NextOfKin instance);
   partial void DeleteNextOfKin(NextOfKin instance);
+  partial void InsertCertificate(Certificate instance);
+  partial void UpdateCertificate(Certificate instance);
+  partial void DeleteCertificate(Certificate instance);
+  partial void InsertCertificateType(CertificateType instance);
+  partial void UpdateCertificateType(CertificateType instance);
+  partial void DeleteCertificateType(CertificateType instance);
   #endregion
 	
 	public OMMDataContext() : 
@@ -443,6 +449,22 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<NextOfKin>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Certificate> Certificates
+	{
+		get
+		{
+			return this.GetTable<Certificate>();
+		}
+	}
+	
+	public System.Data.Linq.Table<CertificateType> CertificateTypes
+	{
+		get
+		{
+			return this.GetTable<CertificateType>();
 		}
 	}
 	
@@ -4981,6 +5003,8 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<NextOfKin> _NextOfKins;
 	
+	private EntitySet<Certificate> _Certificates;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5027,6 +5051,7 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		this._ContactsNextOfKins = new EntitySet<ContactsNextOfKin>(new Action<ContactsNextOfKin>(this.attach_ContactsNextOfKins), new Action<ContactsNextOfKin>(this.detach_ContactsNextOfKins));
 		this._ContactsTravels = new EntitySet<ContactsTravel>(new Action<ContactsTravel>(this.attach_ContactsTravels), new Action<ContactsTravel>(this.detach_ContactsTravels));
 		this._NextOfKins = new EntitySet<NextOfKin>(new Action<NextOfKin>(this.attach_NextOfKins), new Action<NextOfKin>(this.detach_NextOfKins));
+		this._Certificates = new EntitySet<Certificate>(new Action<Certificate>(this.attach_Certificates), new Action<Certificate>(this.detach_Certificates));
 		OnCreated();
 	}
 	
@@ -5476,6 +5501,19 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="User_Certificate", Storage="_Certificates", ThisKey="ID", OtherKey="ChangedByUserID")]
+	public EntitySet<Certificate> Certificates
+	{
+		get
+		{
+			return this._Certificates;
+		}
+		set
+		{
+			this._Certificates.Assign(value);
+		}
+	}
+	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -5755,6 +5793,18 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_NextOfKins(NextOfKin entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_Certificates(Certificate entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_Certificates(Certificate entity)
 	{
 		this.SendPropertyChanging();
 		entity.User = null;
@@ -6634,6 +6684,8 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<NextOfKin> _NextOfKins;
 	
+	private EntitySet<Certificate> _Certificates;
+	
 	private EntityRef<Country> _Country;
 	
 	private EntityRef<Country> _Country1;
@@ -6703,6 +6755,7 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 		this._ContactsNextOfKin = default(EntityRef<ContactsNextOfKin>);
 		this._ContactsTravel = default(EntityRef<ContactsTravel>);
 		this._NextOfKins = new EntitySet<NextOfKin>(new Action<NextOfKin>(this.attach_NextOfKins), new Action<NextOfKin>(this.detach_NextOfKins));
+		this._Certificates = new EntitySet<Certificate>(new Action<Certificate>(this.attach_Certificates), new Action<Certificate>(this.detach_Certificates));
 		this._Country = default(EntityRef<Country>);
 		this._Country1 = default(EntityRef<Country>);
 		this._User = default(EntityRef<User>);
@@ -7300,6 +7353,19 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="Contact_Certificate", Storage="_Certificates", ThisKey="ID", OtherKey="ContactID")]
+	public EntitySet<Certificate> Certificates
+	{
+		get
+		{
+			return this._Certificates;
+		}
+		set
+		{
+			this._Certificates.Assign(value);
+		}
+	}
+	
 	[Association(Name="Country_Contact", Storage="_Country", ThisKey="CountryID", OtherKey="ID", IsForeignKey=true)]
 	public Country Country
 	{
@@ -7569,6 +7635,18 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_NextOfKins(NextOfKin entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = null;
+	}
+	
+	private void attach_Certificates(Certificate entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = this;
+	}
+	
+	private void detach_Certificates(Certificate entity)
 	{
 		this.SendPropertyChanging();
 		entity.Contact = null;
@@ -12493,6 +12571,497 @@ public partial class NextOfKin : INotifyPropertyChanging, INotifyPropertyChanged
 		{
 			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
+	}
+}
+
+[Table(Name="dbo.Certificates")]
+public partial class Certificate : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private int _ContactID;
+	
+	private int _TypeID;
+	
+	private string _Details;
+	
+	private System.Nullable<System.DateTime> _ExpiryDate;
+	
+	private string _PlaceIssued;
+	
+	private System.Data.Linq.Binary _TimeStamp;
+	
+	private System.Nullable<int> _ChangedByUserID;
+	
+	private System.DateTime _ChangedOn;
+	
+	private EntityRef<Contact> _Contact;
+	
+	private EntityRef<User> _User;
+	
+	private EntityRef<CertificateType> _CertificateType;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnContactIDChanging(int value);
+    partial void OnContactIDChanged();
+    partial void OnTypeIDChanging(int value);
+    partial void OnTypeIDChanged();
+    partial void OnDetailsChanging(string value);
+    partial void OnDetailsChanged();
+    partial void OnExpiryDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnExpiryDateChanged();
+    partial void OnPlaceIssuedChanging(string value);
+    partial void OnPlaceIssuedChanged();
+    partial void OnTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnTimeStampChanged();
+    partial void OnChangedByUserIDChanging(System.Nullable<int> value);
+    partial void OnChangedByUserIDChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    #endregion
+	
+	public Certificate()
+	{
+		this._Contact = default(EntityRef<Contact>);
+		this._User = default(EntityRef<User>);
+		this._CertificateType = default(EntityRef<CertificateType>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ContactID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int ContactID
+	{
+		get
+		{
+			return this._ContactID;
+		}
+		set
+		{
+			if ((this._ContactID != value))
+			{
+				if (this._Contact.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnContactIDChanging(value);
+				this.SendPropertyChanging();
+				this._ContactID = value;
+				this.SendPropertyChanged("ContactID");
+				this.OnContactIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_TypeID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int TypeID
+	{
+		get
+		{
+			return this._TypeID;
+		}
+		set
+		{
+			if ((this._TypeID != value))
+			{
+				if (this._CertificateType.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnTypeIDChanging(value);
+				this.SendPropertyChanging();
+				this._TypeID = value;
+				this.SendPropertyChanged("TypeID");
+				this.OnTypeIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Details", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+	public string Details
+	{
+		get
+		{
+			return this._Details;
+		}
+		set
+		{
+			if ((this._Details != value))
+			{
+				this.OnDetailsChanging(value);
+				this.SendPropertyChanging();
+				this._Details = value;
+				this.SendPropertyChanged("Details");
+				this.OnDetailsChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ExpiryDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<System.DateTime> ExpiryDate
+	{
+		get
+		{
+			return this._ExpiryDate;
+		}
+		set
+		{
+			if ((this._ExpiryDate != value))
+			{
+				this.OnExpiryDateChanging(value);
+				this.SendPropertyChanging();
+				this._ExpiryDate = value;
+				this.SendPropertyChanged("ExpiryDate");
+				this.OnExpiryDateChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_PlaceIssued", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+	public string PlaceIssued
+	{
+		get
+		{
+			return this._PlaceIssued;
+		}
+		set
+		{
+			if ((this._PlaceIssued != value))
+			{
+				this.OnPlaceIssuedChanging(value);
+				this.SendPropertyChanging();
+				this._PlaceIssued = value;
+				this.SendPropertyChanged("PlaceIssued");
+				this.OnPlaceIssuedChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_TimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary TimeStamp
+	{
+		get
+		{
+			return this._TimeStamp;
+		}
+		set
+		{
+			if ((this._TimeStamp != value))
+			{
+				this.OnTimeStampChanging(value);
+				this.SendPropertyChanging();
+				this._TimeStamp = value;
+				this.SendPropertyChanged("TimeStamp");
+				this.OnTimeStampChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> ChangedByUserID
+	{
+		get
+		{
+			return this._ChangedByUserID;
+		}
+		set
+		{
+			if ((this._ChangedByUserID != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnChangedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUserID = value;
+				this.SendPropertyChanged("ChangedByUserID");
+				this.OnChangedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Contact_Certificate", Storage="_Contact", ThisKey="ContactID", OtherKey="ID", IsForeignKey=true)]
+	public Contact Contact
+	{
+		get
+		{
+			return this._Contact.Entity;
+		}
+		set
+		{
+			Contact previousValue = this._Contact.Entity;
+			if (((previousValue != value) 
+						|| (this._Contact.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Contact.Entity = null;
+					previousValue.Certificates.Remove(this);
+				}
+				this._Contact.Entity = value;
+				if ((value != null))
+				{
+					value.Certificates.Add(this);
+					this._ContactID = value.ID;
+				}
+				else
+				{
+					this._ContactID = default(int);
+				}
+				this.SendPropertyChanged("Contact");
+			}
+		}
+	}
+	
+	[Association(Name="User_Certificate", Storage="_User", ThisKey="ChangedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.Certificates.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.Certificates.Add(this);
+					this._ChangedByUserID = value.ID;
+				}
+				else
+				{
+					this._ChangedByUserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	[Association(Name="CertificateType_Certificate", Storage="_CertificateType", ThisKey="TypeID", OtherKey="ID", IsForeignKey=true)]
+	public CertificateType CertificateType
+	{
+		get
+		{
+			return this._CertificateType.Entity;
+		}
+		set
+		{
+			CertificateType previousValue = this._CertificateType.Entity;
+			if (((previousValue != value) 
+						|| (this._CertificateType.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._CertificateType.Entity = null;
+					previousValue.Certificates.Remove(this);
+				}
+				this._CertificateType.Entity = value;
+				if ((value != null))
+				{
+					value.Certificates.Add(this);
+					this._TypeID = value.ID;
+				}
+				else
+				{
+					this._TypeID = default(int);
+				}
+				this.SendPropertyChanged("CertificateType");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[Table(Name="dbo.CertificateTypes")]
+public partial class CertificateType : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private string _Name;
+	
+	private EntitySet<Certificate> _Certificates;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+	
+	public CertificateType()
+	{
+		this._Certificates = new EntitySet<Certificate>(new Action<Certificate>(this.attach_Certificates), new Action<Certificate>(this.detach_Certificates));
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string Name
+	{
+		get
+		{
+			return this._Name;
+		}
+		set
+		{
+			if ((this._Name != value))
+			{
+				this.OnNameChanging(value);
+				this.SendPropertyChanging();
+				this._Name = value;
+				this.SendPropertyChanged("Name");
+				this.OnNameChanged();
+			}
+		}
+	}
+	
+	[Association(Name="CertificateType_Certificate", Storage="_Certificates", ThisKey="ID", OtherKey="TypeID")]
+	public EntitySet<Certificate> Certificates
+	{
+		get
+		{
+			return this._Certificates;
+		}
+		set
+		{
+			this._Certificates.Assign(value);
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_Certificates(Certificate entity)
+	{
+		this.SendPropertyChanging();
+		entity.CertificateType = this;
+	}
+	
+	private void detach_Certificates(Certificate entity)
+	{
+		this.SendPropertyChanging();
+		entity.CertificateType = null;
 	}
 }
 

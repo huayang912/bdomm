@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="OMM_Production" Class="OMMDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=MIMIXP-PC;Initial Catalog=OMM_Production;Integrated Security=False;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="OMMConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=MKRABBANI;Initial Catalog=OMM;Integrated Security=False;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="OMMConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Message_Recipients" Member="Message_Recipients">
     <Type Name="Message_Recipient">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -236,6 +236,7 @@
       <Association Name="User_ContactsNextOfKin" Member="ContactsNextOfKins" ThisKey="ID" OtherKey="ChangedByUserID" Type="ContactsNextOfKin" />
       <Association Name="User_ContactsTravel" Member="ContactsTravels" ThisKey="ID" OtherKey="ChangedByUserID" Type="ContactsTravel" />
       <Association Name="User_NextOfKin" Member="NextOfKins" ThisKey="ID" OtherKey="ChangedByUserID" Type="NextOfKin" />
+      <Association Name="User_Certificate" Member="Certificates" ThisKey="ID" OtherKey="ChangedByUserID" Type="Certificate" />
     </Type>
   </Table>
   <Table Name="dbo.SMS_Messages" Member="SMS_Messages">
@@ -307,6 +308,7 @@
       <Association Name="Contact_ContactsNextOfKin" Member="ContactsNextOfKin" ThisKey="ID" OtherKey="ContactID" Type="ContactsNextOfKin" Cardinality="One" />
       <Association Name="Contact_ContactsTravel" Member="ContactsTravel" ThisKey="ID" OtherKey="ContactID" Type="ContactsTravel" Cardinality="One" />
       <Association Name="Contact_NextOfKin" Member="NextOfKins" ThisKey="ID" OtherKey="ContactID" Type="NextOfKin" />
+      <Association Name="Contact_Certificate" Member="Certificates" ThisKey="ID" OtherKey="ContactID" Type="Certificate" />
       <Association Name="Country_Contact" Member="Country" ThisKey="CountryID" OtherKey="ID" Type="Country" IsForeignKey="true" />
       <Association Name="Country_Contact1" Member="Country1" ThisKey="CountryOfBirthID" OtherKey="ID" Type="Country" IsForeignKey="true" />
       <Association Name="User_Contact" Member="User" ThisKey="CreatedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
@@ -530,6 +532,29 @@
       <Association Name="Country_NextOfKin" Member="Country" ThisKey="CountryID" OtherKey="ID" Type="Country" IsForeignKey="true" />
       <Association Name="Contact_NextOfKin" Member="Contact" ThisKey="ContactID" OtherKey="ID" Type="Contact" IsForeignKey="true" />
       <Association Name="User_NextOfKin" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Certificates" Member="Certificates">
+    <Type Name="Certificate">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ContactID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Details" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ExpiryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PlaceIssued" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="ChangedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Contact_Certificate" Member="Contact" ThisKey="ContactID" OtherKey="ID" Type="Contact" IsForeignKey="true" />
+      <Association Name="User_Certificate" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+      <Association Name="CertificateType_Certificate" Member="CertificateType" ThisKey="TypeID" OtherKey="ID" Type="CertificateType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CertificateTypes" Member="CertificateTypes">
+    <Type Name="CertificateType">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="CertificateType_Certificate" Member="Certificates" ThisKey="ID" OtherKey="TypeID" Type="Certificate" />
     </Type>
   </Table>
   <Function Name="dbo.GenerateNewQuotationNumber" Method="GenerateNewQuotationNumber" IsComposable="true">

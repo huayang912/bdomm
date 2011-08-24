@@ -73,4 +73,15 @@ public static class BindDropdownList
         ddl.DataBind();
         InsertBlankOption(ddl);
     }
+
+    public static void CertificateTypes(DropDownList ddl)
+    {
+        OMMDataContext context = new OMMDataContext();
+        var certificateType = from P in context.CertificateTypes orderby P.Name select new { P.ID, P.Name };
+        ddl.DataSource = certificateType;
+        ddl.DataTextField = "Name";
+        ddl.DataValueField = "ID";
+        ddl.DataBind();
+        InsertBlankOption(ddl);
+    }
 }
