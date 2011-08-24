@@ -151,7 +151,7 @@
                 <td class="TabItem" NavigateUrl="PersonnelNotes.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Notes</td>
                 <td class="TabItem" NavigateUrl="PersonnelTravelDetails.aspx">Travel Details</td>
                 <td class="TabItem" NavigateUrl="PersonnelNextOfKin.aspx?ID=<%= _ID.ToString() %>">Next Of Kin</td>
-                <td class="TabItem" NavigateUrl="PersonnelBankDetails.aspx">Bank Details</td>
+                <td class="TabItem" NavigateUrl="PersonnelBankDetails_.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Bank Details</td>
                 <td class="TabItem" NavigateUrl="PersonnelCVUpload.aspx?<%=AppConstants.QueryString.ID %>=<%=_ID.ToString() %>">&nbsp;CV&nbsp;</td>
                 <% } %>
                 

@@ -40,4 +40,19 @@ public class AppSQL
 	        LEFT JOIN Projects ON Projects.ID = E.ProjectID
 	        LEFT JOIN Roles ON Roles.ID = E.RoleID
 	    WHERE E.ContactID = @ContactID";
+
+    public const String GET_BANK_DETAILS_BY_CONTACT = @"
+        SELECT 
+        bd.ID,
+        bd.ContactID,
+        bd.BankName,
+        bd.BranchName,
+        bd.BranchAddress,
+        bd.SortCode,
+        bd.AccountNumber,
+        bd.AccountName,
+        bd.BicCode,
+        bd.AbaCode 
+        FROM BankDetails bd
+        WHERE bd.ContactID = @ContactID";
 }

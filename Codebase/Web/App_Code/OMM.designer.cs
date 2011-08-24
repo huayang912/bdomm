@@ -21,7 +21,7 @@ using System.Reflection;
 
 
 
-[System.Data.Linq.Mapping.DatabaseAttribute(Name="OMM_Production")]
+[System.Data.Linq.Mapping.DatabaseAttribute(Name="OMM")]
 public partial class OMMDataContext : System.Data.Linq.DataContext
 {
 	
@@ -140,6 +140,9 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   partial void InsertCertificateType(CertificateType instance);
   partial void UpdateCertificateType(CertificateType instance);
   partial void DeleteCertificateType(CertificateType instance);
+  partial void InsertBankDetail(BankDetail instance);
+  partial void UpdateBankDetail(BankDetail instance);
+  partial void DeleteBankDetail(BankDetail instance);
   #endregion
 	
 	public OMMDataContext() : 
@@ -465,6 +468,14 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<CertificateType>();
+		}
+	}
+	
+	public System.Data.Linq.Table<BankDetail> BankDetails
+	{
+		get
+		{
+			return this.GetTable<BankDetail>();
 		}
 	}
 	
@@ -5005,6 +5016,8 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<Certificate> _Certificates;
 	
+	private EntitySet<BankDetail> _BankDetails;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5052,6 +5065,7 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		this._ContactsTravels = new EntitySet<ContactsTravel>(new Action<ContactsTravel>(this.attach_ContactsTravels), new Action<ContactsTravel>(this.detach_ContactsTravels));
 		this._NextOfKins = new EntitySet<NextOfKin>(new Action<NextOfKin>(this.attach_NextOfKins), new Action<NextOfKin>(this.detach_NextOfKins));
 		this._Certificates = new EntitySet<Certificate>(new Action<Certificate>(this.attach_Certificates), new Action<Certificate>(this.detach_Certificates));
+		this._BankDetails = new EntitySet<BankDetail>(new Action<BankDetail>(this.attach_BankDetails), new Action<BankDetail>(this.detach_BankDetails));
 		OnCreated();
 	}
 	
@@ -5514,6 +5528,19 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="User_BankDetail", Storage="_BankDetails", ThisKey="ID", OtherKey="ChangedByUserId")]
+	public EntitySet<BankDetail> BankDetails
+	{
+		get
+		{
+			return this._BankDetails;
+		}
+		set
+		{
+			this._BankDetails.Assign(value);
+		}
+	}
+	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -5805,6 +5832,18 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_Certificates(Certificate entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_BankDetails(BankDetail entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_BankDetails(BankDetail entity)
 	{
 		this.SendPropertyChanging();
 		entity.User = null;
@@ -6686,6 +6725,8 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<Certificate> _Certificates;
 	
+	private EntitySet<BankDetail> _BankDetails;
+	
 	private EntityRef<Country> _Country;
 	
 	private EntityRef<Country> _Country1;
@@ -6756,6 +6797,7 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 		this._ContactsTravel = default(EntityRef<ContactsTravel>);
 		this._NextOfKins = new EntitySet<NextOfKin>(new Action<NextOfKin>(this.attach_NextOfKins), new Action<NextOfKin>(this.detach_NextOfKins));
 		this._Certificates = new EntitySet<Certificate>(new Action<Certificate>(this.attach_Certificates), new Action<Certificate>(this.detach_Certificates));
+		this._BankDetails = new EntitySet<BankDetail>(new Action<BankDetail>(this.attach_BankDetails), new Action<BankDetail>(this.detach_BankDetails));
 		this._Country = default(EntityRef<Country>);
 		this._Country1 = default(EntityRef<Country>);
 		this._User = default(EntityRef<User>);
@@ -7366,6 +7408,19 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="Contact_BankDetail", Storage="_BankDetails", ThisKey="ID", OtherKey="ContactID")]
+	public EntitySet<BankDetail> BankDetails
+	{
+		get
+		{
+			return this._BankDetails;
+		}
+		set
+		{
+			this._BankDetails.Assign(value);
+		}
+	}
+	
 	[Association(Name="Country_Contact", Storage="_Country", ThisKey="CountryID", OtherKey="ID", IsForeignKey=true)]
 	public Country Country
 	{
@@ -7647,6 +7702,18 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_Certificates(Certificate entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = null;
+	}
+	
+	private void attach_BankDetails(BankDetail entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = this;
+	}
+	
+	private void detach_BankDetails(BankDetail entity)
 	{
 		this.SendPropertyChanging();
 		entity.Contact = null;
@@ -13062,6 +13129,438 @@ public partial class CertificateType : INotifyPropertyChanging, INotifyPropertyC
 	{
 		this.SendPropertyChanging();
 		entity.CertificateType = null;
+	}
+}
+
+[Table(Name="dbo.BankDetails")]
+public partial class BankDetail : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private int _ContactID;
+	
+	private string _BankName;
+	
+	private string _BranchName;
+	
+	private string _BranchAddress;
+	
+	private string _SortCode;
+	
+	private string _AccountNumber;
+	
+	private string _AccountName;
+	
+	private string _BicCode;
+	
+	private string _AbaCode;
+	
+	private System.Data.Linq.Binary _TimeStamp;
+	
+	private System.Nullable<int> _ChangedByUserId;
+	
+	private System.DateTime _ChangedOn;
+	
+	private EntityRef<Contact> _Contact;
+	
+	private EntityRef<User> _User;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnContactIDChanging(int value);
+    partial void OnContactIDChanged();
+    partial void OnBankNameChanging(string value);
+    partial void OnBankNameChanged();
+    partial void OnBranchNameChanging(string value);
+    partial void OnBranchNameChanged();
+    partial void OnBranchAddressChanging(string value);
+    partial void OnBranchAddressChanged();
+    partial void OnSortCodeChanging(string value);
+    partial void OnSortCodeChanged();
+    partial void OnAccountNumberChanging(string value);
+    partial void OnAccountNumberChanged();
+    partial void OnAccountNameChanging(string value);
+    partial void OnAccountNameChanged();
+    partial void OnBicCodeChanging(string value);
+    partial void OnBicCodeChanged();
+    partial void OnAbaCodeChanging(string value);
+    partial void OnAbaCodeChanged();
+    partial void OnTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnTimeStampChanged();
+    partial void OnChangedByUserIdChanging(System.Nullable<int> value);
+    partial void OnChangedByUserIdChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    #endregion
+	
+	public BankDetail()
+	{
+		this._Contact = default(EntityRef<Contact>);
+		this._User = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ContactID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int ContactID
+	{
+		get
+		{
+			return this._ContactID;
+		}
+		set
+		{
+			if ((this._ContactID != value))
+			{
+				if (this._Contact.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnContactIDChanging(value);
+				this.SendPropertyChanging();
+				this._ContactID = value;
+				this.SendPropertyChanged("ContactID");
+				this.OnContactIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_BankName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string BankName
+	{
+		get
+		{
+			return this._BankName;
+		}
+		set
+		{
+			if ((this._BankName != value))
+			{
+				this.OnBankNameChanging(value);
+				this.SendPropertyChanging();
+				this._BankName = value;
+				this.SendPropertyChanged("BankName");
+				this.OnBankNameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_BranchName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string BranchName
+	{
+		get
+		{
+			return this._BranchName;
+		}
+		set
+		{
+			if ((this._BranchName != value))
+			{
+				this.OnBranchNameChanging(value);
+				this.SendPropertyChanging();
+				this._BranchName = value;
+				this.SendPropertyChanged("BranchName");
+				this.OnBranchNameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_BranchAddress", DbType="NVarChar(200)", UpdateCheck=UpdateCheck.Never)]
+	public string BranchAddress
+	{
+		get
+		{
+			return this._BranchAddress;
+		}
+		set
+		{
+			if ((this._BranchAddress != value))
+			{
+				this.OnBranchAddressChanging(value);
+				this.SendPropertyChanging();
+				this._BranchAddress = value;
+				this.SendPropertyChanged("BranchAddress");
+				this.OnBranchAddressChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_SortCode", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string SortCode
+	{
+		get
+		{
+			return this._SortCode;
+		}
+		set
+		{
+			if ((this._SortCode != value))
+			{
+				this.OnSortCodeChanging(value);
+				this.SendPropertyChanging();
+				this._SortCode = value;
+				this.SendPropertyChanged("SortCode");
+				this.OnSortCodeChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_AccountNumber", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string AccountNumber
+	{
+		get
+		{
+			return this._AccountNumber;
+		}
+		set
+		{
+			if ((this._AccountNumber != value))
+			{
+				this.OnAccountNumberChanging(value);
+				this.SendPropertyChanging();
+				this._AccountNumber = value;
+				this.SendPropertyChanged("AccountNumber");
+				this.OnAccountNumberChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_AccountName", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string AccountName
+	{
+		get
+		{
+			return this._AccountName;
+		}
+		set
+		{
+			if ((this._AccountName != value))
+			{
+				this.OnAccountNameChanging(value);
+				this.SendPropertyChanging();
+				this._AccountName = value;
+				this.SendPropertyChanged("AccountName");
+				this.OnAccountNameChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_BicCode", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string BicCode
+	{
+		get
+		{
+			return this._BicCode;
+		}
+		set
+		{
+			if ((this._BicCode != value))
+			{
+				this.OnBicCodeChanging(value);
+				this.SendPropertyChanging();
+				this._BicCode = value;
+				this.SendPropertyChanged("BicCode");
+				this.OnBicCodeChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_AbaCode", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string AbaCode
+	{
+		get
+		{
+			return this._AbaCode;
+		}
+		set
+		{
+			if ((this._AbaCode != value))
+			{
+				this.OnAbaCodeChanging(value);
+				this.SendPropertyChanging();
+				this._AbaCode = value;
+				this.SendPropertyChanged("AbaCode");
+				this.OnAbaCodeChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_TimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary TimeStamp
+	{
+		get
+		{
+			return this._TimeStamp;
+		}
+		set
+		{
+			if ((this._TimeStamp != value))
+			{
+				this.OnTimeStampChanging(value);
+				this.SendPropertyChanging();
+				this._TimeStamp = value;
+				this.SendPropertyChanged("TimeStamp");
+				this.OnTimeStampChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUserId", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> ChangedByUserId
+	{
+		get
+		{
+			return this._ChangedByUserId;
+		}
+		set
+		{
+			if ((this._ChangedByUserId != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnChangedByUserIdChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUserId = value;
+				this.SendPropertyChanged("ChangedByUserId");
+				this.OnChangedByUserIdChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Contact_BankDetail", Storage="_Contact", ThisKey="ContactID", OtherKey="ID", IsForeignKey=true)]
+	public Contact Contact
+	{
+		get
+		{
+			return this._Contact.Entity;
+		}
+		set
+		{
+			Contact previousValue = this._Contact.Entity;
+			if (((previousValue != value) 
+						|| (this._Contact.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Contact.Entity = null;
+					previousValue.BankDetails.Remove(this);
+				}
+				this._Contact.Entity = value;
+				if ((value != null))
+				{
+					value.BankDetails.Add(this);
+					this._ContactID = value.ID;
+				}
+				else
+				{
+					this._ContactID = default(int);
+				}
+				this.SendPropertyChanged("Contact");
+			}
+		}
+	}
+	
+	[Association(Name="User_BankDetail", Storage="_User", ThisKey="ChangedByUserId", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.BankDetails.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.BankDetails.Add(this);
+					this._ChangedByUserId = value.ID;
+				}
+				else
+				{
+					this._ChangedByUserId = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
 	}
 }
 
