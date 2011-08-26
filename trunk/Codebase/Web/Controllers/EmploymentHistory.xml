@@ -99,7 +99,7 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
     <field name="ContactID" type="Int32" allowNulls="false" label="Contact#" showInSummary="true">
       <items style="Lookup" dataController="Contacts" newDataView="createForm1" />
     </field>
-    <field name="ContactFirstNames" type="String" readOnly="true" label="Contact First Names" />
+    <field name="ContactFirstNames" type="String" readOnly="true" label="Personnel Name" />
     <field name="StartDate" type="DateTime" label="Start Date" showInSummary="true" />
     <field name="EndDate" type="DateTime" label="End Date" showInSummary="true" />
     <field name="ProjectID" type="Int32" label="Project#" showInSummary="true" allowNulls="true">
@@ -165,7 +165,7 @@ from "dbo"."EmploymentHistory" "EmploymentHistory"
       <headerText></headerText>
       <dataFields>
         <dataField fieldName="ProjectID" aliasFieldName="ProjectNumber" />
-        <dataField fieldName="ContactID" aliasFieldName="Personnel Name" />
+        <dataField fieldName="ContactID" aliasFieldName="ContactFirstNames" />
         <dataField fieldName="StartDate" columns="10" />
         <dataField fieldName="EndDate" columns="10" />
         <dataField fieldName="ClientID" hidden="true" aliasFieldName="ClientName" />
