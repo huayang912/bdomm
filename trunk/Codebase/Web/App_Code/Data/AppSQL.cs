@@ -55,4 +55,38 @@ public class AppSQL
         bd.AbaCode 
         FROM BankDetails bd
         WHERE bd.ContactID = @ContactID";
+
+    public const String GET_CRETIFICATION_DETAILS_BY_CONTACT = @"
+        SELECT ct.[Name] AS [Type Name], 
+        c.ID,
+        c.ContactID,
+        c.TypeID,
+        c.Details,
+        c.ExpiryDate,
+        c.PlaceIssued 
+        FROM Certificates c
+        INNER JOIN CertificateTypes ct 
+        ON ct.ID = c.TypeID
+        WHERE c.ContactID = @ContactID";
+
+    public const String GET_PASSPORT_DETAILS_BY_CONTACT = @"
+        SELECT p.ID,
+        p.ContactID,
+        p.Number,
+        p.WhereIssued,
+        p.ExpiryDate,
+        p.Nationality
+        FROM Passports p 
+        WHERE p.ContactID =  @ContactID";
+
+    public const String GET_VISA_DETAILS_BY_CONTACT = @"
+        SELECT v.ID,
+        v.ContactID,
+        v.CountryID,
+        c.[Name],
+        v.VisaType,
+        v.ExpiryDate 
+        FROM Visas v 
+        INNER JOIN Countries c ON c.ID = v.CountryID
+        WHERE v.ContactID =  @ContactID";
 }

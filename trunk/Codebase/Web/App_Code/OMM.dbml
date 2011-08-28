@@ -95,6 +95,7 @@
       <Association Name="Country_Contact" Member="Contacts" ThisKey="ID" OtherKey="CountryID" Type="Contact" />
       <Association Name="Country_Contact1" Member="Contacts1" ThisKey="ID" OtherKey="CountryOfBirthID" Type="Contact" />
       <Association Name="Country_NextOfKin" Member="NextOfKins" ThisKey="ID" OtherKey="CountryID" Type="NextOfKin" />
+      <Association Name="Country_Visa" Member="Visas" ThisKey="ID" OtherKey="CountryID" Type="Visa" />
     </Type>
   </Table>
   <Table Name="dbo.EnquiryTypes" Member="EnquiryTypes">
@@ -238,6 +239,8 @@
       <Association Name="User_NextOfKin" Member="NextOfKins" ThisKey="ID" OtherKey="ChangedByUserID" Type="NextOfKin" />
       <Association Name="User_Certificate" Member="Certificates" ThisKey="ID" OtherKey="ChangedByUserID" Type="Certificate" />
       <Association Name="User_BankDetail" Member="BankDetails" ThisKey="ID" OtherKey="ChangedByUserId" Type="BankDetail" />
+      <Association Name="User_Passport" Member="Passports" ThisKey="ID" OtherKey="ChangedByUserID" Type="Passport" />
+      <Association Name="User_Visa" Member="Visas" ThisKey="ID" OtherKey="ChangedByUserID" Type="Visa" />
     </Type>
   </Table>
   <Table Name="dbo.SMS_Messages" Member="SMS_Messages">
@@ -311,6 +314,8 @@
       <Association Name="Contact_NextOfKin" Member="NextOfKins" ThisKey="ID" OtherKey="ContactID" Type="NextOfKin" />
       <Association Name="Contact_Certificate" Member="Certificates" ThisKey="ID" OtherKey="ContactID" Type="Certificate" />
       <Association Name="Contact_BankDetail" Member="BankDetails" ThisKey="ID" OtherKey="ContactID" Type="BankDetail" />
+      <Association Name="Contact_Passport" Member="Passports" ThisKey="ID" OtherKey="ContactID" Type="Passport" />
+      <Association Name="Contact_Visa" Member="Visas" ThisKey="ID" OtherKey="ContactID" Type="Visa" />
       <Association Name="Country_Contact" Member="Country" ThisKey="CountryID" OtherKey="ID" Type="Country" IsForeignKey="true" />
       <Association Name="Country_Contact1" Member="Country1" ThisKey="CountryOfBirthID" OtherKey="ID" Type="Country" IsForeignKey="true" />
       <Association Name="User_Contact" Member="User" ThisKey="CreatedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
@@ -576,6 +581,36 @@
       <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="Contact_BankDetail" Member="Contact" ThisKey="ContactID" OtherKey="ID" Type="Contact" IsForeignKey="true" />
       <Association Name="User_BankDetail" Member="User" ThisKey="ChangedByUserId" OtherKey="ID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Passports" Member="Passports">
+    <Type Name="Passport">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ContactID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Number" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="WhereIssued" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ExpiryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="ChangedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Contact_Passport" Member="Contact" ThisKey="ContactID" OtherKey="ID" Type="Contact" IsForeignKey="true" />
+      <Association Name="User_Passport" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Visas" Member="Visas">
+    <Type Name="Visa">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ContactID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CountryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VisaType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExpiryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TimeStamp" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="ChangedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Contact_Visa" Member="Contact" ThisKey="ContactID" OtherKey="ID" Type="Contact" IsForeignKey="true" />
+      <Association Name="Country_Visa" Member="Country" ThisKey="CountryID" OtherKey="ID" Type="Country" IsForeignKey="true" />
+      <Association Name="User_Visa" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.GenerateNewQuotationNumber" Method="GenerateNewQuotationNumber" IsComposable="true">

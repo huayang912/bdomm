@@ -92,6 +92,7 @@ public class AppConstants
         public const String CONTACT_ID = "ContactID";
         public const String SUCCESS_MSG = "SCMSG";
         public const String DELETE = "Delete";
+        public const String ON_TABLE = "OnTable";    
     }
 
     #endregion
