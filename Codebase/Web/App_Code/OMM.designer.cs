@@ -143,6 +143,12 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
   partial void InsertBankDetail(BankDetail instance);
   partial void UpdateBankDetail(BankDetail instance);
   partial void DeleteBankDetail(BankDetail instance);
+  partial void InsertPassport(Passport instance);
+  partial void UpdatePassport(Passport instance);
+  partial void DeletePassport(Passport instance);
+  partial void InsertVisa(Visa instance);
+  partial void UpdateVisa(Visa instance);
+  partial void DeleteVisa(Visa instance);
   #endregion
 	
 	public OMMDataContext() : 
@@ -476,6 +482,22 @@ public partial class OMMDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<BankDetail>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Passport> Passports
+	{
+		get
+		{
+			return this.GetTable<Passport>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Visa> Visas
+	{
+		get
+		{
+			return this.GetTable<Visa>();
 		}
 	}
 	
@@ -2390,6 +2412,8 @@ public partial class Country : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<NextOfKin> _NextOfKins;
 	
+	private EntitySet<Visa> _Visas;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2413,6 +2437,7 @@ public partial class Country : INotifyPropertyChanging, INotifyPropertyChanged
 		this._Contacts = new EntitySet<Contact>(new Action<Contact>(this.attach_Contacts), new Action<Contact>(this.detach_Contacts));
 		this._Contacts1 = new EntitySet<Contact>(new Action<Contact>(this.attach_Contacts1), new Action<Contact>(this.detach_Contacts1));
 		this._NextOfKins = new EntitySet<NextOfKin>(new Action<NextOfKin>(this.attach_NextOfKins), new Action<NextOfKin>(this.detach_NextOfKins));
+		this._Visas = new EntitySet<Visa>(new Action<Visa>(this.attach_Visas), new Action<Visa>(this.detach_Visas));
 		OnCreated();
 	}
 	
@@ -2581,6 +2606,19 @@ public partial class Country : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="Country_Visa", Storage="_Visas", ThisKey="ID", OtherKey="CountryID")]
+	public EntitySet<Visa> Visas
+	{
+		get
+		{
+			return this._Visas;
+		}
+		set
+		{
+			this._Visas.Assign(value);
+		}
+	}
+	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -2656,6 +2694,18 @@ public partial class Country : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_NextOfKins(NextOfKin entity)
+	{
+		this.SendPropertyChanging();
+		entity.Country = null;
+	}
+	
+	private void attach_Visas(Visa entity)
+	{
+		this.SendPropertyChanging();
+		entity.Country = this;
+	}
+	
+	private void detach_Visas(Visa entity)
 	{
 		this.SendPropertyChanging();
 		entity.Country = null;
@@ -5018,6 +5068,10 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<BankDetail> _BankDetails;
 	
+	private EntitySet<Passport> _Passports;
+	
+	private EntitySet<Visa> _Visas;
+	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5066,6 +5120,8 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		this._NextOfKins = new EntitySet<NextOfKin>(new Action<NextOfKin>(this.attach_NextOfKins), new Action<NextOfKin>(this.detach_NextOfKins));
 		this._Certificates = new EntitySet<Certificate>(new Action<Certificate>(this.attach_Certificates), new Action<Certificate>(this.detach_Certificates));
 		this._BankDetails = new EntitySet<BankDetail>(new Action<BankDetail>(this.attach_BankDetails), new Action<BankDetail>(this.detach_BankDetails));
+		this._Passports = new EntitySet<Passport>(new Action<Passport>(this.attach_Passports), new Action<Passport>(this.detach_Passports));
+		this._Visas = new EntitySet<Visa>(new Action<Visa>(this.attach_Visas), new Action<Visa>(this.detach_Visas));
 		OnCreated();
 	}
 	
@@ -5541,6 +5597,32 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="User_Passport", Storage="_Passports", ThisKey="ID", OtherKey="ChangedByUserID")]
+	public EntitySet<Passport> Passports
+	{
+		get
+		{
+			return this._Passports;
+		}
+		set
+		{
+			this._Passports.Assign(value);
+		}
+	}
+	
+	[Association(Name="User_Visa", Storage="_Visas", ThisKey="ID", OtherKey="ChangedByUserID")]
+	public EntitySet<Visa> Visas
+	{
+		get
+		{
+			return this._Visas;
+		}
+		set
+		{
+			this._Visas.Assign(value);
+		}
+	}
+	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -5844,6 +5926,30 @@ public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_BankDetails(BankDetail entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_Passports(Passport entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_Passports(Passport entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = null;
+	}
+	
+	private void attach_Visas(Visa entity)
+	{
+		this.SendPropertyChanging();
+		entity.User = this;
+	}
+	
+	private void detach_Visas(Visa entity)
 	{
 		this.SendPropertyChanging();
 		entity.User = null;
@@ -6727,6 +6833,10 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private EntitySet<BankDetail> _BankDetails;
 	
+	private EntitySet<Passport> _Passports;
+	
+	private EntitySet<Visa> _Visas;
+	
 	private EntityRef<Country> _Country;
 	
 	private EntityRef<Country> _Country1;
@@ -6798,6 +6908,8 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 		this._NextOfKins = new EntitySet<NextOfKin>(new Action<NextOfKin>(this.attach_NextOfKins), new Action<NextOfKin>(this.detach_NextOfKins));
 		this._Certificates = new EntitySet<Certificate>(new Action<Certificate>(this.attach_Certificates), new Action<Certificate>(this.detach_Certificates));
 		this._BankDetails = new EntitySet<BankDetail>(new Action<BankDetail>(this.attach_BankDetails), new Action<BankDetail>(this.detach_BankDetails));
+		this._Passports = new EntitySet<Passport>(new Action<Passport>(this.attach_Passports), new Action<Passport>(this.detach_Passports));
+		this._Visas = new EntitySet<Visa>(new Action<Visa>(this.attach_Visas), new Action<Visa>(this.detach_Visas));
 		this._Country = default(EntityRef<Country>);
 		this._Country1 = default(EntityRef<Country>);
 		this._User = default(EntityRef<User>);
@@ -7421,6 +7533,32 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
+	[Association(Name="Contact_Passport", Storage="_Passports", ThisKey="ID", OtherKey="ContactID")]
+	public EntitySet<Passport> Passports
+	{
+		get
+		{
+			return this._Passports;
+		}
+		set
+		{
+			this._Passports.Assign(value);
+		}
+	}
+	
+	[Association(Name="Contact_Visa", Storage="_Visas", ThisKey="ID", OtherKey="ContactID")]
+	public EntitySet<Visa> Visas
+	{
+		get
+		{
+			return this._Visas;
+		}
+		set
+		{
+			this._Visas.Assign(value);
+		}
+	}
+	
 	[Association(Name="Country_Contact", Storage="_Country", ThisKey="CountryID", OtherKey="ID", IsForeignKey=true)]
 	public Country Country
 	{
@@ -7714,6 +7852,30 @@ public partial class Contact : INotifyPropertyChanging, INotifyPropertyChanged
 	}
 	
 	private void detach_BankDetails(BankDetail entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = null;
+	}
+	
+	private void attach_Passports(Passport entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = this;
+	}
+	
+	private void detach_Passports(Passport entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = null;
+	}
+	
+	private void attach_Visas(Visa entity)
+	{
+		this.SendPropertyChanging();
+		entity.Contact = this;
+	}
+	
+	private void detach_Visas(Visa entity)
 	{
 		this.SendPropertyChanging();
 		entity.Contact = null;
@@ -13537,6 +13699,695 @@ public partial class BankDetail : INotifyPropertyChanging, INotifyPropertyChange
 				else
 				{
 					this._ChangedByUserId = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[Table(Name="dbo.Passports")]
+public partial class Passport : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private int _ContactID;
+	
+	private string _Number;
+	
+	private string _WhereIssued;
+	
+	private System.Nullable<System.DateTime> _ExpiryDate;
+	
+	private string _Nationality;
+	
+	private System.Data.Linq.Binary _TimeStamp;
+	
+	private System.Nullable<int> _ChangedByUserID;
+	
+	private System.DateTime _ChangedOn;
+	
+	private EntityRef<Contact> _Contact;
+	
+	private EntityRef<User> _User;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnContactIDChanging(int value);
+    partial void OnContactIDChanged();
+    partial void OnNumberChanging(string value);
+    partial void OnNumberChanged();
+    partial void OnWhereIssuedChanging(string value);
+    partial void OnWhereIssuedChanged();
+    partial void OnExpiryDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnExpiryDateChanged();
+    partial void OnNationalityChanging(string value);
+    partial void OnNationalityChanged();
+    partial void OnTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnTimeStampChanged();
+    partial void OnChangedByUserIDChanging(System.Nullable<int> value);
+    partial void OnChangedByUserIDChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    #endregion
+	
+	public Passport()
+	{
+		this._Contact = default(EntityRef<Contact>);
+		this._User = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ContactID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int ContactID
+	{
+		get
+		{
+			return this._ContactID;
+		}
+		set
+		{
+			if ((this._ContactID != value))
+			{
+				if (this._Contact.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnContactIDChanging(value);
+				this.SendPropertyChanging();
+				this._ContactID = value;
+				this.SendPropertyChanged("ContactID");
+				this.OnContactIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Number", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string Number
+	{
+		get
+		{
+			return this._Number;
+		}
+		set
+		{
+			if ((this._Number != value))
+			{
+				this.OnNumberChanging(value);
+				this.SendPropertyChanging();
+				this._Number = value;
+				this.SendPropertyChanged("Number");
+				this.OnNumberChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_WhereIssued", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+	public string WhereIssued
+	{
+		get
+		{
+			return this._WhereIssued;
+		}
+		set
+		{
+			if ((this._WhereIssued != value))
+			{
+				this.OnWhereIssuedChanging(value);
+				this.SendPropertyChanging();
+				this._WhereIssued = value;
+				this.SendPropertyChanged("WhereIssued");
+				this.OnWhereIssuedChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ExpiryDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<System.DateTime> ExpiryDate
+	{
+		get
+		{
+			return this._ExpiryDate;
+		}
+		set
+		{
+			if ((this._ExpiryDate != value))
+			{
+				this.OnExpiryDateChanging(value);
+				this.SendPropertyChanging();
+				this._ExpiryDate = value;
+				this.SendPropertyChanged("ExpiryDate");
+				this.OnExpiryDateChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_Nationality", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
+	public string Nationality
+	{
+		get
+		{
+			return this._Nationality;
+		}
+		set
+		{
+			if ((this._Nationality != value))
+			{
+				this.OnNationalityChanging(value);
+				this.SendPropertyChanging();
+				this._Nationality = value;
+				this.SendPropertyChanged("Nationality");
+				this.OnNationalityChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_TimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary TimeStamp
+	{
+		get
+		{
+			return this._TimeStamp;
+		}
+		set
+		{
+			if ((this._TimeStamp != value))
+			{
+				this.OnTimeStampChanging(value);
+				this.SendPropertyChanging();
+				this._TimeStamp = value;
+				this.SendPropertyChanged("TimeStamp");
+				this.OnTimeStampChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> ChangedByUserID
+	{
+		get
+		{
+			return this._ChangedByUserID;
+		}
+		set
+		{
+			if ((this._ChangedByUserID != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnChangedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUserID = value;
+				this.SendPropertyChanged("ChangedByUserID");
+				this.OnChangedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Contact_Passport", Storage="_Contact", ThisKey="ContactID", OtherKey="ID", IsForeignKey=true)]
+	public Contact Contact
+	{
+		get
+		{
+			return this._Contact.Entity;
+		}
+		set
+		{
+			Contact previousValue = this._Contact.Entity;
+			if (((previousValue != value) 
+						|| (this._Contact.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Contact.Entity = null;
+					previousValue.Passports.Remove(this);
+				}
+				this._Contact.Entity = value;
+				if ((value != null))
+				{
+					value.Passports.Add(this);
+					this._ContactID = value.ID;
+				}
+				else
+				{
+					this._ContactID = default(int);
+				}
+				this.SendPropertyChanged("Contact");
+			}
+		}
+	}
+	
+	[Association(Name="User_Passport", Storage="_User", ThisKey="ChangedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.Passports.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.Passports.Add(this);
+					this._ChangedByUserID = value.ID;
+				}
+				else
+				{
+					this._ChangedByUserID = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("User");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[Table(Name="dbo.Visas")]
+public partial class Visa : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _ID;
+	
+	private int _ContactID;
+	
+	private int _CountryID;
+	
+	private string _VisaType;
+	
+	private System.Nullable<System.DateTime> _ExpiryDate;
+	
+	private System.Data.Linq.Binary _TimeStamp;
+	
+	private System.Nullable<int> _ChangedByUserID;
+	
+	private System.DateTime _ChangedOn;
+	
+	private EntityRef<Contact> _Contact;
+	
+	private EntityRef<Country> _Country;
+	
+	private EntityRef<User> _User;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnContactIDChanging(int value);
+    partial void OnContactIDChanged();
+    partial void OnCountryIDChanging(int value);
+    partial void OnCountryIDChanged();
+    partial void OnVisaTypeChanging(string value);
+    partial void OnVisaTypeChanged();
+    partial void OnExpiryDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnExpiryDateChanged();
+    partial void OnTimeStampChanging(System.Data.Linq.Binary value);
+    partial void OnTimeStampChanged();
+    partial void OnChangedByUserIDChanging(System.Nullable<int> value);
+    partial void OnChangedByUserIDChanged();
+    partial void OnChangedOnChanging(System.DateTime value);
+    partial void OnChangedOnChanged();
+    #endregion
+	
+	public Visa()
+	{
+		this._Contact = default(EntityRef<Contact>);
+		this._Country = default(EntityRef<Country>);
+		this._User = default(EntityRef<User>);
+		OnCreated();
+	}
+	
+	[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+	public int ID
+	{
+		get
+		{
+			return this._ID;
+		}
+		set
+		{
+			if ((this._ID != value))
+			{
+				this.OnIDChanging(value);
+				this.SendPropertyChanging();
+				this._ID = value;
+				this.SendPropertyChanged("ID");
+				this.OnIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ContactID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int ContactID
+	{
+		get
+		{
+			return this._ContactID;
+		}
+		set
+		{
+			if ((this._ContactID != value))
+			{
+				if (this._Contact.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnContactIDChanging(value);
+				this.SendPropertyChanging();
+				this._ContactID = value;
+				this.SendPropertyChanged("ContactID");
+				this.OnContactIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_CountryID", DbType="Int NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public int CountryID
+	{
+		get
+		{
+			return this._CountryID;
+		}
+		set
+		{
+			if ((this._CountryID != value))
+			{
+				if (this._Country.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnCountryIDChanging(value);
+				this.SendPropertyChanging();
+				this._CountryID = value;
+				this.SendPropertyChanged("CountryID");
+				this.OnCountryIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_VisaType", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+	public string VisaType
+	{
+		get
+		{
+			return this._VisaType;
+		}
+		set
+		{
+			if ((this._VisaType != value))
+			{
+				this.OnVisaTypeChanging(value);
+				this.SendPropertyChanging();
+				this._VisaType = value;
+				this.SendPropertyChanged("VisaType");
+				this.OnVisaTypeChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ExpiryDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<System.DateTime> ExpiryDate
+	{
+		get
+		{
+			return this._ExpiryDate;
+		}
+		set
+		{
+			if ((this._ExpiryDate != value))
+			{
+				this.OnExpiryDateChanging(value);
+				this.SendPropertyChanging();
+				this._ExpiryDate = value;
+				this.SendPropertyChanged("ExpiryDate");
+				this.OnExpiryDateChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_TimeStamp", AutoSync=AutoSync.Always, DbType="rowversion NOT NULL", CanBeNull=false, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+	public System.Data.Linq.Binary TimeStamp
+	{
+		get
+		{
+			return this._TimeStamp;
+		}
+		set
+		{
+			if ((this._TimeStamp != value))
+			{
+				this.OnTimeStampChanging(value);
+				this.SendPropertyChanging();
+				this._TimeStamp = value;
+				this.SendPropertyChanged("TimeStamp");
+				this.OnTimeStampChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedByUserID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+	public System.Nullable<int> ChangedByUserID
+	{
+		get
+		{
+			return this._ChangedByUserID;
+		}
+		set
+		{
+			if ((this._ChangedByUserID != value))
+			{
+				if (this._User.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnChangedByUserIDChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedByUserID = value;
+				this.SendPropertyChanged("ChangedByUserID");
+				this.OnChangedByUserIDChanged();
+			}
+		}
+	}
+	
+	[Column(Storage="_ChangedOn", DbType="DateTime NOT NULL", UpdateCheck=UpdateCheck.Never)]
+	public System.DateTime ChangedOn
+	{
+		get
+		{
+			return this._ChangedOn;
+		}
+		set
+		{
+			if ((this._ChangedOn != value))
+			{
+				this.OnChangedOnChanging(value);
+				this.SendPropertyChanging();
+				this._ChangedOn = value;
+				this.SendPropertyChanged("ChangedOn");
+				this.OnChangedOnChanged();
+			}
+		}
+	}
+	
+	[Association(Name="Contact_Visa", Storage="_Contact", ThisKey="ContactID", OtherKey="ID", IsForeignKey=true)]
+	public Contact Contact
+	{
+		get
+		{
+			return this._Contact.Entity;
+		}
+		set
+		{
+			Contact previousValue = this._Contact.Entity;
+			if (((previousValue != value) 
+						|| (this._Contact.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Contact.Entity = null;
+					previousValue.Visas.Remove(this);
+				}
+				this._Contact.Entity = value;
+				if ((value != null))
+				{
+					value.Visas.Add(this);
+					this._ContactID = value.ID;
+				}
+				else
+				{
+					this._ContactID = default(int);
+				}
+				this.SendPropertyChanged("Contact");
+			}
+		}
+	}
+	
+	[Association(Name="Country_Visa", Storage="_Country", ThisKey="CountryID", OtherKey="ID", IsForeignKey=true)]
+	public Country Country
+	{
+		get
+		{
+			return this._Country.Entity;
+		}
+		set
+		{
+			Country previousValue = this._Country.Entity;
+			if (((previousValue != value) 
+						|| (this._Country.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Country.Entity = null;
+					previousValue.Visas.Remove(this);
+				}
+				this._Country.Entity = value;
+				if ((value != null))
+				{
+					value.Visas.Add(this);
+					this._CountryID = value.ID;
+				}
+				else
+				{
+					this._CountryID = default(int);
+				}
+				this.SendPropertyChanged("Country");
+			}
+		}
+	}
+	
+	[Association(Name="User_Visa", Storage="_User", ThisKey="ChangedByUserID", OtherKey="ID", IsForeignKey=true)]
+	public User User
+	{
+		get
+		{
+			return this._User.Entity;
+		}
+		set
+		{
+			User previousValue = this._User.Entity;
+			if (((previousValue != value) 
+						|| (this._User.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._User.Entity = null;
+					previousValue.Visas.Remove(this);
+				}
+				this._User.Entity = value;
+				if ((value != null))
+				{
+					value.Visas.Add(this);
+					this._ChangedByUserID = value.ID;
+				}
+				else
+				{
+					this._ChangedByUserID = default(Nullable<int>);
 				}
 				this.SendPropertyChanged("User");
 			}

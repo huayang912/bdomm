@@ -26,11 +26,13 @@
             Select File</div>
         <div>
             <asp:FileUpload ID="fileUploadCV" runat="server" />
-            <asp:Button ID="btnUpload" runat="server" Text="Upload" ValidationGroup="SaveInfo"
-                OnClick="btnUpload_onclick" />
+            
         </div>
     </div> 
-    
+    <div class="TenPixelTopMargin">
+        <asp:Button ID="btnUpload" runat="server" Text="Upload" ValidationGroup="SaveInfo"
+                OnClick="btnUpload_onclick" />
+    </div>
     <div class="WinGroupBox">
         <div class="WinGroupBoxHeader">
             List of Documents</div>
@@ -47,20 +49,20 @@
                 <Columns>
                     <asp:BoundField HeaderText="File Name" DataField="FileName" />
                     <asp:BoundField HeaderText="Created On" DataField="ChangedOn" />
-                    <asp:TemplateField HeaderText="Download" ItemStyle-HorizontalAlign="Center">
+                    <asp:TemplateField HeaderText="Action" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <a href='/uploadedcv/<%# Eval("ID").ToString()%>_<%# Eval("FileName").ToString()%>'>
-                                <img src="../Images/download.jpg" style="border:none; height:20px; width:20px;" />
+                                <%--<img src="../Images/download.jpg" style="border:none; height:20px; width:20px;" />--%>
+                                Download
                             </a>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Delete" ItemStyle-HorizontalAlign="Center">
-                        <ItemTemplate>
+                            &nbsp;
                             <asp:LinkButton ID="LinkButton1" CommandArgument='<%# Eval("ID") %>' CommandName="Delete" runat="server">
-                                <img src="../Images/delete.jpg"  style="border:none; height:20px; width:20px;" />
+                                <%--<img src="../Images/delete.jpg"  style="border:none; height:20px; width:20px;" />--%>
+                                Delete
                             </asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    
                 </Columns>
             </asp:GridView>
         </div>
