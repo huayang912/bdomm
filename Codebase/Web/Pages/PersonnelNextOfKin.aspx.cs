@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,414 +6,324 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Net;
-
-using System.IO;
-
-using System.Web.Services;
-
 using App.Core.Extensions;
-
-
-
+using App.Data;
 
 
 public partial class Pages_PersonnelNextOfKin : BasePage
 {
-    protected int _ContactID = 0;
-    protected int _CurrentUserID = 0;
-       
-    
+    private int _ContactID = 0;
+    private int _ID = 0;
+    private bool _IsEditMode = false;
+    private string _OnTable = "";    
+    private bool _IsDeleteMode = false;
+    private const int PAGE_SIZE = 15;
+
     protected void Page_Load(object sender, EventArgs e)
-    {        
+    {
+        BindPageInfo();
         if (!IsPostBack)
         {
-            Page.Title = WebUtil.GetPageTitle("Next of Kin");
-            _ContactID = WebUtil.GetQueryStringInInt("ID");
-            _CurrentUserID = SessionCache.CurrentUser.ID;
-            loadImmediateFamilyDetails(_ContactID);
-            loadNextOfKinDetails(_ContactID);
+            BindDropdownList.Countries(ddlCountry);
 
+            loadImmediateFamilyDetails();
 
-            Countries(ddlCountry);
-        }
-        
-    }
+            CheckAndDeleteData();
+            BindDropDownLists();
+            BindContactsPassportInfo();
 
-
-    private static void InsertBlankOption(DropDownList ddl)
-    {
-        ddl.Items.Insert(0, new ListItem("-Select-", "0"));
-    }
-
-    public static void Countries(DropDownList ddl)
-    {
-        OMMDataContext context = new OMMDataContext();
-        var country = from P in context.Countries orderby P.Name select new { P.ID, P.Name };
-        ddl.DataSource = country;
-        ddl.DataTextField = "Name";
-        ddl.DataValueField = "ID";
-        ddl.DataBind();
-        InsertBlankOption(ddl);
-    }
-
-
-    public void loadImmediateFamilyDetails(int contactID)
-    {
-        OMMDataContext context = new OMMDataContext();
-        //IList<ContactCV> contactCV = (from P 
-        //                                  in context.ContactCVs 
-        //                              where P.ContactID == contactID 
-        //                              select P).ToList();
-
-        //IList<ContactsNextOfKin> ContactsNextOfKin = (from P
-        //                                  in context.ContactsNextOfKins
-        //                              where P.ContactID == contactID
-        //                              select P).ToList();
-
-        var ContactsNextOfKins = context.ContactsNextOfKins.FirstOrDefault(P => P.ContactID == contactID);
-
-        if (ContactsNextOfKins == null || contactID == 0)
-        {
-            btnUpload.Text = "Save";
-        }
-        else
-        {
-            btnUpload.Text = "Update";
-
-            tbxMotherName.Text = (ContactsNextOfKins.MothersName.IsNullOrEmpty()) ? "" : ContactsNextOfKins.MothersName.ToString();
-            tbxFatherName.Text = (ContactsNextOfKins.FathersName.IsNullOrEmpty()) ? "" : ContactsNextOfKins.FathersName.ToString(); 
-            tbxChildName.Text = (ContactsNextOfKins.ChildrensNames.IsNullOrEmpty()) ? "" : ContactsNextOfKins.ChildrensNames.ToString();           
+            BindNextOfKinList(1);
             
-
-            //grdsearch.DataSource = ContactsNextOfKin;
-            //grdsearch.DataBind();
+            ShowSuccessMessage();
         }
     }
 
-
-    public void loadNextOfKinDetails(int contactID)
+    public void loadImmediateFamilyDetails()
     {
-        grdsearch.DataSource = null;
-        grdsearch.DataBind();
-
-
         OMMDataContext context = new OMMDataContext();
-        IList<NextOfKin> NextOfKin_ = (from P
-                                          in context.NextOfKins
-                                      where P.ContactID == contactID
-                                      select P).ToList();
 
+        var _ImmediateFamily = context.ContactsNextOfKins.FirstOrDefault(P => P.ContactID == _ContactID);
 
-
-        if (NextOfKin_ == null || contactID == 0)
+        if (_ImmediateFamily == null || _ContactID == 0)
         {
-            grdsearch.DataSource = NextOfKin_;
-            grdsearch.DataBind();
-
-            btnSaveNextKin.Text = "Save";
+            tbxSaveUpdate.Text = "Save";
         }
         else
         {
-            btnUpload.Text = "Update";
+            tbxSaveUpdate.Text = "Update";
 
-            //tbxMotherName.Text = (ContactsNextOfKins.MothersName.IsNullOrEmpty()) ? "" : ContactsNextOfKins.MothersName.ToString();
-            //tbxFatherName.Text = (ContactsNextOfKins.FathersName.IsNullOrEmpty()) ? "" : ContactsNextOfKins.FathersName.ToString();
-            //tbxChildName.Text = (ContactsNextOfKins.ChildrensNames.IsNullOrEmpty()) ? "" : ContactsNextOfKins.ChildrensNames.ToString();
+            tbxMotherName.Text =
+                (_ImmediateFamily.MothersName.IsNullOrEmpty()) ? "" : 
+                _ImmediateFamily.MothersName.ToString();
+            tbxFatherName.Text =
+                (_ImmediateFamily.FathersName.IsNullOrEmpty()) ? "" : 
+                _ImmediateFamily.FathersName.ToString();
+            tbxChildName.Text =
+                (_ImmediateFamily.ChildrensNames.IsNullOrEmpty()) ? "" : 
+                _ImmediateFamily.ChildrensNames.ToString();
 
-
-            grdsearch.DataSource = NextOfKin_;
-            grdsearch.DataBind();
         }
     }
 
-    protected void btnClean_Click(object sender, EventArgs e)
+    protected void btnSaveBasicInfo_Click(object sender, EventArgs e)
     {
-        if (Page.IsValid)
-        {
-            clearControl();
-        }
+        SaveContactsNextOfKin();
+    }
+    
+    /// <summary>
+    /// Bindis the Page Initialization Variables
+    /// </summary>
+    protected void BindPageInfo()
+    {
+        _ID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);
+        _ContactID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.CONTACT_ID);
+        _IsDeleteMode = String.Compare(WebUtil.GetQueryStringInString(
+            AppConstants.QueryString.DELETE), "True", true) == 0 ? true : false;
+        if (_ID > 0 && !_IsDeleteMode)        
+            _IsEditMode = true;
+
+        _OnTable = WebUtil.GetQueryStringInString(AppConstants.QueryString.ON_TABLE);
+
+        Page.Title = WebUtil.GetPageTitle("Manage Next Of Kin Details");
     }
 
-    public void clearControl()
+    /// <summary>
+    /// Binds Dropdownlists for the initial request.
+    /// </summary>
+    protected void BindDropDownLists()
     {
-        //SearchCV();
-        tbxName.Text = "";
-        tbxRelationShip.Text = "";
-        tbxAddress.Text = "";
-        tbxPostCode.Text = "";
-        tbxHomeNumber.Text = "";
-        tbxWorkNumber.Text = "";
-        tbxMobile.Text = "";
-        tbxChangedBy.Text = "";
-        tbxChangeOn.Text = "";
-        tbxNextOfKinID.Text = "";
-
-        ddlCountry.SelectedValue = "0";
-
-        btnSaveNextKin.Text = "Save";
+        //BindDropdownList.Contactses(ddlContactID);
+        //BindDropdownList.Userses(ddlChangedByUserID);
     }
-         
 
-    protected void btnSaveNextKin_Click(object sender, EventArgs e)
+    protected void ShowSuccessMessage()
     {
-        if (Page.IsValid)
+        if (String.Compare(WebUtil.GetQueryStringInString
+            (AppConstants.QueryString.SUCCESS_MSG), "True", false) == 0)
+            WebUtil.ShowMessageBox(divMessage, "Information Saved Successfully.", false);
+    }
+    protected void CheckAndDeleteData()
+    {
+        if (_IsDeleteMode)
         {
-            //Save information in the database
             OMMDataContext context = new OMMDataContext();
-            int contactID = WebUtil.GetQueryStringInInt("ID");
+            var _nextOfKin = context.NextOfKins.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);
 
-            if (btnSaveNextKin.Text == "Save")
-            {
-                NextOfKin NextKin = new NextOfKin();
-
-                NextKin.ContactID = contactID;
-                NextKin.Name = (tbxName.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxName.Text.ToString().Trim();
-                NextKin.Relationship = (tbxRelationShip.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxRelationShip.Text.ToString().Trim();
-                NextKin.Address = (tbxAddress.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxAddress.Text.ToString().Trim();
-                NextKin.Postcode = (tbxPostCode.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxPostCode.Text.ToString().Trim();
-                if (Convert.ToInt32(ddlCountry.SelectedValue) > 0)
-                {
-                    NextKin.CountryID = Convert.ToInt32(ddlCountry.SelectedValue);
-                }
-                NextKin.HomeNumber = (tbxHomeNumber.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxHomeNumber.Text.ToString().Trim();
-                NextKin.WorkNumber = (tbxWorkNumber.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxWorkNumber.Text.ToString().Trim();
-                NextKin.MobileNumber = (tbxMobile.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxMobile.Text.ToString().Trim();
-
-                NextKin.ChangedByUserID = SessionCache.CurrentUser.ID;
-                NextKin.ChangedOn = System.DateTime.Today;
-
-                context.NextOfKins.InsertOnSubmit(NextKin);
-                context.SubmitChanges();
-
-                clearControl();
-            }
+            if (_nextOfKin == null)
+                WebUtil.ShowMessageBox(divMessage,
+                    "Sorry! requested Next Of Kin Details not found for delete. Delete Failed.", true);
             else
             {
-                var NextKin = context.NextOfKins.FirstOrDefault(P => P.ID == Convert.ToInt32(tbxNextOfKinID.Text));
-
-
-                if (NextKin == null || contactID == 0)
+                context.NextOfKins.DeleteOnSubmit(_nextOfKin);
+                try
                 {
-
-                }
-                else
-                {
-                    NextKin.ContactID = contactID;
-                    NextKin.Name = (tbxName.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxName.Text.ToString().Trim();
-                    NextKin.Relationship = (tbxRelationShip.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxRelationShip.Text.ToString().Trim();
-                    NextKin.Address = (tbxAddress.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxAddress.Text.ToString().Trim();
-                    NextKin.Postcode = (tbxPostCode.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxPostCode.Text.ToString().Trim();
-                    if (Convert.ToInt32(ddlCountry.SelectedValue) > 0)
-                    {
-                        NextKin.CountryID = Convert.ToInt32(ddlCountry.SelectedValue);
-                    }
-                    NextKin.HomeNumber = (tbxHomeNumber.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxHomeNumber.Text.ToString().Trim();
-                    NextKin.WorkNumber = (tbxWorkNumber.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxWorkNumber.Text.ToString().Trim();
-                    NextKin.MobileNumber = (tbxMobile.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxMobile.Text.ToString().Trim();
-
-                    NextKin.ChangedByUserID = SessionCache.CurrentUser.ID;
-                    NextKin.ChangedOn = System.DateTime.Today;
-
                     context.SubmitChanges();
+                    WebUtil.ShowMessageBox(divMessage, "Next Of Kin Details deleted successfully.", false);
+                }
+                catch
+                {
+                    WebUtil.ShowMessageBox(divMessage,
+                        "Sorry! this Next Of Kin details contains related information. Delete failed.", true);
                 }
             }
-
-
-            loadNextOfKinDetails(contactID);
         }
     }
 
+    protected void BindNextOfKinList(int pageNumber)
+    {
+        UtilityDAO dao = new UtilityDAO();
+        DbParameter[] parameters = new[] { new DbParameter("@ContactID", _ContactID) };
+        int totalRecord = 0;
+        //DataSet ds = dao.GetPagedData(AppSQL.GET_BANK_DETAILS_BY_CONTACT, parameters, pageNumber, PAGE_SIZE, out totalRecord);
+        DataSet ds = dao.GetDataSet(AppSQL.GET_NEXT_OF_KIN_BY_CONTACT, parameters, false);
+        
+        //Bind the List Control
+        ucPassportList.DataSource = ds.Tables[0];
+        ucPassportList.EditLink = Request.Url.AbsolutePath + "?" + 
+            AppConstants.QueryString.CONTACT_ID + "={0}&" +
+            AppConstants.QueryString.ID + "={1}&" +
+            AppConstants.QueryString.ON_TABLE + "=Next Of Kin";
+        ucPassportList.DeleteLink = Request.Url.AbsolutePath + "?" + 
+            AppConstants.QueryString.CONTACT_ID + "={0}&" + 
+            AppConstants.QueryString.ID + "={1}&" +
+            AppConstants.QueryString.DELETE + "=True&" +
+            AppConstants.QueryString.ON_TABLE + "=Next Of Kin";
+        ucPassportList.DataBind();
 
-    protected void btnUpload_onclick(object sender, EventArgs e)
+        ///Bind the Pager Control
+        //ucNoteListPager.TotalRecord = totalRecord;
+        //ucNoteListPager.PageNo = pageNumber;
+        //ucNoteListPager.PageSize = PAGE_SIZE;
+        //ucNoteListPager.DataBind();
+    }
+
+    
+
+    /// <summary>
+    /// Binds ContactsNotes Info Requested through Query Strings
+    /// </summary>
+    protected void BindContactsPassportInfo()
+    {
+        OMMDataContext context = new OMMDataContext();
+        if (context.NextOfKins.FirstOrDefault(P => P.ContactID == _ContactID) == null)
+            ShowNotFoundMessage();
+        else
+        {
+            if (_IsEditMode)
+            {
+                NextOfKin entity =
+                    context.NextOfKins.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);
+                if (entity == null)
+                    ShowNotFoundMessage();
+                else
+                {
+                    tbxName.Text = entity.Name;
+                    tbxRelationShip.Text = entity.Relationship;
+                    tbxAddress.Text = entity.Address;
+                    tbxPostCode.Text = entity.Postcode;
+                    ddlCountry.SetSelectedItem((entity.CountryID.ToString().Trim().IsNullOrEmpty()) ?
+                            String.Empty : entity.CountryID.ToString().Trim());
+                    tbxHomeNumber.Text = entity.HomeNumber;
+                    tbxWorkNumber.Text = entity.WorkNumber;
+                    tbxMobile.Text = entity.MobileNumber;                    
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// Shows a Message in the UI and Hides the Data Editing Controls
+    /// </summary>
+    protected void ShowNotFoundMessage()
+    {
+        //pnlFormContainer.Visible = false;
+        WebUtil.ShowMessageBox(divMessage, "Requested Details was not found.", true);
+    }
+
+    protected void SaveContactsNextOfKin()
+    {
+        SaveBasicInfo();
+
+
+        OMMDataContext context = new OMMDataContext();
+        NextOfKin entity = null;
+
+        if (_IsEditMode)
+            entity = context.NextOfKins.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);
+        else
+        {
+            entity = new NextOfKin();
+            entity.ContactID = _ContactID;
+            context.NextOfKins.InsertOnSubmit(entity);
+        }
+
+        entity.Name = tbxName.Text;
+        entity.Relationship = tbxRelationShip.Text;
+        entity.Address = tbxAddress.Text;
+        entity.Postcode = tbxPostCode.Text;
+        
+        if (!ddlCountry.SelectedValue.IsNullOrEmpty())
+        {
+            entity.CountryID = Convert.ToInt32(ddlCountry.SelectedValue);
+        }
+
+        entity.HomeNumber = tbxHomeNumber.Text;
+        entity.WorkNumber = tbxWorkNumber.Text;
+        entity.MobileNumber = tbxMobile.Text;
+        
+        
+        entity.ChangedByUserID = SessionCache.CurrentUser.ID;
+        entity.ChangedOn = DateTime.Now;
+        
+        context.SubmitChanges();
+        String url = String.Format("{0}?{1}={2}&{3}=True"
+            , Request.Url.AbsolutePath
+            , AppConstants.QueryString.CONTACT_ID
+            , _ContactID
+            , AppConstants.QueryString.SUCCESS_MSG);
+        Response.Redirect(url);
+    }
+
+
+    protected void SaveBasicInfo()
     {
         //Save information in the database
         OMMDataContext context = new OMMDataContext();
-        int contactID = WebUtil.GetQueryStringInInt("ID");
+        //int contactID = WebUtil.GetQueryStringInInt("ID");
 
-        if (btnUpload.Text == "Save")
+        if (tbxSaveUpdate.Text == "Save")
         {
-            ContactsNextOfKin conNextKin = new ContactsNextOfKin();
+            ContactsNextOfKin conNextOfKin = new ContactsNextOfKin();
 
-            conNextKin.MothersName = (tbxMotherName.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxMotherName.Text.ToString().Trim();
-            conNextKin.FathersName = (tbxFatherName.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxFatherName.Text.ToString().Trim();
-            conNextKin.ChildrensNames = (tbxChildName.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxChildName.Text.ToString().Trim();
-            conNextKin.ChangedByUserID = SessionCache.CurrentUser.ID;
-            conNextKin.ChangedOn = System.DateTime.Today;
+            conNextOfKin.MothersName =
+                (tbxMotherName.Text.ToString().Trim().IsNullOrEmpty()) ? "" :
+                tbxMotherName.Text.ToString().Trim();
+            conNextOfKin.FathersName =
+                (tbxFatherName.Text.ToString().Trim().IsNullOrEmpty()) ? "" :
+                tbxFatherName.Text.ToString().Trim();
+            conNextOfKin.ChildrensNames =
+                (tbxChildName.Text.ToString().Trim().IsNullOrEmpty()) ? "" :
+                tbxChildName.Text.ToString().Trim();
 
-            context.ContactsNextOfKins.InsertOnSubmit(conNextKin);
+            conNextOfKin.ChangedByUserID = SessionCache.CurrentUser.ID;
+            conNextOfKin.ChangedOn = System.DateTime.Today;
+
+            context.ContactsNextOfKins.InsertOnSubmit(conNextOfKin);
             context.SubmitChanges();
         }
-        else
+        if (tbxSaveUpdate.Text == "Update")
         {
-            var ContactsNextOfKins = context.ContactsNextOfKins.FirstOrDefault(P => P.ContactID == contactID);
+            var ContactsNextOfKin = context.ContactsNextOfKins.FirstOrDefault(P => P.ContactID == _ContactID);
 
 
-            if (ContactsNextOfKins == null || contactID == 0)
+            if (ContactsNextOfKin == null || _ContactID == 0)
             {
-                
+
             }
             else
             {
-                ContactsNextOfKins.MothersName = (tbxMotherName.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxMotherName.Text.ToString().Trim();
-                ContactsNextOfKins.FathersName = (tbxFatherName.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxFatherName.Text.ToString().Trim();
-                ContactsNextOfKins.ChildrensNames = (tbxChildName.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxChildName.Text.ToString().Trim();
-                ContactsNextOfKins.ChangedByUserID = SessionCache.CurrentUser.ID;
-                ContactsNextOfKins.ChangedOn = System.DateTime.Today;
+                ContactsNextOfKin.MothersName =
+                    (tbxMotherName.Text.ToString().Trim().IsNullOrEmpty()) ? "" :
+                    tbxMotherName.Text.ToString().Trim();
+                ContactsNextOfKin.FathersName =
+                    (tbxFatherName.Text.ToString().Trim().IsNullOrEmpty()) ? "" :
+                    tbxFatherName.Text.ToString().Trim();
+                ContactsNextOfKin.ChildrensNames =
+                    (tbxChildName.Text.ToString().Trim().IsNullOrEmpty()) ? "" :
+                    tbxChildName.Text.ToString().Trim();
+
+                ContactsNextOfKin.ChangedByUserID = SessionCache.CurrentUser.ID;
+                ContactsNextOfKin.ChangedOn = System.DateTime.Today;
 
                 context.SubmitChanges();
             }
         }
 
 
-        loadImmediateFamilyDetails(contactID);
+        //ShowSuccessMessage();
     }
 
 
-    private bool IsValidDocument(HttpPostedFile httpPostedFile)
+    protected void btnList_Click(object sender, EventArgs e)
     {
-        String extension = Path.GetExtension(httpPostedFile.FileName);
-        if (String.Compare(extension, ".doc", true) == 0)
-        {
-            return true;
-        }
-        else if (String.Compare(extension, ".docx", true) == 0)
-        {
-            return true;
-        }
-        else if (String.Compare(extension, ".pdf", true) == 0)
-        {
-            return true;
-        }
-            
-        return false;
+        //Response.Redirect(AppConstants.Pages.CONTACTSNOTES_LIST);
+        //return;
     }
-
-
-    private String saveFile(String uploadDirectory, int detailID)
+    protected void ucPassportListPager_PageIndexChanged(object sender, PagerEventArgs e)
     {
-        //if (!Directory.Exists(uploadDirectory))
-        //    Directory.CreateDirectory(uploadDirectory);
-        ////String fileName = String.Format("{0}_{1}", SessionCache.CurrentUser.ID, Path.GetFileName(fileEnquiry.FileName));
-        //String fileName = detailID.ToString()+"_"+Path.GetFileName(fileUploadCV.FileName);
-        //fileUploadCV.SaveAs(Path.Combine(uploadDirectory, fileName));
-        //return fileName;
-
-        return "";
-    }
-
-
-    protected String GetRelativeDownloadUrl()
-    {
-        return Server.MapPath(AppConstants.PERSONNEL_CV_DIRECTORY);
-        //if (rdbPersonnelCV.Checked)
-            //return String.Format("{0}/{1}", AppConstants.PERSONNEL_CV_DIRECTORY, Path.GetFileName(path));
-        //else
-        //    return String.Format("{0}/{1}", ConfigReader.CVBankDirectory, Path.GetFileName(path));
-    }
-
-    [WebMethod]
-    public static bool DeleteCVT(int id, string filePath, int contactID)
-    {
-
-        OMMDataContext context = new OMMDataContext();
-        var cvDetails = context.ContactCVs.SingleOrDefault(P => P.ID == id);
-        
-        if (cvDetails != null)
-        {
-            //First delete CV information from the database
-            
-            //context.ContactCVs.DeleteOnSubmit(cvDetails);
-            //context.SubmitChanges();
-
-            //Now delete the file from the filesystem
-
-            
-            //File.Delete(filePath);
-
-        }
-
-        
-
-        return true;
-    }
-
-    protected void GridView1_RowDataBound(object sender,
-                         GridViewRowEventArgs e)
-    {
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            LinkButton l = (LinkButton)e.Row.FindControl("LinkButton1");
-            l.Attributes.Add("onclick", "javascript:return " +
-            "confirm('Sure to Delete This Information?')");
-        }
-    }
-
-    protected void GridView1_RowCommand(object sender,
-                         GridViewCommandEventArgs e)
-    {
-        if (e.CommandName == "Delete")
-        {
-            int ID = Convert.ToInt32(e.CommandArgument);
-
-            //Get detail information from the database
-            OMMDataContext context = new OMMDataContext();
-            var nextOfKinDetails = context.NextOfKins.SingleOrDefault(P => P.ID == ID);
-
-            if (nextOfKinDetails != null)
-            {
-                //Delete Next of Kin information from the database
-                context.NextOfKins.DeleteOnSubmit(nextOfKinDetails);
-                context.SubmitChanges();
-
-                
-                //Now reload the list
-                loadNextOfKinDetails(WebUtil.GetQueryStringInInt("ID"));
-            }
-        }
-
-        if (e.CommandName == "Edit")
-        {
-            int ID = Convert.ToInt32(e.CommandArgument);
-
-            //Get detail information from the database
-            OMMDataContext context = new OMMDataContext();
-            var nextOfKinDetails = context.NextOfKins.SingleOrDefault(P => P.ID == ID);
-
-            if (nextOfKinDetails != null)
-            {
-                tbxName.Text = (nextOfKinDetails.Name.IsNullOrEmpty()) ? "" : nextOfKinDetails.Name.ToString().Trim();
-                tbxRelationShip.Text = (nextOfKinDetails.Relationship.IsNullOrEmpty()) ? "" : nextOfKinDetails.Relationship.ToString().Trim();
-                tbxAddress.Text = (nextOfKinDetails.Address.IsNullOrEmpty()) ? "" : nextOfKinDetails.Address.ToString().Trim();
-                tbxPostCode.Text = (nextOfKinDetails.Postcode.IsNullOrEmpty()) ? String.Empty : nextOfKinDetails.Postcode.ToString().Trim();
-                ddlCountry.SetSelectedItem((nextOfKinDetails.CountryID.ToString().Trim().IsNullOrEmpty()) ? "0" : nextOfKinDetails.CountryID.ToString().Trim());
-                tbxHomeNumber.Text = (nextOfKinDetails.HomeNumber.IsNullOrEmpty()) ? "" : nextOfKinDetails.HomeNumber.ToString().Trim();
-                tbxWorkNumber.Text = (nextOfKinDetails.WorkNumber.IsNullOrEmpty()) ? "" : nextOfKinDetails.WorkNumber.ToString().Trim();
-                tbxMobile.Text = (nextOfKinDetails.MobileNumber.IsNullOrEmpty()) ? "" : nextOfKinDetails.MobileNumber.ToString().Trim();
-                tbxChangedBy.Text = (nextOfKinDetails.ChangedByUserID.ToString().Trim().IsNullOrEmpty()) ? "" : nextOfKinDetails.ChangedByUserID.ToString().Trim();
-                tbxChangeOn.Text = (nextOfKinDetails.ChangedOn.ToString().Trim().IsNullOrEmpty()) ? "" : nextOfKinDetails.ChangedOn.ToString().Trim();
-
-                tbxNextOfKinID.Text = nextOfKinDetails.ID.ToString().Trim();
-
-                btnSaveNextKin.Text = "Edit";
-                
-            }
-
-            else
-                clearControl();
-
-        }
-    }
-
-    protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
-    {
-        //int categoryID = (int)grdsearch.DataKeys[e.RowIndex].Value;
-        //DeleteRecordByID(categoryID);
-    }
-
-    protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
-    {
-        //int categoryID = (int)grdsearch.DataKeys[e.RowIndex].Value;
-        //DeleteRecordByID(categoryID);
+        //BindPassportList(e.PageIndex);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -10,7 +10,7 @@ using App.Core.Extensions;
 using App.Data;
 
 
-public partial class Pages_PersonnelBankDetails : BasePage
+public partial class Pages_PersonnelCertification : BasePage
 {
     private int _ContactID = 0;
     private int _ID = 0;
@@ -23,10 +23,14 @@ public partial class Pages_PersonnelBankDetails : BasePage
         BindPageInfo();
         if (!IsPostBack)
         {
+            //WebUtil.ShowMessageBox(divMessage, "", false);
+
+            BindDropdownList.CertificateTypes(ddlCertificateType);
+
             CheckAndDeleteData();
             BindDropDownLists();
-            BindContactsBankInfo();
-            BindBankList(1);
+            BindCertificationInfo();
+            BindCertificationList(1);
             ShowSuccessMessage();
         }
     }
@@ -38,12 +42,11 @@ public partial class Pages_PersonnelBankDetails : BasePage
     {
         _ID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);
         _ContactID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.CONTACT_ID);
-        _IsDeleteMode = String.Compare(WebUtil.GetQueryStringInString(
-            AppConstants.QueryString.DELETE), "True", true) == 0 ? true : false;
+        _IsDeleteMode = String.Compare(WebUtil.GetQueryStringInString(AppConstants.QueryString.DELETE), "True", true) == 0 ? true : false;
         if (_ID > 0 && !_IsDeleteMode)        
             _IsEditMode = true;
         
-        Page.Title = WebUtil.GetPageTitle("Manage Bank Details");
+        Page.Title = WebUtil.GetPageTitle("Manage Certification");
     }
 
     /// <summary>
@@ -56,53 +59,49 @@ public partial class Pages_PersonnelBankDetails : BasePage
     }
     protected void ShowSuccessMessage()
     {
-        if (String.Compare(WebUtil.GetQueryStringInString
-            (AppConstants.QueryString.SUCCESS_MSG), "True", false) == 0)
-            WebUtil.ShowMessageBox(divMessage, "Bank Details Saved Successfully.", false);
+        if (String.Compare(WebUtil.GetQueryStringInString(AppConstants.QueryString.SUCCESS_MSG), "True", false) == 0)
+            WebUtil.ShowMessageBox(divMessage, "Certification Details Saved Successfully.", false);
     }
     protected void CheckAndDeleteData()
     {
         if (_IsDeleteMode)
         {
             OMMDataContext context = new OMMDataContext();
-            var bankDetails = context.BankDetails.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);
-            if (bankDetails == null)
-                WebUtil.ShowMessageBox(divMessage, 
-                    "Sorry! requested Bank Details not found for delete. Delete Failed.", true);
+            var CertificationDetails = context.Certificates.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);
+            if (CertificationDetails == null)
+                WebUtil.ShowMessageBox(divMessage, "Sorry! requested Certification Details not found for delete. Delete Failed.", true);
             else
             {
-                context.BankDetails.DeleteOnSubmit(bankDetails);
+                context.Certificates.DeleteOnSubmit(CertificationDetails);
                 try
                 {
                     context.SubmitChanges();
-                    WebUtil.ShowMessageBox(divMessage, "Bank Details deleted successfully.", false);
+                    WebUtil.ShowMessageBox(divMessage, "Certification Details deleted successfully.", false);
                 }
                 catch
                 {
-                    WebUtil.ShowMessageBox(divMessage, 
-                        "Sorry! this Bank details contains related information. Delete failed.", true);
+                    WebUtil.ShowMessageBox(divMessage, "Sorry! this Certification contains related information. Delete failed.", true);
                 }
             }
         }
     }
-    protected void BindBankList(int pageNumber)
+    protected void BindCertificationList(int pageNumber)
     {
         UtilityDAO dao = new UtilityDAO();
         DbParameter[] parameters = new[] { new DbParameter("@ContactID", _ContactID) };
         int totalRecord = 0;
-        //DataSet ds = dao.GetPagedData(AppSQL.GET_BANK_DETAILS_BY_CONTACT, parameters, pageNumber, PAGE_SIZE, out totalRecord);
-        DataSet ds = dao.GetDataSet(AppSQL.GET_BANK_DETAILS_BY_CONTACT, parameters, false);
+        DataSet ds = dao.GetDataSet(AppSQL.GET_CRETIFICATION_DETAILS_BY_CONTACT, parameters, false);
         
         //Bind the List Control
-        ucBankList.DataSource = ds.Tables[0];
-        ucBankList.EditLink = Request.Url.AbsolutePath + "?" + 
+        ucCertificationList.DataSource = ds.Tables[0];
+        ucCertificationList.EditLink = Request.Url.AbsolutePath + "?" + 
             AppConstants.QueryString.CONTACT_ID + "={0}&" + 
             AppConstants.QueryString.ID + "={1}";
-        ucBankList.DeleteLink = Request.Url.AbsolutePath + "?" + 
+        ucCertificationList.DeleteLink = Request.Url.AbsolutePath + "?" + 
             AppConstants.QueryString.CONTACT_ID + "={0}&" + 
             AppConstants.QueryString.ID + "={1}&" + 
             AppConstants.QueryString.DELETE + "=True";
-        ucBankList.DataBind();
+        ucCertificationList.DataBind();
 
         ///Bind the Pager Control
         //ucNoteListPager.TotalRecord = totalRecord;
@@ -113,29 +112,28 @@ public partial class Pages_PersonnelBankDetails : BasePage
     /// <summary>
     /// Binds ContactsNotes Info Requested through Query Strings
     /// </summary>
-    protected void BindContactsBankInfo()
+    protected void BindCertificationInfo()
     {
         OMMDataContext context = new OMMDataContext();
-        if (context.BankDetails.FirstOrDefault(P => P.ID == _ContactID) == null)
+        if (context.Certificates.FirstOrDefault(P => P.ContactID == _ContactID) == null)
             ShowNotFoundMessage();
         else
         {
             if (_IsEditMode)
             {                
-                BankDetail entity = 
-                    context.BankDetails.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);
+                Certificate entity = 
+                    context.Certificates.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);
+                
                 if (entity == null)
                     ShowNotFoundMessage();
                 else
                 {
-                    tbxBankName.Text = entity.BankName;
-                    tbxBranchName.Text = entity.BranchName;
-                    tbxBranchAddress.Text = entity.BranchAddress;
-                    tbxSortCode.Text = entity.SortCode;
-                    tbxAccNumber.Text = entity.AccountNumber;
-                    tbxAccName.Text = entity.AccountName;
-                    tbxBicCode.Text = entity.BicCode;
-                    tbxAbaCode.Text = entity.AbaCode;
+                    ddlCertificateType.SetSelectedItem((entity.TypeID.ToString().Trim().IsNullOrEmpty()) ? 
+                        String.Empty : entity.TypeID.ToString().Trim());
+
+                    tbxDetails.Text = entity.Details;
+                    tbxExpiryDate.Text = entity.ExpiryDate.ToString();
+                    tbxPlaceIssued.Text = entity.PlaceIssued;
                 }
             }
         }
@@ -146,33 +144,33 @@ public partial class Pages_PersonnelBankDetails : BasePage
     protected void ShowNotFoundMessage()
     {
         //pnlFormContainer.Visible = false;
-        WebUtil.ShowMessageBox(divMessage, "Requested Bank Details was not found.", true);
+        WebUtil.ShowMessageBox(divMessage, "Requested Certification Details was not found.", true);
     }
-    protected void SaveContactsBank()
+    protected void SaveContactsCertification()
     {
         OMMDataContext context = new OMMDataContext();
-        BankDetail entity = null;
+        Certificate entity = null;
 
         if (_IsEditMode)
-            entity = context.BankDetails.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);
+            entity = context.Certificates.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID); 
         else
         {
-            entity = new BankDetail();
+            entity = new Certificate();
             entity.ContactID = _ContactID;
-            context.BankDetails.InsertOnSubmit(entity);
+            context.Certificates.InsertOnSubmit(entity);
         }
 
-        //ddlContactID.SelectedValue.ToInt();
-        entity.BankName = tbxBankName.Text;
-        entity.BranchName = tbxBranchName.Text;
-        entity.BranchAddress = tbxBranchAddress.Text;
-        entity.SortCode = tbxSortCode.Text;
-        entity.AccountNumber = tbxAccNumber.Text;
-        entity.AccountName = tbxAccName.Text;
-        entity.BicCode = tbxBicCode.Text;
-        entity.AbaCode = tbxAbaCode.Text;
 
-        entity.ChangedByUserId = SessionCache.CurrentUser.ID;
+
+        if (!ddlCertificateType.SelectedValue.IsNullOrEmpty())
+        {
+            entity.TypeID = Convert.ToInt32(ddlCertificateType.SelectedValue);
+        }
+        entity.Details = tbxDetails.Text;
+        entity.ExpiryDate = Convert.ToDateTime(tbxExpiryDate.Text);
+        entity.PlaceIssued = tbxPlaceIssued.Text;
+
+        entity.ChangedByUserID = SessionCache.CurrentUser.ID;
         entity.ChangedOn = DateTime.Now;        
         //entity = entity.ChangedByUsername = SessionCache.CurrentUser.UserName;
 
@@ -188,7 +186,7 @@ public partial class Pages_PersonnelBankDetails : BasePage
     {
         if (Page.IsValid)
         {
-            SaveContactsBank();
+            SaveContactsCertification();
             //Response.Redirect(AppConstants.Pages.CONTACTSNOTES_LIST);
             return;
         }
@@ -200,7 +198,7 @@ public partial class Pages_PersonnelBankDetails : BasePage
     }
     protected void ucNoteListPager_PageIndexChanged(object sender, PagerEventArgs e)
     {
-        BindBankList(e.PageIndex);
+        BindCertificationList(e.PageIndex);
     }
 }
 

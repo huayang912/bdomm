@@ -147,11 +147,11 @@
                 <td class="TabItemSelected" NavigateUrl="PersonnelBasicInfo.aspx?<%=AppConstants.QueryString.ID %>=<%=_ID.ToString() %>">Basic Info</td>
                 <%if (_ID > 0) { %>
                 <td class="TabItem" NavigateUrl="PersonnelEmploymentHistory.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Employment History</td>
-                <td class="TabItem" NavigateUrl="PersonnelCertification_.aspx?ID=<%= _ID.ToString() %>">Certification</td>                                
+                <td class="TabItem" NavigateUrl="PersonnelCertification.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Certification</td>                                
                 <td class="TabItem" NavigateUrl="PersonnelNotes.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Notes</td>
-                <td class="TabItem" NavigateUrl="PersonnelTravelDetails.aspx">Travel Details</td>
-                <td class="TabItem" NavigateUrl="PersonnelNextOfKin.aspx?ID=<%= _ID.ToString() %>">Next Of Kin</td>
-                <td class="TabItem" NavigateUrl="PersonnelBankDetails_.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Bank Details</td>
+                <td class="TabItem" NavigateUrl="PersonnelTravelDetails.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Travel Details</td>
+                <td class="TabItem" NavigateUrl="PersonnelNextOfkin.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Next Of Kin</td>
+                <td class="TabItem" NavigateUrl="PersonnelBankDetails.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Bank Details</td>
                 <td class="TabItem" NavigateUrl="PersonnelCVUpload.aspx?<%=AppConstants.QueryString.ID %>=<%=_ID.ToString() %>">&nbsp;CV&nbsp;</td>
                 <% } %>
                 
