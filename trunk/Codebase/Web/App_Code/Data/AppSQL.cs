@@ -89,4 +89,20 @@ public class AppSQL
         FROM Visas v 
         INNER JOIN Countries c ON c.ID = v.CountryID
         WHERE v.ContactID =  @ContactID";
+
+
+    public const String GET_NEXT_OF_KIN_BY_CONTACT = @"
+        SELECT nok.ID,
+        nok.ContactID,
+        nok.[Name],
+        nok.Relationship,
+        nok.[Address],
+        nok.Postcode,
+        c.[Name] AS [Country],
+        nok.HomeNumber,
+        nok.WorkNumber,
+        nok.MobileNumber
+        FROM NextOfKin nok
+        INNER JOIN Countries c ON c.ID = nok.CountryID
+        WHERE nok.ContactID =  @ContactID";
 }
