@@ -16,16 +16,19 @@ CodeFile="PersonnelNextOfKin.aspx.cs" Inherits="Pages_PersonnelNextOfKin" %>
         <asp:Panel ID="pnlFormContainer" runat="server" DefaultButton="btnSave">
             
             <div class="WinGroupBox">
-                <div class="WinGroupBoxHeader">
-                    Immediate Family Details</div>
+                <div class="WinGroupBoxHeader">Immediate Family Details</div>
                 <div>
-                    <table cellpadding="1" cellspacing="1" border="0">
+                    <table cellpadding="3" cellspacing="0" style="width:350px;">
+                        <colgroup>
+                            <col style="width:33%;" />
+                            <col />
+                        </colgroup>
                         <tr>
                             <td>
                                 Mother's Name
                             </td>
                             <td>
-                                <asp:TextBox ID="tbxMotherName" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="tbxMotherName" runat="server"></asp:TextBox>
                                 <asp:TextBox ID="tbxSaveUpdate" runat="server" Visible="false"></asp:TextBox>
                             </td>
                         </tr>
@@ -34,7 +37,7 @@ CodeFile="PersonnelNextOfKin.aspx.cs" Inherits="Pages_PersonnelNextOfKin" %>
                                 Father's Name
                             </td>
                             <td>
-                                <asp:TextBox ID="tbxFatherName" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="tbxFatherName" runat="server"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -42,8 +45,7 @@ CodeFile="PersonnelNextOfKin.aspx.cs" Inherits="Pages_PersonnelNextOfKin" %>
                                 Children's Name
                             </td>
                             <td>
-                                <asp:TextBox ID="tbxChildName" runat="server" Height="51px" TextMode="MultiLine"
-                                    Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="tbxChildName" runat="server" TextMode="MultiLine"></asp:TextBox>
                             </td>
                         </tr>
                     </table>
@@ -55,20 +57,26 @@ CodeFile="PersonnelNextOfKin.aspx.cs" Inherits="Pages_PersonnelNextOfKin" %>
                     Next of Kin Information
                 </div>
                 <div>
-                    <table cellpadding="1" cellspacing="1" border="0">
+                    <table cellpadding="3" cellspacing="0" style="width:700px;">
+                        <colgroup>
+                            <col style="width:17%;" />
+                            <col style="width:33%;" />
+                            <col style="width:17%;" />
+                            <col />
+                        </colgroup>
                         <tr>
                             <td>
                                 Name
                             </td>
                             <td>
-                                <asp:TextBox ID="tbxName" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="tbxName" runat="server"></asp:TextBox>
                             </td>
                             
                             <td>
                                 Relationship
                             </td>
                             <td>
-                                <asp:TextBox ID="tbxRelationShip" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="tbxRelationShip" runat="server"></asp:TextBox>
                             </td>
                         </tr>
                         
@@ -77,13 +85,13 @@ CodeFile="PersonnelNextOfKin.aspx.cs" Inherits="Pages_PersonnelNextOfKin" %>
                                 Address
                             </td>
                             <td>
-                                <asp:TextBox ID="tbxAddress" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="tbxAddress" runat="server"></asp:TextBox>
                             </td>
                             <td>
                                 Post Code
                             </td>
                             <td>
-                                <asp:TextBox ID="tbxPostCode" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="tbxPostCode" runat="server"></asp:TextBox>
                             </td>
                         </tr>
                         
@@ -92,14 +100,13 @@ CodeFile="PersonnelNextOfKin.aspx.cs" Inherits="Pages_PersonnelNextOfKin" %>
                                 Country
                             </td>
                             <td>
-                                <asp:DropDownList ID="ddlCountry" runat="server" Width="100px">
-                                </asp:DropDownList>
+                                <asp:DropDownList ID="ddlCountry" runat="server"></asp:DropDownList>
                             </td>
                             <td>
                                 Home Number
                             </td>
                             <td>
-                                <asp:TextBox ID="tbxHomeNumber" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="tbxHomeNumber" runat="server"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -107,13 +114,13 @@ CodeFile="PersonnelNextOfKin.aspx.cs" Inherits="Pages_PersonnelNextOfKin" %>
                                 Work Number
                             </td>
                             <td>
-                                <asp:TextBox ID="tbxWorkNumber" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="tbxWorkNumber" runat="server"></asp:TextBox>
                             </td>
                             <td>
                                 Mobile Number
                             </td>
                             <td>
-                                <asp:TextBox ID="tbxMobile" runat="server" Width="200px"></asp:TextBox>
+                                <asp:TextBox ID="tbxMobile" runat="server"></asp:TextBox>
                             </td>
                             
                         </tr>

@@ -128,7 +128,7 @@ CodeFile="PersonnelCertification.aspx.cs" Inherits="Pages_PersonnelCertification
                 <div class="WinGroupBoxHeader">Certification List</div>
                 
                 <UC:DataTableList ID="ucCertificationList" runat="server"
-                    ExcludeVisibleFields = "ContactID, ID"
+                    ExcludeVisibleFields = "ContactID, ID, TypeID"
                     LinkFields="ContactID, ID"
                     NoRecordMessgae="No Certification Details Found for this Personnel."
                     DeleteMessage="Sure to Delete Certification Details?">

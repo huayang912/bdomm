@@ -336,8 +336,10 @@ public partial class Pages_PersonnelTravelDetails : BasePage
         //ddlContactID.SelectedValue.ToInt();
         entity.Number = tbxNumber.Text;
         entity.WhereIssued = tbxWhereIssued.Text;
-        if(tbxExpiryDate.Text.Trim() != "")
-            entity.ExpiryDate = Convert.ToDateTime(tbxExpiryDate.Text.Trim());
+        if (tbxExpiryDate.Text.IsNullOrEmpty())
+            entity.ExpiryDate = null;
+        else
+            entity.ExpiryDate = tbxExpiryDate.Text.ToDateTime(ConfigReader.CSharpCalendarDateFormat); //Convert.ToDateTime(tbxExpiryDate.Text.Trim());
         entity.Nationality = tbxNationality.Text;
         
 

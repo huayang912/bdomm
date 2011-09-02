@@ -208,7 +208,7 @@ CodeFile="PersonnelTravelDetails.aspx.cs" Inherits="Pages_PersonnelTravelDetails
                 <asp:Button ID="Button1" runat="server" Text="Save" 
                 ValidationGroup="SaveVInfo" OnClick="btnSaveVisa_Click" />            
             </div>
-                           
+            <div style="height:50px;">&nbsp;</div>             
         </asp:Panel>   
     </div> 
 </asp:Content>
