@@ -167,7 +167,10 @@ public partial class Pages_PersonnelCertification : BasePage
             entity.TypeID = Convert.ToInt32(ddlCertificateType.SelectedValue);
         }
         entity.Details = tbxDetails.Text;
-        entity.ExpiryDate = Convert.ToDateTime(tbxExpiryDate.Text);
+        if (tbxExpiryDate.Text.IsNullOrEmpty())
+            entity.ExpiryDate = null;
+        else
+            entity.ExpiryDate = tbxExpiryDate.Text.ToDateTime(ConfigReader.CSharpCalendarDateFormat); //Convert.ToDateTime(tbxExpiryDate.Text);
         entity.PlaceIssued = tbxPlaceIssued.Text;
 
         entity.ChangedByUserID = SessionCache.CurrentUser.ID;
