@@ -43,6 +43,9 @@ Inherits="Pages_CVSearch"  Title="Personnel CV"%>
             CssClass="GridView">
             <Columns>
                 <asp:BoundField HeaderText="File Name" DataField="FILENAME" /> 
+                <asp:BoundField HeaderText="First Name" DataField="FirstNames" /> 
+                <asp:BoundField HeaderText="Last Name" DataField="LastName" /> 
+                <asp:BoundField HeaderText="Address" DataField="Address" /> 
                 <asp:BoundField HeaderText="File Abstract" DataField="characterization" /> 
                 <asp:BoundField HeaderText="File Size (KB)" DataField="Size" />             
                 <asp:TemplateField HeaderText="..">
