@@ -105,4 +105,12 @@ public class AppSQL
         FROM NextOfKin nok
         INNER JOIN Countries c ON c.ID = nok.CountryID
         WHERE nok.ContactID =  @ContactID";
+
+
+    public const String GET_PERSONNEL_DETAILS_BY_CONTACT = @"
+        SELECT c.FirstNames,
+        c.LastName,
+        c.[Address] 
+        FROM Contacts c
+        WHERE  c.ID = @ContactID";
 }
