@@ -13,70 +13,205 @@
   <body xmlns:factory="urn:codeontime:app-factory">
   
     <form id="form1" runat="server">
-      <div>
-        
-        <act:ToolkitScriptManager ID="sm" runat="server" ScriptMode="Release" EnableScriptGlobalization="True" EnablePageMethods="true" />
-        <aquarium:MembershipBar ID="mb" runat="server" DisplayMyAccount="false" DisplayLogin="false" DisplayHelp="false" />
-        
-        <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" ShowStartingNode="False" />
-        <div id="PageHeader">
-          <div id="PageHeaderBar">
-            <div class="floatleft">BUDI</div>
-            <div class="floatright" style="font-size:11px; font-weight:normal; margin-right:12px;"><asp:Literal ID="ltrUserName" runat="server"></asp:Literal> <asp:HyperLink ID="hplLogin" runat="server"></asp:HyperLink></div>
-            <div class="clearboth"></div>
-          </div>
-          <div id="PageMenuBar" runat="server" class="PageMenuBar" />
-        </div>
-        <aquarium:MenuExtender ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1" TargetControlID="PageMenuBar" HoverStyle="Auto" PopupPosition="Left" ShowSiteActions="true" />
-        <table id="PageBody" cellpadding="0" cellspacing="0">
-          <tr>
-            <td id="PageHeaderSideBar">
-              <%--<asp:Image ID="Image5" runat="server" SkinID="PageLogo" CssClass="PageLogo" />--%>
-              &nbsp;&nbsp;
-            </td>
-            <td id="PageHeaderLeftSide">
-              <asp:Image ID="Image1" runat="server" SkinID="Placeholder" />
-            </td>
-            <td id="PageHeaderContent">
-              <div class="Header">
-                <asp:SiteMapPath ID="SiteMapPath1" runat="server" SkinID="SiteMapPath" />
-                <div class="Title">
-                  <asp:ContentPlaceHolder ID="PageHeaderContentPlaceHolder" runat="server">Page Title</asp:ContentPlaceHolder>
+        <div>        
+            <act:ToolkitScriptManager ID="sm" runat="server" ScriptMode="Release" EnableScriptGlobalization="True" EnablePageMethods="true" LoadScriptsBeforeUI="true" />
+            <%--<aquarium:MembershipBar ID="mb" runat="server" DisplayMyAccount="false" DisplayLogin="false" DisplayHelp="false" />--%>              
+            <%--Ribbon Bar Starts--%>
+            <div class="RibbonBar">
+                <%--Ribbon Tab Container--%>                
+                <div class="RibbonBarRightSideItems">
+                    <div id="divRibbonTabs" style="margin-left:10px;">
+                        <div class="RibbonTabSelected" onclick="ShowRibbonTab(this, 'divRibbonTabItemsHome');">Home</div>
+                        <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsClient');">Client</div>
+                        <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsProject');">Project</div>
+                        <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsPersonnel');">Personnel</div>
+                        <div class="RibbonTab" onclick="ShowRibbonTab(this, '');" ItemsContainerID="">Option</div>
+                        <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsReport');">Report</div>
+                        <div class="clearboth"></div>
+                    </div>
+                    <div id="divRibbonItemContainer" class="RibbonItemContainer">
+                        <%--Home Tab Items Start--%>
+                        <div class="RibbonItemCollection" id="divRibbonTabItemsHome" style="display:block;">
+                            <div class="RibbonItem">
+                                <div class="RibbonInnerItem">
+                                    <div class="floatleft"><a href="/Pages/Home.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -0px -94px; width:33px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/Home.aspx">Home</a></div>
+                                    <div class="clearboth"></div>
+                                </div>                        
+                            </div>
+                            <%--<div class="RibbonItem">Fun</div>--%>
+                            <div class="clearboth"></div>
+                        </div>
+                        <%--Home Tab Items End--%>
+
+                        <%--Client Tab Items Start--%>
+                        <div class="RibbonItemCollection" id="divRibbonTabItemsClient">
+                            <div class="RibbonItem">
+                                <div class="RibbonInnerItem">
+                                    <div class="floatleft"><a href="/Pages/ClientNew.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -34px -94px; width:35px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/ClientNew.aspx">View Client</a></div>
+                                    <div class="clearboth"></div>
+                                </div>                        
+                            </div>
+                            <div class="RibbonItem">
+                                <div class="RibbonInnerItem">
+                                    <div class="floatleft"><a href="/Pages/ClientContactSrch.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -71px -94px; width:29px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/ClientContactSrch.aspx">Search Client Contact</a></div>
+                                    <div class="clearboth"></div>
+                                </div>
+                            </div>
+                            <div class="clearboth"></div>
+                        </div>
+                        <%--Client Tab Items End--%>
+
+                        <%--Project Tab Items Start--%>
+                        <div class="RibbonItemCollection" id="divRibbonTabItemsProject">
+                            <div class="RibbonItem">
+                                <div class="RibbonInnerItem floatleft">
+                                    <div class="floatleft"><a href="/Pages/EnquirySch.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -0px -122px; width:43px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/EnquirySch.aspx">Search Enquiry</a></div>
+                                    <div class="clearboth"></div>
+                                </div>    
+                                <div class="RibbonInnerItem floatleft" style="margin-left:15px;">
+                                    <div class="floatleft"><a href="/Pages/EnquiryChange.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -46px -123px; width:37px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/EnquiryChange.aspx">New Enquiry</a></div>
+                                    <div class="clearboth"></div>
+                                </div> 
+                                <div class="clearboth"></div>                   
+                            </div>
+                            <div class="RibbonItem">
+                                <div class="RibbonInnerItem">
+                                    <div class="floatleft"><a href="/Pages/Home.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -86px -123px; width:31px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="Pages/Home.aspx">Search Quotation</a></div>
+                                    <div class="clearboth"></div>
+                                </div>
+                            </div>
+                            <div class="RibbonItem">
+                                <div class="RibbonInnerItem">
+                                    <div class="floatleft"><a href="/Pages/Home.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -1px -152px; width:35px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="Pages/Home.aspx">Project</a></div>
+                                    <div class="clearboth"></div>
+                                </div>
+                            </div>
+                            <div class="clearboth"></div>
+                        </div>
+                        <%--Project Tab Items End--%>
+
+                        <%--Personnel Tab Items Start--%>
+                        <div class="RibbonItemCollection" id="divRibbonTabItemsPersonnel">
+                            <div class="RibbonItem">
+                                <div class="RibbonInnerItem">
+                                    <div class="floatleft"><a href="/Pages/PersonnelView.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -38px -151px; width:42px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/PersonnelView.aspx">Search Personnel</a></div>
+                                    <div class="clearboth"></div>
+                                </div>                        
+                            </div>
+                            <div class="RibbonItem">
+                                <div class="RibbonInnerItem">
+                                    <div class="floatleft"><a href="/Pages/PersonnelChange.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -81px -151px; width:39px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/PersonnelChange.aspx">New Personnel</a></div>
+                                    <div class="clearboth"></div>
+                                </div>
+                            </div>
+                            <div class="RibbonItem">
+                                <div class="RibbonInnerItem">
+                                    <div class="floatleft"><a href="/Pages/CVSearch.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -0px -179px; width:31px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/CVSearch.aspx">Search CV</a></div>
+                                    <div class="clearboth"></div>
+                                </div>
+                            </div>
+                            <div class="clearboth"></div>
+                        </div>
+                        <%--Personnel Tab Items End--%>
+
+                        <%--Report Tab Items Start--%>
+                        <div class="RibbonItemCollection" id="divRibbonTabItemsReport">
+                            <div class="RibbonItem">
+                                <div class="RibbonInnerItem">
+                                    <div class="floatleft"><a href="/Reports/monthlyEnqueryReport.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -35px -179px; width:30px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Reports/monthlyEnqueryReport.aspx">Monthly Enquiry</a></div>
+                                    <div class="clearboth"></div>
+                                </div>                        
+                            </div>
+                            <div class="RibbonItem">
+                                <div class="RibbonInnerItem">
+                                    <div class="floatleft"><a href="/Reports/monthlyQuotationReport.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -66px -179px; width:33px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Reports/monthlyQuotationReport.aspx">Monthly Quotation</a></div>
+                                    <div class="clearboth"></div>
+                                </div>
+                            </div>
+                            <div class="RibbonItem">
+                                <div class="RibbonInnerItem">
+                                    <div class="floatleft"><a href="/Pages/Home.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -1px -210px; width:30px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Reports/TypeWiseMOnthlyEnqueryDetails.aspx">Type Wise Monthly Enquiry Details</a></div>
+                                    <div class="clearboth"></div>
+                                </div>
+                            </div>
+                            <div class="clearboth"></div>
+                        </div>
+                        <%--Report Tab Items End--%>
+                    </div>
                 </div>
-              </div>
-            </td>
-            <td id="PageHeaderRightSide">
-              <asp:Image ID="Image2" runat="server" SkinID="Placeholder" />
-            </td>
-          </tr>
-          <tr>
-            <td id="PageContentSideBar" valign="top">
-              <div class="SideBarBody" style="display:none">
-                <asp:ContentPlaceHolder ID="SideBarPlaceHolder" runat="server" />
-                <asp:Image runat="server" SkinID="Placeholder" />
-              </div>
-            </td>
-            <td id="PageContentLeftSide">
-              <asp:Image ID="Image3" runat="server" SkinID="Placeholder" />
-            </td>
-            <td id="PageContent" valign="top">
-              <asp:ContentPlaceHolder ID="PageContentPlaceHolder" runat="server" />
-            </td>
-            <td id="PageContentRightSide">
-              <asp:Image ID="Image4" runat="server" SkinID="Placeholder" />
-            </td>
-          </tr>
-          <tr>
-            <td id="PageFooterSideBar" />
-            <td id="PageFooterLeftSide" />
-            <td id="PageFooterContent" />
-            <td id="PageFooterRightSide" />
-          </tr>
-        </table>
-        <div id="PageFooterBar">&copy;  OMM</div>
-      </div>
+                <div class="RibbonLogo"></div>
+            </div>
+            <%--Ribbon Bar Ends--%>
+
+            <div class="LogoutContainer"><asp:Literal ID="ltrUserName" runat="server"></asp:Literal> <asp:HyperLink ID="hplLogin" runat="server"></asp:HyperLink></div>
+            <div class="clearboth"></div>
+            <%--<div id="PageHeader">
+                <div id="PageHeaderBar">
+                    <div class="floatleft">BUDI</div>
+                    <div class="floatright" style="font-size:11px; font-weight:normal; margin-right:12px;"><asp:Literal ID="ltrUserName" runat="server"></asp:Literal> <asp:HyperLink ID="hplLogin" runat="server"></asp:HyperLink></div>
+                    <div class="clearboth"></div>
+                </div>
+                <div id="PageMenuBar" runat="server" class="PageMenuBar" />
+            </div>--%>
+
+            <%--<asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" ShowStartingNode="False" />--%>
+            <%--<aquarium:MenuExtender ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1" TargetControlID="PageMenuBar" HoverStyle="Auto" PopupPosition="Left" ShowSiteActions="true" />--%>
+            
+            <table id="PageBody" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td id="PageHeaderSideBar">
+                        <%--<asp:Image ID="Image5" runat="server" SkinID="PageLogo" CssClass="PageLogo" />--%>
+                        &nbsp;&nbsp;
+                    </td>
+                    <td id="PageHeaderLeftSide"><asp:Image ID="Image1" runat="server" SkinID="Placeholder" /></td>
+                    <td id="PageHeaderContent">
+                        <div class="Header">
+                            <asp:SiteMapPath ID="SiteMapPath1" runat="server" SkinID="SiteMapPath" />
+                            <div class="Title">
+                                <asp:ContentPlaceHolder ID="PageHeaderContentPlaceHolder" runat="server">Page Title</asp:ContentPlaceHolder>
+                            </div>
+                        </div>
+                    </td>
+                    <td id="PageHeaderRightSide"><asp:Image ID="Image2" runat="server" SkinID="Placeholder" /></td>
+                </tr>
+                <tr>
+                    <td id="PageContentSideBar" valign="top">
+                        <div class="SideBarBody" style="display:none">
+                            <asp:ContentPlaceHolder ID="SideBarPlaceHolder" runat="server" />
+                            <asp:Image runat="server" SkinID="Placeholder" />
+                        </div>
+                    </td>
+                    <td id="PageContentLeftSide"><asp:Image ID="Image3" runat="server" SkinID="Placeholder" /></td>
+                    <td id="PageContent" valign="top">
+                        <asp:ContentPlaceHolder ID="PageContentPlaceHolder" runat="server" />
+                    </td>
+                    <td id="PageContentRightSide"><asp:Image ID="Image4" runat="server" SkinID="Placeholder" /></td>
+                </tr>
+                <tr>
+                    <td id="PageFooterSideBar" />
+                    <td id="PageFooterLeftSide" />
+                    <td id="PageFooterContent" />
+                    <td id="PageFooterRightSide" />
+                </tr>
+            </table>
+
+            <div id="PageFooterBar">Copyright&copy;   OMM All Rights Reserved.</div>
+        </div>
       
-      <%--Progress Animation--%>
+        <%--Progress Animation--%>
         <div id="divProgressAnimationContainer" class="progressanimationcontainer"><img src="../Images/Loading.gif" alt="Loading" title="Loading" /></div>
     </form>
   </body>

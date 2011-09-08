@@ -57,13 +57,13 @@ table#PageBody tr td#PageHeaderLeftSide img.Placeholder
     height: 1px;
 }
 
-table#PageBody tr td#PageHeaderContent
+/*table#PageBody tr td#PageHeaderContent
 {
     background-image: url(PageHeader.gif);
     background-repeat: repeat-x;
     border-left: solid 1px #6f9dd9;
     border-right: solid 1px #6f9dd9;
-}
+}*/
 
 .HomePage table#PageBody tr td#PageHeaderContent
 {
@@ -73,10 +73,10 @@ table#PageBody tr td#PageHeaderContent
     border-right-style: none;
 }
 
-table#PageBody tr td#PageHeaderContent div.Header
+/*table#PageBody tr td#PageHeaderContent div.Header
 {
     padding: 8px;
-}
+}*/
 
 table#PageBody tr td#PageHeaderContent div.Header div.Title
 {
@@ -85,14 +85,30 @@ table#PageBody tr td#PageHeaderContent div.Header div.Title
     color: Black;
 }
 
-.HomePage table#PageBody tr td#PageHeaderContent div.Header
+/*.HomePage table#PageBody tr td#PageHeaderContent div.Header
 {
     padding: 8px 0px;
     background-image: url(TopShape.jpg);
     background-repeat: no-repeat;
     background-position: 300px bottom;
 }
-
+*/
+div.Header
+{
+    padding-top: 15px;
+    padding-bottom:8px;
+    background-image: url(TopShape.jpg);
+    background-repeat: no-repeat;
+    background-position: 35% bottom;
+}
+td#PageHeaderContent
+{
+    background-image: url(TabsBar.gif);
+    background-repeat: repeat-x;
+    background-color: #d6e8ff;
+    border-left-style: none;
+    border-right-style: none;
+}
 .Tall.HomePage div.Header
 {
     background-image: none !important;
@@ -376,10 +392,10 @@ table#PageBody tr td#PageFooterRightSide
 div#PageFooterBar
 {
     background-color: #83b0ec;
-    color: Black;
+    color: #29476e;
     font-family: Verdana;
     font-size: 8.5pt;
-    padding: 0px 10px 10px 150px;
+    padding: 0px 10px 4px 15px;
 }
 
 .Wide div#PageFooterBar
