@@ -8,7 +8,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="PageHeaderContentPlaceHolder" Runat="Server">
-    Monthly Enquery
+    <asp:Literal ID="ltrHeading" runat="server" Text="Monthly Enquery Report"></asp:Literal>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="SideBarPlaceHolder" Runat="Server">

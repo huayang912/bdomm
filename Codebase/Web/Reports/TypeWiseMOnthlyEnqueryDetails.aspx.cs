@@ -16,7 +16,7 @@ public partial class Reports_TypeWiseMOnthlyEnqueryDetails : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        this.Master.SelectedTab = SelectedTab.Report;
+        BindPageInfo();        
         if (!IsPostBack)
         {
             BindMonthDropDownlist();
@@ -27,9 +27,11 @@ public partial class Reports_TypeWiseMOnthlyEnqueryDetails : BasePage
             //btnShowReport_Click(sender, e);
             loadReport();
         }
-
-
-
+    }
+    protected void BindPageInfo()
+    {
+        this.Master.SelectedTab = SelectedTab.Report;
+        Page.Title = WebUtil.GetPageTitle(ltrHeading.Text);
     }
     protected void BindYearDropDownlist()
     {

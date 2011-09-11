@@ -14,7 +14,7 @@ public partial class Reports_monthlyQuotationReport : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        this.Master.SelectedTab = SelectedTab.Report;
+        BindPageInfo();
         if (!IsPostBack)
         {
             BindYearDropDownlist();
@@ -26,7 +26,11 @@ public partial class Reports_monthlyQuotationReport : System.Web.UI.Page
             loadReport();
         }
     }
-
+    protected void BindPageInfo()
+    {
+        this.Master.SelectedTab = SelectedTab.Report;
+        Page.Title = WebUtil.GetPageTitle(ltrHeading.Text);
+    }
     /// <summary>
     /// Load list of year in the dropdown control
     /// </summary>
@@ -67,6 +71,7 @@ public partial class Reports_monthlyQuotationReport : System.Web.UI.Page
 
         //Now show the report in the reportviewer
         CrystalReportViewer1.ReportSource = repDoc;
+        divReportContainer.Visible = true;
     }
 
     /// <summary>
