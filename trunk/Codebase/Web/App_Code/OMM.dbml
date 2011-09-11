@@ -139,8 +139,8 @@
       <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Association Name="Role_UserInRole" Member="UserInRoles" ThisKey="ID" OtherKey="RoleID" Type="UserInRole" />
-      <Association Name="Role_EmploymentHistory" Member="EmploymentHistories" ThisKey="ID" OtherKey="RoleID" Type="EmploymentHistory" />
       <Association Name="Role_ContactRole" Member="ContactRoles" ThisKey="ID" OtherKey="RoleID" Type="ContactRole" />
+      <Association Name="Role_EmploymentHistory" Member="EmploymentHistories" ThisKey="ID" OtherKey="RoleID" Type="EmploymentHistory" />
       <Association Name="User_Role" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
@@ -197,8 +197,8 @@
       <Column Name="CreatedByUsername" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="ChangedByUsername" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Project_EmploymentHistory" Member="EmploymentHistories" ThisKey="ID" OtherKey="ProjectID" Type="EmploymentHistory" />
       <Association Name="Project_ProjectNote" Member="ProjectNotes" ThisKey="ID" OtherKey="ProjectID" Type="ProjectNote" />
+      <Association Name="Project_EmploymentHistory" Member="EmploymentHistories" ThisKey="ID" OtherKey="ProjectID" Type="EmploymentHistory" />
       <Association Name="User_Project" Member="User" ThisKey="CreatedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
       <Association Name="User_Project1" Member="User1" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
       <Association Name="ProjectStatus_Project" Member="ProjectStatuse" ThisKey="StatusID" OtherKey="ID" Type="ProjectStatus" IsForeignKey="true" />
@@ -223,7 +223,6 @@
       <Association Name="User_Role" Member="Roles" ThisKey="ID" OtherKey="ChangedByUserID" Type="Role" />
       <Association Name="User_Project" Member="Projects" ThisKey="ID" OtherKey="CreatedByUserID" Type="Project" />
       <Association Name="User_Project1" Member="Projects1" ThisKey="ID" OtherKey="ChangedByUserID" Type="Project" />
-      <Association Name="User_EmploymentHistory" Member="EmploymentHistories" ThisKey="ID" OtherKey="ChangedByUserID" Type="EmploymentHistory" />
       <Association Name="User_Contact" Member="Contacts" ThisKey="ID" OtherKey="CreatedByUserID" Type="Contact" />
       <Association Name="User_Contact1" Member="Contacts1" ThisKey="ID" OtherKey="ChangedByUserID" Type="Contact" />
       <Association Name="User_Enquiry" Member="Enquiries" ThisKey="ID" OtherKey="CreatedByUserID" Type="Enquiry" />
@@ -241,6 +240,7 @@
       <Association Name="User_BankDetail" Member="BankDetails" ThisKey="ID" OtherKey="ChangedByUserId" Type="BankDetail" />
       <Association Name="User_Passport" Member="Passports" ThisKey="ID" OtherKey="ChangedByUserID" Type="Passport" />
       <Association Name="User_Visa" Member="Visas" ThisKey="ID" OtherKey="ChangedByUserID" Type="Visa" />
+      <Association Name="User_EmploymentHistory" Member="EmploymentHistories" ThisKey="ID" OtherKey="ChangedByUserID" Type="EmploymentHistory" />
     </Type>
   </Table>
   <Table Name="dbo.SMS_Messages" Member="SMS_Messages">
@@ -256,28 +256,6 @@
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="ProjectStatus_Project" Member="Projects" ThisKey="ID" OtherKey="StatusID" Type="Project" />
-    </Type>
-  </Table>
-  <Table Name="dbo.EmploymentHistory" Member="EmploymentHistories">
-    <Type Name="EmploymentHistory">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ContactID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ProjectID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ClientID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="RoleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DayRate" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
-      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="ChangedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
-      <Column Name="Contract_days" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Client_EmploymentHistory" Member="Client" ThisKey="ClientID" OtherKey="ID" Type="Client" IsForeignKey="true" />
-      <Association Name="Project_EmploymentHistory" Member="Project" ThisKey="ProjectID" OtherKey="ID" Type="Project" IsForeignKey="true" />
-      <Association Name="Role_EmploymentHistory" Member="Role" ThisKey="RoleID" OtherKey="ID" Type="Role" IsForeignKey="true" />
-      <Association Name="User_EmploymentHistory" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
-      <Association Name="Contact_EmploymentHistory" Member="Contact" ThisKey="ContactID" OtherKey="ID" Type="Contact" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Contacts" Member="Contacts">
@@ -303,7 +281,6 @@
       <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
       <Column Name="DayRateCurrencyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Contact_EmploymentHistory" Member="EmploymentHistories" ThisKey="ID" OtherKey="ContactID" Type="EmploymentHistory" />
       <Association Name="Contact_TelephoneNumber" Member="TelephoneNumbers" ThisKey="ID" OtherKey="ContactID" Type="TelephoneNumber" />
       <Association Name="Contact_EmailAddress" Member="EmailAddresses" ThisKey="ID" OtherKey="ContactID" Type="EmailAddress" />
       <Association Name="Contact_ContactRole" Member="ContactRoles" ThisKey="ID" OtherKey="ContactID" Type="ContactRole" />
@@ -316,6 +293,7 @@
       <Association Name="Contact_BankDetail" Member="BankDetails" ThisKey="ID" OtherKey="ContactID" Type="BankDetail" />
       <Association Name="Contact_Passport" Member="Passports" ThisKey="ID" OtherKey="ContactID" Type="Passport" />
       <Association Name="Contact_Visa" Member="Visas" ThisKey="ID" OtherKey="ContactID" Type="Visa" />
+      <Association Name="Contact_EmploymentHistory" Member="EmploymentHistories" ThisKey="ID" OtherKey="ContactID" Type="EmploymentHistory" />
       <Association Name="Country_Contact" Member="Country" ThisKey="CountryID" OtherKey="ID" Type="Country" IsForeignKey="true" />
       <Association Name="Country_Contact1" Member="Country1" ThisKey="CountryOfBirthID" OtherKey="ID" Type="Country" IsForeignKey="true" />
       <Association Name="User_Contact" Member="User" ThisKey="CreatedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
@@ -611,6 +589,37 @@
       <Association Name="Contact_Visa" Member="Contact" ThisKey="ContactID" OtherKey="ID" Type="Contact" IsForeignKey="true" />
       <Association Name="Country_Visa" Member="Country" ThisKey="CountryID" OtherKey="ID" Type="Country" IsForeignKey="true" />
       <Association Name="User_Visa" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmploymentHistory" Member="EmploymentHistories">
+    <Type Name="EmploymentHistory">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ContactID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ProjectID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RoleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DayRate" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="ChangedByUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChangedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="Contract_days" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TravelRate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TravelCost" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CurrencyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OffshoreRate" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
+      <Column Name="Office_Onsh_Rate_type" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="OfficeOnshoreRate" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
+      <Column Name="Hour_Standby_Rate_type" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="HourStandbyRate" Type="System.Decimal" DbType="SmallMoney" CanBeNull="true" />
+      <Column Name="ProjectCode_other" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="Client_EmploymentHistory" Member="Client" ThisKey="ClientID" OtherKey="ID" Type="Client" IsForeignKey="true" />
+      <Association Name="Contact_EmploymentHistory" Member="Contact" ThisKey="ContactID" OtherKey="ID" Type="Contact" IsForeignKey="true" />
+      <Association Name="Project_EmploymentHistory" Member="Project" ThisKey="ProjectID" OtherKey="ID" Type="Project" IsForeignKey="true" />
+      <Association Name="Role_EmploymentHistory" Member="Role" ThisKey="RoleID" OtherKey="ID" Type="Role" IsForeignKey="true" />
+      <Association Name="User_EmploymentHistory" Member="User" ThisKey="ChangedByUserID" OtherKey="ID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.GenerateNewQuotationNumber" Method="GenerateNewQuotationNumber" IsComposable="true">

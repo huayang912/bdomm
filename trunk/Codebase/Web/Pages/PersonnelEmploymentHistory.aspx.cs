@@ -51,6 +51,7 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
         //BindDropdownList.Contactses(ddlContactID);
         BindDropdownList.Projects(ddlProjectID);
         BindDropdownList.Roles(ddlRoleID);
+        BindDropdownList.Currencies_EmpHistory(ddlCurrencyCode);
         //BindDropdownList.Userses(ddlChangedByUserID);
 
     }
@@ -82,21 +83,22 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
                     ddlProjectID.SetSelectedItem(entity.ProjectID.GetValueOrDefault().ToString());
                     ddlClientID.SetSelectedItem(entity.ClientID.GetValueOrDefault().ToString());
                     ddlRoleID.SetSelectedItem(entity.RoleID.GetValueOrDefault().ToString());
+                    ddlCurrencyCode.SetSelectedItem(entity.CurrencyID.GetValueOrDefault().ToString());
                     txtDayRate.Text = entity.DayRate.HasValue ? String.Format(AppConstants.ValueOf.DECIMAL_FORMAT_FOR_TEXTBOX, entity.DayRate.GetValueOrDefault()) : String.Empty;
                     txtNotes.Text = entity.Notes;
                     //ddlChangedByUserID.SetSelectedItem(entity.ChangedByUserID.ToString());
                     //txtChangedOn.Text = entity.ChangedOn.ToString(ConfigReader.CSharpCalendarDateFormat);
                     //txtVersion.Text = entity.Version;
-                    //txtContractdays.Text = entity.Contractdays;
-                    //txtTravelRate.Text = entity.TravelRate;
-                    //txtTravelCost.Text = entity.TravelCost;
+                    txtContractdays.Text = entity.Contract_days.ToString();
+                    txtTravelRate.Text = entity.TravelRate.ToString();
+                    txtTravelCost.Text = entity.TravelCost.ToString();
                     //txtCurrencyID.Text = entity.CurrencyID;
-                    //txtOffshoreRate.Text = entity.OffshoreRate;
-                    //txtOfficeOnshRatetype.Text = entity.OfficeOnshRatetype;
-                    //txtOfficeOnshoreRate.Text = entity.OfficeOnshoreRate;
-                    //txtHourStandbyRatetype.Text = entity.HourStandbyRatetype;
-                    //txtHourStandbyRate.Text = entity.HourStandbyRate;
-                    //txtProjectCodeother.Text = entity.ProjectCodeother;
+                    txtOffshoreRate.Text = entity.OffshoreRate.ToString();
+                    txtOfficeOnshRatetype.Text = entity.Office_Onsh_Rate_type;
+                    txtOfficeOnshoreRate.Text = entity.OfficeOnshoreRate.ToString();
+                    txtHourStandbyRatetype.Text = entity.Hour_Standby_Rate_type;
+                    txtHourStandbyRate.Text = entity.HourStandbyRate.ToString();
+                    txtProjectCodeother.Text = entity.ProjectCode_other;
                 }
             }
         }
@@ -186,6 +188,12 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
             entity.RoleID = null;
         else
             entity.RoleID = ddlRoleID.SelectedValue.ToInt();
+
+        if (ddlCurrencyCode.SelectedValue.ToInt() == 0)
+            entity.CurrencyID = null;
+        else
+            entity.CurrencyID = ddlCurrencyCode.SelectedValue.ToInt();
+
         if (txtDayRate.Text.IsNullOrEmpty())
             entity.DayRate = null;
         else
@@ -194,16 +202,27 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
         entity.ChangedByUserID = SessionCache.CurrentUser.ID;
         entity.ChangedOn = DateTime.Now;
         //entity.Version = txtVersion.Text;
-        //entity.Contractdays = txtContractdays.Text;
-        //entity.TravelRate = txtTravelRate.Text;
-        //entity.TravelCost = txtTravelCost.Text;
+        if (txtContractdays.Text.Trim() != "")
+            entity.Contract_days = Convert.ToInt32(txtContractdays.Text);
+
+        if (txtTravelRate.Text.Trim() != "")
+            entity.TravelRate = Convert.ToInt32(txtTravelRate.Text);
+
+        if (txtTravelCost.Text.Trim() != "")
+            entity.TravelCost = Convert.ToInt32(txtTravelCost.Text);
         //entity.CurrencyID = txtCurrencyID.Text;
-        //entity.OffshoreRate = txtOffshoreRate.Text;
-        //entity.OfficeOnshRatetype = txtOfficeOnshRatetype.Text;
-        //entity.OfficeOnshoreRate = txtOfficeOnshoreRate.Text;
-        //entity.HourStandbyRatetype = txtHourStandbyRatetype.Text;
-        //entity.HourStandbyRate = txtHourStandbyRate.Text;
-        //entity.ProjectCodeother = txtProjectCodeother.Text;
+
+        if (txtContractdays.Text.Trim() != "")
+            entity.OffshoreRate = Convert.ToDecimal(txtOffshoreRate.Text);
+        entity.Office_Onsh_Rate_type = txtOfficeOnshRatetype.Text;
+
+        if (txtOfficeOnshoreRate.Text.Trim() != "")
+        entity.OfficeOnshoreRate = Convert.ToDecimal(txtOfficeOnshoreRate.Text);
+        entity.Hour_Standby_Rate_type = txtHourStandbyRatetype.Text;
+
+        if (txtOfficeOnshoreRate.Text.Trim() != "")
+            entity.HourStandbyRate = Convert.ToDecimal(txtHourStandbyRate.Text);
+        entity.ProjectCode_other = txtProjectCodeother.Text;
         context.SubmitChanges();
         String url = String.Format("{0}?{1}={2}&{3}=True"
             , Request.Url.AbsolutePath
