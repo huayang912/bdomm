@@ -8,7 +8,6 @@ using System.Data;
 using System.Net;
 using System.IO;
 using App.Core.Extensions;
-
 using App.Data;
 
 public partial class Pages_CVSearch : BasePage
@@ -20,6 +19,7 @@ public partial class Pages_CVSearch : BasePage
     protected void BindPageInfo()
     {
         Page.Title = WebUtil.GetPageTitle("CV Search");
+        this.Master.SelectedTab = SelectedTab.Personnel;
     }
     protected String GetRelativeDownloadUrl(String path)
     {

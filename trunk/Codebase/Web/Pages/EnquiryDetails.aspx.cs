@@ -25,6 +25,7 @@ public partial class Pages_EnquiryDetails : BasePage
     {
         Page.Title = WebUtil.GetPageTitle("Close Enquiry");
         _EnquiryID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);
+        this.Master.SelectedTab = SelectedTab.Project;
     }
     protected void BindEnquiryDetails()
     {

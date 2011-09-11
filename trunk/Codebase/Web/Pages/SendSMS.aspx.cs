@@ -25,6 +25,7 @@ public partial class Pages_SendSMS : BasePage
         Page.Title = WebUtil.GetPageTitle("Send SMS");
         String commSeperatedID = WebUtil.GetQueryStringInString(AppConstants.QueryString.ID);
         _ContactIDs = WebUtil.GetIntArray(commSeperatedID);
+        this.Master.SelectedTab = SelectedTab.Project;
     }
     /// <summary>
     /// Binds Contacts List From Query String Parameters

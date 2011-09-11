@@ -1,5 +1,6 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="ProjectDetails.aspx.cs" Inherits="Pages_ProjectDetails" %>
 <%@ Register Src="~/Controls/ProjectNotes.ascx" TagName="ProjectNotes" TagPrefix="UC" %>
+<%@ MasterType VirtualPath="~/Main.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style type="text/css">

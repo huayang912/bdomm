@@ -1,5 +1,6 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" 
     CodeFile="SendSMS.aspx.cs" Inherits="Pages_SendSMS" EnableEventValidation="false" %>
+<%@ MasterType VirtualPath="~/Main.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 

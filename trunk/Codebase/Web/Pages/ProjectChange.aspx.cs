@@ -29,6 +29,7 @@ public partial class Pages_ProjectChange : BasePage
             _IsEditMode = true;
         
         Page.Title = ltrHeading.Text;
+        this.Master.SelectedTab = SelectedTab.Project;
     }
     protected void BindProjectInfo()
     {

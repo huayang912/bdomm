@@ -1,4 +1,6 @@
 <%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="QuotationPricingTypes.aspx.cs" Inherits="Pages_QuotationPricingTypes"  Title="Quotation Pricing Types"%>
+<%@ MasterType VirtualPath="~/Main.master" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="PageHeaderContentPlaceHolder" runat="Server">Quotation Pricing Types</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
   <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory">
