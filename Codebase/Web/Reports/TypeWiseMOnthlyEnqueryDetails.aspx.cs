@@ -16,6 +16,7 @@ public partial class Reports_TypeWiseMOnthlyEnqueryDetails : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        this.Master.SelectedTab = SelectedTab.Report;
         if (!IsPostBack)
         {
             BindMonthDropDownlist();

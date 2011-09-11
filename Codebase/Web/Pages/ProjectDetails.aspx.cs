@@ -24,6 +24,7 @@ public partial class Pages_ProjectDetails : BasePage
     {
         _ProjectID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);
         Page.Title = WebUtil.GetPageTitle("Project Details");
+        this.Master.SelectedTab = SelectedTab.Project;
     }
     protected void BindProjectDetails()
     {

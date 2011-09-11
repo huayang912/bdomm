@@ -20,6 +20,7 @@ public partial class Pages_QuotationDetails : BasePage
     protected void BindPageInfo()
     {
         _QuotationID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);
+        this.Master.SelectedTab = SelectedTab.Project;
     }
     protected void BindQuotationInfo()
     {

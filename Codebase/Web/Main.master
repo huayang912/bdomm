@@ -30,7 +30,7 @@
                     <div id="divRibbonTabs" style="margin-left:10px;">
                         <div class="RibbonTabSelected" onclick="ShowRibbonTab(this, 'divRibbonTabItemsHome');">Home</div>
                         <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsClient');">Client</div>
-                        <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsProject');">Project</div>
+                        <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsProject');">Activity</div>
                         <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsPersonnel');">Personnel</div>
                         <div class="RibbonTab" onclick="ShowRibbonTab(this, '');">Option</div>
                         <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsReport');">Report</div>
@@ -89,14 +89,14 @@
                             <div class="RibbonItem">
                                 <div class="RibbonInnerItem">
                                     <div class="floatleft"><a href="/Pages/Home.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -86px -123px; width:31px;" /></a></div>
-                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="Pages/Home.aspx">Search Quotation</a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/QuoteSrch.aspx">Search Quotation</a></div>
                                     <div class="clearboth"></div>
                                 </div>
                             </div>
                             <div class="RibbonItem">
                                 <div class="RibbonInnerItem">
                                     <div class="floatleft"><a href="/Pages/Home.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -1px -152px; width:35px;" /></a></div>
-                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="Pages/Home.aspx">Project</a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/ProjectSrch.aspx">Project</a></div>
                                     <div class="clearboth"></div>
                                 </div>
                             </div>

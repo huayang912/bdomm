@@ -5,8 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-
-
 public partial class Pages_Quotations : BasePage
 {
     
@@ -20,5 +18,6 @@ public partial class Pages_Quotations : BasePage
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        this.Master.SelectedTab = SelectedTab.Project;
     }
 }

@@ -26,7 +26,8 @@ public partial class Pages_PersonnelChange : BasePage
         if (_ID > 0)
             ltrHeading.Text = "Edit Personnel";
 
-        Page.Title = WebUtil.GetPageTitle(ltrHeading.Text);        
+        Page.Title = WebUtil.GetPageTitle(ltrHeading.Text);
+        this.Master.SelectedTab = SelectedTab.Personnel;
     }
     protected void CheckPersonnelInfo()
     {

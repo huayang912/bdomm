@@ -24,6 +24,7 @@ public partial class Pages_ProjectStatusChange : BasePage
     {        
         _ProjectID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);        
         Page.Title = ltrHeading.Text;
+        this.Master.SelectedTab = SelectedTab.Project;
     }
     protected void BindProjectInfo()
     {

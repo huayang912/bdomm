@@ -1,5 +1,6 @@
 <%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="EnquirySch.aspx.cs" Inherits="Pages_EnquirySch"  Title="Enquiries"%>
 <%@ Register Src="~/Controls/EnquirySrch.ascx" TagName="EnquirySrch"  TagPrefix="uc"%>
+<%@ MasterType VirtualPath="~/Main.master" %>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="head" Runat="Server">
    

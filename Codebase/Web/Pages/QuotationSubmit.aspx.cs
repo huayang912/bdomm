@@ -34,6 +34,7 @@ public partial class Pages_QuotationDecision : BasePage
             //ShowErroMessag("Requested Quotation ");
         }
         Page.Title = WebUtil.GetPageTitle(ltrHeading.Text);
+        this.Master.SelectedTab = SelectedTab.Project;
     }
     
     /// <summary>

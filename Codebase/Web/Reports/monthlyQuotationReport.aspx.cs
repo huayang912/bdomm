@@ -14,6 +14,7 @@ public partial class Reports_monthlyQuotationReport : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        this.Master.SelectedTab = SelectedTab.Report;
         if (!IsPostBack)
         {
             BindYearDropDownlist();
