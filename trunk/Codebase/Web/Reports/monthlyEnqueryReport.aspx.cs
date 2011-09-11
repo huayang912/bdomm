@@ -14,7 +14,7 @@ public partial class Reports_monthlyEnqueryReport : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        this.Master.SelectedTab = SelectedTab.Report;
+        BindPageInfo();        
         if (!IsPostBack)
         {
             BindYearDropDownlist();
@@ -26,7 +26,11 @@ public partial class Reports_monthlyEnqueryReport : BasePage
             loadReport();
         }
     }
-
+    protected void BindPageInfo()
+    {
+        this.Master.SelectedTab = SelectedTab.Report;
+        Page.Title = WebUtil.GetPageTitle(ltrHeading.Text);
+    }
     /// <summary>
     /// Load list of year in the dropdown control
     /// </summary>

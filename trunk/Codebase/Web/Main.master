@@ -8,11 +8,20 @@
     <script language="javascript" src="../Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>    
     <asp:ContentPlaceHolder ID="head" runat="server" ></asp:ContentPlaceHolder>
     <script language="javascript" type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             var selectedTab = '<%# _SelectedTabID %>';
             var index = selectedTab.split(':')[0];
             var div = $('#divRibbonTabs div')[index];
             ShowRibbonTab(div, selectedTab.split(':')[1]);
+            ///Set Page Height
+            var bodyHeight = $('#PageContent').height();
+            var computedHeight = 93 + $('#PageBody tr:first').height() + bodyHeight + $('#PageFooterBar').height();
+            var areaHeight = $(window).height();
+            if (computedHeight < areaHeight) {
+                bodyHeight = areaHeight - (computedHeight - bodyHeight);
+                $('#PageContent').height(bodyHeight - 10);
+            }
+            //alert(computedHeight);
         });
     </script>
   </head>

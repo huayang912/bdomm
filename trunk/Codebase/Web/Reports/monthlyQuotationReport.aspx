@@ -7,44 +7,33 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageHeaderContentPlaceHolder" Runat="Server">
-    Monthly Quotation
+    <asp:Literal ID="ltrHeading" runat="server" Text="Monthly Quotation Report"></asp:Literal>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="SideBarPlaceHolder" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageContentPlaceHolder" Runat="Server">
-
     <div class="GroupBox">
-    <table cellpadding="0" cellspacing="0" border="0" width="100%">
-        
-        <tr>
-            <td>
-            <div class="GroupBox">
-                <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                    <tr>
-                        <td style="width:10%">Select Year</td>
-                        <td style="width:10%">
-                            <asp:DropDownList ID="ddlYear" runat="server">
-                                
-                            </asp:DropDownList>
-                        </td>
-                        <td >
-                            <asp:Button ID="btnShowReport" runat="server" Text="Show Report" 
-                                onclick="btnShowReport_Click" />
-                        </td>
-                    </tr>
-                </table>
-                </div>
-            </td>
-        </tr>
-        
-        <tr>
-            <td>
-                <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" 
-                    AutoDataBind="true" DisplayGroupTree="False" 
-                    HasToggleGroupTreeButton="False" />
-            </td>
-        </tr>
-    </table>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+                <td style="width:10%">Select Year</td>
+                <td style="width:10%">
+                    <asp:DropDownList ID="ddlYear" runat="server">
+                        
+                    </asp:DropDownList>
+                </td>
+                <td >
+                    <asp:Button ID="btnShowReport" runat="server" Text="Show Report" 
+                        onclick="btnShowReport_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+      
+    <div id="divReportContainer" runat="server" visible="false" class="GroupBox" style="margin-bottom:0px;">      
+        <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" 
+            AutoDataBind="true" DisplayGroupTree="False" 
+            HasToggleGroupTreeButton="False" />
+            
     </div>
 </asp:Content>
 
