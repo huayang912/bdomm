@@ -51,7 +51,7 @@
                             <div class="RibbonItem">
                                 <div class="RibbonInnerItem">
                                     <div class="floatleft"><a href="/Pages/Home.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -0px -94px; width:33px;" /></a></div>
-                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/Home.aspx">Home</a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/Home.aspx">Dashboard</a></div>
                                     <div class="clearboth"></div>
                                 </div>                        
                             </div>

@@ -20,5 +20,6 @@ public partial class Pages_Home : BasePage
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        Page.Title = WebUtil.GetPageTitle("Dashboard");
     }
 }
