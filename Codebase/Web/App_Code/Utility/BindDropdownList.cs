@@ -33,6 +33,18 @@ public static class BindDropdownList
         ddl.DataBind();
         //InsertBlankOption(ddl);
     }
+
+    public static void Currencies_EmpHistory(DropDownList ddl)
+    {
+        OMMDataContext context = new OMMDataContext();
+        var currencies = from P in context.Currencies select new { P.ID, P.ShortCode };
+        ddl.DataSource = currencies;
+        ddl.DataTextField = "ShortCode";
+        ddl.DataValueField = "ID";
+        ddl.DataBind();
+        InsertBlankOption(ddl);
+    }
+
     public static void MaritalStatuses(DropDownList ddl)
     {
         OMMDataContext context = new OMMDataContext();

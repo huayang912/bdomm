@@ -88,14 +88,110 @@
 						    <asp:TextBox ID="txtNotes" TextMode="MultiLine" MaxLength="500" runat="server"></asp:TextBox>
 					    </td>
 				    </tr>
+				    
+				    
+				    <tr>
+					    <td>ProjectCodeother</td>
+					    <td>
+						    <asp:TextBox ID="txtProjectCodeother" MaxLength="30" runat="server"></asp:TextBox>
+					    </td>
+					    
+					    <td>TravelRate</td>
+					    <td>
+						    <asp:TextBox ID="txtTravelRate" MaxLength="4" runat="server"></asp:TextBox>
+						    <asp:CompareValidator ID="cpvTravelRate" runat="server"
+							    ControlToValidate="txtTravelRate" SetFocusOnError="true"
+							    Operator="DataTypeCheck" Type="Integer"
+							    ErrorMessage="Please Enter Digits Only." Display="Dynamic"
+							    ValidationGroup="SaveInfo">
+						    </asp:CompareValidator>
+					    </td>
+				    </tr>
+				    
+				    <tr>
+					    <td>TravelCost</td>
+					    <td>
+						    <asp:TextBox ID="txtTravelCost" MaxLength="4" runat="server"></asp:TextBox>
+						    <asp:CompareValidator ID="cpvTravelCost" runat="server"
+							    ControlToValidate="txtTravelCost" SetFocusOnError="true"
+							    Operator="DataTypeCheck" Type="Integer"
+							    ErrorMessage="Please Enter Digits Only." Display="Dynamic"
+							    ValidationGroup="SaveInfo">
+						    </asp:CompareValidator>
+					    </td>
+					     <td>OffshoreRate</td>
+					    <td>
+						    <asp:TextBox ID="txtOffshoreRate" MaxLength="4" runat="server"></asp:TextBox>
+						    <asp:CompareValidator ID="cpvOffshoreRate" runat="server"
+							    ControlToValidate="txtOffshoreRate" SetFocusOnError="true"
+							    Operator="DataTypeCheck" Type="Double"
+							    ErrorMessage="Please Enter Digits Only." Display="Dynamic"
+							    ValidationGroup="SaveInfo">
+						    </asp:CompareValidator>
+					    </td>
+				    </tr>
+				    
+				    <tr>
+					    <td>Contractdays</td>
+					    <td>
+						    <asp:TextBox ID="txtContractdays" MaxLength="4" runat="server"></asp:TextBox>
+						    <asp:CompareValidator ID="cpvContractdays" runat="server"
+							    ControlToValidate="txtContractdays" SetFocusOnError="true"
+							    Operator="DataTypeCheck" Type="Integer"
+							    ErrorMessage="Please Enter Digits Only." Display="Dynamic"
+							    ValidationGroup="SaveInfo">
+						    </asp:CompareValidator>
+					    </td>
+					    
+					    <td>Currency Code</td>
+					    <td>
+						    <asp:DropDownList ID="ddlCurrencyCode" runat="server"></asp:DropDownList>
+					    </td>
+				    </tr>
+				    
+				    <tr>
+				        <td>Office Onsh Rate type</td>
+					    <td>
+						    <asp:TextBox ID="txtOfficeOnshRatetype" MaxLength="30" runat="server"></asp:TextBox>
+					    </td>
+					    <td>Office Onshore Rate</td>
+					    <td>
+						    <asp:TextBox ID="txtOfficeOnshoreRate" MaxLength="4" runat="server"></asp:TextBox>
+						    <asp:CompareValidator ID="CompareValidator1" runat="server"
+							    ControlToValidate="txtOfficeOnshoreRate" SetFocusOnError="true"
+							    Operator="DataTypeCheck" Type="Double"
+							    ErrorMessage="Please Enter Digits Only." Display="Dynamic"
+							    ValidationGroup="SaveInfo">
+						    </asp:CompareValidator>
+					    </td>
+				    </tr>
+				    
+				    
+				    <tr>
+					    <td>HourStandbyRatetype</td>
+					    <td>
+						    <asp:TextBox ID="txtHourStandbyRatetype" MaxLength="30" runat="server"></asp:TextBox>
+					    </td>
+				    
+					    <td>HourStandbyRate</td>
+					    <td>
+						    <asp:TextBox ID="txtHourStandbyRate" MaxLength="4" runat="server"></asp:TextBox>
+						    <asp:CompareValidator ID="cpvHourStandbyRate" runat="server"
+							    ControlToValidate="txtHourStandbyRate" SetFocusOnError="true"
+							    Operator="DataTypeCheck" Type="Double"
+							    ErrorMessage="Please Enter Digits Only." Display="Dynamic"
+							    ValidationGroup="SaveInfo">
+						    </asp:CompareValidator>
+					    </td>
+				    </tr>
 				    <%--<tr>
 					    <td>ChangedByUser</td>
 					    <td>
 						    <asp:DropDownList ID="ddlChangedByUserID" runat="server"></asp:DropDownList>
 					    </td>
 				    </tr>
-				    <tr>
-					    <td>ChangedOn<span class="requiredMark">*</span></td>
+				   <tr>
+					    <td>ChangedOn<span>*</span></td>
 					    <td>
 						    <asp:TextBox ID="txtChangedOn" MaxLength="50" CssClass="CalendarTextBox" runat="server"></asp:TextBox>
 						    <asp:RequiredFieldValidator ID="rfvChangedOn" runat="server"
@@ -122,42 +218,11 @@
 						    </asp:RequiredFieldValidator>
 					    </td>
 				    </tr>
+				    
 				    <tr>
-					    <td>Contractdays</td>
-					    <td>
-						    <asp:TextBox ID="txtContractdays" MaxLength="4" runat="server"></asp:TextBox>
-						    <asp:CompareValidator ID="cpvContractdays" runat="server"
-							    ControlToValidate="txtContractdays" SetFocusOnError="true"
-							    Operator="DataTypeCheck" Type="Integer"
-							    ErrorMessage="Please Enter Digits Only." Display="Dynamic"
-							    ValidationGroup="SaveInfo">
-						    </asp:CompareValidator>
-					    </td>
+					    
 				    </tr>
-				    <tr>
-					    <td>TravelRate</td>
-					    <td>
-						    <asp:TextBox ID="txtTravelRate" MaxLength="4" runat="server"></asp:TextBox>
-						    <asp:CompareValidator ID="cpvTravelRate" runat="server"
-							    ControlToValidate="txtTravelRate" SetFocusOnError="true"
-							    Operator="DataTypeCheck" Type="Integer"
-							    ErrorMessage="Please Enter Digits Only." Display="Dynamic"
-							    ValidationGroup="SaveInfo">
-						    </asp:CompareValidator>
-					    </td>
-				    </tr>
-				    <tr>
-					    <td>TravelCost</td>
-					    <td>
-						    <asp:TextBox ID="txtTravelCost" MaxLength="4" runat="server"></asp:TextBox>
-						    <asp:CompareValidator ID="cpvTravelCost" runat="server"
-							    ControlToValidate="txtTravelCost" SetFocusOnError="true"
-							    Operator="DataTypeCheck" Type="Integer"
-							    ErrorMessage="Please Enter Digits Only." Display="Dynamic"
-							    ValidationGroup="SaveInfo">
-						    </asp:CompareValidator>
-					    </td>
-				    </tr>
+				    
 				    <tr>
 					    <td>Currency</td>
 					    <td>
@@ -171,16 +236,7 @@
 					    </td>
 				    </tr>
 				    <tr>
-					    <td>OffshoreRate</td>
-					    <td>
-						    <asp:TextBox ID="txtOffshoreRate" MaxLength="4" runat="server"></asp:TextBox>
-						    <asp:CompareValidator ID="cpvOffshoreRate" runat="server"
-							    ControlToValidate="txtOffshoreRate" SetFocusOnError="true"
-							    Operator="DataTypeCheck" Type="Double"
-							    ErrorMessage="Please Enter Digits Only." Display="Dynamic"
-							    ValidationGroup="SaveInfo">
-						    </asp:CompareValidator>
-					    </td>
+					   
 				    </tr>
 				    <tr>
 					    <td>OfficeOnshRatetype</td>
@@ -200,30 +256,8 @@
 						    </asp:CompareValidator>
 					    </td>
 				    </tr>
-				    <tr>
-					    <td>HourStandbyRatetype</td>
-					    <td>
-						    <asp:TextBox ID="txtHourStandbyRatetype" MaxLength="30" runat="server"></asp:TextBox>
-					    </td>
-				    </tr>
-				    <tr>
-					    <td>HourStandbyRate</td>
-					    <td>
-						    <asp:TextBox ID="txtHourStandbyRate" MaxLength="4" runat="server"></asp:TextBox>
-						    <asp:CompareValidator ID="cpvHourStandbyRate" runat="server"
-							    ControlToValidate="txtHourStandbyRate" SetFocusOnError="true"
-							    Operator="DataTypeCheck" Type="Double"
-							    ErrorMessage="Please Enter Digits Only." Display="Dynamic"
-							    ValidationGroup="SaveInfo">
-						    </asp:CompareValidator>
-					    </td>
-				    </tr>
-				    <tr>
-					    <td>ProjectCodeother</td>
-					    <td>
-						    <asp:TextBox ID="txtProjectCodeother" MaxLength="30" runat="server"></asp:TextBox>
-					    </td>
-				    </tr>--%>                    
+				    
+				    --%>                    
                 </table>
                 
             </div>        
