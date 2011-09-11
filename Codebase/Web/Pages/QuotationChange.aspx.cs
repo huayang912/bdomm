@@ -38,6 +38,7 @@ public partial class Pages_QuotationChange : BasePage
             ltrHeading.Text = "Edit Quotations Wizard";
         }
         Page.Title = WebUtil.GetPageTitle(ltrHeading.Text);
+        this.Master.SelectedTab = SelectedTab.Project;
     }
 
     /// <summary>

@@ -38,6 +38,7 @@ public partial class Pages_EnquiryChange : BasePage
             ltrHeading.Text = "Edit Enquiry";            
         }
         Page.Title = WebUtil.GetPageTitle(ltrHeading.Text);
+        this.Master.SelectedTab = SelectedTab.Project;
     }
     /// <summary>
     /// Binds Dropdown Lists for this page

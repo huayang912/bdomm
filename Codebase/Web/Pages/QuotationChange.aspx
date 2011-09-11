@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="QuotationChange.aspx.cs" Inherits="Pages_QuotationChange" %>
 <%@ Register Src="~/Controls/jQueryCalendar.ascx" TagName="jQueryCalendar" TagPrefix="UC"%>
+<%@ MasterType VirtualPath="~/Main.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <UC:jQueryCalendar id="ucjQueryCalendar" runat="server"></UC:jQueryCalendar>
@@ -405,7 +406,7 @@
                         <input type="button" value="Add Pricing" onclick="ShowPricingForm(true); ClearFormData();" /> 
                     </div>
                     <div class="floatleft" style="margin-left:20px;">
-                        Currency &nbsp;<asp:DropDownList ID="ddlCurrency" runat="server" onchange="ChangeCurrency(this.value);"></asp:DropDownList>
+                        Currency &nbsp;<asp:DropDownList ID="ddlCurrency" runat="server" onchange="ChangeCurrency(this.value);" style="width:50px;"></asp:DropDownList>
                     </div>                    						        
                     <div class="clearboth"></div>
                 </div>

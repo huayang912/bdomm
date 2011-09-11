@@ -11,7 +11,8 @@ using System.Web.UI.WebControls;
 
 public partial class Main : System.Web.UI.MasterPage
 {
-    
+    public String _SelectedTabID = String.Empty;
+   
     protected void Page_Load(object sender, EventArgs e)
     {
         BindPageInfo();
@@ -47,5 +48,33 @@ public partial class Main : System.Web.UI.MasterPage
         }
         //if (IsPostBack)
         //    Menu1.DataBind();
+        _SelectedTabID = GetSelectedTabID();
+        Page.DataBind();
     }
+    public String GetSelectedTabID()
+    {
+        if (this.SelectedTab == global::SelectedTab.Client)
+            return "1:divRibbonTabItemsClient";        
+        else if (this.SelectedTab == global::SelectedTab.Project)
+            return "2:divRibbonTabItemsProject";
+        else if (this.SelectedTab == global::SelectedTab.Personnel)
+            return "3:divRibbonTabItemsPersonnel";
+        else if (this.SelectedTab == global::SelectedTab.Option)
+            return "4:divRibbonTabItemsOption";
+        else if (this.SelectedTab == global::SelectedTab.Report)
+            return "5:divRibbonTabItemsReport";
+        else
+            return "0:divRibbonTabItemsHome";
+    }
+    public SelectedTab SelectedTab { get; set; }
+}
+
+public enum SelectedTab
+{
+    Home,
+    Client,
+    Personnel,
+    Project,
+    Option,
+    Report
 }

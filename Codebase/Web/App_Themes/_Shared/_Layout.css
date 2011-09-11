@@ -96,7 +96,7 @@ table#PageBody tr td#PageHeaderContent div.Header div.Title
 div.Header
 {
     padding-top: 15px;
-    padding-bottom:8px;
+    padding-bottom:15px;
     background-image: url(TopShape.jpg);
     background-repeat: no-repeat;
     background-position: 35% bottom;
