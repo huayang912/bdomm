@@ -91,12 +91,12 @@
 				    
 				    
 				    <tr>
-					    <td>ProjectCodeother</td>
+					    <td>Project Code Other</td>
 					    <td>
 						    <asp:TextBox ID="txtProjectCodeother" MaxLength="30" runat="server"></asp:TextBox>
 					    </td>
 					    
-					    <td>TravelRate</td>
+					    <td>Travel Rate</td>
 					    <td>
 						    <asp:TextBox ID="txtTravelRate" MaxLength="4" runat="server"></asp:TextBox>
 						    <asp:CompareValidator ID="cpvTravelRate" runat="server"
@@ -109,7 +109,7 @@
 				    </tr>
 				    
 				    <tr>
-					    <td>TravelCost</td>
+					    <td>Travel Cost</td>
 					    <td>
 						    <asp:TextBox ID="txtTravelCost" MaxLength="4" runat="server"></asp:TextBox>
 						    <asp:CompareValidator ID="cpvTravelCost" runat="server"
@@ -119,7 +119,7 @@
 							    ValidationGroup="SaveInfo">
 						    </asp:CompareValidator>
 					    </td>
-					     <td>OffshoreRate</td>
+					     <td>Offshore Rate</td>
 					    <td>
 						    <asp:TextBox ID="txtOffshoreRate" MaxLength="4" runat="server"></asp:TextBox>
 						    <asp:CompareValidator ID="cpvOffshoreRate" runat="server"
@@ -132,7 +132,7 @@
 				    </tr>
 				    
 				    <tr>
-					    <td>Contractdays</td>
+					    <td>Contract Days</td>
 					    <td>
 						    <asp:TextBox ID="txtContractdays" MaxLength="4" runat="server"></asp:TextBox>
 						    <asp:CompareValidator ID="cpvContractdays" runat="server"
@@ -168,12 +168,12 @@
 				    
 				    
 				    <tr>
-					    <td>HourStandbyRatetype</td>
+					    <td>Hour Standby Rate type</td>
 					    <td>
 						    <asp:TextBox ID="txtHourStandbyRatetype" MaxLength="30" runat="server"></asp:TextBox>
 					    </td>
 				    
-					    <td>HourStandbyRate</td>
+					    <td>Hour Standby Rate</td>
 					    <td>
 						    <asp:TextBox ID="txtHourStandbyRate" MaxLength="4" runat="server"></asp:TextBox>
 						    <asp:CompareValidator ID="cpvHourStandbyRate" runat="server"
