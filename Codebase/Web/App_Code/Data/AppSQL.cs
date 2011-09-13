@@ -32,8 +32,10 @@ public class AppSQL
 	        , E.EndDate AS [End Date]
 	        , Projects.Name AS [Project]
 	        --, (Contacts.FirstNames + Contacts.LastName) AS [Contact]
-	        , Clients.Name AS [Client]
-	        , Roles.Name AS [Role]			
+	        --, Clients.Name AS [Client]
+	        , Roles.Name AS [Role]
+            , E.DayRate as [Day Raete]
+            , E.Contract_Days as [Contract Days#]			
 	    FROM EmploymentHistory E
 	        LEFT JOIN Contacts ON Contacts.ID = E.ContactID
 	        LEFT JOIN Clients ON Clients.ID = E.ClientID
