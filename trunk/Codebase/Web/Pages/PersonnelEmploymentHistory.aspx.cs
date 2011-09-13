@@ -47,7 +47,7 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
     /// </summary>
     protected void BindDropDownLists()
     {
-        BindDropdownList.Clients(ddlClientID);
+        //BindDropdownList.Clients(ddlClientID);
         //BindDropdownList.Contactses(ddlContactID);
         BindDropdownList.Projects(ddlProjectID);
         BindDropdownList.Roles(ddlRoleID);
@@ -81,7 +81,7 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
                     txtStartDate.Text = entity.StartDate.HasValue ? entity.StartDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
                     txtEndDate.Text = entity.EndDate.HasValue ? entity.EndDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
                     ddlProjectID.SetSelectedItem(entity.ProjectID.GetValueOrDefault().ToString());
-                    ddlClientID.SetSelectedItem(entity.ClientID.GetValueOrDefault().ToString());
+                    //ddlClientID.SetSelectedItem(entity.ClientID.GetValueOrDefault().ToString());
                     ddlRoleID.SetSelectedItem(entity.RoleID.GetValueOrDefault().ToString());
                     ddlCurrencyCode.SetSelectedItem(entity.CurrencyID.GetValueOrDefault().ToString());
                     txtDayRate.Text = entity.DayRate.HasValue ? String.Format(AppConstants.ValueOf.DECIMAL_FORMAT_FOR_TEXTBOX, entity.DayRate.GetValueOrDefault()) : String.Empty;
@@ -89,14 +89,24 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
                     //ddlChangedByUserID.SetSelectedItem(entity.ChangedByUserID.ToString());
                     //txtChangedOn.Text = entity.ChangedOn.ToString(ConfigReader.CSharpCalendarDateFormat);
                     //txtVersion.Text = entity.Version;
-                    txtContractdays.Text = entity.Contract_days.ToString();
+
+                    ddlRateType.SetSelectedItem(entity.Office_Onsh_Rate_type.ToString());
+                    ddlHourStandby.SetSelectedItem(entity.Hour_Standby_Rate_type.ToString());
+
+                    if (entity.Contract_days.ToString().Trim() == "5")
+                        radFive.Checked = true;
+                    else if (entity.Contract_days.ToString().Trim() == "7")
+                        radSeven.Checked = true;
+                    else
+                        radNull.Checked = true;
+
                     txtTravelRate.Text = entity.TravelRate.ToString();
                     txtTravelCost.Text = entity.TravelCost.ToString();
                     //txtCurrencyID.Text = entity.CurrencyID;
                     txtOffshoreRate.Text = entity.OffshoreRate.ToString();
-                    txtOfficeOnshRatetype.Text = entity.Office_Onsh_Rate_type;
+                    //txtOfficeOnshRatetype.Text = entity.Office_Onsh_Rate_type;
                     txtOfficeOnshoreRate.Text = entity.OfficeOnshoreRate.ToString();
-                    txtHourStandbyRatetype.Text = entity.Hour_Standby_Rate_type;
+                    //txtHourStandbyRatetype.Text = entity.Hour_Standby_Rate_type;
                     txtHourStandbyRate.Text = entity.HourStandbyRate.ToString();
                     txtProjectCodeother.Text = entity.ProjectCode_other;
                 }
@@ -180,10 +190,12 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
             entity.ProjectID = null;
         else
             entity.ProjectID = ddlProjectID.SelectedValue.ToInt();
-        if (ddlClientID.SelectedValue.ToInt() == 0)
-            entity.ClientID = null;
-        else
-            entity.ClientID = ddlClientID.SelectedValue.ToInt();
+        //if (ddlClientID.SelectedValue.ToInt() == 0)
+        //    entity.ClientID = null;
+        //else
+        //    entity.ClientID = ddlClientID.SelectedValue.ToInt();
+
+
         if (ddlRoleID.SelectedValue.ToInt() == 0)
             entity.RoleID = null;
         else
@@ -202,23 +214,37 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
         entity.ChangedByUserID = SessionCache.CurrentUser.ID;
         entity.ChangedOn = DateTime.Now;
         //entity.Version = txtVersion.Text;
-        if (txtContractdays.Text.Trim() != "")
-            entity.Contract_days = Convert.ToInt32(txtContractdays.Text);
+        //if (txtContractdays.Text.Trim() != "")
+        //    entity.Contract_days = Convert.ToInt32(txtContractdays.Text);
+
+        if(radFive.Checked)
+            entity.Contract_days = 5;
+        else if(radSeven.Checked)
+            entity.Contract_days = 7;
+        else
+            entity.Contract_days = null;
+
 
         if (txtTravelRate.Text.Trim() != "")
             entity.TravelRate = Convert.ToInt32(txtTravelRate.Text);
+
+        entity.Office_Onsh_Rate_type = ddlRateType.SelectedValue;
+        entity.Hour_Standby_Rate_type = ddlHourStandby.SelectedValue;
+
 
         if (txtTravelCost.Text.Trim() != "")
             entity.TravelCost = Convert.ToInt32(txtTravelCost.Text);
         //entity.CurrencyID = txtCurrencyID.Text;
 
-        if (txtContractdays.Text.Trim() != "")
-            entity.OffshoreRate = Convert.ToDecimal(txtOffshoreRate.Text);
-        entity.Office_Onsh_Rate_type = txtOfficeOnshRatetype.Text;
+        //if (txtContractdays.Text.Trim() != "")
+        //    entity.OffshoreRate = Convert.ToDecimal(txtOffshoreRate.Text);
+        
+        //entity.Office_Onsh_Rate_type = txtOfficeOnshRatetype.Text;
 
         if (txtOfficeOnshoreRate.Text.Trim() != "")
-        entity.OfficeOnshoreRate = Convert.ToDecimal(txtOfficeOnshoreRate.Text);
-        entity.Hour_Standby_Rate_type = txtHourStandbyRatetype.Text;
+            entity.OfficeOnshoreRate = Convert.ToDecimal(txtOfficeOnshoreRate.Text);
+
+        //entity.Hour_Standby_Rate_type = txtHourStandbyRatetype.Text;
 
         if (txtOfficeOnshoreRate.Text.Trim() != "")
             entity.HourStandbyRate = Convert.ToDecimal(txtHourStandbyRate.Text);
