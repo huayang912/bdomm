@@ -19,26 +19,8 @@
               </ContentTemplate>
             </act:TabPanel>
 			
-			  <act:TabPanel ID="EventsTab" runat="server" HeaderText="Events History">
-              <ContentTemplate>
-                <div id="view12" runat="server"></div>
-                 <aquarium:DataViewExtender id="view12Extender" runat="server" TargetControlID="view12" Controller="ClientsEvents" view="grid1" FilterSource="view1Extender" FilterFields="ClientID" ShowViewSelector="false"/>
-              </ContentTemplate>
-            </act:TabPanel>
 			
-               <act:TabPanel ID="PurchaseOrdersTab" runat="server" HeaderText="Purchase Orders">
-              <ContentTemplate>
-                <div id="view7" runat="server"></div>
-                 <aquarium:DataViewExtender id="view7Extender" runat="server" TargetControlID="view7" Controller="ClientPurchaseOrders" view="grid1" FilterSource="view1Extender" FilterFields="ClientID" ShowViewSelector="false"/>
-              </ContentTemplate>
-            </act:TabPanel>
 			
-			      <act:TabPanel ID="FinancialDetailsTab" runat="server" HeaderText="Financial Details">
-              <ContentTemplate>
-                <div id="view9" runat="server"></div>
-               <aquarium:DataViewExtender id="view9Extender" runat="server" TargetControlID="view9" Controller="ClientsFinancial" view="grid1" FilterSource="view1Extender" FilterFields="ClientID"   ShowViewSelector="false"/>
-              </ContentTemplate>
-            </act:TabPanel>
 			
 			
          
@@ -60,7 +42,14 @@
 	 <div id="view21" runat="server"></div>
       <aquarium:DataViewExtender id="view21Extender" runat="server" TargetControlID="view21" Controller="ViewAllClientContactNote" view="grid1" FilterSource="view1Extender" FilterFields="ClientID" PageSize="5" AutoHide="Container"  ShowQuickFind="false" ShowActionBar="true" ShowViewSelector="false"/>
   
+  
+   <div id="view25" runat="server"></div>
+      <aquarium:DataViewExtender id="view25Extender" runat="server" TargetControlID="view25" Controller="ClientsEvents" view="grid1" FilterSource="view1Extender" FilterFields="ClientID" PageSize="5" AutoHide="Container"  ShowQuickFind="false" ShowActionBar="true" ShowViewSelector="false"/>
+  
     </div>
+	
+	
+	
              
         </div></td>
        </tr> 
