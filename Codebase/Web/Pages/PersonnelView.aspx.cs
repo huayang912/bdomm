@@ -20,5 +20,6 @@ public partial class Pages_PersonnelView : BasePage
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        this.Master.SelectedTab = SelectedTab.Personnel;
     }
 }
