@@ -57,7 +57,7 @@
                         <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsClient');">Client</div>
                         <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsProject');">Activity</div>
                         <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsPersonnel');">Personnel</div>
-                        <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsOption');">Option</div>
+                        <%--<div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsOption');">Option</div>--%>
                         <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsReport');">Report</div>
                         <div class="clearboth"></div>
                     </div>
@@ -157,11 +157,11 @@
                         <%--Personnel Tab Items End--%>
 
                         <%--Options Tab Items Start--%>
-                        <div class="RibbonItemCollection" id="divRibbonTabItemsOption" style="display:block;">
+                        <%--<div class="RibbonItemCollection" id="divRibbonTabItemsOption" style="display:block;">
                             <div class="RibbonItem" onclick="ShowRibbonDorpdown(this, 'divDepartmentDropdown');">
                                 <div class="RibbonInnerItem">
-                                    <div class="floatleft"><%--<a href="/Pages/Home.aspx">--%><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -33px -210px; width:33px;" /><%--</a>--%></div>
-                                    <div class="floatleft RibbonIconLinkAdjustment" style="margin-right:28px; color:#6082A8;"><%--<a href="/Pages/Home.aspx">--%>Department<%--</a>--%></div>
+                                    <div class="floatleft"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -33px -210px; width:33px;" /></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment" style="margin-right:28px; color:#6082A8;">Department</div>
                                     <div class="clearboth"></div>
                                 </div>                        
                             </div>
@@ -169,16 +169,16 @@
                                <img src="../Images/Blank.gif" title="" alt="" style="background:url(../Images/Ribbon/RibbonSprite.png); background-repeat:no-repeat; background-position: -93px -63px; width:15px; height:8px; margin-left:7px; margin-top:20px;" />
                             </div>
                             <div class="clearboth"></div>                           
-                        </div>
+                        </div>--%>
                         <%--Dropdown menu for Department Start--%>
-                        <div id="divDepartmentDropdown" class="RibbonDropdown">
+                        <%--<div id="divDepartmentDropdown" class="RibbonDropdown">
                             <ul class="RibbonDropdownMenu">
                                 <li><a href="">Country</a></li>
                                 <li><a href="">Currency</a></li>
                                 <li><a href="">Enquiry Status</a></li>
                                 <li><a href="">Enquiry Type</a></li>
                             </ul>
-                        </div>
+                        </div>--%>
                         <%--Dropdown menu for Department End--%>
                         
                         <%--Options Tab Items End--%> 

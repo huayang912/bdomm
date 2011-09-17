@@ -58,11 +58,11 @@ public partial class Main : System.Web.UI.MasterPage
         else if (this.SelectedTab == global::SelectedTab.Project)
             return "2:divRibbonTabItemsProject";
         else if (this.SelectedTab == global::SelectedTab.Personnel)
-            return "3:divRibbonTabItemsPersonnel";
-        else if (this.SelectedTab == global::SelectedTab.Option)
-            return "4:divRibbonTabItemsOption";
+            return "3:divRibbonTabItemsPersonnel";        
         else if (this.SelectedTab == global::SelectedTab.Report)
-            return "5:divRibbonTabItemsReport";
+            return "4:divRibbonTabItemsReport";
+        else if (this.SelectedTab == global::SelectedTab.Option)
+            return "5:divRibbonTabItemsOption";
         else
             return "0:divRibbonTabItemsHome";
     }
