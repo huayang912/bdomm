@@ -212,6 +212,19 @@
             _Personnel.DayRateCurrencyID = $('#<%= ddlDayRateCurrencyID.ClientID %>').val();
             _Personnel.NoSMSOrEmail = $('#<%= chkNoSMSorEmail.ClientID %>').is(':checked');
             _Personnel.InActive = $('#<%= chkInactive.ClientID %>').is(':checked');
+            _Personnel.PPE_Sizes = $('#<%= ddlPPE_Size.ClientID %>').val();
+            _Personnel.Coverall = $('#<%= txtcoverall.ClientID %>').val();
+            _Personnel.Boots = $('#<%= ddlbootsize.ClientID %>').val();
+            _Personnel.companyname = $('#<%= txtcompanyname.ClientID %>').val();
+            _Personnel.companyreg = $('#<%= txtcompanyreg.ClientID %>').val();
+            _Personnel.companyvat = $('#<%= txtcompanyvat.ClientID %>').val();
+            _Personnel.companyaddr = $('#<%= txtcompanyadr.ClientID %>').val();
+            _Personnel.insurance = $('#<%= ddlinsurance.ClientID %>').val();
+            _Personnel.employmentstatus = $('#<%= ddlemploymentstatus.ClientID %>').val();
+
+
+            
+
         }
         function PopulateTelephones() {
             _Telephones.length = 0;
@@ -423,11 +436,47 @@
                     </table>
                 </div>
             </div>
+
+              <div class="WinGroupBox">
+                <div class="WinGroupBoxHeader">Email Addresses</div>
+                <div>
+                    <div>
+                        <asp:CustomValidator ID="cvEmailAddressList" runat="server"
+                            Display="Dynamic" ValidateEmptyText="true"
+                            ClientValidationFunction="ValidateEmailList"
+                            ValidationGroup="SaveInfo"
+                            ErrorMessage="Please Enter Email.">
+                        </asp:CustomValidator>                            
+                    </div>
+                    <div>
+                        <asp:CustomValidator ID="cvEmailAddressListEmailValidation" runat="server"
+                            Display="Dynamic" ValidateEmptyText="true"
+                            ClientValidationFunction="ValidateEmail"
+                            ValidationGroup="SaveInfo"
+                            ErrorMessage="Please Enter Valid Email.">
+                        </asp:CustomValidator>                            
+                    </div>
+                    <div class="AddNewLink">
+                        <a href="javascript:void(0);" onclick="AddNewEmailRow();">Add New Email</a>
+                    </div>                        
+                    <table id="tblEmailAddressList" class="GridView" cellpadding="3" cellspacing="0">
+                        <colgroup>
+                            <col style="width:65%;" />                                                             
+                            <col />
+                        </colgroup>
+                        <tr>
+                            <th>Email</th>                                
+                            <th>Actions</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
         </div>
             
         <div class="RightColumn">
             <div class="WinGroupBox">
-                <div class="WinGroupBoxHeader">Business Details</div>
+                <div class="WinGroupBoxHeader">Other Details</div>
                 <table cellpadding="3" cellspacing="0" style="width:100%;">
                     <colgroup>
                         <col style="width:30%;" />
@@ -474,11 +523,53 @@
 			        </tr>	
 				    
 			        <tr>
-				        <td>No SMS or Email</td>
+				        <td>PPE Sizes</td>
 				        <td>
-					        <asp:CheckBox ID="chkNoSMSorEmail" runat="server"/>
+				            <asp:DropDownList ID="ddlPPE_Size" runat="server">
+                          
+                                  <asp:ListItem>XM</asp:ListItem>
+         <asp:ListItem>M</asp:ListItem>
+         <asp:ListItem>L</asp:ListItem>
+         <asp:ListItem>XL</asp:ListItem>
+     <asp:ListItem>XXL</asp:ListItem>
+         <asp:ListItem>XXXL</asp:ListItem>
+                            </asp:DropDownList>
 				        </td>
 			        </tr>	        
+			        <tr>
+                        <td>
+                            Coverall</td>
+                        <td>
+                            <asp:TextBox ID="txtcoverall" runat="server" MaxLength="20" Width="107px"></asp:TextBox>
+                        </td>
+                    </tr>
+			        <tr>
+                        <td>
+                            Boot Size</td>
+                        <td>
+                            <asp:DropDownList ID="ddlbootsize" runat="server">
+                                <asp:ListItem>4</asp:ListItem>
+                                <asp:ListItem>5</asp:ListItem>
+                                <asp:ListItem>6</asp:ListItem>
+                                  <asp:ListItem>7</asp:ListItem>
+                                <asp:ListItem>8</asp:ListItem>
+                                <asp:ListItem>9</asp:ListItem>
+                                  <asp:ListItem>10</asp:ListItem>
+                                <asp:ListItem>11</asp:ListItem>
+                                <asp:ListItem>12</asp:ListItem>
+                                  <asp:ListItem>13</asp:ListItem>
+                                <asp:ListItem>14</asp:ListItem>
+                                <asp:ListItem>15</asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+			        <tr>
+                        <td>
+                            No SMS or Email</td>
+                        <td>
+                            <asp:CheckBox ID="chkNoSMSorEmail" runat="server" />
+                        </td>
+                    </tr>
 			        <tr>
 				        <td>Inactive</td>
 				        <td>
@@ -488,6 +579,62 @@
 		        </table>
             </div>
             
+               <div class="WinGroupBox">
+                <div class="WinGroupBoxHeader">Employment Details</div>
+                <table cellpadding="3" cellspacing="0" style="width:100%;">
+                    <colgroup>
+                        <col style="width:30%;" />
+                        <col />                                        
+                    </colgroup>
+                    <tr>
+			            <td>Company</td>
+			            <td>
+				            <asp:TextBox ID="txtcompanyname" runat="server" MaxLength="20" Width="248px"></asp:TextBox>
+                        </td>
+		            </tr>
+		            <tr>
+				        <td>Reg</td>
+				        <td>
+				            <asp:TextBox ID="txtcompanyreg" runat="server" MaxLength="20" Width="248px"></asp:TextBox>
+                        </td>
+			        </tr>	
+				    
+			        <tr>
+				        <td>Vat</td>
+				        <td>
+					        <asp:TextBox ID="txtcompanyvat" runat="server" MaxLength="20" Width="248px"></asp:TextBox>
+                        </td>
+			        </tr>	        
+			        <tr>
+				        <td>Address</td>
+				        <td>
+					        <asp:TextBox ID="txtcompanyadr" runat="server" MaxLength="200" 
+                                TextMode="MultiLine"></asp:TextBox>
+                        </td>
+			        </tr>
+		            <tr>
+                        <td>
+                            Employment Status</td>
+                        <td>
+                            <asp:DropDownList ID="ddlemploymentstatus" runat="server" >
+                                <asp:ListItem>Self Employed</asp:ListItem>
+                                <asp:ListItem>LTD</asp:ListItem>
+                                <asp:ListItem>Sole Trader</asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Insurance</td>
+                        <td>
+                            <asp:DropDownList ID="ddlinsurance" runat="server">
+                                <asp:ListItem>OWN</asp:ListItem>
+                                <asp:ListItem>OMM</asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+		        </table>
+            </div>
             
             <div class="WinGroupBox">
                 <div class="WinGroupBoxHeader">Roles</div>
@@ -510,40 +657,7 @@
                 </div>
             </div>
             
-            <div class="WinGroupBox">
-                <div class="WinGroupBoxHeader">Email Addresses</div>
-                <div>
-                    <div>
-                        <asp:CustomValidator ID="cvEmailAddressList" runat="server"
-                            Display="Dynamic" ValidateEmptyText="true"
-                            ClientValidationFunction="ValidateEmailList"
-                            ValidationGroup="SaveInfo"
-                            ErrorMessage="Please Enter Email.">
-                        </asp:CustomValidator>                            
-                    </div>
-                    <div>
-                        <asp:CustomValidator ID="cvEmailAddressListEmailValidation" runat="server"
-                            Display="Dynamic" ValidateEmptyText="true"
-                            ClientValidationFunction="ValidateEmail"
-                            ValidationGroup="SaveInfo"
-                            ErrorMessage="Please Enter Valid Email.">
-                        </asp:CustomValidator>                            
-                    </div>
-                    <div class="AddNewLink">
-                        <a href="javascript:void(0);" onclick="AddNewEmailRow();">Add New Email</a>
-                    </div>                        
-                    <table id="tblEmailAddressList" class="GridView" cellpadding="3" cellspacing="0">
-                        <colgroup>
-                            <col style="width:65%;" />                                                             
-                            <col />
-                        </colgroup>
-                        <tr>
-                            <th>Email</th>                                
-                            <th>Actions</th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+          
         </div>
         <div class="clearboth"></div>
         
