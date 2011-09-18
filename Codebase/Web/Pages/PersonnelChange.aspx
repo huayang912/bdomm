@@ -148,6 +148,8 @@
                 <td class="TabItemSelected" NavigateUrl="PersonnelBasicInfo.aspx?<%=AppConstants.QueryString.ID %>=<%=_ID.ToString() %>">Basic Info</td>
                 <%if (_ID > 0) { %>
                 <td class="TabItem" NavigateUrl="PersonnelEmploymentHistory.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Employment History</td>
+                 <td class="TabItem" NavigateUrl="ContactPlacementHistory.aspx?ContactID=<%=_ID.ToString() %>">Placement History</td>
+            
                 <td class="TabItem" NavigateUrl="PersonnelCertification.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Certification</td>                                
                 <td class="TabItem" NavigateUrl="PersonnelNotes.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Notes</td>
                 <td class="TabItem" NavigateUrl="PersonnelTravelDetails.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Travel Details</td>
