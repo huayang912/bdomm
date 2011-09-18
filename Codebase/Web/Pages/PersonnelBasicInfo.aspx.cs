@@ -69,11 +69,27 @@ public partial class Pages_PersonnelBasicInfo : BasePage
                 ddlDayRateCurrencyID.SetSelectedItem(contact.DayRateCurrencyID.GetValueOrDefault().ToString());
                 chkNoSMSorEmail.Checked = contact.NoSMSorEmail;
                 chkInactive.Checked = contact.Inactive;
+               // txtPPESizes.Text = contact.PPE_Sizes;
+                ddlPPE_Size.SetSelectedItem(contact.PPE_Sizes.ToString());
+                txtcoverall.Text = contact.Coverall;
+               // txtbootsize.Text = contact.Boots.HasValue ? contact.Boots.GetValueOrDefault().ToString() : string.Empty;
+                ddlbootsize.SetSelectedItem(contact.Boots.ToString());
+
+                txtcompanyname.Text = contact.CopmpanyName;
+                txtcompanyreg.Text = contact.CompanyVat;
+                txtcompanyvat.Text = contact.CompanyVat;
+                txtcompanyadr.Text = contact.CompanyAddress;
+             //   ddlemploymentstatus.SetSelectedItem(contact.employment_status.ToString());
+              //  ddlinsurance.SetSelectedItem(contact.Insurance.ToString());
+                ddlemploymentstatus.SelectedValue = contact.employment_status.ToString();
+                ddlinsurance.SelectedValue = contact.Insurance.ToString();
+                
+              
 
                 var telephoneNumbers = from P in context.TelephoneNumbers where P.ContactID == _ID select new App.CustomModels.PersonnelTelephone { ID = P.ID, Number = P.Number, TypeID = P.TypeID };
                 if(telephoneNumbers != null && telephoneNumbers.Count() > 0)
                     hdnTelephoneNumbers.Value = telephoneNumbers.ToList().ToJSON();
-
+                
                 var emailAddress = from P in context.EmailAddresses where P.ContactID == _ID select new App.CustomModels.PersonnelEmail { ID = P.ID, Email= P.Address};
                 if (emailAddress != null && emailAddress.Count() > 0)
                     hdnEmailAddresses.Value = emailAddress.ToList().ToJSON();
@@ -175,6 +191,18 @@ public partial class Pages_PersonnelBasicInfo : BasePage
         contact.Postcode = personnel.PostCode;
         contact.CountryID = personnel.CountryID;
         contact.PlaceOfBirth = personnel.PlaceOfBirth;
+        contact.PPE_Sizes = personnel.PPE_Sizes;
+        contact.Coverall = personnel.Coverall;
+        contact.Boots = personnel.Boots;
+
+        contact.CopmpanyName = personnel.companyname;
+        contact.CompanyReg = personnel.companyreg;
+        contact.CompanyVat = personnel.companyvat;
+        contact.CompanyAddress = personnel.companyaddr;
+        contact.employment_status = personnel.employmentstatus;
+        contact.Insurance = personnel.insurance;
+
+
         if (personnel.CountryOfBirthID.ToInt() > 0)
             contact.CountryOfBirthID = personnel.CountryOfBirthID.ToInt();
         else
@@ -243,4 +271,8 @@ public partial class Pages_PersonnelBasicInfo : BasePage
         return true;
     }
     #endregion Delete PageMethods
+    protected void ddlemploymentstatus_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }
