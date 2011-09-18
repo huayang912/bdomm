@@ -174,7 +174,21 @@ namespace App.CustomModels
         public decimal? PreferredDayRate { get; set; }
         public int DayRateCurrencyID { get; set; }
         public bool NoSMSOrEmail { get; set; }
-        public bool InActive { get; set; }        
+        public bool InActive { get; set; }
+        public String PPE_Sizes { get; set; }
+        public String Coverall { get; set; }
+        public int Boots { get; set; }
+
+
+        public String companyname { get; set; }
+        public String companyreg { get; set; } 
+        public String companyvat { get; set; } 
+        public String companyaddr { get; set; } 
+        public String employmentstatus { get; set; } 
+        public String insurance { get; set; } 
+
+
+
     }
 
     public class PersonnelTelephone
