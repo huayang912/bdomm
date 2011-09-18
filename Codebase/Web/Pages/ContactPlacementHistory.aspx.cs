@@ -4,10 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Net;
 
 
+using System.IO;
 
-public partial class Pages_ContactPlacementHistory : BUDI2_NS.Web.PageBase
+using System.Web.Services;
+
+using App.Core.Extensions;
+
+
+public partial class Pages_ContactPlacementHistory : BasePage
 {
     
     public string CssClass
