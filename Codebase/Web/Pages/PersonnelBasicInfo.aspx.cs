@@ -44,6 +44,10 @@ public partial class Pages_PersonnelBasicInfo : BasePage
         var telephoneTypes = from P in context.TelephoneNumberTypes select new { P.ID, P.Name };
         if (telephoneTypes != null && telephoneTypes.Count() > 0)
             hdnTelephoneTypes.Value = telephoneTypes.ToList().ToJSON();
+
+        var commTypes = from P in context.ContactCommsTypes select new { P.ID, P.Name };
+        if (commTypes != null && commTypes.Count() > 0)
+            hdnCommTypes.Value = commTypes.ToList().ToJSON();
     }
     protected void BindPersonnelInfo()
     {
@@ -70,7 +74,7 @@ public partial class Pages_PersonnelBasicInfo : BasePage
                 chkNoSMSorEmail.Checked = contact.NoSMSorEmail;
                 chkInactive.Checked = contact.Inactive;
                // txtPPESizes.Text = contact.PPE_Sizes;
-                ddlPPE_Size.SetSelectedItem(contact.PPE_Sizes.ToString());
+                ddlPPE_Size.SetSelectedItem(contact.PPE_Sizes);
                 txtcoverall.Text = contact.Coverall;
                // txtbootsize.Text = contact.Boots.HasValue ? contact.Boots.GetValueOrDefault().ToString() : string.Empty;
                 ddlbootsize.SetSelectedItem(contact.Boots.ToString());
@@ -81,8 +85,8 @@ public partial class Pages_PersonnelBasicInfo : BasePage
                 txtcompanyadr.Text = contact.CompanyAddress;
              //   ddlemploymentstatus.SetSelectedItem(contact.employment_status.ToString());
               //  ddlinsurance.SetSelectedItem(contact.Insurance.ToString());
-                ddlemploymentstatus.SelectedValue = contact.employment_status.ToString();
-                ddlinsurance.SelectedValue = contact.Insurance.ToString();
+                ddlemploymentstatus.SetSelectedItem(contact.employment_status);
+                ddlinsurance.SetSelectedItem(contact.Insurance);
                 
               
 
@@ -97,6 +101,10 @@ public partial class Pages_PersonnelBasicInfo : BasePage
                 var contactRoles = from P in context.ContactRoles where P.ContactID == _ID select new App.CustomModels.PersonnelRole { ID = P.ID, RoleID = P.RoleID, Order = P.RoleOrder };
                 if (contactRoles != null && contactRoles.Count() > 0)
                     hdnContactRoles.Value = contactRoles.ToList().ToJSON();
+
+                var Notes = from P in context.ContactsNotes where P.ContactID == _ID select new App.CustomModels.ConNote { ID = P.ID, Notes = P.Notes, CommsTypeID = (P.ContactCommsTypeID == null) ? "" : P.ContactCommsTypeID.ToString() };
+                if (Notes != null && Notes.Count() > 0)
+                    hdnNotes.Value = Notes.ToList().ToJSON();
             }
         }
     }
@@ -107,7 +115,11 @@ public partial class Pages_PersonnelBasicInfo : BasePage
     }
 
     [WebMethod]
-    public static int SavePersonnel(App.CustomModels.Personnel personnel, List<App.CustomModels.PersonnelTelephone> telephones, List<App.CustomModels.PersonnelEmail> emails, List<App.CustomModels.PersonnelRole> roles)
+    public static int SavePersonnel(App.CustomModels.Personnel personnel, 
+                                    List<App.CustomModels.PersonnelTelephone> telephones,
+                                    List<App.CustomModels.ConNote> ConNotes,
+                                    List<App.CustomModels.PersonnelEmail> emails, 
+                                    List<App.CustomModels.PersonnelRole> roles)
     {
         OMMDataContext context = new OMMDataContext();
         Contact contact = populateContact(personnel, context);
@@ -128,6 +140,28 @@ public partial class Pages_PersonnelBasicInfo : BasePage
                 phone.TypeID = telephone.TypeID;
                 phone.ChangedByUserID = SessionCache.CurrentUser.ID;
                 phone.ChangedOn = DateTime.Now; 
+            }
+        }
+
+        ///Bind Notes
+        if (ConNotes != null && ConNotes.Count > 0)
+        {
+            foreach (App.CustomModels.ConNote conNote in ConNotes)
+            {
+                ContactsNote note = null;
+                if (conNote.ID > 0)
+                    note = context.ContactsNotes.SingleOrDefault(P => P.ID == conNote.ID);
+                else
+                {
+                    note = new ContactsNote();
+                    contact.ContactsNotes.Add(note);
+                }
+                note.Notes = conNote.Notes;
+                if (conNote.CommsTypeID != null)
+                    note.ContactCommsTypeID = Convert.ToInt32(conNote.CommsTypeID);
+
+                note.ChangedByUserID = SessionCache.CurrentUser.ID;
+                note.ChangedOn = DateTime.Now;
             }
         }
         ///Bind Eamils
@@ -246,6 +280,20 @@ public partial class Pages_PersonnelBasicInfo : BasePage
         }
         return true;
     }
+
+    [WebMethod]
+    public static bool DeleteNotes(int id)
+    {
+        OMMDataContext context = new OMMDataContext();
+        var Notes = context.ContactsNotes.SingleOrDefault(P => P.ID == id);
+        if (Notes != null)
+        {
+            context.ContactsNotes.DeleteOnSubmit(Notes);
+            context.SubmitChanges();
+        }
+        return true;
+    }
+
     [WebMethod]
     public static bool DeleteRole(int id)
     {

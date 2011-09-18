@@ -30,9 +30,20 @@
                     args.IsValid = false;
             });
         }
+
+        function ValidateNotesList(sender, args) {
+            args.IsValid = true;
+            $('#tblNotesList tr:gt(0)').each(function() {
+                if ($(this).find("input[type='text']").val().length == 0)
+                    args.IsValid = false;
+            });
+        }
+        
         var _Roles = new Array();
         var _TelephoneTypes = new Array();
+        var _hdnCommTypes = new Array();
         var _Telephones = new Array();
+        var _Notes = new Array();        
         var _Emails = new Array();
         var _ContactRoles = new Array();
         var _Personnel = null;
@@ -49,6 +60,10 @@
             if ($('#<%= hdnContactRoles.ClientID %>').val().length > 0)
                 _ContactRoles = eval($('#<%= hdnContactRoles.ClientID %>').val());
             //alert(_Roles.length);
+            if ($('#<%= hdnCommTypes.ClientID %>').val().length > 0)
+                _hdnCommTypes = eval($('#<%= hdnCommTypes.ClientID %>').val());
+            if ($('#<%= hdnNotes.ClientID %>').val().length > 0)
+                _Notes = eval($('#<%= hdnNotes.ClientID %>').val());
         }
         function BindTelephoneTypeDropdown(selectedID) {
             var html = '<select>';
@@ -59,6 +74,19 @@
             html +='</select>';
             return html;
         }
+
+        function BindCommTypeDropdown(selectedID) {
+
+            //alert(_hdnCommTypes.length);
+            var html = '<select>';
+            for (i = 0; i < _hdnCommTypes.length; i++) {
+                var selectedText = _hdnCommTypes[i].ID == selectedID ? ' selected="selected"' : '';
+                html += '<option value="' + _hdnCommTypes[i].ID + '"' + selectedText + '>' + _hdnCommTypes[i].Name + '</option>';
+            }
+            html += '</select>';
+            return html;
+        }
+        
         function SetSelectedRole(ddl) {
             var index = $(ddl).parent().parent().index() - 1;
             //alert(index);
@@ -139,6 +167,8 @@
                 FormatTable($(_Tr).parent());
             }
         }
+        
+        
         function DeleteTelephone_Success(result) {
             if (result == true) {
                 HideParentLoading();
@@ -147,12 +177,45 @@
                 FormatTable($(_Tr).parent());
             }
         }
+
+        function DeleteNotes(anchorElement) {
+            _Tr = $(anchorElement).parent().parent();
+            var id = $(_Tr).find("input[type='hidden']").val();
+            if (id > 0) {
+                ShowParentLoading();
+                PageMethods.DeleteNotes(id, DeleteNotes_Success, OnAjax_Error, OnAjax_TimeOut);
+            }
+            else {
+                $(_Tr).remove();
+                SetParentHeight();
+                FormatTable($(_Tr).parent());
+            }
+        }
+
+        function DeleteNotes_Success(result) {
+            if (result == true) {
+                HideParentLoading();
+                $(_Tr).remove();
+                SetParentHeight();
+                FormatTable($(_Tr).parent());
+            }
+        }
+        
         function AddNewTelephoneRow() {
             var tr = '<tr><td><input type="text" value=""/><input type="hidden" value="0"/></td><td>' + BindTelephoneTypeDropdown('') + '</td><td><a href="javascript:void(0);" onclick="DeleteTelephone(this);">Delete</a></td></tr>';
             $('#tblPhoneNumbersList').append(tr);
             SetParentHeight();
             FormatTable($('#tblPhoneNumbersList'));
         }
+
+        function AddNewNotesRow() {
+            //alert("T");
+            var tr = '<tr><td><input type="text" value=""/><input type="hidden" value="0"/></td><td>' + BindCommTypeDropdown('') + '</td><td><a href="javascript:void(0);" onclick="DeleteNotes(this);">Delete</a></td></tr>';
+            $('#tblNotesList').append(tr);
+            SetParentHeight();
+            FormatTable($('#tblNotesList'));
+        }
+        
         function AddNewEmailRow() {            
             var tr = '<tr><td><input type="text" value=""/><input type="hidden" value="0"/></td><td><a href="javascript:void(0);" onclick="DeleteEmail(this);">Delete</a></td></tr>';
             $('#tblEmailAddressList').append(tr);
@@ -176,6 +239,17 @@
                 $('#tblPhoneNumbersList').append(tr);
             }
             FormatTable($('#tblPhoneNumbersList'));
+        }
+
+        function BindNotes() {
+            //alert(_Notes.length);
+            $('#tblNotesList').find('tr:gt(0)').remove();
+            for (j = 0; j < _Notes.length; j++) {
+                var obj = _Notes[j];
+                var tr = '<tr><td><input type="text" value="' + obj.Notes + '"/><input type="hidden" value="' + obj.ID + '"/></td><td>' + BindCommTypeDropdown(obj.CommsTypeID) + '</td><td> <a href="javascript:void(0);" onclick="DeleteNotes(this);">Delete</a></td></tr>';
+                $('#tblNotesList').append(tr);
+            }
+            FormatTable($('#tblNotesList'));
         }
         function BindRoles() {
             $('#tblRolesList').find('tr:gt(0)').remove();
@@ -236,6 +310,18 @@
                 _Telephones.push(telephone);
             });
         }
+
+        function PopulateNotes() {
+            _Notes.length = 0;
+            $('#tblNotesList tr:gt(0)').each(function() {
+            var notes = new App.CustomModels.ConNote();
+            notes.ID = $(this).find("input[type='hidden']").val();
+            notes.Notes = $(this).find("input[type='text']").val();
+            notes.CommsTypeID = $(this).find("select").val();
+            _Notes.push(notes);
+            });
+        }
+        
         function PopulateRoles() {
             _ContactRoles.length = 0;
             $('#tblRolesList tr:gt(0)').each(function() {
@@ -261,8 +347,9 @@
                 PopulatePersonnelObject();                
                 //PopulateRoles();
                 PopulateEmails();
-                PopulateTelephones();                
-                PageMethods.SavePersonnel(_Personnel, _Telephones, _Emails, _ContactRoles, SavePersonnel_Success, OnAjax_Error, OnAjax_TimeOut);              
+                PopulateTelephones();
+                PopulateNotes();               
+                PageMethods.SavePersonnel(_Personnel, _Telephones,_Notes, _Emails, _ContactRoles, SavePersonnel_Success, OnAjax_Error, OnAjax_TimeOut);              
             }
         }
         function SavePersonnel_Success(result) {
@@ -303,10 +390,11 @@
         $(document).ready(function() {
             PrepareCollection();
             BindTelephoneNumbers();
+            BindNotes();
             BindRoles();
             BindEmailAddresses();
             //ShowParentLoading();
-            SetParentHeight();            
+            SetParentHeight();
         });
     </script>
 </asp:Content>
@@ -315,10 +403,12 @@
     <div id="divMessage" runat="server" enableviewstate="false" visible="false"></div>
     
     <asp:HiddenField ID="hdnTelephoneNumbers" runat="server" />
+    <asp:HiddenField ID="hdnNotes" runat="server" />
     <asp:HiddenField ID="hdnEmailAddresses" runat="server" />
     <asp:HiddenField ID="hdnContactRoles" runat="server" />
     <asp:HiddenField ID="hdnRoles" runat="server" />
     <asp:HiddenField ID="hdnTelephoneTypes" runat="server" />
+    <asp:HiddenField ID="hdnCommTypes" runat="server" />
     
     <asp:Panel ID="pnlDetails" runat="server">
         <div class="LeftColumn">
@@ -436,6 +526,36 @@
                     </table>
                 </div>
             </div>
+
+            <div class="WinGroupBox">
+                <div class="WinGroupBoxHeader">Notes</div>
+                <div id="divNotesList">
+                    <div>
+                        <asp:CustomValidator ID="cvNotesList" runat="server"
+                            Display="Dynamic" ValidateEmptyText="true"
+                            ClientValidationFunction="ValidateNotesList"
+                            ValidationGroup="SaveInfo"
+                            ErrorMessage="Please Enter Notes.">
+                        </asp:CustomValidator>
+                    </div>
+                    <div class="AddNewLink">
+                        <a href="javascript:void(0);" onclick="AddNewNotesRow();">Add New Notes</a>
+                    </div>
+                    <table id="tblNotesList" class="GridView" cellpadding="3" cellspacing="0">
+                        <colgroup>
+                            <col style="width:35%;" />
+                            <col style="width:35%;" />                  
+                            <col />
+                        </colgroup>
+                        <tr>
+                            <th>Notes</th>
+                            <th>Comm Type</th>                                
+                            <th>Actions</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
 
               <div class="WinGroupBox">
                 <div class="WinGroupBoxHeader">Email Addresses</div>
