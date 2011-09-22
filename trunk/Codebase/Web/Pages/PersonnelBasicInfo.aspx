@@ -77,8 +77,11 @@
 
         function BindCommTypeDropdown(selectedID) {
 
-            //alert(_hdnCommTypes.length);
-            var html = '<select>';
+            //alert(selectedID);
+            
+            var html = '';
+            selectedID == '' ? html += '<select>' : html += '<select disabled>'
+            
             for (i = 0; i < _hdnCommTypes.length; i++) {
                 var selectedText = _hdnCommTypes[i].ID == selectedID ? ' selected="selected"' : '';
                 html += '<option value="' + _hdnCommTypes[i].ID + '"' + selectedText + '>' + _hdnCommTypes[i].Name + '</option>';
@@ -210,7 +213,7 @@
 
         function AddNewNotesRow() {
             //alert("T");
-            var tr = '<tr><td><input type="text" value=""/><input type="hidden" value="0"/></td><td>' + BindCommTypeDropdown('') + '</td><td><a href="javascript:void(0);" onclick="DeleteNotes(this);">Delete</a></td></tr>';
+            var tr = '<tr><td><input type="text" value=""/><input type="hidden" value="0"/></td><td>' + BindCommTypeDropdown('') + '</td></tr>';
             $('#tblNotesList').append(tr);
             SetParentHeight();
             FormatTable($('#tblNotesList'));
@@ -246,11 +249,13 @@
             $('#tblNotesList').find('tr:gt(0)').remove();
             for (j = 0; j < _Notes.length; j++) {
                 var obj = _Notes[j];
-                var tr = '<tr><td><input type="text" value="' + obj.Notes + '"/><input type="hidden" value="' + obj.ID + '"/></td><td>' + BindCommTypeDropdown(obj.CommsTypeID) + '</td><td> <a href="javascript:void(0);" onclick="DeleteNotes(this);">Delete</a></td></tr>';
+                var tr = '<tr><td><input type="text" readonly="readonly" value="' + obj.Notes + '"/><input type="hidden" value="' + obj.ID + '"/></td><td>' + BindCommTypeDropdown(obj.CommsTypeID) + '</td></tr>';
                 $('#tblNotesList').append(tr);
             }
             FormatTable($('#tblNotesList'));
         }
+        //<td> <a href="javascript:void(0);" onclick="DeleteNotes(this);">Delete</a></td>
+        //readonly="readonly"
         function BindRoles() {
             $('#tblRolesList').find('tr:gt(0)').remove();
             for (j = 0; j < _ContactRoles.length; j++) {
@@ -414,7 +419,7 @@
         <div class="LeftColumn">
             <div class="WinGroupBox">
                 <div class="WinGroupBoxHeader">Personnel Details</div>
-            
+                
                 <table cellpadding="3" cellspacing="0" style="width:100%;">
                     <colgroup>
                         <col style="width:25%;" />
@@ -545,12 +550,12 @@
                         <colgroup>
                             <col style="width:35%;" />
                             <col style="width:35%;" />                  
-                            <col />
+                            
                         </colgroup>
                         <tr>
                             <th>Notes</th>
                             <th>Comm Type</th>                                
-                            <th>Actions</th>
+                            <%--<th>Actions</th>--%>
                         </tr>
                     </table>
                 </div>
