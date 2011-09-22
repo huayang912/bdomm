@@ -3,18 +3,32 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="PageHeaderContentPlaceHolder" runat="Server">Start</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
   
-  <table width="800" border="0" background="">
-  <tr>
-    <td>&nbsp;</td>
-	<td align="center">
-        <img alt="graph" src="../Images/sample-graph.jpg" 
-            style="width: 819px; height: 460px" /></td>
-    <td>&nbsp;</td>
-  </tr>
-</table>
-
-  
-
+    <table width="100%" border="0" background="">
+        <tr>
+            <td style="width:33%">
+                <div class="WinGroupBox">
+                    <div class="WinGroupBoxHeader">
+                        Total Enquiry Posted</div>
+                     <div id="divGraph1" runat="server" visible="True"></div>   
+                    
+                </div>
+            </td>
+            <td style="width:33%">
+                <div class="WinGroupBox">
+                    <div class="WinGroupBoxHeader">
+                        Total Quotation Posted</div>
+                    <div id="divGraph2" runat="server" visible="True"></div>
+                </div>
+            </td>
+            <td>
+                <div class="WinGroupBox">
+                    <div class="WinGroupBoxHeader">
+                        Total Quotation Successful</div>
+                    <div id="divGraph3" runat="server" visible="True"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
 </asp:Content>
 <asp:Content ID="Content3" runat="server" contentplaceholderid="head">
 </asp:Content>

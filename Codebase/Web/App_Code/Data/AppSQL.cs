@@ -115,4 +115,30 @@ public class AppSQL
         c.[Address] 
         FROM Contacts c
         WHERE  c.ID = @ContactID";
+
+
+    public const String GET_GRAPH_1_DATA = @"
+        SELECT CONVERT(DATETIME,CONVERT(VARCHAR,MONTH(c.CreatedOn))+'-01-'+CONVERT(VARCHAR,YEAR(c.CreatedOn))) AS [Date], 
+        COUNT(c.ID) AS [Total]
+        FROM Enquiries c
+        WHERE c.CreatedOn > DATEADD(M,-5,GETDATE())
+        GROUP BY CONVERT(DATETIME,CONVERT(VARCHAR,MONTH(c.CreatedOn))+'-01-'+
+        CONVERT(VARCHAR,YEAR(c.CreatedOn)))";
+
+    public const String GET_GRAPH_2_DATA = @"
+        SELECT CONVERT(DATETIME,CONVERT(VARCHAR,MONTH(c.CreatedOn))+'-01-'+CONVERT(VARCHAR,YEAR(c.CreatedOn))) AS [Date], 
+        COUNT(c.ID) AS [Total]
+        FROM Quotations c
+        WHERE c.CreatedOn > DATEADD(M,-5,GETDATE())
+        GROUP BY CONVERT(DATETIME,CONVERT(VARCHAR,MONTH(c.CreatedOn))+'-01-'+CONVERT(VARCHAR,YEAR(c.CreatedOn)))";
+
+
+    public const String GET_GRAPH_3_DATA = @"
+        SELECT CONVERT(DATETIME,CONVERT(VARCHAR,MONTH(c.CreatedOn))+'-01-'+CONVERT(VARCHAR,YEAR(c.CreatedOn))) AS [Date], 
+        COUNT(c.ID) AS [Total]
+        FROM Quotations c
+        INNER JOIN QuotationStatuses qs ON qs.ID = c.StatusID
+        WHERE qs.ID = 4  AND 
+        c.CreatedOn > DATEADD(M,-5,GETDATE())
+        GROUP BY CONVERT(DATETIME,CONVERT(VARCHAR,MONTH(c.CreatedOn))+'-01-'+CONVERT(VARCHAR,YEAR(c.CreatedOn)))";
 }
