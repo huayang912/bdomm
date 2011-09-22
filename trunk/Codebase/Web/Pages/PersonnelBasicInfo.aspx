@@ -548,8 +548,8 @@
                     </div>
                     <table id="tblNotesList" class="GridView" cellpadding="3" cellspacing="0">
                         <colgroup>
-                            <col style="width:35%;" />
-                            <col style="width:35%;" />                  
+                            <col style="width:75%;" />
+                            <col style="width:25%;" />                  
                             
                         </colgroup>
                         <tr>
