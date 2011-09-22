@@ -197,6 +197,14 @@ namespace App.CustomModels
         public String Number { get; set; }
         public int TypeID { get; set; }
     }
+
+    public class ConNote
+    {
+        public int ID { get; set; }
+        public String Notes { get; set; }
+        public String CommsTypeID { get; set; }
+    }
+
     public class PersonnelEmail
     {
         public int ID { get; set; }
