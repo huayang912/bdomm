@@ -213,7 +213,7 @@
 
         function AddNewNotesRow() {
             //alert("T");
-            var tr = '<tr><td><input type="text" value=""/><input type="hidden" value="0"/></td><td>' + BindCommTypeDropdown('') + '</td></tr>';
+            var tr = '<tr><td><input type="text" style="width:250px;" value=""/><input type="hidden" value="0"/></td><td>' + BindCommTypeDropdown('') + '</td></tr>';
             $('#tblNotesList').append(tr);
             SetParentHeight();
             FormatTable($('#tblNotesList'));
@@ -249,7 +249,7 @@
             $('#tblNotesList').find('tr:gt(0)').remove();
             for (j = 0; j < _Notes.length; j++) {
                 var obj = _Notes[j];
-                var tr = '<tr><td><input type="text" readonly="readonly" value="' + obj.Notes + '"/><input type="hidden" value="' + obj.ID + '"/></td><td>' + BindCommTypeDropdown(obj.CommsTypeID) + '</td></tr>';
+                var tr = '<tr><td><input type="text" style="width:250px;"  readonly="readonly" value="' + obj.Notes + '"/><input type="hidden" value="' + obj.ID + '"/></td><td>' + BindCommTypeDropdown(obj.CommsTypeID) + '</td></tr>';
                 $('#tblNotesList').append(tr);
             }
             FormatTable($('#tblNotesList'));
@@ -419,7 +419,7 @@
         <div class="LeftColumn">
             <div class="WinGroupBox">
                 <div class="WinGroupBoxHeader">Personnel Details</div>
-                
+               <%-- <input type="text" />--%>
                 <table cellpadding="3" cellspacing="0" style="width:100%;">
                     <colgroup>
                         <col style="width:25%;" />
