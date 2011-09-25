@@ -328,12 +328,13 @@
             $('#tblNotesList tr:gt(0)').each(function() {
 
                 if ($(this).find("input[type='hidden']").val() == 0) {
-                    var notes = new App.CustomModels.ConNote();
-                    notes.ID = $(this).find("input[type='hidden']").val();
-                    notes.Notes = $(this).find('textarea').val();
-                    notes.CommsTypeID = $(this).find("select").val();
-                    _Notes.push(notes);
-
+                    if ($(this).find('textarea').val().length > 0) {
+                        var notes = new App.CustomModels.ConNote();
+                        notes.ID = $(this).find("input[type='hidden']").val();
+                        notes.Notes = $(this).find('textarea').val();
+                        notes.CommsTypeID = $(this).find("select").val();
+                        _Notes.push(notes);
+                    }
                     //alert(notes.Notes);
                 }
             });
