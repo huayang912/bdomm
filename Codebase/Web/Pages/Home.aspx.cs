@@ -39,6 +39,8 @@ public partial class Pages_Home : BasePage
         createGraph1();
         createGraph2();
         createGraph3();
+        createGraph4();
+        createGraph5();
         
     }
 
@@ -47,7 +49,7 @@ public partial class Pages_Home : BasePage
         UtilityDAO dao = new UtilityDAO();
         DbParameter[] parameters = new[] { new DbParameter("@ContactID", 1) };
         DataSet ds1 = dao.GetDataSet(AppSQL.GET_GRAPH_1_DATA, parameters, false);
-        divGraph1.InnerHtml = CreateChart(ds1.Tables[0], "FCF_Column3D","CH1");       
+        divGraph1.InnerHtml = CreateChart(ds1.Tables[0], "FCF_Pie3D", "CH1");       
 
 
     }
@@ -57,7 +59,7 @@ public partial class Pages_Home : BasePage
         UtilityDAO dao = new UtilityDAO();
         DbParameter[] parameters = new[] { new DbParameter("@ContactID", 1) };
         DataSet ds2 = dao.GetDataSet(AppSQL.GET_GRAPH_2_DATA, parameters, false);
-        divGraph2.InnerHtml = CreateChart(ds2.Tables[0], "FCF_Column3D", "CH2");
+        divGraph2.InnerHtml = CreateChart(ds2.Tables[0], "FCF_Pie3D", "CH2");
     }
 
     public void createGraph3()
@@ -65,7 +67,23 @@ public partial class Pages_Home : BasePage
         UtilityDAO dao = new UtilityDAO();
         DbParameter[] parameters = new[] { new DbParameter("@ContactID", 1) };
         DataSet ds3 = dao.GetDataSet(AppSQL.GET_GRAPH_3_DATA, parameters, false);
-        divGraph3.InnerHtml = CreateChart(ds3.Tables[0], "FCF_Column3D", "CH3");
+        divGraph3.InnerHtml = CreateChart(ds3.Tables[0], "FCF_Pie3D", "CH3");
+    }
+
+    public void createGraph4()
+    {
+        UtilityDAO dao = new UtilityDAO();
+        DbParameter[] parameters = new[] { new DbParameter("@ContactID", 1) };
+        DataSet ds3 = dao.GetDataSet(AppSQL.GET_GRAPH_3_DATA, parameters, false);
+        divGraph4.InnerHtml = CreateChart(ds3.Tables[0], "FCF_Pie3D", "CH4");
+    }
+
+    public void createGraph5()
+    {
+        UtilityDAO dao = new UtilityDAO();
+        DbParameter[] parameters = new[] { new DbParameter("@ContactID", 1) };
+        DataSet ds3 = dao.GetDataSet(AppSQL.GET_GRAPH_3_DATA, parameters, false);
+        divGraph5.InnerHtml = CreateChart(ds3.Tables[0], "FCF_Pie3D", "CH5");
     }
 
     public string CreateChart(DataTable graphTab, string chartType, string chID)
@@ -101,7 +119,7 @@ public partial class Pages_Home : BasePage
         strXML += "</graph>";
 
         //Create the chart - Column 3D Chart with data contained in strXML
-        return FusionCharts.RenderChart("../FusionCharts/" + chartType + ".swf", "myChartId2", strXML, chID, Convert.ToString(350), "300", false, false);
+        return FusionCharts.RenderChart("../FusionCharts/" + chartType + ".swf", "myChartId2", strXML, chID, "200", "200", false, false);
 
     }
 

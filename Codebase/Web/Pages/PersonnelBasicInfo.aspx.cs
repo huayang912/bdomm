@@ -164,6 +164,7 @@ public partial class Pages_PersonnelBasicInfo : BasePage
                 note.ChangedOn = DateTime.Now;
             }
         }
+
         ///Bind Eamils
         if (emails != null && emails.Count > 0)
         {

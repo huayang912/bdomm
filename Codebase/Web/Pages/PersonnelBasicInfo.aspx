@@ -34,8 +34,12 @@
         function ValidateNotesList(sender, args) {
             args.IsValid = true;
             $('#tblNotesList tr:gt(0)').each(function() {
-                if ($(this).find("input[type='text']").val().length == 0)
-                    args.IsValid = false;
+
+                if ($(_Tr).find("input[type='hidden']").val() > 0) {
+
+                    if ($(this).find("input[type='text']").val().length == 0)
+                        args.IsValid = false;
+                }
             });
         }
         
@@ -213,11 +217,12 @@
 
         function AddNewNotesRow() {
             //alert("T");
-            var tr = '<tr><td><input type="text" style="width:250px;" value=""/><input type="hidden" value="0"/></td><td>' + BindCommTypeDropdown('') + '</td></tr>';
+            var tr = '<tr><td><TEXTAREA ROWS=3 style="width:90%"></textarea><input type="hidden" value="0"/></td><td>' + BindCommTypeDropdown('') + '&nbsp;&nbsp;<a href="javascript:void(0);" onclick="DeleteNotes(this);">Delete</a></td></tr>';
             $('#tblNotesList').append(tr);
             SetParentHeight();
             FormatTable($('#tblNotesList'));
         }
+        //<input type="text" style="width:250px;" value=""/>
         
         function AddNewEmailRow() {            
             var tr = '<tr><td><input type="text" value=""/><input type="hidden" value="0"/></td><td><a href="javascript:void(0);" onclick="DeleteEmail(this);">Delete</a></td></tr>';
@@ -249,13 +254,15 @@
             $('#tblNotesList').find('tr:gt(0)').remove();
             for (j = 0; j < _Notes.length; j++) {
                 var obj = _Notes[j];
-                var tr = '<tr><td><input type="text" style="width:250px;"  readonly="readonly" value="' + obj.Notes + '"/><input type="hidden" value="' + obj.ID + '"/></td><td>' + BindCommTypeDropdown(obj.CommsTypeID) + '</td></tr>';
+                var tr = '<tr><td>' + obj.Notes + '<input type="hidden" value="' + obj.ID + '"/></td><td>' + BindCommTypeDropdown(obj.CommsTypeID) + '</td></tr>';
                 $('#tblNotesList').append(tr);
             }
             FormatTable($('#tblNotesList'));
         }
+        //<input type="text" style="width:250px;"  readonly="readonly" value="' + obj.Notes + '"/>
         //<td> <a href="javascript:void(0);" onclick="DeleteNotes(this);">Delete</a></td>
         //readonly="readonly"
+        
         function BindRoles() {
             $('#tblRolesList').find('tr:gt(0)').remove();
             for (j = 0; j < _ContactRoles.length; j++) {
@@ -319,11 +326,16 @@
         function PopulateNotes() {
             _Notes.length = 0;
             $('#tblNotesList tr:gt(0)').each(function() {
-            var notes = new App.CustomModels.ConNote();
-            notes.ID = $(this).find("input[type='hidden']").val();
-            notes.Notes = $(this).find("input[type='text']").val();
-            notes.CommsTypeID = $(this).find("select").val();
-            _Notes.push(notes);
+
+                if ($(this).find("input[type='hidden']").val() == 0) {
+                    var notes = new App.CustomModels.ConNote();
+                    notes.ID = $(this).find("input[type='hidden']").val();
+                    notes.Notes = $(this).find('textarea').val();
+                    notes.CommsTypeID = $(this).find("select").val();
+                    _Notes.push(notes);
+
+                    //alert(notes.Notes);
+                }
             });
         }
         
@@ -406,7 +418,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
     <div id="divMessage" runat="server" enableviewstate="false" visible="false"></div>
-    
+    <%--<textarea style="width:100%"></textarea>--%>
     <asp:HiddenField ID="hdnTelephoneNumbers" runat="server" />
     <asp:HiddenField ID="hdnNotes" runat="server" />
     <asp:HiddenField ID="hdnEmailAddresses" runat="server" />
@@ -532,34 +544,7 @@
                 </div>
             </div>
 
-            <div class="WinGroupBox">
-                <div class="WinGroupBoxHeader">Notes</div>
-                <div id="divNotesList">
-                    <div>
-                        <asp:CustomValidator ID="cvNotesList" runat="server"
-                            Display="Dynamic" ValidateEmptyText="true"
-                            ClientValidationFunction="ValidateNotesList"
-                            ValidationGroup="SaveInfo"
-                            ErrorMessage="Please Enter Notes.">
-                        </asp:CustomValidator>
-                    </div>
-                    <div class="AddNewLink">
-                        <a href="javascript:void(0);" onclick="AddNewNotesRow();">Add New Notes</a>
-                    </div>
-                    <table id="tblNotesList" class="GridView" cellpadding="3" cellspacing="0">
-                        <colgroup>
-                            <col style="width:75%;" />
-                            <col style="width:25%;" />                  
-                            
-                        </colgroup>
-                        <tr>
-                            <th>Notes</th>
-                            <th>Comm Type</th>                                
-                            <%--<th>Actions</th>--%>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            
 
 
               <div class="WinGroupBox">
@@ -785,6 +770,35 @@
           
         </div>
         <div class="clearboth"></div>
+        
+        <div class="WinGroupBox">
+                <div class="WinGroupBoxHeader">Notes</div>
+                <div id="divNotesList">
+                    <div>
+                        <asp:CustomValidator ID="cvNotesList" runat="server"
+                            Display="Dynamic" ValidateEmptyText="true"
+                            ClientValidationFunction="ValidateNotesList"
+                            ValidationGroup="SaveInfo"
+                            ErrorMessage="Please Enter Notes.">
+                        </asp:CustomValidator>
+                    </div>
+                    <div class="AddNewLink">
+                        <a href="javascript:void(0);" onclick="AddNewNotesRow();">Add New Notes</a>
+                    </div>
+                    <table id="tblNotesList" class="GridView" cellpadding="3" cellspacing="0">
+                        <colgroup>
+                            <col style="width:85%;" />
+                            <col style="width:15%;" />                  
+                            <%--<col style="width:5%;" />--%>
+                        </colgroup>
+                        <tr>
+                            <th>Notes</th>
+                            <th>Comm Type</th>                                
+                            <%--<th></th>--%>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         
         <div class="TenPixelTopMargin">
             <input type="button" class="ButtonCommon" value="Save" onclick="SavePersonnel();" />
