@@ -80,18 +80,27 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
                     //ddlContactID.SetSelectedItem(entity.ContactID.ToString());
                     txtStartDate.Text = entity.StartDate.HasValue ? entity.StartDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
                     txtEndDate.Text = entity.EndDate.HasValue ? entity.EndDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
-                    ddlProjectID.SetSelectedItem(entity.ProjectID.GetValueOrDefault().ToString());
+                    
                     //ddlClientID.SetSelectedItem(entity.ClientID.GetValueOrDefault().ToString());
-                    ddlRoleID.SetSelectedItem(entity.RoleID.GetValueOrDefault().ToString());
-                    ddlCurrencyCode.SetSelectedItem(entity.CurrencyID.GetValueOrDefault().ToString());
+                    
                     txtDayRate.Text = entity.DayRate.HasValue ? String.Format(AppConstants.ValueOf.DECIMAL_FORMAT_FOR_TEXTBOX, entity.DayRate.GetValueOrDefault()) : String.Empty;
                     txtNotes.Text = entity.Notes;
                     //ddlChangedByUserID.SetSelectedItem(entity.ChangedByUserID.ToString());
                     //txtChangedOn.Text = entity.ChangedOn.ToString(ConfigReader.CSharpCalendarDateFormat);
                     //txtVersion.Text = entity.Version;
 
-                    ddlRateType.SetSelectedItem(entity.Office_Onsh_Rate_type.ToString());
-                    ddlHourStandby.SetSelectedItem(entity.Hour_Standby_Rate_type.ToString());
+                    ddlRoleID.SetSelectedItem(entity.RoleID.GetValueOrDefault().ToString());
+                    ddlCurrencyCode.SetSelectedItem(entity.CurrencyID.GetValueOrDefault().ToString());
+                    ddlProjectID.SetSelectedItem(entity.ProjectID.GetValueOrDefault().ToString());
+                    //ddlRateType.SetSelectedItem(entity.Office_Onsh_Rate_type.ToString());
+                    //ddlHourStandby.SetSelectedItem(entity.Hour_Standby_Rate_type.ToString());
+
+                    ddlRateType.SetSelectedItem((entity.Office_Onsh_Rate_type.IsNullOrEmpty()) ?
+                        String.Empty : entity.Office_Onsh_Rate_type.ToString().Trim());                   
+
+                    ddlHourStandby.SetSelectedItem((entity.Hour_Standby_Rate_type.IsNullOrEmpty()) ?
+                       String.Empty : entity.Hour_Standby_Rate_type.ToString().Trim());
+                   
 
                     if (entity.Contract_days.ToString().Trim() == "5")
                         radFive.Checked = true;
