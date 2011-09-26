@@ -11,16 +11,24 @@ public class AppSQL
     public const String GET_NOTES_BY_CONTACT = @"
         WITH PersonnelNotes AS
         (
-            SELECT ID
-	            , ContactID
-	            , Notes AS Note 	
-	            , ROW_NUMBER() OVER(ORDER BY ChangedOn DESC) AS RowNumber	
-            FROM ContactsNotes
-            WHERE ContactID = @ContactID
+            SELECT CN.ID
+	            , CN.ContactID
+	            , CN.Notes AS Note
+                , CT.Name as CommunicationType
+                , U.DisplayName	AS ChangedBy
+                , CN.ChangedOn
+	            , ROW_NUMBER() OVER(ORDER BY CN.ChangedOn DESC) AS RowNumber	
+            FROM ContactsNotes CN
+            INNER JOIN Users U ON CN.ChangedByUserID = U.ID
+            INNER JOIN ContactCommsTypes CT ON CN.ContactCommsTypeID = CT.ID
+            WHERE CN.ContactID = @ContactID
         )
         SELECT ID
             , ContactID	
             , Note
+            , CommunicationType
+            , ChangedBy
+            , ChangedOn
             , (SELECT COUNT(*) FROM PersonnelNotes) AS TotalRecord
         FROM PersonnelNotes
         WHERE RowNumber BETWEEN {0} AND {1}";

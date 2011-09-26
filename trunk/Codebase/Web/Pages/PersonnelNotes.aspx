@@ -29,7 +29,20 @@
 						        ValidationGroup="SaveInfo">
 			                </asp:RequiredFieldValidator>
 					    </td>
-				    </tr>				                    
+				    </tr>
+				    <tr>
+				        <td>Communication Type</td>
+				        <td>
+                            <asp:DropDownList ID="ddlCommType" runat="server" Width="20%"></asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                SetFocusOnError="true"
+                                Display="Dynamic" 
+                                ControlToValidate="ddlCommType" 
+                                ErrorMessage="Please Select a Type."
+                                ValidationGroup="SaveInfo">
+                            </asp:RequiredFieldValidator>
+                        </td>
+                        				    </tr>				                    
                 </table>
             </div>        
             <div class="TenPixelTopMargin">
@@ -41,7 +54,7 @@
                 <div class="WinGroupBoxHeader">Notes List</div>
                 
                 <UC:DataTableList ID="ucNoteList" runat="server"
-                    VisibleFields="ID, Note"
+                    VisibleFields="ID, Note,CommunicationType,ChangedBy,ChangedOn"
                     LinkFields="ContactID, ID"
                     NoRecordMessgae="No Note Found for this Personnel."
                     DeleteMessage="Sure to Delete Note?">

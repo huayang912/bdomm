@@ -203,6 +203,9 @@ namespace App.CustomModels
         public int ID { get; set; }
         public String Notes { get; set; }
         public String CommsTypeID { get; set; }
+        public String CommsType { get; set; }
+        public String ChangedBy { get; set; }
+        public String ChangedOn { get; set; }
     }
 
     public class PersonnelEmail
