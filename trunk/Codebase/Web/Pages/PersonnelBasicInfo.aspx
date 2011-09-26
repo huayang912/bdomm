@@ -477,7 +477,7 @@
 				        <td>Surname<span class="requiredMark">*</span></td>
 				        <td>
 					        <asp:TextBox ID="txtLastName" MaxLength="50" runat="server"
-					            BorderStyle="None" ReadOnly="true" BackColor="Transparent" ></asp:TextBox>
+					            ></asp:TextBox>
 					        <asp:RequiredFieldValidator ID="rfvLastName" runat="server"
 						        ControlToValidate="txtLastName" SetFocusOnError="true"
 						        ErrorMessage="Please Enter a LastName." Display="Dynamic"
