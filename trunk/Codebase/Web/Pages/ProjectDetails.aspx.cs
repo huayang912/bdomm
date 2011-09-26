@@ -37,6 +37,8 @@ public partial class Pages_ProjectDetails : BasePage
             Page.Title = WebUtil.GetPageTitle(String.Format("Project Details : {0}", project.Name.HtmlEncode()));
             ltrHeading.Text = String.Format("Project Details : {0}", project.Name.HtmlEncode());
             StringBuilder sb = new StringBuilder();
+            StringBuilder group_sb = new StringBuilder();
+
             sb.AppendFormat("<b>Number:</b> {0}<br/><br/>", project.Number);
             sb.AppendFormat("<b>Quotation Information:</b> <br/>");
             if (project.Quotation != null)
@@ -58,14 +60,49 @@ public partial class Pages_ProjectDetails : BasePage
                 sb.AppendFormat("<br/><b>Subcontractor(s):</b> {0}<br/>", GetSubContractors(project, context));
                 sb.Append(GetQuotationPricingList(project.Quotation));
             }
-            sb.Append(GetPersonnelList(context));
+
             sb.AppendFormat("<b>Status:</b> {0}<br/>", project.StatusID.GetValueOrDefault() > 0 ? project.ProjectStatuse.Name : "NA");
-            sb.AppendFormat("<b>Description:</b> {0}<br/>",  WebUtil.FormatText(project.Description.IsNullOrEmpty() ? "NA" : project.Description));
             sb.AppendFormat("<b>Start Date:</b> {0}<br/>", project.StartDate == DateTime.MinValue ? "NA" : project.StartDate.GetValueOrDefault().ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
             sb.AppendFormat("<b>End Date:</b> {0}<br/>", project.EndDate == DateTime.MinValue ? "NA" : project.EndDate.GetValueOrDefault().ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
+  
+         // New momin to make the look better
+             group_sb.AppendFormat("<table width='100%' border='0'> ");			
+			 
+			 group_sb.AppendFormat("<tr><td width='50%'>");			
+			  group_sb.AppendFormat("<div class='GroupBox'>");
+              group_sb.AppendFormat("<div class='WinGroupBoxHeader'>Project Info</div>");  			
+                group_sb.AppendFormat(sb.ToString());	// move sb to group_sb		
+			  group_sb.AppendFormat("</div>");						
+			 group_sb.AppendFormat("</td>");		
+			 
+			 //TD  - description
+             group_sb.AppendFormat("<td width='50%'>");			
+			  group_sb.AppendFormat("<div class='GroupBox'>");
+              group_sb.AppendFormat("<div class='WinGroupBoxHeader'>Project Description</div>");  			
+                group_sb.AppendFormat("{0}<br/>",  WebUtil.FormatText(project.Description.IsNullOrEmpty() ? "NA" : project.Description));		
+			  group_sb.AppendFormat("</div>");						
+			 group_sb.AppendFormat("</td></tr>");				
+			 
+			  group_sb.AppendFormat("</table>");		
+	
+            sb.Length = 0;  // clear sb
+			sb.AppendFormat(group_sb.ToString());  // fill sb again 
+            //----
 
+          
+        //     sb.AppendFormat("<b>Description:</b> {0}<br/>",  WebUtil.FormatText(project.Description.IsNullOrEmpty() ? "NA" : project.Description));
+
+          
+       
             if (project.Quotation != null)
             {
+                sb.AppendFormat("<table width='100%' border='0'> ");
+
+                sb.AppendFormat("<tr><td>");		
+                sb.AppendFormat("<div class='GroupBox'>");
+                sb.AppendFormat("<div class='WinGroupBoxHeader'>Quotation Details</div>");  			
+
+
                 sb.AppendFormat("<b>Quotation No:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.QUOTATION_DETAILS_Archive,
                     AppConstants.QueryString.ID, project.QuotationID + "&_controllerName=Quotations&_commandName=Select&_commandArgument=editForm1", project.Quotation.Number);
               //  sb.AppendFormat("<b>Quotation Create Date:</b> {0}<br/>", project.Quotation.CreatedOn == DateTime.MinValue ? "NA" : project.Quotation.CreatedOn.ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
@@ -78,8 +115,13 @@ public partial class Pages_ProjectDetails : BasePage
                     sb.AppendFormat("<b>Attachments: </b><br/>{0}", GetAttachmentsList(project.Quotation.Enquiry));
                 }
                 sb.AppendFormat("<br/><b>Scope of the Work:</b> <br/>{0}<br/>", project.Quotation.ScopeOfWork.IsNullOrEmpty() ? "NA" : WebUtil.FormatText(project.Quotation.ScopeOfWork));
-                
+
+                sb.AppendFormat("</div");
+                sb.AppendFormat("</td></tr>");
+                sb.AppendFormat("</table>");
             }
+
+            sb.Append(GetPersonnelList(context));
 
             divDetails.InnerHtml = sb.ToString();
             ucProjectNotes.ProjectID = _ProjectID;
