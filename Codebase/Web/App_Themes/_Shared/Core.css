@@ -842,12 +842,13 @@ table.DataView tr.CategoryRow td.CategoryColumn table.Category tr td.Description
     padding-bottom: 4px;
 }
 
+/*  background-color: #EBF3FF;  momin */
 table.DataView tr.CategoryRow td.Fields
 {
-    width: 375px;
-    background-color: #EBF3FF;
-    border-top: solid 1px silver;
-    padding: 8px;
+	width: 375px;
+	background-color: #FFFFFF;
+	border-top: solid 1px silver;
+	padding: 8px;
 }
 
 table.DataView table.Categories tr.CategoryRow td.Fields
@@ -860,6 +861,7 @@ table.DataView tr.CategoryRow td.Fields div.Item
     padding: 0px 0px 12px 0px;
 }
 
+/*   color: gray;  momin */
 table.DataView tr.CategoryRow td.Fields div.Header, table.DataView tr.InlineFormRow div.Header
 {
     color: gray;

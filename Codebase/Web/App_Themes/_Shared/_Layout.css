@@ -92,14 +92,18 @@ table#PageBody tr td#PageHeaderContent div.Header div.Title
     background-repeat: no-repeat;
     background-position: 300px bottom;
 }
+
+=momin header
+
+background-image: url(TopShape.jpg);
 */
 div.Header
 {
     padding-top: 15px;
     padding-bottom:15px;
-    background-image: url(TopShape.jpg);
+    
     background-repeat: no-repeat;
-    background-position: 35% bottom;
+    background-position: 35% bottom;    
 }
 td#PageHeaderContent
 {
