@@ -217,7 +217,7 @@
 
         function AddNewNotesRow() {
             //alert("T");
-            var tr = '<tr><td><TEXTAREA ROWS=3 style="width:90%"></textarea><input type="hidden" value="0"/></td><td>' + BindCommTypeDropdown('') + '&nbsp;&nbsp;<a href="javascript:void(0);" onclick="DeleteNotes(this);">Delete</a></td></tr>';
+            var tr = '<tr><td><TEXTAREA ROWS=3 style="width:90%"></textarea><input type="hidden" value="0"/></td><td colspan="3">' + BindCommTypeDropdown('') + '&nbsp;&nbsp;<a href="javascript:void(0);" onclick="DeleteNotes(this);">Delete</a></td></tr>';
             $('#tblNotesList').append(tr);
             SetParentHeight();
             FormatTable($('#tblNotesList'));
@@ -254,11 +254,12 @@
             $('#tblNotesList').find('tr:gt(0)').remove();
             for (j = 0; j < _Notes.length; j++) {
                 var obj = _Notes[j];
-                var tr = '<tr><td>' + obj.Notes + '<input type="hidden" value="' + obj.ID + '"/></td><td>' + BindCommTypeDropdown(obj.CommsTypeID) + '</td></tr>';
+                var tr = '<tr><td>' + obj.Notes + '<input type="hidden" value="' + obj.ID + '"/></td><td>' + obj.CommsType + '</td><td>' + obj.ChangedBy + '</td><td>' + obj.ChangedOn + '</td></tr>';
                 $('#tblNotesList').append(tr);
             }
             FormatTable($('#tblNotesList'));
         }
+        //' + BindCommTypeDropdown(obj.CommsTypeID) + '
         //<input type="text" style="width:250px;"  readonly="readonly" value="' + obj.Notes + '"/>
         //<td> <a href="javascript:void(0);" onclick="DeleteNotes(this);">Delete</a></td>
         //readonly="readonly"
@@ -788,14 +789,16 @@
                     </div>
                     <table id="tblNotesList" class="GridView" cellpadding="3" cellspacing="0">
                         <colgroup>
-                            <col style="width:85%;" />
-                            <col style="width:15%;" />                  
-                            <%--<col style="width:5%;" />--%>
+                            <col style="width:60%;" />
+                            <col style="width:10%;" />                  
+                            <col style="width:20%;" />
+                            <col style="width:10%;" />
                         </colgroup>
                         <tr>
                             <th>Notes</th>
                             <th>Comm Type</th>                                
-                            <%--<th></th>--%>
+                            <th>Changed By</th>
+                            <th>Changed On</th>
                         </tr>
                     </table>
                 </div>

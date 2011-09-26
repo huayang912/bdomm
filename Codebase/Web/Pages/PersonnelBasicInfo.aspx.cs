@@ -102,9 +102,52 @@ public partial class Pages_PersonnelBasicInfo : BasePage
                 if (contactRoles != null && contactRoles.Count() > 0)
                     hdnContactRoles.Value = contactRoles.ToList().ToJSON();
 
-                var Notes = from P in context.ContactsNotes where P.ContactID == _ID select new App.CustomModels.ConNote { ID = P.ID, Notes = P.Notes, CommsTypeID = (P.ContactCommsTypeID == null) ? "" : P.ContactCommsTypeID.ToString() };
+                var Notes =
+                    from p in context.ContactsNotes
+                    join cp in context.ContactCommsTypes on p.ContactCommsTypeID equals cp.ID
+                    join u in context.Users on p.ChangedByUserID equals u.ID
+                    where p.ContactID == _ID
+                    select new App.CustomModels.ConNote
+                    {
+                        ID = p.ID,
+                        Notes = p.Notes,
+                        CommsTypeID = (p.ContactCommsTypeID == null) ?
+                            "" : p.ContactCommsTypeID.ToString(),
+                        CommsType = cp.Name,
+                        ChangedBy = u.DisplayName,
+                        ChangedOn = p.ChangedOn.ToString()
+
+                    };
+                    //from P in context.ContactsNotes where P.ContactID == _ID select new App.CustomModels.ConNote { ID = P.ID, Notes = P.Notes, CommsTypeID = (P.ContactCommsTypeID == null) ? "" : P.ContactCommsTypeID.ToString() };
                 if (Notes != null && Notes.Count() > 0)
                     hdnNotes.Value = Notes.ToList().ToJSON();
+
+                //var t = from p in context.ContactsNotes
+                //        join cp in context.ContactCommsTypes on p.ContactCommsTypeID equals cp.ID
+                //        where p.ContactID == _ID
+                //        select new App.CustomModels.ConNote 
+                //        { 
+                //            ID = p.ID, 
+                //            Notes = p.Notes, 
+                //            CommsTypeID = (p.ContactCommsTypeID == null) ? 
+                //                "" : p.ContactCommsTypeID.ToString(),
+                //            CommsType = cp.Name
+                //        };
+                        
+                        
+                        //select new
+
+                        //{
+
+                        //    PostId = p.PostId,
+
+                        //    CategoryName = c.CategoryName,
+
+                        //    PostName = p.PostName,
+
+                        //    PostSubName = p.PostSubName
+
+                        //}; 
             }
         }
     }

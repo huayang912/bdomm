@@ -96,4 +96,15 @@ public static class BindDropdownList
         ddl.DataBind();
         InsertBlankOption(ddl);
     }
+
+    public static void CommunicationTypes(DropDownList ddl)
+    {
+        OMMDataContext context = new OMMDataContext();
+        var communicationType = from P in context.ContactCommsTypes orderby P.Name select new { P.ID, P.Name };
+        ddl.DataSource = communicationType;
+        ddl.DataTextField = "Name";
+        ddl.DataValueField = "ID";
+        ddl.DataBind();
+        InsertBlankOption(ddl);
+    }
 }

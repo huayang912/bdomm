@@ -50,8 +50,9 @@ public partial class Pages_PersonnelNotes : BasePage
     /// </summary>
     protected void BindDropDownLists()
     {
-        //BindDropdownList.Contactses(ddlContactID);
+        BindDropdownList.CommunicationTypes(ddlCommType);
         //BindDropdownList.Userses(ddlChangedByUserID);
+
     }
     protected void ShowSuccessMessage()
     {
@@ -116,9 +117,15 @@ public partial class Pages_PersonnelNotes : BasePage
                     ShowNotFoundMessage();
                 else
                 {
+                    //UtilityDAO dao = new UtilityDAO();
+                    //DbParameter[] parameters = new[] { new DbParameter("@CommTypeID", entity.ContactCommsTypeID) };
+                    
+                    ////DataSet ds = dao.GetPagedData(AppSQL.GET_BANK_DETAILS_BY_CONTACT, parameters, pageNumber, PAGE_SIZE, out totalRecord);
+                    //DataSet ds = dao.GetDataSet(AppSQL.GET_BANK_DETAILS_BY_CONTACT, parameters, false);
+
                     //ddlContactID.SetSelectedItem(entity.ContactID.ToString());
                     txtNotes.Text = entity.Notes;
-                    //ddlChangedByUserID.SetSelectedItem(entity.ChangedByUserID.ToString());
+                    ddlCommType.SetSelectedItem(entity.ContactCommsTypeID.ToString());
                     //txtChangedOn.Text = entity.ChangedOn.ToString(ConfigReader.CSharpCalendarDateFormat);
                     //txtVersion.Text = entity.Version;
                     //txtCreatedByUsername.Text = entity.CreatedByUsername;
@@ -151,6 +158,7 @@ public partial class Pages_PersonnelNotes : BasePage
 
         //ddlContactID.SelectedValue.ToInt();
         entity.Notes = txtNotes.Text;
+        entity.ContactCommsTypeID = Convert.ToInt32(ddlCommType.SelectedValue);
         entity.ChangedByUserID = SessionCache.CurrentUser.ID;
         entity.ChangedOn = DateTime.Now;        
         entity.CreatedByUsername = entity.ChangedByUsername = SessionCache.CurrentUser.UserName;
