@@ -258,6 +258,7 @@
                 $('#tblNotesList').append(tr);
             }
             FormatTable($('#tblNotesList'));
+            
         }
         //' + BindCommTypeDropdown(obj.CommsTypeID) + '
         //<input type="text" style="width:250px;"  readonly="readonly" value="' + obj.Notes + '"/>
@@ -281,6 +282,8 @@
                 $('#tblEmailAddressList').append(tr);
             }
             FormatTable($('#tblEmailAddressList'));
+
+            toggleAlert('1');
         }
         function PopulatePersonnelObject() {
             _Personnel = new App.CustomModels.Personnel();
@@ -415,6 +418,32 @@
             //ShowParentLoading();
             SetParentHeight();
         });
+
+
+        function toggleAlert(T) {
+            if (T > 1)
+            { 
+                document.getElementById('EditMode').style.visibility = "hidden";
+            }
+            toggleDisabled(document.getElementById("content"));
+        }
+        function toggleDisabled(el) {
+
+            
+            try {
+                el.disabled = el.disabled ? false : true;
+            }
+            catch (E) {
+            }
+            if (el.childNodes && el.childNodes.length > 0) {
+                for (var x = 0; x < el.childNodes.length; x++) {
+                    toggleDisabled(el.childNodes[x]);
+                }
+            }
+        }
+        //
+        
+        
     </script>
 </asp:Content>
 
@@ -428,8 +457,13 @@
     <asp:HiddenField ID="hdnRoles" runat="server" />
     <asp:HiddenField ID="hdnTelephoneTypes" runat="server" />
     <asp:HiddenField ID="hdnCommTypes" runat="server" />
-    
+
+<input type="button" id="EditMode" class="ButtonCommon" value="Edit" onclick="toggleAlert(2)" />
+
+<div id="content">    
     <asp:Panel ID="pnlDetails" runat="server">
+    
+    
         <div class="LeftColumn">
             <div class="WinGroupBox">
                 <div class="WinGroupBoxHeader">Personnel Details</div>
@@ -442,7 +476,8 @@
 			        <tr>
 				        <td>Surname<span class="requiredMark">*</span></td>
 				        <td>
-					        <asp:TextBox ID="txtLastName" MaxLength="50" runat="server"></asp:TextBox>
+					        <asp:TextBox ID="txtLastName" MaxLength="50" runat="server"
+					            BorderStyle="None" ReadOnly="true" BackColor="Transparent" ></asp:TextBox>
 					        <asp:RequiredFieldValidator ID="rfvLastName" runat="server"
 						        ControlToValidate="txtLastName" SetFocusOnError="true"
 						        ErrorMessage="Please Enter a LastName." Display="Dynamic"
@@ -807,6 +842,7 @@
         <div class="TenPixelTopMargin">
             <input type="button" class="ButtonCommon" value="Save" onclick="SavePersonnel();" />
         </div>        
-    </asp:Panel>    
+    </asp:Panel>   
+</div> 
 </asp:Content>
 
