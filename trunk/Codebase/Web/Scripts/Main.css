@@ -40,7 +40,6 @@ div.pageheading, h1
 	clear:both;
 }
 .TextBoxCommon{	
-	width:99%;	
 	color:#333333;
 	font-size:11px;
 	padding:0px; 
@@ -77,13 +76,11 @@ div.pageheading, h1
 .DropDownListCommon
 {
 	min-width:100px;
-	width:auto;		
 	color:#333333;
 	font-size:11px;
 	padding:0px;
 	margin:0px;
-	width:100%;
-}    
+	}    
 div.GroupBox
 {
 	border:#B9B9B9 1px solid;
@@ -106,6 +103,18 @@ div.GroupHeader
 	-moz-border-radius: 6px;
 	border-radius: 6px;	
 }
+
+.COTBox
+{
+    border:#B9B9B9 1px solid;
+	padding:10px;
+	height:500px;
+	margin-top:20px;    
+	margin-bottom:0px;    
+	-moz-border-radius: 6px;
+	border-radius: 6px;	
+}
+
 .WinGroupBoxHeader
 {
     width:150px;        	
