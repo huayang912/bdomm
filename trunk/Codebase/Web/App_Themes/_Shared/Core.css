@@ -1717,10 +1717,7 @@ td.Fields table.FieldWrapper div.Item div.Error, td.Fields .FieldPlaceholder div
 
 td.Fields table.FieldWrapper div.Header, td.Fields table.FieldWrapper td.Item.ReadOnly div.Item
 {
-    padding-top: 4px !important;
-    padding-bottom: 4px !important;
-    padding-left: 0px !important;
-    padding-right: 0px !important;
+    padding: 4px 0px;
 }
 
 
