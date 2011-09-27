@@ -18,6 +18,8 @@ public partial class Pages_PersonnelBasicInfo : BasePage
         {
             BindDropdownLists();
             BindPersonnelInfo();
+
+            enableDisable(1);
         }
     }
     protected void BindPageInfo()
@@ -59,35 +61,90 @@ public partial class Pages_PersonnelBasicInfo : BasePage
                 ShowNotFoundMessage();
             else
             {
+                //---------------------
+                //Personal Details
+                //---------------------
                 txtLastName.Text = contact.LastName;
+                lblLastName.Text = contact.LastName;
+
                 txtFirstNames.Text = contact.FirstNames;
+                lblFirstNames.Text = contact.FirstNames;
+
                 txtAddress.Text = contact.Address;
+                lblAddress.Text = contact.Address;
+
                 txtPostcode.Text = contact.Postcode;
+                lblPostcode.Text = contact.Postcode;
+
                 ddlCountryID.SetSelectedItem(contact.CountryID.ToString());
+                lblCountryID.Text = ddlCountryID.SelectedItem.Text.ToString();
+
                 ddlMaritalStatusID.SetSelectedItem(contact.MaritalStatusID.ToString());
+                lblMaritalStatusID.Text = ddlMaritalStatusID.SelectedItem.Text.ToString();
+
                 txtPlaceOfBirth.Text = contact.PlaceOfBirth;
-                txtDateOfBirth.Text = contact.DateOfBirth.HasValue ? contact.DateOfBirth.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
+                lblPlaceOfBirth.Text = contact.PlaceOfBirth;
+                
+                txtDateOfBirth.Text = contact.DateOfBirth.HasValue ? 
+                    contact.DateOfBirth.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
+                lblDateOfBirth.Text = contact.DateOfBirth.HasValue ? 
+                    contact.DateOfBirth.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
+                
                 ddlCountryOfBirthID.SetSelectedItem(contact.CountryOfBirthID.ToString());
+                lblCountryOfBirthID.Text = ddlCountryOfBirthID.SelectedItem.Text.ToString();
+                //End Personal Details
+
+
+                //---------------------
+                //Other Details
+                //---------------------
                 txtDateOfLastMeeting.Text = contact.DateOfLastMeeting.HasValue ? contact.DateOfLastMeeting.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
+                lblDateOfLastMeeting.Text = contact.DateOfLastMeeting.HasValue ? contact.DateOfLastMeeting.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
+                
                 txtPreferredDayRate.Text = contact.PreferredDayRate.HasValue ? contact.PreferredDayRate.GetValueOrDefault().ToString() : String.Empty;
+                lblPreferredDayRate.Text = contact.PreferredDayRate.HasValue ? contact.PreferredDayRate.GetValueOrDefault().ToString() : String.Empty;
+                
                 ddlDayRateCurrencyID.SetSelectedItem(contact.DayRateCurrencyID.GetValueOrDefault().ToString());
+                lblDayRateCurrencyID.Text = ddlDayRateCurrencyID.SelectedItem.Text.ToString();
+                
                 chkNoSMSorEmail.Checked = contact.NoSMSorEmail;
                 chkInactive.Checked = contact.Inactive;
-               // txtPPESizes.Text = contact.PPE_Sizes;
+                // txtPPESizes.Text = contact.PPE_Sizes;
                 ddlPPE_Size.SetSelectedItem(contact.PPE_Sizes);
-                txtcoverall.Text = contact.Coverall;
-               // txtbootsize.Text = contact.Boots.HasValue ? contact.Boots.GetValueOrDefault().ToString() : string.Empty;
-                ddlbootsize.SetSelectedItem(contact.Boots.ToString());
-
-                txtcompanyname.Text = contact.CopmpanyName;
-                txtcompanyreg.Text = contact.CompanyVat;
-                txtcompanyvat.Text = contact.CompanyVat;
-                txtcompanyadr.Text = contact.CompanyAddress;
-             //   ddlemploymentstatus.SetSelectedItem(contact.employment_status.ToString());
-              //  ddlinsurance.SetSelectedItem(contact.Insurance.ToString());
-                ddlemploymentstatus.SetSelectedItem(contact.employment_status);
-                ddlinsurance.SetSelectedItem(contact.Insurance);
+                lblPPE_Size.Text = ddlPPE_Size.SelectedItem.Text.ToString();
                 
+                txtcoverall.Text = contact.Coverall;
+                lblCoverall.Text = contact.Coverall;
+                
+                // txtbootsize.Text = contact.Boots.HasValue ? contact.Boots.GetValueOrDefault().ToString() : string.Empty;
+                ddlbootsize.SetSelectedItem(contact.Boots.ToString());
+                lblBootsize.Text = ddlbootsize.SelectedItem.Text.ToString();
+                //End Other details
+
+
+                //---------------------
+                //Emploment Details
+                //---------------------
+                txtcompanyname.Text = contact.CopmpanyName;
+                lblCompanyname.Text = contact.CopmpanyName;
+                
+                txtcompanyreg.Text = contact.CompanyVat;
+                lblCompanyreg.Text = contact.CompanyVat;
+                
+                txtcompanyvat.Text = contact.CompanyVat;
+                lblCompanyvat.Text = contact.CompanyVat;
+                
+                txtcompanyadr.Text = contact.CompanyAddress;
+                lblCompanyadr.Text = contact.CompanyAddress;                
+                
+                //   ddlemploymentstatus.SetSelectedItem(contact.employment_status.ToString());
+                //  ddlinsurance.SetSelectedItem(contact.Insurance.ToString());
+                ddlemploymentstatus.SetSelectedItem(contact.employment_status);
+                lblEmploymentstatus.Text = ddlemploymentstatus.SelectedItem.Text.ToString();
+                
+                ddlinsurance.SetSelectedItem(contact.Insurance);
+                lblInsurance.Text = ddlinsurance.SelectedItem.Text.ToString();
+                //End Employment Details
               
 
                 var telephoneNumbers = from P in context.TelephoneNumbers where P.ContactID == _ID select new App.CustomModels.PersonnelTelephone { ID = P.ID, Number = P.Number, TypeID = P.TypeID };
@@ -122,32 +179,7 @@ public partial class Pages_PersonnelBasicInfo : BasePage
                 if (Notes != null && Notes.Count() > 0)
                     hdnNotes.Value = Notes.ToList().ToJSON();
 
-                //var t = from p in context.ContactsNotes
-                //        join cp in context.ContactCommsTypes on p.ContactCommsTypeID equals cp.ID
-                //        where p.ContactID == _ID
-                //        select new App.CustomModels.ConNote 
-                //        { 
-                //            ID = p.ID, 
-                //            Notes = p.Notes, 
-                //            CommsTypeID = (p.ContactCommsTypeID == null) ? 
-                //                "" : p.ContactCommsTypeID.ToString(),
-                //            CommsType = cp.Name
-                //        };
-                        
-                        
-                        //select new
-
-                        //{
-
-                        //    PostId = p.PostId,
-
-                        //    CategoryName = c.CategoryName,
-
-                        //    PostName = p.PostName,
-
-                        //    PostSubName = p.PostSubName
-
-                        //}; 
+ 
             }
         }
     }
@@ -366,5 +398,158 @@ public partial class Pages_PersonnelBasicInfo : BasePage
     protected void ddlemploymentstatus_SelectedIndexChanged(object sender, EventArgs e)
     {
 
+    }
+
+
+
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        enableDisable(2);
+    }
+
+    public void enableDisable(int i)
+    {
+        if (i == 1)
+        {
+                        
+            txtLastName.Visible = false;
+            lblLastName.Visible = true;
+
+            txtFirstNames.Visible = false;
+            lblFirstNames.Visible = true;
+
+            txtAddress.Visible = false;
+            lblAddress.Visible = true;
+
+            txtPostcode.Visible = false;
+            lblPostcode.Visible = true;
+
+            txtPlaceOfBirth.Visible = false;
+            lblPlaceOfBirth.Visible = true;
+                
+            txtDateOfBirth.Visible = false;
+            lblDateOfBirth.Visible = true;
+
+            ddlCountryID.Visible = false;
+            lblCountryID.Visible = true;
+
+            ddlMaritalStatusID.Visible = false;
+            lblMaritalStatusID.Visible = true;
+
+            ddlCountryOfBirthID.Visible = false;
+            lblCountryOfBirthID.Visible = true;
+
+            txtcompanyname.Visible = false;
+            lblCompanyname.Visible = true;
+
+            txtcompanyreg.Visible = false;
+            lblCompanyreg.Visible = true;
+
+            txtcompanyvat.Visible = false;
+            lblCompanyvat.Visible = true;
+
+            txtcompanyadr.Visible = false;
+            lblCompanyadr.Visible = true;
+
+            ddlemploymentstatus.Visible = false;
+            lblEmploymentstatus.Visible = true;
+
+            ddlinsurance.Visible = false;
+            lblInsurance.Visible = true;
+
+
+            txtDateOfLastMeeting.Visible = false;
+            lblDateOfLastMeeting.Visible = true;
+
+            txtPreferredDayRate.Visible = false;
+            lblPreferredDayRate.Visible = true;
+
+            ddlDayRateCurrencyID.Visible = false;
+            lblDayRateCurrencyID.Visible = true;
+
+            
+            ddlPPE_Size.Visible = false;
+            lblPPE_Size.Visible = true;
+
+            txtcoverall.Visible = false;
+            lblCoverall.Visible = true;
+
+            ddlbootsize.Visible = false;
+            lblBootsize.Visible = true;
+        }
+        else
+        {
+            txtLastName.Visible = true;
+            lblLastName.Visible = false;
+
+            txtFirstNames.Visible = true;
+            lblFirstNames.Visible = false;
+
+            txtAddress.Visible = true;
+            lblAddress.Visible = false;
+
+            txtPostcode.Visible = true;
+            lblPostcode.Visible = false;
+
+            txtPlaceOfBirth.Visible = true;
+            lblPlaceOfBirth.Visible = false;
+
+            txtDateOfBirth.Visible = true;
+            lblDateOfBirth.Visible = false;
+
+            ddlCountryID.Visible = true;
+            lblCountryID.Visible = false;
+
+
+            ddlMaritalStatusID.Visible = true;
+            lblMaritalStatusID.Visible = false;
+
+            ddlCountryOfBirthID.Visible = true;
+            lblCountryOfBirthID.Visible = false;
+
+
+
+            txtcompanyname.Visible = true;
+            lblCompanyname.Visible = false;
+
+            txtcompanyreg.Visible = true;
+            lblCompanyreg.Visible = false;
+
+            txtcompanyvat.Visible = true;
+            lblCompanyvat.Visible = false;
+
+            txtcompanyadr.Visible = true;
+            lblCompanyadr.Visible = false;
+
+            ddlemploymentstatus.Visible = true;
+            lblEmploymentstatus.Visible = false;
+
+            ddlinsurance.Visible = true;
+            lblInsurance.Visible = false;
+
+
+
+            txtDateOfLastMeeting.Visible = true;
+            lblDateOfLastMeeting.Visible = false;
+
+            txtPreferredDayRate.Visible = true;
+            lblPreferredDayRate.Visible = false;
+
+            ddlDayRateCurrencyID.Visible = true;
+            lblDayRateCurrencyID.Visible = false;
+
+
+            ddlPPE_Size.Visible = true;
+            lblPPE_Size.Visible = false;
+
+            txtcoverall.Visible = true;
+            lblCoverall.Visible = false;
+
+            ddlbootsize.Visible = true;
+            lblBootsize.Visible = false;
+
+            Button1.Visible = false;
+        }
     }
 }

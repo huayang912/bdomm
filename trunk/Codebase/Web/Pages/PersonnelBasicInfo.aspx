@@ -283,7 +283,16 @@
             }
             FormatTable($('#tblEmailAddressList'));
 
-            toggleAlert('1');
+            //toggleAlert('1');
+
+            //document.getElementById('txtLastName').style.visibility = "hidden";
+            //document.getElementById('txtLastName').style.v = "none";
+
+            //var control = document.getElementById('TextBox1');
+            //if(control.style.visibility == "visible" || control.style.visibility == "")
+                //control.style.visibility = "hidden";
+            //else
+                //control.style.visibility = "visible";
         }
         function PopulatePersonnelObject() {
             _Personnel = new App.CustomModels.Personnel();
@@ -365,14 +374,26 @@
         }
         function SavePersonnel() {
             if (Page_ClientValidate('SaveInfo')) {
-                ShowParentLoading();
-                PopulatePersonnelObject();                
-                //PopulateRoles();
-                PopulateEmails();
-                PopulateTelephones();
-                PopulateNotes();               
-                PageMethods.SavePersonnel(_Personnel, _Telephones,_Notes, _Emails, _ContactRoles, SavePersonnel_Success, OnAjax_Error, OnAjax_TimeOut);              
-            }
+
+
+                if (document.getElementById('ctl00_body_txtLastName') != null) {
+                
+                    ShowParentLoading();
+                    PopulatePersonnelObject();
+                    //PopulateRoles();
+                    PopulateEmails();
+                    PopulateTelephones();
+                    PopulateNotes();
+                    PageMethods.SavePersonnel(_Personnel, _Telephones, _Notes, _Emails, _ContactRoles, SavePersonnel_Success, OnAjax_Error, OnAjax_TimeOut);
+                    //            try {}
+                    //            catch (E) {
+                    //            }
+
+                }
+                else {
+                    alert('Please Select The Edit Mode First');
+                }
+           }
         }
         function SavePersonnel_Success(result) {
             if (result > 0) {
@@ -420,31 +441,47 @@
         });
 
 
-        function toggleAlert(T) {
-            if (T > 1)
-            { 
-                document.getElementById('EditMode').style.visibility = "hidden";
-            }
-            toggleDisabled(document.getElementById("content"));
-        }
-        function toggleDisabled(el) {
+//        function toggleAlert(T) {
+//            if (T > 1)
+//            {
+//                document.getElementById('EditMode').style.visibility = "hidden";
+//                //document.getElementById('TextBox1').style.visibility = "visible";
+//            }
+//            toggleDisabled(document.getElementById("content"));
+//        }
+//        function toggleDisabled(el) {
 
-            
-            try {
-                el.disabled = el.disabled ? false : true;
-            }
-            catch (E) {
-            }
-            if (el.childNodes && el.childNodes.length > 0) {
-                for (var x = 0; x < el.childNodes.length; x++) {
-                    toggleDisabled(el.childNodes[x]);
-                }
-            }
-        }
+//            
+//            try {
+//                el.disabled = el.disabled ? false : true;
+//            }
+//            catch (E) {
+//            }
+//            if (el.childNodes && el.childNodes.length > 0) {
+//                for (var x = 0; x < el.childNodes.length; x++) {
+//                    toggleDisabled(el.childNodes[x]);
+//                }
+//            }
+//        }
         //
-        
-        
+
+//        function toggleVisibility(controlId) {
+//            alert("YY");
+//            var control = document.getElementById(controlId);
+
+//            //if (control.style.visibility == "visible" || control.style.visibility == "")
+
+//                control.style.visibility = "hidden";
+
+//            //else
+
+//              //  control.style.visibility = "visible";
+
+//            alert("YY");
+
+//        }
     </script>
+    
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
@@ -458,12 +495,21 @@
     <asp:HiddenField ID="hdnTelephoneTypes" runat="server" />
     <asp:HiddenField ID="hdnCommTypes" runat="server" />
 
-<input type="button" id="EditMode" class="ButtonCommon" value="Edit" onclick="toggleAlert(2)" />
 
-<div id="content">    
+    <asp:Button ID="Button1" runat="server" Text="Edit" onclick="Button1_Click" />
+  <%--  <input type="button" ID="btnShowHide" value="Show/Hide" onclick="toggleVisibility('TextBox1');" />
+<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+<input type="button" id="EditMode" class="ButtonCommon" value="Edit" onclick="toggleVisibility('txtLastName')" />
+<div id="content">  
+</div> --%>  
+
+     <%--<div>
+       <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <input type="button" id="btnShowHide" value="Show/Hide" onclick="toggleVisibility('txtLastName');" />
+    </div>--%>
     <asp:Panel ID="pnlDetails" runat="server">
     
-    
+        
         <div class="LeftColumn">
             <div class="WinGroupBox">
                 <div class="WinGroupBoxHeader">Personnel Details</div>
@@ -476,8 +522,8 @@
 			        <tr>
 				        <td>Surname<span class="requiredMark">*</span></td>
 				        <td>
-					        <asp:TextBox ID="txtLastName" MaxLength="50" runat="server"
-					            ></asp:TextBox>
+					        <asp:TextBox ID="txtLastName" MaxLength="50" runat="server"></asp:TextBox>
+                            <asp:Label ID="lblLastName" runat="server" Text=""></asp:Label>
 					        <asp:RequiredFieldValidator ID="rfvLastName" runat="server"
 						        ControlToValidate="txtLastName" SetFocusOnError="true"
 						        ErrorMessage="Please Enter a LastName." Display="Dynamic"
@@ -489,6 +535,7 @@
 				        <td>First Name<span class="requiredMark">*</span></td>
 				        <td>
 					        <asp:TextBox ID="txtFirstNames" MaxLength="50" runat="server"></asp:TextBox>
+					        <asp:Label ID="lblFirstNames" runat="server" Text=""></asp:Label>
 					        <asp:RequiredFieldValidator ID="rfvFirstNames" runat="server"
 						        ControlToValidate="txtFirstNames" SetFocusOnError="true"
 						        ErrorMessage="Please Enter a FirstNames." Display="Dynamic"
@@ -500,23 +547,27 @@
 				        <td>Address</td>
 				        <td>
 					        <asp:TextBox ID="txtAddress" TextMode="MultiLine" MaxLength="200" runat="server"></asp:TextBox>
+					        <asp:Label ID="lblAddress" runat="server" Text=""></asp:Label>
 				        </td>
 			        </tr>
 			        <tr>
 				        <td>Postcode</td>
 				        <td>
 					        <asp:TextBox ID="txtPostcode" MaxLength="20" runat="server"></asp:TextBox>
+					        <asp:Label ID="lblPostcode" runat="server" Text=""></asp:Label>
 				        </td>
 			        </tr>
 			        <tr>
 				        <td>Country</td>
 				        <td>
 					        <asp:DropDownList ID="ddlCountryID" runat="server"></asp:DropDownList>
+					        <asp:Label ID="lblCountryID" runat="server" Text=""></asp:Label>
 				        </td>
 			        </tr>				
 			        <tr>
 				        <td>Marital Status<span class="requiredMark">*</span></td>
 				        <td>
+				            <asp:Label ID="lblMaritalStatusID" runat="server" Text=""></asp:Label>
 					        <asp:DropDownList ID="ddlMaritalStatusID" runat="server"></asp:DropDownList>
 					        <asp:RequiredFieldValidator ID="rfvMaritalStatusID" runat="server"
 						        ControlToValidate="ddlMaritalStatusID" SetFocusOnError="true"
@@ -529,18 +580,21 @@
 				        <td>Place Of Birth</td>
 				        <td>
 					        <asp:TextBox ID="txtPlaceOfBirth" MaxLength="100" runat="server"></asp:TextBox>
+					        <asp:Label ID="lblPlaceOfBirth" runat="server" Text=""></asp:Label>
 				        </td>
 			        </tr>
 			        <tr>
 				        <td>Country Of Birth</td>
 				        <td>
 					        <asp:DropDownList ID="ddlCountryOfBirthID" runat="server"></asp:DropDownList>
+					        <asp:Label ID="lblCountryOfBirthID" runat="server" Text=""></asp:Label>
 				        </td>
 			        </tr>
 			        <tr>
 				        <td>Date Of Birth</td>
 				        <td>
 					        <asp:TextBox ID="txtDateOfBirth" MaxLength="50" CssClass="CalendarTextBox" runat="server"></asp:TextBox>
+					        <asp:Label ID="lblDateOfBirth" runat="server" Text=""></asp:Label>
 					        <asp:CustomValidator ID="cvDateOfBirth" runat="server"
 						        ControlToValidate="txtDateOfBirth" SetFocusOnError="true"
 						        ClientValidationFunction="ValidateDate"
@@ -623,191 +677,225 @@
             
         <div class="RightColumn">
             <div class="WinGroupBox">
-                <div class="WinGroupBoxHeader">Other Details</div>
-                <table cellpadding="3" cellspacing="0" style="width:100%;">
+                <div class="WinGroupBoxHeader">
+                    Other Details</div>
+                <table cellpadding="3" cellspacing="0" style="width: 100%;">
                     <colgroup>
-                        <col style="width:30%;" />
-                        <col />                                        
+                        <col style="width: 30%;" />
+                        <col />
                     </colgroup>
                     <tr>
-			            <td>Date Of Last Meeting</td>
-			            <td>
-				            <asp:TextBox ID="txtDateOfLastMeeting" MaxLength="50" CssClass="CalendarTextBox" runat="server"></asp:TextBox>
-				            <asp:CustomValidator ID="cvDateOfLastMeeting" runat="server"
-					            ControlToValidate="txtDateOfLastMeeting" SetFocusOnError="true"
-					            ClientValidationFunction="ValidateDate"
-					            ErrorMessage="Please Select a Valid Date." Display="Dynamic"
-					            ValidationGroup="SaveInfo">
-				            </asp:CustomValidator>
-			            </td>
-		            </tr>
-		            <tr>
-				        <td>Preferred Day Rate</td>
-				        <td>
-				            <table cellpadding="0" cellspacing="0" style="width:100%;">
-				                <tr>
-				                    <td>
-				                        <asp:TextBox ID="txtPreferredDayRate" MaxLength="4" runat="server"></asp:TextBox>
-					                    <asp:CompareValidator ID="cpvPreferredDayRate" runat="server"
-						                    ControlToValidate="txtPreferredDayRate" SetFocusOnError="true"
-						                    Operator="DataTypeCheck" Type="Double"
-						                    ErrorMessage="Please Enter Digits Only." Display="Dynamic"
-						                    ValidationGroup="SaveInfo">
-					                    </asp:CompareValidator>
-				                    </td>
-				                    <td style="padding-left:10px; width:20%;">
-				                        <asp:DropDownList ID="ddlDayRateCurrencyID" runat="server"></asp:DropDownList>
-					                    <%--<asp:CompareValidator ID="cpvDayRateCurrencyID" runat="server"
+                        <td>
+                            Date Of Last Meeting
+                        </td>
+                        <td>
+                            <asp:Label ID="lblDateOfLastMeeting" runat="server" Text=""></asp:Label>
+                            <asp:TextBox ID="txtDateOfLastMeeting" MaxLength="50" CssClass="CalendarTextBox"
+                                runat="server"></asp:TextBox>
+                            <asp:CustomValidator ID="cvDateOfLastMeeting" runat="server" ControlToValidate="txtDateOfLastMeeting"
+                                SetFocusOnError="true" ClientValidationFunction="ValidateDate" ErrorMessage="Please Select a Valid Date."
+                                Display="Dynamic" ValidationGroup="SaveInfo">
+                            </asp:CustomValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Preferred Day Rate
+                        </td>
+                        <td>
+                            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                <tr>
+                                    <td>
+                                        <asp:TextBox ID="txtPreferredDayRate" MaxLength="4" runat="server"></asp:TextBox>
+                                        <asp:Label ID="lblPreferredDayRate" runat="server" Text=""></asp:Label>    
+                                        <asp:CompareValidator ID="cpvPreferredDayRate" runat="server" ControlToValidate="txtPreferredDayRate"
+                                            SetFocusOnError="true" Operator="DataTypeCheck" Type="Double" ErrorMessage="Please Enter Digits Only."
+                                            Display="Dynamic" ValidationGroup="SaveInfo">
+                                        </asp:CompareValidator>
+                                    </td>
+                                    <td style="padding-left: 10px; width: 20%;">
+                                        <asp:DropDownList ID="ddlDayRateCurrencyID" runat="server">
+                                        </asp:DropDownList>
+                                        <asp:Label ID="lblDayRateCurrencyID" runat="server" Text=""></asp:Label>
+                                        <%--<asp:CompareValidator ID="cpvDayRateCurrencyID" runat="server"
 						                    ControlToValidate="txtDayRateCurrencyID" SetFocusOnError="true"
 						                    Operator="DataTypeCheck" Type="Integer"
 						                    ErrorMessage="Please Enter Digits Only." Display="Dynamic"
 						                    ValidationGroup="SaveInfo">
 					                    </asp:CompareValidator>--%>
-				                    </td>
-				                </tr>
-				            </table>						    
-				        </td>
-			        </tr>	
-				    
-			        <tr>
-				        <td>PPE Sizes</td>
-				        <td>
-				            <asp:DropDownList ID="ddlPPE_Size" runat="server">
-                          
-                                  <asp:ListItem>XM</asp:ListItem>
-         <asp:ListItem>M</asp:ListItem>
-         <asp:ListItem>L</asp:ListItem>
-         <asp:ListItem>XL</asp:ListItem>
-     <asp:ListItem>XXL</asp:ListItem>
-         <asp:ListItem>XXXL</asp:ListItem>
-                            </asp:DropDownList>
-				        </td>
-			        </tr>	        
-			        <tr>
-                        <td>
-                            Coverall</td>
-                        <td>
-                            <asp:TextBox ID="txtcoverall" runat="server" MaxLength="20" Width="107px"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
-			        <tr>
+                    <tr>
                         <td>
-                            Boot Size</td>
+                            PPE Sizes
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlPPE_Size" runat="server">
+                                <asp:ListItem>XM</asp:ListItem>
+                                <asp:ListItem>M</asp:ListItem>
+                                <asp:ListItem>L</asp:ListItem>
+                                <asp:ListItem>XL</asp:ListItem>
+                                <asp:ListItem>XXL</asp:ListItem>
+                                <asp:ListItem>XXXL</asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:Label ID="lblPPE_Size" runat="server" Text=""></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Coverall
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtcoverall" runat="server" MaxLength="20" Width="107px"></asp:TextBox>
+                            <asp:Label ID="lblCoverall" runat="server" Text=""></asp:Label>    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Boot Size
+                        </td>
                         <td>
                             <asp:DropDownList ID="ddlbootsize" runat="server">
                                 <asp:ListItem>4</asp:ListItem>
                                 <asp:ListItem>5</asp:ListItem>
                                 <asp:ListItem>6</asp:ListItem>
-                                  <asp:ListItem>7</asp:ListItem>
+                                <asp:ListItem>7</asp:ListItem>
                                 <asp:ListItem>8</asp:ListItem>
                                 <asp:ListItem>9</asp:ListItem>
-                                  <asp:ListItem>10</asp:ListItem>
+                                <asp:ListItem>10</asp:ListItem>
                                 <asp:ListItem>11</asp:ListItem>
                                 <asp:ListItem>12</asp:ListItem>
-                                  <asp:ListItem>13</asp:ListItem>
+                                <asp:ListItem>13</asp:ListItem>
                                 <asp:ListItem>14</asp:ListItem>
                                 <asp:ListItem>15</asp:ListItem>
                             </asp:DropDownList>
+                            <asp:Label ID="lblBootsize" runat="server" Text=""></asp:Label>
                         </td>
                     </tr>
-			        <tr>
+                    <tr>
                         <td>
-                            No SMS or Email</td>
+                            No SMS or Email
+                        </td>
                         <td>
                             <asp:CheckBox ID="chkNoSMSorEmail" runat="server" />
                         </td>
                     </tr>
-			        <tr>
-				        <td>Inactive</td>
-				        <td>
-					        <asp:CheckBox ID="chkInactive" runat="server"/>
-				        </td>
-			        </tr>
-		        </table>
+                    <tr>
+                        <td>
+                            Inactive
+                        </td>
+                        <td>
+                            <asp:CheckBox ID="chkInactive" runat="server" />
+                        </td>
+                    </tr>
+                </table>
             </div>
-            
-               <div class="WinGroupBox">
-                <div class="WinGroupBoxHeader">Employment Details</div>
-                <table cellpadding="3" cellspacing="0" style="width:100%;">
+            <div class="WinGroupBox">
+                <div class="WinGroupBoxHeader">
+                    Employment Details</div>
+                <table cellpadding="3" cellspacing="0" style="width: 100%;">
                     <colgroup>
-                        <col style="width:30%;" />
-                        <col />                                        
+                        <col style="width: 30%;" />
+                        <col />
                     </colgroup>
                     <tr>
-			            <td>Company</td>
-			            <td>
-				            <asp:TextBox ID="txtcompanyname" runat="server" MaxLength="20" Width="248px"></asp:TextBox>
-                        </td>
-		            </tr>
-		            <tr>
-				        <td>Reg</td>
-				        <td>
-				            <asp:TextBox ID="txtcompanyreg" runat="server" MaxLength="20" Width="248px"></asp:TextBox>
-                        </td>
-			        </tr>	
-				    
-			        <tr>
-				        <td>Vat</td>
-				        <td>
-					        <asp:TextBox ID="txtcompanyvat" runat="server" MaxLength="20" Width="248px"></asp:TextBox>
-                        </td>
-			        </tr>	        
-			        <tr>
-				        <td>Address</td>
-				        <td>
-					        <asp:TextBox ID="txtcompanyadr" runat="server" MaxLength="200" 
-                                TextMode="MultiLine"></asp:TextBox>
-                        </td>
-			        </tr>
-		            <tr>
                         <td>
-                            Employment Status</td>
+                            Company
+                        </td>
                         <td>
-                            <asp:DropDownList ID="ddlemploymentstatus" runat="server" >
-                                <asp:ListItem>Self Employed</asp:ListItem>
-                                <asp:ListItem>LTD</asp:ListItem>
-                                <asp:ListItem>Sole Trader</asp:ListItem>
-                            </asp:DropDownList>
+                            <asp:TextBox ID="txtcompanyname" runat="server" MaxLength="20" Width="248px"></asp:TextBox>
+                            <asp:Label ID="lblCompanyname" runat="server" Text=""></asp:Label>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Insurance</td>
+                            Reg
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtcompanyreg" runat="server" MaxLength="20" Width="248px"></asp:TextBox>
+                            <asp:Label ID="lblCompanyreg" runat="server" Text=""></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Vat
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtcompanyvat" runat="server" MaxLength="20" Width="248px"></asp:TextBox>
+                            <asp:Label ID="lblCompanyvat" runat="server" Text=""></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Address
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtcompanyadr" runat="server" MaxLength="200" TextMode="MultiLine"></asp:TextBox>
+                            <asp:Label ID="lblCompanyadr" runat="server" Text=""></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Employment Status
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlemploymentstatus" runat="server">
+                                <asp:ListItem>Self Employed</asp:ListItem>
+                                <asp:ListItem>LTD</asp:ListItem>
+                                <asp:ListItem>Sole Trader</asp:ListItem>
+                            </asp:DropDownList>
+                            <asp:Label ID="lblEmploymentstatus" runat="server" Text=""></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Insurance
+                        </td>
                         <td>
                             <asp:DropDownList ID="ddlinsurance" runat="server">
                                 <asp:ListItem>OWN</asp:ListItem>
                                 <asp:ListItem>OMM</asp:ListItem>
                             </asp:DropDownList>
+                            <asp:Label ID="lblInsurance" runat="server" Text=""></asp:Label>
                         </td>
                     </tr>
-		        </table>
+                </table>
             </div>
-            
             <div class="WinGroupBox">
-                <div class="WinGroupBoxHeader">Roles</div>
+                <div class="WinGroupBoxHeader">
+                    Roles</div>
                 <div id="div1">
                     <div class="AddNewLink">
                         <a href="javascript:void(0);" onclick="AddNewRoleRow();">Add New Role</a>
                     </div>
                     <table id="tblRolesList" class="GridView" cellpadding="3" cellspacing="0">
                         <colgroup>
-                            <col style="width:35%;" />
-                            <col style="width:35%;" />                  
+                            <col style="width: 35%;" />
+                            <col style="width: 35%;" />
                             <col />
                         </colgroup>
                         <tr>
-                            <th>Order</th>
-                            <th>Role</th>                                
-                            <th>Actions</th>
+                            <th>
+                                Order
+                            </th>
+                            <th>
+                                Role
+                            </th>
+                            <th>
+                                Actions
+                            </th>
                         </tr>
                     </table>
                 </div>
             </div>
-            
-          
         </div>
         <div class="clearboth"></div>
-        
+        <div class="TenPixelTopMargin" id="Div2">
+            &nbsp;
+        </div>
         <div class="WinGroupBox">
                 <div class="WinGroupBoxHeader">Notes</div>
                 <div id="divNotesList">
@@ -839,10 +927,10 @@
                 </div>
             </div>
         
-        <div class="TenPixelTopMargin">
+        <div class="TenPixelTopMargin" id="dvSaveBtn">
             <input type="button" class="ButtonCommon" value="Save" onclick="SavePersonnel();" />
         </div>        
     </asp:Panel>   
-</div> 
+        
 </asp:Content>
 
