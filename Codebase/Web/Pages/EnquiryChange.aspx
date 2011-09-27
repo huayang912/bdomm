@@ -195,7 +195,7 @@
                 </div>
             </div>
 			
-			<!--
+					<!-- Attache -->
             <div class="floatleft" style="margin-left:20px;">
                 <div style="margin:10px 0px 5px 0px;"><b>Attach File(s)</b></div>
                 <div>
@@ -211,7 +211,7 @@
                 </div>
 				
             </div>
-			-->
+		<!--	Attach end -->
             <div class="clearboth"></div>
             <div style="margin-top:30px;">
                 <input type="button" value="< Back" onclick="MoveNext(1);" />&nbsp;

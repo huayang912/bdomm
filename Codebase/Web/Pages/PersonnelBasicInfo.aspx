@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPagePopup.master" AutoEventWireup="true" CodeFile="PersonnelBasicInfo.aspx.cs" Inherits="Pages_PersonnelBasicInfo" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPagePopup.master" AutoEventWireup="true" CodeFile="PersonnelBasicInfo.aspx.cs" Inherits="Pages_PersonnelBasicInfo" %>
 <%@ Register Src="~/Controls/jQueryCalendar.ascx" TagName="jQueryCalendar" TagPrefix="UC" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">   
