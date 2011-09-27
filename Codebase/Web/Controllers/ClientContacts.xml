@@ -207,37 +207,55 @@ from "dbo"."ClientContacts" "ClientContacts"
         <category headerText="New Client Contacts" newColumn="true">
           <description>$DefaultNewDescription</description>
           <dataFields>
-            <dataField fieldName="Name" columns="30"  />
+            <dataField fieldName="Name" columns="30"/>
             <dataField fieldName="JobTitle" columns="30" />
             <dataField fieldName="Address" columns="30" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
-            <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30" />
-            <dataField fieldName="Telephone" columns="30" />
-            <dataField fieldName="Fax" columns="30"   hyperlinkFormatString="_blank:mailto:{Email}" />
-            <dataField fieldName="Email" columns="30" />
-            <dataField fieldName="CompanyID" aliasFieldName="CompanyName" columns="30" />
-            <dataField fieldName="DateOfBirth" columns="10"  hidden="true" />
-            <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
-            <dataField fieldName="ChangedOn"  hidden="true" columns="10" />
-            <dataField fieldName="Mobile" columns="30" />
-            <dataField fieldName="Department" columns="30" />
+            <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30"/>
+            <dataField fieldName="CompanyID" aliasFieldName="CompanyName" columns="30" hyperlinkFormatString="_Blank:~/pages/ClientNew.aspx?id={CompanyID}"/>
+            <dataField fieldName="DateOfBirth" columns="10" hidden="true"/>
+            <dataField fieldName="ChangedOn" columns="10" hidden="true"/>
+            <dataField fieldName="Version" hidden="true" columns="15" />
+            <dataField fieldName="Department" columns="30"/>
+            <dataField fieldName="ChangedByUserID"  readOnly="true" aliasFieldName="ChangedByUserUserName" />
+          </dataFields>
+        </category>
+        <category headerText="Reference Information" newColumn="true">
+          <description>$DefaultReferenceDescription</description>
+          <dataFields>
+            <dataField fieldName="CompanyCountryName" columns="30"/>
+            <dataField fieldName="Telephone" columns="30"/>
+            <dataField fieldName="Mobile" columns="30"/>
+            <dataField fieldName="Fax" columns="30"/>
+            <dataField fieldName="Email"   hyperlinkFormatString="mailto:{Email}" columns="30"/>
+
+
           </dataFields>
         </category>
 
         <category headerText="CRM Information" newColumn="true">
+          <description>$DefaultReferenceDescription</description>
           <dataFields>
-           
-   
-				        <dataField fieldName="NL_All"/>	  
- <dataField fieldName="NL_HSE" />			
- <dataField fieldName="NL_Project" />
-    <dataField fieldName="NL_O_M" />
-	 <dataField fieldName="NL_Survey"/>
 
-	     <dataField fieldName="NL_Personnel" /> 
-	    <dataField fieldName="NL_Software"  />	 
-   <dataField fieldName="NL_Vessels" />
-           <dataField fieldName="NL_Procurement"  />
+
+            <dataField fieldName="NL_All"/>
+            <dataField fieldName="NL_HSE" />
+            <dataField fieldName="NL_Project" />
+            <dataField fieldName="NL_O_M" />
+            <dataField fieldName="NL_Survey"/>
+            <dataField fieldName="NL_Personnel" />
+            <dataField fieldName="NL_Software"  />
+            <dataField fieldName="NL_Vessels" />
+            <dataField fieldName="NL_Procurement"  />
+
+
+
+
+
+            <dataField fieldName="NL_Supply" />
+
+
+
 
 
           </dataFields>
@@ -279,7 +297,9 @@ from "dbo"."ClientContacts" "ClientContacts"
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <!--<action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />-->
+      <action id="a100" commandName="Navigate" commandArgument="_blank:~/pages/ClientContacts.aspx?CompanyID={CompanyID}&amp;_commandName=New&amp;_commandArgument=createForm1" causesValidation="true" headerText="Add New Contacts" whenHRef="ClientNew.aspx"/>
+
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
