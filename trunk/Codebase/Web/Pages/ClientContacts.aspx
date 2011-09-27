@@ -1,10 +1,11 @@
 <%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="ClientContacts.aspx.cs" Inherits="Pages_ClientContacts"  Title="Client Contacts"%>
+<%@ MasterType VirtualPath="~/Main.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="PageHeaderContentPlaceHolder" runat="Server">Client Contacts</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
   <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory">
     <div factory:activator="Tab|Client Contacts">
       <div id="view1" runat="server"></div>
-      <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="ClientContacts" view="grid1" ShowInSummary="True" />
+      <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="ClientContacts" view="grid1" ShowInSummary="True"  ShowViewSelector="false"/>
     </div>
     <div factory:activator="Tab|Client Contacts Notes">
       <div id="view4" runat="server"></div>
