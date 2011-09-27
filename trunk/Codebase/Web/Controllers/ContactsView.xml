@@ -361,9 +361,11 @@ from "dbo"."Contacts" "Contacts"
       <action id="a10" whenLastCommandName="Select" commandName="Cancel" />
       <action id="a100" commandName="Update" commandArgument="~/pages/Contacts_bak.aspx?ID={ID}" headerText="Update" causesValidation="true" whenLastCommandName="Edit" whenHRef="Contacts_bak" />
     </actionGroup>
+    <!--
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
       <action id="a1" commandName="Navigate" commandArgument="~/pages/Personnelchange.aspx" cssClass="NewIcon" headerText="Add New Personnel"/>
     </actionGroup>
+    -->
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
