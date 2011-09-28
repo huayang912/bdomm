@@ -141,8 +141,8 @@ from "dbo"."Clients" "Clients"
       <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
      -->
      <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
-      <!--<action id="a7" whenLastCommandName="New" commandName="Insert" />
-      <action id="a8" whenLastCommandName="New" commandName="Cancel" />-->
+    <action id="a7" whenLastCommandName="New" commandName="Insert" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
     </actionGroup>
