@@ -11,20 +11,20 @@ Partial Public Class Controls_ClientContactSrch
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
-        If Not IsPostBack Then
-            ' EnquiryStatusText.Text = Session("EnquiryStatusText")
-            'SupplierCompanyNameText.Text = Session("SupplierCompanyName")
-            'CategoryCategoryNameText.Text = Session("CategoryCategoryName")
+        'If Not IsPostBack Then
+        ' EnquiryStatusText.Text = Session("EnquiryStatusText")
+        'SupplierCompanyNameText.Text = Session("SupplierCompanyName")
+        'CategoryCategoryNameText.Text = Session("CategoryCategoryName")
 
 
 
-            Dim chars As New List(Of App.CustomModels.StartsWith)
-            chars = App.CustomModels.StartsWith.GetStartsWith()
-            rptStartsWith.DataSource = chars
-            rptStartsWith.DataBind()
+        Dim chars As New List(Of App.CustomModels.StartsWith)
+        chars = App.CustomModels.StartsWith.GetStartsWith()
+        rptStartsWith.DataSource = chars
+        rptStartsWith.DataBind()
 
-            
-        End If
+
+        'End If
     End Sub
 
     Protected Sub ShowAllButton_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles ShowAllButton.Click

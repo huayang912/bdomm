@@ -18,8 +18,6 @@ public partial class Pages_PersonnelBasicInfo : BasePage
         {
             BindDropdownLists();
             BindPersonnelInfo();
-
-            enableDisable(1);
         }
     }
     protected void BindPageInfo()
@@ -84,12 +82,12 @@ public partial class Pages_PersonnelBasicInfo : BasePage
 
                 txtPlaceOfBirth.Text = contact.PlaceOfBirth;
                 lblPlaceOfBirth.Text = contact.PlaceOfBirth;
-                
-                txtDateOfBirth.Text = contact.DateOfBirth.HasValue ? 
+
+                txtDateOfBirth.Text = contact.DateOfBirth.HasValue ?
                     contact.DateOfBirth.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
-                lblDateOfBirth.Text = contact.DateOfBirth.HasValue ? 
+                lblDateOfBirth.Text = contact.DateOfBirth.HasValue ?
                     contact.DateOfBirth.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
-                
+
                 ddlCountryOfBirthID.SetSelectedItem(contact.CountryOfBirthID.ToString());
                 lblCountryOfBirthID.Text = ddlCountryOfBirthID.SelectedItem.Text.ToString();
                 //End Personal Details
@@ -100,22 +98,22 @@ public partial class Pages_PersonnelBasicInfo : BasePage
                 //---------------------
                 txtDateOfLastMeeting.Text = contact.DateOfLastMeeting.HasValue ? contact.DateOfLastMeeting.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
                 lblDateOfLastMeeting.Text = contact.DateOfLastMeeting.HasValue ? contact.DateOfLastMeeting.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
-                
+
                 txtPreferredDayRate.Text = contact.PreferredDayRate.HasValue ? contact.PreferredDayRate.GetValueOrDefault().ToString() : String.Empty;
                 lblPreferredDayRate.Text = contact.PreferredDayRate.HasValue ? contact.PreferredDayRate.GetValueOrDefault().ToString() : String.Empty;
-                
+
                 ddlDayRateCurrencyID.SetSelectedItem(contact.DayRateCurrencyID.GetValueOrDefault().ToString());
                 lblDayRateCurrencyID.Text = ddlDayRateCurrencyID.SelectedItem.Text.ToString();
-                
+
                 chkNoSMSorEmail.Checked = contact.NoSMSorEmail;
                 chkInactive.Checked = contact.Inactive;
                 // txtPPESizes.Text = contact.PPE_Sizes;
                 ddlPPE_Size.SetSelectedItem(contact.PPE_Sizes);
                 lblPPE_Size.Text = ddlPPE_Size.SelectedItem.Text.ToString();
-                
+
                 txtcoverall.Text = contact.Coverall;
                 lblCoverall.Text = contact.Coverall;
-                
+
                 // txtbootsize.Text = contact.Boots.HasValue ? contact.Boots.GetValueOrDefault().ToString() : string.Empty;
                 ddlbootsize.SetSelectedItem(contact.Boots.ToString());
                 lblBootsize.Text = ddlbootsize.SelectedItem.Text.ToString();
@@ -127,31 +125,31 @@ public partial class Pages_PersonnelBasicInfo : BasePage
                 //---------------------
                 txtcompanyname.Text = contact.CopmpanyName;
                 lblCompanyname.Text = contact.CopmpanyName;
-                
+
                 txtcompanyreg.Text = contact.CompanyVat;
                 lblCompanyreg.Text = contact.CompanyVat;
-                
+
                 txtcompanyvat.Text = contact.CompanyVat;
                 lblCompanyvat.Text = contact.CompanyVat;
-                
+
                 txtcompanyadr.Text = contact.CompanyAddress;
-                lblCompanyadr.Text = contact.CompanyAddress;                
-                
+                lblCompanyadr.Text = contact.CompanyAddress;
+
                 //   ddlemploymentstatus.SetSelectedItem(contact.employment_status.ToString());
                 //  ddlinsurance.SetSelectedItem(contact.Insurance.ToString());
                 ddlemploymentstatus.SetSelectedItem(contact.employment_status);
                 lblEmploymentstatus.Text = ddlemploymentstatus.SelectedItem.Text.ToString();
-                
+
                 ddlinsurance.SetSelectedItem(contact.Insurance);
                 lblInsurance.Text = ddlinsurance.SelectedItem.Text.ToString();
                 //End Employment Details
-              
+
 
                 var telephoneNumbers = from P in context.TelephoneNumbers where P.ContactID == _ID select new App.CustomModels.PersonnelTelephone { ID = P.ID, Number = P.Number, TypeID = P.TypeID };
-                if(telephoneNumbers != null && telephoneNumbers.Count() > 0)
+                if (telephoneNumbers != null && telephoneNumbers.Count() > 0)
                     hdnTelephoneNumbers.Value = telephoneNumbers.ToList().ToJSON();
-                
-                var emailAddress = from P in context.EmailAddresses where P.ContactID == _ID select new App.CustomModels.PersonnelEmail { ID = P.ID, Email= P.Address};
+
+                var emailAddress = from P in context.EmailAddresses where P.ContactID == _ID select new App.CustomModels.PersonnelEmail { ID = P.ID, Email = P.Address };
                 if (emailAddress != null && emailAddress.Count() > 0)
                     hdnEmailAddresses.Value = emailAddress.ToList().ToJSON();
 
@@ -175,12 +173,17 @@ public partial class Pages_PersonnelBasicInfo : BasePage
                         ChangedOn = p.ChangedOn.ToString()
 
                     };
-                    //from P in context.ContactsNotes where P.ContactID == _ID select new App.CustomModels.ConNote { ID = P.ID, Notes = P.Notes, CommsTypeID = (P.ContactCommsTypeID == null) ? "" : P.ContactCommsTypeID.ToString() };
+                //from P in context.ContactsNotes where P.ContactID == _ID select new App.CustomModels.ConNote { ID = P.ID, Notes = P.Notes, CommsTypeID = (P.ContactCommsTypeID == null) ? "" : P.ContactCommsTypeID.ToString() };
                 if (Notes != null && Notes.Count() > 0)
                     hdnNotes.Value = Notes.ToList().ToJSON();
 
- 
+
             }
+            enableDisable(1);
+        }
+        else
+        {
+            enableDisable(0);
         }
     }
     protected void ShowNotFoundMessage()
