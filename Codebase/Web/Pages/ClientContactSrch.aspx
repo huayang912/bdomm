@@ -4,5 +4,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PageHeaderContentPlaceHolder" runat="Server">Client Contact</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
-  <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory"><uc:QuoteSrchControl ID="c100" runat="server"></uc:QuoteSrchControl></div>
+    <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory">
+        <uc:QuoteSrchControl ID="c100" runat="server"></uc:QuoteSrchControl>
+    </div>
 </asp:Content>
