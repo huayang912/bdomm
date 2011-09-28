@@ -266,19 +266,20 @@ from "dbo"."Enquiries" "Enquiries"
       <action id="a8" whenLastCommandName="New" commandName="Cancel" />
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
     </actionGroup>
+    <!-- 
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
   <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon"  whenHRef="Enquiries.aspx"/>
-      <!--<action id="a103" commandName="Navigate" commandArgument="~/pages/QuotationSubmit.aspx?ID={ID}" headerText="Submit This Quotation" causesValidation="true" />-->
+     <action id="a103" commandName="Navigate" commandArgument="~/pages/QuotationSubmit.aspx?ID={ID}" headerText="Submit This Quotation" causesValidation="true" />
       <action id="a1" commandName="Navigate" commandArgument="~/Pages/EnquiryChange.aspx" headerText="New Enquiry" cssClass="NewIcon"/>   
 	  
 	   
-    </actionGroup>
+    </actionGroup>-->
   
-    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+    <!--<actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
       <action id="a3" commandName="ExportRowset" />
-    </actionGroup>
+    </actionGroup>-->
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
