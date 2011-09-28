@@ -14,7 +14,8 @@ public partial class Controls_PersonnelViewControl : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
-            BindStartsWith();
+            // temporarily disabled Alpha search as its not workin
+         //   BindStartsWith();
         }
     }
 

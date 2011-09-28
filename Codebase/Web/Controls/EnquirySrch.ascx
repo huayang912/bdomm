@@ -25,6 +25,9 @@
                             onclick="SearchButton_Click" />                  </td>
                 </tr>
             </table></td><td><a href="EnquirySch_archive.aspx">Archive</a></td>
+             <td>
+                            <asp:Button ID="Button1" runat="server" Text="Search" OnClick="SearchButton_Click" />
+                        </td>
     <td align="right"><table>
                 <tr>
                 

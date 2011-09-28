@@ -39,7 +39,7 @@ public partial class Controls_send_mail_control : System.Web.UI.UserControl
                 , SessionCache.CurrentUser.UserName
                 , txtMessage.Text.HtmlEncode());
 
-            WebUtil.SendEmailThroughGmail(txtEmail.Text, "BUDI - Feedback", messageBody);
+            WebUtil.SendEmailThroughGmail("budi_support@offshoremm.com", "BUDI - Feedback", messageBody);
 
             #region Old Code
             // System.Web.Mail.SmtpMail.SmtpServer is obsolete in 2.0
