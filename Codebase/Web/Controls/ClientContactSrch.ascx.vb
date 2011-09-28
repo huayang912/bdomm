@@ -18,10 +18,10 @@ Partial Public Class Controls_ClientContactSrch
 
 
 
-            'Dim chars As New List(Of App.CustomModels.StartsWith)
-            'chars = App.CustomModels.StartsWith.GetStartsWith()
-            'rptStartsWith.DataSource = chars
-            'rptStartsWith.DataBind()
+            Dim chars As New List(Of App.CustomModels.StartsWith)
+            chars = App.CustomModels.StartsWith.GetStartsWith()
+            rptStartsWith.DataSource = chars
+            rptStartsWith.DataBind()
 
             
         End If
