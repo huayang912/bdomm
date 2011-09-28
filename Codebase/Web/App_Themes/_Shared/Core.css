@@ -394,7 +394,7 @@ table.DataView tr.NoRecords td.Cell
 table.DataView tr.ActionRow td.ActionBar
 {
     border: solid 1px #6f9dd9;
-    background-image: url(ActionBarBg.gif);
+    background-image: url(ActionBarBg.gif);   
     background-repeat: repeat-x;
     padding: 1px 3px 1px 2px;
     background-color: #D6E8FF;
@@ -782,6 +782,7 @@ table.DataView tr.FooterRow td.Footer td.Pager a:hover
     text-decoration: underline;
 }
 
+/*sorrounding area of view box*/
 table.DataView tr.Categories td.Categories table.Categories
 {
     width: 100%;
@@ -799,10 +800,11 @@ table.DataView tr.CategoryRow td.Category
     padding-left: 4px;
 }
 
+/* horizontal bar*/
 table.DataView tr.CategoryRow
 {
     border-collapse: collapse;
-    border-spacing: 0px;
+    border-spacing: 0px;   
 }
 
 table.DataView tr.CategoryRow td.CategoryColumn
@@ -815,13 +817,14 @@ table.DataView tr.CategoryRow td.CategorySeparator
     padding: 0px 4px;
     font-size: 1pt;
 }
-
+/* horizontal bar above client detail view left box*/
 table.DataView tr.CategoryRow .Category table.Category tr td.HeaderText
 {
-    color: #696969;
-    font-weight: bold;
-    width: 475px;
-    padding: 4px 2px 4px 2px;
+	color: #696969;
+	font-weight: bold;
+	width: 475px;
+	padding: 4px 2px 4px 2px;
+	
 }
 
 table.DataView tr.CategoryRow .Category table.Category tr td.Description
@@ -851,9 +854,11 @@ table.DataView tr.CategoryRow td.Fields
 	padding: 8px;
 }
 
+/*inner box section*/
 table.DataView table.Categories tr.CategoryRow td.Fields
 {
     width: 100%;
+     background-color:#FFFFFF;
 }
 
 table.DataView tr.CategoryRow td.Fields div.Item
