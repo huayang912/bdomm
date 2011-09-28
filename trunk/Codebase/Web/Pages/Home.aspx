@@ -5,42 +5,29 @@
   
     <table width="100%" border="0" background="">
         <tr >
-            <td style="width:20%">
+            <td style="width:33%">
                 <div class="WinGroupBox">
                     <div class="WinGroupBoxHeader">
-                        Total Enquiry Posted</div>
+                        Pie Chart</div>
                      <div id="divGraph1" runat="server" visible="True"></div>   
                     
                 </div>
             </td>
-            <td style="width:20%">
+            <td style="width:33%">
                 <div class="WinGroupBox">
                     <div class="WinGroupBoxHeader">
-                        Total Quotation Posted</div>
+                        Bar Chart</div>
                     <div id="divGraph2" runat="server" visible="True"></div>
                 </div>
             </td>
-            <td style="width:20%">
+            <td style="width:33%">
                 <div class="WinGroupBox">
                     <div class="WinGroupBoxHeader">
-                        Total Quotation Successful</div>
+                        Line Chart</div>
                     <div id="divGraph3" runat="server" visible="True"></div>
                 </div>
             </td>
-            <td style="width:20%">
-                <div class="WinGroupBox">
-                    <div class="WinGroupBoxHeader">
-                        Dummy</div>
-                    <div id="divGraph4" runat="server" visible="True"></div>
-                </div>
-            </td>
-            <td style="width:20%">
-                <div class="WinGroupBox">
-                    <div class="WinGroupBoxHeader">
-                        Dummy</div>
-                    <div id="divGraph5" runat="server" visible="True"></div>
-                </div>
-            </td>
+            
         </tr>
         <%--<tr>
             <td style="width:25%">
