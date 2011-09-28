@@ -115,6 +115,16 @@ div.GroupHeader
 	border-radius: 6px;	
 }
 
+.COTFixBox
+{
+	border:#B9B9B9 1px solid;
+	padding:10px;    
+	margin-bottom:15px;    
+	width:410px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;	
+}
+
 .WinGroupBoxHeader
 {
     width:150px;        	
