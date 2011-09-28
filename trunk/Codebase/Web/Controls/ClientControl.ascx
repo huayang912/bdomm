@@ -19,11 +19,11 @@
         
       <div factory:flow="NewRow" style="padding-top:8px;  xmlns:factory="urn:codeontime:app-factory" >
       
-      <div class="GroupBox">                
+      <div class="COTFixBox">                
                 <div class="WinGroupBoxHeader">Details</div>  
            
                 <div id="view1" runat="server"></div>    
-                     <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Clients"  view="grid1"  ShowViewSelector="false"  PageSize="25"/>
+                     <aquarium:DataViewExtender id="view1Extender" runat="server" TargetControlID="view1" Controller="Clients"  view="grid1"  ShowViewSelector="false"  PageSize="25" />
          </div>
          
          
@@ -32,7 +32,7 @@
         <td> 
         
         <div factory:flow="NewRow" style="padding-top:8px" xmlns:factory="urn:codeontime:app-factory">
-          <div class="GroupBox">                
+          <div class="COTFixBox">                
                 <div class="WinGroupBoxHeader">Contacts</div> 
         
               <div id="view2" runat="server"></div>
@@ -42,7 +42,7 @@
         
        
     
-    <div class="GroupBox">                
+    <div class="COTFixBox">                
                 <div class="WinGroupBoxHeader">Contact Notes</div> 
     
 	 <div id="view21" runat="server"></div>

@@ -15,14 +15,14 @@
 					<td><asp:textbox style="display:none" id="txtName" Width="241" Runat="server"></asp:textbox></td>
 				</tr>
 				<tr>
-					<td><strong>Your Email Address</strong>:</td>
-					<td><asp:textbox  id="txtEmail" Width="241" Runat="server"></asp:textbox></td>
+					<td></td>
+					<td><asp:textbox style="display:none" id="txtEmail" Width="241" Runat="server"></asp:textbox></td>
 				</tr>
 				<tr>
 					<td colSpan="2" ><strong>Your Comments:</strong></td>
 				</tr>
 				<tr>
-					<td align="center" colSpan="2" width=100%><asp:textbox id="txtMessage" Width="100%" Runat="server" Height="99" TextMode="MultiLine" MaxLength="400"></asp:textbox></td>
+					<td align="center" colSpan="2" width=100%><asp:textbox id="txtMessage" Width="400px" Runat="server" Height="99" TextMode="MultiLine" MaxLength="400"></asp:textbox></td>
 				</tr>
 				<tr>
 					<td colSpan="2">&nbsp;</td>

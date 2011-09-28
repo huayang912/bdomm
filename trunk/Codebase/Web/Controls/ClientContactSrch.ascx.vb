@@ -15,10 +15,15 @@ Partial Public Class Controls_ClientContactSrch
             ' EnquiryStatusText.Text = Session("EnquiryStatusText")
             'SupplierCompanyNameText.Text = Session("SupplierCompanyName")
             'CategoryCategoryNameText.Text = Session("CategoryCategoryName")
-            Dim chars As New List(Of App.CustomModels.StartsWith)
-            chars = App.CustomModels.StartsWith.GetStartsWith()
-            rptStartsWith.DataSource = chars
-            rptStartsWith.DataBind()
+
+
+
+            'Dim chars As New List(Of App.CustomModels.StartsWith)
+            'chars = App.CustomModels.StartsWith.GetStartsWith()
+            'rptStartsWith.DataSource = chars
+            'rptStartsWith.DataBind()
+
+            
         End If
     End Sub
 
