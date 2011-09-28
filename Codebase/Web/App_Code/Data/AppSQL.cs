@@ -125,6 +125,99 @@ public class AppSQL
         WHERE  c.ID = @ContactID";
 
 
+    public const String GET_GRAPH_DATA = @"
+        IF NOT EXISTS(
+       SELECT T AS [T],
+              COUNT(T) AS [Total]
+       FROM   (
+                  SELECT 'Quot. Suc' AS T
+                  FROM   Quotations e
+                  WHERE  MONTH(e.CreatedOn) = MONTH(GETDATE())
+                         AND YEAR(e.CreatedOn) = YEAR(GETDATE())
+                         AND e.StatusID = 4
+              ) A
+       GROUP BY
+              A.T
+   )
+   
+   (
+       SELECT T AS [T],
+              COUNT(T) AS [Total]
+       FROM   (
+                  SELECT 'Enq. Post' AS T
+                  FROM   Enquiries e
+                  WHERE  MONTH(e.CreatedOn) = MONTH(GETDATE())
+                         AND YEAR(e.CreatedOn) = YEAR(GETDATE())
+              ) A
+       GROUP BY
+              A.T
+   )
+   UNION ALL
+   
+   
+   (
+       SELECT T AS [T],
+              COUNT(T) AS [Total]
+       FROM   (
+                  SELECT 'Quot. Post' AS T
+                  FROM   Quotations e
+                  WHERE  MONTH(e.CreatedOn) = MONTH(GETDATE())
+                         AND YEAR(e.CreatedOn) = YEAR(GETDATE())
+              ) A
+       GROUP BY
+              A.T
+   )
+   
+   UNION ALL
+    SELECT 'Quot. Suc' AS [T],
+           0 AS [Total]
+ELSE
+    (
+        (
+            SELECT T AS [T],
+                   COUNT(T) AS [Total]
+            FROM   (
+                       SELECT 'Enq. Post' AS T
+                       FROM   Enquiries e
+                       WHERE  MONTH(e.CreatedOn) = MONTH(GETDATE())
+                              AND YEAR(e.CreatedOn) = YEAR(GETDATE())
+                   ) A
+            GROUP BY
+                   A.T
+        )
+        UNION ALL
+        
+        
+        (
+            SELECT T AS [T],
+                   COUNT(T) AS [Total]
+            FROM   (
+                       SELECT 'Quot. Post' AS T
+                       FROM   Quotations e
+                       WHERE  MONTH(e.CreatedOn) = MONTH(GETDATE())
+                              AND YEAR(e.CreatedOn) = YEAR(GETDATE())
+                   ) A
+            GROUP BY
+                   A.T
+        )
+        
+        UNION ALL
+        
+        (
+            SELECT T AS [T],
+                   COUNT(T) AS [Total]
+            FROM   (
+                       SELECT 'Quot. Suc' AS T
+                       FROM   Quotations e
+                       WHERE  MONTH(e.CreatedOn) = MONTH(GETDATE())
+                              AND YEAR(e.CreatedOn) = YEAR(GETDATE())
+                              AND e.StatusID = 4
+                   ) A
+            GROUP BY
+                   A.T
+        )
+    )";
+
     public const String GET_GRAPH_1_DATA = @"
         SELECT CONVERT(DATETIME,CONVERT(VARCHAR,MONTH(c.CreatedOn))+'-01-'+CONVERT(VARCHAR,YEAR(c.CreatedOn))) AS [Date], 
         COUNT(c.ID) AS [Total]
@@ -138,7 +231,8 @@ public class AppSQL
         COUNT(c.ID) AS [Total]
         FROM Quotations c
         WHERE c.CreatedOn > DATEADD(M,-5,GETDATE())
-        GROUP BY CONVERT(DATETIME,CONVERT(VARCHAR,MONTH(c.CreatedOn))+'-01-'+CONVERT(VARCHAR,YEAR(c.CreatedOn)))";
+        GROUP BY CONVERT(DATETIME,CONVERT(VARCHAR,MONTH(c.CreatedOn))+'-01-'+
+        CONVERT(VARCHAR,YEAR(c.CreatedOn)))";
 
 
     public const String GET_GRAPH_3_DATA = @"
@@ -148,5 +242,6 @@ public class AppSQL
         INNER JOIN QuotationStatuses qs ON qs.ID = c.StatusID
         WHERE qs.ID = 4  AND 
         c.CreatedOn > DATEADD(M,-5,GETDATE())
-        GROUP BY CONVERT(DATETIME,CONVERT(VARCHAR,MONTH(c.CreatedOn))+'-01-'+CONVERT(VARCHAR,YEAR(c.CreatedOn)))";
+        GROUP BY CONVERT(DATETIME,CONVERT(VARCHAR,MONTH(c.CreatedOn))+'-01-'+
+        CONVERT(VARCHAR,YEAR(c.CreatedOn)))";
 }
