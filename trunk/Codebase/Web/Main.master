@@ -72,6 +72,13 @@
                                     <div class="clearboth"></div>
                                 </div>                        
                             </div>
+                             <div class="RibbonItem">
+                                <div class="RibbonInnerItem">
+                                    <div class="floatleft"><a href="/Pages/send_mail.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -1px -210px; width:30px;" /></a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/send_mail.aspx">Contact Support</a></div>
+                                    <div class="clearboth"></div>
+                                </div>                        
+                            </div>
                             <%--<div class="RibbonItem">Fun</div>--%>
                             <div class="clearboth"></div>
                         </div>
@@ -89,7 +96,7 @@
                             <div class="RibbonItem">
                                 <div class="RibbonInnerItem">
                                     <div class="floatleft"><a href="/Pages/Clients.aspx"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -46px -123px; width:37px;" /></a></div>
-                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/Clients.aspx?_controller=Clients&_commandName=New&_commandArgument=createForm1">Add Client</a></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment"><a href="/Pages/ClientsAdd.aspx">Add Client</a></div>
                                     <div class="clearboth"></div>
                                 </div>
                             </div>
