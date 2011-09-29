@@ -165,7 +165,7 @@ namespace App.CustomModels
         public String LastName { get; set; }
         public String Address { get; set; }
         public String PostCode { get; set; }
-        public int CountryID { get; set; }
+        public String CountryID { get; set; }
         public int MaritalStatus { get; set; }
         public String PlaceOfBirth { get; set; }
         public String CountryOfBirthID { get; set; }
