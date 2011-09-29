@@ -76,7 +76,7 @@ public partial class Pages_PersonnelBasicInfo : BasePage
 
                 ddlCountryID.SetSelectedItem(contact.CountryID.ToString());
                 lblCountryID.Text = ddlCountryID.SelectedItem.Text.ToString();
-
+                                
                 ddlMaritalStatusID.SetSelectedItem(contact.MaritalStatusID.ToString());
                 lblMaritalStatusID.Text = ddlMaritalStatusID.SelectedItem.Text.ToString();
 
@@ -302,7 +302,14 @@ public partial class Pages_PersonnelBasicInfo : BasePage
         contact.Address = personnel.Address;
         contact.MaritalStatusID = personnel.MaritalStatus;
         contact.Postcode = personnel.PostCode;
-        contact.CountryID = personnel.CountryID;
+      //  contact.CountryID = personnel.CountryID;
+
+        if (personnel.CountryID.ToInt() > 0)
+            contact.CountryID = personnel.CountryID.ToInt();
+        else
+            contact.CountryID = null;
+      
+        
         contact.PlaceOfBirth = personnel.PlaceOfBirth;
         contact.PPE_Sizes = personnel.PPE_Sizes;
         contact.Coverall = personnel.Coverall;
