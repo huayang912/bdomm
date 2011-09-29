@@ -35,6 +35,7 @@
                                 <asp:ListItem Value="1/1/2008" Text="2008">2008</asp:ListItem>
                                 <asp:ListItem Text="2009" Value="1/1/2009">2009</asp:ListItem>
                                 <asp:ListItem Text="2010" Value="1/1/2010">2010</asp:ListItem>
+                                 <asp:ListItem Text="2011" Value="1/1/2011">2011</asp:ListItem>
                             </asp:DropDownList>
                         </td>
                         <td>Month:</td>
