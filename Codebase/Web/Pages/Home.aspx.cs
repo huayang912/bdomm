@@ -120,7 +120,7 @@ public partial class Pages_Home : BasePage
         strXML += "</graph>";
 
         //Create the chart - Column 3D Chart with data contained in strXML
-        return FusionCharts.RenderChart("../FusionCharts/" + chartType + ".swf", "myChartId2", strXML, chID, "250", "300", false, false);
+        return FusionCharts.RenderChart("../FusionCharts/" + chartType + ".swf", "myChartId2", strXML, chID, "300", "300", false, false);
 
     }
 
