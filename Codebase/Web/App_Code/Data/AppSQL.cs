@@ -216,6 +216,20 @@ ELSE
             GROUP BY
                    A.T
         )
+
+        UNION ALL
+        
+        (
+            SELECT T AS [T],
+                   COUNT(T) AS [Total]
+            FROM   (
+                       SELECT 'Proj. Run' AS T
+                       FROM Projects  e
+                       WHERE e.StatusID = 1
+                   ) A
+            GROUP BY
+                   A.T
+        )
     )";
 
     public const String GET_GRAPH_1_DATA = @"
