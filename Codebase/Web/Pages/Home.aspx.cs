@@ -38,7 +38,7 @@ public partial class Pages_Home : BasePage
 
         createGraph1();
         createGraph2();
-        createGraph3();
+        //createGraph3();
         //createGraph4();
         //createGraph5();
         
@@ -49,7 +49,8 @@ public partial class Pages_Home : BasePage
         UtilityDAO dao = new UtilityDAO();
         DbParameter[] parameters = new[] { new DbParameter("@ContactID", 1) };
         DataSet ds1 = dao.GetDataSet(AppSQL.GET_GRAPH_DATA, parameters, false);
-        divGraph1.InnerHtml = CreateChart(ds1.Tables[0], "FCF_Pie3D", "CH1");
+        if (ds1.Tables[0].Rows.Count > 2)
+            divGraph1.InnerHtml = CreateChart(ds1.Tables[0], "FCF_Pie3D", "CH1");
     }
 
     public void createGraph2()
@@ -57,7 +58,8 @@ public partial class Pages_Home : BasePage
         UtilityDAO dao = new UtilityDAO();
         DbParameter[] parameters = new[] { new DbParameter("@ContactID", 1) };
         DataSet ds2 = dao.GetDataSet(AppSQL.GET_GRAPH_DATA, parameters, false);
-        divGraph2.InnerHtml = CreateChart(ds2.Tables[0], "FCF_Column3D", "CH2");
+        if (ds2.Tables[0].Rows.Count>2)
+            divGraph2.InnerHtml = CreateChart(ds2.Tables[0], "FCF_Column3D", "CH2");
     }
 
     public void createGraph3()
