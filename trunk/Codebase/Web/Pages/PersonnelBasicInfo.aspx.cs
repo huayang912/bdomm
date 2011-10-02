@@ -183,7 +183,7 @@ public partial class Pages_PersonnelBasicInfo : BasePage
         }
         else
         {
-            enableDisable(0);
+           enableDisable(0);
         }
     }
     protected void ShowNotFoundMessage()

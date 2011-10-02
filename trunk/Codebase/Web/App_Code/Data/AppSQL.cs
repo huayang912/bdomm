@@ -258,4 +258,32 @@ ELSE
         c.CreatedOn > DATEADD(M,-5,GETDATE())
         GROUP BY CONVERT(DATETIME,CONVERT(VARCHAR,MONTH(c.CreatedOn))+'-01-'+
         CONVERT(VARCHAR,YEAR(c.CreatedOn)))";
+
+    // SELECT * FROM ClientContacts cc";
+    public const String GET_CLIENT_CONTACT_DETAILS_ALL = @"
+           
+        WITH ClientCont AS
+            (
+                SELECT *,
+                ROW_NUMBER() OVER(ORDER BY CC.ChangedOn DESC) AS RowNumber 
+                FROM ClientContacts CC
+            )
+            SELECT *
+                , (SELECT COUNT(*) FROM ClientCont) AS TotalRecord
+            FROM ClientCont
+            WHERE RowNumber BETWEEN {0} AND {1}";
+
+    public const String GET_CLIENT_CONTACT_DETAILS_STARTS_WITH = @"
+           
+        WITH ClientCont AS
+            (
+                SELECT *,
+                ROW_NUMBER() OVER(ORDER BY CC.ChangedOn DESC) AS RowNumber 
+                FROM ClientContacts CC
+                WHERE cc.[Name] LIKE '{2}%'
+            )
+            SELECT *
+                , (SELECT COUNT(*) FROM ClientCont) AS TotalRecord
+            FROM ClientCont
+            WHERE RowNumber BETWEEN {0} AND {1}";
 }

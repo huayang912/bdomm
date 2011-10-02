@@ -92,7 +92,11 @@ public class AppConstants
         public const String CONTACT_ID = "ContactID";
         public const String SUCCESS_MSG = "SCMSG";
         public const String DELETE = "Delete";
-        public const String ON_TABLE = "OnTable";    
+        public const String ON_TABLE = "OnTable";   
+ 
+        //Add By Rabbani 1-Oct-2011
+        public const String SearchApplyBy = "SearchApplyBy";
+        public const String PN = "pn";
     }
 
     #endregion
