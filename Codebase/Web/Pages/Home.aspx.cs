@@ -67,7 +67,8 @@ public partial class Pages_Home : BasePage
         UtilityDAO dao = new UtilityDAO();
         DbParameter[] parameters = new[] { new DbParameter("@ContactID", 1) };
         DataSet ds3 = dao.GetDataSet(AppSQL.GET_GRAPH_DATA, parameters, false);
-        divGraph3.InnerHtml = CreateChart(ds3.Tables[0], "FCF_Line", "CH3");
+        if (ds3.Tables[0].Rows.Count > 2)
+            divGraph3.InnerHtml = CreateChart(ds3.Tables[0], "FCF_Line", "CH3");
     }
 
     //public void createGraph4()
