@@ -262,24 +262,7 @@ public partial class Pages_PersonnelBasicInfo : BasePage
             }
         }
         ///Roles
-        if (roles != null && roles.Count > 0)
-        {
-            foreach (App.CustomModels.PersonnelRole role in roles)
-            {
-                ContactRole contactRole = null;
-                if (role.ID > 0)
-                    contactRole = context.ContactRoles.SingleOrDefault(P => P.ID == role.ID);
-                else
-                {
-                    contactRole = new ContactRole();
-                    contact.ContactRoles.Add(contactRole);                    
-                }
-                contactRole.RoleID = role.RoleID;
-                contactRole.RoleOrder = role.Order;
-                contactRole.ChangedByUserID = SessionCache.CurrentUser.ID;
-                contactRole.ChangedOn = DateTime.Now;
-            }
-        }
+      
         context.SubmitChanges();
         return contact.ID;
     }
@@ -311,24 +294,13 @@ public partial class Pages_PersonnelBasicInfo : BasePage
       
         
         contact.PlaceOfBirth = personnel.PlaceOfBirth;
-        contact.PPE_Sizes = personnel.PPE_Sizes;
-        contact.Coverall = personnel.Coverall;
-        contact.Boots = personnel.Boots;
-
-        contact.CopmpanyName = personnel.companyname;
-        contact.CompanyReg = personnel.companyreg;
-        contact.CompanyVat = personnel.companyvat;
-        contact.CompanyAddress = personnel.companyaddr;
-        contact.employment_status = personnel.employmentstatus;
-        contact.Insurance = personnel.insurance;
-
+       
 
         if (personnel.CountryOfBirthID.ToInt() > 0)
             contact.CountryOfBirthID = personnel.CountryOfBirthID.ToInt();
         else
             contact.CountryOfBirthID = null;
-        contact.NoSMSorEmail = personnel.NoSMSOrEmail;
-        contact.Inactive = personnel.InActive;
+       
         
         ///Date of Birth (Nullable)
         if (personnel.DateOfBirth.IsNullOrEmpty())
@@ -336,17 +308,9 @@ public partial class Pages_PersonnelBasicInfo : BasePage
         else
             contact.DateOfBirth = personnel.DateOfBirth.ToDateTime(ConfigReader.CSharpCalendarDateFormat);
         
-        ///Date of Last Meeting (Nullable)
-        if (personnel.DateOfLastMeeting.IsNullOrEmpty())
-            contact.DateOfLastMeeting = null;
-        else
-            contact.DateOfLastMeeting = personnel.DateOfLastMeeting.ToDateTime(ConfigReader.CSharpCalendarDateFormat);
-
+    
         
-        contact.PreferredDayRate = personnel.PreferredDayRate;
-        if(contact.PreferredDayRate.HasValue)
-            contact.DayRateCurrencyID = personnel.DayRateCurrencyID;
-
+     
         contact.ChangedOn = DateTime.Now;
         contact.ChangedByUserID = SessionCache.CurrentUser.ID;
 

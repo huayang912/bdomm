@@ -126,8 +126,8 @@ public partial class Pages_PersonnelBasicInfo : BasePage
                 txtcompanyname.Text = contact.CopmpanyName;
                 lblCompanyname.Text = contact.CopmpanyName;
 
-                txtcompanyreg.Text = contact.CompanyVat;
-                lblCompanyreg.Text = contact.CompanyVat;
+                txtcompanyreg.Text = contact.CompanyReg;
+                lblCompanyreg.Text = contact.CompanyReg;
 
                 txtcompanyvat.Text = contact.CompanyVat;
                 lblCompanyvat.Text = contact.CompanyVat;
@@ -201,66 +201,10 @@ public partial class Pages_PersonnelBasicInfo : BasePage
     {
         OMMDataContext context = new OMMDataContext();
         Contact contact = populateContact(personnel, context);
-        ///Bind Telephones
-        if (telephones != null && telephones.Count > 0)
-        {
-            foreach (App.CustomModels.PersonnelTelephone telephone in telephones)
-            {
-                TelephoneNumber phone = null;
-                if (telephone.ID > 0)
-                    phone = context.TelephoneNumbers.SingleOrDefault(P => P.ID == telephone.ID);
-                else
-                {
-                    phone = new TelephoneNumber();
-                    contact.TelephoneNumbers.Add(phone);
-                }
-                phone.Number = telephone.Number;
-                phone.TypeID = telephone.TypeID;
-                phone.ChangedByUserID = SessionCache.CurrentUser.ID;
-                phone.ChangedOn = DateTime.Now; 
-            }
-        }
+    
 
-        ///Bind Notes
-        if (ConNotes != null && ConNotes.Count > 0)
-        {
-            foreach (App.CustomModels.ConNote conNote in ConNotes)
-            {
-                ContactsNote note = null;
-                if (conNote.ID > 0)
-                    note = context.ContactsNotes.SingleOrDefault(P => P.ID == conNote.ID);
-                else
-                {
-                    note = new ContactsNote();
-                    contact.ContactsNotes.Add(note);
-                }
-                note.Notes = conNote.Notes;
-                if (conNote.CommsTypeID != null)
-                    note.ContactCommsTypeID = Convert.ToInt32(conNote.CommsTypeID);
-
-                note.ChangedByUserID = SessionCache.CurrentUser.ID;
-                note.ChangedOn = DateTime.Now;
-            }
-        }
-
-        ///Bind Eamils
-        if (emails != null && emails.Count > 0)
-        {
-            foreach (App.CustomModels.PersonnelEmail email in emails)
-            {
-                EmailAddress contactEmail = null;
-                if (email.ID > 0)
-                    contactEmail = context.EmailAddresses.SingleOrDefault(P => P.ID == email.ID);
-                else
-                {
-                    contactEmail = new EmailAddress();
-                    contact.EmailAddresses.Add(contactEmail);
-                }                
-                contactEmail.Address = email.Email;
-                contactEmail.ChangedByUserID = SessionCache.CurrentUser.ID;
-                contactEmail.ChangedOn = DateTime.Now;
-            }
-        }
+     
+     
         ///Roles
         if (roles != null && roles.Count > 0)
         {
@@ -297,20 +241,20 @@ public partial class Pages_PersonnelBasicInfo : BasePage
             contact.CreatedOn = DateTime.Now;            
             context.Contacts.InsertOnSubmit(contact);             
         }
-        contact.FirstNames = personnel.FirstName;
-        contact.LastName = personnel.LastName;
-        contact.Address = personnel.Address;
-        contact.MaritalStatusID = personnel.MaritalStatus;
-        contact.Postcode = personnel.PostCode;
+      //  contact.FirstNames = personnel.FirstName;
+     //   contact.LastName = personnel.LastName;
+     //   contact.Address = personnel.Address;
+      //  contact.MaritalStatusID = personnel.MaritalStatus;
+      //  contact.Postcode = personnel.PostCode;
       //  contact.CountryID = personnel.CountryID;
 
-        if (personnel.CountryID.ToInt() > 0)
-            contact.CountryID = personnel.CountryID.ToInt();
-        else
-            contact.CountryID = null;
+     //   if (personnel.CountryID.ToInt() > 0)
+     //       contact.CountryID = personnel.CountryID.ToInt();
+    //    else
+    //        contact.CountryID = null;
       
         
-        contact.PlaceOfBirth = personnel.PlaceOfBirth;
+    //    contact.PlaceOfBirth = personnel.PlaceOfBirth;
         contact.PPE_Sizes = personnel.PPE_Sizes;
         contact.Coverall = personnel.Coverall;
         contact.Boots = personnel.Boots;
@@ -323,19 +267,11 @@ public partial class Pages_PersonnelBasicInfo : BasePage
         contact.Insurance = personnel.insurance;
 
 
-        if (personnel.CountryOfBirthID.ToInt() > 0)
-            contact.CountryOfBirthID = personnel.CountryOfBirthID.ToInt();
-        else
-            contact.CountryOfBirthID = null;
+    
         contact.NoSMSorEmail = personnel.NoSMSOrEmail;
         contact.Inactive = personnel.InActive;
         
-        ///Date of Birth (Nullable)
-        if (personnel.DateOfBirth.IsNullOrEmpty())
-            contact.DateOfBirth = null;
-        else
-            contact.DateOfBirth = personnel.DateOfBirth.ToDateTime(ConfigReader.CSharpCalendarDateFormat);
-        
+          
         ///Date of Last Meeting (Nullable)
         if (personnel.DateOfLastMeeting.IsNullOrEmpty())
             contact.DateOfLastMeeting = null;
