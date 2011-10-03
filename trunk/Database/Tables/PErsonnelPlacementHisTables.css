@@ -1,0 +1,32 @@
+USE [OMMBUDI_Test]
+GO
+CREATE TABLE [dbo].[ContactPlacementStatusTypes](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[NumberSuffix] [nvarchar](5) NOT NULL
+)
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+USE [OMMBUDI_Test]
+GO
+drop TABLE [dbo].[ContactPlacementHistory]
+go
+CREATE TABLE [dbo].[ContactPlacementHistory](
+	[ID] [int] IDENTITY(1,1) NOT NULL, 
+    [ContactID] Int  null,
+    [EnquiryID] Nvarchar(50) NOT NULL,     
+    [ContactPlacementStatusID] [int] NOT NULL,     
+	[Notes] [nvarchar](2000) COLLATE Latin1_General_CI_AS NULL,
+	[ChangedByUserID] [int] NULL,
+	[ChangedOn] [datetime] NOT NULL CONSTRAINT [DF_ContactPlacementHistory_ChangedOn]  DEFAULT (getdate()),
+
+ CONSTRAINT [PK_ContactPlacementHistory] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
