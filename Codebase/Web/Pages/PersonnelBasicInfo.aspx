@@ -606,7 +606,13 @@
                 </table>
             </div>
             
-            <div class="WinGroupBox">
+       
+
+        </div>
+            
+        <div class="RightColumn">
+        
+             <div class="WinGroupBox">
                 <div class="WinGroupBoxHeader">Phone Numbers</div>
                 <div id="divPhoneNumbersList">
                     <div>
@@ -672,11 +678,10 @@
                     </table>
                 </div>
             </div>
-
-        </div>
-            
-        <div class="RightColumn">
-            <div class="WinGroupBox">
+        
+        
+         <asp:Panel ID="Panel_otherdetail" runat="server" Visible="false">
+                <div class="WinGroupBox">
                 <div class="WinGroupBoxHeader">
                     Other Details</div>
                 <table cellpadding="3" cellspacing="0" style="width: 100%;">
@@ -792,8 +797,11 @@
                         </td>
                     </tr>
                 </table>
-            </div>
-            <div class="WinGroupBox">
+            </div>     
+         </asp:Panel>
+
+             <asp:Panel ID="Panel_empdetail" runat="server" Visible="false">
+                 <div class="WinGroupBox">
                 <div class="WinGroupBoxHeader">
                     Employment Details</div>
                 <table cellpadding="3" cellspacing="0" style="width: 100%;">
@@ -863,8 +871,12 @@
                         </td>
                     </tr>
                 </table>
-            </div>
-            <div class="WinGroupBox">
+            </div>        
+              </asp:Panel>
+            
+
+            <asp:Panel ID="Panel_role" runat="server" Visible="false">
+             <div class="WinGroupBox">
                 <div class="WinGroupBoxHeader">
                     Roles</div>
                 <div id="div1">
@@ -891,11 +903,14 @@
                     </table>
                 </div>
             </div>
+            </asp:Panel>
+           
         </div>
         <div class="clearboth"></div>
         <div class="TenPixelTopMargin" id="Div2">
             &nbsp;
         </div>
+             <asp:Panel ID="Panel_notes" runat="server" Visible="false">
         <div class="WinGroupBox">
                 <div class="WinGroupBoxHeader">Notes</div>
                 <div id="divNotesList">
@@ -926,6 +941,7 @@
                     </table>
                 </div>
             </div>
+         </asp:Panel>
         
         <div class="TenPixelTopMargin" id="dvSaveBtn">
             <input type="button" class="ButtonCommon" value="Save" onclick="SavePersonnel();" />
