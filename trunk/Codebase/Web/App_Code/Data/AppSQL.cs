@@ -286,4 +286,11 @@ ELSE
                 , (SELECT COUNT(*) FROM ClientCont) AS TotalRecord
             FROM ClientCont
             WHERE RowNumber BETWEEN {0} AND {1}";
+
+
+    public const String GET_CONTACT_ROLES = @"
+        SELECT cr.ContactID,cr.ID,r.[Name] as [Name]
+        FROM ContactRoles cr
+        INNER JOIN Roles r ON r.ID = cr.RoleID
+        WHERE cr.ContactID = @ContactID";
 }

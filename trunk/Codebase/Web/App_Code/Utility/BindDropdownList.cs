@@ -86,6 +86,17 @@ public static class BindDropdownList
         InsertBlankOption(ddl);
     }
 
+    public static void RolesNoBlank(DropDownList ddl)
+    {
+        OMMDataContext context = new OMMDataContext();
+        var statuses = from P in context.Roles orderby P.Name select new { ID = P.ID, Name = P.Name };
+        ddl.DataSource = statuses;
+        ddl.DataTextField = "Name";
+        ddl.DataValueField = "ID";
+        ddl.DataBind();
+        //InsertBlankOption(ddl);
+    }
+
     public static void CertificateTypes(DropDownList ddl)
     {
         OMMDataContext context = new OMMDataContext();
