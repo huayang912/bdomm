@@ -5,6 +5,9 @@
   
     <table width="100%" border="0" background="">
         <tr >
+            <asp:Panel ID="Panel_pie_chart" runat="server" Visible="false">
+          
+        
             <td style="width:33%">
                 <div class="WinGroupBox">
                     <div class="WinGroupBoxHeader">
@@ -12,14 +15,16 @@
                      <div id="divGraph1" runat="server" visible="True"></div>   
                     
                 </div>
-            </td>
+            </td>  
+            </asp:Panel>
             <td style="width:33%">
                 <div class="WinGroupBox">
                     <div class="WinGroupBoxHeader">
-                        Bar Chart</div>
+                       </div>
                     <div id="divGraph2" runat="server" visible="True"></div>
                 </div>
             </td>
+               <asp:Panel ID="Panel_line_chart" runat="server" Visible="false">
             <td style="width:33%">
                 <div class="WinGroupBox">
                     <div class="WinGroupBoxHeader">
@@ -27,6 +32,7 @@
                     <div id="divGraph3" runat="server" visible="True"></div>
                 </div>
             </td>
+            </asp:Panel>
             
         </tr>
         <%--<tr>
