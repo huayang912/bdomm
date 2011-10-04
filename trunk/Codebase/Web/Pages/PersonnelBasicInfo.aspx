@@ -1,4 +1,5 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPagePopup.master" AutoEventWireup="true" CodeFile="PersonnelBasicInfo.aspx.cs" Inherits="Pages_PersonnelBasicInfo" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPagePopup.master" 
+AutoEventWireup="true" CodeFile="PersonnelBasicInfo.aspx.cs" Inherits="Pages_PersonnelBasicInfo" %>
 <%@ Register Src="~/Controls/jQueryCalendar.ascx" TagName="jQueryCalendar" TagPrefix="UC" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">   
@@ -496,7 +497,21 @@
     <asp:HiddenField ID="hdnCommTypes" runat="server" />
 
 
-    <asp:Button ID="Button1" runat="server" Text="Edit" onclick="Button1_Click" />
+    
+    
+    <div class="TenPixelTopMargin" id="dvSaveBtn">
+            
+               
+        
+                <asp:Panel runat="server" ID="pnlEditButton" Visible="true">
+                    <asp:Button ID="Button1" runat="server" Text="Edit" onclick="Button1_Click" />
+                </asp:Panel>
+                <asp:Panel runat="server" ID="pnlSaveButton" Visible="false">
+                    <input type="button" class="ButtonCommon" value="Save" onclick="SavePersonnel();" />
+                </asp:Panel>    
+        
+   </div>      
+    
   <%--  <input type="button" ID="btnShowHide" value="Show/Hide" onclick="toggleVisibility('TextBox1');" />
 <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
 <input type="button" id="EditMode" class="ButtonCommon" value="Edit" onclick="toggleVisibility('txtLastName')" />
@@ -943,9 +958,7 @@
             </div>
          </asp:Panel>
         
-        <div class="TenPixelTopMargin" id="dvSaveBtn">
-            <input type="button" class="ButtonCommon" value="Save" onclick="SavePersonnel();" />
-        </div>        
+                
     </asp:Panel>   
         
 </asp:Content>

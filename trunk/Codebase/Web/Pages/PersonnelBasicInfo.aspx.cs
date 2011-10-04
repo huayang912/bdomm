@@ -386,6 +386,8 @@ public partial class Pages_PersonnelBasicInfo : BasePage
     {
         if (i == 1)
         {
+            pnlEditButton.Visible = true;
+            pnlSaveButton.Visible = false;
                         
             txtLastName.Visible = false;
             lblLastName.Visible = true;
@@ -454,6 +456,11 @@ public partial class Pages_PersonnelBasicInfo : BasePage
         }
         else
         {
+
+            pnlEditButton.Visible = false;
+            pnlSaveButton.Visible = true;
+
+
             txtLastName.Visible = true;
             lblLastName.Visible = false;
 
