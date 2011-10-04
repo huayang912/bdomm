@@ -19,7 +19,7 @@ CodeFile="ClientContactSearch.aspx.cs" Inherits="Pages_ClientContactSearch" %>
         <div id="divMessage" runat="server" visible="false" enableviewstate="false"></div>
         <asp:Panel ID="pnlFormContainer" runat="server" DefaultButton="btnSave">
         
-        
+        <asp:Panel runat="server" ID="pnlContainer" Visible ="false">
             <%--ContactsNotes Information Group Box Start--%>
             <div class="LeftColumn">
                 <div class="WinGroupBox">
@@ -181,11 +181,17 @@ CodeFile="ClientContactSearch.aspx.cs" Inherits="Pages_ClientContactSearch" %>
                 </div>
             </div>
             
+           
+            
+            
             <div class="clearboth"></div>
             
             <div class="TenPixelTopMargin">
                 <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="SaveInfo" OnClick="btnSave_Click" />
             </div>
+            
+        </asp:Panel>     
+            
             <div class="WinGroupBox">
                 <%--<div class="WinGroupBoxHeader">
                     Contact Details</div>--%>

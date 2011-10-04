@@ -121,7 +121,14 @@ public partial class Pages_ClientContactSearch : BasePage
         _IsDeleteMode = String.Compare(WebUtil.GetQueryStringInString(
             AppConstants.QueryString.DELETE), "True", true) == 0 ? true : false;
         if (_ID > 0 && !_IsDeleteMode)
+        {
             _IsEditMode = true;
+            pnlContainer.Visible = true;
+        }
+        else
+        {
+            pnlContainer.Visible = false;
+        }
 
         Page.Title = WebUtil.GetPageTitle("Manage Client Contact Details");
     }

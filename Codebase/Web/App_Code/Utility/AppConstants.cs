@@ -97,6 +97,7 @@ public class AppConstants
         //Add By Rabbani 1-Oct-2011
         public const String SearchApplyBy = "SearchApplyBy";
         public const String PN = "pn";
+        public const String DeleteOn = "DeleteOn";
     }
 
     #endregion
