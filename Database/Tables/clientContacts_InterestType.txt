@@ -1,0 +1,2 @@
+
+ALTER TABLE ClientContacts ADD [InterestType] [nvarchar] (100) NULL
