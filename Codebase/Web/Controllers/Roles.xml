@@ -95,6 +95,8 @@ from "dbo"."Roles" "Roles"
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
       <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action commandName="ExportCsv" headerText="Download" description="Download items in CSV format." />
+
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
