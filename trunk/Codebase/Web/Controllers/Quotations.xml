@@ -60,6 +60,7 @@
         ,"Quotations"."Contract_awarded_Value" "Contract_awarded_Value"		
 		   ,"EnquiryFiles"."FileName" "FileName"	
 		   ,"UploadedByUser"."UserName" "UploadedByUserName"
+       	,"EnquiryLines"."Details" "EnqDetails"
 		
      from "dbo"."Quotations" "Quotations"
 	left join "dbo"."Enquiries" "Enquiry" on "Quotations"."EnquiryID" = "Enquiry"."ID"
@@ -91,6 +92,8 @@ left join "dbo"."ClientContacts" "EnquiryContact" on "Enquiry"."ContactID" = "En
 	
 	   left join "dbo"."EnquiryFiles" "EnquiryFiles" on "Quotations"."EnquiryID" = "EnquiryFiles"."EnquiryID"
    left join "dbo"."Users" "UploadedByUser" on "EnquiryFiles"."UploadedBy" = "UploadedByUser"."ID"
+    	left join "dbo"."EnquiryLines" "EnquiryLines" on "Quotations"."EnquiryID"= "enquiryLines"."EnquiryID"
+      
 WHERE Quotations.StatusID<>3 AND Quotations.StatusID<>4
 ]]></text>
     </command>
@@ -180,6 +183,9 @@ WHERE Quotations.StatusID<>3 AND Quotations.StatusID<>4
     <field name="QuotationStatusID" type="Int16" allowNulls="true" isPrimaryKey="false" computed="false" calculated="false" onDemand="false" label="QuotationStatusID" readOnly="false" showInSummary="false" htmlEncode="false" formatOnClient="true" allowQBE="false" allowSorting="false" />
     <field name="Contract_awarded_to" type="String" allowNulls="true" isPrimaryKey="false" computed="false" calculated="false" onDemand="false" label="Contract Aawarded To" readOnly="false" showInSummary="false" htmlEncode="false" formatOnClient="true" allowQBE="true" allowSorting="true" />
     <field name="Contract_awarded_Value" type="Int16" allowNulls="true" isPrimaryKey="false" computed="false" calculated="false" onDemand="false" label="Contract Awarded Value" readOnly="false" showInSummary="false" htmlEncode="false" formatOnClient="true" allowQBE="true" allowSorting="true" />
+
+    <field name="EnqDetails" type="String" readOnly="true" label="Enquiry Details" showInSummary="false" formatOnClient="true" allowQBE="false" allowSorting="false" />
+  
   </fields>
   <views xmlns:a="urn:schemas-codeontime-com:data-aquarium">
     <view id="grid1" type="Grid" commandId="command1" label="Quotations" sortExpression="id desc">
@@ -202,6 +208,8 @@ WHERE Quotations.StatusID<>3 AND Quotations.StatusID<>4
         <dataField fieldName="ExpiryDate" formatOnClient="true" />
         <dataField fieldName="IsExpired"  hidden="true"/>
         <dataField fieldName="QuotationStatusID" hidden="true" />
+        
+        
       </dataFields>
       <a:styles>
         <expression type="ClientScript" test="[IsExpired] &gt; 0" result="QuoteExpired" />
@@ -239,7 +247,7 @@ WHERE Quotations.StatusID<>3 AND Quotations.StatusID<>4
 			
           </dataFields>
         </category>
-		<category newColumn="true">
+		<category newColumn="true" headerText="">
        <!-- <category headerText="Reference Information" newColumn="true">
           <description>$DefaultReferenceDescription</description> -->
           <dataFields>
@@ -277,6 +285,15 @@ WHERE Quotations.StatusID<>3 AND Quotations.StatusID<>4
 		   
 		  
         </category>
+
+
+        <category newColumn="true" headerText="Enquiry Details">
+         
+          <dataFields>
+            <dataField fieldName="EnqDetails" readOnly="true"/>
+          </dataFields>
+        </category>
+
       </categories>
     </view>
     <view id="createForm1" type="Form" commandId="command1" label="New Quotations">
