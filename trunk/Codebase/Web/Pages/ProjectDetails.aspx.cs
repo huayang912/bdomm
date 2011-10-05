@@ -106,11 +106,17 @@ public partial class Pages_ProjectDetails : BasePage
                 sb.AppendFormat("<b>Quotation No:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.QUOTATION_DETAILS_Archive,
                     AppConstants.QueryString.ID, project.QuotationID + "&_controllerName=Quotations&_commandName=Select&_commandArgument=editForm1", project.Quotation.Number);
               //  sb.AppendFormat("<b>Quotation Create Date:</b> {0}<br/>", project.Quotation.CreatedOn == DateTime.MinValue ? "NA" : project.Quotation.CreatedOn.ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
+                //new
+                sb.AppendFormat("<b>Quotation Date:</b> {0}<br/>", project.Quotation.CreatedOn == DateTime.MinValue ? "NA" : project.Quotation.CreatedOn.ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
 
                 if (project.Quotation.Enquiry != null)
                 {
                     sb.AppendFormat("<b>Enquiry No:</b> <a href='{0}?{1}={2}'>{3}</a><br/>", AppConstants.Pages.ENQUIRY_DETAILS_Archive,
                         AppConstants.QueryString.ID, project.Quotation.EnquiryID + "&_controllerName=Enquiry&_commandName=Select&_commandArgument=editForm1", project.Quotation.Enquiry.Number);
+
+                    //new
+                    sb.AppendFormat("<b>Enquiry Date:</b> {0}<br/>", project.Quotation.Enquiry.ChangedOn == DateTime.MinValue ? "NA" : project.Quotation.Enquiry.ChangedOn.ToString(AppConstants.ValueOf.DATE_FROMAT_DISPLAY));
+
 
                     sb.AppendFormat("<b>Attachments: </b><br/>{0}", GetAttachmentsList(project.Quotation.Enquiry));
                 }
