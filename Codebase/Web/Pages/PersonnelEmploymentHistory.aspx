@@ -696,10 +696,15 @@ CodeFile="PersonnelEmploymentHistory.aspx.cs" Inherits="Pages_PersonnelEmploymen
             <div class="clearboth">
             </div>
           </asp:Panel>
-          
+            
+            
             <div class="WinGroupBox">
                 <div class="WinGroupBoxHeader" style="width: 160px;">
                     Employment History List</div>
+                
+                <asp:Button ID="btnShowEmpDetails" runat="server" Text="Add New Details" 
+                OnClick="btnShowEmpDetails_Click" />
+                    
                 <UC:DataTableList ID="ucEmploymentHistoryList" runat="server" ExcludeVisibleFields="ID, ContactID"
                     LinkFields="ContactID, ID" NoRecordMessgae="No Employment History Found for this Personnel."
                     DeleteMessage="Sure to Delete Employment History?"></UC:DataTableList>
@@ -710,6 +715,8 @@ CodeFile="PersonnelEmploymentHistory.aspx.cs" Inherits="Pages_PersonnelEmploymen
             
             
         </asp:Panel>
+        
+        
     </div>
 </asp:Content>
 
