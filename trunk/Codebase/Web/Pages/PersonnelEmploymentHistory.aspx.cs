@@ -61,40 +61,6 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
                 ShowNotFoundMessage();
             else
             {
-                ////---------------------
-                ////Personal Details
-                ////---------------------
-                //txtLastName.Text = contact.LastName;
-                //lblLastName.Text = contact.LastName;
-
-                //txtFirstNames.Text = contact.FirstNames;
-                //lblFirstNames.Text = contact.FirstNames;
-
-                //txtAddress.Text = contact.Address;
-                //lblAddress.Text = contact.Address;
-
-                //txtPostcode.Text = contact.Postcode;
-                //lblPostcode.Text = contact.Postcode;
-
-                //ddlCountryID.SetSelectedItem(contact.CountryID.ToString());
-                //lblCountryID.Text = ddlCountryID.SelectedItem.Text.ToString();
-
-                //ddlMaritalStatusID.SetSelectedItem(contact.MaritalStatusID.ToString());
-                //lblMaritalStatusID.Text = ddlMaritalStatusID.SelectedItem.Text.ToString();
-
-                //txtPlaceOfBirth.Text = contact.PlaceOfBirth;
-                //lblPlaceOfBirth.Text = contact.PlaceOfBirth;
-
-                //txtDateOfBirth.Text = contact.DateOfBirth.HasValue ?
-                //    contact.DateOfBirth.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
-                //lblDateOfBirth.Text = contact.DateOfBirth.HasValue ?
-                //    contact.DateOfBirth.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
-
-                //ddlCountryOfBirthID.SetSelectedItem(contact.CountryOfBirthID.ToString());
-                //lblCountryOfBirthID.Text = ddlCountryOfBirthID.SelectedItem.Text.ToString();
-                ////End Personal Details
-
-
                 //---------------------
                 //Other Details
                 //---------------------
@@ -137,49 +103,13 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
                 txtcompanyadr.Text = contact.CompanyAddress;
                 lblCompanyadr.Text = contact.CompanyAddress;
 
-                //   ddlemploymentstatus.SetSelectedItem(contact.employment_status.ToString());
-                //  ddlinsurance.SetSelectedItem(contact.Insurance.ToString());
                 ddlemploymentstatus.SetSelectedItem(contact.employment_status);
                 lblEmploymentstatus.Text = ddlemploymentstatus.SelectedItem.Text.ToString();
 
                 ddlinsurance.SetSelectedItem(contact.Insurance);
                 lblInsurance.Text = ddlinsurance.SelectedItem.Text.ToString();
                 //End Employment Details
-
-
-                //var telephoneNumbers = from P in context.TelephoneNumbers where P.ContactID == _ID select new App.CustomModels.PersonnelTelephone { ID = P.ID, Number = P.Number, TypeID = P.TypeID };
-                //if (telephoneNumbers != null && telephoneNumbers.Count() > 0)
-                //    hdnTelephoneNumbers.Value = telephoneNumbers.ToList().ToJSON();
-
-                //var emailAddress = from P in context.EmailAddresses where P.ContactID == _ID select new App.CustomModels.PersonnelEmail { ID = P.ID, Email = P.Address };
-                //if (emailAddress != null && emailAddress.Count() > 0)
-                //    hdnEmailAddresses.Value = emailAddress.ToList().ToJSON();
-
-                //var contactRoles = from P in context.ContactRoles where P.ContactID == _ID select new App.CustomModels.PersonnelRole { ID = P.ID, RoleID = P.RoleID, Order = P.RoleOrder };
-                //if (contactRoles != null && contactRoles.Count() > 0)
-                //    hdnContactRoles.Value = contactRoles.ToList().ToJSON();
-
-                //var Notes =
-                //    from p in context.ContactsNotes
-                //    join cp in context.ContactCommsTypes on p.ContactCommsTypeID equals cp.ID
-                //    join u in context.Users on p.ChangedByUserID equals u.ID
-                //    where p.ContactID == _ID
-                //    select new App.CustomModels.ConNote
-                //    {
-                //        ID = p.ID,
-                //        Notes = p.Notes,
-                //        CommsTypeID = (p.ContactCommsTypeID == null) ?
-                //            "" : p.ContactCommsTypeID.ToString(),
-                //        CommsType = cp.Name,
-                //        ChangedBy = u.DisplayName,
-                //        ChangedOn = p.ChangedOn.ToString()
-
-                //    };
-                ////from P in context.ContactsNotes where P.ContactID == _ID select new App.CustomModels.ConNote { ID = P.ID, Notes = P.Notes, CommsTypeID = (P.ContactCommsTypeID == null) ? "" : P.ContactCommsTypeID.ToString() };
-                //if (Notes != null && Notes.Count() > 0)
-                //    hdnNotes.Value = Notes.ToList().ToJSON();
-
-
+              
             }
             enableDisable(1);
         }
@@ -369,14 +299,14 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
         OMMDataContext context = new OMMDataContext();
         if (context.Contacts.FirstOrDefault(P => P.ID == _ContactID) == null)
         {
-            //pnlEmpHistory.Visible = true;
+            pnlEmpHistory.Visible = true;
             ShowNotFoundMessage();
         }
 
 
         else
         {
-            //pnlEmpHistory.Visible = false;
+            pnlEmpHistory.Visible = false;
 
             if (_IsEditMode)
             {
@@ -442,7 +372,7 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
     protected void ShowNotFoundMessage()
     {
         pnlFormContainer.Visible = false;
-        WebUtil.ShowMessageBox(divMessage, "Requested Employment History was not found.", true);
+        WebUtil.ShowMessageBox(divMessage, "Information was not found.", true);
     }
 
     protected void CheckAndDeleteData()
@@ -508,11 +438,6 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
             AppConstants.QueryString.DeleteOn + "=EH";
         ucEmploymentHistoryList.DataBind();
 
-        ///Bind the Pager Control
-        //ucNoteListPager.TotalRecord = totalRecord;
-        //ucNoteListPager.PageNo = pageNumber;
-        //ucNoteListPager.PageSize = PAGE_SIZE;
-        //ucNoteListPager.DataBind();
     }
 
     protected void BindRoleList()
@@ -560,12 +485,6 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
             entity.ProjectID = null;
         else
             entity.ProjectID = ddlProjectID.SelectedValue.ToInt();
-        //if (ddlClientID.SelectedValue.ToInt() == 0)
-        //    entity.ClientID = null;
-        //else
-        //    entity.ClientID = ddlClientID.SelectedValue.ToInt();
-
-
         if (ddlRoleID.SelectedValue.ToInt() == 0)
             entity.RoleID = null;
         else
@@ -604,12 +523,6 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
 
         if (txtTravelCost.Text.Trim() != "")
             entity.TravelCost = Convert.ToInt32(txtTravelCost.Text);
-        //entity.CurrencyID = txtCurrencyID.Text;
-
-        //if (txtContractdays.Text.Trim() != "")
-        //    entity.OffshoreRate = Convert.ToDecimal(txtOffshoreRate.Text);
-        
-        //entity.Office_Onsh_Rate_type = txtOfficeOnshRatetype.Text;
 
         if (txtOfficeOnshoreRate.Text.Trim() != "")
             entity.OfficeOnshoreRate = Convert.ToDecimal(txtOfficeOnshoreRate.Text);
@@ -693,75 +606,6 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
             entity.employment_status = ddlemploymentstatus.SelectedItem.Text;
             entity.Insurance = ddlinsurance.SelectedItem.Text; 
 
-            //if (txtEndDate.Text.IsNullOrEmpty())
-            //    entity.EndDate = null;
-            //else
-            //    entity.EndDate = txtEndDate.Text.ToDateTime(ConfigReader.CSharpCalendarDateFormat); ;
-
-            //if (ddlProjectID.SelectedValue.ToInt() == 0)
-            //    entity.ProjectID = null;
-            //else
-            //    entity.ProjectID = ddlProjectID.SelectedValue.ToInt();
-            ////if (ddlClientID.SelectedValue.ToInt() == 0)
-            ////    entity.ClientID = null;
-            ////else
-            ////    entity.ClientID = ddlClientID.SelectedValue.ToInt();
-
-
-            //if (ddlRoleID.SelectedValue.ToInt() == 0)
-            //    entity.RoleID = null;
-            //else
-            //    entity.RoleID = ddlRoleID.SelectedValue.ToInt();
-
-            //if (ddlCurrencyCode.SelectedValue.ToInt() == 0)
-            //    entity.CurrencyID = null;
-            //else
-            //    entity.CurrencyID = ddlCurrencyCode.SelectedValue.ToInt();
-
-            //if (txtDayRate.Text.IsNullOrEmpty())
-            //    entity.DayRate = null;
-            //else
-            //    entity.DayRate = txtDayRate.Text.ToDecimal();
-            //entity.Notes = txtNotes.Text;
-            //entity.ChangedByUserID = SessionCache.CurrentUser.ID;
-            //entity.ChangedOn = DateTime.Now;
-            ////entity.Version = txtVersion.Text;
-            ////if (txtContractdays.Text.Trim() != "")
-            ////    entity.Contract_days = Convert.ToInt32(txtContractdays.Text);
-
-            //if (radFive.Checked)
-            //    entity.Contract_days = 5;
-            //else if (radSeven.Checked)
-            //    entity.Contract_days = 7;
-            //else
-            //    entity.Contract_days = null;
-
-
-            //if (txtTravelRate.Text.Trim() != "")
-            //    entity.TravelRate = Convert.ToInt32(txtTravelRate.Text);
-
-            //entity.Office_Onsh_Rate_type = ddlRateType.SelectedValue;
-            //entity.Hour_Standby_Rate_type = ddlHourStandby.SelectedValue;
-
-
-            //if (txtTravelCost.Text.Trim() != "")
-            //    entity.TravelCost = Convert.ToInt32(txtTravelCost.Text);
-            ////entity.CurrencyID = txtCurrencyID.Text;
-
-            ////if (txtContractdays.Text.Trim() != "")
-            ////    entity.OffshoreRate = Convert.ToDecimal(txtOffshoreRate.Text);
-
-            ////entity.Office_Onsh_Rate_type = txtOfficeOnshRatetype.Text;
-
-            //if (txtOfficeOnshoreRate.Text.Trim() != "")
-            //    entity.OfficeOnshoreRate = Convert.ToDecimal(txtOfficeOnshoreRate.Text);
-
-            ////entity.Hour_Standby_Rate_type = txtHourStandbyRatetype.Text;
-
-            //if (txtOfficeOnshoreRate.Text.Trim() != "")
-            //    entity.HourStandbyRate = Convert.ToDecimal(txtHourStandbyRate.Text);
-            //entity.ProjectCode_other = txtProjectCodeother.Text;
-
 
             context.SubmitChanges();
 
@@ -809,4 +653,11 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
     {
         enableDisable(2);
     }
+
+
+    protected void btnShowEmpDetails_Click(object sender, EventArgs e)
+    {
+        pnlEmpHistory.Visible = true;
+    }
+
 }
