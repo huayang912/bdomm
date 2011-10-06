@@ -47,7 +47,7 @@ CodeFile="PersonnelEmploymentHistory.aspx.cs" Inherits="Pages_PersonnelEmploymen
                                     </td>
                                     <td>
                                         <asp:Label ID="lblDateOfLastMeeting" runat="server" Text=""></asp:Label>
-                                        <asp:TextBox ID="txtDateOfLastMeeting" MaxLength="50" CssClass="CalendarTextBox"
+                                        <asp:TextBox ID="txtDateOfLastMeeting" MaxLength="30" CssClass="CalendarTextBox"
                                             runat="server"></asp:TextBox>
                                         <asp:CustomValidator ID="cvDateOfLastMeeting" runat="server" ControlToValidate="txtDateOfLastMeeting"
                                             SetFocusOnError="true" ClientValidationFunction="ValidateDate" ErrorMessage="Please Select a Valid Date."
@@ -279,7 +279,7 @@ CodeFile="PersonnelEmploymentHistory.aspx.cs" Inherits="Pages_PersonnelEmploymen
                                     Company
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtcompanyname" runat="server" MaxLength="20" Width="248px"></asp:TextBox>
+                                    <asp:TextBox ID="txtcompanyname" runat="server" MaxLength="20" Width="107px"></asp:TextBox>
                                     <asp:Label ID="lblCompanyname" runat="server" Text=""></asp:Label>
                                 </td>
                             </tr>
@@ -288,7 +288,7 @@ CodeFile="PersonnelEmploymentHistory.aspx.cs" Inherits="Pages_PersonnelEmploymen
                                     Reg
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtcompanyreg" runat="server" MaxLength="20" Width="248px"></asp:TextBox>
+                                    <asp:TextBox ID="txtcompanyreg" runat="server" MaxLength="20" Width="107px"></asp:TextBox>
                                     <asp:Label ID="lblCompanyreg" runat="server" Text=""></asp:Label>
                                 </td>
                             </tr>
@@ -297,7 +297,7 @@ CodeFile="PersonnelEmploymentHistory.aspx.cs" Inherits="Pages_PersonnelEmploymen
                                     Vat
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtcompanyvat" runat="server" MaxLength="20" Width="248px"></asp:TextBox>
+                                    <asp:TextBox ID="txtcompanyvat" runat="server" MaxLength="20" Width="107px"></asp:TextBox>
                                     <asp:Label ID="lblCompanyvat" runat="server" Text=""></asp:Label>
                                 </td>
                             </tr>
@@ -306,7 +306,8 @@ CodeFile="PersonnelEmploymentHistory.aspx.cs" Inherits="Pages_PersonnelEmploymen
                                     Address
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtcompanyadr" runat="server" MaxLength="200" TextMode="MultiLine"></asp:TextBox>
+                                    <asp:TextBox ID="txtcompanyadr" runat="server" MaxLength="120" 
+                                        TextMode="MultiLine" Width="146px"></asp:TextBox>
                                     <asp:Label ID="lblCompanyadr" runat="server" Text=""></asp:Label>
                                 </td>
                             </tr>
