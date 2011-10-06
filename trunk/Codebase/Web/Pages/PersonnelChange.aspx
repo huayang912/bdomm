@@ -147,8 +147,7 @@
             <tr>                
                 <td class="TabItemSelected" NavigateUrl="PersonnelBasicInfo.aspx?<%=AppConstants.QueryString.ID %>=<%=_ID.ToString() %>">Basic Info</td>
                 <%if (_ID > 0) { %>
-                        <td class="TabItemSelected" NavigateUrl="PersonnelSkills.aspx?<%=AppConstants.QueryString.ID %>=<%=_ID.ToString() %>">Skills</td>
-       
+            
                 <td class="TabItem" NavigateUrl="PersonnelEmploymentHistory.aspx?<%=AppConstants.QueryString.CONTACT_ID %>=<%=_ID.ToString() %>">Employment History</td>
                  <td class="TabItem" NavigateUrl="ContactPlacementHistory.aspx?ContactID=<%=_ID.ToString() %>">Placement History</td>
                 
