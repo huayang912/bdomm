@@ -98,6 +98,7 @@ public class AppConstants
         public const String SearchApplyBy = "SearchApplyBy";
         public const String PN = "pn";
         public const String DeleteOn = "DeleteOn";
+        public const String GRAPH_REFRESH_TIME = "60.00";
     }
 
     #endregion

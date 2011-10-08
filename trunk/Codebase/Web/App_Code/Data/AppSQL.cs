@@ -130,7 +130,7 @@ public class AppSQL
        SELECT T AS [T],
               COUNT(T) AS [Total]
        FROM   (
-                  SELECT 'Quot. Suc' AS T
+                  SELECT 'Quotation Success' AS T
                   FROM   Quotations e
                   WHERE  MONTH(e.CreatedOn) = MONTH(GETDATE())
                          AND YEAR(e.CreatedOn) = YEAR(GETDATE())
@@ -144,7 +144,7 @@ public class AppSQL
        SELECT T AS [T],
               COUNT(T) AS [Total]
        FROM   (
-                  SELECT 'Enq. Post' AS T
+                  SELECT 'Enquiries Posted' AS T
                   FROM   Enquiries e
                   WHERE  MONTH(e.CreatedOn) = MONTH(GETDATE())
                          AND YEAR(e.CreatedOn) = YEAR(GETDATE())
@@ -159,7 +159,7 @@ public class AppSQL
        SELECT T AS [T],
               COUNT(T) AS [Total]
        FROM   (
-                  SELECT 'Quot. Post' AS T
+                  SELECT 'Quotation Posted' AS T
                   FROM   Quotations e
                   WHERE  MONTH(e.CreatedOn) = MONTH(GETDATE())
                          AND YEAR(e.CreatedOn) = YEAR(GETDATE())
@@ -169,7 +169,7 @@ public class AppSQL
    )
    
    UNION ALL
-    SELECT 'Quot. Suc' AS [T],
+    SELECT 'Quotation Success' AS [T],
            0 AS [Total]
 ELSE
     (
@@ -177,7 +177,7 @@ ELSE
             SELECT T AS [T],
                    COUNT(T) AS [Total]
             FROM   (
-                       SELECT 'Enq. Post' AS T
+                       SELECT 'Enquiries Posted' AS T
                        FROM   Enquiries e
                        WHERE  MONTH(e.CreatedOn) = MONTH(GETDATE())
                               AND YEAR(e.CreatedOn) = YEAR(GETDATE())
@@ -192,7 +192,7 @@ ELSE
             SELECT T AS [T],
                    COUNT(T) AS [Total]
             FROM   (
-                       SELECT 'Quot. Post' AS T
+                       SELECT 'Quotation Posted' AS T
                        FROM   Quotations e
                        WHERE  MONTH(e.CreatedOn) = MONTH(GETDATE())
                               AND YEAR(e.CreatedOn) = YEAR(GETDATE())
@@ -207,7 +207,7 @@ ELSE
             SELECT T AS [T],
                    COUNT(T) AS [Total]
             FROM   (
-                       SELECT 'Quot. Suc' AS T
+                       SELECT 'Quotation Success' AS T
                        FROM   Quotations e
                        WHERE  MONTH(e.CreatedOn) = MONTH(GETDATE())
                               AND YEAR(e.CreatedOn) = YEAR(GETDATE())
@@ -223,7 +223,7 @@ ELSE
             SELECT T AS [T],
                    COUNT(T) AS [Total]
             FROM   (
-                       SELECT 'Proj. Run' AS T
+                       SELECT 'Project Running' AS T
                        FROM Projects  e
                        WHERE e.StatusID = 1
                    ) A
