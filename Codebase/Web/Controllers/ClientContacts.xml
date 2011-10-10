@@ -36,7 +36,6 @@ select
 	,"ClientContacts"."NL_Supply" "NL_Supply"
 	,"ClientContacts"."NL_Vessels" "NL_Vessels"
 	,"ClientContacts"."NL_HSE" "NL_HSE"  
-  ,"ClientContacts"."InterestType" "InterestType"    
 from "dbo"."ClientContacts" "ClientContacts"
 	left join "dbo"."Countries" "Country" on "ClientContacts"."CountryID" = "Country"."ID"
 	left join "dbo"."Clients" "Company" on "ClientContacts"."CompanyID" = "Company"."ID"
@@ -119,14 +118,6 @@ from "dbo"."ClientContacts" "ClientContacts"
     <field name="NL_HSE" type="Boolean" allowNulls="false" default="((0))" label="CRM - HSE" >
       <items style="CheckBox"/>
     </field>
-    <field name="InterestType" type="String" label="InterestType">
-      <items style="DropDownList">
-        <item text="unknown" value="unknown"/>
-        <item text="OWF Owner" value="OWF Owner"/>
-        <item text="Cable Manufacturer" value="Cable Manufacturer"/>      
-      </items>
-    </field>
-    
 	
 
   </fields>
@@ -150,10 +141,10 @@ from "dbo"."ClientContacts" "ClientContacts"
       </dataFields>
     </view>
     <view id="editForm1" type="Form" commandId="command1" label="Review Client Contacts">
-      <headerText></headerText>
+      <headerText>$DefaultEditViewDescription</headerText>
       <categories>
         <category headerText="Client Contacts" newColumn="true">
-          <description></description>
+          <description>$DefaultEditDescription</description>
           <dataFields>
             <dataField fieldName="Name" columns="30"/>
             <dataField fieldName="JobTitle" columns="30" />
@@ -168,21 +159,21 @@ from "dbo"."ClientContacts" "ClientContacts"
             <dataField fieldName="ChangedByUserID"  readOnly="true" aliasFieldName="ChangedByUserUserName" />
           </dataFields>
         </category>
-        <category headerText="-" newColumn="true">
-          <description></description>
+        <category headerText="Reference Information" newColumn="true">
+          <description>$DefaultReferenceDescription</description>
           <dataFields>
-            <dataField fieldName="CompanyCountryName" columns="30" readOnly="true"/>
+            <dataField fieldName="CompanyCountryName" columns="30"/>
             <dataField fieldName="Telephone" columns="30"/>
             <dataField fieldName="Mobile" columns="30"/>
             <dataField fieldName="Fax" columns="30"/>
             <dataField fieldName="Email"   hyperlinkFormatString="mailto:{Email}" columns="30"/>
-            <dataField fieldName="InterestType" columns="30"/>
+           
 
           </dataFields>
         </category>
 		
 		 <category headerText="CRM Information" newColumn="true">
-          <description></description>
+          <description>$DefaultReferenceDescription</description>
           <dataFields>
 		  
 		  
@@ -211,59 +202,42 @@ from "dbo"."ClientContacts" "ClientContacts"
       </categories>
     </view>
     <view id="createForm1" type="Form" commandId="command1" label="New Client Contacts">
-      <headerText></headerText>
+      <headerText>$DefaultCreateViewDescription</headerText>
       <categories>
         <category headerText="New Client Contacts" newColumn="true">
-          <description></description>
+          <description>$DefaultNewDescription</description>
           <dataFields>
-            <dataField fieldName="Name" columns="30"/>
+            <dataField fieldName="Name" columns="30"  />
             <dataField fieldName="JobTitle" columns="30" />
             <dataField fieldName="Address" columns="30" rows="3"/>
             <dataField fieldName="Postcode" columns="20" />
-            <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30"/>
-            <dataField fieldName="CompanyID" aliasFieldName="CompanyName" columns="30" hyperlinkFormatString="_Blank:~/pages/ClientNew.aspx?id={CompanyID}"/>
-            <dataField fieldName="DateOfBirth" columns="10" hidden="true"/>
-            <dataField fieldName="ChangedOn" columns="10" hidden="true"/>
-            <dataField fieldName="Version" hidden="true" columns="15" />
-            <dataField fieldName="Department" columns="30"/>
-            <dataField fieldName="ChangedByUserID"  readOnly="true" aliasFieldName="ChangedByUserUserName" />
-          </dataFields>
-        </category>
-        <category headerText="-" newColumn="true">
-          <description></description>
-          <dataFields>
-            <dataField fieldName="CompanyCountryName" columns="30" hidden="true"/>
-            <dataField fieldName="Telephone" columns="30"/>
-            <dataField fieldName="Mobile" columns="30"/>
-            <dataField fieldName="Fax" columns="30"/>
-            <dataField fieldName="Email"   hyperlinkFormatString="mailto:{Email}" columns="30"/>
-            <dataField fieldName="InterestType" columns="30"/>
+            <dataField fieldName="CountryID" aliasFieldName="CountryName" columns="30" />
+            <dataField fieldName="Telephone" columns="30" />
+            <dataField fieldName="Fax" columns="30"   hyperlinkFormatString="_blank:mailto:{Email}" />
+            <dataField fieldName="Email" columns="30" />
+            <dataField fieldName="CompanyID" aliasFieldName="CompanyName" columns="30" />
+            <dataField fieldName="DateOfBirth" columns="10"  hidden="true" />
+            <dataField fieldName="ChangedByUserID" hidden="true" aliasFieldName="ChangedByUserUserName" />
+            <dataField fieldName="ChangedOn"  hidden="true" columns="10" />
+            <dataField fieldName="Mobile" columns="30" />
+            <dataField fieldName="Department" columns="30" />
           </dataFields>
         </category>
 
         <category headerText="CRM Information" newColumn="true">
-          <description></description>
           <dataFields>
+           
+   
+				        <dataField fieldName="NL_All"/>	  
+ <dataField fieldName="NL_HSE" />			
+ <dataField fieldName="NL_Project" />
+    <dataField fieldName="NL_O_M" />
+	 <dataField fieldName="NL_Survey"/>
 
-
-            <dataField fieldName="NL_All"/>
-            <dataField fieldName="NL_HSE" />
-            <dataField fieldName="NL_Project" />
-            <dataField fieldName="NL_O_M" />
-            <dataField fieldName="NL_Survey"/>
-            <dataField fieldName="NL_Personnel" />
-            <dataField fieldName="NL_Software"  />
-            <dataField fieldName="NL_Vessels" />
-            <dataField fieldName="NL_Procurement"  />
-
-
-
-
-
-            <dataField fieldName="NL_Supply" />
-
-
-
+	     <dataField fieldName="NL_Personnel" /> 
+	    <dataField fieldName="NL_Software"  />	 
+   <dataField fieldName="NL_Vessels" />
+           <dataField fieldName="NL_Procurement"  />
 
 
           </dataFields>
@@ -305,14 +279,21 @@ from "dbo"."ClientContacts" "ClientContacts"
       <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
     </actionGroup>
     <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
-      <!--<action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />-->
-      <action id="a100" commandName="Navigate" commandArgument="_blank:~/pages/ClientContacts.aspx?CompanyID={CompanyID}&amp;_commandName=New&amp;_commandArgument=createForm1" causesValidation="true" headerText="Add New Contacts" whenHRef="ClientNew.aspx"/>
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+      <action id="a100" commandName="Navigate" commandArgument="_blank:~/pages/ClientContactsView.aspx?CompanyID={CompanyID}&amp;_commandName=New&amp;_commandArgument=createForm1" causesValidation="true" headerText="Add" whenHRef="ClientNew.aspx"/>
 
     </actionGroup>
     <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
       <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
+
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+    </actionGroup>
+    
 	 <actionGroup id="ag51" scope="ActionBar" headerText="Edit" flat="true">
       <action id="a100" whenLastCommandName="Select" commandName="Edit" />
     </actionGroup>
