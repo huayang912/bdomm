@@ -91,6 +91,7 @@ CodeFile="PersonnelEmploymentHistory.aspx.cs" Inherits="Pages_PersonnelEmploymen
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ddlPPE_Size" runat="server">
+                                          <asp:ListItem Text="" Value=""></asp:ListItem>                                     
                                             <asp:ListItem>XM</asp:ListItem>
                                             <asp:ListItem>M</asp:ListItem>
                                             <asp:ListItem>L</asp:ListItem>
@@ -116,6 +117,7 @@ CodeFile="PersonnelEmploymentHistory.aspx.cs" Inherits="Pages_PersonnelEmploymen
                                     </td>
                                     <td>
                                         <asp:DropDownList ID="ddlbootsize" runat="server">
+                                           <asp:ListItem Text="0" Value="0"></asp:ListItem>   
                                             <asp:ListItem>4</asp:ListItem>
                                             <asp:ListItem>5</asp:ListItem>
                                             <asp:ListItem>6</asp:ListItem>
@@ -306,8 +308,7 @@ CodeFile="PersonnelEmploymentHistory.aspx.cs" Inherits="Pages_PersonnelEmploymen
                                     Address
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="txtcompanyadr" runat="server" MaxLength="120" 
-                                        TextMode="MultiLine" Width="146px"></asp:TextBox>
+                                    <asp:TextBox ID="txtcompanyadr" runat="server" MaxLength="200" TextMode="MultiLine"></asp:TextBox>
                                     <asp:Label ID="lblCompanyadr" runat="server" Text=""></asp:Label>
                                 </td>
                             </tr>
@@ -317,6 +318,7 @@ CodeFile="PersonnelEmploymentHistory.aspx.cs" Inherits="Pages_PersonnelEmploymen
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="ddlemploymentstatus" runat="server">
+                                       <asp:ListItem Text="" Value=""></asp:ListItem>   
                                         <asp:ListItem>Self Employed</asp:ListItem>
                                         <asp:ListItem>LTD</asp:ListItem>
                                         <asp:ListItem>Sole Trader</asp:ListItem>
@@ -330,6 +332,7 @@ CodeFile="PersonnelEmploymentHistory.aspx.cs" Inherits="Pages_PersonnelEmploymen
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="ddlinsurance" runat="server">
+                                       <asp:ListItem Text="" Value=""></asp:ListItem>   
                                         <asp:ListItem>OWN</asp:ListItem>
                                         <asp:ListItem>OMM</asp:ListItem>
                                     </asp:DropDownList>
