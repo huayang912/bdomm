@@ -19,8 +19,8 @@ public class AppSQL
                 , CN.ChangedOn
 	            , ROW_NUMBER() OVER(ORDER BY CN.ChangedOn DESC) AS RowNumber	
             FROM ContactsNotes CN
-            INNER JOIN Users U ON CN.ChangedByUserID = U.ID
-            INNER JOIN ContactCommsTypes CT ON CN.ContactCommsTypeID = CT.ID
+            LEFT JOIN Users U ON CN.ChangedByUserID = U.ID
+            LEFT JOIN ContactCommsTypes CT ON CN.ContactCommsTypeID = CT.ID
             WHERE CN.ContactID = @ContactID
         )
         SELECT ID
