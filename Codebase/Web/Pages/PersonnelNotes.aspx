@@ -10,22 +10,8 @@
         <div id="divMessage" runat="server" visible="false" enableviewstate="false"></div>
         <asp:Panel ID="pnlFormContainer" runat="server" DefaultButton="btnSave">
          
-            <div class="WinGroupBox">
-                <div class="WinGroupBoxHeader">Notes List</div>
-                
-                <UC:DataTableList ID="ucNoteList" runat="server"
-                    VisibleFields="ID, Note,CommunicationType,ChangedBy,ChangedOn"
-                    LinkFields="ContactID, ID"
-                    NoRecordMessgae="No Note Found for this Personnel."
-                    DeleteMessage="Delete Note?">
-                </UC:DataTableList>
-                
-                <div class="TenPixelTopMargin">
-                    <UC:Pager ID="ucNoteListPager" runat="server" TotalRecordMessage="Total {0} Note(s) Found." OnPageIndexChanged="ucNoteListPager_PageIndexChanged" />
-                </div>
-            </div>    
-            
-               <%--ContactsNotes edit box  Group Box Start--%>               
+         
+                  <%--ContactsNotes edit box  Group Box Start--%>               
             <div class="WinGroupBox">                
                 <div class="WinGroupBoxHeader">Personnel Note</div>                
                 
@@ -39,7 +25,7 @@
 				    <tr>
 				        <td>Note</td>
 				        <td>
-                            <asp:TextBox ID="txtNotes" runat="server" Height="100" TextMode="MultiLine" 
+                            <asp:TextBox ID="txtNotes" runat="server" Height="50" TextMode="MultiLine" 
                                 width="400"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="rfvNote" runat="server" 
                                 ControlToValidate="txtNotes" Display="Dynamic" 
@@ -67,7 +53,24 @@
                 <asp:Button ID="btnSave" runat="server" Text="Save" ValidationGroup="SaveInfo" OnClick="btnSave_Click" />            
                 <%--<asp:Button ID="btnList" runat="server" Text="View List" OnClick="btnList_Click" />--%>
             </div>
-               <%--ContactsNotes edit box  end--%>              
+               <%--ContactsNotes edit box  end--%>      
+         
+            <div class="WinGroupBox">
+                <div class="WinGroupBoxHeader">Notes List</div>
+                
+                <UC:DataTableList ID="ucNoteList" runat="server"
+                    VisibleFields="ID, Note,CommunicationType,ChangedBy,ChangedOn"
+                    LinkFields="ContactID, ID"
+                    NoRecordMessgae="No Note Found for this Personnel."
+                    DeleteMessage="Delete Note?">
+                </UC:DataTableList>
+                
+                <div class="TenPixelTopMargin">
+                    <UC:Pager ID="ucNoteListPager" runat="server" TotalRecordMessage="Total {0} Note(s) Found." OnPageIndexChanged="ucNoteListPager_PageIndexChanged" />
+                </div>
+            </div>    
+            
+              
     
         </asp:Panel>   
     </div> 
