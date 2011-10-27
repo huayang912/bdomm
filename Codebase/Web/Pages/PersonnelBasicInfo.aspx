@@ -4,9 +4,7 @@ AutoEventWireup="true" CodeFile="PersonnelBasicInfo.aspx.cs" Inherits="Pages_Per
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">   
     <UC:jQueryCalendar runat="server" ID="ucjQueryCalendar" />
-    <style type="text/css">
-        .LeftColumn{width:410px; float:left;}
-        .RightColumn{width:410px; float:left; margin-left:10px;}
+    <style type="text/css">        
         .AddNewLink{margin-bottom:5px;}
     </style> 
     <script type="text/javascript" language="javascript">
