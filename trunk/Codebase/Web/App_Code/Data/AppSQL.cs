@@ -42,7 +42,7 @@ public class AppSQL
 	        --, (Contacts.FirstNames + Contacts.LastName) AS [Contact]
 	        --, Clients.Name AS [Client]
 	        , Roles.Name AS [Role]
-            , E.DayRate as [Day Raete]
+            , E.DayRate as [Day Rate]
             , E.Contract_Days as [Contract Days#]			
 	    FROM EmploymentHistory E
 	        LEFT JOIN Contacts ON Contacts.ID = E.ContactID
@@ -293,4 +293,13 @@ ELSE
         FROM ContactRoles cr
         INNER JOIN Roles r ON r.ID = cr.RoleID
         WHERE cr.ContactID = @ContactID";
+
+    public const String GET_TELEPHONE_NUMBERS_BY_CONTACT = @"
+        SELECT TN.Number
+            , TNT.Name AS Type
+        FROM TelephoneNumbers TN
+            INNER JOIN TelephoneNumberTypes TNT ON TNT.ID = TN.TypeID  
+        WHERE ContactID = @ContactID";
+    public const String GET_EMAILS_BY_CONTACT = "SELECT ID, Address AS Email FROM EmailAddresses WHERE ContactID = @ContactID";
+    
 }

@@ -429,3 +429,5 @@ ul.RibbonDropdownMenu li{padding:4px 5px 4px 10px;}
 ul.RibbonDropdownMenu li a:link{color:#6082A8; text-decoration:none;}
 ul.RibbonDropdownMenu li a:visited{color:#6082A8; text-decoration:none;}
 ul.RibbonDropdownMenu li a:hover{color:#6082A8; text-decoration:underline;}
+.LeftColumn{width:410px; float:left;}
+.RightColumn{width:410px; float:left; margin-left:10px;}
