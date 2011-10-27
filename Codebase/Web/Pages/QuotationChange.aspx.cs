@@ -50,10 +50,18 @@ public partial class Pages_QuotationChange : BasePage
 
         IList<Currency> currencies = (from C in dataContext.Currencies select C).ToList();
         ddlCurrency.DataSource = currencies;
+        ddlCurrency.DataValueField = "ID";
+        ddlCurrency.DataTextField = "Description";
+        ddlCurrency.DataBind();
+
+        /*
+
+        ddlCurrency.DataSource = currencies;
         foreach (Currency c in currencies)
         {
             ddlCurrency.Items.Add(new ListItem(c.Description, String.Format("{0}:{1}", c.ID, c.ShortCode)));
         }
+          */
 
         IList<QuotationPricingType> pricingTypes = (from C in dataContext.QuotationPricingTypes select C).ToList();
         ddlPricingTypeID.DataSource = pricingTypes;
