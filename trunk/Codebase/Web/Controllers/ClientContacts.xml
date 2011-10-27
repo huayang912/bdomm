@@ -260,16 +260,18 @@ from "dbo"."ClientContacts" "ClientContacts"
       <action id="a100" commandName="Navigate" commandArgument="_blank:~/pages/ClientContactsView.aspx?ID={ID}" causesValidation="true" headerText="Contact Details" whenHRef="ClientNew.aspx"/>
      <!-- <action id="a110" commandName="Select" whenHRef="ClientContactSrch.aspx" />-->
       <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <!--
       <action id="a2" commandName="Edit" />
       <action id="a3" commandName="Delete" />
       <action id="a6" />
       <action id="a7" commandName="Duplicate" commandArgument="createForm1" />
       <action id="a8" commandName="New" commandArgument="grid1" />
+      -->
     </actionGroup>
     <actionGroup id="ag2" scope="Form">
     <!--  <action id="a1" commandName="Edit" />
       <action id="a2" commandName="Delete" /> -->
-      <action id="a3" commandName="Cancel" />
+      <action id="a3" commandName="Cancel" />    
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <action id="a5" whenLastCommandName="Edit" commandName="Delete" />
       <action id="a6" whenLastCommandName="Edit" commandName="Cancel" />
@@ -288,25 +290,27 @@ from "dbo"."ClientContacts" "ClientContacts"
       <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
     </actionGroup>
 
+    <!--
     <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
       <action id="a1" commandName="ExportCsv" />
       <action id="a2" />
       <action id="a3" commandName="ExportRowset" />
     </actionGroup>
-    
+ -->
 	 <actionGroup id="ag51" scope="ActionBar" headerText="Edit" flat="true">
-      <action id="a100" whenLastCommandName="Select" commandName="Edit" />
+      <action id="a100"  whenLastCommandArgument="createForm1"  commandName="Edit" whenHRef="ClientContactsView.aspx" />
     </actionGroup>
 	
-
+   
 	
- 
+ <!--
     <actionGroup id="ag6" scope="ActionBar" headerText="Record">
       <action id="a1" whenLastCommandName="Edit" commandName="Update" />
       <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
       <action id="a3" whenLastCommandName="New" commandName="Insert" />
       <action id="a4" whenLastCommandName="New" commandName="Cancel" />
     </actionGroup>
+    -->
     <actionGroup id="ag8" scope="Row">
       <action id="a4" whenLastCommandName="Edit" commandName="Update" />
       <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
