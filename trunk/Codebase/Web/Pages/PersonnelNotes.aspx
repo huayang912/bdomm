@@ -19,34 +19,30 @@
                     <colgroup>
                         <col style="width:15%;" />
                         <col />                                        
-                    </colgroup
-				    <tr>
-				    </tr __designer:mapid="109a">
+                    </colgroup>				    
 				    <tr>
 				        <td>Note</td>
 				        <td>
-                            <asp:TextBox ID="txtNotes" runat="server" Height="50" TextMode="MultiLine" 
-                                width="400"></asp:TextBox>
+                            <asp:TextBox ID="txtNotes" runat="server" TextMode="MultiLine" style="height:90px; width:400px;"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="rfvNote" runat="server" 
                                 ControlToValidate="txtNotes" Display="Dynamic" 
                                 ErrorMessage="Please Enter a Note." SetFocusOnError="true" 
                                 ValidationGroup="SaveInfo">
 			                </asp:RequiredFieldValidator>
                         </td>
-                        				    <tr>
-                                                <td>
-                                                    Communication Type</td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlCommType" runat="server" Width="20%">
-                                                    </asp:DropDownList>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
-                                                        ControlToValidate="ddlCommType" Display="Dynamic" 
-                                                        ErrorMessage="Please Select a Type." SetFocusOnError="true" 
-                                                        ValidationGroup="SaveInfo">
+                    </tr>
+                    <tr>
+                        <td>Communication Type</td>
+                        <td>
+                            <asp:DropDownList ID="ddlCommType" runat="server" Width="20%">
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ControlToValidate="ddlCommType" Display="Dynamic" 
+                                ErrorMessage="Please Select a Type." SetFocusOnError="true" 
+                                ValidationGroup="SaveInfo">
                             </asp:RequiredFieldValidator>
-                                                </td>
-                        </tr>
-                        				    </tr>				                    
+                        </td>
+				    </tr>				                    
                 </table>
             </div>        
             <div class="TenPixelTopMargin">
@@ -62,7 +58,8 @@
                     VisibleFields="ID, Note,CommunicationType,ChangedBy,ChangedOn"
                     LinkFields="ContactID, ID"
                     NoRecordMessgae="No Note Found for this Personnel."
-                    DeleteMessage="Delete Note?">
+                    DeleteMessage="Delete Note?"
+                    ListFullText="true">
                 </UC:DataTableList>
                 
                 <div class="TenPixelTopMargin">
