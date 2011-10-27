@@ -62,7 +62,11 @@ public partial class UserControls_DataTableList : BaseUserControl
     /// <summary>
     /// Which Fields Value should be Given in the Selection Checkbox. No checkbox will be there if this value is not specified
     /// </summary>
-    public String SelectionCheckBoxField { get; set; }    
+    public String SelectionCheckBoxField { get; set; }
+    /// <summary>
+    /// Determines Whether to list all from a bigger text or part of them 
+    /// </summary>
+    public bool ListFullText { get; set; }
     /// <summary>
     /// The Message to Show When there is no record in the datasoure to display to the user.
     /// </summary>
@@ -232,7 +236,7 @@ public partial class UserControls_DataTableList : BaseUserControl
         if(data.GetType() == typeof(String))
         {
             String text = NullHandler.GetString(data);
-            if(text.WordCount() > 30)
+            if(!this.ListFullText && text.WordCount() > 30)
                 text = text.GetWords(30);
             return WebUtil.FormatText(text);
         }
