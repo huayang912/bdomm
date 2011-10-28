@@ -23,7 +23,8 @@
 				    <tr>
 				        <td>Note</td>
 				        <td>
-                            <asp:TextBox ID="txtNotes" runat="server" TextMode="MultiLine" style="height:90px; width:400px;"></asp:TextBox>
+                            <asp:TextBox ID="txtNotes" runat="server" TextMode="MultiLine" 
+                                Height="150px" Width="700"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="rfvNote" runat="server" 
                                 ControlToValidate="txtNotes" Display="Dynamic" 
                                 ErrorMessage="Please Enter a Note." SetFocusOnError="true" 
