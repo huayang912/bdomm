@@ -221,17 +221,17 @@
                         <%--Dropdown menu for Configuration Start--%>
                         <div id="divConfigurationDropdown" class="RibbonDropdown">
                             <ul class="RibbonDropdownMenu">
-                                <li><a href="/Pages/Countries.aspx" target="_blank">Country</a></li>
-                                <li><a href="/Pages/Currency.aspx" target="_blank">Currency</a></li>
-                                <li><a href="/Pages/EnquiryStatuses.aspx" target="_blank">Enquiry Status</a></li>
-                                <li><a href="/Pages/EnquiryTypes.aspx" target="_blank">Enquiry Type</a></li>
-                                <li><a href="/Pages/EnquirySourceTypes.aspx" target="_blank">Enquiry Source</a></li>
-                                <li><a href="/Pages/MaritalStatuses.aspx" target="_blank">Marital Status</a></li>
-                                <li><a href="/Pages/ProjectStatuses.aspx" target="_blank">Project Status</a></li>
-                                <li><a href="/Pages/QuotationPricingTypes.aspx" target="_blank">Quotation Pricing Type</a></li>
-                                <li><a href="/Pages/QuotationStatuses.aspx" target="_blank">Quotation Status</a></li>
-                                <li><a href="/Pages/CertificateTypes.aspx" target="_blank">Certification Type</a></li>
-                                <li><a href="/Pages/TelephoneNumberTypes.aspx" target="_blank">Telephone Number Type</a></li>
+                                <li><a href="/Pages/Countries.aspx">Country</a></li>
+                                <li><a href="/Pages/Currency.aspx">Currency</a></li>
+                                <li><a href="/Pages/EnquiryStatuses.aspx">Enquiry Status</a></li>
+                                <li><a href="/Pages/EnquiryTypes.aspx">Enquiry Type</a></li>
+                                <li><a href="/Pages/EnquirySourceTypes.aspx">Enquiry Source</a></li>
+                                <li><a href="/Pages/MaritalStatuses.aspx">Marital Status</a></li>
+                                <li><a href="/Pages/ProjectStatuses.aspx">Project Status</a></li>
+                                <li><a href="/Pages/QuotationPricingTypes.aspx">Quotation Pricing Type</a></li>
+                                <li><a href="/Pages/QuotationStatuses.aspx">Quotation Status</a></li>
+                                <li><a href="/Pages/CertificateTypes.aspx">Certification Type</a></li>
+                                <li><a href="/Pages/TelephoneNumberTypes.aspx">Telephone Number Type</a></li>
                             </ul>
                         </div>
                         <%--Dropdown menu for Configuration End--%>
