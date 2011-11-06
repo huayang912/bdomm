@@ -10,7 +10,8 @@
     <asp:ContentPlaceHolder ID="head" runat="server" ></asp:ContentPlaceHolder>
     <script language="javascript" type="text/javascript">
         function ShowRibbonDorpdown(div, listId) {
-            $(div).click(function (event) { event.stopPropagation(); });
+            //$(div).click(function (event) { event.stopPropagation(); });
+            $('.RibbonDropdown').slideUp('slow');
             var dropdown = $('#' + listId);
             if ($(dropdown).is(':visible'))
                 $(dropdown).slideUp('slow');
@@ -39,6 +40,7 @@
                 $('#PageContent').height(bodyHeight - 10);
             }
             //alert(computedHeight);
+            $('.RibbonItem').click(function(event) { event.stopPropagation(); });
         });
     </script>
   </head>
@@ -173,7 +175,7 @@
                         <%--Personnel Tab Items End--%>
 
                         <%--Options Tab Items Start--%>
-                        <div class="RibbonItemCollection" id="divRibbonTabItemsOption" style="display:block;">
+                        <div class="RibbonItemCollection" id="divRibbonTabItemsOption">
                             <div class="RibbonItem" onclick="ShowRibbonDorpdown(this, 'divDepartmentDropdown');">
                                 <div class="RibbonInnerItem">
                                     <div class="floatleft"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -33px -210px; width:33px;" /></div>
@@ -188,7 +190,7 @@
                             <%--Configuration Tab Start--%>
                             <div class="RibbonItem" onclick="ShowRibbonDorpdown(this, 'divConfigurationDropdown');">
                                 <div class="RibbonInnerItem">
-                                    <div class="floatleft"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -33px -210px; width:33px;" /></div>
+                                    <div class="floatleft"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -66px -210px; width:33px;" /></div>
                                     <div class="floatleft RibbonIconLinkAdjustment" style="margin-right:28px; color:#6082A8;">Configuration</div>
                                     <div class="clearboth"></div>
                                 </div>
@@ -225,7 +227,7 @@
                                 <li><a href="/Pages/Currency.aspx">Currency</a></li>
                                 <li><a href="/Pages/EnquiryStatuses.aspx">Enquiry Status</a></li>
                                 <li><a href="/Pages/EnquiryTypes.aspx">Enquiry Type</a></li>
-                                <li><a href="/Pages/EnquirySourceTypes.aspx">Enquiry Source</a></li>
+                                <li><a href="/Pages/EnquirySourceTypes.aspx">Enquiry Source Type</a></li>
                                 <li><a href="/Pages/MaritalStatuses.aspx">Marital Status</a></li>
                                 <li><a href="/Pages/ProjectStatuses.aspx">Project Status</a></li>
                                 <li><a href="/Pages/QuotationPricingTypes.aspx">Quotation Pricing Type</a></li>

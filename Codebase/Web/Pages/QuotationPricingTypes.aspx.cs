@@ -20,6 +20,6 @@ public partial class Pages_QuotationPricingTypes : BasePage
     
     protected void Page_Load(object sender, EventArgs e)
     {
-        this.Master.SelectedTab = SelectedTab.Project;
+        this.Master.SelectedTab = SelectedTab.Option;
     }
 }

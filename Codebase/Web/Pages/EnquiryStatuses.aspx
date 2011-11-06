@@ -1,4 +1,6 @@
 <%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="EnquiryStatuses.aspx.cs" Inherits="Pages_EnquiryStatuses"  Title="Enquiry Statuses"%>
+<%@ MasterType VirtualPath="~/Main.master" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="PageHeaderContentPlaceHolder" runat="Server">Enquiry Statuses</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageContentPlaceHolder" runat="Server">
   <div factory:flow="NewRow" xmlns:factory="urn:codeontime:app-factory">
