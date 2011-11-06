@@ -58,7 +58,7 @@
                         <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsClient');">Client</div>
                         <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsProject');">Activity</div>
                         <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsPersonnel');">Personnel</div>
-                        <%--<div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsOption');">Option</div>--%>
+                        <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsOption');">Option</div>
                         <div class="RibbonTab" onclick="ShowRibbonTab(this, 'divRibbonTabItemsReport');">Report</div>
                         <div class="clearboth"></div>
                     </div>
@@ -173,7 +173,7 @@
                         <%--Personnel Tab Items End--%>
 
                         <%--Options Tab Items Start--%>
-                        <%--<div class="RibbonItemCollection" id="divRibbonTabItemsOption" style="display:block;">
+                        <div class="RibbonItemCollection" id="divRibbonTabItemsOption" style="display:block;">
                             <div class="RibbonItem" onclick="ShowRibbonDorpdown(this, 'divDepartmentDropdown');">
                                 <div class="RibbonInnerItem">
                                     <div class="floatleft"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -33px -210px; width:33px;" /></div>
@@ -184,18 +184,57 @@
                             <div class="RibbonArrowContainer">
                                <img src="../Images/Blank.gif" title="" alt="" style="background:url(../Images/Ribbon/RibbonSprite.png); background-repeat:no-repeat; background-position: -93px -63px; width:15px; height:8px; margin-left:7px; margin-top:20px;" />
                             </div>
+
+                            <%--Configuration Tab Start--%>
+                            <div class="RibbonItem" onclick="ShowRibbonDorpdown(this, 'divConfigurationDropdown');">
+                                <div class="RibbonInnerItem">
+                                    <div class="floatleft"><img class="RibbonIcon" src="../Images/Blank.gif" title="" alt="" style="background-position: -33px -210px; width:33px;" /></div>
+                                    <div class="floatleft RibbonIconLinkAdjustment" style="margin-right:28px; color:#6082A8;">Configuration</div>
+                                    <div class="clearboth"></div>
+                                </div>
+                            </div>
+                            <div class="RibbonArrowContainer">
+                               <img src="../Images/Blank.gif" title="" alt="" style="background:url(../Images/Ribbon/RibbonSprite.png); background-repeat:no-repeat; background-position: -93px -63px; width:15px; height:8px; margin-left:7px; margin-top:20px;" />
+                            </div>
+                            <%--Configuration Tab End--%>
                             <div class="clearboth"></div>                           
-                        </div>--%>
+                        </div>
                         <%--Dropdown menu for Department Start--%>
-                        <%--<div id="divDepartmentDropdown" class="RibbonDropdown">
+                        <div id="divDepartmentDropdown" class="RibbonDropdown">
                             <ul class="RibbonDropdownMenu">
-                                <li><a href="">Country</a></li>
-                                <li><a href="">Currency</a></li>
-                                <li><a href="">Enquiry Status</a></li>
-                                <li><a href="">Enquiry Type</a></li>
+                                <li><a href="http://www.companyweb.com/Commercial/default.aspx" target="_blank">Commercial</a></li>
+                                <li><a href="http://www.companyweb.com/projects/default.aspx" target="_blank">Project</a></li>
+                                <li><a href="http://www.companyweb.com/personnel/default.aspx" target="_blank">Personnel</a></li>
+                                <li><a href="http://www.companyweb.com/security/default.aspx" target="_blank">Security</a></li>
+                                <li><a href="http://www.companyweb.com/academy/default.aspx" target="_blank">Academy</a></li>
+                                <li><a href="http://www.companyweb.com/vessels/default.aspx" target="_blank">Vassels</a></li>
+                                <li><a href="http://www.companyweb.com/marketing/default.aspx" target="_blank">Marketing</a></li>
+                                <li><a href="http://www.companyweb.com/finance/default.aspx" target="_blank">Finance</a></li>
+                                <li><a href="http://www.companyweb.com/IT/default.aspx" target="_blank">IT</a></li>
+                                <li><a href="http://www.companyweb.com/HR/default.aspx" target="_blank">HR</a></li>
+                                <li><a href="http://www.companyweb.com/HSE/default.aspx" target="_blank">HSE</a></li>
+                                <li><a href="http://www.companyweb.com/QA/default.aspx" target="_blank">QA</a></li>
                             </ul>
-                        </div>--%>
+                        </div>
                         <%--Dropdown menu for Department End--%>
+
+                        <%--Dropdown menu for Configuration Start--%>
+                        <div id="divConfigurationDropdown" class="RibbonDropdown">
+                            <ul class="RibbonDropdownMenu">
+                                <li><a href="/Pages/Countries.aspx" target="_blank">Country</a></li>
+                                <li><a href="/Pages/Currency.aspx" target="_blank">Currency</a></li>
+                                <li><a href="/Pages/EnquiryStatuses.aspx" target="_blank">Enquiry Status</a></li>
+                                <li><a href="/Pages/EnquiryTypes.aspx" target="_blank">Enquiry Type</a></li>
+                                <li><a href="/Pages/EnquirySourceTypes.aspx" target="_blank">Enquiry Source</a></li>
+                                <li><a href="/Pages/MaritalStatuses.aspx" target="_blank">Marital Status</a></li>
+                                <li><a href="/Pages/ProjectStatuses.aspx" target="_blank">Project Status</a></li>
+                                <li><a href="/Pages/QuotationPricingTypes.aspx" target="_blank">Quotation Pricing Type</a></li>
+                                <li><a href="/Pages/QuotationStatuses.aspx" target="_blank">Quotation Status</a></li>
+                                <li><a href="/Pages/CertificateTypes.aspx" target="_blank">Certification Type</a></li>
+                                <li><a href="/Pages/TelephoneNumberTypes.aspx" target="_blank">Telephone Number Type</a></li>
+                            </ul>
+                        </div>
+                        <%--Dropdown menu for Configuration End--%>
                         
                         <%--Options Tab Items End--%> 
 
