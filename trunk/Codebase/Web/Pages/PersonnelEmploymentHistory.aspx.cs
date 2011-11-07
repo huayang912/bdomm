@@ -636,6 +636,7 @@ public partial class Pages_PersonnelEmploymentHistory : BasePage
                 entity.RoleID = Convert.ToInt32(ddlRoles.SelectedValue);
                 entity.ChangedByUserID = SessionCache.CurrentUser.ID;
                 entity.ChangedOn = DateTime.Now;
+                entity.RoleOrder = Convert.ToInt32(RoleOrderNo.Text);
 
                 context.ContactRoles.InsertOnSubmit(entity);
                 context.SubmitChanges();
