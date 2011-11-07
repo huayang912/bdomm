@@ -349,13 +349,14 @@ CodeFile="PersonnelEmploymentHistory.aspx.cs" Inherits="Pages_PersonnelEmploymen
                         <div id="div1">
                             
                             <asp:DropDownList ID="ddlRoles" runat="server"></asp:DropDownList>
+                            &nbsp;Order:<asp:TextBox ID="RoleOrderNo"  Text="1" runat="server" Width="56px"></asp:TextBox>
                             <asp:Button ID="btnAddRoles" runat="server" Text="Add" OnClick="btnAddRoles_Click" />
                             
                             <UC:DataTableList ID="ucContactRoles" runat="server" 
                                 ExcludeVisibleFields="ContactID,ID"
                                 LinkFields="ContactID, ID" 
                                 NoRecordMessgae="No Role Found for this Personnel."
-                                DeleteMessage="Sure to Delete Role?">
+                                DeleteMessage="Delete Role?">
                             </UC:DataTableList>
                             
                             
