@@ -289,10 +289,10 @@ ELSE
 
 
     public const String GET_CONTACT_ROLES = @"
-        SELECT cr.ContactID,cr.ID,r.[Name] as [Name]
+        SELECT cr.ContactID,cr.ID,r.[Name] as [Name],cr.[RoleOrder] as [Order] 
         FROM ContactRoles cr
         INNER JOIN Roles r ON r.ID = cr.RoleID
-        WHERE cr.ContactID = @ContactID";
+        WHERE cr.ContactID = @ContactID Order by cr.RoleOrder";
 
     public const String GET_TELEPHONE_NUMBERS_BY_CONTACT = @"
         SELECT TN.Number
