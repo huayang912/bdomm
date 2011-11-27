@@ -89,7 +89,7 @@ public partial class Pages_PersonnelCertification : BasePage
     {
         UtilityDAO dao = new UtilityDAO();
         DbParameter[] parameters = new[] { new DbParameter("@ContactID", _ContactID) };
-        int totalRecord = 0;
+        //int totalRecord = 0;
         DataSet ds = dao.GetDataSet(AppSQL.GET_CRETIFICATION_DETAILS_BY_CONTACT, parameters, false);
         
         //Bind the List Control
@@ -115,28 +115,35 @@ public partial class Pages_PersonnelCertification : BasePage
     protected void BindCertificationInfo()
     {
         OMMDataContext context = new OMMDataContext();
-        if (context.Certificates.FirstOrDefault(P => P.ContactID == _ContactID) == null)
-            ShowNotFoundMessage();
-        else
+        //if (context.Certificates.FirstOrDefault(P => P.ContactID == _ContactID) == null)
+        //    ShowNotFoundMessage();
+        //else
+        //{
+        if (_IsEditMode)
         {
-            if (_IsEditMode)
-            {                
-                Certificate entity = 
-                    context.Certificates.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);
-                
-                if (entity == null)
-                    ShowNotFoundMessage();
-                else
-                {
-                    ddlCertificateType.SetSelectedItem((entity.TypeID.ToString().Trim().IsNullOrEmpty()) ? 
-                        String.Empty : entity.TypeID.ToString().Trim());
+            Certificate entity =
+                context.Certificates.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);
 
-                    tbxDetails.Text = entity.Details;
-                    tbxExpiryDate.Text = entity.ExpiryDate.ToString();
-                    tbxPlaceIssued.Text = entity.PlaceIssued;
-                }
+            if (entity == null)
+                ShowNotFoundMessage();
+            else
+            {
+                //ddlCertificateType.SetSelectedItem((entity.TypeID.ToString().Trim().IsNullOrEmpty()) ? 
+                //   String.Empty : entity.TypeID.ToString().Trim());
+                ddlCertificateType.SetSelectedItem(entity.TypeID.ToString());
+                tbxDetails.Text = entity.Details;
+                tbxExpiryDate.Text = entity.ExpiryDate.ToString();
+                tbxPlaceIssued.Text = entity.PlaceIssued;
+                lblChangedBy.Text = entity.User == null ? String.Empty : entity.User.UserName.HtmlEncode();
+                lblChangedOn.Text = entity.ChangedOn.ToString(AppConstants.ValueOf.SHORT_DATE_FROMAT_WITH_TIME);
             }
         }
+        else
+        {
+            lblChangedBy.Text = SessionCache.CurrentUser.UserName.HtmlEncode();
+            lblChangedOn.Text = DateTime.Now.ToString(AppConstants.ValueOf.SHORT_DATE_FROMAT_WITH_TIME);
+        }
+        //}
     }
     /// <summary>
     /// Shows a Message in the UI and Hides the Data Editing Controls

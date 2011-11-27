@@ -53,16 +53,16 @@ public class AppSQL
 
     public const String GET_BANK_DETAILS_BY_CONTACT = @"
         SELECT 
-        bd.ID,
-        bd.ContactID,
-        bd.BankName,
-        bd.BranchName,
-        bd.BranchAddress,
-        bd.SortCode,
-        bd.AccountNumber,
-        bd.AccountName,
-        bd.BicCode,
-        bd.AbaCode 
+            bd.ID,
+            bd.ContactID,
+            bd.BankName AS [Bank Name],
+            bd.BranchName AS [Branch Name],
+            bd.BranchAddress AS [Branch Address],
+            bd.SortCode AS [Sort Code],
+            bd.AccountNumber AS [Account Number],
+            bd.AccountName AS [Account Name],
+            bd.BicCode AS [Bic Code],
+            bd.AbaCode AS [Aba Code] 
         FROM BankDetails bd
         WHERE bd.ContactID = @ContactID";
 
@@ -72,8 +72,8 @@ public class AppSQL
         c.ContactID,
         c.TypeID,
         c.Details,
-        c.ExpiryDate,
-        c.PlaceIssued 
+        c.ExpiryDate AS [Expiry Date],
+        c.PlaceIssued AS [Place Issued]
         FROM Certificates c
         INNER JOIN CertificateTypes ct 
         ON ct.ID = c.TypeID
@@ -81,37 +81,37 @@ public class AppSQL
 
     public const String GET_PASSPORT_DETAILS_BY_CONTACT = @"
         SELECT p.ID,
-        p.ContactID,
-        p.Number,
-        p.WhereIssued,
-        p.ExpiryDate,
-        p.Nationality
+            p.ContactID,
+            p.Number,
+            p.WhereIssued AS [Where Issued],
+            p.ExpiryDate AS [Expiry Date],
+            p.Nationality
         FROM Passports p 
         WHERE p.ContactID =  @ContactID";
 
     public const String GET_VISA_DETAILS_BY_CONTACT = @"
         SELECT v.ID,
-        v.ContactID,
-        v.CountryID,
-        c.[Name],
-        v.VisaType,
-        v.ExpiryDate 
+	        v.ContactID,
+	        v.CountryID,
+	        c.[Name],
+	        v.VisaType AS [Visa Type],
+	        v.ExpiryDate AS [Expiry Date] 
         FROM Visas v 
-        INNER JOIN Countries c ON c.ID = v.CountryID
+	        INNER JOIN Countries c ON c.ID = v.CountryID
         WHERE v.ContactID =  @ContactID";
 
 
     public const String GET_NEXT_OF_KIN_BY_CONTACT = @"
         SELECT nok.ID,
-        nok.ContactID,
-        nok.[Name],
-        nok.Relationship,
-        nok.[Address],
-        nok.Postcode,
-        c.[Name] AS [Country],
-        nok.HomeNumber,
-        nok.WorkNumber,
-        nok.MobileNumber
+            nok.ContactID,
+            nok.[Name],
+            nok.Relationship,
+            nok.[Address],
+            nok.Postcode,
+            c.[Name] AS [Country],
+            nok.HomeNumber AS [Home Number],
+            nok.WorkNumber AS [Work Number],
+            nok.MobileNumber AS [Mobile Number]
         FROM NextOfKin nok
         INNER JOIN Countries c ON c.ID = nok.CountryID
         WHERE nok.ContactID =  @ContactID";

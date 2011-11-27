@@ -25,7 +25,7 @@ public partial class Pages_PersonnelBankDetails : BasePage
         {
             CheckAndDeleteData();
             BindDropDownLists();
-            BindContactsBankInfo();
+            BindBankInfo();
             BindBankList(1);
             ShowSuccessMessage();
         }
@@ -89,7 +89,7 @@ public partial class Pages_PersonnelBankDetails : BasePage
     {
         UtilityDAO dao = new UtilityDAO();
         DbParameter[] parameters = new[] { new DbParameter("@ContactID", _ContactID) };
-        int totalRecord = 0;
+        //int totalRecord = 0;
         //DataSet ds = dao.GetPagedData(AppSQL.GET_BANK_DETAILS_BY_CONTACT, parameters, pageNumber, PAGE_SIZE, out totalRecord);
         DataSet ds = dao.GetDataSet(AppSQL.GET_BANK_DETAILS_BY_CONTACT, parameters, false);
         
@@ -113,42 +113,49 @@ public partial class Pages_PersonnelBankDetails : BasePage
     /// <summary>
     /// Binds ContactsNotes Info Requested through Query Strings
     /// </summary>
-    protected void BindContactsBankInfo()
+    protected void BindBankInfo()
     {
         OMMDataContext context = new OMMDataContext();
-        if (context.BankDetails.FirstOrDefault(P => P.ID == _ContactID) == null)
-            ShowNotFoundMessage();
-        else
+        //if (context.BankDetails.FirstOrDefault(P => P.ID == _ContactID) == null)
+        //    ShowNotFoundMessage();
+        //else
+        //{
+        if (_IsEditMode)
         {
-            if (_IsEditMode)
-            {                
-                BankDetail entity = 
-                    context.BankDetails.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);
-                if (entity == null)
-                    ShowNotFoundMessage();
-                else
-                {
-                    tbxBankName.Text = entity.BankName;
-                    tbxBranchName.Text = entity.BranchName;
-                    tbxBranchAddress.Text = entity.BranchAddress;
-                    tbxSortCode.Text = entity.SortCode;
-                    tbxAccNumber.Text = entity.AccountNumber;
-                    tbxAccName.Text = entity.AccountName;
-                    tbxBicCode.Text = entity.BicCode;
-                    tbxAbaCode.Text = entity.AbaCode;
-                }
+            BankDetail entity =
+                context.BankDetails.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID);
+            if (entity == null)
+                ShowNotFoundMessage();
+            else
+            {
+                tbxBankName.Text = entity.BankName;
+                tbxBranchName.Text = entity.BranchName;
+                tbxBranchAddress.Text = entity.BranchAddress;
+                tbxSortCode.Text = entity.SortCode;
+                tbxAccNumber.Text = entity.AccountNumber;
+                tbxAccName.Text = entity.AccountName;
+                tbxBicCode.Text = entity.BicCode;
+                tbxAbaCode.Text = entity.AbaCode;
+                lblChangedBy.Text = entity.User == null ? String.Empty : entity.User.UserName.HtmlEncode();
+                lblChangedOn.Text = entity.ChangedOn.ToString(AppConstants.ValueOf.SHORT_DATE_FROMAT_WITH_TIME);
             }
         }
+        else
+        {
+            lblChangedBy.Text = SessionCache.CurrentUser.UserName.HtmlEncode();
+            lblChangedOn.Text = DateTime.Now.ToString(AppConstants.ValueOf.SHORT_DATE_FROMAT_WITH_TIME);
+        }
+        //}
     }
     /// <summary>
     /// Shows a Message in the UI and Hides the Data Editing Controls
     /// </summary>
     protected void ShowNotFoundMessage()
     {
-        //pnlFormContainer.Visible = false;
+        pnlFormContainer.Visible = false;
         WebUtil.ShowMessageBox(divMessage, "Requested Bank Details was not found.", true);
     }
-    protected void SaveContactsBank()
+    protected void SaveBankDetails()
     {
         OMMDataContext context = new OMMDataContext();
         BankDetail entity = null;
@@ -188,7 +195,7 @@ public partial class Pages_PersonnelBankDetails : BasePage
     {
         if (Page.IsValid)
         {
-            SaveContactsBank();
+            SaveBankDetails();
             //Response.Redirect(AppConstants.Pages.CONTACTSNOTES_LIST);
             return;
         }
