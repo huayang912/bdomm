@@ -13,68 +13,89 @@ CodeFile="PersonnelTravelDetails.aspx.cs" Inherits="Pages_PersonnelTravelDetails
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">    
     <div>
         <div id="divMessage" runat="server" visible="false" enableviewstate="false"></div>
-        <asp:Panel ID="pnlFormContainer" runat="server" DefaultButton="btnSave">
+        <%--<asp:Panel ID="pnlFormContainer" runat="server" DefaultButton="btnSave">--%>
             <div class="WinGroupBox">
-                <div class="WinGroupBoxHeader">Basis Travel Details</div>
+                <div class="WinGroupBoxHeader">Basic Travel Details</div>
                 <table cellpadding="3" cellspacing="0" style="width: 100%;">
+                    <colgroup>
+                        <col style="width:10%;" />
+                        <col style="width:20%;" />
+                        <col style="width:10%;" />
+                        <col />
+                    </colgroup>
                     <tr>
                         <td>
                             Frequent Flyer Number:
                         </td>
                         <td>
-                            <asp:TextBox ID="tbxFrequentFlNumber" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbxFrequentFlNumber" runat="server" MaxLength="50"></asp:TextBox>
                         </td>
                         <td>
                             Preferred Airport:
-                        </td>
-                    
+                        </td>                    
                         <td>
-                            <asp:TextBox ID="tbxPreferredAirport" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbxPreferredAirport" runat="server" MaxLength="50"></asp:TextBox>
                         </td>
                      </tr>
                     <tr>   
                         <td>
-                            Closetst Airport:
+                            Closest Airport:
                         </td>
                         <td>
-                            <asp:TextBox ID="tbxClosestAirport" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbxClosestAirport" runat="server" MaxLength="50"></asp:TextBox>
                         </td>
-                        <td></td>
+                        <td>Changed By</td>
                         <td>
-                            <asp:TextBox ID="tbxUpdateSave" runat="server" Visible = "false"></asp:TextBox>
+                            <asp:Label ID="lblChangedBy" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Changed On</td>
+                        <td><asp:Label ID="lblChangedOn" runat="server"></asp:Label></td>
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <asp:Button ID="btnSaveBasicInfo" runat="server" Text="Save" 
+                                ValidationGroup="SaveTravelDetails" OnClick="btnSaveBasicInfo_Click"/>
                         </td>
                     </tr>
                 </table>
             </div>
-            
-            <div class="TenPixelTopMargin">
-                <asp:Button ID="btnSaveBasicInfo" runat="server" Text="Save" 
-                ValidationGroup="SaveInfo" OnClick="btnSaveBasicInfo_Click"/>                
-            </div>
+           
             
             <div class="WinGroupBox">
-                <div class="WinGroupBoxHeader">
-                    Passport Details</div>
+                <div class="WinGroupBoxHeader">Passports</div>
                 <table cellpadding="3" cellspacing="0" style="width: 100%;">
+                    <colgroup>
+                        <col style="width:10%;" />
+                        <col style="width:20%;" />
+                        <col style="width:10%;" />
+                        <col />
+                    </colgroup>
                     <tr>
+                        <td>Number</td>
                         <td>
-                            Number
-                        </td>
-                        <td>
-                            <asp:TextBox ID="tbxNumber" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbxNumber" runat="server" MaxLength="50"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                 SetFocusOnError="true"
                                 Display="Dynamic" 
                                 ControlToValidate="tbxNumber" 
-                                ErrorMessage="Please Enter a Number."
-                                ValidationGroup="SavePInfo">
+                                ErrorMessage="<br/>Please Enter a Number."
+                                ValidationGroup="SavePassport">
                             </asp:RequiredFieldValidator>
+                            <asp:CustomValidator ID="cvPassport" runat="server"
+                                SetFocusOnError="true" Display="Dynamic"
+                                ControlToValidate="tbxNumber" ValidationGroup="SavePassport"
+                                ErrorMessage="<br/>This Passport Number already exists."
+                                OnServerValidate="cvPassport_OnServerValidate">
+                            </asp:CustomValidator>
                         </td>
                         <td>
                             Where Issued
                         </td>
                         <td>
-                            <asp:TextBox ID="tbxWhereIssued" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbxWhereIssued" runat="server" MaxLength="100"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -88,47 +109,24 @@ CodeFile="PersonnelTravelDetails.aspx.cs" Inherits="Pages_PersonnelTravelDetails
                             <asp:CustomValidator ID="cvStartDate" runat="server" 
                                 ControlToValidate="tbxExpiryDate"
                                 SetFocusOnError="true" ClientValidationFunction="ValidateDate" 
-                                ErrorMessage="Please Select a Valid Date."
-                                Display="Dynamic" ValidationGroup="SaveInfo">
+                                ErrorMessage="<br/>Please Select a Valid Date."
+                                Display="Dynamic" ValidationGroup="SavePassport">
                             </asp:CustomValidator>
                         </td>
                         <td>
                             Nationality
                         </td>
                         <td>
-                            <asp:TextBox ID="tbxNationality" runat="server"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <%--<tr>
-                        <td>
-                            Accout Number
-                        </td>
-                        <td>
-                            <asp:TextBox ID="tbxAccNumber" runat="server"></asp:TextBox>
-                        </td>
-                        <td>
-                            Account Name
-                        </td>
-                        <td>
-                            <asp:TextBox ID="tbxAccName" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbxNationality" runat="server" MaxLength="100"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            Bic Code
+                        <td colspan="4">
+                            <asp:Button ID="btnSavePassport" runat="server" Text="Save" ValidationGroup="SavePassport" OnClick="btnSavePassport_Click" />
                         </td>
-                        <td>
-                            <asp:TextBox ID="tbxBicCode" runat="server"></asp:TextBox>
-                        </td>
-                        <td>
-                            Aba Code
-                        </td>
-                        <td>
-                            <asp:TextBox ID="tbxAbaCode" runat="server"></asp:TextBox>
-                        </td>
-                    </tr>--%>
+                    </tr>
                     <tr>
-                        <td colspan = 4 >
+                        <td colspan="4">
                             <UC:DataTableList ID="ucPassportList" runat="server"
                                 ExcludeVisibleFields = "ContactID, ID"
                                 LinkFields="ContactID, ID"
@@ -139,26 +137,26 @@ CodeFile="PersonnelTravelDetails.aspx.cs" Inherits="Pages_PersonnelTravelDetails
                     </tr>
                 </table>
             </div>        
-            <div class="TenPixelTopMargin">
-                <asp:Button ID="btnSave" runat="server" Text="Save" 
-                ValidationGroup="SavePInfo" OnClick="btnSave_Click" />            
-            </div>
+            
             
             <div class="WinGroupBox">
-                <div class="WinGroupBoxHeader">Visas List</div>
-                
+                <div class="WinGroupBoxHeader">Visas</div>                
                 <table cellpadding="3" cellspacing="0" style="width: 100%;">
+                    <colgroup>
+                        <col style="width:10%;" />
+                        <col style="width:20%;" />
+                        <col style="width:10%;" />
+                        <col />
+                    </colgroup>
                     <tr>
-                        <td>
-                            Country
-                        </td>
+                        <td>Country</td>
                         <td>
                             <asp:DropDownList ID="ddlCountry" runat="server"></asp:DropDownList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                 SetFocusOnError="true"
                                 Display="Dynamic" 
                                 ControlToValidate="ddlCountry" 
-                                ErrorMessage="Please Select a Country."
+                                ErrorMessage="<br/>Please Select a Country."
                                 ValidationGroup="SaveVInfo">
                             </asp:RequiredFieldValidator>
                         </td>
@@ -166,7 +164,7 @@ CodeFile="PersonnelTravelDetails.aspx.cs" Inherits="Pages_PersonnelTravelDetails
                             Visa Type
                         </td>
                         <td>
-                            <asp:TextBox ID="tbxVisaType" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="tbxVisaType" runat="server" MaxLength="50"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -179,22 +177,22 @@ CodeFile="PersonnelTravelDetails.aspx.cs" Inherits="Pages_PersonnelTravelDetails
                             <asp:CustomValidator ID="CustomValidator1" runat="server" 
                                 ControlToValidate="tbxVisaExpDate"
                                 SetFocusOnError="true" ClientValidationFunction="ValidateDate" 
-                                ErrorMessage="Please Select a Valid Date."
-                                Display="Dynamic" ValidationGroup="SaveInfo">
+                                ErrorMessage="<br/>Please Select a Valid Date."
+                                Display="Dynamic" ValidationGroup="SaveVInfo">
                             </asp:CustomValidator>
                         </td>
-                        <td>
-                            
-                        </td>
-                        <td>
-                            
+                        <td colspan="2"></td>                        
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <asp:Button ID="btnSaveVisa" runat="server" Text="Save" 
+                                ValidationGroup="SaveVInfo" OnClick="btnSaveVisa_Click" />
                         </td>
                     </tr>
-                    
                     <tr>
-                        <td colspan = 4 >
+                        <td colspan="4" >
                             <UC:DataTableList ID="ucVisaList" runat="server"
-                                ExcludeVisibleFields = "ContactID, ID"
+                                ExcludeVisibleFields = "ContactID, ID, CountryID"
                                 LinkFields="ContactID, ID"
                                 NoRecordMessgae="No VISA Details Found for this Personnel."
                                 DeleteMessage="Sure to Delete VISA Details?">
@@ -203,13 +201,9 @@ CodeFile="PersonnelTravelDetails.aspx.cs" Inherits="Pages_PersonnelTravelDetails
                     </tr>
                 </table>
                 
-            </div> 
-            <div class="TenPixelTopMargin">
-                <asp:Button ID="Button1" runat="server" Text="Save" 
-                ValidationGroup="SaveVInfo" OnClick="btnSaveVisa_Click" />            
-            </div>
+            </div>             
             <div style="height:50px;">&nbsp;</div>             
-        </asp:Panel>   
+        <%--</asp:Panel>--%>   
     </div> 
 </asp:Content>
 

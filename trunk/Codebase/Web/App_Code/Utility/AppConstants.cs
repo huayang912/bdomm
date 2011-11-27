@@ -60,6 +60,7 @@ public class AppConstants
         public const String DECIMAL_FORMAT_FOR_TEXTBOX = "{0:0}";
         public const String DATE_FROMAT_DISPLAY = "MMMM dd, yyyy";
         public const String DATE_FROMAT_DISPLAY_WITH_TIME = "dddd, MMMM dd, yyyy hh:mm:ss tt";
+        public const String SHORT_DATE_FROMAT_WITH_TIME = "dd/MM/yyyy hh:mm:ss tt";
     }
     #endregion
 

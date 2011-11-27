@@ -23,13 +23,10 @@ public partial class Pages_PersonnelTravelDetails : BasePage
     {
         BindPageInfo();
         if (!IsPostBack)
-        {
-            BindDropdownList.Countries(ddlCountry);
-
-            loadBasicDetails();
-
+        {            
             CheckAndDeleteData();
             BindDropDownLists();
+            LoadTravelBasicDetails();
             BindContactsPassportInfo();
             
             BindPassportList(1);
@@ -38,30 +35,63 @@ public partial class Pages_PersonnelTravelDetails : BasePage
             ShowSuccessMessage();
         }
     }
+    /// <summary>
+    /// Bindis the Page Initialization Variables
+    /// </summary>
+    protected void BindPageInfo()
+    {
+        _ID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);
+        _ContactID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.CONTACT_ID);
+        _IsDeleteMode = String.Compare(WebUtil.GetQueryStringInString(
+            AppConstants.QueryString.DELETE), "True", true) == 0 ? true : false;
+        if (_ID > 0 && !_IsDeleteMode)
+            _IsEditMode = true;
 
-    public void loadBasicDetails()
+        _OnTable = WebUtil.GetQueryStringInString(AppConstants.QueryString.ON_TABLE);
+
+        Page.Title = WebUtil.GetPageTitle("Manage Travel Details");
+    }
+    /// <summary>
+    /// Binds Dropdownlists for the initial request.
+    /// </summary>
+    protected void BindDropDownLists()
+    {
+        //BindDropdownList.Contactses(ddlContactID);
+        //BindDropdownList.Userses(ddlChangedByUserID);
+        BindDropdownList.Countries(ddlCountry);
+    }
+
+    public void LoadTravelBasicDetails()
     {
         OMMDataContext context = new OMMDataContext();
         
-        var ContactsTravelDetails = context.ContactsTravels.FirstOrDefault(P => P.ContactID == _ContactID);
+        var contactTravel = context.ContactsTravels.FirstOrDefault(P => P.ContactID == _ContactID);
 
-        if (ContactsTravelDetails == null || _ContactID == 0)
+        //if (ContactsTravelDetails == null || _ContactID == 0)
+        //{
+        //    //btnSaveBasicInfo.Text = "Save";
+        //    tbxUpdateSave.Text = "Save";
+        //}
+        //else
+        if (contactTravel == null)
         {
-            //btnSaveBasicInfo.Text = "Save";
-            tbxUpdateSave.Text = "Save";
+            lblChangedBy.Text = SessionCache.CurrentUser.UserName.HtmlEncode();
+            lblChangedOn.Text = DateTime.Now.ToString(AppConstants.ValueOf.SHORT_DATE_FROMAT_WITH_TIME);
         }
         else
         {
             //btnSaveBasicInfo.Text = "Update";
-            tbxUpdateSave.Text = "Update";
+            //tbxUpdateSave.Text = "Update";
 
-            tbxFrequentFlNumber.Text = 
-                (ContactsTravelDetails.FrequentFlyerNumber.IsNullOrEmpty()) ? "" : ContactsTravelDetails.FrequentFlyerNumber.ToString();
-            tbxPreferredAirport.Text = 
-                (ContactsTravelDetails.PreferredAirport.IsNullOrEmpty()) ? "" : ContactsTravelDetails.PreferredAirport.ToString();
-            tbxClosestAirport.Text = 
-                (ContactsTravelDetails.ClosestAirport.IsNullOrEmpty()) ? "" : ContactsTravelDetails.ClosestAirport.ToString();
+            tbxFrequentFlNumber.Text = contactTravel.FrequentFlyerNumber;
+                //(ContactsTravelDetails.FrequentFlyerNumber.IsNullOrEmpty()) ? "" : ContactsTravelDetails.FrequentFlyerNumber.ToString();
+            tbxPreferredAirport.Text = contactTravel.PreferredAirport;
+                //(ContactsTravelDetails.PreferredAirport.IsNullOrEmpty()) ? "" : ContactsTravelDetails.PreferredAirport.ToString();
+            tbxClosestAirport.Text = contactTravel.ClosestAirport;
+                //(ContactsTravelDetails.ClosestAirport.IsNullOrEmpty()) ? "" : ContactsTravelDetails.ClosestAirport.ToString();
 
+            lblChangedBy.Text = contactTravel.User == null ? String.Empty : contactTravel.User.UserName.HtmlEncode();
+            lblChangedOn.Text = contactTravel.ChangedOn.ToString(AppConstants.ValueOf.SHORT_DATE_FROMAT_WITH_TIME);
 
             //grdsearch.DataSource = ContactsNextOfKin;
             //grdsearch.DataBind();
@@ -74,75 +104,54 @@ public partial class Pages_PersonnelTravelDetails : BasePage
         OMMDataContext context = new OMMDataContext();
         //int contactID = WebUtil.GetQueryStringInInt("ID");
 
-        if (tbxUpdateSave.Text == "Save")
-        {
-            ContactsTravel conTravel = new ContactsTravel();
-
-            conTravel.FrequentFlyerNumber = 
-                (tbxFrequentFlNumber.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxFrequentFlNumber.Text.ToString().Trim();
-            conTravel.PreferredAirport = 
-                (tbxPreferredAirport.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxPreferredAirport.Text.ToString().Trim();
-            conTravel.ClosestAirport = 
-                (tbxClosestAirport.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxClosestAirport.Text.ToString().Trim();
+        //if (tbxUpdateSave.Text == "Save")
+        {            
+            ContactsTravel conTravel = context.ContactsTravels.FirstOrDefault(P => P.ContactID == _ContactID);
+            if (conTravel == null)
+            {
+                conTravel = new ContactsTravel();
+                conTravel.ContactID = _ContactID;
+                context.ContactsTravels.InsertOnSubmit(conTravel);
+            }
+            conTravel.FrequentFlyerNumber = tbxFrequentFlNumber.Text; 
+                //(tbxFrequentFlNumber.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxFrequentFlNumber.Text.ToString().Trim();
+            conTravel.PreferredAirport = tbxPreferredAirport.Text;
+                //(tbxPreferredAirport.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxPreferredAirport.Text.ToString().Trim();
+            conTravel.ClosestAirport = tbxClosestAirport.Text;
+                //(tbxClosestAirport.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxClosestAirport.Text.ToString().Trim();
             conTravel.ChangedByUserID = SessionCache.CurrentUser.ID;
-            conTravel.ChangedOn = System.DateTime.Today;
-
-            context.ContactsTravels.InsertOnSubmit(conTravel);
+            conTravel.ChangedOn = System.DateTime.Now;
+            
             context.SubmitChanges();
+            RedirectToShowSuccessMessage();
         }
-        if (tbxUpdateSave.Text == "Update")
-        {
-            var ContactsTravel = context.ContactsTravels.FirstOrDefault(P => P.ContactID == _ContactID);
+        //if (tbxUpdateSave.Text == "Update")
+        //{
+        //    var ContactsTravel = context.ContactsTravels.FirstOrDefault(P => P.ContactID == _ContactID);
+
+        //    if (ContactsTravel == null || _ContactID == 0)
+        //    {
+
+        //    }
+        //    else
+        //    {
+        //        ContactsTravel.FrequentFlyerNumber = 
+        //            (tbxFrequentFlNumber.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxFrequentFlNumber.Text.ToString().Trim();
+        //        ContactsTravel.PreferredAirport = 
+        //            (tbxPreferredAirport.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxPreferredAirport.Text.ToString().Trim();
+        //        ContactsTravel.ClosestAirport = 
+        //            (tbxClosestAirport.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxClosestAirport.Text.ToString().Trim();
+        //        ContactsTravel.ChangedByUserID = SessionCache.CurrentUser.ID;
+        //        ContactsTravel.ChangedOn = System.DateTime.Today;
+
+        //        context.SubmitChanges();
+        //    }
+        //}
 
 
-            if (ContactsTravel == null || _ContactID == 0)
-            {
-
-            }
-            else
-            {
-                ContactsTravel.FrequentFlyerNumber = 
-                    (tbxFrequentFlNumber.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxFrequentFlNumber.Text.ToString().Trim();
-                ContactsTravel.PreferredAirport = 
-                    (tbxPreferredAirport.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxPreferredAirport.Text.ToString().Trim();
-                ContactsTravel.ClosestAirport = 
-                    (tbxClosestAirport.Text.ToString().Trim().IsNullOrEmpty()) ? "" : tbxClosestAirport.Text.ToString().Trim();
-                ContactsTravel.ChangedByUserID = SessionCache.CurrentUser.ID;
-                ContactsTravel.ChangedOn = System.DateTime.Today;
-
-                context.SubmitChanges();
-            }
-        }
-
-
-        ShowSuccessMessage();
-    }
+        //ShowSuccessMessage();
+    }  
     
-    /// <summary>
-    /// Bindis the Page Initialization Variables
-    /// </summary>
-    protected void BindPageInfo()
-    {
-        _ID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.ID);
-        _ContactID = WebUtil.GetQueryStringInInt(AppConstants.QueryString.CONTACT_ID);
-        _IsDeleteMode = String.Compare(WebUtil.GetQueryStringInString(
-            AppConstants.QueryString.DELETE), "True", true) == 0 ? true : false;
-        if (_ID > 0 && !_IsDeleteMode)        
-            _IsEditMode = true;
-
-        _OnTable = WebUtil.GetQueryStringInString(AppConstants.QueryString.ON_TABLE);
-
-        Page.Title = WebUtil.GetPageTitle("Manage Travel Details");
-    }
-
-    /// <summary>
-    /// Binds Dropdownlists for the initial request.
-    /// </summary>
-    protected void BindDropDownLists()
-    {
-        //BindDropdownList.Contactses(ddlContactID);
-        //BindDropdownList.Userses(ddlChangedByUserID);
-    }
     protected void ShowSuccessMessage()
     {
         if (String.Compare(WebUtil.GetQueryStringInString
@@ -203,7 +212,7 @@ public partial class Pages_PersonnelTravelDetails : BasePage
     {
         UtilityDAO dao = new UtilityDAO();
         DbParameter[] parameters = new[] { new DbParameter("@ContactID", _ContactID) };
-        int totalRecord = 0;
+        //int totalRecord = 0;
         //DataSet ds = dao.GetPagedData(AppSQL.GET_BANK_DETAILS_BY_CONTACT, parameters, pageNumber, PAGE_SIZE, out totalRecord);
         DataSet ds = dao.GetDataSet(AppSQL.GET_PASSPORT_DETAILS_BY_CONTACT, parameters, false);
         
@@ -230,7 +239,7 @@ public partial class Pages_PersonnelTravelDetails : BasePage
     {
         UtilityDAO dao = new UtilityDAO();
         DbParameter[] parameters = new[] { new DbParameter("@ContactID", _ContactID) };
-        int totalRecord = 0;
+        //int totalRecord = 0;
         //DataSet ds = dao.GetPagedData(AppSQL.GET_BANK_DETAILS_BY_CONTACT, parameters, pageNumber, PAGE_SIZE, out totalRecord);
         DataSet ds = dao.GetDataSet(AppSQL.GET_VISA_DETAILS_BY_CONTACT, parameters, false);
 
@@ -263,10 +272,10 @@ public partial class Pages_PersonnelTravelDetails : BasePage
         if (_OnTable == "PASSPORT")
         {
             OMMDataContext context = new OMMDataContext();
-            if (context.Passports.FirstOrDefault(P => P.ContactID == _ContactID) == null)
-                ShowNotFoundMessage();
-            else
-            {
+            //if (context.Passports.FirstOrDefault(P => P.ContactID == _ContactID) == null)
+            //    ShowNotFoundMessage();
+            //else
+            //{
                 if (_IsEditMode)
                 {
                     Passport entity =
@@ -277,19 +286,21 @@ public partial class Pages_PersonnelTravelDetails : BasePage
                     {
                         tbxNumber.Text = entity.Number;
                         tbxWhereIssued.Text = entity.WhereIssued;
-                        tbxExpiryDate.Text = (entity.ExpiryDate.IsNotNull()) ? entity.ExpiryDate.ToString() : "";
+                        //tbxExpiryDate.Text = (entity.ExpiryDate.IsNotNull()) ? entity.ExpiryDate.ToString() : "";
+                        tbxExpiryDate.Text = entity.ExpiryDate.HasValue ? entity.ExpiryDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
                         tbxNationality.Text = entity.Nationality;
                     }
                 }
-            }
+            //}
         }
+        ///Load VISA Information
         if (_OnTable == "VISA")
         {
             OMMDataContext context = new OMMDataContext();
-            if (context.Visas.FirstOrDefault(P => P.ContactID == _ContactID) == null)
-                ShowNotFoundMessage();
-            else
-            {
+            //if (context.Visas.FirstOrDefault(P => P.ID == _ID && P.ContactID == _ContactID) == null)
+            //    ShowNotFoundMessage();
+            //else
+            //{
                 if (_IsEditMode)
                 {
                     Visa entity =
@@ -299,15 +310,15 @@ public partial class Pages_PersonnelTravelDetails : BasePage
                     else
                     {
                         //tbxCountry.Text = entity.CountryID.ToString();
-                        ddlCountry.SetSelectedItem((entity.CountryID.ToString().Trim().IsNullOrEmpty()) ?
-                            String.Empty : entity.CountryID.ToString().Trim());
+                        ddlCountry.SetSelectedItem(entity.CountryID.ToString());
 
                         tbxVisaType.Text = entity.VisaType;
-                        tbxVisaExpDate.Text = (entity.ExpiryDate.IsNotNull()) ? entity.ExpiryDate.ToString() : "";
+                        //tbxVisaExpDate.Text = (entity.ExpiryDate.IsNotNull()) ? entity.ExpiryDate.ToString() : "";
+                        tbxVisaExpDate.Text = entity.ExpiryDate.HasValue ? entity.ExpiryDate.GetValueOrDefault().ToString(ConfigReader.CSharpCalendarDateFormat) : String.Empty;
                         
                     }
                 }
-            }
+            //}
         }
     }
     /// <summary>
@@ -348,6 +359,11 @@ public partial class Pages_PersonnelTravelDetails : BasePage
         //entity = entity.ChangedByUsername = SessionCache.CurrentUser.UserName;
 
         context.SubmitChanges();
+        RedirectToShowSuccessMessage();
+    }
+
+    protected void RedirectToShowSuccessMessage()
+    {
         String url = String.Format("{0}?{1}={2}&{3}=True"
             , Request.Url.AbsolutePath
             , AppConstants.QueryString.CONTACT_ID
@@ -374,28 +390,23 @@ public partial class Pages_PersonnelTravelDetails : BasePage
         //ddlContactID.SelectedValue.ToInt();
         if (!ddlCountry.SelectedValue.IsNullOrEmpty())
         {
-            entity.CountryID = Convert.ToInt32(ddlCountry.SelectedValue);
+            entity.CountryID = ddlCountry.SelectedValue.ToInt(); //Convert.ToInt32(ddlCountry.SelectedValue);
         }
         //entity.CountryID = Convert.ToInt32(tbxCountry.Text);
 
         entity.VisaType = tbxVisaType.Text;
-        if (tbxExpiryDate.Text.Trim() != "")
-            entity.ExpiryDate = Convert.ToDateTime(tbxExpiryDate.Text.Trim());
+        if (!tbxVisaExpDate.Text.IsNullOrEmpty()) //if (tbxExpiryDate.Text.Trim() != "")
+            entity.ExpiryDate = tbxVisaExpDate.Text.ToDateTime(ConfigReader.CSharpCalendarDateFormat); //Convert.ToDateTime(tbxExpiryDate.Text.Trim());
         
         entity.ChangedByUserID = SessionCache.CurrentUser.ID;
         entity.ChangedOn = DateTime.Now;
         //entity = entity.ChangedByUsername = SessionCache.CurrentUser.UserName;
 
         context.SubmitChanges();
-        String url = String.Format("{0}?{1}={2}&{3}=True"
-            , Request.Url.AbsolutePath
-            , AppConstants.QueryString.CONTACT_ID
-            , _ContactID
-            , AppConstants.QueryString.SUCCESS_MSG);
-        Response.Redirect(url);
+        RedirectToShowSuccessMessage();
     }
 
-    protected void btnSave_Click(object sender, EventArgs e)
+    protected void btnSavePassport_Click(object sender, EventArgs e)
     {
         if (Page.IsValid)
         {
@@ -432,6 +443,21 @@ public partial class Pages_PersonnelTravelDetails : BasePage
     protected void ucPassportListPager_PageIndexChanged(object sender, PagerEventArgs e)
     {
         BindPassportList(e.PageIndex);
+    }
+    protected void cvPassport_OnServerValidate(object sender, ServerValidateEventArgs e)
+    {
+        OMMDataContext context = new OMMDataContext();
+        Passport passport = null;
+        if (_IsEditMode)
+        {
+            passport = context.Passports.FirstOrDefault(P => String.Compare(P.Number, e.Value, true) == 0 && P.ID != _ID);
+            e.IsValid = passport == null ? true : false;
+        }
+        else
+        {
+            passport = context.Passports.FirstOrDefault(P => String.Compare(P.Number, e.Value, true) == 0);
+            e.IsValid = passport == null ? true : false;
+        }
     }
 }
 

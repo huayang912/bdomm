@@ -12,25 +12,15 @@ CodeFile="PersonnelBankDetails_.aspx.cs" Inherits="Pages_PersonnelBankDetails_" 
         <asp:Panel ID="pnlFormContainer" runat="server" DefaultButton="btnSave">
             <%--ContactsNotes Information Group Box Start--%>               
             <div class="WinGroupBox">                
-                <div class="WinGroupBoxHeader">Personnel Bank Details</div>                
+                <div class="WinGroupBoxHeader">Personnel Bank Details1111</div>                
                 
                 <table cellpadding="3" cellspacing="0" style="width:100%;">
-                    <%--<colgroup>
-                        <col style="width:15%;" />
-                        <col />                                        
-                    </colgroup>
-				    <tr>
-					    <td>Note</td>
-					    <td>
-						    <asp:TextBox ID="txtNotes" TextMode="MultiLine" MaxLength="2000" runat="server"></asp:TextBox>
-						    <asp:RequiredFieldValidator ID="rfvNote" runat="server"
-						        SetFocusOnError="true" Display="Dynamic"
-						        ControlToValidate="txtNotes"
-						        ErrorMessage="Please Enter a Note."
-						        ValidationGroup="SaveInfo">
-			                </asp:RequiredFieldValidator>
-					    </td>
-				    </tr>--%>
+                    <colgroup>
+                        <col style="width:10%;" />
+                        <col style="width:20%;" />
+                        <col style="width:10%;" />
+                        <col />
+                    </colgroup>                   
 				    <tr>
 				        <td>Bank Name</td>
 				        <td>
@@ -41,7 +31,7 @@ CodeFile="PersonnelBankDetails_.aspx.cs" Inherits="Pages_PersonnelBankDetails_" 
 						        ErrorMessage="Please Enter a Bank Name."
 						        ValidationGroup="SaveInfo">
 			                </asp:RequiredFieldValidator>
-				        </td>
+				        </td>				    
 				        <td>Branch Name</td>
 				        <td>
 				            <asp:TextBox ID="tbxBranchName" runat="server"></asp:TextBox>
@@ -52,6 +42,8 @@ CodeFile="PersonnelBankDetails_.aspx.cs" Inherits="Pages_PersonnelBankDetails_" 
 						        ValidationGroup="SaveInfo">
 			                </asp:RequiredFieldValidator>
 				        </td>
+				    </tr>
+				    <tr>
 				        <td>Branch Address</td>
 				        <td>
 				            <asp:TextBox ID="tbxBranchAddress" runat="server"></asp:TextBox>
@@ -60,8 +52,7 @@ CodeFile="PersonnelBankDetails_.aspx.cs" Inherits="Pages_PersonnelBankDetails_" 
 				        <td>
 				            <asp:TextBox ID="tbxSortCode" runat="server"></asp:TextBox>
 				        </td>
-				    </tr>	
-				    
+				    </tr>				    
 				    <tr>
 				        <td>Accout Number</td>
 				        <td>
@@ -71,6 +62,8 @@ CodeFile="PersonnelBankDetails_.aspx.cs" Inherits="Pages_PersonnelBankDetails_" 
 				        <td>
 				            <asp:TextBox ID="tbxAccName" runat="server"></asp:TextBox>
 						</td>
+			        </tr>
+				    <tr>
 				        <td>Bic Code</td>
 				        <td>
 				            <asp:TextBox ID="tbxBicCode" runat="server"></asp:TextBox>
