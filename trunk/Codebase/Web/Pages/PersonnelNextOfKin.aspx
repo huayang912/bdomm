@@ -127,10 +127,15 @@ CodeFile="PersonnelNextOfKin.aspx.cs" Inherits="Pages_PersonnelNextOfKin" %>
                         
                         <tr>                         
                             <td>
-                                Country
-                            </td>
+                                Country*</td>
                             <td>
                                 <asp:DropDownList ID="ddlCountry" runat="server"></asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="rftddlCountry" runat="server"
+                                    SetFocusOnError="true" Display="Dynamic"
+                                    ControlToValidate="ddlCountry"
+                                    ValidationGroup="SaveNextOfKin"
+                                    ErrorMessage="<br/>Please Select Country.">
+                                </asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 Home Number
